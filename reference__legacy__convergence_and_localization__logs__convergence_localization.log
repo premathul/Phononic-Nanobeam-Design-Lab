@@ -1,0 +1,327 @@
+Intel MKL WARNING: Support of Intel(R) Streaming SIMD Extensions 4.2 (Intel(R) SSE4.2) enabled only processors has been deprecated. Intel oneAPI Math Kernel Library 2025.0 will require Intel(R) Advanced Vector Extensions (Intel(R) AVX) instructions.
+Intel MKL WARNING: Support of Intel(R) Streaming SIMD Extensions 4.2 (Intel(R) SSE4.2) enabled only processors has been deprecated. Intel oneAPI Math Kernel Library 2025.0 will require Intel(R) Advanced Vector Extensions (Intel(R) AVX) instructions.
+Info    : Meshing 1D...
+Info    : [  0%] Meshing curve 5 (Ellipse)
+Info    : [ 10%] Meshing curve 6 (Ellipse)
+Info    : [ 10%] Meshing curve 7 (Ellipse)
+Info    : [ 20%] Meshing curve 8 (Ellipse)
+Info    : [ 20%] Meshing curve 9 (Ellipse)
+Info    : [ 20%] Meshing curve 10 (Ellipse)
+Info    : [ 30%] Meshing curve 11 (Ellipse)
+Info    : [ 30%] Meshing curve 12 (Ellipse)
+Info    : [ 30%] Meshing curve 13 (Ellipse)
+Info    : [ 40%] Meshing curve 14 (Ellipse)
+Info    : [ 40%] Meshing curve 15 (Ellipse)
+Info    : [ 40%] Meshing curve 16 (Ellipse)
+Info    : [ 50%] Meshing curve 17 (Ellipse)
+Info    : [ 50%] Meshing curve 18 (Ellipse)
+Info    : [ 50%] Meshing curve 19 (Ellipse)
+Info    : [ 60%] Meshing curve 20 (Ellipse)
+Info    : [ 60%] Meshing curve 21 (Ellipse)
+Info    : [ 60%] Meshing curve 22 (Ellipse)
+Info    : [ 70%] Meshing curve 23 (Ellipse)
+Info    : [ 70%] Meshing curve 24 (Ellipse)
+Info    : [ 70%] Meshing curve 25 (Ellipse)
+Info    : [ 80%] Meshing curve 26 (Ellipse)
+Info    : [ 80%] Meshing curve 27 (Ellipse)
+Info    : [ 80%] Meshing curve 28 (Ellipse)
+Info    : [ 90%] Meshing curve 29 (Ellipse)
+Info    : [ 90%] Meshing curve 30 (Ellipse)
+Info    : [ 90%] Meshing curve 31 (Line)
+Info    : [100%] Meshing curve 32 (Line)
+Info    : [100%] Meshing curve 33 (Line)
+Info    : [100%] Meshing curve 34 (Line)
+Info    : Done meshing 1D (Wall 0.066399s, CPU 0.062167s)
+Info    : Meshing 2D...
+Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
+Info    : Done meshing 2D (Wall 0.560663s, CPU 0.54005s)
+Info    : 16386 nodes 32852 elements
+Info    : Writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h30.msh'...
+Info    : Done writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h30.msh'
+Info    : Meshing 1D...
+Info    : [  0%] Meshing curve 5 (Ellipse)
+Info    : [ 30%] Meshing curve 6 (Line)
+Info    : [ 50%] Meshing curve 7 (Line)
+Info    : [ 70%] Meshing curve 8 (Line)
+Info    : [ 90%] Meshing curve 9 (Line)
+Info    : Done meshing 1D (Wall 0.000431292s, CPU 0.000376s)
+Info    : Meshing 2D...
+Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
+Info    : Done meshing 2D (Wall 0.00382267s, CPU 0.003798s)
+Info    : 138 nodes 281 elements
+Info    : Writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h30.msh'...
+Info    : Done writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h30.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h30.msh'...
+Info    : 11 entities
+Info    : 138 nodes
+Info    : 281 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h30.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h30.msh'...
+Info    : 61 entities
+Info    : 16386 nodes
+Info    : 32852 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h30.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h30.msh'...
+Info    : 61 entities
+Info    : 16386 nodes
+Info    : 32852 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h30.msh'
+Info    : Meshing 1D...
+Info    : [  0%] Meshing curve 5 (Ellipse)
+Info    : [ 10%] Meshing curve 6 (Ellipse)
+Info    : [ 10%] Meshing curve 7 (Ellipse)
+Info    : [ 20%] Meshing curve 8 (Ellipse)
+Info    : [ 20%] Meshing curve 9 (Ellipse)
+Info    : [ 20%] Meshing curve 10 (Ellipse)
+Info    : [ 30%] Meshing curve 11 (Ellipse)
+Info    : [ 30%] Meshing curve 12 (Ellipse)
+Info    : [ 30%] Meshing curve 13 (Ellipse)
+Info    : [ 40%] Meshing curve 14 (Ellipse)
+Info    : [ 40%] Meshing curve 15 (Ellipse)
+Info    : [ 40%] Meshing curve 16 (Ellipse)
+Info    : [ 50%] Meshing curve 17 (Ellipse)
+Info    : [ 50%] Meshing curve 18 (Ellipse)
+Info    : [ 50%] Meshing curve 19 (Ellipse)
+Info    : [ 60%] Meshing curve 20 (Ellipse)
+Info    : [ 60%] Meshing curve 21 (Ellipse)
+Info    : [ 60%] Meshing curve 22 (Ellipse)
+Info    : [ 70%] Meshing curve 23 (Ellipse)
+Info    : [ 70%] Meshing curve 24 (Ellipse)
+Info    : [ 70%] Meshing curve 25 (Ellipse)
+Info    : [ 80%] Meshing curve 26 (Ellipse)
+Info    : [ 80%] Meshing curve 27 (Ellipse)
+Info    : [ 80%] Meshing curve 28 (Ellipse)
+Info    : [ 90%] Meshing curve 29 (Ellipse)
+Info    : [ 90%] Meshing curve 30 (Ellipse)
+Info    : [ 90%] Meshing curve 31 (Line)
+Info    : [100%] Meshing curve 32 (Line)
+Info    : [100%] Meshing curve 33 (Line)
+Info    : [100%] Meshing curve 34 (Line)
+Info    : Done meshing 1D (Wall 0.0951683s, CPU 0.787466s)
+Info    : Meshing 2D...
+Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
+Info    : Done meshing 2D (Wall 1.17947s, CPU 1.86414s)
+Info    : 32516 nodes 65112 elements
+Info    : Writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h20.msh'...
+Info    : Done writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h20.msh'
+Info    : Meshing 1D...
+Info    : [  0%] Meshing curve 5 (Ellipse)
+Info    : [ 30%] Meshing curve 6 (Line)
+Info    : [ 50%] Meshing curve 7 (Line)
+Info    : [ 70%] Meshing curve 8 (Line)
+Info    : [ 90%] Meshing curve 9 (Line)
+Info    : Done meshing 1D (Wall 0.000421s, CPU 0.000371s)
+Info    : Meshing 2D...
+Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
+Info    : Done meshing 2D (Wall 0.00387762s, CPU 0.003792s)
+Info    : 138 nodes 281 elements
+Info    : Writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h20.msh'...
+Info    : Done writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h20.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h20.msh'...
+Info    : 11 entities
+Info    : 138 nodes
+Info    : 281 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h20.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h20.msh'...
+Info    : 61 entities
+Info    : 32516 nodes
+Info    : 65112 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h20.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h20.msh'...
+Info    : 61 entities
+Info    : 32516 nodes
+Info    : 65112 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h20.msh'
+Info    : Meshing 1D...
+Info    : [  0%] Meshing curve 5 (Ellipse)
+Info    : [ 10%] Meshing curve 6 (Ellipse)
+Info    : [ 10%] Meshing curve 7 (Ellipse)
+Info    : [ 20%] Meshing curve 8 (Ellipse)
+Info    : [ 20%] Meshing curve 9 (Ellipse)
+Info    : [ 20%] Meshing curve 10 (Ellipse)
+Info    : [ 30%] Meshing curve 11 (Ellipse)
+Info    : [ 30%] Meshing curve 12 (Ellipse)
+Info    : [ 30%] Meshing curve 13 (Ellipse)
+Info    : [ 40%] Meshing curve 14 (Ellipse)
+Info    : [ 40%] Meshing curve 15 (Ellipse)
+Info    : [ 40%] Meshing curve 16 (Ellipse)
+Info    : [ 50%] Meshing curve 17 (Ellipse)
+Info    : [ 50%] Meshing curve 18 (Ellipse)
+Info    : [ 50%] Meshing curve 19 (Ellipse)
+Info    : [ 60%] Meshing curve 20 (Ellipse)
+Info    : [ 60%] Meshing curve 21 (Ellipse)
+Info    : [ 60%] Meshing curve 22 (Ellipse)
+Info    : [ 70%] Meshing curve 23 (Ellipse)
+Info    : [ 70%] Meshing curve 24 (Ellipse)
+Info    : [ 70%] Meshing curve 25 (Ellipse)
+Info    : [ 80%] Meshing curve 26 (Ellipse)
+Info    : [ 80%] Meshing curve 27 (Ellipse)
+Info    : [ 80%] Meshing curve 28 (Ellipse)
+Info    : [ 90%] Meshing curve 29 (Ellipse)
+Info    : [ 90%] Meshing curve 30 (Ellipse)
+Info    : [ 90%] Meshing curve 31 (Line)
+Info    : [100%] Meshing curve 32 (Line)
+Info    : [100%] Meshing curve 33 (Line)
+Info    : [100%] Meshing curve 34 (Line)
+Info    : Done meshing 1D (Wall 0.102761s, CPU 0.870679s)
+Info    : Meshing 2D...
+Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
+Info    : Done meshing 2D (Wall 2.07992s, CPU 2.66614s)
+Info    : 53469 nodes 107018 elements
+Info    : Writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h15.msh'...
+Info    : Done writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h15.msh'
+Info    : Meshing 1D...
+Info    : [  0%] Meshing curve 5 (Ellipse)
+Info    : [ 30%] Meshing curve 6 (Line)
+Info    : [ 50%] Meshing curve 7 (Line)
+Info    : [ 70%] Meshing curve 8 (Line)
+Info    : [ 90%] Meshing curve 9 (Line)
+Info    : Done meshing 1D (Wall 0.000433667s, CPU 0.000384s)
+Info    : Meshing 2D...
+Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
+Info    : Done meshing 2D (Wall 0.00387208s, CPU 0.003821s)
+Info    : 138 nodes 281 elements
+Info    : Writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h15.msh'...
+Info    : Done writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h15.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h15.msh'...
+Info    : 11 entities
+Info    : 138 nodes
+Info    : 281 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h15.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h15.msh'...
+Info    : 61 entities
+Info    : 53469 nodes
+Info    : 107018 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h15.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h15.msh'...
+Info    : 61 entities
+Info    : 53469 nodes
+Info    : 107018 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h15.msh'
+Info    : Meshing 1D...
+Info    : [  0%] Meshing curve 5 (Ellipse)
+Info    : [ 10%] Meshing curve 6 (Ellipse)
+Info    : [ 10%] Meshing curve 7 (Ellipse)
+Info    : [ 20%] Meshing curve 8 (Ellipse)
+Info    : [ 20%] Meshing curve 9 (Ellipse)
+Info    : [ 20%] Meshing curve 10 (Ellipse)
+Info    : [ 30%] Meshing curve 11 (Ellipse)
+Info    : [ 30%] Meshing curve 12 (Ellipse)
+Info    : [ 30%] Meshing curve 13 (Ellipse)
+Info    : [ 40%] Meshing curve 14 (Ellipse)
+Info    : [ 40%] Meshing curve 15 (Ellipse)
+Info    : [ 40%] Meshing curve 16 (Ellipse)
+Info    : [ 50%] Meshing curve 17 (Ellipse)
+Info    : [ 50%] Meshing curve 18 (Ellipse)
+Info    : [ 50%] Meshing curve 19 (Ellipse)
+Info    : [ 60%] Meshing curve 20 (Ellipse)
+Info    : [ 60%] Meshing curve 21 (Ellipse)
+Info    : [ 60%] Meshing curve 22 (Ellipse)
+Info    : [ 70%] Meshing curve 23 (Ellipse)
+Info    : [ 70%] Meshing curve 24 (Ellipse)
+Info    : [ 70%] Meshing curve 25 (Ellipse)
+Info    : [ 80%] Meshing curve 26 (Ellipse)
+Info    : [ 80%] Meshing curve 27 (Ellipse)
+Info    : [ 80%] Meshing curve 28 (Ellipse)
+Info    : [ 90%] Meshing curve 29 (Ellipse)
+Info    : [ 90%] Meshing curve 30 (Ellipse)
+Info    : [ 90%] Meshing curve 31 (Line)
+Info    : [100%] Meshing curve 32 (Line)
+Info    : [100%] Meshing curve 33 (Line)
+Info    : [100%] Meshing curve 34 (Line)
+Info    : Done meshing 1D (Wall 0.103401s, CPU 0.886321s)
+Info    : Meshing 2D...
+Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
+Info    : Done meshing 2D (Wall 3.29195s, CPU 3.87523s)
+Info    : 79144 nodes 158368 elements
+Info    : Writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h12.msh'...
+Info    : Done writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h12.msh'
+Info    : Meshing 1D...
+Info    : [  0%] Meshing curve 5 (Ellipse)
+Info    : [ 30%] Meshing curve 6 (Line)
+Info    : [ 50%] Meshing curve 7 (Line)
+Info    : [ 70%] Meshing curve 8 (Line)
+Info    : [ 90%] Meshing curve 9 (Line)
+Info    : Done meshing 1D (Wall 0.0004515s, CPU 0.000391s)
+Info    : Meshing 2D...
+Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
+Info    : Done meshing 2D (Wall 0.00396812s, CPU 0.003838s)
+Info    : 138 nodes 281 elements
+Info    : Writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h12.msh'...
+Info    : Done writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h12.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h12.msh'...
+Info    : 11 entities
+Info    : 138 nodes
+Info    : 281 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h12.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h12.msh'...
+Info    : 61 entities
+Info    : 79144 nodes
+Info    : 158368 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h12.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h12.msh'...
+Info    : 61 entities
+Info    : 79144 nodes
+Info    : 158368 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h12.msh'
+Info    : Meshing 1D...
+Info    : [  0%] Meshing curve 5 (Ellipse)
+Info    : [ 10%] Meshing curve 6 (Ellipse)
+Info    : [ 10%] Meshing curve 7 (Ellipse)
+Info    : [ 20%] Meshing curve 8 (Ellipse)
+Info    : [ 20%] Meshing curve 9 (Ellipse)
+Info    : [ 20%] Meshing curve 10 (Ellipse)
+Info    : [ 30%] Meshing curve 11 (Ellipse)
+Info    : [ 30%] Meshing curve 12 (Ellipse)
+Info    : [ 30%] Meshing curve 13 (Ellipse)
+Info    : [ 40%] Meshing curve 14 (Ellipse)
+Info    : [ 40%] Meshing curve 15 (Ellipse)
+Info    : [ 40%] Meshing curve 16 (Ellipse)
+Info    : [ 50%] Meshing curve 17 (Ellipse)
+Info    : [ 50%] Meshing curve 18 (Ellipse)
+Info    : [ 50%] Meshing curve 19 (Ellipse)
+Info    : [ 60%] Meshing curve 20 (Ellipse)
+Info    : [ 60%] Meshing curve 21 (Ellipse)
+Info    : [ 60%] Meshing curve 22 (Ellipse)
+Info    : [ 70%] Meshing curve 23 (Ellipse)
+Info    : [ 70%] Meshing curve 24 (Ellipse)
+Info    : [ 70%] Meshing curve 25 (Ellipse)
+Info    : [ 80%] Meshing curve 26 (Ellipse)
+Info    : [ 80%] Meshing curve 27 (Ellipse)
+Info    : [ 80%] Meshing curve 28 (Ellipse)
+Info    : [ 90%] Meshing curve 29 (Ellipse)
+Info    : [ 90%] Meshing curve 30 (Ellipse)
+Info    : [ 90%] Meshing curve 31 (Line)
+Info    : [100%] Meshing curve 32 (Line)
+Info    : [100%] Meshing curve 33 (Line)
+Info    : [100%] Meshing curve 34 (Line)
+Info    : Done meshing 1D (Wall 0.105635s, CPU 0.91184s)
+Info    : Meshing 2D...
+Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
+Info    : Done meshing 2D (Wall 4.89789s, CPU 5.41295s)
+Info    : 108952 nodes 217984 elements
+Info    : Writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h10.msh'...
+Info    : Done writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h10.msh'
+Info    : Meshing 1D...
+Info    : [  0%] Meshing curve 5 (Ellipse)
+Info    : [ 30%] Meshing curve 6 (Line)
+Info    : [ 50%] Meshing curve 7 (Line)
+Info    : [ 70%] Meshing curve 8 (Line)
+Info    : [ 90%] Meshing curve 9 (Line)
+Info    : Done meshing 1D (Wall 0.000443s, CPU 0.000388s)
+Info    : Meshing 2D...
+Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
+Info    : Done meshing 2D (Wall 0.00407142s, CPU 0.003919s)
+Info    : 138 nodes 281 elements
+Info    : Writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h10.msh'...
+Info    : Done writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h10.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h10.msh'...
+Info    : 11 entities
+Info    : 138 nodes
+Info    : 281 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h10.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h10.msh'...
+Info    : 61 entities
+Info    : 108952 nodes
+Info    : 217984 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h10.msh'

@@ -1,0 +1,9 @@
+STATUS: PASS (Gmsh mesh gate; meshio/scikit-fem loading NOT RUN)
+Gmsh: 4.15.0
+Nodes: 16386
+Triangles: 31340
+Minimum edge length: 18.1749 nm
+Maximum edge length: 106.9206 nm
+Approximate elements across 250 nm hole (250 / median edge): 8.2396
+Triangles with centroid inside a hole: 0
+Physical groups in MSH: DOMAIN_GE, LEFT_BOUNDARY, RIGHT_BOUNDARY, TOP_BOUNDARY, BOTTOM_BOUNDARY, HOLE_BOUNDARIES, LEFT_LEAD, PNC_REGION, RIGHT_LEAD

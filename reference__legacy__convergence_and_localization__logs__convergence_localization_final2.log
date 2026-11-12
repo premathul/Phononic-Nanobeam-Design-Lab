@@ -1,0 +1,98 @@
+Intel MKL WARNING: Support of Intel(R) Streaming SIMD Extensions 4.2 (Intel(R) SSE4.2) enabled only processors has been deprecated. Intel oneAPI Math Kernel Library 2025.0 will require Intel(R) Advanced Vector Extensions (Intel(R) AVX) instructions.
+Intel MKL WARNING: Support of Intel(R) Streaming SIMD Extensions 4.2 (Intel(R) SSE4.2) enabled only processors has been deprecated. Intel oneAPI Math Kernel Library 2025.0 will require Intel(R) Advanced Vector Extensions (Intel(R) AVX) instructions.
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h30.msh'...
+Info    : 11 entities
+Info    : 678 nodes
+Info    : 1361 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h30.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h30.msh'...
+Info    : 61 entities
+Info    : 16386 nodes
+Info    : 32852 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h30.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h30.msh'...
+Info    : 61 entities
+Info    : 16386 nodes
+Info    : 32852 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h30.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h30.msh'...
+Info    : 61 entities
+Info    : 16386 nodes
+Info    : 32852 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h30.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h20.msh'...
+Info    : 11 entities
+Info    : 1373 nodes
+Info    : 2751 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h20.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h20.msh'...
+Info    : 61 entities
+Info    : 32516 nodes
+Info    : 65112 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h20.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h20.msh'...
+Info    : 61 entities
+Info    : 32516 nodes
+Info    : 65112 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h20.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h15.msh'...
+Info    : 11 entities
+Info    : 2259 nodes
+Info    : 4523 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h15.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h15.msh'...
+Info    : 61 entities
+Info    : 53469 nodes
+Info    : 107018 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h15.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h15.msh'...
+Info    : 61 entities
+Info    : 53469 nodes
+Info    : 107018 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h15.msh'
+Info    : Meshing 1D...
+Info    : [  0%] Meshing curve 5 (Ellipse)
+Info    : [ 30%] Meshing curve 6 (Line)
+Info    : [ 50%] Meshing curve 7 (Line)
+Info    : [ 70%] Meshing curve 8 (Line)
+Info    : [ 90%] Meshing curve 9 (Line)
+Info    : Done meshing 1D (Wall 0.00355875s, CPU 0.015843s)
+Info    : Meshing 2D...
+Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
+Info    : Done meshing 2D (Wall 0.116601s, CPU 0.196685s)
+Info    : 3374 nodes 6753 elements
+Info    : Writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h12.msh'...
+Info    : Done writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h12.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h12.msh'...
+Info    : 11 entities
+Info    : 3374 nodes
+Info    : 6753 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h12.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h12.msh'...
+Info    : 61 entities
+Info    : 79144 nodes
+Info    : 158368 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h12.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h12.msh'...
+Info    : 61 entities
+Info    : 79144 nodes
+Info    : 158368 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/defect_h12.msh'
+Info    : Meshing 1D...
+Info    : [  0%] Meshing curve 5 (Ellipse)
+Info    : [ 30%] Meshing curve 6 (Line)
+Info    : [ 50%] Meshing curve 7 (Line)
+Info    : [ 70%] Meshing curve 8 (Line)
+Info    : [ 90%] Meshing curve 9 (Line)
+Info    : Done meshing 1D (Wall 0.00385067s, CPU 0.006997s)
+Info    : Meshing 2D...
+Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
+Info    : Done meshing 2D (Wall 0.173439s, CPU 0.358018s)
+Info    : 4682 nodes 9369 elements
+Info    : Writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h10.msh'...
+Info    : Done writing '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h10.msh'
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h10.msh'...
+Info    : 11 entities
+Info    : 4682 nodes
+Info    : 9369 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h10.msh'

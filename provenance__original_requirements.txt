@@ -1,0 +1,12 @@
+python==3.11
+numpy
+scipy
+pandas
+openpyxl
+matplotlib
+gmsh
+meshio
+scikit-fem
+jupyterlab
+pytest
+

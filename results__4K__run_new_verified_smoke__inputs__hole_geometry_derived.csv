@@ -1,0 +1,27 @@
+hole_number,position_nm,diameter_nm,region
+1,-6700,250.0,Mirror
+2,-6150,250.0,Mirror
+3,-5600,250.0,Mirror
+4,-5050,250.0,Mirror
+5,-4500,250.0,Mirror
+6,-3950,250.0,Mirror
+7,-3400,250.0,Mirror
+8,-2850,250.0,Mirror
+9,-2310,255.0,Taper
+10,-1780,260.0,Taper
+11,-1260,265.0,Taper
+12,-750,270.0,Taper
+13,-250,275.0,Central cavity
+14,250,275.0,Central cavity
+15,750,270.0,Taper
+16,1260,265.0,Taper
+17,1780,260.0,Taper
+18,2310,255.0,Taper
+19,2850,250.0,Mirror transition
+20,3400,250.0,Mirror
+21,3950,250.0,Mirror
+22,4500,250.0,Mirror
+23,5050,250.0,Mirror
+24,5600,250.0,Mirror
+25,6150,250.0,Mirror
+26,6700,250.0,Mirror

@@ -1,0 +1,90 @@
+Intel MKL WARNING: Support of Intel(R) Streaming SIMD Extensions 4.2 (Intel(R) SSE4.2) enabled only processors has been deprecated. Intel oneAPI Math Kernel Library 2025.0 will require Intel(R) Advanced Vector Extensions (Intel(R) AVX) instructions.
+Intel MKL WARNING: Support of Intel(R) Streaming SIMD Extensions 4.2 (Intel(R) SSE4.2) enabled only processors has been deprecated. Intel oneAPI Math Kernel Library 2025.0 will require Intel(R) Advanced Vector Extensions (Intel(R) AVX) instructions.
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h30.msh'...
+Info    : 11 entities
+Info    : 649 nodes
+Info    : 1303 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h30.msh'
+Traceback (most recent call last):
+  File "/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/scripts/convergence_localization.py", line 105, in main
+    p,t,b,g=bands(cpath);gap=max((x for x in g if x[0]<8 and x[1]>1),key=lambda x:x[3],default=(float('nan'),)*5+(0,));
+            ~~~~~^^^^^^^
+  File "/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/scripts/convergence_localization.py", line 63, in bands
+    kr,mr=matrices_at_k(K,M,p,k);v=np.linalg.eigvalsh(np.linalg.solve(mr,kr)) if kr.shape[0]<600 else None
+          ~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/scripts/convergence_localization.py", line 51, in matrices_at_k
+    if abs(y[j]-y[i])>1e-3:raise RuntimeError('nonconforming Bloch boundaries')
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: nonconforming Bloch boundaries
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h20.msh'...
+Info    : 11 entities
+Info    : 1280 nodes
+Info    : 2565 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h20.msh'
+Traceback (most recent call last):
+  File "/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/scripts/convergence_localization.py", line 105, in main
+    p,t,b,g=bands(cpath);gap=max((x for x in g if x[0]<8 and x[1]>1),key=lambda x:x[3],default=(float('nan'),)*5+(0,));
+            ~~~~~^^^^^^^
+  File "/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/scripts/convergence_localization.py", line 63, in bands
+    kr,mr=matrices_at_k(K,M,p,k);v=np.linalg.eigvalsh(np.linalg.solve(mr,kr)) if kr.shape[0]<600 else None
+          ~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/scripts/convergence_localization.py", line 51, in matrices_at_k
+    if abs(y[j]-y[i])>1e-3:raise RuntimeError('nonconforming Bloch boundaries')
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: nonconforming Bloch boundaries
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h15.msh'...
+Info    : 11 entities
+Info    : 2102 nodes
+Info    : 4209 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h15.msh'
+Traceback (most recent call last):
+  File "/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/scripts/convergence_localization.py", line 105, in main
+    p,t,b,g=bands(cpath);gap=max((x for x in g if x[0]<8 and x[1]>1),key=lambda x:x[3],default=(float('nan'),)*5+(0,));
+            ~~~~~^^^^^^^
+  File "/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/scripts/convergence_localization.py", line 63, in bands
+    kr,mr=matrices_at_k(K,M,p,k);v=np.linalg.eigvalsh(np.linalg.solve(mr,kr)) if kr.shape[0]<600 else None
+          ~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/scripts/convergence_localization.py", line 51, in matrices_at_k
+    if abs(y[j]-y[i])>1e-3:raise RuntimeError('nonconforming Bloch boundaries')
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: nonconforming Bloch boundaries
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h12.msh'...
+Info    : 11 entities
+Info    : 3114 nodes
+Info    : 6233 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h12.msh'
+Traceback (most recent call last):
+  File "/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/scripts/convergence_localization.py", line 105, in main
+    p,t,b,g=bands(cpath);gap=max((x for x in g if x[0]<8 and x[1]>1),key=lambda x:x[3],default=(float('nan'),)*5+(0,));
+            ~~~~~^^^^^^^
+  File "/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/scripts/convergence_localization.py", line 63, in bands
+    kr,mr=matrices_at_k(K,M,p,k);v=np.linalg.eigvalsh(np.linalg.solve(mr,kr)) if kr.shape[0]<600 else None
+          ~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/scripts/convergence_localization.py", line 51, in matrices_at_k
+    if abs(y[j]-y[i])>1e-3:raise RuntimeError('nonconforming Bloch boundaries')
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: nonconforming Bloch boundaries
+Info    : Reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h10.msh'...
+Info    : 11 entities
+Info    : 4275 nodes
+Info    : 8555 elements
+Info    : Done reading '/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/results/convergence_and_localization/fields/cell_h10.msh'
+Traceback (most recent call last):
+  File "/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/scripts/convergence_localization.py", line 105, in main
+    p,t,b,g=bands(cpath);gap=max((x for x in g if x[0]<8 and x[1]>1),key=lambda x:x[3],default=(float('nan'),)*5+(0,));
+            ~~~~~^^^^^^^
+  File "/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/scripts/convergence_localization.py", line 63, in bands
+    kr,mr=matrices_at_k(K,M,p,k);v=np.linalg.eigvalsh(np.linalg.solve(mr,kr)) if kr.shape[0]<600 else None
+          ~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/scripts/convergence_localization.py", line 51, in matrices_at_k
+    if abs(y[j]-y[i])>1e-3:raise RuntimeError('nonconforming Bloch boundaries')
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: nonconforming Bloch boundaries
+Traceback (most recent call last):
+  File "/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/scripts/convergence_localization.py", line 152, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/athulsmac/Desktop/Desktop - Athul's MacBook Pro/PDFs&Research/Phononic Cavities /Simulation for pnc/Ge_PnC_Simulation/scripts/convergence_localization.py", line 121, in main
+    if not good:raise RuntimeError('No convergence mesh succeeded')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: No convergence mesh succeeded
