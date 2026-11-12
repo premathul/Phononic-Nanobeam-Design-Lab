@@ -1,0 +1,17 @@
+{
+  "status": "PASS_SAVED_DATA_CHECKS",
+  "copied_original_hashes_checked": 300,
+  "archived_manifest_files_checked": 180,
+  "excluded_metadata_or_cache": [
+    ".DS_Store"
+  ],
+  "harmonic_solves_checked": 333,
+  "cavity_eigen_residuals_checked": 60,
+  "maximum_harmonic_residual": 3.597612568638179e-12,
+  "maximum_power_balance_error": 4.631902853600682e-13,
+  "physical_validation_failures_preserved": true,
+  "simulation_rerun": false,
+  "saved_npz_files_checked": 14,
+  "fresh_five_frequency_max_difference_dB": 0.0,
+  "fresh_smoke_comparison": "PASS"
+}

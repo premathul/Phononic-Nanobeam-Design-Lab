@@ -1,0 +1,13 @@
+{
+  "half_width_nm": 80,
+  "centers_nm": {
+    "P0": -7900,
+    "P1": -7150,
+    "P2": 0,
+    "P3": 7150,
+    "P4": 7750
+  },
+  "averaging": "area-weighted seven-point triangle quadrature",
+  "source": "1 Pa uniform longitudinal traction at left edge; unit model thickness",
+  "sponge": "quadratic mass-proportional numerical damping, zero for |x| <=7300 nm; P3 is upstream of sponge; P4 is within sponge"
+}

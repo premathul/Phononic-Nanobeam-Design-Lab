@@ -1,29 +1,54 @@
-# Phononic Nanobeam Design Lab
+# Germanium phononic cavity handoff: flat edition
 
-This repository is a reproducible starting point for designing and checking a perforated phononic nanobeam. It combines two deliberately separate tasks: checking whether a proposed list of circular holes is geometrically consistent, and exploring the band splitting of an idealized one-dimensional mechanical chain. The first task can catch mistakes in a fabrication drawing before export. The second illustrates how periodicity creates acoustic and optical branches, but it does **not** predict the elastic modes of a germanium nanobeam. Keeping these tasks separate is important: a valid pattern is not evidence of a phononic bandgap, and a bandgap in a mass-spring chain is not a bandgap in a three-dimensional structure.
+All saved results, figures, meshes, workbooks and scripts are files in this one folder. `flat_manifest.json` maps each filename to its original path and SHA-256. All 496 files present before reorganization are retained byte-for-byte, including earlier smoke runs. No numerical model or saved result has been changed.
 
-The geometry checker accepts a CSV containing the longitudinal position and diameter of each hole in nanometers. It sorts the holes by position and reports the center-to-center pitch and the edge-to-edge separation for each adjacent pair. For holes with centers x_i and x_(i+1) and diameters d_i and d_(i+1), the longitudinal edge gap is x_(i+1) − x_i − (d_i+d_(i+1))/2. A negative gap indicates overlapping circular openings. Given a beam width, the checker also detects diameters that cannot fit inside a beam when the hole centers lie on its transverse centerline. An optional minimum edge gap lets a user enforce a fabrication rule that is specific to their process, resist, and etch transfer. No default minimum feature size is asserted as universally manufacturable.
+## Start here
 
-The example file contains **only selected entries from a previously discussed left-side design table**. In particular, it includes holes at −6700, −6150, and −5600 nm and selected taper and cavity positions through −250 nm. It is not a complete device mask or a verified final design; missing indices, the right half, beam width, anchors, alignment marks, and layer details must be supplied from the actual design. A large distance between consecutive example rows may reflect omitted holes rather than the intended physical pitch. Do not export this example directly for lithography.
+1. Install Python 3.11–3.13 and `requirements.txt` in an environment outside this folder.
+2. Run `python verify_AP_pnc.py --fields --safety` to check saved data and launcher protections.
+3. Run `python run_AP_pnc.py --name colleague_001` for the small reproduction gate.
+4. Run `python verify_AP_pnc.py --compare-name colleague_001` to compare it against the saved baseline.
 
-## Getting started
+Use `python run_AP_pnc.py --name colleague_001 --dry-run` to preview without a simulation.
 
-Use Python 3.10 or newer. In a virtual environment, install the single runtime dependency with `python -m pip install -r requirements.txt`. To check the example with an **illustrative** 600 nm beam width, run `python src/nanobeam.py geometry examples/half_array.csv --beam-width-nm 600`. The command prints JSON so that geometry reports can be archived or consumed by another script. It exits with status 1 when it finds a hole wider than the beam or a neighboring edge gap smaller than the requested minimum. For instance, add `--min-edge-gap-nm 250` to evaluate a chosen 250 nm clearance criterion. That criterion is an input decision, not a guarantee that an EBL process can resolve the design.
+The adapter restores original source paths in an operating-system temporary directory, runs the unchanged solver, and copies newly generated files back here as `new_colleague_001__...`. The temporary tree is removed afterwards. The original solver uses directories internally; the shared folder stays flat. Allow additional disk space for the temporary copy and requested simulation output. Keep the computer awake during a run. An interrupted or failed run retains outputs when the launcher can exit normally; a forced kill or power loss may leave uncollected temporary output, so do not force-quit it.
 
-The CSV header is `x_nm,diameter_nm,region`. Each row represents one circular hole centered at y = 0 in a straight beam; `region` is descriptive metadata, such as Mirror, Taper, or Central cavity. The checker does not infer a mirrored counterpart or fill in missing holes. If both members of a mirrored pair appear at positions of equal magnitude, it records a diameter mismatch in the JSON report. A mismatch is informational because intentionally asymmetric patterns may be useful. Positions and diameters must be finite and diameters must be positive.
+## Continue a run
 
-## Illustrative dispersion model
+```
+python run_AP_pnc.py --name colleague_001 --resume --stage bands
+python run_AP_pnc.py --name colleague_001 --resume --stage cavity
+```
 
-Run `python src/nanobeam.py chain --cell-nm 1000 --mass-a-kg 1e-18 --mass-b-kg 2e-18 --spring-n-m 1 > dispersion.csv` to produce the acoustic and optical branches of an infinite diatomic mass-spring chain. The CSV lists dimensionless ka/π and frequency in hertz. In this model each unit cell of length a has two point masses and identical nearest-neighbor springs. The frequencies follow from the eigenvalues of the two-component Bloch dynamical matrix. At wave number zero, the acoustic branch is exactly zero because translating the entire chain costs no spring energy. At the Brillouin-zone edge, unequal masses split the branches. All masses and springs in the command are illustrative and have **not** been derived from the hole geometry.
+Supported stages: smoke, sweep, bands, cavity, robustness, all. Full campaigns are opt-in and may require substantial RAM, storage and time. The original source and stage hash checks still apply. Use a new label after changing source or parameters. A flat run lock prevents simultaneous writes under the same name.
 
-A real patterned beam has a continuous elastic displacement field, multiple polarizations, material anisotropy, boundary conditions, and potentially nontrivial substrate and support losses. Computing a defensible mechanical band structure requires solving the appropriate elastic eigenproblem on the actual three-dimensional unit cell with Bloch boundary conditions. A cavity mode requires a finite tapered structure and a localization analysis. Quality factor further depends on radiation, material damping, surface loss, fabrication disorder, and coupling to the environment. Thus the current one-dimensional curve must not be labeled a calculated stop band or quality factor for the proposed germanium device.
+After a completed full campaign, in order:
 
-## Reproducibility and scientific workflow
+```
+python run_AP_pnc.py --name colleague_001 --resume --postprocess verify_eigen_scaling
+python run_AP_pnc.py --name colleague_001 --resume --postprocess check_legacy_bloch
+python run_AP_pnc.py --name colleague_001 --resume --postprocess finalize
+```
 
-Run `python -m unittest discover -s tests -v` for checks covering a known pitch and gap, overlap, beam containment, the partial-example input, and exact limits of the chain dispersion. For each candidate design, keep the original CSV, a versioned report, the chosen geometry thresholds, and the units of every parameter. Before interpreting a finite-element result, check mesh refinement separately for the eigenfrequency, mode profile, band edges, and any cavity-mode participation. A convincing cavity claim should also compare the nominal taper with nearby variants and quantify sensitivity to position and diameter errors.
+`--excel-python /path/to/python` supports an existing separate workbook-reader environment. A fresh environment with all requirements needs no special interpreter option.
 
-The planned next stage is an adapter for simulation results: import tabulated Bloch frequencies and finite-device eigenmodes from an external elastic solver, identify candidate gaps only after mode and polarization tracking, and plot spatial energy localization and convergence against mesh size. Another useful extension would export a full symmetric mask from a complete, reviewed half-array while retaining a machine-readable record of all generated coordinates. These capabilities are plans; the current code does not claim to provide them.
+## Find the saved evidence
 
-## Contact
+- `latest__SUMMARY.md`: latest cubic-Ge summary.
+- `latest__figures__band_structure.png`: sampled band structure.
+- `latest__figures__cavity_rank1_displacement.png`: candidate displacement.
+- `latest__figures__cavity_rank1_strain.png`: candidate strain.
+- `latest__tables__validation_status.json`: actual validation gates.
+- `docs__RESULTS_AND_NEXT_GOALS.md`: frequency lineage and next investigations.
+- `docs__ENVIRONMENT.md`: dependencies and storage guidance.
+- `verification__REPORT.md`: original preparation checks.
 
-**Athul Prem** — [GitHub profile](https://github.com/premathul). For scientific discussion, collaboration, or corrections, open an issue in this repository or contact me through my GitHub profile.
+The candidate is approximately 3.042098 GHz within the sampled 2.953106–3.062947 GHz in-plane gap. Finite-transmission mesh and sponge checks remain failed. Flattening does not promote these predictions to experimental or publication validation.
+
+## Naming and provenance
+
+Every supplied Python file ends `_AP_pnc.py`. Only `run_AP_pnc.py` and `verify_AP_pnc.py` are direct user entrypoints; the other renamed scripts are provenance-preserved source consumed through the adapter. Do not run archival scripts individually. Their contents, internal imports and original documentation retain historical names intentionally. Use `flat_manifest.json` to resolve any historical path; `original_README.md` is superseded by this README for commands and layout.
+
+For future figures, place a discreet visible title/footer beginning `athul_simulation_pnc_`. Historical plots are preserved unchanged rather than relabeled. New independent scripts should also end `_AP_pnc.py`.
+
+No GitHub publication or upload has been performed. Check future large outputs against GitHub limits before sharing. The original nested folder and full pre-flatten ZIP are retained separately on the Desktop as recovery copies, not included in this upload folder.

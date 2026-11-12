@@ -1,0 +1,9 @@
+{
+  "nodes": 18935,
+  "triangles": 36226,
+  "components": 1,
+  "boundary_loops": 27,
+  "minimum_edge_nm": 18.18381908772057,
+  "maximum_edge_nm": 52.14988257236185,
+  "area_m2": 1.5385216083896932e-11
+}

@@ -1,0 +1,80 @@
+{
+  "run_id": "run_new_verified_smoke",
+  "temperature_K": 4.0,
+  "device": "authoritative 26-hole tapered nanobeam",
+  "material": "ideal diamond-cubic Ge; HPGe requested; specimen certificate unavailable",
+  "material_status": "UNCALIBRATED_AT_4K",
+  "C11_Pa": 128500000000.0,
+  "C12_Pa": 48300000000.0,
+  "C44_Pa": 66800000000.0,
+  "rho_kg_m3": 5323.0,
+  "elastic_constant_basis": "User-supplied nominal cubic Ge constants from the prior project specification; not verified as 4 K values",
+  "temperature_changes_elastic_operator": false,
+  "crystal_axes": {
+    "x": [
+      1,
+      0,
+      0
+    ],
+    "y": [
+      0,
+      1,
+      0
+    ],
+    "z": [
+      0,
+      0,
+      1
+    ]
+  },
+  "orientation_status": "ASSUMED (001) surface with [100] beam; [110] sensitivity is separate",
+  "purity_certificate": null,
+  "isotope_composition": null,
+  "carrier_concentration_cm3": null,
+  "model": "2D in-plane cubic-anisotropic plane stress; CST triangles; consistent mass; unit thickness",
+  "beam_width_nm": 1000.0,
+  "left_lead_nm": 1500.0,
+  "right_lead_nm": 1500.0,
+  "geometry_temperature_basis": "Workbook dimensions are held fixed; no verified thermal contraction or mount-induced prestress model",
+  "nominal_mesh_hole_nm": 30,
+  "nominal_mesh_bulk_nm": 40,
+  "refined_meshes_nm": [
+    [
+      20,
+      30
+    ],
+    [
+      12,
+      20
+    ]
+  ],
+  "traction_Pa": 1.0,
+  "intrinsic_damping_model": "NONE; intrinsic HPGe loss and Q unknown",
+  "sponge_loss": 0.02,
+  "sponge_frequency_scale_Hz": 4000000000.0,
+  "sponge_guard_nm": 300.0,
+  "sponge_sensitivity": [
+    0.01,
+    0.02,
+    0.04
+  ],
+  "sweep_start_GHz": 1.0,
+  "sweep_stop_GHz": 12.0,
+  "sweep_step_GHz": 0.1,
+  "probe_half_width_nm": 80.0,
+  "eigenmode_count": 20,
+  "bloch_branches": 16,
+  "bloch_q_points": 41,
+  "validation_thresholds": {
+    "harmonic_relative_residual": 1e-07,
+    "eigen_relative_residual": 1e-07,
+    "patch_relative_error": 1e-09,
+    "power_balance_relative_error": 1e-06,
+    "final_frequency_change_percent": 2.0,
+    "localization_absolute_change": 0.02,
+    "mode_overlap_minimum": 0.9,
+    "transmission_change_dB": 1.0,
+    "minimum_estimated_elements_per_shear_wavelength": 10
+  },
+  "publication_status": "NOT_READY; numerical and physical validation gates must be evaluated separately"
+}

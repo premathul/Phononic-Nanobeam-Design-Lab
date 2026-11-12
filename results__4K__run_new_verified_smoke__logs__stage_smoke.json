@@ -1,0 +1,33 @@
+{
+  "four_GHz": "PASS",
+  "five_frequencies": "PASS",
+  "operator_regression": "PASS",
+  "_output_sha256": {
+    "tables/five_frequency_comparison.csv": "7126241c37bc56fed6e7cda715db87c5403a88aa32376d00a61a5ad16840d41d",
+    "tables/geometry_validation.json": "bf1aee74e1ed9ea7f2bf3230e9ed41a43a7128cfa18543ff5ef130a19891d57a",
+    "tables/hole_validation.csv": "14ea9eb46fa485edc88ca2e77b79d031bfaeb2f59531408b786e84e2e3e263ae",
+    "tables/independent_operator_checks.json": "fdd3d42de31c4a6c99d6a198116767b55a8bb622dfdbfc452dce4d3614c511f1",
+    "tables/mesh_defect_h30_b40.json": "15761896f1e12e8574b1197d887db4104d14fc56191fcab71628bdd081e093d6",
+    "tables/mesh_periodic_h30_b40.json": "f4d017dda310dc79a2e74c43efab32b649393172d250161256bba78dadbb3c05",
+    "tables/mesh_reference_h30_b40.json": "770b20131af84d24d88de0bcdf6e87869ee8bf33fcef3f4af07959ed722a8064",
+    "tables/patch_defect_h30_b40_angle0.json": "1da90acb7a4cb841b238bdf20802405c7a8b565a0ed3bf78db20a191e9234ad2",
+    "tables/patch_periodic_h30_b40_angle0.json": "c477a577a0ffe58ba134ae27211e684c5d7f5489f8711495a9df647b1e00b89b",
+    "tables/patch_reference_h30_b40_angle0.json": "a16dc08efb72041cf19114b8f8b177287ec8500a4c8d978763f567610d8baa4d",
+    "tables/single_4GHz.json": "dca803a43166fd0136b6060cc378b683091a9fb899be938e822fa56d1516c740",
+    "fields/field_4GHz.npz": "663460125f6be638f0fe4eab72c7304d01788942ff63a21e0242e75d69d1c884",
+    "mesh/defect_h30_b40.brep": "906ca12ba9c1e05819c3ce431493724ac3e3d5667d1ca8c32be56b4880183e65",
+    "mesh/defect_h30_b40.msh": "bfeaa782b6ad876e1d5e89b84a3569061d265c8a29082fb2b9bc1b4c29e05b5e",
+    "mesh/periodic_h30_b40.brep": "7c7b92d5e44c4908c23a23e093cad6517cb88a809fc6bab5d8d3042a0da5ef99",
+    "mesh/periodic_h30_b40.msh": "3bcffef3cc815af3c748de8b9fca20f0e80451b3532f6570ba8f707d193c0d90",
+    "mesh/reference_h30_b40.brep": "3649619d4a214a448b1f85303925eb297e6e4aca36f049a44403b8a72507e863",
+    "mesh/reference_h30_b40.msh": "63e00322447fc7a9aeb5c33663eb9eb540a015bc33c43f788f0cac2e16e40992",
+    "mesh/regression_cell_h20.brep": "07856aa1b740d961fc52516405e2648528375a602e67f2004b1a6c635c0bc548",
+    "mesh/regression_cell_h20.msh": "aa1048911e949c6c80dd6edb3f33051ed24cae718542d1b775c5a1321f99d621",
+    "figures/field_4GHz_displacement.pdf": "8a54f618e09303f52dc19e01f16db54a028948c96fa59651e1471ce9ff99a5a1",
+    "figures/field_4GHz_displacement.png": "b74f2861bde7aee7ea42570f2d1575a69271194f08c390466f3957f51085017d",
+    "figures/field_4GHz_strain.pdf": "066e9a99028afb1b0b289f7d24bcf2f22f21b84e151de4f4404ed9fdd2de70f2",
+    "figures/field_4GHz_strain.png": "2e499b30be2c5100c14b80a2a815939fb0b2942a4093464220b4da453e510514",
+    "figures/geometry.png": "54799ef8ff158918d8d149b5f512f42c63d73802f9503e40bf8fa663869fda3f",
+    "figures/mesh.png": "a8bf4f3d5b61046c046c4679e077102d489bbbcddb278f6e7fb49211c462bb84"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "sheet_names": [
+    "Nanobeam Hole Array"
+  ],
+  "exact_columns": [
+    "Hole #",
+    "Position (nm)",
+    "Diameter (nm)",
+    "Center-to-center distance\nfrom previous hole (nm)",
+    "Edge-to-edge gap\nfrom previous hole (nm)",
+    "Region"
+  ],
+  "hole_count": 26,
+  "workbook_sha256": "6d4ae03be9662b4997af1dedc87bab80b7be080c8e1144372667dea4cf658917",
+  "derived_sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771"
+}

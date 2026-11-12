@@ -1,0 +1,9 @@
+{
+  "python": "3.13.11 | packaged by conda-forge | (main, Dec  6 2025, 11:37:04) [Clang 19.1.7 ]",
+  "executable": "/Users/athulsmac/anaconda3/envs/qtcad/bin/python",
+  "architecture": "x86_64",
+  "numpy": "2.2.6",
+  "scipy": "1.15.2",
+  "gmsh": "4.15.0",
+  "matplotlib": "3.10.8"
+}

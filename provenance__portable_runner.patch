@@ -1,0 +1,135 @@
+--- archived/run.py
++++ portable_template/run.py
+@@ -4,19 +4,39 @@
+ writes are used. --output creates a new sibling run; --resume is explicit.
+ """
+ from __future__ import annotations
+-import argparse,csv,hashlib,json,os,platform,re,shutil,subprocess,sys,time,traceback
++import argparse,atexit,csv,hashlib,json,os,platform,re,shutil,subprocess,sys,time,traceback,uuid
+ from pathlib import Path
+ sys.dont_write_bytecode=True
+ SOURCE=Path(__file__).resolve().parent
+ PROJECT=SOURCE.parents[2]
+-ap=argparse.ArgumentParser();ap.add_argument('--resume',action='store_true');ap.add_argument('--output',type=Path)
++ap=argparse.ArgumentParser(description='Portable staged runner. Numerical functions retain the original implementation.')
++ap.add_argument('--resume',action='store_true')
++ap.add_argument('--output',type=Path,required=True)
++ap.add_argument('--stage',choices=['smoke','sweep','bands','cavity','robustness','all'],default='smoke')
++ap.add_argument('--excel-python',default=sys.executable,help='Interpreter with openpyxl; defaults to this interpreter')
+ args=ap.parse_args()
+-OUT=args.output.resolve() if args.output else SOURCE
++OUT=args.output.resolve()
++if OUT == SOURCE or OUT.name in ('portable_template','run_20261011T002256Z'):
++    ap.error('Output must be a new named run, never the template or archived baseline')
+ if args.output:
+     if OUT.parent!=SOURCE.parent:raise ValueError('--output must be a new sibling under results/4K')
+-    OUT.mkdir(exist_ok=False)
++    if args.resume:
++        if not OUT.is_dir():raise ValueError('--resume requires an existing run')
++    else:
++        OUT.mkdir(exist_ok=False)
++    # Exclusive per-run lock prevents simultaneous resumes or solver writes.
++    lock=OUT/'.run.lock'; lock_token=str(uuid.uuid4())
++    try:
++        with lock.open('x') as f:f.write(json.dumps({'pid':os.getpid(),'token':lock_token}))
++    except FileExistsError:
++        raise SystemExit('Run lock exists. Do not resume while a run is active. If interrupted, verify no process is using the run before removing its .run.lock.')
++    def release_lock():
++        try:
++            if json.loads(lock.read_text()).get('token')==lock_token:lock.unlink()
++        except (OSError,ValueError):pass
++    atexit.register(release_lock)
+     for name in ('config.json','MATERIAL_PROVENANCE.md','NUMERICAL_METHODS.md','run.py','numerics.py','finalize.py','verify_eigen_scaling.py','check_legacy_bloch.py'):
+-        shutil.copy2(SOURCE/name,OUT/name)
++        if not args.resume:shutil.copy2(SOURCE/name,OUT/name)
+ for name in ('figures','tables','fields','logs','mesh','inputs'):(OUT/name).mkdir(exist_ok=True)
+ os.environ['MPLCONFIGDIR']=str(OUT/'logs'/'matplotlib-cache')
+ os.environ['XDG_CACHE_HOME']=str(OUT/'logs'/'cache')
+@@ -32,6 +52,22 @@
+ from scipy.optimize import linear_sum_assignment
+ import numerics as n
+ 
++if args.resume:
++    for filename in ('run.py','numerics.py'):
++        if (OUT/filename).read_bytes() != (SOURCE/filename).read_bytes():
++            raise ValueError('Resume source differs from template; use the original template or a new run')
++    source_hash_file=OUT/'logs'/'input_source_hashes.json'
++    if not source_hash_file.exists():
++        raise ValueError('Cannot safely resume without prior source hashes; choose a new run')
++    previous_hashes=json.loads(source_hash_file.read_text())
++    for rel in ('scripts/solve_direct_fem.py','config.py','results/convergence_and_localization/fields/cell_h20.msh','results/convergence_and_localization/fields/cell_h12.msh','results/convergence_and_localization/fields/cell_h10.msh'):
++        found=[digest for key,digest in previous_hashes.items() if key.replace(chr(92),'/').endswith('/'+rel)]
++        current=hashlib.sha256((PROJECT/rel).read_bytes()).hexdigest()
++        if len(found)!=1 or found[0]!=current:
++            raise ValueError('Shared source changed since prior run: '+rel+'; choose a new run')
++    oldcfg=json.loads((OUT/'config.json').read_text()); newcfg=json.loads((SOURCE/'config.json').read_text())
++    oldcfg.pop('run_id',None);newcfg.pop('run_id',None)
++    if oldcfg != newcfg:raise ValueError('Resume configuration differs from template')
+ CFG=json.loads((OUT/'config.json').read_text())
+ if args.output:
+     CFG['run_id']=OUT.name
+@@ -71,7 +107,7 @@
+         if not p.exists():shutil.copy2(PROJECT/'data'/p.name,p)
+         if sha(p)!=sha(PROJECT/'data'/p.name):raise ValueError('Input differs from original workbook/derived data')
+     code='import json,sys; from openpyxl import load_workbook; b=load_workbook(sys.argv[1],read_only=True,data_only=True); print(json.dumps({"sheets":b.sheetnames,"rows":list(b["Nanobeam Hole Array"].values)}))'
+-    raw=json.loads(subprocess.check_output(['/Users/athulsmac/anaconda3/bin/python','-c',code,str(wb)],text=True))
++    raw=json.loads(subprocess.check_output([args.excel_python,'-c',code,str(wb)],text=True))
+     headers=[str(x or '').strip() for x in raw['rows'][0]]
+     def col(prefix):
+         found=[i for i,x in enumerate(headers) if x.startswith(prefix)]
+@@ -130,7 +166,7 @@
+     js(LOG/'environment.json',versions)
+     source_dir=LOG/'source_snapshot';source_dir.mkdir(exist_ok=True)
+     hashes={}
+-    for path in (PROJECT/'scripts'/'solve_direct_fem.py',PROJECT/'config.py',SOURCE/'run.py',SOURCE/'numerics.py',SOURCE/'config.json'):
++    for path in (PROJECT/'scripts'/'solve_direct_fem.py',PROJECT/'config.py',SOURCE/'run.py',SOURCE/'numerics.py',SOURCE/'config.json') + tuple(PROJECT/'results'/'convergence_and_localization'/'fields'/f'cell_h{h}.msh' for h in (20,12,10)):
+         dest=source_dir/(sha(path)[:12]+'_'+path.name)
+         if not dest.exists():shutil.copy2(path,dest)
+         hashes[str(path)]=sha(path)
+@@ -420,7 +456,7 @@
+     text+='The 4 K bath changes the Bose occupation calculation, not the classical displacement operator with fixed elastic inputs. A comparison against the old isotropic result changes the constitutive model and must not be described as a measured cooling shift. The [110] sensitivity is a second assumption, not a crystal-orientation measurement. Bloch gap edges use adaptive sampling of 16 computed in-plane branches; this is a numerical estimate, not proof of a full 3D bandgap. Coarse high-frequency transmission may be under-resolved. Central localization integrals use degree-five quadrature with finite-window sampling; mode-area is an inverse participation area. End-loss sensitivity tests use a weak mass sponge and cannot establish radiation-limited Q.\n\n'
+     text+='Necessary publication work: verify low-temperature Cij and density including the Fine erratum; obtain crystal orientation, thickness and fabrication metrology; include cubic 3D modes or demonstrate the validity of the 2D reduction; establish converged energy-flux or port transmission with validated nonreflecting boundaries; characterize loss, thermal contraction and support stress.\n\n'
+     text+='See MATERIAL_PROVENANCE.md for primary-source links. Figures are supplied as PNG and selected PDF files. Raw meshes, full selected complex fields, source hashes, validation tables and run logs are preserved.\n\n'
+-    text+='## Reproduction\n\nFrom this directory, using the existing local environment:\n\n```sh\n/Users/athulsmac/anaconda3/envs/qtcad/bin/python run.py --output ../run_NEW_UNIQUE_ID\n```\n\nA new sibling output directory must not already exist. Completed output cannot be silently replaced. `--resume` explicitly continues a partially completed run and skips completed stages. The project workbook, original direct FEM module, and base Python with openpyxl are required; hashes and versions are recorded. No packages are installed.\n'
++    text+='## Reproduction\n\nFrom this directory, using the existing local environment:\n\n```sh\npython run.py --output ../run_NEW_UNIQUE_ID --stage all\n```\n\nA new sibling output directory must not already exist. Completed output cannot be silently replaced. `--resume` explicitly continues a partially completed run and skips completed stages. The project workbook, original direct FEM module, and an interpreter with openpyxl are required; hashes and versions are recorded. No packages are installed.\n'
+     (OUT/'SUMMARY.md').write_text(text)
+     return summary
+ 
+@@ -432,12 +468,32 @@
+     if not sentinel.exists():js(sentinel,{'UTC':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'pid':os.getpid(),'scope_confirmed':'26-hole nanobeam','specimen_information':'user has none'})
+     try:
+         VARIANTS,BOUNDS=geometry();snapshot()
+-        for stage,fn in [('smoke',smoke),('sweep',sweep),('bands',bands),('cavity',cavities),('robustness',robustness)]:
++        stage_functions=[('smoke',smoke),('sweep',sweep),('bands',bands),('cavity',cavities),('robustness',robustness)]
++        requested={'smoke':{'smoke'},'sweep':{'smoke','sweep'},'bands':{'smoke','bands'},
++                   'cavity':{'smoke','bands','cavity'},'robustness':{'smoke','sweep','bands','robustness'},
++                   'all':{name for name,_ in stage_functions}}[args.stage]
++        for stage,fn in stage_functions:
++            if stage not in requested:continue
+             path=LOG/f'stage_{stage}.json'
+-            if path.exists():log('Skip completed stage',stage);continue
++            if path.exists():
++                previous=json.loads(path.read_text())
++                evidence=previous.get('_output_sha256') if isinstance(previous,dict) else None
++                if not isinstance(evidence,dict) or not evidence:
++                    raise ValueError('Stage marker lacks verified artifact hashes: '+stage)
++                for rel,digest in evidence.items():
++                    artifact=OUT/rel
++                    if not artifact.is_file() or sha(artifact)!=digest:
++                        raise ValueError('Completed-stage artifact missing/changed: '+rel+'; use a new run')
++                log('Skip verified completed stage',stage);continue
+             js(LOG/'status.json',{'state':'running','stage':stage,'pid':os.getpid()});log('START',stage)
+-            result=fn();js(path,result);log('COMPLETE',stage)
+-        result=report();js(LOG/'complete.json',{'status':'COMPLETE_CONDITIONAL_STUDY','publication_ready':False});js(LOG/'status.json',{'state':'complete','publication_ready':False})
+-        log('COMPLETE',str(OUT))
++            result=fn()
++            result['_output_sha256']={str(p.relative_to(OUT)):sha(p) for group in (TAB,FLD,MESH,FIG) for p in sorted(group.rglob('*')) if p.is_file()}
++            js(path,result);log('COMPLETE',stage)
++        if all((LOG/f'stage_{name}.json').exists() for name,_ in stage_functions):
++            result=report();js(LOG/'complete.json',{'status':'COMPLETE_CONDITIONAL_STUDY','publication_ready':False})
++            js(LOG/'status.json',{'state':'complete','publication_ready':False})
++        else:
++            js(LOG/'status.json',{'state':'selected_stages_complete','requested_stage':args.stage,'publication_ready':False})
++        log('SELECTED STAGES COMPLETE',str(OUT))
+     except Exception as exc:
+         details=traceback.format_exc();log(details);js(LOG/'status.json',{'state':'failed','error':str(exc)});(LOG/'failure.txt').write_text(details);raise

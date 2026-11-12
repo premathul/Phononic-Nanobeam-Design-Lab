@@ -1,0 +1,11 @@
+test_archived_run_rejected (__main__.SafetyTests) ... ok
+test_dry_run_does_not_create_output (__main__.SafetyTests) ... ok
+test_existing_lock_preserved (__main__.SafetyTests) ... ok
+test_missing_output_option_rejected (__main__.SafetyTests) ... ok
+test_numerics_unchanged (__main__.SafetyTests) ... ok
+test_path_name_rejected (__main__.SafetyTests) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.733s
+
+OK
