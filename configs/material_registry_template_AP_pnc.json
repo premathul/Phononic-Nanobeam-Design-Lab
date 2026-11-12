@@ -1,0 +1,100 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": "proposal-1",
+  "status": "TEMPLATE_NOT_CALIBRATED",
+  "material_id": "nominal_pure_HPGe_control",
+  "material_model_version": "unimplemented-1",
+  "sample": {
+    "chemical_purity": null,
+    "carrier_concentration_cm3": null,
+    "resistivity_ohm_m": null,
+    "isotopic_composition": null,
+    "dislocation_density_m2": null,
+    "certificate": null,
+    "description": "nominal crystalline Ge, no intentional doping or added layers"
+  },
+  "allowed_policy": "fixed_property_control",
+  "allowed_for_quantitative_temperature_claims": false,
+  "reference_input": "results/archive_smoke/run_new_verified_smoke/config_AP_pnc.json",
+  "parameters": {
+    "C11": {
+      "value": 128500000000.0,
+      "units": "Pa",
+      "basis": "historical nominal project input; not newly sourced specimen data",
+      "valid_temperature_K": null,
+      "valid_frequency_Hz": null,
+      "uncertainty": null,
+      "primary_source": null,
+      "source_page_or_table": null,
+      "interpolation_rule": "none_fixed_control",
+      "extrapolation_permitted": false
+    },
+    "C12": {
+      "value": 48300000000.0,
+      "units": "Pa",
+      "basis": "historical nominal project input; not newly sourced specimen data",
+      "valid_temperature_K": null,
+      "valid_frequency_Hz": null,
+      "uncertainty": null,
+      "primary_source": null,
+      "source_page_or_table": null,
+      "interpolation_rule": "none_fixed_control",
+      "extrapolation_permitted": false
+    },
+    "C44": {
+      "value": 66800000000.0,
+      "units": "Pa",
+      "basis": "historical nominal project input; not newly sourced specimen data",
+      "valid_temperature_K": null,
+      "valid_frequency_Hz": null,
+      "uncertainty": null,
+      "primary_source": null,
+      "source_page_or_table": null,
+      "interpolation_rule": "none_fixed_control",
+      "extrapolation_permitted": false
+    },
+    "rho": {
+      "value": 5323.0,
+      "units": "kg/m^3",
+      "basis": "historical nominal project input; not newly sourced specimen data",
+      "valid_temperature_K": null,
+      "valid_frequency_Hz": null,
+      "uncertainty": null,
+      "primary_source": null,
+      "source_page_or_table": null,
+      "interpolation_rule": "none_fixed_control",
+      "extrapolation_permitted": false
+    },
+    "alpha_linear": {
+      "value": null,
+      "units": "1/K",
+      "valid_temperature_K": null,
+      "valid_frequency_Hz": null,
+      "uncertainty": null,
+      "primary_source": null,
+      "source_page_or_table": null,
+      "interpolation_rule": null,
+      "extrapolation_permitted": false
+    },
+    "physical_loss_model": {
+      "value": null,
+      "units": "model_specific",
+      "valid_temperature_K": null,
+      "valid_frequency_Hz": null,
+      "uncertainty": null,
+      "primary_source": null,
+      "source_page_or_table": null,
+      "interpolation_rule": null,
+      "extrapolation_permitted": false
+    }
+  },
+  "acceptance_tasks": [
+    "Read primary property sources and corrections",
+    "Record specimen context and uncertainty",
+    "Check cubic stability and rotated tensor symmetry",
+    "Define mass-consistent expansion/density",
+    "Verify passivity of any added loss model",
+    "Reject unsupported quantitative thermal claims"
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": "proposal-1",
+  "status": "SPECIFICATION_ONLY_NOT_EXECUTABLE",
+  "execution_enabled": false,
+  "purpose": "3D HPGe mode-resolved propagation with independent validation gates",
+  "material_id": "nominal_pure_HPGe_control",
+  "material_model_version": "unimplemented-1",
+  "crystal_rotation": [
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      1
+    ]
+  ],
+  "crystal_orientation_status": "assumed_001_surface_100_reference_beam",
+  "geometry_families": [
+    "homogeneous_straight",
+    "periodic_straight",
+    "defect_straight",
+    "open_bend"
+  ],
+  "later_geometry_families": [
+    "closed_ring",
+    "bus_coupled_ring"
+  ],
+  "geometry_parameters_SI": {
+    "beam_width_m": 1e-06,
+    "left_lead_m": 1.5e-06,
+    "right_lead_m": 1.5e-06,
+    "dimension_status": "historical_provisional_assumptions",
+    "hole_source": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+    "source_coordinate_unit": "nm",
+    "source_conversion_to_m": 1e-09,
+    "open_bend_radius_over_width": [
+      5,
+      10,
+      20,
+      40
+    ],
+    "ring_closure_rule": null
+  },
+  "thickness_m": [
+    1e-07,
+    2e-07,
+    1e-06
+  ],
+  "temperature_K": [
+    0.02,
+    0.04,
+    1.0,
+    4.0,
+    20.0,
+    77.0,
+    300.0
+  ],
+  "reference_temperature_K": 4.0,
+  "reference_temperature_status": "planning_choice_not_calibrated_material_data",
+  "thermal_policy": "fixed_property_control",
+  "quantitative_temperature_claims_allowed": false,
+  "other_policies_require_sourced_registry": [
+    "material_only_fixed_geometry",
+    "free_thermal_contraction",
+    "constrained_thermoelastic"
+  ],
+  "frequency_min_Hz": 100000000.0,
+  "frequency_max_Hz": 6000000000.0,
+  "frequency_strategy": {
+    "type": "adaptive_after_121_point_screen",
+    "initial_points": 121,
+    "planning_max_points": 1001,
+    "points_per_resolved_linewidth_min": 10,
+    "points_per_resolved_linewidth_target": 20,
+    "optional_extension_max_Hz": 8000000000.0,
+    "extension_requires_validation": true,
+    "known_diagnostic_frequencies_Hz": [
+      2800000000.0,
+      5200000000.0
+    ],
+    "unresolved_at_cap": "record_unresolved_and_revise_budget"
+  },
+  "incident_mode_ids": "all_verified_open_incoming_channels",
+  "maximum_mode_count": null,
+  "mode_policy": {
+    "completeness_required": true,
+    "evanescent_convergence_required": true,
+    "cutoff_handling": "separate_status_and_power_direction",
+    "tracking": "field_or_invariant_subspace_overlap"
+  },
+  "port_definitions": {
+    "status": "to_be_implemented_and_calibrated",
+    "normalization": "unit_incident_power_W",
+    "matched_cross_sections_required": true
+  },
+  "mesh_policy": {
+    "element_family": null,
+    "polynomial_order": null,
+    "minimum_systematic_levels": 3,
+    "independent_controls": [
+      "thickness_resolution",
+      "hole_curvature",
+      "shortest_wavelength",
+      "mesh_realization"
+    ]
+  },
+  "solver_tolerances": {
+    "small_benchmark_relative_residual_target": 1e-08,
+    "tracked_frequency_change_fraction_max": 0.005,
+    "nondegenerate_mode_overlap_min": 0.99,
+    "localization_fraction_change_max": 0.02,
+    "power_budget_absolute_error_max": 0.01,
+    "transmission_refinement_absolute_change_max": 0.01,
+    "reflection_refinement_absolute_change_max": 0.01,
+    "status": "proposed_initial_targets_not_achieved"
+  },
+  "boundary_model": {
+    "status": "not_implemented",
+    "physical_intrinsic_loss": null,
+    "numerical_absorber_is_physical_loss": false,
+    "independent_length_profile_tests_required": true
+  },
+  "uncertainty_case": {
+    "material": null,
+    "geometry": null,
+    "exploratory_dimension_factors": [
+      0.9,
+      1.0,
+      1.1
+    ],
+    "factors_are_fabrication_tolerances": false
+  },
+  "resource_limits": {
+    "max_ram_bytes": null,
+    "max_output_disk_bytes": null,
+    "max_wall_time_seconds": null,
+    "max_parallel_jobs": 1,
+    "must_be_resolved_before_execution": true
+  },
+  "checkpoint_policy": {
+    "atomic_task_writes": true,
+    "exclusive_run_lock": true,
+    "same_source_and_input_hashes_for_resume": true,
+    "retain_failed_points": true,
+    "operator_hash_separate_from_run_hash": true
+  },
+  "field_retention": "representative_passband_gap_resonance_conversion_and_failure_points",
+  "outputs": {
+    "results_directory": "results/runs/<run_id>/",
+    "figure_directory": "figures/<run_id>/",
+    "figure_prefix": "athul_simulation_pnc_",
+    "filename_suffix": "_AP_pnc",
+    "visible_figure_header": "Athul Prem | athul_simulation_pnc_<identifier>"
+  },
+  "final_report": {
+    "recipient": "athul.prem@coyotes.usd.edu",
+    "requirements": "reports/REPORT_REQUIREMENTS_AP_pnc.md",
+    "email_subject": "HPGe phonon propagation research report | Athul Prem | _AP_pnc",
+    "delivery_status": "not_prepared_not_sent"
+  }
+}

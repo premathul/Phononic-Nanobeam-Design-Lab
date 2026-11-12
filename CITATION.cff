@@ -1,0 +1,12 @@
+# Author: Athul Prem | _AP_pnc
+cff-version: 1.2.0
+message: "Credit Athul Prem and the exact repository revision when using this research project. The _AP_pnc tag identifies project artifacts."
+title: "Phononic Nanobeam Design Lab (_AP_pnc)"
+type: software
+authors:
+  - family-names: Prem
+    given-names: Athul
+    affiliation: University of South Dakota
+    email: athul.prem@coyotes.usd.edu
+repository-code: "https://github.com/premathul/Phononic-Nanobeam-Design-Lab"
+abstract: "Preserved germanium phononic simulation evidence and a research specification for verified three-dimensional HPGe phonon propagation. The full archived FEM workflow is incomplete; the proposed 3D campaign is not an executed result."

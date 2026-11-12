@@ -1,0 +1,23 @@
+To: athul.prem@coyotes.usd.edu
+Subject: HPGe phonon propagation research report | Athul Prem | _AP_pnc
+X-Project-Author: Athul Prem
+X-Project-Tag: _AP_pnc
+X-Template-Status: Unsent template; research report not yet prepared
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+
+Dear Athul,
+
+[Replace this template only after preparing and validating the report.]
+
+The attached report presents the [complete/partial/blocked] HPGe phonon-propagation study at source revision [commit].
+
+Completed scope: [actual geometries, thicknesses, admitted temperatures, frequencies and modes].
+Supported findings: [specific findings with uncertainty and model validity].
+Remaining limitations: [failed gates, missing evidence and unexecuted extensions].
+Reproducibility package: [verified link and checksums].
+
+Attachment: HPGe_Phonon_Propagation_Final_Report_AP_pnc.pdf
+
+Prepared for Athul Prem
+_AP_pnc research handoff

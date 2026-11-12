@@ -1,0 +1,16 @@
+# Author: Athul Prem | _AP_pnc
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.DS_Store
+*.tmp
+*.lock
+.env
+.env.*
+!.env.example
+# New run scratch and bulky fields are local until deliberately selected for sharing.
+results/runs/
+scratch/
+tmp/

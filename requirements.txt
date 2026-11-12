@@ -1,1 +1,4 @@
+# Author: Athul Prem | _AP_pnc
+# Current geometry/chain utility and optional saved-field checks only.
+# Full legacy FEM dependencies and missing source require separate recovery.
 numpy>=1.24,<3

@@ -1,0 +1,278 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "verification_type": "repository_reorganization_and_available_evidence",
+  "verified_at_utc": "2026-11-12T18:44:35.770895+00:00",
+  "baseline_commit": "068cb8c92d179bfb2049f886278e95a0e7d9c709",
+  "python": "3.12.14",
+  "platform": "linux",
+  "simulation_rerun": false,
+  "full_archive_complete": false,
+  "report_email_sent": false,
+  "blocked_launch_created_files": false,
+  "checks": [
+    {
+      "command": "python -B tools/audit_repository_AP_pnc.py",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "expectation_met": true,
+      "result": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "uploaded_files_checked": 199,
+        "uploaded_bytes_preserved": true,
+        "archive_manifest_entries": 496,
+        "available_expected_entries": 273,
+        "exact_hash_aliases": 84,
+        "unresolved_expected_entries": 223,
+        "archive_complete": false,
+        "critical_missing_runner_inputs": [
+          "handoff.py",
+          "results/4K/portable_template/numerics.py",
+          "results/4K/portable_template/config.json",
+          "results/4K/portable_template/MATERIAL_PROVENANCE.md",
+          "results/4K/portable_template/NUMERICAL_METHODS.md",
+          "results/4K/portable_template/finalize.py",
+          "results/4K/portable_template/verify_eigen_scaling.py",
+          "results/4K/portable_template/check_legacy_bloch.py"
+        ],
+        "integrity_errors": [],
+        "simulation_rerun": false,
+        "status": "PASS_UPLOAD_INTEGRITY"
+      }
+    },
+    {
+      "command": "python -B verify_AP_pnc.py --fields --safety",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "expectation_met": true,
+      "result": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "uploaded_files_checked": 199,
+        "uploaded_bytes_preserved": true,
+        "archive_manifest_entries": 496,
+        "available_expected_entries": 273,
+        "exact_hash_aliases": 84,
+        "unresolved_expected_entries": 223,
+        "archive_complete": false,
+        "critical_missing_runner_inputs": [
+          "handoff.py",
+          "results/4K/portable_template/numerics.py",
+          "results/4K/portable_template/config.json",
+          "results/4K/portable_template/MATERIAL_PROVENANCE.md",
+          "results/4K/portable_template/NUMERICAL_METHODS.md",
+          "results/4K/portable_template/finalize.py",
+          "results/4K/portable_template/verify_eigen_scaling.py",
+          "results/4K/portable_template/check_legacy_bloch.py"
+        ],
+        "integrity_errors": [],
+        "simulation_rerun": false,
+        "available_saved_smoke": {
+          "status": "PASS_AVAILABLE_SAVED_SMOKE",
+          "source_run": "results/4K/run_new_verified_smoke",
+          "saved_stage_outputs_hashed": 26,
+          "saved_frequencies_checked": 5,
+          "saved_structure_frequency_records_checked": 15,
+          "maximum_saved_algebraic_residual": 5.296414884797587e-13,
+          "maximum_saved_source_sponge_balance_error": 8.630743758784776e-14,
+          "maximum_displacement_ratio_arithmetic_error_dB": 0.0,
+          "saved_operator_comparisons_checked": 4,
+          "calibrated_power_transmission_validated": false,
+          "full_333_solve_60_mode_archive_reverified": false,
+          "simulation_rerun": false,
+          "saved_field_check": {
+            "status": "PASS_FINITE_ARRAYS_AND_TOPOLOGY",
+            "points": 18598,
+            "triangles": 35540,
+            "arrays_checked": 4
+          }
+        },
+        "archive_guard_tests": {
+          "status": "PASS",
+          "count": 8
+        },
+        "status": "PASS_AVAILABLE_EVIDENCE"
+      },
+      "stderr": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.004s\n\nOK\n"
+    },
+    {
+      "command": "python -B -m unittest discover -s tests -p test*_AP_pnc.py -v",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "expectation_met": true,
+      "stdout": "",
+      "stderr": "test_all_inputs_checked_before_partial_restore (test_archive_runtime_AP_pnc.ArchiveGuards.test_all_inputs_checked_before_partial_restore) ... ok\ntest_corrupted_hash_blocks_restore_before_writes (test_archive_runtime_AP_pnc.ArchiveGuards.test_corrupted_hash_blocks_restore_before_writes) ... ok\ntest_exact_hash_alias_restores_original_paths (test_archive_runtime_AP_pnc.ArchiveGuards.test_exact_hash_alias_restores_original_paths) ... ok\ntest_existing_restore_target_is_never_overwritten (test_archive_runtime_AP_pnc.ArchiveGuards.test_existing_restore_target_is_never_overwritten) ... ok\ntest_missing_archive_does_not_turn_integrity_into_completeness (test_archive_runtime_AP_pnc.ArchiveGuards.test_missing_archive_does_not_turn_integrity_into_completeness) ... ok\ntest_rejects_traversal_and_ambiguous_paths (test_archive_runtime_AP_pnc.ArchiveGuards.test_rejects_traversal_and_ambiguous_paths) ... ok\ntest_run_name_and_existing_output_guards (test_archive_runtime_AP_pnc.ArchiveGuards.test_run_name_and_existing_output_guards) ... ok\ntest_symlink_source_and_parent_are_rejected (test_archive_runtime_AP_pnc.ArchiveGuards.test_symlink_source_and_parent_are_rejected) ... ok\ntest_acoustic_zero_and_zone_edge (test_nanobeam_AP_pnc.ChainTests.test_acoustic_zero_and_zone_edge) ... ok\ntest_example_partial_array (test_nanobeam_AP_pnc.GeometryTests.test_example_partial_array) ... ok\ntest_known_adjacent_spacing (test_nanobeam_AP_pnc.GeometryTests.test_known_adjacent_spacing) ... ok\ntest_overlap_and_sidewall (test_nanobeam_AP_pnc.GeometryTests.test_overlap_and_sidewall) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 0.006s\n\nOK\n"
+    },
+    {
+      "command": "python -B src/nanobeam_AP_pnc.py geometry data/examples/half_array_AP_pnc.csv --beam-width-nm 600",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "expectation_met": true,
+      "result": {
+        "hole_count": 8,
+        "beam_width_nm": 600.0,
+        "adjacent": [
+          {
+            "left_hole": 1,
+            "right_hole": 2,
+            "pitch_nm": 550.0,
+            "edge_gap_nm": 300.0
+          },
+          {
+            "left_hole": 2,
+            "right_hole": 3,
+            "pitch_nm": 550.0,
+            "edge_gap_nm": 300.0
+          },
+          {
+            "left_hole": 3,
+            "right_hole": 4,
+            "pitch_nm": 3290.0,
+            "edge_gap_nm": 3037.5
+          },
+          {
+            "left_hole": 4,
+            "right_hole": 5,
+            "pitch_nm": 530.0,
+            "edge_gap_nm": 272.5
+          },
+          {
+            "left_hole": 5,
+            "right_hole": 6,
+            "pitch_nm": 520.0,
+            "edge_gap_nm": 257.5
+          },
+          {
+            "left_hole": 6,
+            "right_hole": 7,
+            "pitch_nm": 510.0,
+            "edge_gap_nm": 242.5
+          },
+          {
+            "left_hole": 7,
+            "right_hole": 8,
+            "pitch_nm": 500.0,
+            "edge_gap_nm": 227.5
+          }
+        ],
+        "issues": [],
+        "paired_mirror_diameter_mismatches": [],
+        "note": "Coordinates represent circle centers on y=0; substrate and anchors are not modeled."
+      }
+    },
+    {
+      "command": "python -B src/nanobeam_AP_pnc.py chain --points 11",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "expectation_met": true,
+      "stdout": "ka_over_pi,acoustic_hz,optical_hz\n0,0,2.7566445e+08\n0.1,20384383,2.7490974e+08\n0.2,40599324,2.7265836e+08\n0.3,60468536,2.6895063e+08\n0.4,79799022,2.6386171e+08\n0.5,98363164,2.5751811e+08\n0.6,1.1586187e+08,2.5013379e+08\n0.7,1.3184277e+08,2.4209166e+08\n0.8,1.4551449e+08,2.3412907e+08\n0.9,1.5538958e+08,2.276949e+08\n1,1.5915494e+08,2.2507908e+08\n"
+    },
+    {
+      "command": "python -B run_AP_pnc.py --name hpge_reference --dry-run",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "expectation_met": true,
+      "result": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "status": "DRY_RUN_BLOCKED",
+        "run_name": "hpge_reference",
+        "requested_stage": "smoke",
+        "planned_output": "results/runs/hpge_reference",
+        "archive_complete": false,
+        "unresolved_expected_entries": 223,
+        "critical_missing_runner_inputs": [
+          "handoff.py",
+          "results/4K/portable_template/numerics.py",
+          "results/4K/portable_template/config.json",
+          "results/4K/portable_template/MATERIAL_PROVENANCE.md",
+          "results/4K/portable_template/NUMERICAL_METHODS.md",
+          "results/4K/portable_template/finalize.py",
+          "results/4K/portable_template/verify_eigen_scaling.py",
+          "results/4K/portable_template/check_legacy_bloch.py"
+        ],
+        "execution_adapter_enabled": false,
+        "next_action": "Recover exact archived source/configuration, rerun strict verification, then review an execution adapter before starting the legacy smoke case.",
+        "new_3D_campaign_implemented": false,
+        "simulation_rerun": false,
+        "files_created": false
+      }
+    },
+    {
+      "command": "python -B run_AP_pnc.py --name hpge_reference",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "expectation_met": true,
+      "result": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "status": "BLOCKED_NO_EXECUTION",
+        "run_name": "hpge_reference",
+        "requested_stage": "smoke",
+        "planned_output": "results/runs/hpge_reference",
+        "archive_complete": false,
+        "unresolved_expected_entries": 223,
+        "critical_missing_runner_inputs": [
+          "handoff.py",
+          "results/4K/portable_template/numerics.py",
+          "results/4K/portable_template/config.json",
+          "results/4K/portable_template/MATERIAL_PROVENANCE.md",
+          "results/4K/portable_template/NUMERICAL_METHODS.md",
+          "results/4K/portable_template/finalize.py",
+          "results/4K/portable_template/verify_eigen_scaling.py",
+          "results/4K/portable_template/check_legacy_bloch.py"
+        ],
+        "execution_adapter_enabled": false,
+        "next_action": "Recover exact archived source/configuration, rerun strict verification, then review an execution adapter before starting the legacy smoke case.",
+        "new_3D_campaign_implemented": false,
+        "simulation_rerun": false,
+        "files_created": false
+      }
+    },
+    {
+      "command": "python -B verify_AP_pnc.py --require-complete-archive",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "expectation_met": true,
+      "result": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "uploaded_files_checked": 199,
+        "uploaded_bytes_preserved": true,
+        "archive_manifest_entries": 496,
+        "available_expected_entries": 273,
+        "exact_hash_aliases": 84,
+        "unresolved_expected_entries": 223,
+        "archive_complete": false,
+        "critical_missing_runner_inputs": [
+          "handoff.py",
+          "results/4K/portable_template/numerics.py",
+          "results/4K/portable_template/config.json",
+          "results/4K/portable_template/MATERIAL_PROVENANCE.md",
+          "results/4K/portable_template/NUMERICAL_METHODS.md",
+          "results/4K/portable_template/finalize.py",
+          "results/4K/portable_template/verify_eigen_scaling.py",
+          "results/4K/portable_template/check_legacy_bloch.py"
+        ],
+        "integrity_errors": [],
+        "simulation_rerun": false,
+        "available_saved_smoke": {
+          "status": "PASS_AVAILABLE_SAVED_SMOKE",
+          "source_run": "results/4K/run_new_verified_smoke",
+          "saved_stage_outputs_hashed": 26,
+          "saved_frequencies_checked": 5,
+          "saved_structure_frequency_records_checked": 15,
+          "maximum_saved_algebraic_residual": 5.296414884797587e-13,
+          "maximum_saved_source_sponge_balance_error": 8.630743758784776e-14,
+          "maximum_displacement_ratio_arithmetic_error_dB": 0.0,
+          "saved_operator_comparisons_checked": 4,
+          "calibrated_power_transmission_validated": false,
+          "full_333_solve_60_mode_archive_reverified": false,
+          "simulation_rerun": false
+        },
+        "status": "BLOCKED_INCOMPLETE_ARCHIVE"
+      }
+    }
+  ]
+}

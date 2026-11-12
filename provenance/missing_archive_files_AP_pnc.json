@@ -1,0 +1,2017 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "baseline_commit": "068cb8c92d179bfb2049f886278e95a0e7d9c709",
+  "date": "2026-11-12",
+  "policy": "Historical bytes preserved; paths changed; no physics run.",
+  "entries": [
+    {
+      "original": ".DS_Store",
+      "flat": ".DS_Store",
+      "sha256": "f8e1d0c336de0336cda09e953124dfbdd8fbd2b30bd363ddb692b8b31b84a05c",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": ".gitignore",
+      "flat": ".gitignore",
+      "sha256": "fc9bdb8e5cd2a43a93ee6fdeba356321032358e8adb8825890708f7b1718c0bb",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "handoff.py",
+      "flat": "handoff_AP_pnc.py",
+      "sha256": "877ead78ce98b168f81805cd2a7e67c1fb7f58a382047b115a4e1a1088b88ad1",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "provenance/copied_original_sha256.json",
+      "flat": "provenance__copied_original_sha256.json",
+      "sha256": "19329e71940714ddb64f3ede50209a3ff54b06e5c9b479465aa8cfb3b39a159f",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "provenance/original_README.md",
+      "flat": "provenance__original_README.md",
+      "sha256": "6624a1c6336916cbc8eab608b8b1cbe206ae5f8bc73d0158c2de66b5659dcea6",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "provenance/original_README_NEXT_AGENT.md",
+      "flat": "provenance__original_README_NEXT_AGENT.md",
+      "sha256": "7d37121a7a514b0dc966e9c46190169b8d29d0147ee3a4be1e0d066fdf853f8a",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/cavity_convergence/SUMMARY.md",
+      "flat": "reference__legacy__cavity_convergence__SUMMARY.md",
+      "sha256": "e1ee54a4ef3a8ecc02ce8c20d0e12e209c05ec60c714224bb7ff45741ffb579a",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/cavity_convergence/logs/cavity_convergence.log",
+      "flat": "reference__legacy__cavity_convergence__logs__cavity_convergence.log",
+      "sha256": "b6be56326ca605f0db438d3f9fda358a7fad81a7c8d55c0752c7c6e2c814d87e",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/cavity_convergence/logs/cavity_convergence_rerun.log",
+      "flat": "reference__legacy__cavity_convergence__logs__cavity_convergence_rerun.log",
+      "sha256": "e71dee3a90c6833c9156ce99850e3ce8d13f639d4106bb310e9f759c07e44e9e",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/cavity_convergence/logs/completion.txt",
+      "flat": "reference__legacy__cavity_convergence__logs__completion.txt",
+      "sha256": "e1ba62bb98e240d9bfee689828caec5d6d068ca29b6f08b4ec6adbe429f92ba2",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/cavity_convergence/logs/run_parameters.txt",
+      "flat": "reference__legacy__cavity_convergence__logs__run_parameters.txt",
+      "sha256": "67ce37dcbc4f1ad7cad3ca3210064271f7f9627d68f0930a35e31e0c52e8a31b",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/cavity_convergence/tables/cavity_mesh_convergence.csv",
+      "flat": "reference__legacy__cavity_convergence__tables__cavity_mesh_convergence.csv",
+      "sha256": "260b15dfcd410e7d5f4389abc0c6d76b2fc1fff7451dff961d0aeffd040ad8b5",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/cavity_convergence/tables/cavity_mesh_percentage_changes.csv",
+      "flat": "reference__legacy__cavity_convergence__tables__cavity_mesh_percentage_changes.csv",
+      "sha256": "59eb7a7bdc8ee8f23cd0b6cd90f453a1386da4bc27c2f81c52d7f3f2f048e294",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/cavity_convergence/tables/taper_candidate_parameters.csv",
+      "flat": "reference__legacy__cavity_convergence__tables__taper_candidate_parameters.csv",
+      "sha256": "410adbd834d6bc96c6f03730f73143838143f6e12fdd7860701881e7d83fbb03",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/cavity_convergence/tables/taper_optimization_candidates.csv",
+      "flat": "reference__legacy__cavity_convergence__tables__taper_optimization_candidates.csv",
+      "sha256": "5f8e4b87f1d8b64f7384cc5479fd808de0d1bb0fc78a42ea9c06544723e612c8",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/convergence_and_localization/SUMMARY.md",
+      "flat": "reference__legacy__convergence_and_localization__SUMMARY.md",
+      "sha256": "631abaa792bb674b5f95031da3efa51d81589f7f418a89e4ebb2affb97004bea",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/convergence_and_localization/logs/convergence_localization_final3.log",
+      "flat": "reference__legacy__convergence_and_localization__logs__convergence_localization_final3.log",
+      "sha256": "2ecfbdd2c2c5cc512f9a8c82cce38ff3228ae754b74cc374647687186204654b",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/convergence_and_localization/logs/convergence_localization_final4.log",
+      "flat": "reference__legacy__convergence_and_localization__logs__convergence_localization_final4.log",
+      "sha256": "3a36b7fb59bf7a1b1c074483a441a0ad43b4d1bf398a1118b1c4d26c3fbe6805",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/convergence_and_localization/logs/convergence_localization_transfinite.log",
+      "flat": "reference__legacy__convergence_and_localization__logs__convergence_localization_transfinite.log",
+      "sha256": "2cee08cde2c800da0efac3e80f83e8f07d01ec29fe6809d4677b96ec64ea6d82",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/convergence_and_localization/logs/run_parameters.txt",
+      "flat": "reference__legacy__convergence_and_localization__logs__run_parameters.txt",
+      "sha256": "53ab47dca6763e1168657d2caca9d626c932964834a76278fade1226304ead2e",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/convergence_and_localization/tables/band_gaps_converged.csv",
+      "flat": "reference__legacy__convergence_and_localization__tables__band_gaps_converged.csv",
+      "sha256": "c04bdb63650fbad651e8a8c0b89e00c0962930fcc32bf944939755fa2edac6d1",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/convergence_and_localization/tables/cavity_mode_ranking.csv",
+      "flat": "reference__legacy__convergence_and_localization__tables__cavity_mode_ranking.csv",
+      "sha256": "99ad9c23b24d3c056c139aa5b3c42880b194c50e92401dc68186a60ceb4e4d4b",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/convergence_and_localization/tables/mesh_convergence_detailed.csv",
+      "flat": "reference__legacy__convergence_and_localization__tables__mesh_convergence_detailed.csv",
+      "sha256": "67189363c12805fe52ecaaf22e99c40ee7e716fdfd3a880628d7e4eb1e85c6f6",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/convergence_and_localization/tables/mesh_convergence_percentage_changes.csv",
+      "flat": "reference__legacy__convergence_and_localization__tables__mesh_convergence_percentage_changes.csv",
+      "sha256": "b8e312250b49820f2bd23b2993b559c365a3f4c68a050b215b3999cb81039492",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/physics_validation_2026_10_07/MANIFEST.json",
+      "flat": "reference__legacy__physics_validation_2026_10_07__MANIFEST.json",
+      "sha256": "dd0e1c1770b523e9faf9d99145f84c2451335a3c878811155f8af9561ed1a40d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/physics_validation_2026_10_07/SUMMARY.md",
+      "flat": "reference__legacy__physics_validation_2026_10_07__SUMMARY.md",
+      "sha256": "9a2acbb5b6834a9cfdd4a4f9fc6497e885ea24db48758ac638e425db91eedee6",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/physics_validation_2026_10_07/logs/audit.log",
+      "flat": "reference__legacy__physics_validation_2026_10_07__logs__audit.log",
+      "sha256": "f2c40a94578abf731f856642fea9deb2b30358ca47319caa8d8a78cba89730f7",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/physics_validation_2026_10_07/logs/audit_refined.log",
+      "flat": "reference__legacy__physics_validation_2026_10_07__logs__audit_refined.log",
+      "sha256": "7cf38ef2208f75d3bffb10ff129bdbb7e3cb4fd3ed1aac4765c26815bb133ac6",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/physics_validation_2026_10_07/logs/cavity.log",
+      "flat": "reference__legacy__physics_validation_2026_10_07__logs__cavity.log",
+      "sha256": "922a5bf4b72edc850edad1d14493e08d5f9107a21193af3503c696cd4a79b909",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/physics_validation_2026_10_07/logs/controls.log",
+      "flat": "reference__legacy__physics_validation_2026_10_07__logs__controls.log",
+      "sha256": "13aa83a119010a4e81387fc03796e6872996b980ef054ce442636a81b5fca347",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/physics_validation_2026_10_07/logs/run_parameters.json",
+      "flat": "reference__legacy__physics_validation_2026_10_07__logs__run_parameters.json",
+      "sha256": "d159b1b935c5bec6c8d152524a6dac0017066807f138e44e672a830e93bf0050",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/physics_validation_2026_10_07/logs/sweep.log",
+      "flat": "reference__legacy__physics_validation_2026_10_07__logs__sweep.log",
+      "sha256": "a0264ea3deab835ad49979002ebb332acfa8ae4ba3d8d19ef4967a8655601bad",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/physics_validation_2026_10_07/tables/bloch_branches.csv",
+      "flat": "reference__legacy__physics_validation_2026_10_07__tables__bloch_branches.csv",
+      "sha256": "28060761689667d94c58ca8332b0cd0d4b3b305281d75a384c9595138a7a1ba5",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/physics_validation_2026_10_07/tables/bloch_gap_audit.json",
+      "flat": "reference__legacy__physics_validation_2026_10_07__tables__bloch_gap_audit.json",
+      "sha256": "67c1d3edb1ba0fce6744e27d028439e53af9ca5d8c03ca7d6e8b2f14af304a52",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/physics_validation_2026_10_07/tables/cavity_audit.json",
+      "flat": "reference__legacy__physics_validation_2026_10_07__tables__cavity_audit.json",
+      "sha256": "eae93ad0906acd66a374a3cca273266d3b7cb91ba923d8f14827229b0c333c9c",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/physics_validation_2026_10_07/tables/fem_patch_tests.json",
+      "flat": "reference__legacy__physics_validation_2026_10_07__tables__fem_patch_tests.json",
+      "sha256": "f1aa0ba85e52554b477d41dd4d8e646d7785510d72155b8d3e752490b868c765",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/physics_validation_2026_10_07/tables/fresh_cavity_modes_12nm.csv",
+      "flat": "reference__legacy__physics_validation_2026_10_07__tables__fresh_cavity_modes_12nm.csv",
+      "sha256": "59ed2c76c9df81ba88a447adbde2a2957470af3e70f5546b21b211a8a14c8f17",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/physics_validation_2026_10_07/tables/fresh_three_structure_sweep.csv",
+      "flat": "reference__legacy__physics_validation_2026_10_07__tables__fresh_three_structure_sweep.csv",
+      "sha256": "099b50551ff845c0a8ddc6c34bc7c5fd359ad3a446dbfbe65c4a275d1a32f3b9",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/physics_validation_2026_10_07/tables/mesh_and_topology_audit.csv",
+      "flat": "reference__legacy__physics_validation_2026_10_07__tables__mesh_and_topology_audit.csv",
+      "sha256": "4e8f67e57eb9379ad429ff9d653e941610d7567a83d354a17fdcd44db238b27d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/physics_validation_2026_10_07/tables/refined_mesh_spot_checks.csv",
+      "flat": "reference__legacy__physics_validation_2026_10_07__tables__refined_mesh_spot_checks.csv",
+      "sha256": "f7f120a1e0b8bf92d826270fc52b420be7bd46302387ac3d5180e51045dec183",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/physics_validation_2026_10_07/tables/sponge_sensitivity.csv",
+      "flat": "reference__legacy__physics_validation_2026_10_07__tables__sponge_sensitivity.csv",
+      "sha256": "97d5333b7445d64b95e9abef539cc02c4dd478b1367a0854db382a87ba8adce6",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/physics_validation_2026_10_07/tables/transmission_mesh_sensitivity.csv",
+      "flat": "reference__legacy__physics_validation_2026_10_07__tables__transmission_mesh_sensitivity.csv",
+      "sha256": "59880f8829f9a9dce4816f7ae27febec41a3796d7c89cb6e4407f96fe2b3d175",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/physics_validation_2026_10_07/tables/validation_status.json",
+      "flat": "reference__legacy__physics_validation_2026_10_07__tables__validation_status.json",
+      "sha256": "8e10139df0ce009359c85f770491b82f34b51ce53446bb6a28e97b7cfa4b040f",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "reference/legacy/physics_validation_2026_10_07/tables/workbook_audit.json",
+      "flat": "reference__legacy__physics_validation_2026_10_07__tables__workbook_audit.json",
+      "sha256": "66d745f82c20bc5f0abb9693cee78d92ca2602080b0ae9ccda6c709632a657e0",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "requirements-legacy.txt",
+      "flat": "requirements-legacy.txt",
+      "sha256": "975b3ffb4b8ea1aa92c912e1aba2241503948f3c50a03cbef5e076244ab9dd64",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "requirements.txt",
+      "flat": "requirements.txt",
+      "sha256": "59e7e39e5c6db01539d75b4aa6ccc3e1d50962f3d6d7c83320d516061153f78e",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "uploaded_hash_mismatch",
+      "uploaded_repository_path": "archive/environment/requirements_uploaded_AP_pnc.txt"
+    },
+    {
+      "original": "results/4K/portable_template/MATERIAL_PROVENANCE.md",
+      "flat": "portable__MATERIAL_PROVENANCE.md",
+      "sha256": "508319f60f48a07d2966413a8295c04d7ae953b3e849fa7a6c2f588a0cb633f2",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/portable_template/NUMERICAL_METHODS.md",
+      "flat": "portable__NUMERICAL_METHODS.md",
+      "sha256": "435698610a898f02019b98411281a6bd12e75dd8625b7f1f0d28c6598a1c5b24",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/portable_template/check_legacy_bloch.py",
+      "flat": "portable__check_legacy_bloch_AP_pnc.py",
+      "sha256": "ed39160177e5af014735c26c6c843fba44e85a1ececda96419b3f477a28f1a1d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/portable_template/config.json",
+      "flat": "portable__config.json",
+      "sha256": "56aef0bfddcbd116dd2893c0ff4be627f088dcc82bce8778cfc28c9952e2700a",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/portable_template/finalize.py",
+      "flat": "portable__finalize_AP_pnc.py",
+      "sha256": "0c0ffeaceff9a7952f6672d16fc62e3125dbe335bc93891e3dac16e956c130d4",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/portable_template/numerics.py",
+      "flat": "portable__numerics_AP_pnc.py",
+      "sha256": "ef0ec6f9394e76ab4f32b14bb79a84f2dbafe9cb740b0061ac32839c4678606d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/portable_template/verify_eigen_scaling.py",
+      "flat": "portable__verify_eigen_scaling_AP_pnc.py",
+      "sha256": "b9ba213ae721982292f9c61e7db724e941a70d86b54d1232fa92ac1e56237dc3",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/MATERIAL_PROVENANCE.md",
+      "flat": "latest__MATERIAL_PROVENANCE.md",
+      "sha256": "508319f60f48a07d2966413a8295c04d7ae953b3e849fa7a6c2f588a0cb633f2",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/NUMERICAL_METHODS.md",
+      "flat": "latest__NUMERICAL_METHODS.md",
+      "sha256": "435698610a898f02019b98411281a6bd12e75dd8625b7f1f0d28c6598a1c5b24",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/SUMMARY.md",
+      "flat": "latest__SUMMARY.md",
+      "sha256": "98d76301b5f943b029f8c4251e3ea9b2467a2b1cbbbbe4b32af176f3eb6a86ba",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/check_legacy_bloch.py",
+      "flat": "latest__check_legacy_bloch_AP_pnc.py",
+      "sha256": "ed39160177e5af014735c26c6c843fba44e85a1ececda96419b3f477a28f1a1d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/config.json",
+      "flat": "latest__config.json",
+      "sha256": "56aef0bfddcbd116dd2893c0ff4be627f088dcc82bce8778cfc28c9952e2700a",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/fields/cavity_h12.npz",
+      "flat": "latest__fields__cavity_h12.npz",
+      "sha256": "eb2daed9532f7054b6cc01aeffd8b9f13e6938cdf48f197eff55f93f074afe30",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/fields/cavity_h20.npz",
+      "flat": "latest__fields__cavity_h20.npz",
+      "sha256": "7c89669f5fb6d83ec07a6c690ac96bda384e6b081e8dc22f8caeb7e74a215bea",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/fields/cavity_h30.npz",
+      "flat": "latest__fields__cavity_h30.npz",
+      "sha256": "1c299ed2231ec6a9739aa5bf023929efc548e9d1cec8108f3e5d95d1bc0439e6",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/fields/cavity_rank1.npz",
+      "flat": "latest__fields__cavity_rank1.npz",
+      "sha256": "2cb2cd0b13fcb331658fa1d41bb91adf7fe2f310f067a4a253472704bcbf40a5",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/fields/cavity_rank2.npz",
+      "flat": "latest__fields__cavity_rank2.npz",
+      "sha256": "2a01f6d0f73d5c90c0b2fc3d937bcd856322650e5a390d4e4ccc203bd8d13dda",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/fields/cavity_rank3.npz",
+      "flat": "latest__fields__cavity_rank3.npz",
+      "sha256": "ade48779032d1f37f5439fe17ad3df99d8e2f58f71b3cddeeb36153af8b4d9ef",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/fields/cavity_rank4.npz",
+      "flat": "latest__fields__cavity_rank4.npz",
+      "sha256": "f59489e3bcd8b16c46211acd3935a9a334a3159040ac7ff4202092e5f0cc95c3",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/fields/field_10GHz.npz",
+      "flat": "latest__fields__field_10GHz.npz",
+      "sha256": "50e8f5cfd315d3cfcf4e8da6ae46674f805c7773bed33f8ab8ff86c235ebbb7f",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/fields/field_2GHz.npz",
+      "flat": "latest__fields__field_2GHz.npz",
+      "sha256": "fc6884808dbfeabc2f88f1c8d206e8e480abb4c7b6ce83034649bba0e639fcad",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/fields/field_6GHz.npz",
+      "flat": "latest__fields__field_6GHz.npz",
+      "sha256": "8e7bfda719535b7e5ba6ccf2c4d92d1485bef98c769927ea29f6b07e8753d12b",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/fields/field_8GHz.npz",
+      "flat": "latest__fields__field_8GHz.npz",
+      "sha256": "7666cb36b9979d32aa3618bd4ab3a03e7eb4b559b2975ddb6d454ddbc9f097bf",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/fields/strongest_transmission.npz",
+      "flat": "latest__fields__strongest_transmission.npz",
+      "sha256": "919a32358296f2142054bc2301f557e778fb8a2c397cf4bc69c03a6d5490f17b",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/band_structure.pdf",
+      "flat": "latest__figures__band_structure.pdf",
+      "sha256": "8d9406318a9edb36b686c98401d6171eaf0c4f04b64ec42f08b2ef23c00cbd23",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/band_structure.png",
+      "flat": "latest__figures__band_structure.png",
+      "sha256": "4615d8f7683f3d40e99bb610424e25435f08c22e5a24d38d433a4bf1cd45d73d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/bloch_mesh_convergence.png",
+      "flat": "latest__figures__bloch_mesh_convergence.png",
+      "sha256": "babea868bb75329b508a662ffb870a9eaf758d6207d6530e175441a23106302b",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/cavity_rank1_displacement.pdf",
+      "flat": "latest__figures__cavity_rank1_displacement.pdf",
+      "sha256": "397b3c09e90e7973259c61c645738c6e2792a7a336748cc5622bb6d61c52dd9d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/cavity_rank1_displacement.png",
+      "flat": "latest__figures__cavity_rank1_displacement.png",
+      "sha256": "135b44be34ed5e41b5c68d2e6fd98ab0949613021169fe1442ad9c57add9c98a",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/cavity_rank1_strain.pdf",
+      "flat": "latest__figures__cavity_rank1_strain.pdf",
+      "sha256": "ad1767d432c7cadc299a543d5eb5c9a20646a06a2ab18bee9b1f7b89e58cb944",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/cavity_rank1_strain.png",
+      "flat": "latest__figures__cavity_rank1_strain.png",
+      "sha256": "7466386cda1933f423be673a6a7c21c39eb4060fee7b2e87b9b79aaa905ac94e",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/cavity_rank2_displacement.pdf",
+      "flat": "latest__figures__cavity_rank2_displacement.pdf",
+      "sha256": "76923ff672f8a80586572259f70759304b38cfff2fd442b2850467e0ab5797c8",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/cavity_rank2_displacement.png",
+      "flat": "latest__figures__cavity_rank2_displacement.png",
+      "sha256": "cfc2b61b739c9409f9a4311d7033d5196445f0e45a88196d3ff3e0f1533e25ad",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/cavity_rank2_strain.pdf",
+      "flat": "latest__figures__cavity_rank2_strain.pdf",
+      "sha256": "aad8da090e0e6cd1b867fde29715f343d47e063c55c8ee64c103f2618afb4c3d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/cavity_rank2_strain.png",
+      "flat": "latest__figures__cavity_rank2_strain.png",
+      "sha256": "82dfa583f7b13ee714afcf16a3c7d542cc8df0438ad4e9625b12b8496d13400d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/cavity_rank3_displacement.pdf",
+      "flat": "latest__figures__cavity_rank3_displacement.pdf",
+      "sha256": "588a77294e0b3688475dbadd25b5ac97a64c0b3b077f4e885915af3e6ef022d7",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/cavity_rank3_displacement.png",
+      "flat": "latest__figures__cavity_rank3_displacement.png",
+      "sha256": "b869aa1fd88ee695c218705e566ff490a019317f429aa62dbb13e59e8bf0d1d4",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/cavity_rank3_strain.pdf",
+      "flat": "latest__figures__cavity_rank3_strain.pdf",
+      "sha256": "b0bc999becab49aa5c30249b8df428b1106e5700a1f3e070c49d7d5f9d1b0f97",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/cavity_rank3_strain.png",
+      "flat": "latest__figures__cavity_rank3_strain.png",
+      "sha256": "93b3fddd478c59fd9f1fae5dbd711c8fbcd0020476fcd9ac025575ec6c5ba51a",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/cavity_rank4_displacement.pdf",
+      "flat": "latest__figures__cavity_rank4_displacement.pdf",
+      "sha256": "c65e2559a1ca6675c08c389903aa78a0ffe338c3a771f30793091998fe6f998c",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/cavity_rank4_displacement.png",
+      "flat": "latest__figures__cavity_rank4_displacement.png",
+      "sha256": "7d4081d581886fdd8c1aadd39aa356e15985735ab6def13b3e17452cd84e877d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/cavity_rank4_strain.pdf",
+      "flat": "latest__figures__cavity_rank4_strain.pdf",
+      "sha256": "0a125d2081ece60678951cf084108398c7995602f9cdeb4220a631ab547cf025",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/cavity_rank4_strain.png",
+      "flat": "latest__figures__cavity_rank4_strain.png",
+      "sha256": "01c89152f3fa46f6a08331a8c60d966ddafd3df09c8269a2294561078c1d6fdc",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/convergence_eta_displacement_1um.png",
+      "flat": "latest__figures__convergence_eta_displacement_1um.png",
+      "sha256": "ec84f293c0c7fb743dd8e2d11e0c75a68b386c5922965e64c679756fd6c38291",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/convergence_eta_strain_1um.png",
+      "flat": "latest__figures__convergence_eta_strain_1um.png",
+      "sha256": "697c948f78a42bc6c4e18f0b402ef6bd47cff5f4351b6507f496ba79e803fb34",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/convergence_frequency_GHz.png",
+      "flat": "latest__figures__convergence_frequency_GHz.png",
+      "sha256": "509e4f8169b0f2fd1c4a986655cb1058839554e721c04c9fcdd80af145b0ad06",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/field_10GHz_displacement.pdf",
+      "flat": "latest__figures__field_10GHz_displacement.pdf",
+      "sha256": "593206e5bc1dbd20557fd8a0eba8e0fb176d4a7ee48d1bb55721741034ab52e2",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/field_10GHz_displacement.png",
+      "flat": "latest__figures__field_10GHz_displacement.png",
+      "sha256": "9eb02864bc46139d63afecf31678d9ce525e53b37f1de14d045025b3f3028f97",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/field_10GHz_strain.pdf",
+      "flat": "latest__figures__field_10GHz_strain.pdf",
+      "sha256": "4b3414cf1972633eaa9d1d81232bcf44ded35e5e2f8ecfe5087428dfc76d64f8",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/field_10GHz_strain.png",
+      "flat": "latest__figures__field_10GHz_strain.png",
+      "sha256": "b8eecb6f7ab8a760465a4768c37c1ea8f04a6445cd89efeb72a9c6d0135dc723",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/field_2GHz_displacement.pdf",
+      "flat": "latest__figures__field_2GHz_displacement.pdf",
+      "sha256": "b0d2293a94b777450691b049c3d0d829114190ed29c648c2703a2b238f3e0d0e",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/field_2GHz_displacement.png",
+      "flat": "latest__figures__field_2GHz_displacement.png",
+      "sha256": "f0ec6dca44cebd35e03d461aad086aae37dcbbcc4f03f594ddfa8d24b3a23672",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/field_2GHz_strain.pdf",
+      "flat": "latest__figures__field_2GHz_strain.pdf",
+      "sha256": "800a75154e674c813865a3a5d1dea9b24516314d941fb6a27777123565cd3f77",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/field_2GHz_strain.png",
+      "flat": "latest__figures__field_2GHz_strain.png",
+      "sha256": "b6d186c4777c2f52e9e2bd268d55d864edd81c73746e72d28b7ebddfcf7b9d84",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/field_4GHz_displacement.pdf",
+      "flat": "latest__figures__field_4GHz_displacement.pdf",
+      "sha256": "60da9bff3ea839b5a672058e4ef3b2f25119ead62c99468a6815fc6b3700bbca",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/field_4GHz_displacement.png",
+      "flat": "latest__figures__field_4GHz_displacement.png",
+      "sha256": "785907bf5a8bf65965d396029e8ad1745c228e815a94a2a13f3edff63f77101a",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/field_4GHz_strain.pdf",
+      "flat": "latest__figures__field_4GHz_strain.pdf",
+      "sha256": "0858190d91b89aaac2f5dceca1fce6b61317be9b315d91ebbf3f60a7ff5e2260",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/field_4GHz_strain.png",
+      "flat": "latest__figures__field_4GHz_strain.png",
+      "sha256": "cca7d68cb2ad3e181899e6fa628818b406bf022c2556ed0c361086f969c18d47",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/field_6GHz_displacement.pdf",
+      "flat": "latest__figures__field_6GHz_displacement.pdf",
+      "sha256": "4f7be340167eae2707036101fbc1d6c98029846c3ef790e73267c39268bfb75a",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/field_6GHz_displacement.png",
+      "flat": "latest__figures__field_6GHz_displacement.png",
+      "sha256": "8a426e9b31945c5048ce44de3d8a47ecd652af0a4cd81219e31b001643787687",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/probe_response.png",
+      "flat": "latest__figures__probe_response.png",
+      "sha256": "922c993d9f03a51a7dccfd25c5e0eb6574275bd025a19044ef27154258f75712",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/thermal_occupation_4K.png",
+      "flat": "latest__figures__thermal_occupation_4K.png",
+      "sha256": "4bdec6b4c96cd3ae7cc2cda8010d57268133cca7c9f704de5213e0d440c979e9",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/transmission_spectrum.pdf",
+      "flat": "latest__figures__transmission_spectrum.pdf",
+      "sha256": "9232d4f722b1367d9e5b8f2078757b3374fef18b12b067dc7152161275af3241",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/figures/transmission_spectrum.png",
+      "flat": "latest__figures__transmission_spectrum.png",
+      "sha256": "ceb4fced16b7ffc5aca324cd2f4b5edf7146f426d26892901c282366b94a596d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/finalize.py",
+      "flat": "latest__finalize_AP_pnc.py",
+      "sha256": "0c0ffeaceff9a7952f6672d16fc62e3125dbe335bc93891e3dac16e956c130d4",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/logs/artifact_manifest_sha256.json",
+      "flat": "latest__logs__artifact_manifest_sha256.json",
+      "sha256": "e55e9e5cf0baaeee0eeebb61280a949a46678660b34018eb49aeaf037a8b3ce8",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/logs/complete.json",
+      "flat": "latest__logs__complete.json",
+      "sha256": "18ac66dccdad534e66de9f2c266ab7e78575116be1d94cbbe3ee5b4ed5e021ee",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/logs/failure.txt",
+      "flat": "latest__logs__failure.txt",
+      "sha256": "df123b2ae227b4abc441c2aae2843bbf9f4631a14eaad4d8ee0f1672ab7fd772",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/logs/input_source_hashes.json",
+      "flat": "latest__logs__input_source_hashes.json",
+      "sha256": "24e8c25bbc5fac0bdd2c25d298ec8b86fa5facdb2ffdfd2242230f7a15513d69",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/logs/run.log",
+      "flat": "latest__logs__run.log",
+      "sha256": "f5b1920ce9cfd11f0517380335a7c1b238c28aa1a3de001e46113e8f63cd8601",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/logs/source_snapshot/56aef0bfddcb_config.json",
+      "flat": "latest__logs__source_snapshot__56aef0bfddcb_config.json",
+      "sha256": "56aef0bfddcbd116dd2893c0ff4be627f088dcc82bce8778cfc28c9952e2700a",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/logs/source_snapshot/67736afc631b_numerics.py",
+      "flat": "latest__logs__source_snapshot__67736afc631b_numerics_AP_pnc.py",
+      "sha256": "67736afc631b6a049d05532cee4670f3524359b32df1516c61b0877c505dfac5",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/logs/source_snapshot/bb24890c27a4_run.py",
+      "flat": "latest__logs__source_snapshot__bb24890c27a4_run_AP_pnc.py",
+      "sha256": "bb24890c27a45f3233e43a443d2f54aff5ad85a08087fac2da01235f3229cf7f",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/logs/source_snapshot/config.json",
+      "flat": "latest__logs__source_snapshot__config.json",
+      "sha256": "56aef0bfddcbd116dd2893c0ff4be627f088dcc82bce8778cfc28c9952e2700a",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/logs/source_snapshot/ef0ec6f9394e_numerics.py",
+      "flat": "latest__logs__source_snapshot__ef0ec6f9394e_numerics_AP_pnc.py",
+      "sha256": "ef0ec6f9394e76ab4f32b14bb79a84f2dbafe9cb740b0061ac32839c4678606d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/logs/source_snapshot/numerics.py",
+      "flat": "latest__logs__source_snapshot__numerics_AP_pnc.py",
+      "sha256": "33d1090f50f585066995483961d516da903cab71a69c9913a42898d2b71a81cc",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/logs/source_snapshot/run.py",
+      "flat": "latest__logs__source_snapshot__run_AP_pnc.py",
+      "sha256": "305af455d1d187bd997b0770fc8c569ac474038f551e920eb0e9cf7d5d18543d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/logs/stage_bands.json",
+      "flat": "latest__logs__stage_bands.json",
+      "sha256": "6e73f58189f4bdbfe0e91e5ad9244d7834e1401d82478144c9ef014d4c5e30f7",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/logs/stage_cavity.json",
+      "flat": "latest__logs__stage_cavity.json",
+      "sha256": "00a9fa2c55983549f02298f6f37fafe7206fdad8352f660fa3ae0f4a43768a98",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/logs/stage_robustness.json",
+      "flat": "latest__logs__stage_robustness.json",
+      "sha256": "ca8bdb4fe42e6d7a1cfa153693143f22ff88c7461362198a862fde8fd7a3e969",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/logs/stage_sweep.json",
+      "flat": "latest__logs__stage_sweep.json",
+      "sha256": "a5530aedeb58f4f0bd376126e312d4bf7cef91b5052572ae07967e6472d11328",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/logs/started.json",
+      "flat": "latest__logs__started.json",
+      "sha256": "c4b077386fc0866dd893770fb4dfced41efbe8896a7d12fa98366d1f768b7651",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/logs/status.json",
+      "flat": "latest__logs__status.json",
+      "sha256": "585dbce71c6913c9a8b7a5931319b2bc542254221767c4e870b77792ec4d47f7",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/mesh/defect_h12_b20.msh",
+      "flat": "latest__mesh__defect_h12_b20.msh",
+      "sha256": "f18fd6683d17c4ac2eeb278f1fb3c4c1a9151c0cfd3b786e086eb78ee57132b5",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/mesh/defect_h20_b30.msh",
+      "flat": "latest__mesh__defect_h20_b30.msh",
+      "sha256": "22c07d40b47b654b48ec62815584afcb626bc5c5e96936a82ff2a622ecb584f7",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/mesh/reference_h12_b20.msh",
+      "flat": "latest__mesh__reference_h12_b20.msh",
+      "sha256": "6fd909c92173df1a2be6a71a1a91b40933b630014cff6da7d876e0dcde1103d2",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/mesh/reference_h20_b30.msh",
+      "flat": "latest__mesh__reference_h20_b30.msh",
+      "sha256": "ea3544d6d66f92d89bd68bc233f331444cd34ed8c4439dfe41dd6c89e5e5e770",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/mesh/regression_cell.msh",
+      "flat": "latest__mesh__regression_cell.msh",
+      "sha256": "33b4ef2a0ecc7d57f935c9eecd95b58f5417032feae0ee5f7c0d914d701e0c27",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/mesh/uniform_cell.msh",
+      "flat": "latest__mesh__uniform_cell.msh",
+      "sha256": "5c3772d621225a4c1384c8d68bac4fa3f695ae7523ebcdc7caafaf70f225b80a",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/numerics.py",
+      "flat": "latest__numerics_AP_pnc.py",
+      "sha256": "ef0ec6f9394e76ab4f32b14bb79a84f2dbafe9cb740b0061ac32839c4678606d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/summary.json",
+      "flat": "latest__summary.json",
+      "sha256": "e84c31c325845280330215755efff480bb83872383fce5d31e02340529920898",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/all_cavity_candidates.csv",
+      "flat": "latest__tables__all_cavity_candidates.csv",
+      "sha256": "9df71a88e56989bbfc0173787ed490efd90dc31797f416dd1d3b83c7005e528a",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/band_gaps_best_estimate.csv",
+      "flat": "latest__tables__band_gaps_best_estimate.csv",
+      "sha256": "8d11cabeb9265571398f206e56ab3e159ebcf8288494a41dfd89011e12780487",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/bloch_final_changes.csv",
+      "flat": "latest__tables__bloch_final_changes.csv",
+      "sha256": "eb0310cf58bcea219d848211c895366578ccb06cd23757fe020e7e31d23df904",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/bloch_h10_angle0.csv",
+      "flat": "latest__tables__bloch_h10_angle0.csv",
+      "sha256": "fed00d74fd5d84d5508ecb407c374423e0b7073987511fa095c630f87d5c703c",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/bloch_h12_angle0.csv",
+      "flat": "latest__tables__bloch_h12_angle0.csv",
+      "sha256": "32de1c2bef775f4e3e4dd40e4a1438b4ff432d323f4efbd1eef0a4fbcbf8c438",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/bloch_h20_angle0.csv",
+      "flat": "latest__tables__bloch_h20_angle0.csv",
+      "sha256": "5db84405ce1ece04626df00ebd824cdc5456074d5e34785f1f34a658dce6da4c",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/bloch_h20_angle45.csv",
+      "flat": "latest__tables__bloch_h20_angle45.csv",
+      "sha256": "4905c177f253ab5587a6c0aa61a3cfba7e019926521827c7c9c888f3bddd2ff8",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/bloch_mesh_convergence.csv",
+      "flat": "latest__tables__bloch_mesh_convergence.csv",
+      "sha256": "db1b35b8fd1afcfae86c40dbbad058ac97563e7670134ab60ba4928557799082",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/cavity_mesh_convergence.csv",
+      "flat": "latest__tables__cavity_mesh_convergence.csv",
+      "sha256": "6a536ebfad43f5a2bb418a6825cd9908c4e93d88847b645fb6f4fb23c74d0ae4",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/cavity_ranking.csv",
+      "flat": "latest__tables__cavity_ranking.csv",
+      "sha256": "ef0270afacc8432922adebf58fdad7b56cc4bace0de0c663b5c8a345b883825d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/cavity_thermal_4K.csv",
+      "flat": "latest__tables__cavity_thermal_4K.csv",
+      "sha256": "ae23351b6f0df928a89418d11217566b7357bcbf58bd8e4547e953cf0901fc03",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/frequency_sweep.csv",
+      "flat": "latest__tables__frequency_sweep.csv",
+      "sha256": "da1d848586ca07371179d14a3d10020d695df4d935f84478c9c89a5f7c128822",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/gaps_h10_angle0.json",
+      "flat": "latest__tables__gaps_h10_angle0.json",
+      "sha256": "d00955a5e74f0a6d540376adc2e51b03741d3359dd28ef0013f1ae4276a38257",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/gaps_h12_angle0.json",
+      "flat": "latest__tables__gaps_h12_angle0.json",
+      "sha256": "500fb2ead27b48d572bd8ee0dbb41ee0399620537f2d58f172796f3f6b013217",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/gaps_h20_angle0.json",
+      "flat": "latest__tables__gaps_h20_angle0.json",
+      "sha256": "c7e5f482c1155ef04da2dcd2bbe52967296f3e5610b9826ab408933b4c63cd65",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/gaps_h20_angle45.json",
+      "flat": "latest__tables__gaps_h20_angle45.json",
+      "sha256": "1e8359b15d103076f7deba04c7203ac897b8d78aeb5df973a15ded87525fd323",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/independent_output_checks.json",
+      "flat": "latest__tables__independent_output_checks.json",
+      "sha256": "69a9f835970efe04fa66a6dd1d236582280375bb565fee0c98c2cc8340d03af0",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/legacy_isotropic_bloch_spotcheck.csv",
+      "flat": "latest__tables__legacy_isotropic_bloch_spotcheck.csv",
+      "sha256": "b340239247f952db403dfde66c273563b5137442660701c3361ef021872ad511",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/long_wave_benchmark.json",
+      "flat": "latest__tables__long_wave_benchmark.json",
+      "sha256": "62365e05f1a13d2780b55ecdcfc7e5a2123f83207a8fe22d82edaed1720fa629",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/mesh_defect_h12_b20.json",
+      "flat": "latest__tables__mesh_defect_h12_b20.json",
+      "sha256": "f35e14a65091c6eb615c13bee4f3f642d99b53cf1f74cddb08559cd10475c361",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/mesh_defect_h20_b30.json",
+      "flat": "latest__tables__mesh_defect_h20_b30.json",
+      "sha256": "1236c0c4ff5a0da89fa7a3460b81fc4b7bf57c1aa3aad0202b48c08f9869a828",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/mesh_reference_h12_b20.json",
+      "flat": "latest__tables__mesh_reference_h12_b20.json",
+      "sha256": "8162993d75e68539b1fb8f093847d710afacd006eb01e5f500f63f878902febd",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/mesh_reference_h20_b30.json",
+      "flat": "latest__tables__mesh_reference_h20_b30.json",
+      "sha256": "363a297c8a06370e3d7758c01fc7b4d2a8c94d8ad858cac19565e142c08ae380",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/orientation_4GHz.json",
+      "flat": "latest__tables__orientation_4GHz.json",
+      "sha256": "dfd29c2917183c25627ae6a036490f2d7e2cd70fc1b48fea1d1f43e4cd4cf760",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/patch_defect_h12_b20_angle0.json",
+      "flat": "latest__tables__patch_defect_h12_b20_angle0.json",
+      "sha256": "dc71b0bb619355708b5162bb69d8c3cc6852dd32693b5e1a4fa30b5f4ad68f40",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/patch_defect_h20_b30_angle0.json",
+      "flat": "latest__tables__patch_defect_h20_b30_angle0.json",
+      "sha256": "a8ad5ab3302871d6733a9597a8106ffa7ea9f79091aa7da5c5bd88f94494b275",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/patch_reference_h12_b20_angle0.json",
+      "flat": "latest__tables__patch_reference_h12_b20_angle0.json",
+      "sha256": "c8d0ec2530dbf1e595f1baa9aacd1072a246b8ea5f855bf4d203f869ec206ff6",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/patch_reference_h20_b30_angle0.json",
+      "flat": "latest__tables__patch_reference_h20_b30_angle0.json",
+      "sha256": "95b8a9463fa2d9b35d4da3253baeba798f7a7b49ec84d894f2f3877274e73fc0",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/sponge_sensitivity.csv",
+      "flat": "latest__tables__sponge_sensitivity.csv",
+      "sha256": "43ad66e23c1b1497c4a5effd78aef849c5ffc4a5278017914b50866415b57c10",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/suppression_regions.csv",
+      "flat": "latest__tables__suppression_regions.csv",
+      "sha256": "d7b54f8717aa11ea890d4a3929766dd14ab10132d45d123ce00f51da11f8eb5c",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/thermal_4K.csv",
+      "flat": "latest__tables__thermal_4K.csv",
+      "sha256": "f9e0104a4caf4efdd1413895d89858f4433163422957df379f69331b4c261945",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/transmission_mesh_convergence.csv",
+      "flat": "latest__tables__transmission_mesh_convergence.csv",
+      "sha256": "e8d38556aa98a8043c74ed863cc618d4bcf75e5cd7a261a105d6164bc1106911",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/transmission_robustness_summary.csv",
+      "flat": "latest__tables__transmission_robustness_summary.csv",
+      "sha256": "8974106eb59955fe17f7091cf8b6f237db88210352c36ee794d092c22a3c38f3",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/validation_status.json",
+      "flat": "latest__tables__validation_status.json",
+      "sha256": "e0af54e1146c9f72bdeea9f3a0b82a6dc0be0dfac823ab7c8e147963d18c4432",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/tables/wavelength_resolution_diagnostic.csv",
+      "flat": "latest__tables__wavelength_resolution_diagnostic.csv",
+      "sha256": "54bffb4853cad9658e425a4c323cb9c75ecaeada7289db1e1a8c55b2763b8f72",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_20261011T002256Z/verify_eigen_scaling.py",
+      "flat": "latest__verify_eigen_scaling_AP_pnc.py",
+      "sha256": "b9ba213ae721982292f9c61e7db724e941a70d86b54d1232fa92ac1e56237dc3",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_001/MATERIAL_PROVENANCE.md",
+      "flat": "results__4K__run_new_handoff_smoke_001__MATERIAL_PROVENANCE.md",
+      "sha256": "508319f60f48a07d2966413a8295c04d7ae953b3e849fa7a6c2f588a0cb633f2",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_001/NUMERICAL_METHODS.md",
+      "flat": "results__4K__run_new_handoff_smoke_001__NUMERICAL_METHODS.md",
+      "sha256": "435698610a898f02019b98411281a6bd12e75dd8625b7f1f0d28c6598a1c5b24",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_001/check_legacy_bloch.py",
+      "flat": "results__4K__run_new_handoff_smoke_001__check_legacy_bloch_AP_pnc.py",
+      "sha256": "ed39160177e5af014735c26c6c843fba44e85a1ececda96419b3f477a28f1a1d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_001/config.json",
+      "flat": "results__4K__run_new_handoff_smoke_001__config.json",
+      "sha256": "c4a9d668556ad1f34f07ca25a728925a3a86fbd976515475fe59dd3f2f02df58",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_001/figures/field_4GHz_displacement.pdf",
+      "flat": "results__4K__run_new_handoff_smoke_001__figures__field_4GHz_displacement.pdf",
+      "sha256": "b88d4b31b5bd6b5824044f37a09f8262c671c5e2a08b0f4b0fdf839cbdbc403c",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_001/figures/field_4GHz_strain.pdf",
+      "flat": "results__4K__run_new_handoff_smoke_001__figures__field_4GHz_strain.pdf",
+      "sha256": "12a84e4d30f4061563472a4378e97a10593edfed6c27fcaed04d4a80c0a868d6",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_001/finalize.py",
+      "flat": "results__4K__run_new_handoff_smoke_001__finalize_AP_pnc.py",
+      "sha256": "0c0ffeaceff9a7952f6672d16fc62e3125dbe335bc93891e3dac16e956c130d4",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_001/logs/input_source_hashes.json",
+      "flat": "results__4K__run_new_handoff_smoke_001__logs__input_source_hashes.json",
+      "sha256": "38297f2286700af558afefbd06fd74f484408fc17b08367788e4eb227468fd7b",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_001/logs/matplotlib-cache/fontlist-v390.json",
+      "flat": "results__4K__run_new_handoff_smoke_001__logs__matplotlib-cache__fontlist-v390.json",
+      "sha256": "4c0ddd670f6361c29a4fa34b31aeec58a86011db6a9605634bf7ceb365da4bb0",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_001/logs/run.log",
+      "flat": "results__4K__run_new_handoff_smoke_001__logs__run.log",
+      "sha256": "8ed7e4809cb7463c4b8813b6e222a91dc134bd93c9ab1e57e0b35821c64cab57",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_001/logs/source_snapshot/270d31275924_run.py",
+      "flat": "results__4K__run_new_handoff_smoke_001__logs__source_snapshot__270d31275924_run_AP_pnc.py",
+      "sha256": "270d31275924dc13fc0ca533b6107829af524a59bd029544fc9afd04e1637eed",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_001/logs/source_snapshot/56aef0bfddcb_config.json",
+      "flat": "results__4K__run_new_handoff_smoke_001__logs__source_snapshot__56aef0bfddcb_config.json",
+      "sha256": "56aef0bfddcbd116dd2893c0ff4be627f088dcc82bce8778cfc28c9952e2700a",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_001/logs/source_snapshot/ef0ec6f9394e_numerics.py",
+      "flat": "results__4K__run_new_handoff_smoke_001__logs__source_snapshot__ef0ec6f9394e_numerics_AP_pnc.py",
+      "sha256": "ef0ec6f9394e76ab4f32b14bb79a84f2dbafe9cb740b0061ac32839c4678606d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_001/logs/started.json",
+      "flat": "results__4K__run_new_handoff_smoke_001__logs__started.json",
+      "sha256": "6c2ff2e4d68f7dd2bbb6cd4ebb057ed77cc2b9c647e10d46efe67e64d4506171",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_001/numerics.py",
+      "flat": "results__4K__run_new_handoff_smoke_001__numerics_AP_pnc.py",
+      "sha256": "ef0ec6f9394e76ab4f32b14bb79a84f2dbafe9cb740b0061ac32839c4678606d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_001/run.py",
+      "flat": "results__4K__run_new_handoff_smoke_001__run_AP_pnc.py",
+      "sha256": "270d31275924dc13fc0ca533b6107829af524a59bd029544fc9afd04e1637eed",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_001/verify_eigen_scaling.py",
+      "flat": "results__4K__run_new_handoff_smoke_001__verify_eigen_scaling_AP_pnc.py",
+      "sha256": "b9ba213ae721982292f9c61e7db724e941a70d86b54d1232fa92ac1e56237dc3",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_002/MATERIAL_PROVENANCE.md",
+      "flat": "results__4K__run_new_handoff_smoke_002__MATERIAL_PROVENANCE.md",
+      "sha256": "508319f60f48a07d2966413a8295c04d7ae953b3e849fa7a6c2f588a0cb633f2",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_002/NUMERICAL_METHODS.md",
+      "flat": "results__4K__run_new_handoff_smoke_002__NUMERICAL_METHODS.md",
+      "sha256": "435698610a898f02019b98411281a6bd12e75dd8625b7f1f0d28c6598a1c5b24",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_002/check_legacy_bloch.py",
+      "flat": "results__4K__run_new_handoff_smoke_002__check_legacy_bloch_AP_pnc.py",
+      "sha256": "ed39160177e5af014735c26c6c843fba44e85a1ececda96419b3f477a28f1a1d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_002/config.json",
+      "flat": "results__4K__run_new_handoff_smoke_002__config.json",
+      "sha256": "f4aed2e708eda869b5493131f033a247c4138f7fcd03ff6be851c168ed150c41",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_002/figures/field_4GHz_displacement.pdf",
+      "flat": "results__4K__run_new_handoff_smoke_002__figures__field_4GHz_displacement.pdf",
+      "sha256": "dae1e864acaf94b9f4b786699ff9cce241b31ae33ddb32a03a0e46d88c4023f8",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_002/figures/field_4GHz_strain.pdf",
+      "flat": "results__4K__run_new_handoff_smoke_002__figures__field_4GHz_strain.pdf",
+      "sha256": "5cc7bc8df05f3ef16d09085c169612eefe239f2c24bd575605ea701e421c600f",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_002/finalize.py",
+      "flat": "results__4K__run_new_handoff_smoke_002__finalize_AP_pnc.py",
+      "sha256": "0c0ffeaceff9a7952f6672d16fc62e3125dbe335bc93891e3dac16e956c130d4",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_002/logs/input_source_hashes.json",
+      "flat": "results__4K__run_new_handoff_smoke_002__logs__input_source_hashes.json",
+      "sha256": "dfc00f5159d6642be575f3afb138f708e3a175617fea2bd70c5b7afc743cc4a5",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_002/logs/matplotlib-cache/fontlist-v390.json",
+      "flat": "results__4K__run_new_handoff_smoke_002__logs__matplotlib-cache__fontlist-v390.json",
+      "sha256": "e616e77c59904ea629e2a5169c4ac53352144d712c962833907ac5c0c0284139",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_002/logs/source_snapshot/56aef0bfddcb_config.json",
+      "flat": "results__4K__run_new_handoff_smoke_002__logs__source_snapshot__56aef0bfddcb_config.json",
+      "sha256": "56aef0bfddcbd116dd2893c0ff4be627f088dcc82bce8778cfc28c9952e2700a",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_002/logs/source_snapshot/ef0ec6f9394e_numerics.py",
+      "flat": "results__4K__run_new_handoff_smoke_002__logs__source_snapshot__ef0ec6f9394e_numerics_AP_pnc.py",
+      "sha256": "ef0ec6f9394e76ab4f32b14bb79a84f2dbafe9cb740b0061ac32839c4678606d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_002/logs/source_snapshot/f698dbf41462_run.py",
+      "flat": "results__4K__run_new_handoff_smoke_002__logs__source_snapshot__f698dbf41462_run_AP_pnc.py",
+      "sha256": "f698dbf414620403265fa24c61e3aedcac0ce02a3fb6090304a4dcaeef191d60",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_002/logs/started.json",
+      "flat": "results__4K__run_new_handoff_smoke_002__logs__started.json",
+      "sha256": "cbcb5699b48627e801eda54946c2e3ad251c970b93d203646b84c8eba0e4364d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_002/numerics.py",
+      "flat": "results__4K__run_new_handoff_smoke_002__numerics_AP_pnc.py",
+      "sha256": "ef0ec6f9394e76ab4f32b14bb79a84f2dbafe9cb740b0061ac32839c4678606d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_002/run.py",
+      "flat": "results__4K__run_new_handoff_smoke_002__run_AP_pnc.py",
+      "sha256": "f698dbf414620403265fa24c61e3aedcac0ce02a3fb6090304a4dcaeef191d60",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_handoff_smoke_002/verify_eigen_scaling.py",
+      "flat": "results__4K__run_new_handoff_smoke_002__verify_eigen_scaling_AP_pnc.py",
+      "sha256": "b9ba213ae721982292f9c61e7db724e941a70d86b54d1232fa92ac1e56237dc3",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_verified_smoke/MATERIAL_PROVENANCE.md",
+      "flat": "results__4K__run_new_verified_smoke__MATERIAL_PROVENANCE.md",
+      "sha256": "508319f60f48a07d2966413a8295c04d7ae953b3e849fa7a6c2f588a0cb633f2",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_verified_smoke/NUMERICAL_METHODS.md",
+      "flat": "results__4K__run_new_verified_smoke__NUMERICAL_METHODS.md",
+      "sha256": "435698610a898f02019b98411281a6bd12e75dd8625b7f1f0d28c6598a1c5b24",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_verified_smoke/check_legacy_bloch.py",
+      "flat": "results__4K__run_new_verified_smoke__check_legacy_bloch_AP_pnc.py",
+      "sha256": "ed39160177e5af014735c26c6c843fba44e85a1ececda96419b3f477a28f1a1d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_verified_smoke/finalize.py",
+      "flat": "results__4K__run_new_verified_smoke__finalize_AP_pnc.py",
+      "sha256": "0c0ffeaceff9a7952f6672d16fc62e3125dbe335bc93891e3dac16e956c130d4",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_verified_smoke/logs/source_snapshot/56aef0bfddcb_config.json",
+      "flat": "results__4K__run_new_verified_smoke__logs__source_snapshot__56aef0bfddcb_config.json",
+      "sha256": "56aef0bfddcbd116dd2893c0ff4be627f088dcc82bce8778cfc28c9952e2700a",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_verified_smoke/logs/source_snapshot/ef0ec6f9394e_numerics.py",
+      "flat": "results__4K__run_new_verified_smoke__logs__source_snapshot__ef0ec6f9394e_numerics_AP_pnc.py",
+      "sha256": "ef0ec6f9394e76ab4f32b14bb79a84f2dbafe9cb740b0061ac32839c4678606d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_verified_smoke/numerics.py",
+      "flat": "results__4K__run_new_verified_smoke__numerics_AP_pnc.py",
+      "sha256": "ef0ec6f9394e76ab4f32b14bb79a84f2dbafe9cb740b0061ac32839c4678606d",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/4K/run_new_verified_smoke/verify_eigen_scaling.py",
+      "flat": "results__4K__run_new_verified_smoke__verify_eigen_scaling_AP_pnc.py",
+      "sha256": "b9ba213ae721982292f9c61e7db724e941a70d86b54d1232fa92ac1e56237dc3",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "results/physics_validation_2026_10_07/tables/bloch_branches.csv",
+      "flat": "results__physics_validation_2026_10_07__tables__bloch_branches.csv",
+      "sha256": "28060761689667d94c58ca8332b0cd0d4b3b305281d75a384c9595138a7a1ba5",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "scripts/cavity_convergence.py",
+      "flat": "scripts__cavity_convergence_AP_pnc.py",
+      "sha256": "57270b4121f9960be064ef4c975c8bf8e78f49f1cf16e284b240202c8ee89230",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "scripts/convergence_localization.py",
+      "flat": "scripts__convergence_localization_AP_pnc.py",
+      "sha256": "8c9383f59b235fc6f6e0bc5fcc233e18b0437c755274df7beaffad7f3641c190",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "scripts/finalize_cavity_reports.py",
+      "flat": "scripts__finalize_cavity_reports_AP_pnc.py",
+      "sha256": "39745f4cfca0c556c95d47f9095a362e79c7149941e42c066a0ea8b4a6223890",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "scripts/finalize_physics_validation_2026_10_07.py",
+      "flat": "scripts__finalize_physics_validation_2026_10_07_AP_pnc.py",
+      "sha256": "3be31d18d973f2a4364c730abfb168069cf32033cc4e1091641aa69a60f8863e",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "scripts/physics_validation_2026_10_07.py",
+      "flat": "scripts__physics_validation_2026_10_07_AP_pnc.py",
+      "sha256": "e0f7b4f2ae380b36e4102d708113f7092efa5adf5a13ea77c03f1bf980649be8",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "scripts/physics_workbook_check.py",
+      "flat": "scripts__physics_workbook_check_AP_pnc.py",
+      "sha256": "9caa2a45435ec41f3ba24ee54bc6148b905e9ebb27c2ae3d003523ff4e23486a",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "scripts/postprocess_convergence_localization.py",
+      "flat": "scripts__postprocess_convergence_localization_AP_pnc.py",
+      "sha256": "8e2f1f3f95ee882f261059d33eda1a339589aae3731f312857e1d7d9aac49f7b",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    },
+    {
+      "original": "verification/smoke_run.log",
+      "flat": "verification__smoke_run.log",
+      "sha256": "c7c9c0b96ae0a6c1c71b2502b074d5c7379ec5cf4c06f0568c23faeaca05a8d8",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "repository_path": null,
+      "status": "missing"
+    }
+  ]
+}

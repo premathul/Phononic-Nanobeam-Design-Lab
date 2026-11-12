@@ -1,0 +1,7 @@
+# Author: Athul Prem | _AP_pnc
+# Preserve exact scientific/archive bytes across platforms and checkout settings.
+* -text
+*.pdf binary
+*.png binary
+*.npz binary
+*.xlsx binary
