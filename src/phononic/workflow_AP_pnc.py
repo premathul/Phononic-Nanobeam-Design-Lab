@@ -169,16 +169,16 @@ def resolve_config(config: dict, *, check_body_budget: bool = True) -> dict:
                   rho=material["density_kg_m3"], rotation=material["crystal_rotation"])
     analysis = config["analysis"]
     if "linear_solver" in config["resources"]:
-        if config["resources"]["linear_solver"] not in ("direct", "ilu_gmres"):
-            raise ValueError("resources.linear_solver must be direct or ilu_gmres")
+        if config["resources"]["linear_solver"] not in ("direct", "ilu_gmres", "ilu_lgmres"):
+            raise ValueError("resources.linear_solver must be direct, ilu_gmres or ilu_lgmres")
         if analysis["kind"] != "scattering":
             raise ValueError("resources.linear_solver applies to scattering only")
     if "ilu_fill_factor" in config["resources"]:
         fill = config["resources"]["ilu_fill_factor"]
         if not _finite_number(fill) or fill < 1:
             raise ValueError("resources.ilu_fill_factor must be finite and at least 1")
-        if config["resources"].get("linear_solver") != "ilu_gmres":
-            raise ValueError("resources.ilu_fill_factor requires linear_solver=ilu_gmres")
+        if config["resources"].get("linear_solver") not in ("ilu_gmres", "ilu_lgmres"):
+            raise ValueError("resources.ilu_fill_factor requires linear_solver=ilu_gmres or ilu_lgmres")
     if analysis["kind"] == "scattering" or kind in ("gmsh", "layered"):
         config["resources"].setdefault("max_port_dofs", 200)
         maximum_port = config["resources"]["max_port_dofs"]
@@ -406,6 +406,10 @@ def run_study(config: dict, output_root: Path | None = None) -> dict:
                     from .linear_solvers_AP_pnc import solve_ilu_gmres
                     linear_solver = lambda operator, rhs: solve_ilu_gmres(
                         operator, rhs, report=solver_report, fill_factor=config["resources"].get("ilu_fill_factor", 10.0))
+                elif config["resources"].get("linear_solver") == "ilu_lgmres":
+                    from .linear_lgmres_AP_pnc import solve_ilu_lgmres
+                    linear_solver = lambda operator, rhs: solve_ilu_lgmres(
+                        operator, rhs, report=solver_report, fill_factor=config["resources"].get("ilu_fill_factor", 10.0))
                 summary["linear_solver"] = solver_report
                 with measured_resources() as scattering_resources:
                     summary["scattering_resources"] = scattering_resources
@@ -607,8 +611,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--max-port-dofs", type=int)
     parser.add_argument("--assembly-batch-elements", type=int,
                         help="Assemble this many tetrahedra at a time with unchanged integration accuracy")
-    parser.add_argument("--linear-solver", choices=("direct", "ilu_gmres"), help="Matched-port linear solver")
-    parser.add_argument("--ilu-fill-factor", type=float, help="ILU storage fill factor for ilu_gmres (default: 10)")
+    parser.add_argument("--linear-solver", choices=("direct", "ilu_gmres", "ilu_lgmres"), help="Matched-port linear solver")
+    parser.add_argument("--ilu-fill-factor", type=float, help="ILU storage fill factor for iterative solvers (default: 10)")
     parser.add_argument("--mesh-only", action="store_true", help="Save and inspect a mesh before assembling or solving")
     parser.add_argument("--output-root", type=Path)
     parser.add_argument("--open", action="store_true", help="Open the offline interactive result page")

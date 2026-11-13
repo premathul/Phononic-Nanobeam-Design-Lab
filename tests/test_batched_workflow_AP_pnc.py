@@ -57,11 +57,19 @@ class BatchedWorkflowTests(unittest.TestCase):
                 standard = run_study(config, output)
                 resources.update(assembly_batch_elements=7, linear_solver="ilu_gmres", ilu_fill_factor=6)
                 iterative = run_study(config, output)
+                resources["linear_solver"] = "ilu_lgmres"
+                augmented = run_study(config, output)
+                with patch("phononic.linear_lgmres_AP_pnc.solve_ilu_lgmres",
+                           side_effect=AssertionError("cached augmented result solved again")):
+                    self.assertTrue(run_study(config, output)["reused"])
             self.assertEqual(standard["assembly_method"], "standard")
             self.assertEqual(standard["mesh_checkpoint"], first["mesh_checkpoint"])
             self.assertEqual(iterative["mesh_checkpoint"], first["mesh_checkpoint"])
             self.assertNotEqual(iterative["run_hash"], first["run_hash"])
             self.assertTrue(iterative["power_balance_passed"])
+            self.assertEqual(augmented["mesh_checkpoint"], first["mesh_checkpoint"])
+            self.assertTrue(augmented["power_balance_passed"])
+            self.assertNotEqual(augmented["run_hash"], iterative["run_hash"])
 
             first_path = Path(first["output_directory"])
             source = "src/phononic/assembly_batched_AP_pnc.py"
@@ -98,6 +106,23 @@ class BatchedWorkflowTests(unittest.TestCase):
                   np.load(first_path / "selected_fields_AP_pnc.npz", allow_pickle=False) as control):
                 for group in ("incident", "reflection", "transmission"):
                     np.testing.assert_array_equal(fields[f"{group}_mode_indices"], control[f"{group}_mode_indices"])
+                for block in ("reflection_amplitudes", "transmission_amplitudes"):
+                    np.testing.assert_allclose(fields[block], control[block], atol=1e-8, rtol=0)
+
+            augmented_path = Path(augmented["output_directory"])
+            saved, augmented_inputs, _ = read_run(augmented_path)
+            source = "src/phononic/linear_lgmres_AP_pnc.py"
+            self.assertEqual(augmented_inputs["numerical_source_sha256"][source], file_sha(ROOT / source))
+            self.assertNotIn(source, iterative_inputs["numerical_source_sha256"])
+            self.assertEqual(saved["linear_solver"]["method"], "ilu_lgmres")
+            self.assertEqual(saved["linear_solver"]["lgmres"]["outer_k"], 3)
+            self.assertEqual(len(saved["linear_solver"]["channels"]), saved["num_incident_channels"])
+            for channel in saved["linear_solver"]["channels"]:
+                self.assertEqual(channel["info"], 0)
+                self.assertLessEqual(channel["relative_residual"], 1e-9)
+                self.assertLessEqual(channel["relative_backward_residual"], 1e-9)
+            with (np.load(augmented_path / "selected_fields_AP_pnc.npz", allow_pickle=False) as fields,
+                  np.load(first_path / "selected_fields_AP_pnc.npz", allow_pickle=False) as control):
                 for block in ("reflection_amplitudes", "transmission_amplitudes"):
                     np.testing.assert_allclose(fields[block], control[block], atol=1e-8, rtol=0)
 

@@ -1399,5 +1399,1027 @@
       ]
     }
   },
-  "csv_sha256": "1d6db5b80c86e8f31328ad8e640b2259525fa9d3e34fc7df00be66a28add5b29"
+  "csv_sha256": "eed176829e0258e7429d08bbe48bdbf918c28a2f3673ae9a8b87065713644b9b",
+  "historical_full_workflow_source": {
+    "source_path": "src/phononic/workflow_AP_pnc.py",
+    "source_commit": "392ea7955bf6e5f96e01879264266bd45ff7a73c",
+    "sha256": "aed828cad9f2ed18079037b3ec6c2df7aa6dea5fc2546979442469bd571f6e03",
+    "bytes": 42347,
+    "applies_to": [
+      "full_device_operator",
+      "full_device_solve_replay"
+    ]
+  },
+  "full_device_lgmres_initial": {
+    "status": "failed",
+    "worker_status": "failed",
+    "scattering_computed": false,
+    "body_dofs": 157005,
+    "operator": {
+      "nonzero_storage": 11890163,
+      "array_bytes": 238431284
+    },
+    "operator_csc_sha256": "4a9a4187ac23848b03efaa76ff123970020da1f19857cf03f40f549647dfaaf6",
+    "rhs_array_sha256": "549e5febe1d65547c56d38863aff552d884f04a18ea06f628d22430906c6fac1",
+    "before_factorization": {
+      "commit_total_mib": 27486.125,
+      "commit_limit_mib": 33086.86328125,
+      "commit_headroom_mib": 5600.73828125,
+      "physical_available_mib": 2518.15625,
+      "private_commit_mib": 279.93359375
+    },
+    "ilu_settings": {
+      "drop_tol": 0.0001,
+      "fill_factor": 10.0,
+      "permc_spec": "COLAMD"
+    },
+    "lgmres_settings": {
+      "inner_m": 50,
+      "outer_k": 3,
+      "maxiter": 20,
+      "rtol": 1e-10,
+      "atol": 0.0
+    },
+    "settings_sha256": "22a9593bd8ce5f7b9c3e18c6a59b01eb415d38372f7b175cf101764be0112d2f",
+    "relative_residual_limit": 1e-09,
+    "backward_residual_limit": 1e-09,
+    "preconditioner_nnz": 92858621,
+    "preconditioner_seconds": 34.23400000001129,
+    "process_lifetime_peak_working_set_mib": 2167.80859375,
+    "process_lifetime_peak_private_commit_mib": 5148.109375,
+    "numerical_threads": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1"
+    },
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "source_sha256": {
+      "spilu": "252737690439f6bf4c8f71da2cbcbe3e70bae8c4a6c713fedc88616f9dccdbb7",
+      "lgmres": "0c555fb496da5d8181b4a267f9a3260711794ce8a1308954aa4b59f88f67dcf6",
+      "_fgmres": "e89928d6ed66d2f62bb078bb39a15ae97ea6ed67967682b0d91fa705bb63ded5"
+    },
+    "run": {
+      "initial_windows_memory": {
+        "commit_total_mib": 27188.0546875,
+        "commit_limit_mib": 33086.86328125,
+        "commit_headroom_mib": 5898.80859375,
+        "physical_available_mib": 2823.0859375
+      },
+      "initial_ilu_estimate_mib": 4535.737228393555,
+      "required_margin_mib": 768,
+      "sample_interval_seconds": 0.1,
+      "available_floor_mib": 400,
+      "commit_headroom_floor_mib": 512,
+      "wall_cap_seconds": 600,
+      "augmentation_estimate_mib": 14.374237060546875,
+      "worker_exit_code": 1,
+      "elapsed_seconds": 216.75,
+      "peak_tree_rss_mib": 2172.61328125,
+      "peak_tree_private_commit_mib": 5148.875,
+      "minimum_available_mib": 563.3984375,
+      "minimum_commit_headroom_mib": 606.41796875
+    },
+    "raw_files": {
+      "replay": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_replay/replay_AP_pnc.json",
+        "sha256": "ada540a38968249c794c359cf1cbf11c28da3e26cd34f344fa8538f31fd8da39",
+        "bytes": 4115
+      },
+      "execution": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_replay/execution_AP_pnc.json",
+        "sha256": "713de2c4b035a72fd5bde45eb6951325cc3c3424cf4e0dfa43481215a4577dcc",
+        "bytes": 1041
+      },
+      "driver": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_replay/run_AP_pnc.py",
+        "sha256": "a6c578774ac253548a1f7de7ba21090e9d117b214df793d7811bf7f911018c61",
+        "bytes": 11637
+      },
+      "log": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_replay/worker_AP_pnc.log",
+        "sha256": "a8908ec0fdc056e7983f57a7a9612258249e2ded30131d14a3394d3b7a301859",
+        "bytes": 634
+      },
+      "monitor_helpers": {
+        "path": "results/runs/full_device_resource_profile/profile_AP_pnc.py",
+        "sha256": "f0dab5367f25016a5cea91d5809311ec89658a8c090ee53eb8dbafe934205911",
+        "bytes": 25492
+      }
+    },
+    "channels": [
+      {
+        "column": 0,
+        "status": "failed",
+        "info": 20,
+        "relative_true_residual": 9.30270846408391e-11,
+        "relative_backward_residual": 8.165779459997752e-14,
+        "elapsed_seconds": 180.75,
+        "outer_callback_count": 20,
+        "last_callback_relative_true_residual": 2.6980453011671354e-10,
+        "residual_gates_passed": true,
+        "requested_relative_tolerance_met": true
+      }
+    ],
+    "interpretation": "The returned vector passed both external residual gates and the requested LGMRES tolerance. SciPy checks the residual before each outer update and does not check the last updated vector when the outer loop exhausts its iteration cap. The original driver rejected the raw status before writing a candidate vector.",
+    "stopping_semantics_source": "https://github.com/scipy/scipy/blob/v1.18.1/scipy/sparse/linalg/_isolve/lgmres.py#L139-L217",
+    "candidate_vector_retained": false,
+    "error": "RuntimeError: LGMRES failed for RHS 1 (info=20, relative 9.303e-11, backward 8.166e-14)."
+  },
+  "full_device_lgmres_checkpointed": {
+    "status": "solved",
+    "worker_status": "solved",
+    "scattering_computed": false,
+    "body_dofs": 157005,
+    "operator": {
+      "nonzero_storage": 11890163,
+      "array_bytes": 238431284
+    },
+    "operator_csc_sha256": "4a9a4187ac23848b03efaa76ff123970020da1f19857cf03f40f549647dfaaf6",
+    "rhs_array_sha256": "549e5febe1d65547c56d38863aff552d884f04a18ea06f628d22430906c6fac1",
+    "before_factorization": {
+      "commit_total_mib": 27552.3046875,
+      "commit_limit_mib": 33086.86328125,
+      "commit_headroom_mib": 5534.55859375,
+      "physical_available_mib": 2530.29296875,
+      "private_commit_mib": 280.65234375
+    },
+    "ilu_settings": {
+      "drop_tol": 0.0001,
+      "fill_factor": 10.0,
+      "permc_spec": "COLAMD"
+    },
+    "lgmres_settings": {
+      "inner_m": 50,
+      "outer_k": 3,
+      "maxiter": 30,
+      "rtol": 1e-10,
+      "atol": 0.0
+    },
+    "settings_sha256": "cc1ddf7f26dbf492c2a1a5eac10f1d28c7b508ca802fdc5c4485786b8f32dcc1",
+    "relative_residual_limit": 1e-09,
+    "backward_residual_limit": 1e-09,
+    "preconditioner_nnz": 92858621,
+    "preconditioner_seconds": 31.077999999994063,
+    "process_lifetime_peak_working_set_mib": 2180.35546875,
+    "process_lifetime_peak_private_commit_mib": 5160.98828125,
+    "numerical_threads": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1"
+    },
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "source_sha256": {
+      "spilu": "252737690439f6bf4c8f71da2cbcbe3e70bae8c4a6c713fedc88616f9dccdbb7",
+      "lgmres": "0c555fb496da5d8181b4a267f9a3260711794ce8a1308954aa4b59f88f67dcf6",
+      "_fgmres": "e89928d6ed66d2f62bb078bb39a15ae97ea6ed67967682b0d91fa705bb63ded5"
+    },
+    "run": {
+      "initial_windows_memory": {
+        "commit_total_mib": 27318.140625,
+        "commit_limit_mib": 33086.86328125,
+        "commit_headroom_mib": 5768.72265625,
+        "physical_available_mib": 2782.28515625
+      },
+      "initial_ilu_estimate_mib": 4535.737228393555,
+      "required_margin_mib": 768,
+      "sample_interval_seconds": 0.1,
+      "available_floor_mib": 400,
+      "commit_headroom_floor_mib": 512,
+      "wall_cap_seconds": 1200,
+      "augmentation_estimate_mib": 14.374237060546875,
+      "worker_exit_code": 0,
+      "elapsed_seconds": 890.6410000000033,
+      "peak_tree_rss_mib": 2185.21875,
+      "peak_tree_private_commit_mib": 5161.75390625,
+      "minimum_available_mib": 577.421875,
+      "minimum_commit_headroom_mib": 568.84765625
+    },
+    "raw_files": {
+      "replay": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_checkpointed/replay_AP_pnc.json",
+        "sha256": "9ebea47df4336f7c1c21be8713d7feab24ab13c834cd0660af22abbb14c7cb1e",
+        "bytes": 16311
+      },
+      "execution": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_checkpointed/execution_AP_pnc.json",
+        "sha256": "c70c9bda557f6e9be31cfcab446d9204077d720ea884c79d650e6f5d3166a653",
+        "bytes": 1060
+      },
+      "driver": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_checkpointed/run_AP_pnc.py",
+        "sha256": "79ec830e871826ff8dbd682e617bc93e7b19f2dff02ca583e92171ee631ea377",
+        "bytes": 14849
+      },
+      "log": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_checkpointed/worker_AP_pnc.log",
+        "sha256": "4915d4e4bfef855f74f34e02c94185d5bf291cacdc44948a45c88b9592c72ad3",
+        "bytes": 255
+      },
+      "monitor_helpers": {
+        "path": "results/runs/full_device_resource_profile/profile_AP_pnc.py",
+        "sha256": "f0dab5367f25016a5cea91d5809311ec89658a8c090ee53eb8dbafe934205911",
+        "bytes": 25492
+      },
+      "prior_lgmres": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_replay/replay_AP_pnc.json",
+        "sha256": "ada540a38968249c794c359cf1cbf11c28da3e26cd34f344fa8538f31fd8da39",
+        "bytes": 4115
+      },
+      "solution": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_checkpointed/solution_AP_pnc.npy",
+        "sha256": "9bbfec19a65d7592f828196929d58f3f708f806a652074ed4c599c89bfba3e4a",
+        "bytes": 12560528
+      }
+    },
+    "channels": [
+      {
+        "column": 0,
+        "status": "accepted",
+        "rhs_column_sha256": "b6fd1ba2b2723a443f055fb576d82207e77c68d5dd68f3e6eacea7cc72225e46",
+        "info": 0,
+        "relative_true_residual": 9.30270846408391e-11,
+        "relative_backward_residual": 8.165779459997752e-14,
+        "elapsed_seconds": 174.71900000001187,
+        "outer_callback_count": 21,
+        "last_callback_relative_true_residual": 9.30270846408391e-11,
+        "residual_gates_passed": true,
+        "requested_relative_tolerance_met": true,
+        "solution": {
+          "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_checkpointed/solution_column_1_AP_pnc.npy",
+          "sha256": "1b2b604f931e8b2b8f7e9143dbc66a4b2084f57bc580ec083fe5d4042783d3ec",
+          "bytes": 2512208
+        },
+        "latest_checkpoint": {
+          "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_checkpointed/latest_column_1_AP_pnc.npz",
+          "sha256": "66f19b1637727a1c701f924233d514b2fbccb8596d9f0c0d97e9acdb62abdc0f",
+          "bytes": 2515104,
+          "stage": "solver_return",
+          "raw_info": 0
+        }
+      },
+      {
+        "column": 1,
+        "status": "accepted",
+        "rhs_column_sha256": "016ea5b438ec9e561ca2e4d8c544890b871d991f13ecee9851de673cd637d45a",
+        "info": 0,
+        "relative_true_residual": 3.0401630158842036e-11,
+        "relative_backward_residual": 7.154165227071632e-15,
+        "elapsed_seconds": 192.15599999998813,
+        "outer_callback_count": 25,
+        "last_callback_relative_true_residual": 3.0401630158842036e-11,
+        "residual_gates_passed": true,
+        "requested_relative_tolerance_met": true,
+        "solution": {
+          "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_checkpointed/solution_column_2_AP_pnc.npy",
+          "sha256": "6fd0096ac945278961621c46bde14eb691bcfc4fd68979495b71cdc15dc94932",
+          "bytes": 2512208
+        },
+        "latest_checkpoint": {
+          "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_checkpointed/latest_column_2_AP_pnc.npz",
+          "sha256": "2d9684c2ceead8925c0001e9b39484688d3595b6e31674b02d020eb559b9bcc2",
+          "bytes": 2515104,
+          "stage": "solver_return",
+          "raw_info": 0
+        }
+      },
+      {
+        "column": 2,
+        "status": "accepted",
+        "rhs_column_sha256": "84817e811e91981d45074479b24343ab15a43dee9caa978fd31d5f5cd99016fa",
+        "info": 0,
+        "relative_true_residual": 9.90282905349919e-11,
+        "relative_backward_residual": 9.036147437790218e-14,
+        "elapsed_seconds": 147.45300000000861,
+        "outer_callback_count": 19,
+        "last_callback_relative_true_residual": 9.90282905349919e-11,
+        "residual_gates_passed": true,
+        "requested_relative_tolerance_met": true,
+        "solution": {
+          "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_checkpointed/solution_column_3_AP_pnc.npy",
+          "sha256": "526ab044d5012ffa102dc83b74d1432ea0e48d4603b9589b6abe9db878109ea1",
+          "bytes": 2512208
+        },
+        "latest_checkpoint": {
+          "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_checkpointed/latest_column_3_AP_pnc.npz",
+          "sha256": "4018111f3b4934a9fc47a455648d62b8025a0c0f649f8b9f68986326990065d5",
+          "bytes": 2515104,
+          "stage": "solver_return",
+          "raw_info": 0
+        }
+      },
+      {
+        "column": 3,
+        "status": "accepted",
+        "rhs_column_sha256": "7b5b27d64c249e7a67c308896726f428beccb1841ba6246120236f91779fdee3",
+        "info": 0,
+        "relative_true_residual": 7.529779402473427e-11,
+        "relative_backward_residual": 3.788157643354245e-14,
+        "elapsed_seconds": 177.78199999999197,
+        "outer_callback_count": 23,
+        "last_callback_relative_true_residual": 7.529779402473427e-11,
+        "residual_gates_passed": true,
+        "requested_relative_tolerance_met": true,
+        "solution": {
+          "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_checkpointed/solution_column_4_AP_pnc.npy",
+          "sha256": "940bc4b0d5f7cfecdc0e7217226adeb48ebe5f84de697eb5ac0017a047140155",
+          "bytes": 2512208
+        },
+        "latest_checkpoint": {
+          "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_checkpointed/latest_column_4_AP_pnc.npz",
+          "sha256": "f3b6fe5c6e84886513abb57b991e7cc861c598e200ddbf482adbabaa8dde075d",
+          "bytes": 2515104,
+          "stage": "solver_return",
+          "raw_info": 0
+        }
+      },
+      {
+        "column": 4,
+        "status": "accepted",
+        "rhs_column_sha256": "b1e5d6d7d4bcc07256fa3377376aa49a6482086d04f063d87ecc3fa1d1f258e1",
+        "info": 0,
+        "relative_true_residual": 7.34365725084101e-11,
+        "relative_backward_residual": 8.698889438078344e-14,
+        "elapsed_seconds": 165.73500000000058,
+        "outer_callback_count": 22,
+        "last_callback_relative_true_residual": 7.34365725084101e-11,
+        "residual_gates_passed": true,
+        "requested_relative_tolerance_met": true,
+        "solution": {
+          "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_checkpointed/solution_column_5_AP_pnc.npy",
+          "sha256": "a7a9c6adf29e45c07f6fa0038610455aafd7cda39d5a5c7ebf0c8f4e4ebd1f6a",
+          "bytes": 2512208
+        },
+        "latest_checkpoint": {
+          "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_checkpointed/latest_column_5_AP_pnc.npz",
+          "sha256": "dcb66dfba86aee46981006f4cbb2b669090e84b5a1617bc4094eca08b4a92490",
+          "bytes": 2515104,
+          "stage": "solver_return",
+          "raw_info": 0
+        }
+      }
+    ],
+    "repeat_reason": "The first LGMRES attempt reached tolerance on its final outer update. The driver stopped on raw info=20 before saving the candidate vector, so the corrected attempt had to recompute it from the saved operator and physical right-hand sides."
+  },
+  "full_device_lgmres_public_replay": {
+    "status": "completed_unverified",
+    "scattering_computed": true,
+    "raw_files": {
+      "replay": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_checkpointed/public_replay_AP_pnc.json",
+        "sha256": "514623b6c7f2ed90e223651e3ae2315ef094d5542564432057c96c230a4a28a2",
+        "bytes": 6030
+      },
+      "driver": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_checkpointed/export_AP_pnc.py",
+        "sha256": "fd462e73743f84a212b8b7207ceca341d08a2836850c538a6ba3849899777a76",
+        "bytes": 8877
+      },
+      "solution": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/lgmres_checkpointed/solution_AP_pnc.npy",
+        "sha256": "9bbfec19a65d7592f828196929d58f3f708f806a652074ed4c599c89bfba3e4a",
+        "bytes": 12560528
+      },
+      "public_summary": {
+        "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h200_ny12_z4-44ad87c9837d/summary_AP_pnc.json",
+        "sha256": "02f3a416dd75b398bcd043ac307dc86d01d7fc51840cfb0875a8d58e08691e09",
+        "bytes": 26501
+      },
+      "configuration_AP_pnc.json": {
+        "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h200_ny12_z4-44ad87c9837d/configuration_AP_pnc.json",
+        "sha256": "50a0dc4cc70963dfc2eec1d5d620b3d9015674a68c68040aa8831226abec8a49",
+        "bytes": 1304
+      },
+      "scattering_AP_pnc.csv": {
+        "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h200_ny12_z4-44ad87c9837d/scattering_AP_pnc.csv",
+        "sha256": "53012874131a31e863a31f77495dfda68055c68903e3e9757f51c4b86e830739",
+        "bytes": 920
+      },
+      "scattering_channels_AP_pnc.csv": {
+        "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h200_ny12_z4-44ad87c9837d/scattering_channels_AP_pnc.csv",
+        "sha256": "bfa2fe680ca9257ccd579541feda4d0d5dd44f8d9cbecf80898b824c7b8ece67",
+        "bytes": 4661
+      },
+      "port_modes_AP_pnc.csv": {
+        "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h200_ny12_z4-44ad87c9837d/port_modes_AP_pnc.csv",
+        "sha256": "05772e7246425c3dabf48b2b230ab1a71e966db6e58bbb31112c3cb22f396480",
+        "bytes": 114211
+      },
+      "selected_fields_AP_pnc.npz": {
+        "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h200_ny12_z4-44ad87c9837d/selected_fields_AP_pnc.npz",
+        "sha256": "f9a1e81d2ef6f7c78332abbbb1bb32b9e4218e4caa1c807a702eddfeafac726b",
+        "bytes": 27360256
+      }
+    },
+    "run": {
+      "elapsed_seconds": 3.125
+    },
+    "scope": "Cached production scattering postprocessing and export. K/M, SAFE modes and displacement are restored from the saved checkpoint. No FEM assembly, SAFE eigensolve or harmonic iteration.",
+    "configuration": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "schema_version": 1,
+      "name": "historical_26hole_layered_h200_ny12_z4",
+      "geometry": {
+        "length_nm": 16650,
+        "width_nm": 1000,
+        "thickness_nm": 200,
+        "pattern": {
+          "csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+          "x_offset_nm": 8325
+        }
+      },
+      "mesh": {
+        "kind": "layered",
+        "element_order": 2,
+        "mesh_size_nm": 200,
+        "port_size_nm": 83.33333333333333,
+        "circle_resolution": 32,
+        "thickness_layers": 4
+      },
+      "material": {
+        "name": "nominal_cubic_ge",
+        "C11_Pa": 128500000000.0,
+        "C12_Pa": 48300000000.0,
+        "C44_Pa": 66800000000.0,
+        "density_kg_m3": 5323,
+        "crystal_rotation": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "temperature_policy": "fixed_property_control",
+        "temperature_K": 4
+      },
+      "analysis": {
+        "kind": "scattering",
+        "boundary": "matched_ports",
+        "frequency_GHz": 1,
+        "incident_side": "left"
+      },
+      "resources": {
+        "max_dofs": 160000,
+        "max_port_dofs": 675,
+        "assembly_batch_elements": 2048,
+        "linear_solver": "ilu_lgmres",
+        "ilu_fill_factor": 10.0
+      }
+    },
+    "export_implementation": {
+      "git_commit": "392ea7955bf6e5f96e01879264266bd45ff7a73c",
+      "source_sha256": {
+        "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+        "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/linear_lgmres_AP_pnc.py": "543f0be835f2f0f54502eae170584d531bd3126766175d7229a3818360d0aa67",
+        "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/report_AP_pnc.py": "871fc6a358958c7908ad17f57521bdb51772ea82739d83cdbe5b4b536a5145c5",
+        "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+        "src/phononic/workflow_AP_pnc.py": "388dd2fc6b0a2923e43c31bc2b71ecae332e6c4e11f4887ee1ae4a91b6c62f82",
+        "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+      },
+      "packages": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "scikit-fem": "12.0.2",
+        "meshio": "5.3.5",
+        "gmsh": "4.15.2",
+        "matplotlib": "3.11.2",
+        "psutil": "7.2.2"
+      },
+      "python": "3.12.14",
+      "platform": "Windows-11-10.0.26200-SP0"
+    },
+    "replay_true_relative_residuals": [
+      9.30270846408382e-11,
+      3.0401630158841926e-11,
+      9.902829053499129e-11,
+      7.52977940247333e-11,
+      7.343657250840973e-11
+    ],
+    "replay_backward_residuals": [
+      8.165779459997752e-14,
+      7.154165227071632e-15,
+      9.036147437790218e-14,
+      3.788157643354245e-14,
+      8.698889438078344e-14
+    ],
+    "power_balance_passed": true,
+    "physical_checks": {
+      "power_balance_passed": true,
+      "max_power_imbalance": 1.2845657870741434e-10,
+      "maximum_flux_power_imbalance": 1.2873291321824354e-10,
+      "maximum_net_outward_power_ratio": 1.28752453143477e-10,
+      "maximum_modal_flux_difference": 8.454348332520567e-13,
+      "maximum_relative_solver_residual": 9.036147437790218e-14,
+      "maximum_relative_port_residual": 4.298888081297976e-15,
+      "spatial_convergence_established": false,
+      "channels": [
+        {
+          "incident_mode_order": 1,
+          "incident_root_index": 1348,
+          "reflection": 0.0037057912915214515,
+          "transmission": 0.9962942087046633,
+          "reflection_flux": 0.003705791291521753,
+          "transmission_flux": 0.9962942087051131,
+          "power_balance": 3.815170401821888e-12,
+          "flux_power_balance": 3.365197009941312e-12,
+          "relative_residual": 8.165779459997752e-14
+        },
+        {
+          "incident_mode_order": 2,
+          "incident_root_index": 1311,
+          "reflection": 0.0034852020984933504,
+          "transmission": 0.9965147979283683,
+          "reflection_flux": 0.003485202098492467,
+          "transmission_flux": 0.9965147979285709,
+          "power_balance": -2.6861624036200737e-11,
+          "flux_power_balance": -2.706335155977513e-11,
+          "relative_residual": 7.154165227071632e-15
+        },
+        {
+          "incident_mode_order": 3,
+          "incident_root_index": 1292,
+          "reflection": 0.04029257612843837,
+          "transmission": 0.9597074238957383,
+          "reflection_flux": 0.04029257612843811,
+          "transmission_flux": 0.9597074238956328,
+          "power_balance": -2.417666067344726e-11,
+          "flux_power_balance": -2.407085641920048e-11,
+          "relative_residual": 9.036147437790218e-14
+        },
+        {
+          "incident_mode_order": 4,
+          "incident_root_index": 1284,
+          "reflection": 0.004660431269988438,
+          "transmission": 0.9953395688584106,
+          "reflection_flux": 0.004660431269990361,
+          "transmission_flux": 0.9953395688587425,
+          "power_balance": -1.283989581324363e-10,
+          "flux_power_balance": -1.2873291321824354e-10,
+          "relative_residual": 3.788157643354245e-14
+        },
+        {
+          "incident_mode_order": 5,
+          "incident_root_index": 1274,
+          "reflection": 0.00429272681552203,
+          "transmission": 0.9957072733129345,
+          "reflection_flux": 0.004292726815522548,
+          "transmission_flux": 0.9957072733120891,
+          "power_balance": -1.2845657870741434e-10,
+          "flux_power_balance": -1.2761158796337213e-10,
+          "relative_residual": 8.698889438078344e-14
+        }
+      ]
+    },
+    "scattering": {
+      "frequency_hz": 1000000000.0,
+      "incident_side": "left",
+      "amplitude_format": "Each complex coefficient is stored as [real, imaginary]. Rows are outgoing modes and columns incident modes at the original end planes.",
+      "dimensions_nm": {
+        "length_nm": 16650,
+        "width_nm": 1000,
+        "thickness_nm": 200
+      },
+      "numerical_source_sha256": {
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+        "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+        "src/phononic/linear_lgmres_AP_pnc.py": "543f0be835f2f0f54502eae170584d531bd3126766175d7229a3818360d0aa67"
+      },
+      "section_checkpoint": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/ports_AP_pnc.npz",
+        "sha256": "ac2e0265423fe720db187246f3c21304bb3e0605dc579091f6ca29f92005de08",
+        "bytes": 29229016,
+        "trace_dofs": 675,
+        "propagating_channels_per_direction": 5
+      },
+      "groups": {
+        "incoming": {
+          "root_indices": [
+            1348,
+            1311,
+            1292,
+            1284,
+            1274
+          ],
+          "wavenumbers_rad_m": [
+            1446668.9722198995,
+            1455967.0707150882,
+            2796959.945550218,
+            4103493.19443145,
+            5196894.30896118
+          ],
+          "signed_power_w": [
+            1.0000000000000002,
+            0.9999999999999989,
+            0.9999999999999998,
+            0.9999999999999998,
+            1.0000000000000002
+          ]
+        },
+        "reflection": {
+          "root_indices": [
+            1349,
+            1312,
+            1293,
+            1285,
+            1275
+          ],
+          "wavenumbers_rad_m": [
+            -1446668.9722198995,
+            -1455967.0707150882,
+            -2796959.945550218,
+            -4103493.19443145,
+            -5196894.30896118
+          ],
+          "signed_power_w": [
+            -1.0000000000000002,
+            -0.9999999999999989,
+            -0.9999999999999998,
+            -0.9999999999999998,
+            -1.0000000000000002
+          ]
+        },
+        "transmission": {
+          "root_indices": [
+            1348,
+            1311,
+            1292,
+            1284,
+            1274
+          ],
+          "wavenumbers_rad_m": [
+            1446668.9722198995,
+            1455967.0707150882,
+            2796959.945550218,
+            4103493.19443145,
+            5196894.30896118
+          ],
+          "signed_power_w": [
+            1.0000000000000002,
+            0.9999999999999989,
+            0.9999999999999998,
+            0.9999999999999998,
+            1.0000000000000002
+          ]
+        }
+      },
+      "reflection_amplitudes": [
+        [
+          [
+            -0.020870378095119928,
+            0.05718159040147181
+          ],
+          [
+            -1.0087019232953243e-05,
+            -7.064467512891601e-05
+          ],
+          [
+            -0.00010798220320317394,
+            0.0006472531205177949
+          ],
+          [
+            -0.0001388260706640562,
+            1.7308397572983796e-05
+          ],
+          [
+            -0.00014881689840199632,
+            -8.319219787253631e-05
+          ]
+        ],
+        [
+          [
+            -1.0086994218462173e-05,
+            -7.064468390824234e-05
+          ],
+          [
+            0.01869475672606924,
+            -0.03060241436726047
+          ],
+          [
+            0.0001071231836513458,
+            2.427474332693385e-05
+          ],
+          [
+            0.004924622073019209,
+            -2.324086124842519e-05
+          ],
+          [
+            0.04534156771975257,
+            0.01091205955562267
+          ]
+        ],
+        [
+          [
+            -0.00010798219542358169,
+            0.0006472531194654029
+          ],
+          [
+            0.0001071232484962111,
+            2.4274703178299837e-05
+          ],
+          [
+            0.035177447069269334,
+            0.1976220815934654
+          ],
+          [
+            0.0002833509451995313,
+            3.722659907698483e-05
+          ],
+          [
+            -0.0003328774842125314,
+            -3.271668187776138e-05
+          ]
+        ],
+        [
+          [
+            -0.0001388260766973407,
+            1.7308423763733886e-05
+          ],
+          [
+            0.004924622122629206,
+            -2.3240851584636556e-05
+          ],
+          [
+            0.0002833509667680145,
+            3.722660230021421e-05
+          ],
+          [
+            0.036588897694410906,
+            0.05738580232486963
+          ],
+          [
+            -0.0006900371761539603,
+            0.0019296857848335924
+          ]
+        ],
+        [
+          [
+            -0.00014881690235230046,
+            -8.319219291836024e-05
+          ],
+          [
+            0.04534156768505187,
+            0.01091205956477749
+          ],
+          [
+            -0.0003328774930261801,
+            -3.27166520153678e-05
+          ],
+          [
+            -0.0006900371851443136,
+            0.0019296857709036077
+          ],
+          [
+            0.0020895311931633156,
+            -0.04592481991407256
+          ]
+        ]
+      ],
+      "transmission_amplitudes": [
+        [
+          [
+            0.936473657887596,
+            0.34541336660457045
+          ],
+          [
+            -7.467755765700044e-05,
+            -0.00010135658010987842
+          ],
+          [
+            -0.000993035447076363,
+            0.00030074012191168054
+          ],
+          [
+            0.0001066762881378774,
+            2.3519131578021027e-05
+          ],
+          [
+            6.440440985550109e-05,
+            0.00024595406901409684
+          ]
+        ],
+        [
+          [
+            -0.00013173174899501526,
+            5.191420895102308e-06
+          ],
+          [
+            -0.8924204796509341,
+            -0.4472911993706614
+          ],
+          [
+            -0.000228829168061177,
+            0.0014842533088246215
+          ],
+          [
+            -0.0038896926358760603,
+            0.0005825040155368372
+          ],
+          [
+            -0.003356474794357073,
+            -3.9687502024002076e-05
+          ]
+        ],
+        [
+          [
+            0.0007653938855001999,
+            0.00046230930862690354
+          ],
+          [
+            0.00022319529416409573,
+            -0.00148818756747151
+          ],
+          [
+            0.9655860954372233,
+            -0.1653693474596578
+          ],
+          [
+            0.0005385897567673555,
+            -0.0004399014296061023
+          ],
+          [
+            -0.00018700011647009842,
+            -7.510516922616701e-05
+          ]
+        ],
+        [
+          [
+            0.00010162436000454006,
+            -4.753915974343197e-05
+          ],
+          [
+            0.00385388349520411,
+            -0.0004968004204952928
+          ],
+          [
+            0.0007257769526425382,
+            -4.757700490968797e-05
+          ],
+          [
+            -0.8239955615752312,
+            0.5623834015661957
+          ],
+          [
+            -0.0047376184076280085,
+            -0.007349611183360781
+          ]
+        ],
+        [
+          [
+            -0.00015309210274493497,
+            0.00022359698190386568
+          ],
+          [
+            -0.003049343649112343,
+            -0.0020953042517859125
+          ],
+          [
+            0.00018393488414369442,
+            -1.8229402448744304e-05
+          ],
+          [
+            -0.00026279846989699714,
+            0.008930811700246987
+          ],
+          [
+            0.9973816399043935,
+            0.029142805845175156
+          ]
+        ]
+      ]
+    }
+  },
+  "h160_candidate_preflight": {
+    "status": "mesh_ready",
+    "operation": "mesh_only",
+    "scope": "The h160 candidate keeps the h200 mesh's port width, four thickness layers, and 32-segment hole rims. No mechanical assembly or scattering solve was performed.",
+    "mesh_hash": "9c595b505778b0dade0f84d1107f5c672ac1577279a5c4d5c1455ede9f0e707a",
+    "mesh_sha256": "1d5601103a66ea63d0ca5f7555bd533b77b4ef17d84732cf5a57de675face67e",
+    "ndof": 187623,
+    "mesh_tetrahedra": 35448,
+    "mesh_vertices": 9925,
+    "end_face_dofs": {
+      "xleft": 675,
+      "xright": 675
+    },
+    "hole_count": 26,
+    "settings": {
+      "kind": "layered",
+      "element_order": 2,
+      "mesh_size_nm": 160,
+      "port_size_nm": 83.33333333333333,
+      "circle_resolution": 32,
+      "thickness_layers": 4
+    },
+    "source_sha256": {
+      "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+      "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+      "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+      "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a"
+    },
+    "geometry_diagnostics": {
+      "analytic_solid_volume_m3": 3.062532655455e-18,
+      "meshed_solid_volume_m3": 3.064247963349631e-18,
+      "analytic_removed_volume_m3": 2.674673445450011e-19,
+      "meshed_removed_volume_m3": 2.657520366503703e-19,
+      "relative_solid_volume_error": 0.0005600945647307897,
+      "relative_removed_volume_error": 0.006413148855793134,
+      "rim_segments_min": 32,
+      "rim_segments_max": 32,
+      "max_radial_sagitta_m": 6.621000825729834e-10
+    },
+    "mesh_resources": {
+      "peak_process_memory_mib": 114.484375,
+      "system_available_memory_mib_at_start": 2809.38671875,
+      "process_lifetime_peak_working_set_mib": 119.359375,
+      "elapsed_seconds": 0.5365001000027405
+    },
+    "mesh_control": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "preflight_sha256": "5a405a442fa2c053dbfe0230f14dc5dfa6706a7be369166a9557cb647ac4f57e",
+      "same_end_triangulations": {
+        "xleft": true,
+        "xright": true
+      },
+      "z_planes_nm": [
+        [
+          -100.00000000000001,
+          -50.00000000000001,
+          0.0,
+          50.000000000000014,
+          100.00000000000001
+        ],
+        [
+          -100.00000000000001,
+          -50.00000000000001,
+          0.0,
+          50.000000000000014,
+          100.00000000000001
+        ]
+      ]
+    },
+    "within_body_budget": false,
+    "max_body_dofs": 60000,
+    "raw_files": {
+      "preflight": {
+        "path": "results/runs/full_device_layered_preflight/h160_preflight/preflight_AP_pnc.json",
+        "sha256": "5a405a442fa2c053dbfe0230f14dc5dfa6706a7be369166a9557cb647ac4f57e",
+        "bytes": 10218
+      },
+      "mesh_summary": {
+        "path": "results/runs/full_device_layered_preflight/_meshes/9c595b505778b0dade0f84d1107f5c672ac1577279a5c4d5c1455ede9f0e707a/summary_AP_pnc.json",
+        "sha256": "c7944a8b793f0cef9df1f631d7e39ddad67ba81114cfe4b2b5fad38ae747fdbd",
+        "bytes": 9555
+      },
+      "mesh": {
+        "path": "results/runs/full_device_layered_preflight/_meshes/9c595b505778b0dade0f84d1107f5c672ac1577279a5c4d5c1455ede9f0e707a/mesh_AP_pnc.npz",
+        "sha256": "1d5601103a66ea63d0ca5f7555bd533b77b4ef17d84732cf5a57de675face67e",
+        "bytes": 299757
+      },
+      "configuration": {
+        "path": "results/runs/full_device_layered_preflight/h160_preflight/configuration_AP_pnc.json",
+        "sha256": "f75c5ba34c6aa6f1faf23c69dd187213604622d1a1c3b455c98a667bf1be4c59",
+        "bytes": 1199
+      },
+      "mesh_control": {
+        "path": "results/runs/full_device_layered_preflight/h160_preflight/mesh_control_AP_pnc.json",
+        "sha256": "009385c53d8771164d3908a29ecaef52dde3615caa946914ecfd3d1cbd6a625a",
+        "bytes": 522
+      }
+    }
+  }
 }

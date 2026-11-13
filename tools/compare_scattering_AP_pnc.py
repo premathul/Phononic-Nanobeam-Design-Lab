@@ -106,6 +106,8 @@ def read_run(directory: Path) -> tuple[dict, dict, dict]:
     modules = CORE + (("assembly_batched",) if "assembly_batch_elements" in configuration["resources"] else ())
     if configuration["resources"].get("linear_solver", "direct") == "ilu_gmres":
         modules += ("linear_solvers",)
+    elif configuration["resources"].get("linear_solver") == "ilu_lgmres":
+        modules += ("linear_lgmres",)
     core = {f"src/phononic/{module}_AP_pnc.py": core_hashes.get(f"src/phononic/{module}_AP_pnc.py") for module in modules}
     require(all(isinstance(value, str) and len(value) == 64 for value in core.values()),
             f"Missing numerical source hashes in {directory}.")
