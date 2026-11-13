@@ -100,7 +100,7 @@ For the refined two-hole case described below, select **Two-hole refined layers 
 
 ## Verification and capabilities
 
-The current Windows/Python 3.12 suite ran 79 tests: 78 passed and one was skipped because the process lacked permission to create a symbolic link. The checks cover tensor rotation, uniform strain, consistent mass, rigid-body subspaces, independent dense and sparse solutions, Bloch phase and the long-wavelength rod limit. Port checks cover trace mapping, directional energy flux, the dispersion-derivative identity, exact symmetry degeneracy, an independent 3D Bloch comparison, and explicit rejection of unresolved cutoffs. Scattering checks exercise both incidence directions, independent boundary flux, and reconstruction from exported fields. Geometry/workflow checks cover identical Gmsh end traces, analytic polygon volumes, independent curvature refinement, CSV provenance, cache invalidation, preflight budgets and exact tagged-mesh reuse. Saved-run checks cover unequal P1/P2 port traces, mode ordering and phase invariance, repeatability labeling, input power-check failures, reopening results and the desktop comparison workflow.
+The current Windows/Python 3.12 suite ran 81 tests: 80 passed and one was skipped because the process lacked permission to create a symbolic link. The checks cover tensor rotation, uniform strain, consistent mass, rigid-body subspaces, independent dense and sparse solutions, Bloch phase and the long-wavelength rod limit. Port checks cover trace mapping, directional energy flux, the dispersion-derivative identity, exact symmetry degeneracy, an independent 3D Bloch comparison, and explicit rejection of unresolved cutoffs. Scattering checks exercise both incidence directions, independent boundary flux, and reconstruction from exported fields. Geometry/workflow checks cover identical Gmsh end traces, analytic polygon volumes, independent curvature refinement, CSV provenance, cache invalidation, preflight budgets and exact tagged-mesh reuse. Saved-run checks cover unequal P1/P2 port traces, mode ordering and phase invariance, repeatability labeling, input power-check failures, reopening results and the desktop comparison workflow.
 
 The [three-mesh convergence record](verification/straight_beam_validation_AP_pnc.json) covers the first four cantilever modes of the default geometry with 1755, 5187 and 11475 degrees of freedom. The maximum frequency change between the two finest meshes was about 0.468%, and the minimum mass-weighted mode overlap was about 0.999992. Independent fixed-property assemblies and solves labeled 20 mK and 4 K yielded identical matrices and frequencies. Convergence for other geometries, thicknesses and frequency bands requires its own checks.
 
@@ -144,6 +144,18 @@ Use the offline tool with a completed uniform scattering run:
 ```
 
 It uses the checked-in 8-by-4 reference by default, verifies matching section/material/frequency, and writes JSON and channel CSV without solving. The supplied reference covers the 600 by 200 nm section at 1 GHz; a different section needs its own reference. It reports response and reference-refinement checks separately, retains phase at the original end planes, and rejects patterned devices. No uniform phase is subtracted from a device scattering matrix. Exit code 0 means the comparison completed, including scientific checks that failed.
+
+The [full-device port study](verification/full_device_port_resolution_AP_pnc.json) now supplies the separate 1000 by 200 nm reference at 1 GHz. It reuses the old 99/195/315-DOF ports and adds ten small SAFE-only sections, retaining five propagating channels each way. Width and thickness are varied independently and channels are matched by displacement fields, including the branch-order exchange seen in the older meshes.
+
+| Port comparison | Phase change over both 3 µm leads | Over 16.65 µm uniform-equivalent length |
+| --- | ---: | ---: |
+| Width 16 → 20 cells at six layers | 0.001242 rad | 0.006895 rad |
+| Thickness four → six layers at 20 width cells | 0.001307 rad | 0.007256 rad |
+| Economical 12-by-4 section versus 20-by-6 reference | 0.007168 rad | 0.039784 rad |
+
+The final independent reference increments meet 0.01 rad at both distances. The economical section meets that comparison only for the shorter leads. These are finite uniform-guide phase diagnostics, not a continuum error bound or proof of patterned-device convergence. The largest section used 1599 trace DOFs, 41.42 s and 995 MiB peak working set. No full-device solve was repeated. Its h200/12-by-4 mesh-only candidate is saved: 157005 body DOFs and 675 per port, with assembly/factorization resources still to be measured.
+
+To use the finer reference with a compatible completed **uniform** run, add `--reference verification/full_device_port_resolution_AP_pnc.json --reference-case 20x6` to the same offline command. No tool change or new solve is required.
 
 | Capability | Status |
 | --- | --- |
@@ -189,7 +201,7 @@ The device-refinement checker verifies preserved data without solving. Its defau
 - [Long-term research work packages](docs/NEXT_STEPS_AP_pnc.md)
 - [Material references and validity limits](docs/REFERENCES_AP_pnc.md)
 
-The next numerical work transfers the independently checked thickness/port strategy to the full device, starting with its own 1000 by 200 nm section and a resource preflight. The two-hole 1 GHz checks do not transfer automatically to the longer, wider structure. Reuse existing matrices and common-reference diagnostics before further solves; hole faceting and frequency coverage remain separate checks. Temperature-dependent properties, bends and larger sweeps follow when the corresponding inputs and checks are established. QTCAD served as a workflow reference. The phonon solver uses the libraries listed above.
+The next numerical work measures assembly and factorization resources for the saved full-device layered candidate before selecting a solve budget or further in-plane refinement. Reuse the completed port study and exact mesh; full-device response, hole faceting and frequency coverage remain separate checks. Temperature-dependent properties, bends and larger sweeps follow when the corresponding inputs and checks are established. QTCAD served as a workflow reference. The phonon solver uses the libraries listed above.
 
 ## Historical two-dimensional evidence
 
