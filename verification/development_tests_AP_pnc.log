@@ -93,6 +93,7 @@ test_full_device_body_mesh_pair_replays_matching_and_gates (test_solver_resource
 test_h160_continuation_reuses_failed_iterate (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h160_continuation_reuses_failed_iterate) ... ok
 test_portable_modal_power_matches_boundary_flux (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_portable_modal_power_matches_boundary_flux) ... ok
 test_terminal_status_is_distinct_from_residual_failure (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_terminal_status_is_distinct_from_residual_failure) ... ok
+test_uniform_body_diagnostic_replays_native_phase (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_uniform_body_diagnostic_replays_native_phase) ... ok
 test_known_uniform_phase_and_full_reflection_survive_signed_channel_reordering (test_uniform_reference_AP_pnc.UniformReferenceTests.test_known_uniform_phase_and_full_reflection_survive_signed_channel_reordering) ... ok
 test_physical_and_source_mismatches_rejected (test_uniform_reference_AP_pnc.UniformReferenceTests.test_physical_and_source_mismatches_rejected) ... ok
 test_port_qualification_is_recomputed_from_independent_pairs_at_run_length (test_uniform_reference_AP_pnc.UniformReferenceTests.test_port_qualification_is_recomputed_from_independent_pairs_at_run_length) ... ok
@@ -115,7 +116,7 @@ test_failed_attempt_is_retained_and_bad_material_creates_no_output (test_workflo
 3D solid: 352 tetrahedra, 435 displacement DOFs
 test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks (test_workflow3d_AP_pnc.Workflow3D.test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks) ... ok
 test_historical_hole_pattern_uses_source_origin_and_exact_provenance (test_workflow3d_AP_pnc.Workflow3D.test_historical_hole_pattern_uses_source_origin_and_exact_provenance) ... ok
-Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{46e27f5c-4599-4f5e-b7bc-2bd1e007e4bd}\Temp\tmpaznywdal\two_hole_pilot_200nm-9a9df10a7534
+Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{ea344e9c-36b4-4f16-8b32-1d342b5c277c}\Temp\tmpitff_32e\two_hole_pilot_200nm-1249b371757d
 Max relative solve residual: 0
 Power balance check: True; max R=0
 Matched-guide power check: True
@@ -127,6 +128,6 @@ test_output_can_be_reconstructed_and_cache_checks_files (test_workflow3d_AP_pnc.
 test_scattering_exports_power_channels_and_reconstructible_responses (test_workflow3d_AP_pnc.Workflow3D.test_scattering_exports_power_channels_and_reconstructible_responses) ... ok
 
 ----------------------------------------------------------------------
-Ran 103 tests in 21.948s
+Ran 104 tests in 29.987s
 
 OK (skipped=1)
