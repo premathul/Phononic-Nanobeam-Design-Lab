@@ -35,6 +35,7 @@ PRESETS = (
     ("Two-hole phase reference · scattering", "perforated_phase_reference_AP_pnc.json"),
     ("Historical 26-hole device · pilot", "historical_26hole_AP_pnc.json"),
     ("Two-hole beam · layered mesh", "perforated_layered_AP_pnc.json"),
+    ("Two-hole refined layers · scattering", "perforated_layered_reference_AP_pnc.json"),
 )
 ANALYSES = {"modes": "Finite-body modes", "bloch": "Bloch dispersion", "scattering": "Matched-port scattering"}
 BOUNDARIES = {"clamped_free": "Clamped–free", "clamped_clamped": "Clamped at both ends", "free": "Free",

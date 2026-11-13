@@ -14,6 +14,8 @@ The workbench opens saved runs and compares scattering results through `tools/co
 
 The additional `layered` mesh uses `src/phononic/layered_AP_pnc.py` and `configs/perforated_layered_AP_pnc.json`. Its in-plane size and `thickness_layers` are separate controls; z layers also define the port thickness mesh. This remains a full 3D displacement model. `tools/diagnose_wave_resolution_AP_pnc.py` and the saved directional diagnostic establish sensitivity, not complete-device convergence. Keep the existing unstructured Gmsh path and its numerical evidence unchanged.
 
+The tested two-hole 1 GHz thickness/port follow-up is complete. `configs/perforated_layered_reference_AP_pnc.json` selects h80/four layers/100 nm port width; final thickness and width increments and agreement with the saved unstructured reference pass 0.01. `tools/compare_uniform_reference_AP_pnc.py` compares saved uniform runs to the portable finer SAFE reference; coarse native-port phase alone can mislead. These bounded two-hole/600 nm-section checks do not certify the longer 26-hole/1000 nm-section device. Read the saved follow-up before new solves.
+
 ## Project language
 
 Use English for all project artifacts, including code comments, user-interface text, generated reports and other output text, documentation, and GitHub communications. Standard scientific Unicode symbols and notation are welcome. Chinese may be used in direct conversation and progress updates to the user.

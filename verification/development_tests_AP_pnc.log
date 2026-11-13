@@ -30,6 +30,9 @@ test_layered_affine_patch_and_port_assembly (test_layered_AP_pnc.LayeredMeshTest
 test_rejects_invalid_layers_and_port_budget (test_layered_AP_pnc.LayeredMeshTests.test_rejects_invalid_layers_and_port_budget) ... ok
 test_xy_refinement_preserves_port_traces (test_layered_AP_pnc.LayeredMeshTests.test_xy_refinement_preserves_port_traces) ... ok
 test_saved_controls_and_scattering_comparisons (test_layered_evidence_AP_pnc.LayeredEvidenceTests.test_saved_controls_and_scattering_comparisons) ... ok
+test_saved_port_refinement (test_layered_port_resolution_AP_pnc.LayeredPortEvidenceTests.test_saved_port_refinement) ... ok
+test_saved_pairs_preserve_scope_and_reproduce_power_and_complex_changes (test_layered_resolution_AP_pnc.LayeredResolutionEvidenceTests.test_saved_pairs_preserve_scope_and_reproduce_power_and_complex_changes) ... ok
+test_saved_uniform_responses_against_common_safe_reference (test_layered_resolution_AP_pnc.LayeredResolutionEvidenceTests.test_saved_uniform_responses_against_common_safe_reference) ... ok
 test_gamma_has_four_rigid_modes (test_lead_modes_AP_pnc.LeadModeTests.test_gamma_has_four_rigid_modes) ... ok
 test_matching_face_nodes_with_different_triangles_are_rejected (test_lead_modes_AP_pnc.LeadModeTests.test_matching_face_nodes_with_different_triangles_are_rejected) ... ok
 test_nonmatching_end_faces_are_rejected (test_lead_modes_AP_pnc.LeadModeTests.test_nonmatching_end_faces_are_rejected) ... ok
@@ -58,6 +61,10 @@ test_symmetry_degenerate_flexural_modes_are_flux_orthogonal (test_port_modes_AP_
 test_wavenumbers_match_independent_three_dimensional_bloch_solve (test_port_modes_AP_pnc.PortModeTests.test_wavenumbers_match_independent_three_dimensional_bloch_solve) ... ok
 test_matched_guide_for_both_directions (test_scattering_AP_pnc.ScatteringTests.test_matched_guide_for_both_directions) ... ok
 test_rejects_incompatible_frequency_and_port_mapping (test_scattering_AP_pnc.ScatteringTests.test_rejects_incompatible_frequency_and_port_mapping) ... ok
+test_known_uniform_phase_and_full_reflection_survive_signed_channel_reordering (test_uniform_reference_AP_pnc.UniformReferenceTests.test_known_uniform_phase_and_full_reflection_survive_signed_channel_reordering) ... ok
+test_physical_and_source_mismatches_rejected (test_uniform_reference_AP_pnc.UniformReferenceTests.test_physical_and_source_mismatches_rejected) ... ok
+test_port_qualification_is_recomputed_from_independent_pairs_at_run_length (test_uniform_reference_AP_pnc.UniformReferenceTests.test_port_qualification_is_recomputed_from_independent_pairs_at_run_length) ... ok
+test_qualification_rejects_incompatible_predecessors (test_uniform_reference_AP_pnc.UniformReferenceTests.test_qualification_rejects_incompatible_predecessors) ... ok
 test_uniform_guide_power_phase_and_fixed_port_controls (test_wave_resolution_AP_pnc.WaveResolutionEvidenceTests.test_uniform_guide_power_phase_and_fixed_port_controls) ... ok
 test_compare_protocol_keeps_scattering_candidate_and_opens_comparison_report (test_workbench_AP_pnc.WorkbenchTests.test_compare_protocol_keeps_scattering_candidate_and_opens_comparison_report) ... ok
 test_comparison_status_separates_repeatability_and_input_power_checks (test_workbench_AP_pnc.WorkbenchTests.test_comparison_status_separates_repeatability_and_input_power_checks) ... ok
@@ -76,7 +83,7 @@ test_failed_attempt_is_retained_and_bad_material_creates_no_output (test_workflo
 3D solid: 352 tetrahedra, 435 displacement DOFs
 test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks (test_workflow3d_AP_pnc.Workflow3D.test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks) ... ok
 test_historical_hole_pattern_uses_source_origin_and_exact_provenance (test_workflow3d_AP_pnc.Workflow3D.test_historical_hole_pattern_uses_source_origin_and_exact_provenance) ... ok
-Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{05521cd3-49d2-45e7-b039-f4404030b07e}\Temp\tmpszrthnoi\two_hole_pilot_200nm-92274eedd5db
+Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{36ecfd32-2a87-4704-b41f-a7199f8cb47d}\Temp\tmp_0k_zekg\two_hole_pilot_200nm-08ef0238491c
 Max relative solve residual: 0
 Power balance check: True; max R=0
 Matched-guide power check: True
@@ -88,6 +95,6 @@ test_output_can_be_reconstructed_and_cache_checks_files (test_workflow3d_AP_pnc.
 test_scattering_exports_power_channels_and_reconstructible_responses (test_workflow3d_AP_pnc.Workflow3D.test_scattering_exports_power_channels_and_reconstructible_responses) ... ok
 
 ----------------------------------------------------------------------
-Ran 72 tests in 18.567s
+Ran 79 tests in 22.335s
 
 OK (skipped=1)
