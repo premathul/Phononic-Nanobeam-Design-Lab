@@ -3,7 +3,7 @@
 from pathlib import Path
 import sys
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 import numpy as np
 from scipy.sparse import csc_matrix
@@ -27,22 +27,58 @@ class LgmresScatteringTests(unittest.TestCase):
         frequency = 1e9
         modes = solve_port_modes(assemble_port(system, material), frequency)
         for side in ("left", "right"):
-            with self.subTest(side=side):
-                report = {}
-                direct = solve_scattering(system, modes, frequency, side)
-                iterative = solve_scattering(system, modes, frequency, side,
-                                             linear_solver=lambda A, rhs: solve_ilu_lgmres(A, rhs, report))
-                for name in ("reflection_amplitudes", "transmission_amplitudes", "reflection_flux", "transmission_flux"):
-                    np.testing.assert_allclose(getattr(iterative, name), getattr(direct, name), atol=1e-8, rtol=0)
-                np.testing.assert_allclose(iterative.flux_power_balance, 0, atol=1e-8)
-                self.assertEqual(report["method"], "ilu_lgmres")
-                self.assertEqual(len(report["channels"]), 4)
-                for channel in report["channels"]:
-                    self.assertEqual(channel["info"], 0)
-                    self.assertEqual(channel["iterations"], len(channel["relative_residual_history"]))
-                    self.assertAlmostEqual(channel["relative_residual_history"][0], 1)
-                    self.assertLessEqual(channel["relative_residual"], 1e-9)
-                    self.assertLessEqual(channel["relative_backward_residual"], 1e-9)
+            direct = solve_scattering(system, modes, frequency, side)
+            for single_precision in (False, True):
+                with self.subTest(side=side, single_precision=single_precision):
+                    report = {}
+                    iterative = solve_scattering(
+                        system, modes, frequency, side,
+                        linear_solver=lambda A, rhs: solve_ilu_lgmres(A, rhs, report, single_precision=single_precision),
+                    )
+                    for name in ("reflection_amplitudes", "transmission_amplitudes", "reflection_flux", "transmission_flux"):
+                        np.testing.assert_allclose(getattr(iterative, name), getattr(direct, name), atol=1e-8, rtol=0)
+                    np.testing.assert_allclose(iterative.flux_power_balance, 0, atol=1e-8)
+                    self.assertEqual(report["method"], "ilu_lgmres")
+                    self.assertEqual(report["working_dtype"], "complex128")
+                    self.assertEqual(report["factor_dtype"], "complex64" if single_precision else "complex128")
+                    self.assertEqual(len(report["channels"]), 4)
+                    for channel in report["channels"]:
+                        self.assertEqual(channel["info"], 0)
+                        self.assertEqual(channel["iterations"], len(channel["relative_residual_history"]))
+                        self.assertAlmostEqual(channel["relative_residual_history"][0], 1)
+                        self.assertLessEqual(channel["relative_residual"], 1e-9)
+                        self.assertLessEqual(channel["relative_backward_residual"], 1e-9)
+
+    def test_single_precision_only_changes_ilu_input_and_inverse(self):
+        operator = csc_matrix(np.array([[4 + 1.00000001j, 1], [2, 3 - 1j]], dtype=np.complex128))
+        rhs = np.array([[2 + 1j], [-1 + 3j]], dtype=np.complex128)
+        original = tuple(array.tobytes() for array in (operator.data, operator.indices, operator.indptr, rhs))
+
+        def factor_in_single(A, **settings):
+            self.assertEqual(A.dtype, np.dtype(np.complex64))
+            factor = spilu(A, **settings)
+
+            def solve_single(vector):
+                self.assertEqual(vector.dtype, np.dtype(np.complex64))
+                result = factor.solve(vector)
+                self.assertEqual(result.dtype, np.dtype(np.complex64))
+                return result
+
+            return Mock(nnz=factor.nnz, solve=solve_single)
+
+        def solve_in_double(A, b, **settings):
+            self.assertIs(A, operator)
+            self.assertEqual(b.dtype, np.dtype(np.complex128))
+            self.assertEqual(settings["M"].matvec(b).dtype, np.dtype(np.complex128))
+            return lgmres(A, b, **settings)
+
+        with (patch("phononic.linear_lgmres_AP_pnc.spilu", side_effect=factor_in_single) as factorize,
+              patch("phononic.linear_lgmres_AP_pnc.lgmres", side_effect=solve_in_double)):
+            solution = solve_ilu_lgmres(operator, rhs, single_precision=True)
+        factorize.assert_called_once()
+        self.assertEqual(solution.dtype, np.dtype(np.complex128))
+        np.testing.assert_allclose(operator @ solution, rhs, rtol=1e-10)
+        self.assertEqual(tuple(array.tobytes() for array in (operator.data, operator.indices, operator.indptr, rhs)), original)
 
     def test_terminal_update_requires_unchanged_official_confirmation(self):
         operator = csc_matrix(np.eye(3, dtype=complex))
@@ -80,7 +116,7 @@ class LgmresScatteringTests(unittest.TestCase):
                 report = {}
                 with (patch("phononic.linear_lgmres_AP_pnc.lgmres", return_value=(answer, status)) as solve,
                       self.assertRaisesRegex(RuntimeError, "failed for RHS 1")):
-                    solve_ilu_lgmres(operator, rhs, report)
+                    solve_ilu_lgmres(operator, rhs, report, single_precision=True)
                 solve.assert_called_once()
                 channel, = report["channels"]
                 self.assertEqual(channel["raw_info"], status)

@@ -95,7 +95,7 @@ def resolve_config(config: dict, *, check_body_budget: bool = True) -> dict:
         "mesh": {"kind", "cells", "element_order", "mesh_size_nm", "port_size_nm", "circle_resolution", "thickness_layers"},
         "material": {"name", "C11_Pa", "C12_Pa", "C44_Pa", "density_kg_m3", "crystal_rotation", "temperature_policy", "temperature_K"},
         "analysis": {"kind", "boundary", "num_modes", "k_points", "frequency_GHz", "incident_side"},
-        "resources": {"max_dofs", "max_port_dofs", "assembly_batch_elements", "linear_solver", "ilu_fill_factor"},
+        "resources": {"max_dofs", "max_port_dofs", "assembly_batch_elements", "linear_solver", "ilu_fill_factor", "ilu_precision"},
     }
     for section, keys in required.items():
         if section not in config or not isinstance(config[section], dict):
@@ -179,6 +179,11 @@ def resolve_config(config: dict, *, check_body_budget: bool = True) -> dict:
             raise ValueError("resources.ilu_fill_factor must be finite and at least 1")
         if config["resources"].get("linear_solver") not in ("ilu_gmres", "ilu_lgmres"):
             raise ValueError("resources.ilu_fill_factor requires linear_solver=ilu_gmres or ilu_lgmres")
+    if "ilu_precision" in config["resources"]:
+        if config["resources"]["ilu_precision"] not in ("double", "single"):
+            raise ValueError("resources.ilu_precision must be double or single")
+        if config["resources"].get("linear_solver") != "ilu_lgmres":
+            raise ValueError("resources.ilu_precision requires linear_solver=ilu_lgmres")
     if analysis["kind"] == "scattering" or kind in ("gmsh", "layered"):
         config["resources"].setdefault("max_port_dofs", 200)
         maximum_port = config["resources"]["max_port_dofs"]
@@ -409,7 +414,8 @@ def run_study(config: dict, output_root: Path | None = None) -> dict:
                 elif config["resources"].get("linear_solver") == "ilu_lgmres":
                     from .linear_lgmres_AP_pnc import solve_ilu_lgmres
                     linear_solver = lambda operator, rhs: solve_ilu_lgmres(
-                        operator, rhs, report=solver_report, fill_factor=config["resources"].get("ilu_fill_factor", 10.0))
+                        operator, rhs, report=solver_report, fill_factor=config["resources"].get("ilu_fill_factor", 10.0),
+                        single_precision=config["resources"].get("ilu_precision", "double") == "single")
                 summary["linear_solver"] = solver_report
                 with measured_resources() as scattering_resources:
                     summary["scattering_resources"] = scattering_resources
@@ -613,6 +619,8 @@ def main(argv: list[str] | None = None) -> int:
                         help="Assemble this many tetrahedra at a time with unchanged integration accuracy")
     parser.add_argument("--linear-solver", choices=("direct", "ilu_gmres", "ilu_lgmres"), help="Matched-port linear solver")
     parser.add_argument("--ilu-fill-factor", type=float, help="ILU storage fill factor for iterative solvers (default: 10)")
+    parser.add_argument("--ilu-precision", choices=("double", "single"),
+                        help="LGMRES preconditioner precision; equations and residuals stay double precision")
     parser.add_argument("--mesh-only", action="store_true", help="Save and inspect a mesh before assembling or solving")
     parser.add_argument("--output-root", type=Path)
     parser.add_argument("--open", action="store_true", help="Open the offline interactive result page")
@@ -647,6 +655,7 @@ def main(argv: list[str] | None = None) -> int:
                                     (args.assembly_batch_elements, "resources", "assembly_batch_elements"),
                                     (args.linear_solver, "resources", "linear_solver"),
                                     (args.ilu_fill_factor, "resources", "ilu_fill_factor"),
+                                    (args.ilu_precision, "resources", "ilu_precision"),
                                     (args.max_port_dofs, "resources", "max_port_dofs")):
             if value is not None:
                 config[section][key] = value

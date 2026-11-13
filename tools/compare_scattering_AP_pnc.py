@@ -36,6 +36,13 @@ LIMIT = 0.01
 MIN_OVERLAP = 0.99
 K_GAP_TOL = 1e-8
 PHASE_AMPLITUDE_FLOOR = 1e-10
+LGMRES_SOURCE = "src/phononic/linear_lgmres_AP_pnc.py"
+# Verified original and optional mixed-precision implementations. The elastic
+# operator kernels remain subject to exact source identity below.
+VERIFIED_LGMRES_SOURCES = {
+    "543f0be835f2f0f54502eae170584d531bd3126766175d7229a3818360d0aa67",
+    "459589f4e5de39c888966305e28dbd2b16f2947ec427ae9c131c69ae47c609df",
+}
 
 
 @dataclass(frozen=True)
@@ -119,6 +126,57 @@ def read_run(directory: Path) -> tuple[dict, dict, dict]:
               "implementation": summary["implementation"], "ndof": summary["ndof"], "port_dofs": summary["port_dofs"],
               "power_balance_passed": summary["power_balance_passed"]}
     return summary, fixed, record
+
+
+def checked_lgmres_accuracy(summary: dict, source: str) -> dict:
+    resources = summary["configuration"]["resources"]
+    report = summary.get("linear_solver", {})
+    precision = resources.get("ilu_precision", "double")
+    require(source in VERIFIED_LGMRES_SOURCES and resources.get("linear_solver") == "ilu_lgmres"
+            and report.get("method") == "ilu_lgmres" and precision in ("double", "single"),
+            "Different linear solvers require verified LGMRES sources and original-equation accuracy checks.")
+    if source == "543f0be835f2f0f54502eae170584d531bd3126766175d7229a3818360d0aa67":
+        require(precision == "double", "The original LGMRES implementation used double-precision factors.")
+    else:
+        require(report.get("working_dtype") == "complex128"
+                and report.get("factor_dtype") == ("complex64" if precision == "single" else "complex128"),
+                "Saved LGMRES precision differs from its configuration.")
+    channels = report.get("channels", [])
+    count = summary["num_incident_channels"]
+    require(len(channels) == count and sorted(row["column"] for row in channels) == list(range(count)),
+            "Missing per-channel original-equation accuracy checks.")
+    relative, backward = [], []
+    for row in channels:
+        require(type(row.get("info")) is int and row["info"] == 0, "A saved LGMRES channel did not converge.")
+        relative_keys = [key for key in ("relative_true_residual", "relative_residual") if key in row]
+        require(len(relative_keys) == 1, "A saved LGMRES channel needs one unambiguous relative residual field.")
+        values = (row[relative_keys[0]], row.get("relative_backward_residual"))
+        require(all(isinstance(value, (int, float)) and not isinstance(value, bool)
+                    and math.isfinite(value) and 0 <= value <= 1e-9 for value in values),
+                "Different linear solvers require original-equation relative and backward residuals at most 1e-9.")
+        relative.append(values[0])
+        backward.append(values[1])
+    return {"precision": precision, "source_sha256": source,
+            "maximum_relative_residual": max(relative), "maximum_backward_residual": max(backward)}
+
+
+def compatible_inputs(a: dict, b: dict, fixed: dict, other: dict) -> tuple[dict, dict | None]:
+    for key, value in fixed.items():
+        if key != "numerical_source_sha256":
+            require(value == other[key], f"Runs differ in {key.replace('_', ' ')}; a mesh comparison requires identical physical inputs and numerical core.")
+    first, second = dict(fixed["numerical_source_sha256"]), dict(other["numerical_source_sha256"])
+    precision_a = a["configuration"]["resources"].get("ilu_precision", "double")
+    precision_b = b["configuration"]["resources"].get("ilu_precision", "double")
+    compatibility = None
+    if first.get(LGMRES_SOURCE) != second.get(LGMRES_SOURCE) or precision_a != precision_b:
+        checks = {"reference": checked_lgmres_accuracy(a, first.get(LGMRES_SOURCE)),
+                  "candidate": checked_lgmres_accuracy(b, second.get(LGMRES_SOURCE))}
+        first.pop(LGMRES_SOURCE, None)
+        second.pop(LGMRES_SOURCE, None)
+        compatibility = {"basis": "Verified LGMRES variants, identical physical kernels and unchanged original-equation residual limits.",
+                         "relative_residual_limit": 1e-9, "backward_residual_limit": 1e-9, "checks": checks}
+    require(first == second, "Runs differ in numerical source sha256; a mesh comparison requires identical physical numerical kernels.")
+    return {**fixed, "numerical_source_sha256": first}, compatibility
 
 
 def build_section(fields, order: int, dimensions: dict, density: float) -> Section:
@@ -326,6 +384,7 @@ code{{overflow-wrap:anywhere}}small{{color:#40515a}}</style>
 <strong>Complex amplitude change {complex_status}</strong> ({result['maximum_complex_change']:.6g}).
 Each maximum must be below {LIMIT:g}.</p>
 <p>Input power-balance checks: reference {reference_balance}; candidate {candidate_balance}.</p>
+{'<p>Both input solutions also passed the same original-equation accuracy checks across the solver precision or version change.</p>' if result.get('linear_solver_compatibility') else ''}
 <p><strong>{outcome}</strong></p>
 <p>{escape(result['scope'])}</p><ul>{paths}</ul>
 <table><thead><tr><th>Quantity</th><th>Incident channel</th><th>Reference power</th><th>Candidate power</th>
@@ -341,8 +400,7 @@ def compare_runs(reference: Path, candidate: Path, output_root: Path | None = No
     require(reference != candidate, "Select two different completed runs.")
     a, fixed, a_record = read_run(reference)
     b, other, b_record = read_run(candidate)
-    for key, value in fixed.items():
-        require(value == other[key], f"Runs differ in {key.replace('_', ' ')}; a mesh comparison requires identical physical inputs and numerical core.")
+    fixed, solver_compatibility = compatible_inputs(a, b, fixed, other)
     implementation = {"tool_sha256": file_sha(Path(__file__)), "python": platform.python_version(),
                       "packages": {name: version(name) for name in ("numpy", "scipy", "scikit-fem")}}
     comparison_hash = digest({"reference": a_record, "candidate": b_record, "implementation": implementation})
@@ -365,6 +423,7 @@ def compare_runs(reference: Path, candidate: Path, output_root: Path | None = No
     input_checks = a_record["power_balance_passed"] is True and b_record["power_balance_passed"] is True
     result = {**AUTHOR, "schema_version": 1, "status": "compared", "comparison_hash": comparison_hash,
               "reference": a_record, "candidate": b_record, "physical_inputs": fixed, "implementation": implementation,
+              "linear_solver_compatibility": solver_compatibility,
               "comparison_kind": comparison_kind, "input_power_checks_passed": input_checks,
               "discretization_sha256": {"reference": reference_mesh, "candidate": candidate_mesh},
               "matched_channels": matches, "blocks": blocks, "power_change_limit": LIMIT, "complex_change_limit": LIMIT,

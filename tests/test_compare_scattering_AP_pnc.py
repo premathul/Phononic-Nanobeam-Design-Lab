@@ -12,7 +12,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
-from compare_scattering_AP_pnc import compare_runs, file_sha
+from compare_scattering_AP_pnc import LGMRES_SOURCE, compare_runs, file_sha
 from phononic.workflow_AP_pnc import run_study, write_json
 
 
@@ -117,6 +117,52 @@ class ScatteringComparisonTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "differ in material"):
             compare_runs(self.reference, fields.parent, self.output / "different-comparison")
         self.assertFalse((self.output / "different-comparison").exists())
+
+    def test_verified_precision_change_retains_physical_and_residual_gates(self):
+        config = json.loads((self.reference / "configuration_AP_pnc.json").read_bytes())
+        config["resources"].update(linear_solver="ilu_lgmres", ilu_fill_factor=12, ilu_precision="double")
+        double = Path(run_study(config, self.output)["output_directory"])
+        config["resources"]["ilu_precision"] = "single"
+        single = Path(run_study(config, self.output)["output_directory"])
+        current = compare_runs(double, single, self.output / "current-precision")
+        self.assertTrue(current["complex_passed"])
+        self.assertEqual(current["comparison_kind"], "repeatability")
+        self.assertFalse(current["mesh_pair_passed"])
+        self.assertEqual(current["linear_solver_compatibility"]["checks"]["candidate"]["precision"], "single")
+
+        # Exercise the archived h200 report schema with the unchanged default
+        # double-precision numerical path, without repeating that large solve.
+        legacy, fields = self.copy_run(double, "legacy-lgmres")
+        legacy["implementation"]["source_sha256"][LGMRES_SOURCE] = "543f0be835f2f0f54502eae170584d531bd3126766175d7229a3818360d0aa67"
+        for name in ("working_dtype", "factor_dtype"):
+            legacy["linear_solver"].pop(name)
+        for row in legacy["linear_solver"]["channels"]:
+            row["relative_true_residual"] = row.pop("relative_residual")
+        write_json(fields.parent / "summary_AP_pnc.json", legacy)
+        result = compare_runs(fields.parent, single, self.output / "legacy-precision")
+        self.assertLess(result["maximum_complex_change"], 1e-8)
+        self.assertTrue(result["input_power_checks_passed"])
+        self.assertIsNotNone(result["linear_solver_compatibility"])
+        self.assertNotIn(LGMRES_SOURCE, result["physical_inputs"]["numerical_source_sha256"])
+
+        bad, bad_fields = self.copy_run(single, "invalid-precision")
+        for field, value in (("relative_residual", 1e-5), ("relative_backward_residual", 1e-5), ("info", 30)):
+            altered = json.loads(json.dumps(bad))
+            altered["linear_solver"]["channels"][0][field] = value
+            write_json(bad_fields.parent / "summary_AP_pnc.json", altered)
+            with self.subTest(field=field), self.assertRaisesRegex(ValueError, "residuals|did not converge"):
+                compare_runs(fields.parent, bad_fields.parent, self.output / "rejected-precision")
+        for source in (LGMRES_SOURCE, "src/phononic/material_AP_pnc.py"):
+            altered = json.loads(json.dumps(bad))
+            altered["implementation"]["source_sha256"][source] = "0" * 64
+            write_json(bad_fields.parent / "summary_AP_pnc.json", altered)
+            with self.subTest(source=source), self.assertRaisesRegex(ValueError, "verified LGMRES|physical numerical kernels"):
+                compare_runs(fields.parent, bad_fields.parent, self.output / "rejected-precision")
+        altered = json.loads(json.dumps(bad))
+        altered["linear_solver"]["channels"][0].update(relative_residual=1e-5, relative_true_residual=1e-12)
+        write_json(bad_fields.parent / "summary_AP_pnc.json", altered)
+        with self.assertRaisesRegex(ValueError, "unambiguous relative residual"):
+            compare_runs(fields.parent, bad_fields.parent, self.output / "rejected-precision")
 
     def copy_run(self, source: Path, name: str):
         directory = self.output / name

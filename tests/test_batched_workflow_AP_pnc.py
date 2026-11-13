@@ -58,6 +58,7 @@ class BatchedWorkflowTests(unittest.TestCase):
                 resources.update(assembly_batch_elements=7, linear_solver="ilu_gmres", ilu_fill_factor=6)
                 iterative = run_study(config, output)
                 resources["linear_solver"] = "ilu_lgmres"
+                resources["ilu_precision"] = "single"
                 augmented = run_study(config, output)
                 with patch("phononic.linear_lgmres_AP_pnc.solve_ilu_lgmres",
                            side_effect=AssertionError("cached augmented result solved again")):
@@ -115,6 +116,8 @@ class BatchedWorkflowTests(unittest.TestCase):
             self.assertEqual(augmented_inputs["numerical_source_sha256"][source], file_sha(ROOT / source))
             self.assertNotIn(source, iterative_inputs["numerical_source_sha256"])
             self.assertEqual(saved["linear_solver"]["method"], "ilu_lgmres")
+            self.assertEqual(saved["linear_solver"]["working_dtype"], "complex128")
+            self.assertEqual(saved["linear_solver"]["factor_dtype"], "complex64")
             self.assertEqual(saved["linear_solver"]["lgmres"]["outer_k"], 3)
             self.assertEqual(len(saved["linear_solver"]["channels"]), saved["num_incident_channels"])
             for channel in saved["linear_solver"]["channels"]:
@@ -132,7 +135,9 @@ class BatchedWorkflowTests(unittest.TestCase):
         for options, error in (({"linear_solver": "cg"}, "linear_solver must be"),
                                ({"ilu_fill_factor": 6}, "requires linear_solver"),
                                ({"linear_solver": "ilu_gmres", "ilu_fill_factor": True}, "must be finite and at least 1"),
-                               ({"linear_solver": "ilu_gmres", "ilu_fill_factor": 0}, "must be finite and at least 1")):
+                               ({"linear_solver": "ilu_gmres", "ilu_fill_factor": 0}, "must be finite and at least 1"),
+                               ({"linear_solver": "ilu_lgmres", "ilu_precision": "half"}, "ilu_precision must be"),
+                               ({"linear_solver": "ilu_gmres", "ilu_precision": "single"}, "ilu_precision requires")):
             with self.subTest(options=options), self.assertRaisesRegex(ValueError, error):
                 resolve_config({**config, "resources": {**resources, **options}})
 
