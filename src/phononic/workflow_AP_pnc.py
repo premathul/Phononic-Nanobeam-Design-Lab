@@ -95,7 +95,7 @@ def resolve_config(config: dict, *, check_body_budget: bool = True) -> dict:
         "mesh": {"kind", "cells", "element_order", "mesh_size_nm", "port_size_nm", "circle_resolution", "thickness_layers"},
         "material": {"name", "C11_Pa", "C12_Pa", "C44_Pa", "density_kg_m3", "crystal_rotation", "temperature_policy", "temperature_K"},
         "analysis": {"kind", "boundary", "num_modes", "k_points", "frequency_GHz", "incident_side"},
-        "resources": {"max_dofs", "max_port_dofs"},
+        "resources": {"max_dofs", "max_port_dofs", "assembly_batch_elements", "linear_solver", "ilu_fill_factor"},
     }
     for section, keys in required.items():
         if section not in config or not isinstance(config[section], dict):
@@ -126,6 +126,10 @@ def resolve_config(config: dict, *, check_body_budget: bool = True) -> dict:
     maximum = config["resources"]["max_dofs"]
     if type(maximum) is not int or maximum <= 0:
         raise ValueError("max_dofs must be a positive integer")
+    if "assembly_batch_elements" in config["resources"]:
+        batch = config["resources"]["assembly_batch_elements"]
+        if type(batch) is not int or batch <= 0:
+            raise ValueError("assembly_batch_elements must be a positive integer")
     gmsh_fields = {"mesh_size_nm", "port_size_nm", "circle_resolution"}
     if kind != "layered" and "thickness_layers" in mesh:
         raise ValueError("mesh.thickness_layers requires mesh.kind=layered")
@@ -164,6 +168,17 @@ def resolve_config(config: dict, *, check_body_budget: bool = True) -> dict:
     CubicMaterial(C11=material["C11_Pa"], C12=material["C12_Pa"], C44=material["C44_Pa"],
                   rho=material["density_kg_m3"], rotation=material["crystal_rotation"])
     analysis = config["analysis"]
+    if "linear_solver" in config["resources"]:
+        if config["resources"]["linear_solver"] not in ("direct", "ilu_gmres"):
+            raise ValueError("resources.linear_solver must be direct or ilu_gmres")
+        if analysis["kind"] != "scattering":
+            raise ValueError("resources.linear_solver applies to scattering only")
+    if "ilu_fill_factor" in config["resources"]:
+        fill = config["resources"]["ilu_fill_factor"]
+        if not _finite_number(fill) or fill < 1:
+            raise ValueError("resources.ilu_fill_factor must be finite and at least 1")
+        if config["resources"].get("linear_solver") != "ilu_gmres":
+            raise ValueError("resources.ilu_fill_factor requires linear_solver=ilu_gmres")
     if analysis["kind"] == "scattering" or kind in ("gmsh", "layered"):
         config["resources"].setdefault("max_port_dofs", 200)
         maximum_port = config["resources"]["max_port_dofs"]
@@ -365,8 +380,17 @@ def run_study(config: dict, output_root: Path | None = None) -> dict:
             port_dofs = max(counts["end_face_dofs"].values())
             if max_port_dofs is not None and port_dofs > max_port_dofs:
                 raise ValueError(f"Port has {port_dofs} DOFs, exceeding dense solver cap {max_port_dofs}.")
-            system = assemble_elasticity(mesh, material, element_order=mesh_settings["element_order"],
-                                        max_dofs=max_dofs)
+            batch = config["resources"].get("assembly_batch_elements")
+            summary["assembly_method"] = "standard" if batch is None else "batched"
+            with measured_resources() as assembly_resources:
+                summary["assembly_resources"] = assembly_resources
+                if batch is None:
+                    system = assemble_elasticity(mesh, material, element_order=mesh_settings["element_order"],
+                                                max_dofs=max_dofs)
+                else:
+                    from .assembly_batched_AP_pnc import assemble_elasticity_batched
+                    system = assemble_elasticity_batched(mesh, material, element_order=mesh_settings["element_order"],
+                                                        max_dofs=max_dofs, batch_elements=batch)
             print(f"3D solid: {mesh.nelements} tetrahedra, {system.K.shape[0]} displacement DOFs", flush=True)
             analysis = config["analysis"]
             rows = []
@@ -376,7 +400,17 @@ def run_study(config: dict, output_root: Path | None = None) -> dict:
                 frequency = analysis["frequency_GHz"] * 1e9
                 port = assemble_port(system, material, max_dofs=config["resources"]["max_port_dofs"])
                 port_modes = solve_port_modes(port, frequency)
-                result = solve_scattering(system, port_modes, frequency, incident_side=analysis["incident_side"])
+                solver_report = {"method": "direct"}
+                linear_solver = None
+                if config["resources"].get("linear_solver", "direct") == "ilu_gmres":
+                    from .linear_solvers_AP_pnc import solve_ilu_gmres
+                    linear_solver = lambda operator, rhs: solve_ilu_gmres(
+                        operator, rhs, report=solver_report, fill_factor=config["resources"].get("ilu_fill_factor", 10.0))
+                summary["linear_solver"] = solver_report
+                with measured_resources() as scattering_resources:
+                    summary["scattering_resources"] = scattering_resources
+                    result = solve_scattering(system, port_modes, frequency,
+                                              incident_side=analysis["incident_side"], linear_solver=linear_solver)
                 rows = _scattering_rows(result)
                 _write_csv(output / "scattering_AP_pnc.csv", rows)
                 _write_csv(output / "scattering_channels_AP_pnc.csv", _channel_rows(result))
@@ -571,6 +605,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--incident-side", choices=("left", "right"))
     parser.add_argument("--max-dofs", type=int, help="Maximum displacement DOFs allowed for assembly")
     parser.add_argument("--max-port-dofs", type=int)
+    parser.add_argument("--assembly-batch-elements", type=int,
+                        help="Assemble this many tetrahedra at a time with unchanged integration accuracy")
+    parser.add_argument("--linear-solver", choices=("direct", "ilu_gmres"), help="Matched-port linear solver")
+    parser.add_argument("--ilu-fill-factor", type=float, help="ILU storage fill factor for ilu_gmres (default: 10)")
     parser.add_argument("--mesh-only", action="store_true", help="Save and inspect a mesh before assembling or solving")
     parser.add_argument("--output-root", type=Path)
     parser.add_argument("--open", action="store_true", help="Open the offline interactive result page")
@@ -602,6 +640,9 @@ def main(argv: list[str] | None = None) -> int:
                                     (args.frequency_ghz, "analysis", "frequency_GHz"),
                                     (args.incident_side, "analysis", "incident_side"),
                                     (args.max_dofs, "resources", "max_dofs"),
+                                    (args.assembly_batch_elements, "resources", "assembly_batch_elements"),
+                                    (args.linear_solver, "resources", "linear_solver"),
+                                    (args.ilu_fill_factor, "resources", "ilu_fill_factor"),
                                     (args.max_port_dofs, "resources", "max_port_dofs")):
             if value is not None:
                 config[section][key] = value

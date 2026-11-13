@@ -22,6 +22,9 @@ MESH_SIZES = (105, 80, 60, 50)
 SIDES = ("left", "right")
 CHANNEL_COUNT = 4
 CHECK_TOL = 1e-10
+ARCHIVED_SOURCE_HASHES = {
+    "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+}
 CHANNEL_FIELDS = (
     "reflection", "transmission", "reflection_flux", "transmission_flux", "reflection_gram", "transmission_gram",
     "power_balance", "flux_power_balance", "net_outward_power_ratio", "relative_residuals", "incident_powers_w",
@@ -44,6 +47,18 @@ def checked_file(reference: dict) -> Path:
     require(path.is_relative_to(ROOT), f"Evidence path is outside the repository: {path}.")
     require(file_sha(path) == reference["sha256"], f"Evidence checksum differs: {path}.")
     return path
+
+
+def check_recorded_source(relative: str, expected: str) -> None:
+    """Verify the original source bytes for saved evidence, including retained historical versions."""
+    current = (ROOT / relative).resolve()
+    require(current.is_relative_to(ROOT), f"Source path is outside the repository: {relative}.")
+    if current.is_file() and file_sha(current) == expected:
+        return
+    require(relative in ARCHIVED_SOURCE_HASHES and ARCHIVED_SOURCE_HASHES[relative] == expected,
+            f"No retained numerical source matches the recorded checksum: {relative}.")
+    archive = f"provenance/solver_sources_AP_pnc/{expected}_AP_pnc.py"
+    checked_file({"path": archive, "sha256": expected})
 
 
 def equivalent(saved, actual, label: str) -> None:
@@ -234,9 +249,11 @@ def check(path: Path) -> tuple[list[dict], list[dict]]:
                      "port_size_nm": mesh["port_size_nm"], "circle_points": mesh["circle_resolution"]})
     require(len(holes) == 2, "Reference geometry must contain two holes.")
 
-    numerical_paths = [f"src/phononic/{module}_AP_pnc.py" for module in NUMERICAL_MODULES]
-    source_hashes = {name: file_sha(ROOT / name) for name in numerical_paths}
-    require(evidence["numerical_source_sha256"] == source_hashes, "Top-level numerical source checksums differ.")
+    numerical_paths = {f"src/phononic/{module}_AP_pnc.py" for module in NUMERICAL_MODULES}
+    source_hashes = evidence["numerical_source_sha256"]
+    require(source_hashes.keys() == numerical_paths, "Top-level numerical source paths differ.")
+    for source, checksum in source_hashes.items():
+        check_recorded_source(source, checksum)
     levels = evidence["levels"]
     require(levels.keys() == {str(size) for size in MESH_SIZES}, "Unexpected set of body mesh levels.")
     for h, name in ((105, "curvature_fine"), (80, "body_phase_fine")):

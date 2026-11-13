@@ -1,3 +1,24 @@
+3D solid: 48 tetrahedra, 405 displacement DOFs
+3D solid: 48 tetrahedra, 405 displacement DOFs
+3D solid: 48 tetrahedra, 405 displacement DOFs
+3D solid: 48 tetrahedra, 405 displacement DOFs
+3D solid: 48 tetrahedra, 405 displacement DOFs
+3D solid: 216 tetrahedra, 252 displacement DOFs
+3D solid: 288 tetrahedra, 1785 displacement DOFs
+3D solid: 24 tetrahedra, 225 displacement DOFs
+3D solid: 24 tetrahedra, 225 displacement DOFs
+3D solid: 24 tetrahedra, 225 displacement DOFs
+3D solid: 24 tetrahedra, 225 displacement DOFs
+3D solid: 24 tetrahedra, 225 displacement DOFs
+3D solid: 352 tetrahedra, 435 displacement DOFs
+Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{243200c6-b48e-4aa0-9425-b08442bc0a31}\Temp\tmpne1ito9e\two_hole_pilot_200nm-226ecd3c7d25
+Max relative solve residual: 0
+Power balance check: True; max R=0
+Matched-guide power check: True
+Solve time 0.00 s; sampled process peak 0.0 MiB
+Model status: computed; phase accuracy, spatial convergence and physical adequacy require separate evidence.
+3D solid: 24 tetrahedra, 225 displacement DOFs
+3D solid: 72 tetrahedra, 585 displacement DOFs
 test_all_inputs_checked_before_partial_restore (test_archive_runtime_AP_pnc.ArchiveGuards.test_all_inputs_checked_before_partial_restore) ... ok
 test_corrupted_hash_blocks_restore_before_writes (test_archive_runtime_AP_pnc.ArchiveGuards.test_corrupted_hash_blocks_restore_before_writes) ... ok
 test_exact_hash_alias_restores_original_paths (test_archive_runtime_AP_pnc.ArchiveGuards.test_exact_hash_alias_restores_original_paths) ... ok
@@ -6,8 +27,10 @@ test_missing_archive_does_not_turn_integrity_into_completeness (test_archive_run
 test_rejects_traversal_and_ambiguous_paths (test_archive_runtime_AP_pnc.ArchiveGuards.test_rejects_traversal_and_ambiguous_paths) ... ok
 test_run_name_and_existing_output_guards (test_archive_runtime_AP_pnc.ArchiveGuards.test_run_name_and_existing_output_guards) ... ok
 test_symlink_source_and_parent_are_rejected (test_archive_runtime_AP_pnc.ArchiveGuards.test_symlink_source_and_parent_are_rejected) ... skipped 'Windows account cannot create symbolic links; symlink guard untested'
-3D solid: 216 tetrahedra, 252 displacement DOFs
-3D solid: 288 tetrahedra, 1785 displacement DOFs
+test_operators_layout_and_matched_response (test_batched_assembly_AP_pnc.BatchedAssemblyTests.test_operators_layout_and_matched_response) ... ok
+test_rejects_invalid_batch_size_and_dof_cap (test_batched_assembly_AP_pnc.BatchedAssemblyTests.test_rejects_invalid_batch_size_and_dof_cap) ... ok
+test_batched_scattering_exports_global_dofs_and_reuses_exact_mesh (test_batched_workflow_AP_pnc.BatchedWorkflowTests.test_batched_scattering_exports_global_dofs_and_reuses_exact_mesh) ... ok
+test_iterative_failure_preserves_diagnostics_and_rejects_invalid_options (test_batched_workflow_AP_pnc.BatchedWorkflowTests.test_iterative_failure_preserves_diagnostics_and_rejects_invalid_options) ... ok
 test_changed_physical_input_is_rejected_before_comparing (test_compare_scattering_AP_pnc.ScatteringComparisonTests.test_changed_physical_input_is_rejected_before_comparing) ... ok
 test_failed_input_power_balance_prevents_mesh_acceptance (test_compare_scattering_AP_pnc.ScatteringComparisonTests.test_failed_input_power_balance_prevents_mesh_acceptance) ... ok
 test_signed_channel_gauge_and_permutation_leave_comparison_invariant (test_compare_scattering_AP_pnc.ScatteringComparisonTests.test_signed_channel_gauge_and_permutation_leave_comparison_invariant) ... ok
@@ -27,6 +50,11 @@ test_historical_csv_and_example (test_geometry3d_AP_pnc.Geometry3DTests.test_his
 test_reject_nonphysical_mesh_inputs (test_geometry3d_AP_pnc.Geometry3DTests.test_reject_nonphysical_mesh_inputs) ... ok
 test_straight_beam_si_volume_and_end_ports (test_geometry3d_AP_pnc.Geometry3DTests.test_straight_beam_si_volume_and_end_ports) ... ok
 test_two_cylindrical_through_holes_remove_expected_volume (test_geometry3d_AP_pnc.Geometry3DTests.test_two_cylindrical_through_holes_remove_expected_volume) ... ok
+test_current_archive_and_corruption (test_historical_source_AP_pnc.HistoricalSourceTests.test_current_archive_and_corruption) ... ok
+test_unregistered_archive_is_rejected (test_historical_source_AP_pnc.HistoricalSourceTests.test_unregistered_archive_is_rejected) ... ok
+test_fill_factor_is_validated_and_passed_to_preconditioner (test_iterative_scattering_AP_pnc.IterativeScatteringTests.test_fill_factor_is_validated_and_passed_to_preconditioner) ... ok
+test_rejects_failure_status_and_false_success (test_iterative_scattering_AP_pnc.IterativeScatteringTests.test_rejects_failure_status_and_false_success) ... ok
+test_rotated_germanium_both_incidence_sides (test_iterative_scattering_AP_pnc.IterativeScatteringTests.test_rotated_germanium_both_incidence_sides) ... ok
 test_layer_refinement_preserves_exact_footprint_and_polygon_volume (test_layered_AP_pnc.LayeredMeshTests.test_layer_refinement_preserves_exact_footprint_and_polygon_volume) ... ok
 test_layered_affine_patch_and_port_assembly (test_layered_AP_pnc.LayeredMeshTests.test_layered_affine_patch_and_port_assembly) ... ok
 test_rejects_invalid_layers_and_port_budget (test_layered_AP_pnc.LayeredMeshTests.test_rejects_invalid_layers_and_port_budget) ... ok
@@ -40,11 +68,8 @@ test_matching_face_nodes_with_different_triangles_are_rejected (test_lead_modes_
 test_nonmatching_end_faces_are_rejected (test_lead_modes_AP_pnc.LeadModeTests.test_nonmatching_end_faces_are_rejected) ... ok
 test_opposite_wavenumbers_and_face_phase (test_lead_modes_AP_pnc.LeadModeTests.test_opposite_wavenumbers_and_face_phase) ... ok
 test_small_k_extension_uses_free_sidewall_rod_speed (test_lead_modes_AP_pnc.LeadModeTests.test_small_k_extension_uses_free_sidewall_rod_speed) ... ok
-3D solid: 24 tetrahedra, 225 displacement DOFs
 test_checkpoint_identity_ignores_analysis_and_detects_changed_mesh_bytes (test_mesh_preflight_AP_pnc.MeshPreflightTests.test_checkpoint_identity_ignores_analysis_and_detects_changed_mesh_bytes) ... ok
 test_layered_preflight_sets_exact_thickness_planes_and_supplies_scattering_mesh (test_mesh_preflight_AP_pnc.MeshPreflightTests.test_layered_preflight_sets_exact_thickness_planes_and_supplies_scattering_mesh) ... ok
-3D solid: 24 tetrahedra, 225 displacement DOFs
-3D solid: 24 tetrahedra, 225 displacement DOFs
 test_preflight_after_completed_uncached_mesh_uses_separate_run_identity (test_mesh_preflight_AP_pnc.MeshPreflightTests.test_preflight_after_completed_uncached_mesh_uses_separate_run_identity) ... ok
 test_public_preflight_reuses_exact_tagged_gmsh_mesh_after_body_budget_changes (test_mesh_preflight_AP_pnc.MeshPreflightTests.test_public_preflight_reuses_exact_tagged_gmsh_mesh_after_body_budget_changes) ... ok
 test_thickness_layers_is_required_positive_integer_only_for_layered_meshes (test_mesh_preflight_AP_pnc.MeshPreflightTests.test_thickness_layers_is_required_positive_integer_only_for_layered_meshes) ... ok
@@ -61,6 +86,9 @@ test_end_face_basis_and_integrated_mass_match_for_p1_and_p2 (test_port_modes_AP_
 test_signed_axial_power_agrees_with_dispersion_derivative (test_port_modes_AP_pnc.PortModeTests.test_signed_axial_power_agrees_with_dispersion_derivative) ... ok
 test_symmetry_degenerate_flexural_modes_are_flux_orthogonal (test_port_modes_AP_pnc.PortModeTests.test_symmetry_degenerate_flexural_modes_are_flux_orthogonal) ... ok
 test_wavenumbers_match_independent_three_dimensional_bloch_solve (test_port_modes_AP_pnc.PortModeTests.test_wavenumbers_match_independent_three_dimensional_bloch_solve) ... ok
+test_archived_scattering_baseline_remains_usable (test_saved_scattering_validation_AP_pnc.SavedScatteringValidationTests.test_archived_scattering_baseline_remains_usable) ... ok
+test_safe_source_mismatch_is_rejected (test_saved_scattering_validation_AP_pnc.SavedScatteringValidationTests.test_safe_source_mismatch_is_rejected) ... ok
+test_unknown_scattering_source_is_rejected (test_saved_scattering_validation_AP_pnc.SavedScatteringValidationTests.test_unknown_scattering_source_is_rejected) ... ok
 test_matched_guide_for_both_directions (test_scattering_AP_pnc.ScatteringTests.test_matched_guide_for_both_directions) ... ok
 test_rejects_incompatible_frequency_and_port_mapping (test_scattering_AP_pnc.ScatteringTests.test_rejects_incompatible_frequency_and_port_mapping) ... ok
 test_known_uniform_phase_and_full_reflection_survive_signed_channel_reordering (test_uniform_reference_AP_pnc.UniformReferenceTests.test_known_uniform_phase_and_full_reflection_survive_signed_channel_reordering) ... ok
@@ -79,24 +107,13 @@ test_tiny_preflight_then_run_reuses_exact_mesh_and_resets_on_load (test_workbenc
 test_comparison_uses_saved_folders_and_returns_scientific_failure_as_compared (test_workbench_worker_AP_pnc.WorkbenchWorkerTests.test_comparison_uses_saved_folders_and_returns_scientific_failure_as_compared) ... ok
 test_invalid_configuration_writes_failure_and_existing_response_is_preserved (test_workbench_worker_AP_pnc.WorkbenchWorkerTests.test_invalid_configuration_writes_failure_and_existing_response_is_preserved) ... ok
 test_mesh_and_solve_use_the_same_checkpoint_and_return_exact_paths (test_workbench_worker_AP_pnc.WorkbenchWorkerTests.test_mesh_and_solve_use_the_same_checkpoint_and_return_exact_paths) ... ok
-3D solid: 24 tetrahedra, 225 displacement DOFs
-3D solid: 24 tetrahedra, 225 displacement DOFs
 test_failed_attempt_is_retained_and_bad_material_creates_no_output (test_workflow3d_AP_pnc.Workflow3D.test_failed_attempt_is_retained_and_bad_material_creates_no_output) ... ok
-3D solid: 352 tetrahedra, 435 displacement DOFs
 test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks (test_workflow3d_AP_pnc.Workflow3D.test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks) ... ok
 test_historical_hole_pattern_uses_source_origin_and_exact_provenance (test_workflow3d_AP_pnc.Workflow3D.test_historical_hole_pattern_uses_source_origin_and_exact_provenance) ... ok
-Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{dc70156f-a5a7-41ed-8ef9-996777c2ef9a}\Temp\tmp761hg2hn\two_hole_pilot_200nm-c138dfaee5bd
-Max relative solve residual: 0
-Power balance check: True; max R=0
-Matched-guide power check: True
-Solve time 0.00 s; sampled process peak 0.0 MiB
-Model status: computed; phase accuracy, spatial convergence and physical adequacy require separate evidence.
-3D solid: 24 tetrahedra, 225 displacement DOFs
 test_output_can_be_reconstructed_and_cache_checks_files (test_workflow3d_AP_pnc.Workflow3D.test_output_can_be_reconstructed_and_cache_checks_files) ... ok
-3D solid: 72 tetrahedra, 585 displacement DOFs
 test_scattering_exports_power_channels_and_reconstructible_responses (test_workflow3d_AP_pnc.Workflow3D.test_scattering_exports_power_channels_and_reconstructible_responses) ... ok
 
 ----------------------------------------------------------------------
-Ran 81 tests in 18.747s
+Ran 93 tests in 19.887s
 
 OK (skipped=1)

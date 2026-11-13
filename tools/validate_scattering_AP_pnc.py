@@ -16,6 +16,8 @@ import psutil
 from scipy.optimize import linear_sum_assignment
 from skfem import Basis
 
+from check_phase_refinement_AP_pnc import check_recorded_source
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
@@ -73,10 +75,11 @@ BASELINE_STEM = "straight_scattering_validation_AP_pnc"
 REFINEMENT_STEM = "straight_scattering_refinement_AP_pnc"
 ACCEPTANCE_LONG = (1.5e-6, (24, 5, 4))
 ACCEPTANCE_REFERENCE_CELLS = (1, 6, 5)
-NUMERICAL_SOURCES = (
+SAFE_RECONSTRUCTION_SOURCES = (
     "__init__.py", "elasticity_AP_pnc.py", "geometry_AP_pnc.py", "lead_modes_AP_pnc.py",
-    "material_AP_pnc.py", "port_modes_AP_pnc.py", "scattering_AP_pnc.py",
+    "material_AP_pnc.py", "port_modes_AP_pnc.py",
 )
+SCATTERING_SOURCE = "src/phononic/scattering_AP_pnc.py"
 
 
 @dataclass(frozen=True)
@@ -316,9 +319,11 @@ def read_saved_case(path: Path, identity: dict, report: dict, case: str, plan: t
     if csv_digest != baseline["channel_csv_sha256"]:
         raise ValueError("The saved CSV checksum does not match its evidence record.")
     previous = baseline["implementation"]
-    paths = [f"src/phononic/{name}" for name in NUMERICAL_SOURCES]
+    paths = [f"src/phononic/{name}" for name in SAFE_RECONSTRUCTION_SOURCES]
     if any(previous["source_sha256"][name] != identity["source_sha256"][name] for name in paths):
-        raise ValueError("Saved numerical source checksums differ from current sources.")
+        raise ValueError("Saved SAFE reconstruction source checksums differ from current sources.")
+    saved_scattering_sha256 = previous["source_sha256"][SCATTERING_SOURCE]
+    check_recorded_source(SCATTERING_SOURCE, saved_scattering_sha256)
     if any(previous["packages"][name] != identity["packages"][name] for name in ("numpy", "scipy", "scikit-fem")):
         raise ValueError("Saved NumPy, SciPy, or scikit-fem version differs from the current environment.")
     for key in ("frequency_hz", "width_m", "thickness_m", "element_order", "material"):
@@ -339,6 +344,8 @@ def read_saved_case(path: Path, identity: dict, report: dict, case: str, plan: t
         "original_status": baseline["status"], "original_failed_checks": baseline["failed_checks"],
         "reused_cases": [case],
         "matching_numerical_source_sha256": {name: previous["source_sha256"][name] for name in paths},
+        "scattering_source": {"path": SCATTERING_SOURCE, "saved_sha256": saved_scattering_sha256,
+                              "current_candidate_sha256": identity["source_sha256"][SCATTERING_SOURCE]},
         "saved_python": previous["python"], "saved_platform": previous["platform"],
     }
     return record, evidence

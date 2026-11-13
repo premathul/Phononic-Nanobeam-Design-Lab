@@ -4,12 +4,16 @@ import csv
 from hashlib import sha256
 import json
 from pathlib import Path
+import sys
 import unittest
 
 import numpy as np
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+from check_phase_refinement_AP_pnc import check_recorded_source
+
 EVIDENCE = ROOT / "verification/wave_resolution_diagnostic_AP_pnc.json"
 
 
@@ -29,7 +33,7 @@ class WaveResolutionEvidenceTests(unittest.TestCase):
         self.assertEqual(data["material"]["temperature_policy"], "fixed_property_control")
         np.testing.assert_array_equal(data["material"]["rotation"], np.eye(3))
         source = "tools/diagnose_wave_resolution_AP_pnc.py"
-        self.assertEqual(sha256((ROOT / source).read_bytes()).hexdigest(), data["implementation"]["source_sha256"][source])
+        check_recorded_source(source, data["implementation"]["source_sha256"][source])
         table = EVIDENCE.with_suffix(".csv")
         self.assertEqual(sha256(table.read_bytes()).hexdigest(), data["channel_csv_sha256"])
         with table.open(encoding="utf-8", newline="") as stream:

@@ -75,6 +75,8 @@ def solve_scattering(
     port_modes: PortModes,
     frequency_hz: float,
     incident_side: str = "left",
+    *,
+    linear_solver=None,
 ) -> ScatteringResult:
     """Solve free-sidewall harmonic scattering for every incident propagating mode.
 
@@ -82,6 +84,8 @@ def solve_scattering(
     the same cross-section at both ends. Under exp(-i omega t), axial forces in
     PortModes use the +x normal. The left outward normal reverses those forces.
     All outgoing waves, including decaying waves, enter the end traction map.
+    An optional linear_solver(operator, rhs) may solve the same complex system;
+    the physical flux and residual checks below still apply to its result.
     """
     if (not isinstance(frequency_hz, Real) or isinstance(frequency_hz, (bool, np.bool_))
             or not isfinite(frequency_hz) or frequency_hz <= 0):
@@ -145,7 +149,7 @@ def solve_scattering(
     operator = dynamic.tocsc() - traction_map
     rhs = np.zeros((system.K.shape[0], len(incident_indices)), dtype=operator.dtype)
     rhs[incoming_dofs] = incident_force - z_in @ incident_u
-    full_u = splu(operator).solve(rhs)
+    full_u = splu(operator).solve(rhs) if linear_solver is None else linear_solver(operator, rhs)
     if not np.all(np.isfinite(full_u)):
         raise RuntimeError("harmonic scattering solve produced a nonfinite field")
 

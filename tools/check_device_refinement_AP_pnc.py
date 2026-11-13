@@ -15,7 +15,7 @@ from scipy.spatial import cKDTree
 from skfem import Basis, ElementTriP2, MeshTri
 from skfem.models.poisson import mass
 
-from check_phase_refinement_AP_pnc import checked_array, checked_file, equivalent, require
+from check_phase_refinement_AP_pnc import checked_array, checked_file, check_recorded_source, equivalent, require
 from validate_perforated_AP_pnc import NUMERICAL_MODULES, POWER_LIMIT, RESIDUAL_LIMIT, ROOT, file_sha, pack, unpack
 
 
@@ -222,9 +222,9 @@ def check(path: Path) -> dict:
             and baseline["mesh"]["element_order"] == 2, "Pilot settings differ from the comparison scope.")
     numerical_sources = {f"src/phononic/{name}_AP_pnc.py" for name in NUMERICAL_MODULES}
     for source in numerical_sources:
-        digest = file_sha(ROOT / source)
-        require(pilot["implementation"]["source_sha256"][source] == digest
-                and all(level["implementation"]["source_sha256"][source] == digest for level in levels.values()),
+        digest = pilot["implementation"]["source_sha256"][source]
+        check_recorded_source(source, digest)
+        require(all(level["implementation"]["source_sha256"][source] == digest for level in levels.values()),
                 f"Core numerical source checksum differs: {source}.")
     for size, level in levels.items():
         expected = {**baseline, "mesh": {**baseline["mesh"], "mesh_size_nm": int(size)}}
