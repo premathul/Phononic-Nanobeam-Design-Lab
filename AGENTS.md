@@ -6,9 +6,11 @@ Research owner: **Athul Prem** | Project tag: **_AP_pnc**.
 
 Read README.md, docs/AI_HANDOFF_AP_pnc.md, docs/IMPLEMENTATION_PLAN_AP_pnc.md and docs/PHYSICS_SPECIFICATION_AP_pnc.md. Current user authorization supersedes the historical handoff: architecture can change freely; prioritize the latest reliable physics and a usable configurable simulator. Full archive recovery is not a prerequisite for new development. Preserve actual evidence and label new implementation independently.
 
-The active solver is `simulate_AP_pnc.py` and `src/phononic/`. Root `run_AP_pnc.py` remains a legacy readiness checker. Never confuse the two. Finite-body modes, Bloch dispersion and power-normalized uniform/perforated scattering are implemented. Two-hole power checks and a bounded 1 GHz complex-response mesh-pair check pass. The full 26-hole h200/h160 comparison failed both power and complex-response mesh criteria; port convergence remains unresolved. Reuse saved evidence before further solves, and keep those limits explicit before extending spectral or resonance claims.
+The active solver is `simulate_AP_pnc.py` and `src/phononic/`. Root `run_AP_pnc.py` remains a legacy readiness checker. Never confuse the two. Finite-body modes, Bloch dispersion and power-normalized uniform/perforated scattering are implemented. Two-hole power checks and a bounded 1 GHz complex-response mesh-pair check pass. The full 26-hole h200/h160 comparison failed both power and complex-response mesh criteria; h160/h130 passes power but still fails complex response. Independent SAFE port refinement also leaves phase accuracy unresolved. Reuse saved evidence before further solves, and keep those limits explicit before extending spectral or resonance claims.
 
 The optional English Qt interface is `workbench_AP_pnc.py` (`Launch_Workbench_AP_pnc.cmd` on Windows); its headless worker calls the same solver and mesh-preflight APIs. UI dependencies are separate in `requirements_ui_AP_pnc.txt`. Keep mesh readiness, successful computation and scientific convergence distinct in the interface.
+
+The workbench opens saved runs and compares scattering results through `tools/compare_scattering_AP_pnc.py` without new solves. Identical discretizations are repeatability checks, and failed input power checks cannot establish mesh-pair acceptance. The saved full-device/port follow-up is checked with `tools/check_device_followup_AP_pnc.py`; a successful integrity check does not mean the scientific convergence criteria passed.
 
 ## Project language
 

@@ -53,6 +53,7 @@ class WorkbenchTests(unittest.TestCase):
             self.assertIn("225 body DOFs", self.window.status.text())
             self.assertTrue(self.window.folder_button.isEnabled())
             self.assertFalse(self.window.report_button.isEnabled())
+            self.assertFalse(self.window.compare_button.isEnabled())
             mesh = json.loads(self.window.response_path.read_bytes())["summary"]
             self.assertEqual(mesh["status"], "mesh_ready")
 
@@ -60,6 +61,7 @@ class WorkbenchTests(unittest.TestCase):
             self.wait_for(lambda: self.window.action is None)
             self.assertIn("Computed (unverified)", self.window.status.text())
             self.assertTrue(self.window.report_button.isEnabled())
+            self.assertFalse(self.window.compare_button.isEnabled())
             run = json.loads(self.window.response_path.read_bytes())["summary"]
             self.assertEqual(run["mesh_checkpoint"]["mesh_sha256"], mesh["mesh_sha256"])
             self.assertTrue(self.window.report_path.is_file())
@@ -84,6 +86,128 @@ class WorkbenchTests(unittest.TestCase):
         self.assertIn("Thickness (nm) must be a positive number", self.window.status.text())
         self.assertIsNone(self.window.action)
         self.assertFalse((self.output / "_workbench").exists())
+
+    def test_open_saved_run_uses_selected_folder_without_launching_or_changing_files(self):
+        directory = self.output.resolve() / "moved scattering result"
+        directory.mkdir()
+        config = json.loads((ROOT / "configs" / PRESETS[1][1]).read_bytes())
+        config_path = directory / "configuration_AP_pnc.json"
+        config_path.write_text(json.dumps(config), encoding="utf-8")
+        report = directory / "report_AP_pnc.html"
+        report.write_text("Saved report", encoding="utf-8")
+        summary_path = directory / "summary_AP_pnc.json"
+        summary = {"status": "completed_unverified", "analysis_kind": "scattering", "power_balance_passed": True,
+                   "configuration": config, "output_directory": str(self.output / "former location")}
+        summary_path.write_text(json.dumps(summary), encoding="utf-8")
+        saved_bytes = {path: path.read_bytes() for path in (config_path, report, summary_path)}
+        with patch("workbench_AP_pnc.QFileDialog.getExistingDirectory", return_value=str(directory)):
+            QTest.mouseClick(self.window.saved_run_button, Qt.MouseButton.LeftButton)
+        self.assertIsNone(self.window.action)
+        self.assertFalse((self.output / "_workbench").exists())
+        self.assertEqual(self.window.result_directory, directory)
+        self.assertEqual(self.window.report_path, report)
+        self.assertEqual(self.window.scattering_directory, directory)
+        self.assertTrue(self.window.compare_button.isEnabled())
+        self.assertEqual(self.window.edited_config(), config)
+        self.assertEqual({path: path.read_bytes() for path in saved_bytes}, saved_bytes)
+
+        failed = self.output / "failed run"
+        failed.mkdir()
+        (failed / config_path.name).write_bytes(saved_bytes[config_path])
+        (failed / summary_path.name).write_text(json.dumps({**summary, "status": "failed"}), encoding="utf-8")
+        self.assertFalse(self.window.open_saved_run(failed))
+        self.assertIn("Choose a completed simulation run", self.window.status.text())
+        self.assertEqual(self.window.edited_config(), config)
+        self.assertEqual(self.window.report_path, report)
+        self.assertEqual(self.window.scattering_directory, directory)
+
+        modes = self.output.resolve() / "saved finite modes"
+        modes.mkdir()
+        mode_config = json.loads((ROOT / "configs" / PRESETS[0][1]).read_bytes())
+        (modes / config_path.name).write_text(json.dumps(mode_config), encoding="utf-8")
+        (modes / summary_path.name).write_text(json.dumps({
+            "status": "completed_unverified", "analysis_kind": "modes", "configuration": mode_config,
+        }), encoding="utf-8")
+        (modes / report.name).touch()
+        self.assertTrue(self.window.open_saved_run(modes))
+        self.assertTrue(self.window.report_button.isEnabled())
+        self.assertFalse(self.window.compare_button.isEnabled())
+        self.assertIsNone(self.window.scattering_directory)
+
+    def test_compare_protocol_keeps_scattering_candidate_and_opens_comparison_report(self):
+        candidate = self.output.resolve() / "saved candidate"
+        reference = self.output.resolve() / "saved reference"
+        comparison = self.output.resolve() / "saved comparison"
+        for directory in (candidate, reference, comparison):
+            directory.mkdir()
+            (directory / "report_AP_pnc.html").touch()
+        self.window._show_result("completed_unverified", {
+            "output_directory": str(candidate), "analysis_kind": "scattering", "power_balance_passed": True,
+        })
+        self.assertTrue(self.window.compare_button.isEnabled())
+
+        script = self.output / "synthetic_comparison_worker_AP_pnc.py"
+        script.write_text(
+            "import json, pathlib, sys\n"
+            "args = sys.argv[1:]\n"
+            "response = pathlib.Path(args[args.index('--response') + 1])\n"
+            "(response.parent / 'observed_args_AP_pnc.json').write_text(json.dumps(args))\n"
+            "response.write_text(json.dumps({'action': 'compare', 'status': 'compared', 'summary': {"
+            f"'output_directory': {str(comparison)!r}, 'report_path': {str(comparison / 'report_AP_pnc.html')!r}, "
+            "'maximum_power_change': 0.00234, 'maximum_complex_change': 0.138, "
+            "'power_passed': True, 'complex_passed': False, 'mesh_pair_passed': False, "
+            "'comparison_kind': 'mesh_sensitivity', 'input_power_checks_passed': True, "
+            "'reference': {'power_balance_passed': True}, 'candidate': {'power_balance_passed': True}}}))\n",
+            encoding="utf-8",
+        )
+        with patch("workbench_AP_pnc.WORKER", script), patch("workbench_AP_pnc.QFileDialog.getExistingDirectory", return_value=str(reference)), patch("workbench_AP_pnc.QDesktopServices.openUrl") as open_url:
+            QTest.mouseClick(self.window.compare_button, Qt.MouseButton.LeftButton)
+            self.assertEqual(self.window.action, "compare")
+            self.assertFalse(self.window.compare_button.isEnabled())
+            self.wait_for(lambda: self.window.action is None)
+            self.assertIn("0.00234 (passed)", self.window.status.text())
+            self.assertIn("0.138 (failed)", self.window.status.text())
+            self.assertIn("Mesh-pair check failed for these runs", self.window.status.text())
+            self.assertEqual(self.window.scattering_directory, candidate)
+            self.assertTrue(self.window.compare_button.isEnabled())
+            self.assertEqual(self.window.result_directory, comparison)
+            QTest.mouseClick(self.window.report_button, Qt.MouseButton.LeftButton)
+            self.assertEqual(Path(open_url.call_args.args[0].toLocalFile()), comparison / "report_AP_pnc.html")
+
+        job = self.window.response_path.parent
+        args = json.loads((job / "observed_args_AP_pnc.json").read_bytes())
+        for flag, value in (("--action", "compare"), ("--reference", str(reference)), ("--candidate", str(candidate))):
+            self.assertEqual(args[args.index(flag) + 1], value)
+        self.assertNotIn("--config", args)
+        self.assertFalse((job / "configuration_AP_pnc.json").exists())
+        request = json.loads((job / "comparison_request_AP_pnc.json").read_bytes())
+        self.assertEqual((request["reference"], request["candidate"]), (str(reference), str(candidate)))
+        self.window.preset.setCurrentIndex(1)
+        self.assertFalse(self.window.compare_button.isEnabled())
+        self.assertFalse(self.window.report_button.isEnabled())
+        self.assertIsNone(self.window.scattering_directory)
+
+    def test_comparison_status_separates_repeatability_and_input_power_checks(self):
+        report = self.output / "report_AP_pnc.html"
+        report.touch()
+        summary = {
+            "output_directory": str(self.output), "report_path": str(report),
+            "maximum_power_change": 0, "maximum_complex_change": 0,
+            "power_passed": True, "complex_passed": True, "mesh_pair_passed": False,
+            "comparison_kind": "repeatability", "input_power_checks_passed": True,
+            "reference": {"power_balance_passed": True}, "candidate": {"power_balance_passed": True},
+        }
+        self.window._show_result("compared", summary)
+        self.assertIn("Repeatability", self.window.status.text())
+        self.assertIn("same discretization", self.window.status.text())
+        self.assertNotIn("Mesh-pair", self.window.status.text())
+
+        summary.update(comparison_kind="mesh_sensitivity", input_power_checks_passed=False,
+                       candidate={"power_balance_passed": False})
+        self.window._show_result("compared", summary)
+        self.assertIn("maximum power change 0 (passed)", self.window.status.text())
+        self.assertIn("reference passed, candidate failed", self.window.status.text())
+        self.assertIn("Mesh-pair check failed for these runs", self.window.status.text())
 
     def test_malformed_analysis_load_preserves_prior_inputs_and_result(self):
         report = self.output / "report_AP_pnc.html"
@@ -112,7 +236,9 @@ class WorkbenchTests(unittest.TestCase):
             "import json, pathlib, subprocess, sys, time\n"
             "path = pathlib.Path(sys.argv[sys.argv.index('--response') + 1]).parent\n"
             "child = subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(20)'])\n"
-            "(path / 'child_AP_pnc.json').write_text(json.dumps(child.pid))\n"
+            "pending = path / 'child_AP_pnc.tmp'\n"
+            "pending.write_text(json.dumps(child.pid))\n"
+            "pending.replace(path / 'child_AP_pnc.json')\n"
             "print('Synthetic worker started', flush=True)\n"
             "time.sleep(20)\n",
             encoding="utf-8",
