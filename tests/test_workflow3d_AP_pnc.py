@@ -1,6 +1,7 @@
 """End-to-end scientific output and retry checks. Author: Athul Prem | _AP_pnc."""
 import copy
 import csv
+import hashlib
 import json
 from pathlib import Path
 import sys
@@ -12,7 +13,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from phononic.workflow_AP_pnc import resolve_config, run_study
+from phononic.workflow_AP_pnc import _resolve_geometry, main, resolve_config, run_study
 
 
 class Workflow3D(unittest.TestCase):
@@ -112,6 +113,76 @@ class Workflow3D(unittest.TestCase):
         invalid["resources"]["max_port_dofs"] = 44
         with self.assertRaisesRegex(ValueError, "45 port DOFs"):
             resolve_config(invalid)
+
+    def test_historical_hole_pattern_uses_source_origin_and_exact_provenance(self):
+        config = json.loads((ROOT / "configs/historical_26hole_AP_pnc.json").read_text())
+        geometry, holes, provenance = _resolve_geometry(resolve_config(config))
+        self.assertAlmostEqual(geometry.length_m * 1e9, 16650)
+        self.assertEqual(len(holes), 26)
+        np.testing.assert_allclose([holes[0].x_m, holes[-1].x_m], np.array([1625, 15025]) * 1e-9)
+        self.assertAlmostEqual(provenance["clearances"]["min_end_ligament_m"] * 1e9, 1500)
+        self.assertEqual(provenance["source_csv"], config["geometry"]["pattern"]["csv"])
+        source = ROOT / provenance["source_csv"]
+        self.assertEqual(provenance["source_sha256"], hashlib.sha256(source.read_bytes()).hexdigest())
+        local_absolute = copy.deepcopy(config)
+        local_absolute["geometry"]["pattern"]["csv"] = str(source)
+        self.assertEqual(resolve_config(local_absolute), resolve_config(config))
+
+        missing_offset = copy.deepcopy(config)
+        del missing_offset["geometry"]["pattern"]["x_offset_nm"]
+        with self.assertRaisesRegex(ValueError, "explicit x_offset_nm"):
+            resolve_config(missing_offset)
+        misplaced = copy.deepcopy(config)
+        misplaced["geometry"]["pattern"]["x_offset_nm"] = 0
+        with self.assertRaisesRegex(ValueError, "clearance"):
+            run_study(misplaced, self.output)
+        self.assertEqual(list(self.output.iterdir()), [])
+
+    def test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks(self):
+        config = json.loads((ROOT / "configs/perforated_beam_AP_pnc.json").read_text())
+        config["geometry"]["pattern"]["csv"] = str(self.output / "holes.csv")
+        config["mesh"].update(element_order=1, mesh_size_nm=240, port_size_nm=250, circle_resolution=8)
+        config["resources"]["max_dofs"] = 3000
+        pattern_path = Path(config["geometry"]["pattern"]["csv"])
+        pattern_path.write_text("x_nm,diameter_nm,region\n-275,250,pilot\n275,250,pilot\n", encoding="utf-8")
+        result = run_study(config, self.output)
+        self.assertEqual(result["hole_count"], 2)
+        self.assertTrue(result["power_balance_passed"])
+        self.assertIsNone(result["matched_reference_passed"])
+        self.assertFalse(result["spatial_convergence_established"])
+        self.assertGreater(result["geometry_diagnostics"]["analytic_removed_volume_m3"], 0)
+        directory = Path(result["output_directory"])
+        provenance = json.loads((directory / "hole_pattern_AP_pnc.json").read_text(encoding="utf-8"))
+        self.assertEqual(provenance, result["hole_pattern_provenance"])
+        self.assertEqual(provenance["source_sha256"], hashlib.sha256(pattern_path.read_bytes()).hexdigest())
+        html = (directory / "report_AP_pnc.html").read_text(encoding="utf-8")
+        self.assertIn("Perforated-beam scattering", html)
+        self.assertNotIn("Matched-guide power check", html)
+        self.assertNotRegex(html, r"[\u3400-\u9fff]")
+        self.assertTrue(run_study(config, self.output)["reused"])
+
+        pattern_path.write_bytes(pattern_path.read_bytes() + b"\n")
+        with patch("phononic.workflow_AP_pnc.assemble_elasticity", side_effect=RuntimeError("changed source")):
+            with self.assertRaisesRegex(RuntimeError, "changed source"):
+                run_study(config, self.output)
+        summaries = [json.loads(path.read_text(encoding="utf-8")) for path in self.output.glob("*/summary_AP_pnc.json")]
+        changed = next(summary for summary in summaries if summary["status"] == "failed")
+        self.assertNotEqual(result["run_hash"], changed["run_hash"])
+        self.assertNotEqual(result["mechanical_operator_hash"], changed["mechanical_operator_hash"])
+        self.assertEqual(provenance["holes"], changed["hole_pattern_provenance"]["holes"])
+        self.assertEqual(changed["hole_pattern_provenance"]["source_sha256"], hashlib.sha256(pattern_path.read_bytes()).hexdigest())
+
+        config_path = self.output / "test_config.json"
+        config_path.write_text(json.dumps(config), encoding="utf-8")
+        with patch("phononic.workflow_AP_pnc.run_study", return_value={
+            "output_directory": str(directory), "reused": False, "maximum_relative_solver_residual": 0,
+            "analysis_kind": "scattering", "power_balance_passed": True, "maximum_reflection": 0,
+            "matched_reference_passed": True, "elapsed_seconds": 0, "peak_process_memory_mib": 0,
+        }) as study:
+            self.assertEqual(main(["--config", str(config_path), "--uniform", "--circle-resolution", "12"]), 0)
+        passed_config = study.call_args.args[0]
+        self.assertNotIn("pattern", passed_config["geometry"])
+        self.assertEqual(passed_config["mesh"], {**config["mesh"], "circle_resolution": 12})
 
 
 if __name__ == "__main__":

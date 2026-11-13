@@ -28,6 +28,8 @@ jobs:
         run: python -B tools/validate_3d_AP_pnc.py
       - name: Matched-port power and phase acceptance
         run: python -B tools/validate_scattering_AP_pnc.py --acceptance --output-dir results/ci-scattering
+      - name: Gmsh two-hole power convergence
+        run: python -B tools/validate_perforated_AP_pnc.py --output-dir results/ci-perforated --verification-dir results/ci-perforated/evidence
       - uses: actions/upload-artifact@v7
         if: always()
         with:
@@ -37,3 +39,5 @@ jobs:
             verification/straight_beam_validation_AP_pnc.csv
             results/ci-scattering/straight_scattering_acceptance_AP_pnc.json
             results/ci-scattering/straight_scattering_acceptance_AP_pnc.csv
+            results/ci-perforated/evidence/two_hole_scattering_validation_AP_pnc.json
+            results/ci-perforated/evidence/two_hole_scattering_validation_AP_pnc.csv

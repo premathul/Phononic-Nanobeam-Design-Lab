@@ -4,7 +4,7 @@ Author: Athul Prem | _AP_pnc
 
 ## Scope and deliverables
 
-Develop the repository into a reproducible three-dimensional anisotropic elastic-wave simulator. The implemented workflow takes a configuration with explicit units, builds a 3D solid and mesh, applies the material tensor, and computes finite-beam eigenmodes, periodic straight-guide dispersion or matched-port power scattering. The next milestone integrates the original 26-hole device with matched ports. A campaign spanning all seven temperatures, bends or ring variants is outside the current milestone.
+Develop the repository into a reproducible three-dimensional anisotropic elastic-wave simulator. The implemented workflow takes a configuration with explicit units, builds a 3D solid and mesh, applies the material tensor, and computes finite-beam eigenmodes, periodic dispersion or matched-port power scattering. The original 26-hole device is now integrated and has a one-frequency pilot. The next numerical milestone resolves perforated phase accuracy and full-device mesh sensitivity. A campaign spanning all seven temperatures, bends or ring variants is outside the current milestone.
 
 The user authorized architectural changes and prioritized the latest reliable simulations. Historical recovery can proceed independently of the new 3D implementation. GitHub collaborator write access is confirmed. Push the development branch after integration checks and review, then merge through a pull request. Email delivery requires current user authorization.
 
@@ -33,6 +33,7 @@ Use scikit-fem to assemble 3D vector finite elements, SciPy for sparse eigenvalu
 | Module | Responsibility |
 | --- | --- |
 | `src/phononic/geometry_AP_pnc.py` | Parameterized straight beams, the original hole table, SI geometry and optional Gmsh meshes |
+| `perforated_AP_pnc.py` | Port-compatible Gmsh meshes with independently controlled body, end-face and circle resolutions; exact CAD/affine-mesh volume diagnostics |
 | `material_AP_pnc.py` | Cubic crystal tensor, crystal-to-lab rotation and material provenance |
 | `elasticity_AP_pnc.py` | Three-dimensional consistent mass and stiffness, eigenmodes and numerical residuals |
 | `lead_modes_AP_pnc.py` | Bloch constraints on the two ends of a single mesh and guided-wave dispersion with free sidewalls |
@@ -53,6 +54,8 @@ Begin with a single launch command, editable configuration and a readable result
 Use measured outcomes to select the next calculation. Review each integrated milestone and focus later checks on changes that affect the verified result.
 
 The first mechanics and guided-wave milestone is merged. The matched-port implementation now passes the bounded 1 GHz, 600 × 200 nm uniform-guide benchmark for lengths of 1 and 1.5 µm. Its phase reference is a refined SAFE discretization, not an exact continuum solution. The initial coarse-mesh phase failures, subsequent refinements and final acceptance are retained in `verification/straight_scattering_*_AP_pnc.json`. Read the current handoff for measured results and limits before extending this benchmark.
+
+CSV-defined perforation now runs through the public workflow, with source-byte checksums and the original coordinate offset preserved. The two-hole 1 GHz study meets the 0.01 absolute T/R sensitivity checks across body, circle, port and lead variations. Its final complex-coefficient change of 0.03162 fails the separate phase criterion, and that failed check remains in the evidence. The original 26-hole, 56220-DOF pilot completed with five incident channels but is not mesh-converged. Improving phase or full-device accuracy must reuse these results and target the unresolved errors, without rerunning the unchanged straight-guide campaign.
 
 ## Resources and data
 

@@ -12,5 +12,6 @@ venv/
 !.env.example
 # New run scratch and bulky fields are local until deliberately selected for sharing.
 results/runs/
+results/perforated_validation/
 scratch/
 tmp/

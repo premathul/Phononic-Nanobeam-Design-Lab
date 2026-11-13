@@ -26,7 +26,7 @@ import meshio
 import numpy as np
 import psutil
 
-from .geometry_AP_pnc import BeamGeometry, make_straight_mesh
+from .geometry_AP_pnc import BeamGeometry, Hole, make_straight_mesh, read_hole_pattern, validate_hole_clearances
 from .material_AP_pnc import CubicMaterial
 from .elasticity_AP_pnc import assemble_elasticity, solve_modes
 from .lead_modes_AP_pnc import solve_bloch
@@ -35,6 +35,7 @@ from .scattering_AP_pnc import solve_scattering
 
 ROOT = Path(__file__).resolve().parents[2]
 PACKAGES = ("numpy", "scipy", "scikit-fem", "meshio", "gmsh", "matplotlib", "psutil")
+DIMENSIONS_NM = ("length_nm", "width_nm", "thickness_nm")
 
 
 def write_json(path: Path, value: dict) -> None:
@@ -51,6 +52,32 @@ def digest(value: object) -> str:
     return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()).hexdigest()
 
 
+def _finite_number(value: object) -> bool:
+    return type(value) in (int, float) and math.isfinite(value)
+
+
+def _resolve_geometry(config: dict) -> tuple[BeamGeometry, tuple[Hole, ...], dict | None]:
+    dims = config["geometry"]
+    geometry = BeamGeometry(*(dims[key] * 1e-9 for key in DIMENSIONS_NM))
+    if "pattern" not in dims:
+        return geometry, (), None
+
+    spec = dims["pattern"]
+    source_path = ROOT / spec["csv"]
+    source = read_hole_pattern(source_path)
+    offset_m = spec["x_offset_nm"] * 1e-9
+    holes = tuple(Hole(hole.x_m + offset_m, hole.diameter_m, hole.region) for hole in source.holes)
+    provenance = {
+        "author": "Athul Prem", "file_tag": "_AP_pnc",
+        "source_csv": spec["csv"],
+        "source_sha256": source.source_sha256,
+        "x_offset_m": offset_m,
+        "holes": [{"x_m": hole.x_m, "diameter_m": hole.diameter_m, "region": hole.region} for hole in holes],
+        "clearances": validate_hole_clearances(geometry, holes),
+    }
+    return geometry, holes, provenance
+
+
 def resolve_config(config: dict) -> dict:
     """Keep the first public configuration deliberately small and explicit."""
     config = copy.deepcopy(config)
@@ -63,8 +90,8 @@ def resolve_config(config: dict) -> dict:
     if not re.fullmatch(r"[A-Za-z0-9_-]{1,80}", config["name"]):
         raise ValueError("name must use 1-80 letters, digits, underscores or hyphens")
     required = {
-        "geometry": {"length_nm", "width_nm", "thickness_nm"},
-        "mesh": {"cells", "element_order"},
+        "geometry": {*DIMENSIONS_NM, "pattern"},
+        "mesh": {"kind", "cells", "element_order", "mesh_size_nm", "port_size_nm", "circle_resolution"},
         "material": {"name", "C11_Pa", "C12_Pa", "C44_Pa", "density_kg_m3", "crystal_rotation", "temperature_policy", "temperature_K"},
         "analysis": {"kind", "boundary", "num_modes", "k_points", "frequency_GHz", "incident_side"},
         "resources": {"max_dofs", "max_port_dofs"},
@@ -74,22 +101,53 @@ def resolve_config(config: dict) -> dict:
             raise ValueError(f"Missing configuration object: {section}")
         if set(config[section]) - keys:
             raise ValueError(f"Unknown {section} fields: {sorted(set(config[section]) - keys)}")
-    for key in required["geometry"]:
-        value = config["geometry"][key]
-        if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value <= 0:
+    geometry = config["geometry"]
+    for key in DIMENSIONS_NM:
+        value = geometry[key]
+        if not _finite_number(value) or value <= 0:
             raise ValueError(f"{key} must be positive and finite (nm)")
-    cells = config["mesh"]["cells"]
-    if len(cells) != 3 or any(type(n) is not int or n <= 0 for n in cells):
-        raise ValueError("mesh.cells must contain three positive integers")
-    order = config["mesh"]["element_order"]
+    if "pattern" in geometry:
+        pattern = geometry["pattern"]
+        if not isinstance(pattern, dict) or set(pattern) != {"csv", "x_offset_nm"}:
+            raise ValueError("geometry.pattern requires csv and an explicit x_offset_nm")
+        if not isinstance(pattern["csv"], str) or not pattern["csv"].strip():
+            raise ValueError("geometry.pattern.csv must be a nonempty path")
+        if not _finite_number(pattern["x_offset_nm"]):
+            raise ValueError("geometry.pattern.x_offset_nm must be finite")
+        source_path = (ROOT / pattern["csv"]).resolve()
+        pattern["csv"] = source_path.relative_to(ROOT).as_posix() if source_path.is_relative_to(ROOT) else str(source_path)
+
+    mesh = config["mesh"]
+    kind = mesh.get("kind", "structured")
+    order = mesh["element_order"]
     if type(order) is not int or order not in (1, 2):
         raise ValueError("element_order must be 1 or 2")
     maximum = config["resources"]["max_dofs"]
     if type(maximum) is not int or maximum <= 0:
         raise ValueError("max_dofs must be a positive integer")
-    predicted = 3 * math.prod(order * n + 1 for n in cells)
-    if predicted > maximum:
-        raise ValueError(f"Requested grid has {predicted} displacement DOFs; configured maximum is {maximum}")
+    gmsh_fields = {"mesh_size_nm", "port_size_nm", "circle_resolution"}
+    if kind == "structured":
+        if "pattern" in geometry or gmsh_fields.intersection(mesh):
+            raise ValueError("A hole pattern and Gmsh mesh settings require mesh.kind=gmsh")
+        cells = mesh.get("cells")
+        if not isinstance(cells, (list, tuple)) or len(cells) != 3 or any(type(n) is not int or n <= 0 for n in cells):
+            raise ValueError("mesh.cells must contain three positive integers")
+        predicted = 3 * math.prod(order * n + 1 for n in cells)
+        if predicted > maximum:
+            raise ValueError(f"Requested grid has {predicted} displacement DOFs; configured maximum is {maximum}")
+    elif kind == "gmsh":
+        if "cells" in mesh:
+            raise ValueError("Omit mesh.cells for a Gmsh mesh")
+        for key in ("mesh_size_nm", "port_size_nm"):
+            value = mesh.get(key)
+            if not _finite_number(value) or value <= 0:
+                raise ValueError(f"mesh.{key} must be positive and finite")
+        mesh.setdefault("circle_resolution", 24)
+        resolution = mesh["circle_resolution"]
+        if type(resolution) is not int or resolution < 8 or resolution % 4 != 0:
+            raise ValueError("mesh.circle_resolution must be a multiple of 4 and at least 8")
+    else:
+        raise ValueError("mesh.kind must be structured or gmsh")
     material = config["material"]
     if material["temperature_policy"] != "fixed_property_control":
         raise ValueError("Only fixed_property_control is implemented; temperature-dependent material data are not installed")
@@ -99,6 +157,11 @@ def resolve_config(config: dict) -> dict:
     CubicMaterial(C11=material["C11_Pa"], C12=material["C12_Pa"], C44=material["C44_Pa"],
                   rho=material["density_kg_m3"], rotation=material["crystal_rotation"])
     analysis = config["analysis"]
+    if analysis["kind"] == "scattering" or kind == "gmsh":
+        config["resources"].setdefault("max_port_dofs", 200)
+        maximum_port = config["resources"]["max_port_dofs"]
+        if type(maximum_port) is not int or maximum_port <= 0:
+            raise ValueError("max_port_dofs must be a positive integer")
     if analysis["kind"] == "scattering":
         if analysis["boundary"] != "matched_ports":
             raise ValueError("Scattering requires boundary=matched_ports")
@@ -112,13 +175,10 @@ def resolve_config(config: dict) -> dict:
         analysis.setdefault("incident_side", "left")
         if analysis["incident_side"] not in ("left", "right"):
             raise ValueError("incident_side must be left or right")
-        config["resources"].setdefault("max_port_dofs", 200)
-        maximum_port = config["resources"]["max_port_dofs"]
-        if type(maximum_port) is not int or maximum_port <= 0:
-            raise ValueError("max_port_dofs must be a positive integer")
-        predicted_port = 3 * math.prod(order * n + 1 for n in cells[1:])
-        if predicted_port > maximum_port:
-            raise ValueError(f"Requested section has {predicted_port} port DOFs; configured maximum is {maximum_port}")
+        if kind == "structured":
+            predicted_port = 3 * math.prod(order * n + 1 for n in cells[1:])
+            if predicted_port > maximum_port:
+                raise ValueError(f"Requested section has {predicted_port} port DOFs; configured maximum is {maximum_port}")
         return config
     if analysis["kind"] not in ("modes", "bloch"):
         raise ValueError("analysis.kind must be modes, bloch or scattering")
@@ -176,14 +236,22 @@ def measured_resources():
 
 def run_study(config: dict, output_root: Path | None = None) -> dict:
     config = resolve_config(config)
+    geometry, holes, pattern = _resolve_geometry(config)
+    mesh_settings = config["mesh"]
+    mesh_kind = mesh_settings.get("kind", "structured")
     identity = source_identity()
     numerical_identity = {key: identity[key] for key in ("source_sha256", "packages", "python", "platform")}
-    run_hash = digest({"configuration": config, "implementation": numerical_identity})
+    identity_inputs = {"implementation": numerical_identity}
+    if pattern is not None:
+        # Hash the same parsed bytes used to create the mesh. The saved run
+        # remains traceable if the original CSV is replaced during the solve.
+        identity_inputs["hole_pattern"] = {key: pattern[key] for key in ("source_sha256", "x_offset_m", "holes")}
+    run_hash = digest({"configuration": config, **identity_inputs})
     mechanical = copy.deepcopy(config)
     for key in ("name", "author", "file_tag"):
         mechanical.pop(key, None)
     mechanical["material"].pop("temperature_K")
-    operator_hash = digest({"configuration": mechanical, "implementation": numerical_identity})
+    operator_hash = digest({"configuration": mechanical, **identity_inputs})
     output_root = Path(output_root or ROOT / "results" / "runs")
     stem = f"{config['name']}-{run_hash[:12]}"
     output = output_root / stem
@@ -217,7 +285,9 @@ def run_study(config: dict, output_root: Path | None = None) -> dict:
     summary = {"author": "Athul Prem", "file_tag": "_AP_pnc", "run_hash": run_hash,
                "mechanical_operator_hash": operator_hash, "status": "running", "configuration": config,
                "implementation": identity, "analysis_kind": config["analysis"]["kind"],
-               "geometry_nm": config["geometry"], "boundary": config["analysis"]["boundary"],
+               "geometry_nm": {key: config["geometry"][key] for key in DIMENSIONS_NM},
+               "mesh_kind": mesh_kind, "hole_count": len(holes), "hole_pattern_provenance": pattern,
+               "boundary": config["analysis"]["boundary"],
                "material_status": "nominal fixed-property control; no temperature calibration",
                "calibrated_scattering_available": False, "experimental_validation": False,
                "mode_completeness_established": False, "spatial_convergence_established": False,
@@ -228,14 +298,28 @@ def run_study(config: dict, output_root: Path | None = None) -> dict:
             json.dump({"pid": process.pid, "process_start": process.create_time()}, stream)
         write_json(summary_path, summary)
         write_json(output / "configuration_AP_pnc.json", config)
+        if pattern is not None:
+            write_json(output / "hole_pattern_AP_pnc.json", pattern)
         with measured_resources() as measured:
-            dims = config["geometry"]
-            geometry = BeamGeometry(*(dims[key] * 1e-9 for key in ("length_nm", "width_nm", "thickness_nm")))
             params = config["material"]
             material = CubicMaterial(C11=params["C11_Pa"], C12=params["C12_Pa"], C44=params["C44_Pa"],
                                      rho=params["density_kg_m3"], rotation=params["crystal_rotation"])
-            mesh = make_straight_mesh(geometry, config["mesh"]["cells"])
-            system = assemble_elasticity(mesh, material, element_order=config["mesh"]["element_order"],
+            if mesh_kind == "gmsh":
+                from .perforated_AP_pnc import make_perforated_mesh, volume_diagnostics
+
+                mesh = make_perforated_mesh(
+                    geometry, holes, mesh_settings["mesh_size_nm"] * 1e-9,
+                    port_mesh_size_m=mesh_settings["port_size_nm"] * 1e-9,
+                    circle_points=mesh_settings["circle_resolution"],
+                    max_port_dofs=config["resources"]["max_port_dofs"],
+                    element_order=mesh_settings["element_order"],
+                )
+                summary["geometry_diagnostics"] = volume_diagnostics(mesh, geometry, holes)
+                summary.update({"mesh_vertices": int(mesh.nvertices), "mesh_tetrahedra": int(mesh.nelements)})
+                write_json(summary_path, summary)
+            else:
+                mesh = make_straight_mesh(geometry, mesh_settings["cells"])
+            system = assemble_elasticity(mesh, material, element_order=mesh_settings["element_order"],
                                         max_dofs=config["resources"]["max_dofs"])
             summary.update({"ndof": int(system.K.shape[0]), "mesh_vertices": int(mesh.nvertices), "mesh_tetrahedra": int(mesh.nelements)})
             print(f"3D solid: {mesh.nelements} tetrahedra, {system.K.shape[0]} displacement DOFs", flush=True)
@@ -257,13 +341,17 @@ def run_study(config: dict, output_root: Path | None = None) -> dict:
                 max_power_imbalance = float(np.max(abs(result.power_balance)))
                 power_disagreement = float(max(np.max(abs(result.reflection - result.reflection_flux)),
                                                np.max(abs(result.transmission - result.transmission_flux))))
-                matched = bool(np.max(abs(result.reflection)) < 0.01
-                               and np.max(abs(result.transmission - 1)) < 0.01
-                               and max_power_imbalance < 0.01 and power_disagreement < 0.01
-                               and np.max(abs(result.flux_power_balance)) < 0.01
-                               and np.max(abs(result.net_outward_power_ratio)) < 0.01
-                               and np.max(result.relative_residuals) < 1e-8
-                               and np.max(port_modes.relative_residuals) < 1e-8)
+                power_balance_passed = bool(
+                    max_power_imbalance < 0.01 and power_disagreement < 0.01
+                    and np.max(abs(result.flux_power_balance)) < 0.01
+                    and np.max(abs(result.net_outward_power_ratio)) < 0.01
+                    and np.max(result.relative_residuals) < 1e-8
+                    and np.max(port_modes.relative_residuals) < 1e-8
+                )
+                matched = None if holes else bool(
+                    power_balance_passed and np.max(abs(result.reflection)) < 0.01
+                    and np.max(abs(result.transmission - 1)) < 0.01
+                )
                 summary.update({"frequency_hz": frequency, "incident_side": analysis["incident_side"],
                                 "incident_mode_indices": result.incident_mode_indices.tolist(),
                                 "num_incident_channels": len(result.incident_mode_indices),
@@ -275,10 +363,11 @@ def run_study(config: dict, output_root: Path | None = None) -> dict:
                                 "maximum_flux_power_imbalance": float(np.max(abs(result.flux_power_balance))),
                                 "maximum_net_outward_power_ratio": float(np.max(abs(result.net_outward_power_ratio))),
                                 "maximum_modal_flux_difference": power_disagreement,
-                                "matched_reference_passed": matched,
+                                "power_balance_passed": power_balance_passed, "matched_reference_passed": matched,
                                 "calibrated_scattering_available": False,
                                 "scattering_power_normalization_available": True,
-                                "matched_reference_scope": "Power-only check of this uniform guide; phase and mesh convergence require separate evidence",
+                                "matched_reference_scope": ("The unit-transmission reference applies to uniform guides"
+                                    if holes else "Power-only check of this uniform guide; phase and mesh convergence require separate evidence"),
                                 "field_normalization": "Response per square root of incident watt; visualization has arbitrary amplitude; VTU samples vertices"})
                 extra_fields = {"displacements_per_sqrt_w": fields,
                                 "incident_mode_indices": result.incident_mode_indices,
@@ -425,6 +514,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--analysis", choices=("modes", "bloch", "scattering"))
     parser.add_argument("--thickness-nm", type=float)
     parser.add_argument("--cells", nargs=3, type=int, metavar=("NX", "NY", "NZ"))
+    parser.add_argument("--mesh-size-nm", type=float, help="Target Gmsh body mesh size")
+    parser.add_argument("--port-size-nm", type=float, help="Target matched-port mesh size")
+    parser.add_argument("--circle-resolution", type=int, help="Number of straight segments around each hole")
+    parser.add_argument("--uniform", action="store_true", help="Remove the hole pattern while retaining the geometry dimensions and mesh settings")
     parser.add_argument("--boundary", choices=("clamped_free", "clamped_clamped", "free", "periodic_x", "matched_ports"))
     parser.add_argument("--modes", type=int)
     parser.add_argument("--k-points", type=int)
@@ -436,6 +529,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         config = json.loads(args.config.read_text(encoding="utf-8-sig"))
+        if args.uniform:
+            config["geometry"].pop("pattern", None)
         if args.analysis:
             previous = config["analysis"]
             if args.analysis == "scattering":
@@ -449,6 +544,8 @@ def main(argv: list[str] | None = None) -> int:
                 if args.analysis == "bloch":
                     config["analysis"]["k_points"] = previous.get("k_points", 9)
         for value, section, key in ((args.thickness_nm, "geometry", "thickness_nm"), (args.cells, "mesh", "cells"),
+                                    (args.mesh_size_nm, "mesh", "mesh_size_nm"), (args.port_size_nm, "mesh", "port_size_nm"),
+                                    (args.circle_resolution, "mesh", "circle_resolution"),
                                     (args.boundary, "analysis", "boundary"), (args.modes, "analysis", "num_modes"),
                                     (args.k_points, "analysis", "k_points"),
                                     (args.frequency_ghz, "analysis", "frequency_GHz"),
@@ -461,7 +558,9 @@ def main(argv: list[str] | None = None) -> int:
         print(f"{'Reused' if summary['reused'] else 'Completed'}: {output}")
         print(f"Max relative solve residual: {summary['maximum_relative_solver_residual']:.3g}")
         if summary["analysis_kind"] == "scattering":
-            print(f"Matched-guide power check: {summary['matched_reference_passed']}; max R={summary['maximum_reflection']:.6g}")
+            print(f"Power balance check: {summary['power_balance_passed']}; max R={summary['maximum_reflection']:.6g}")
+            if summary["matched_reference_passed"] is not None:
+                print(f"Matched-guide power check: {summary['matched_reference_passed']}")
         print(f"Solve time {summary['elapsed_seconds']:.2f} s; sampled process peak {summary['peak_process_memory_mib']:.1f} MiB")
         print("Model status: computed; phase accuracy, spatial convergence and physical adequacy require separate evidence.")
         if args.open:
