@@ -21,7 +21,8 @@ class SolverResourceEvidenceTests(unittest.TestCase):
         cls.ledger = json.loads(LEDGER.read_bytes())
 
     def test_portable_modal_power_matches_boundary_flux(self):
-        for case in ("full_device_lgmres_public_replay", "full_device_h160_lgmres_public_replay"):
+        for case in ("full_device_lgmres_public_replay", "full_device_h160_lgmres_public_replay",
+                     "full_device_h130_lgmres_public_replay"):
             with self.subTest(case=case):
                 self.check_modal_power(self.ledger[case])
 
@@ -128,7 +129,11 @@ class SolverResourceEvidenceTests(unittest.TestCase):
             self.assertEqual(row["initial_relative_true_residual"], expected_initial)
 
     def test_full_device_body_mesh_pair_replays_matching_and_gates(self):
-        comparison = self.ledger["full_device_h200_h160_mixed_comparison"]
+        for case in ("full_device_h200_h160_mixed_comparison", "full_device_h160_h130_mixed_comparison"):
+            with self.subTest(case=case):
+                self.check_body_mesh_pair(self.ledger[case])
+
+    def check_body_mesh_pair(self, comparison):
         reference, candidate = (self.ledger[comparison[f"{name}_case"]] for name in ("reference", "candidate"))
         a, b = reference["scattering"], candidate["scattering"]
         for key in ("frequency_hz", "incident_side", "dimensions_nm"):
@@ -137,16 +142,18 @@ class SolverResourceEvidenceTests(unittest.TestCase):
         self.assertEqual(planes, {"xleft": 0, "xright": a["dimensions_nm"]["length_nm"] * 1e-9})
         self.assertFalse(comparison["phase_adjustment_applied"])
         compatibility = comparison["linear_solver_compatibility"]
-        self.assertEqual(compatibility["relative_residual_limit"], 1e-9)
-        self.assertEqual(compatibility["backward_residual_limit"], 1e-9)
-        for side, case, precision in (("reference", reference, "double"), ("candidate", candidate, "single")):
-            checked = compatibility["checks"][side]
-            self.assertEqual(checked["precision"], precision)
+        if compatibility is not None:
+            self.assertEqual(compatibility["relative_residual_limit"], 1e-9)
+            self.assertEqual(compatibility["backward_residual_limit"], 1e-9)
+        for side, case in (("reference", reference), ("candidate", candidate)):
             sources = dict(case["scattering"]["numerical_source_sha256"])
-            self.assertEqual(sources.pop("src/phononic/linear_lgmres_AP_pnc.py"), checked["source_sha256"])
+            if compatibility is not None:
+                checked = compatibility["checks"][side]
+                self.assertEqual(checked["precision"], case["configuration"]["resources"].get("ilu_precision", "double"))
+                self.assertEqual(sources.pop("src/phononic/linear_lgmres_AP_pnc.py"), checked["source_sha256"])
+                self.assertLessEqual(checked["maximum_relative_residual"], compatibility["relative_residual_limit"])
+                self.assertLessEqual(checked["maximum_backward_residual"], compatibility["backward_residual_limit"])
             self.assertEqual(sources, comparison["physical_inputs"]["numerical_source_sha256"])
-            self.assertLessEqual(checked["maximum_relative_residual"], compatibility["relative_residual_limit"])
-            self.assertLessEqual(checked["maximum_backward_residual"], compatibility["backward_residual_limit"])
 
         def match(group):
             mapping = comparison["matched_channels"][group]
@@ -196,6 +203,64 @@ class SolverResourceEvidenceTests(unittest.TestCase):
         mesh_pair = len(set(comparison["discretization_sha256"].values())) == 2
         self.assertTrue(mesh_pair)
         self.assertEqual(comparison["mesh_pair_passed"], mesh_pair and input_power_passed and power_passed and complex_passed)
+
+    def test_uniform_body_diagnostic_replays_native_phase(self):
+        diagnostic = self.ledger["full_device_uniform_h160_h130_diagnostic"]
+        self.assertEqual(diagnostic["status"], "diagnostic_completed")
+        self.assertFalse(diagnostic["phase_adjustment_applied"])
+        h200 = self.ledger["full_device_lgmres_public_replay"]
+        mode_checkpoint = self.ledger["full_device_operator"]["raw_files"]["port_modes"]
+        self.assertEqual(diagnostic["reused_safe_sources"]["modes"]["sha256"], mode_checkpoint["sha256"])
+        self.assertEqual(diagnostic["reused_safe_sources"]["fields"], h200["raw_files"]["selected_fields_AP_pnc.npz"])
+        roots = diagnostic["roots"]
+        wave = np.asarray(diagnostic["wavenumbers_rad_m"])
+        length = diagnostic["length_m"]
+        native = np.exp(1j * wave * length)
+        phase_limit = diagnostic["finite_diagnostic_limit"]
+        self.assertEqual(phase_limit, 0.01)
+        reflection, transmission = [], []
+        for size in ("160", "130"):
+            with self.subTest(size=size):
+                case = diagnostic["cases"][size]
+                self.check_modal_power(case)
+                scattering = case["scattering"]
+                self.assertEqual(scattering["groups"], h200["scattering"]["groups"])
+                self.assertEqual(scattering["groups"]["incoming"]["root_indices"], roots)
+                np.testing.assert_array_equal(scattering["groups"]["incoming"]["wavenumbers_rad_m"], wave)
+                self.assertEqual(case["configuration"]["geometry"]["length_nm"] * 1e-9, length)
+                self.assertEqual(scattering["frequency_hz"], diagnostic["frequency_hz"])
+                r, t = (complex_block(scattering, name) for name in ("reflection", "transmission"))
+                reflection.append(r)
+                transmission.append(t)
+                phase = np.angle(np.diag(t) / native)
+                np.testing.assert_allclose(phase, case["same_channel_native_phase_error_rad"], atol=1e-12, rtol=0)
+                error = np.max(abs(t - np.diag(native)))
+                self.assertAlmostEqual(error, case["maximum_native_complex_error"], places=12)
+                self.assertAlmostEqual(np.max(abs(r)), case["maximum_reflection_amplitude"], places=12)
+                checks = case["physical_checks"]
+                matched_power = (max(np.max(np.sum(abs(r) ** 2, axis=0)),
+                                     np.max(abs(np.sum(abs(t) ** 2, axis=0) - 1))) < 0.01
+                                 and checks["power_balance_passed"])
+                self.assertEqual(checks["matched_reference_passed"], matched_power)
+                linear = case["linear_solver"]
+                for channel in linear["channels"]:
+                    self.assertEqual(channel["info"], 0)
+                    self.assertLessEqual(channel["relative_residual"], linear["relative_residual_limit"])
+                    self.assertLessEqual(channel["relative_backward_residual"], linear["backward_residual_limit"])
+
+        phase_difference = np.angle(np.diag(transmission[1]) / np.diag(transmission[0]))
+        np.testing.assert_allclose(phase_difference, diagnostic["same_channel_phase_difference_rad"], atol=1e-12, rtol=0)
+        np.testing.assert_allclose(phase_difference / (length * 1e6),
+                                   diagnostic["same_channel_phase_difference_rad_per_um"], atol=1e-12, rtol=0)
+        power_change, complex_change = 0.0, 0.0
+        for name, (first, second) in (("reflection", reflection), ("transmission", transmission)):
+            block_change = np.max(abs(second - first))
+            self.assertAlmostEqual(block_change, diagnostic[f"maximum_{name}_complex_change"], places=12)
+            complex_change = max(complex_change, block_change)
+            power_change = max(power_change, np.max(abs(np.sum(abs(second) ** 2 - abs(first) ** 2, axis=0))))
+        self.assertAlmostEqual(power_change, diagnostic["maximum_power_change"], places=12)
+        self.assertEqual(diagnostic["pair_power_passed"], power_change < phase_limit)
+        self.assertEqual(diagnostic["pair_complex_passed"], complex_change < phase_limit)
 
 
 if __name__ == "__main__":

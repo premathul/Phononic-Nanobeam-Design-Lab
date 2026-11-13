@@ -1399,7 +1399,7 @@
       ]
     }
   },
-  "csv_sha256": "64a7ffe97d923329257f84f2effd0503f0c02a1b013b1e7c32ccb2efb69e9df5",
+  "csv_sha256": "21c0976eaf0ef5de7fd5adf31110f77923f313a81e572a6fcc8f647853c0733e",
   "historical_full_workflow_source": {
     "source_path": "src/phononic/workflow_AP_pnc.py",
     "source_commit": "392ea7955bf6e5f96e01879264266bd45ff7a73c",
@@ -4719,5 +4719,2948 @@
         "bytes": 3530
       }
     }
+  },
+  "h130_candidate_preflight": {
+    "status": "mesh_ready",
+    "scope": "Mesh-only 26-hole h130 preflight with unchanged physical inputs, circle32, four thickness layers and 675-DOF ports. No body assembly or solve.",
+    "mesh_hash": "b9e62272dea5ebcacee6bda955e2b7e47cdf457e6fa73a3ad204ddcdb02624b3",
+    "mesh_sha256": "19534b8071344fc61ffc6187f48a4c805b27fbe49f6c64678ca78c31639c4551",
+    "ndof": 225747,
+    "mesh_tetrahedra": 43632,
+    "mesh_vertices": 11750,
+    "end_face_dofs": {
+      "xleft": 675,
+      "xright": 675
+    },
+    "hole_count": 26,
+    "geometry_diagnostics": {
+      "analytic_solid_volume_m3": 3.062532655455e-18,
+      "meshed_solid_volume_m3": 3.064247963349631e-18,
+      "analytic_removed_volume_m3": 2.674673445450011e-19,
+      "meshed_removed_volume_m3": 2.657520366503703e-19,
+      "relative_solid_volume_error": 0.0005600945647307897,
+      "relative_removed_volume_error": 0.006413148855793134,
+      "rim_segments_min": 32,
+      "rim_segments_max": 32,
+      "max_radial_sagitta_m": 6.621000825729834e-10
+    },
+    "mesh_resources": {
+      "peak_process_memory_mib": 120.4921875,
+      "system_available_memory_mib_at_start": 4691.46484375,
+      "process_lifetime_peak_working_set_mib": 127.72265625,
+      "elapsed_seconds": 0.6008909000083804
+    },
+    "within_body_budget": false,
+    "operation": "mesh_only",
+    "settings": {
+      "kind": "layered",
+      "element_order": 2,
+      "mesh_size_nm": 130,
+      "port_size_nm": 83.33333333333333,
+      "circle_resolution": 32,
+      "thickness_layers": 4
+    },
+    "max_body_dofs": 60000,
+    "source_sha256": {
+      "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+      "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+      "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+      "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a"
+    },
+    "raw_files": {
+      "preflight": {
+        "path": "results/runs/full_device_layered_preflight/h130_preflight/preflight_AP_pnc.json",
+        "sha256": "bb806c0969d48584d09bf159a2873a1c965649ab6bc765eecb68f1d996129f54",
+        "bytes": 10222
+      },
+      "mesh_summary": {
+        "path": "results/runs/full_device_layered_preflight/_meshes/b9e62272dea5ebcacee6bda955e2b7e47cdf457e6fa73a3ad204ddcdb02624b3/summary_AP_pnc.json",
+        "sha256": "e94ae0dbba7cd85671c71990f1592f7ca596795db81b69cf73068ee52212b530",
+        "bytes": 9559
+      },
+      "mesh": {
+        "path": "results/runs/full_device_layered_preflight/_meshes/b9e62272dea5ebcacee6bda955e2b7e47cdf457e6fa73a3ad204ddcdb02624b3/mesh_AP_pnc.npz",
+        "sha256": "19534b8071344fc61ffc6187f48a4c805b27fbe49f6c64678ca78c31639c4551",
+        "bytes": 369060
+      },
+      "configuration": {
+        "path": "results/runs/full_device_layered_preflight/h130_preflight/configuration_AP_pnc.json",
+        "sha256": "37099d4eca8a23df4e2468d46add7065bc7067544609a398e6c3d313c2e9b6b5",
+        "bytes": 1199
+      }
+    }
+  },
+  "full_device_h130_operator": {
+    "status": "operator_ready",
+    "scope": "Full layered h130, four thickness layers, 12 width cells, 1 GHz, left incidence. Assemble K/M and stage the original two-port harmonic operator and five physical drives. Reuse saved h160 SAFE modes in their exact original local ordering. No factorization or scattering solve.",
+    "source": {
+      "git_commit": "f2e41709fc4d8a02d695e27a077daf7421694633",
+      "source_sha256": {
+        "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+        "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/linear_lgmres_AP_pnc.py": "459589f4e5de39c888966305e28dbd2b16f2947ec427ae9c131c69ae47c609df",
+        "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/report_AP_pnc.py": "871fc6a358958c7908ad17f57521bdb51772ea82739d83cdbe5b4b536a5145c5",
+        "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+        "src/phononic/workflow_AP_pnc.py": "2ecccace6feee9456ed9a86744f246db7df34ade75a21dd3f0512d5ec553cbfa",
+        "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+      },
+      "packages": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "scikit-fem": "12.0.2",
+        "meshio": "5.3.5",
+        "gmsh": "4.15.2",
+        "matplotlib": "3.11.2",
+        "psutil": "7.2.2"
+      },
+      "python": "3.12.14",
+      "platform": "Windows-11-10.0.26200-SP0"
+    },
+    "mesh_hash": "b9e62272dea5ebcacee6bda955e2b7e47cdf457e6fa73a3ad204ddcdb02624b3",
+    "mesh_comparison": {
+      "exact_yz_triangulations": true,
+      "exact_z_planes": true,
+      "tetrahedra": 43632,
+      "ndof": 225747
+    },
+    "factorization_attempted": false,
+    "port_modes": {
+      "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/ports_AP_pnc.npz",
+      "sha256": "988670170e2daf71ee24a8ef75dbee0924251fe4d6fddf91e5a593d31bad58ee",
+      "bytes": 29223616,
+      "trace_dofs": 675,
+      "propagating_channels_per_direction": 5,
+      "source_modes": {
+        "path": "results/runs/full_device_resource_profile/full_h160_operator_tiucndqa/ports_AP_pnc.npz",
+        "sha256": "1858f12f56e4aef75b38c215757133e852bb1a40399781ed79cb54ecc3bf85da",
+        "bytes": 29223616
+      },
+      "source_public_fields": {
+        "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h160_ny12_z4-ec5ad09e287e/selected_fields_AP_pnc.npz",
+        "sha256": "9ad3144f620cfb5f8504ffb7e9991608ee8f29a22288de8f67b9afe8fdf0b3c5",
+        "bytes": 30254065
+      },
+      "source_public_summary": {
+        "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h160_ny12_z4-ec5ad09e287e/summary_AP_pnc.json",
+        "sha256": "18c7ed2e7a6043071974c7bbf941e3fd1afc9c1c3d0875304bdaf47fccb0b610",
+        "bytes": 26802
+      },
+      "local_trace_order": "Exact h160 ordering retained on both ends. Only global DOF IDs changed.",
+      "phase_adjustment_applied": false
+    },
+    "operator_callback_entry": {
+      "commit_total_mib": 25953.8671875,
+      "commit_limit_mib": 33086.86328125,
+      "commit_headroom_mib": 7132.99609375,
+      "physical_available_mib": 2621.3828125,
+      "rss_mib": 946.29296875,
+      "private_commit_mib": 1071.05859375,
+      "peak_working_set_mib": 1380.5234375,
+      "peak_private_commit_mib": 1489.546875
+    },
+    "initial_ilu_allocation_model": "2 x (8-byte complex + 4-byte index) x fill_factor 12 x A.nnz",
+    "configuration": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "schema_version": 1,
+      "name": "historical_26hole_layered_h130_ny12_z4",
+      "geometry": {
+        "length_nm": 16650,
+        "width_nm": 1000,
+        "thickness_nm": 200,
+        "pattern": {
+          "csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+          "x_offset_nm": 8325
+        }
+      },
+      "mesh": {
+        "kind": "layered",
+        "element_order": 2,
+        "mesh_size_nm": 130,
+        "port_size_nm": 83.33333333333333,
+        "circle_resolution": 32,
+        "thickness_layers": 4
+      },
+      "material": {
+        "name": "nominal_cubic_ge",
+        "C11_Pa": 128500000000.0,
+        "C12_Pa": 48300000000.0,
+        "C44_Pa": 66800000000.0,
+        "density_kg_m3": 5323,
+        "crystal_rotation": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "temperature_policy": "fixed_property_control",
+        "temperature_K": 4
+      },
+      "analysis": {
+        "kind": "scattering",
+        "boundary": "matched_ports",
+        "frequency_GHz": 1,
+        "incident_side": "left"
+      },
+      "resources": {
+        "max_dofs": 230000,
+        "max_port_dofs": 675,
+        "assembly_batch_elements": 2048,
+        "linear_solver": "ilu_lgmres",
+        "ilu_fill_factor": 12.0,
+        "ilu_precision": "single"
+      }
+    },
+    "port_reuse_proof": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "status": "verified",
+      "h130_stage_sha256": "8904453fae6bdf265f996dab00ad607f9b1e592ca0d59d504fb97d55a07ef392",
+      "h160_stage_sha256": "f1b328d000b5b6d300df1f7461c00bf503f42f9a1c534a88204951b796e668c4",
+      "all_local_safe_arrays_bit_identical": true,
+      "all_local_physical_rhs_values_bit_identical": true,
+      "h130_rhs_nonzero_rows_per_channel": [
+        675,
+        675,
+        675,
+        675,
+        675
+      ],
+      "scope": "Saved-stage comparison in exact local SAFE ordering; global volume indices differ."
+    },
+    "raw_files": {
+      "configuration": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/configuration_AP_pnc.json",
+        "sha256": "b6706cc975817e7d2a50b1525328d1d67916a606cab4d8310c2aaca0334fd6ba",
+        "bytes": 1336
+      },
+      "preflight": {
+        "path": "results/runs/full_device_layered_preflight/h130_preflight/preflight_AP_pnc.json",
+        "sha256": "bb806c0969d48584d09bf159a2873a1c965649ab6bc765eecb68f1d996129f54",
+        "bytes": 10222
+      },
+      "mesh": {
+        "path": "results/runs/full_device_layered_preflight/_meshes/b9e62272dea5ebcacee6bda955e2b7e47cdf457e6fa73a3ad204ddcdb02624b3/mesh_AP_pnc.npz",
+        "sha256": "19534b8071344fc61ffc6187f48a4c805b27fbe49f6c64678ca78c31639c4551",
+        "bytes": 369060
+      },
+      "driver": {
+        "path": "results/runs/full_device_resource_profile/stage_h130_operator_AP_pnc.py",
+        "sha256": "6badd803904e67a2b4fafd4d5616351a0be4d92b363a620dc52f952b44198327",
+        "bytes": 16609
+      },
+      "monitor_helpers": {
+        "path": "results/runs/full_device_resource_profile/profile_AP_pnc.py",
+        "sha256": "f0dab5367f25016a5cea91d5809311ec89658a8c090ee53eb8dbafe934205911",
+        "bytes": 25492
+      },
+      "hole_pattern": {
+        "path": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+        "sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+        "bytes": 608
+      },
+      "h160_stage": {
+        "path": "results/runs/full_device_resource_profile/full_h160_operator_tiucndqa/stages_AP_pnc.json",
+        "sha256": "f1b328d000b5b6d300df1f7461c00bf503f42f9a1c534a88204951b796e668c4",
+        "bytes": 12871
+      },
+      "K": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/K_AP_pnc.npz",
+        "sha256": "49356681a455258b87b2026e04ad2a84b39c481bf323378ee2a69dab16cdebf4",
+        "bytes": 196136437
+      },
+      "M": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/M_AP_pnc.npz",
+        "sha256": "620265093079bc9484d574f98123defa3730c736a1d61d5b46feebd0535ae446",
+        "bytes": 67947301
+      },
+      "A": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/A_AP_pnc.npz",
+        "sha256": "d22f5a9efb343e1295f09964a2818de502158a0c3d4b0fdb9d2936173edde808",
+        "bytes": 344025749
+      },
+      "rhs": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/rhs_AP_pnc.npy",
+        "sha256": "ac86daf626d4b529885d578d0ebb37f7e25649bcb59b119b6b4c8befd293dab2",
+        "bytes": 18059888
+      },
+      "port_modes": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/ports_AP_pnc.npz",
+        "sha256": "988670170e2daf71ee24a8ef75dbee0924251fe4d6fddf91e5a593d31bad58ee",
+        "bytes": 29223616
+      },
+      "stages": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/stages_AP_pnc.json",
+        "sha256": "8904453fae6bdf265f996dab00ad607f9b1e592ca0d59d504fb97d55a07ef392",
+        "bytes": 12853
+      },
+      "execution": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/execution_AP_pnc.json",
+        "sha256": "9231db6cfdb86a3cee5587b1f70f372fdb3f0f256e774ec9ec0e7235563b1570",
+        "bytes": 865
+      },
+      "port_rhs_equivalence": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/port_rhs_equivalence_AP_pnc.json",
+        "sha256": "7ffe630e866a113a454e33e35e146b7367d99e3df81c9fba047047eb817cced5",
+        "bytes": 566
+      },
+      "log": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/worker_AP_pnc.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    "operator": {
+      "nonzero_storage": 17156075,
+      "array_bytes": 344024492
+    },
+    "predicted_initial_ilu_buffers_mib": {
+      "complex64_fill12": 4712.056732177734
+    },
+    "checkpoint_bytes": 655392991,
+    "phases": {
+      "verify_saved_mesh_and_sources": {
+        "elapsed_seconds": 0.1870000000053551,
+        "before": {
+          "commit_total_mib": 22983.4921875,
+          "commit_limit_mib": 33086.86328125,
+          "commit_headroom_mib": 10103.37109375,
+          "physical_available_mib": 4643.8203125,
+          "rss_mib": 70.58203125,
+          "private_commit_mib": 51.1953125,
+          "peak_working_set_mib": 70.91796875,
+          "peak_private_commit_mib": 51.31640625
+        },
+        "after": {
+          "commit_total_mib": 22995.796875,
+          "commit_limit_mib": 33086.86328125,
+          "commit_headroom_mib": 10091.06640625,
+          "physical_available_mib": 4626.89453125,
+          "rss_mib": 73.6953125,
+          "private_commit_mib": 53.6875,
+          "peak_working_set_mib": 88.7265625,
+          "peak_private_commit_mib": 68.8515625
+        }
+      },
+      "production_batched_assembly": {
+        "elapsed_seconds": 46.32799999999406,
+        "before": {
+          "commit_total_mib": 23032.375,
+          "commit_limit_mib": 33086.86328125,
+          "commit_headroom_mib": 10054.48828125,
+          "physical_available_mib": 4626.7578125,
+          "rss_mib": 73.8515625,
+          "private_commit_mib": 85.765625,
+          "peak_working_set_mib": 88.7265625,
+          "peak_private_commit_mib": 85.765625
+        },
+        "after": {
+          "commit_total_mib": 24443.27734375,
+          "commit_limit_mib": 33086.86328125,
+          "commit_headroom_mib": 8643.5859375,
+          "physical_available_mib": 3786.47265625,
+          "rss_mib": 347.6484375,
+          "private_commit_mib": 361.3046875,
+          "peak_working_set_mib": 722.70703125,
+          "peak_private_commit_mib": 926.3125
+        }
+      },
+      "save_stiffness": {
+        "elapsed_seconds": 0.4379999999946449,
+        "before": {
+          "commit_total_mib": 24451.27734375,
+          "commit_limit_mib": 33086.86328125,
+          "commit_headroom_mib": 8635.5859375,
+          "physical_available_mib": 3785.40234375,
+          "rss_mib": 347.66015625,
+          "private_commit_mib": 361.31640625,
+          "peak_working_set_mib": 722.70703125,
+          "peak_private_commit_mib": 926.3125
+        },
+        "after": {
+          "commit_total_mib": 24428.16015625,
+          "commit_limit_mib": 33086.86328125,
+          "commit_headroom_mib": 8658.703125,
+          "physical_available_mib": 3633.87890625,
+          "rss_mib": 348.7734375,
+          "private_commit_mib": 362.69140625,
+          "peak_working_set_mib": 722.70703125,
+          "peak_private_commit_mib": 926.3125
+        }
+      },
+      "save_mass": {
+        "elapsed_seconds": 0.13999999999941792,
+        "before": {
+          "commit_total_mib": 24437.6875,
+          "commit_limit_mib": 33086.86328125,
+          "commit_headroom_mib": 8649.17578125,
+          "physical_available_mib": 3632.44140625,
+          "rss_mib": 348.7734375,
+          "private_commit_mib": 362.69140625,
+          "peak_working_set_mib": 722.70703125,
+          "peak_private_commit_mib": 926.3125
+        },
+        "after": {
+          "commit_total_mib": 24439.14453125,
+          "commit_limit_mib": 33086.86328125,
+          "commit_headroom_mib": 8647.71875,
+          "physical_available_mib": 3564.3203125,
+          "rss_mib": 348.7734375,
+          "private_commit_mib": 362.69140625,
+          "peak_working_set_mib": 722.70703125,
+          "peak_private_commit_mib": 926.3125
+        }
+      },
+      "restore_exact_h160_safe_modes": {
+        "elapsed_seconds": 0.7189999999973224,
+        "before": {
+          "commit_total_mib": 24439.14453125,
+          "commit_limit_mib": 33086.86328125,
+          "commit_headroom_mib": 8647.71875,
+          "physical_available_mib": 3564.3203125,
+          "rss_mib": 348.7890625,
+          "private_commit_mib": 362.70703125,
+          "peak_working_set_mib": 722.70703125,
+          "peak_private_commit_mib": 926.3125
+        },
+        "after": {
+          "commit_total_mib": 24665.2890625,
+          "commit_limit_mib": 33086.86328125,
+          "commit_headroom_mib": 8421.57421875,
+          "physical_available_mib": 3473.98046875,
+          "rss_mib": 381.1171875,
+          "private_commit_mib": 394.3671875,
+          "peak_working_set_mib": 722.70703125,
+          "peak_private_commit_mib": 926.3125
+        }
+      },
+      "stage_physical_operator_and_rhs": {
+        "elapsed_seconds": 2.4530000000086147,
+        "before": {
+          "commit_total_mib": 24665.2890625,
+          "commit_limit_mib": 33086.86328125,
+          "commit_headroom_mib": 8421.57421875,
+          "physical_available_mib": 3473.73046875,
+          "rss_mib": 381.1171875,
+          "private_commit_mib": 394.3671875,
+          "peak_working_set_mib": 722.70703125,
+          "peak_private_commit_mib": 926.3125
+        },
+        "after": {
+          "commit_total_mib": 25979.09375,
+          "commit_limit_mib": 33086.86328125,
+          "commit_headroom_mib": 7107.76953125,
+          "physical_available_mib": 2424.7578125,
+          "rss_mib": 962.97265625,
+          "private_commit_mib": 1071.05859375,
+          "peak_working_set_mib": 1380.5234375,
+          "peak_private_commit_mib": 1489.546875
+        }
+      }
+    },
+    "run": {
+      "initial_memory": {
+        "commit_total_mib": 22937.19140625,
+        "commit_limit_mib": 33086.86328125,
+        "commit_headroom_mib": 10149.671875,
+        "physical_available_mib": 4690.06640625
+      },
+      "available_floor_mib": 400,
+      "commit_headroom_floor_mib": 512,
+      "sample_interval_seconds": 0.1,
+      "worker_exit_code": 0,
+      "elapsed_seconds": 52.39100000000326,
+      "peak_tree_rss_mib": 1330.1015625,
+      "peak_tree_private_commit_mib": 1490.34375,
+      "minimum_available_mib": 2277.765625,
+      "minimum_commit_headroom_mib": 6802.78125
+    }
+  },
+  "full_device_h130_lgmres_mixed_fill12": {
+    "status": "solved",
+    "scope": "h130, exact cached complex128 operator and five left-incidence drives at 1 GHz. Only incomplete factorization and preconditioner application use complex64.",
+    "scattering_computed": false,
+    "body_dofs": 225747,
+    "operator": {
+      "nonzero_storage": 17156075,
+      "array_bytes": 344024492
+    },
+    "admission": {
+      "ilu_settings": {
+        "drop_tol": 0.0001,
+        "fill_factor": 12.0,
+        "permc_spec": "COLAMD"
+      },
+      "lgmres_settings": {
+        "inner_m": 50,
+        "outer_k": 3,
+        "maxiter": 30,
+        "rtol": 1e-10,
+        "atol": 0.0
+      },
+      "fill10_initial_native_buffers_mib": 6544.523239135742,
+      "complex128_fill8_initial_native_buffers_mib": 5235.618591308594,
+      "mixed_fill12_initial_native_buffers_mib": 4712.056732177734,
+      "factor_input_dtype": "complex64",
+      "outer_dtype": "complex128",
+      "required_launch_commit_headroom_mib": 5736.056732177734,
+      "required_launch_physical_mib": 1200,
+      "required_margin_mib": 1024,
+      "physical_floor_mib": 400,
+      "commit_floor_mib": 512,
+      "wall_cap_seconds": 1800,
+      "measured_h160_wall_seconds": 75.34300000000803,
+      "selection_basis": "Use the previously verified h160 complex64 fill12 preconditioner settings on the h130 staged matrix. The measured larger operator sets the 24-byte-per-fill allocation estimate. Require 1024 MiB additional system commit headroom after the factor input is resident.",
+      "initial_windows_memory": {
+        "commit_total_mib": 25718.91015625,
+        "commit_limit_mib": 33086.86328125,
+        "commit_headroom_mib": 7367.953125,
+        "physical_available_mib": 2826.72265625
+      }
+    },
+    "channels": [
+      {
+        "column": 0,
+        "status": "accepted",
+        "rhs_column_sha256": "6d3a8bf13429839708f085196d571106471c6a7fd10ff5f9dafa230bf96f1254",
+        "initial_iterate_sha256": null,
+        "raw_info": 0,
+        "info": 0,
+        "relative_true_residual": 3.2734492799647074e-11,
+        "relative_backward_residual": 2.1134948605723968e-14,
+        "elapsed_seconds": 25.0,
+        "initial_relative_true_residual": 1.0,
+        "outer_updates": 3,
+        "latest_checkpoint": {
+          "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/latest_column_1_AP_pnc.npz",
+          "sha256": "211fd59eec4165fcc9f235e7c9b0f3e40b88d9bfc71a3f57dbee3ed580de0653",
+          "bytes": 3615332,
+          "stage": "solver_return"
+        },
+        "solution": {
+          "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/solution_column_1_AP_pnc.npy",
+          "sha256": "69255f3d188f16873f9da038fc2d9e64e175b59e7d6db5c6130aee7033a6daec",
+          "bytes": 3612080
+        }
+      },
+      {
+        "column": 1,
+        "status": "accepted",
+        "rhs_column_sha256": "fe73733a4a0d5ece9d3e5e6d95ca09068049d36e5ea075de26be9f6e22b67218",
+        "initial_iterate_sha256": null,
+        "raw_info": 0,
+        "info": 0,
+        "relative_true_residual": 3.3457725001974065e-11,
+        "relative_backward_residual": 4.430191190130026e-15,
+        "elapsed_seconds": 25.922000000005937,
+        "initial_relative_true_residual": 1.0,
+        "outer_updates": 3,
+        "latest_checkpoint": {
+          "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/latest_column_2_AP_pnc.npz",
+          "sha256": "b86fe6648909fc263f9d0d2fdf210eb11cc1c89a69c4aa620bbc46af456bfa8c",
+          "bytes": 3615332,
+          "stage": "solver_return"
+        },
+        "solution": {
+          "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/solution_column_2_AP_pnc.npy",
+          "sha256": "d14912cd09660a7e297ca16276de9752646c1fa9336f552fbfbbbcf13739c3bb",
+          "bytes": 3612080
+        }
+      },
+      {
+        "column": 2,
+        "status": "accepted",
+        "rhs_column_sha256": "e0f7bf46009a2947d2d02b04fc8a908b1ff29a98afcb3dd64a8c4ea068110798",
+        "initial_iterate_sha256": null,
+        "raw_info": 0,
+        "info": 0,
+        "relative_true_residual": 2.0076848496157206e-11,
+        "relative_backward_residual": 2.140243442412895e-14,
+        "elapsed_seconds": 26.75,
+        "initial_relative_true_residual": 1.0,
+        "outer_updates": 3,
+        "latest_checkpoint": {
+          "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/latest_column_3_AP_pnc.npz",
+          "sha256": "2a0c24fb51061525215253effa8656eade3fbb45c8e8778e0c19b6cc1691fb28",
+          "bytes": 3615332,
+          "stage": "solver_return"
+        },
+        "solution": {
+          "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/solution_column_3_AP_pnc.npy",
+          "sha256": "20a91c7fbb3db2a26dee5c9c3afd6eff4ce616c630931135fd98ab7ebc9ba9f1",
+          "bytes": 3612080
+        }
+      },
+      {
+        "column": 3,
+        "status": "accepted",
+        "rhs_column_sha256": "79f1e14a6fb24076e668991c5bb2b678e25cffdf59577443a45e21617a46dd80",
+        "initial_iterate_sha256": null,
+        "raw_info": 0,
+        "info": 0,
+        "relative_true_residual": 3.2848875486177866e-11,
+        "relative_backward_residual": 1.2187007226933537e-14,
+        "elapsed_seconds": 24.85899999999674,
+        "initial_relative_true_residual": 1.0,
+        "outer_updates": 3,
+        "latest_checkpoint": {
+          "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/latest_column_4_AP_pnc.npz",
+          "sha256": "27a7700e15138f1733e0fd8fe09f67b45e46fbfa01848315dbc28f54f5ed85f0",
+          "bytes": 3615332,
+          "stage": "solver_return"
+        },
+        "solution": {
+          "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/solution_column_4_AP_pnc.npy",
+          "sha256": "78c5b5eaed87214caf78bd1a21536a9ef886601c1f0aaa8d1c616eb6f09ad839",
+          "bytes": 3612080
+        }
+      },
+      {
+        "column": 4,
+        "status": "accepted",
+        "rhs_column_sha256": "69fb76a4dcb2f1d968fa5c04a513f5121ee64018e8d1cac0f11c4b9f5adcecb0",
+        "initial_iterate_sha256": null,
+        "raw_info": 0,
+        "info": 0,
+        "relative_true_residual": 1.0715828420795104e-11,
+        "relative_backward_residual": 4.907945901666079e-15,
+        "elapsed_seconds": 25.937000000005355,
+        "initial_relative_true_residual": 1.0,
+        "outer_updates": 3,
+        "latest_checkpoint": {
+          "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/latest_column_5_AP_pnc.npz",
+          "sha256": "0129ccadc06bf7578e61d61f4b68e7fc229459edc82ed8f5d375a1042fa24dae",
+          "bytes": 3615332,
+          "stage": "solver_return"
+        },
+        "solution": {
+          "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/solution_column_5_AP_pnc.npy",
+          "sha256": "e7deeb1ed13705746b4266078aa844e5eff1e8c221a77aa5f5fce297df895470",
+          "bytes": 3612080
+        }
+      }
+    ],
+    "raw_files": {
+      "budget": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/budget_AP_pnc.json",
+        "sha256": "6de62c7a16c152ee78aed146310a0293c7cd8d59ecacbde275a4077e27188d54",
+        "bytes": 1815
+      },
+      "execution": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/execution_AP_pnc.json",
+        "sha256": "44850de23868ae40e0ffb4ae3cbbb3bb2c5defa74d1adc51ad945c3ea980df83",
+        "bytes": 1051
+      },
+      "replay": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/replay_AP_pnc.json",
+        "sha256": "47f2c034f1a7027af2494bc63fa47bf1d6c0bef0628248eb319d24df8908c4f6",
+        "bytes": 14803
+      },
+      "log": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/worker_AP_pnc.log",
+        "sha256": "530ba073d1a18c14979dbe03f61d0f5e601ec025782bd68558284b7a4ca140c2",
+        "bytes": 255
+      },
+      "driver": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/run_AP_pnc.py",
+        "sha256": "29cc269ed2653596e393fac899b84dcd5c4154f99eb8bb1123b61e465f32933d",
+        "bytes": 18799
+      },
+      "monitor_helpers": {
+        "path": "results/runs/full_device_resource_profile/profile_AP_pnc.py",
+        "sha256": "f0dab5367f25016a5cea91d5809311ec89658a8c090ee53eb8dbafe934205911",
+        "bytes": 25492
+      },
+      "solution": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/solution_AP_pnc.npy",
+        "sha256": "591c9c00f0c539e902c6a027d1d1f79eac2dfaf03f70e5eb10d1c7e2ca14721b",
+        "bytes": 18059888
+      }
+    },
+    "run": {
+      "initial_windows_memory": {
+        "commit_total_mib": 25718.91015625,
+        "commit_limit_mib": 33086.86328125,
+        "commit_headroom_mib": 7367.953125,
+        "physical_available_mib": 2826.72265625
+      },
+      "initial_ilu_estimate_mib": 4712.056732177734,
+      "required_margin_mib": 1024,
+      "sample_interval_seconds": 0.1,
+      "available_floor_mib": 400,
+      "commit_headroom_floor_mib": 512,
+      "wall_cap_seconds": 1800,
+      "augmentation_estimate_mib": 20.667755126953125,
+      "worker_exit_code": 0,
+      "elapsed_seconds": 219.875,
+      "peak_tree_rss_mib": 2200.19921875,
+      "peak_tree_private_commit_mib": 5427.421875,
+      "minimum_available_mib": 668.2421875,
+      "minimum_commit_headroom_mib": 1286.46875
+    },
+    "initial_guess": "Zero for all five channels.",
+    "before_factorization": {
+      "commit_total_mib": 26184.765625,
+      "commit_limit_mib": 33086.86328125,
+      "commit_headroom_mib": 6902.09765625,
+      "physical_available_mib": 2298.65625,
+      "private_commit_mib": 583.45703125
+    },
+    "predicted_initial_ilu_buffers_mib": 4712.056732177734,
+    "operator_csc_sha256": "bbe75b8e58f0334d084620ac3fb9847e43d9a6e065030d19211ec813f301ee0f",
+    "rhs_array_sha256": "2f086547c5a4c80b20a6a2d9356f9b988ba62ad54606c4b3a43bafba197d6b7e",
+    "factor_input_csc_sha256": "28d5c249b84dee24cf73cbc6050ad9619085dd2814e8cf2bb9645efc1fbb6d4f",
+    "factor_input_bytes": 206775892,
+    "factor_input_dtype": "complex64",
+    "outer_dtype": "complex128",
+    "ilu_settings": {
+      "drop_tol": 0.0001,
+      "fill_factor": 12.0,
+      "permc_spec": "COLAMD"
+    },
+    "lgmres_settings": {
+      "inner_m": 50,
+      "outer_k": 3,
+      "maxiter": 30,
+      "rtol": 1e-10,
+      "atol": 0.0
+    },
+    "settings_sha256": "832d081277ac194d7101f926d328822beae2839c9523ab68835e3b5f5aa15ab9",
+    "relative_residual_limit": 1e-09,
+    "backward_residual_limit": 1e-09,
+    "preconditioner_nnz": 160198481,
+    "preconditioner_seconds": 88.98399999999674,
+    "peak_working_set_mib": 2196.140625,
+    "peak_private_commit_mib": 5426.54296875,
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "source_sha256": {
+      "spilu": "252737690439f6bf4c8f71da2cbcbe3e70bae8c4a6c713fedc88616f9dccdbb7",
+      "lgmres": "0c555fb496da5d8181b4a267f9a3260711794ce8a1308954aa4b59f88f67dcf6",
+      "_fgmres": "e89928d6ed66d2f62bb078bb39a15ae97ea6ed67967682b0d91fa705bb63ded5"
+    },
+    "numerical_threads": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1"
+    }
+  },
+  "full_device_h130_lgmres_public_replay": {
+    "status": "completed_unverified",
+    "scattering_computed": true,
+    "scope": "Cached production scattering postprocessing and export. K/M, SAFE modes and displacement are restored from the saved checkpoint. No FEM assembly, SAFE eigensolve or harmonic iteration.",
+    "configuration": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "schema_version": 1,
+      "name": "historical_26hole_layered_h130_ny12_z4",
+      "geometry": {
+        "length_nm": 16650,
+        "width_nm": 1000,
+        "thickness_nm": 200,
+        "pattern": {
+          "csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+          "x_offset_nm": 8325
+        }
+      },
+      "mesh": {
+        "kind": "layered",
+        "element_order": 2,
+        "mesh_size_nm": 130,
+        "port_size_nm": 83.33333333333333,
+        "circle_resolution": 32,
+        "thickness_layers": 4
+      },
+      "material": {
+        "name": "nominal_cubic_ge",
+        "C11_Pa": 128500000000.0,
+        "C12_Pa": 48300000000.0,
+        "C44_Pa": 66800000000.0,
+        "density_kg_m3": 5323,
+        "crystal_rotation": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "temperature_policy": "fixed_property_control",
+        "temperature_K": 4
+      },
+      "analysis": {
+        "kind": "scattering",
+        "boundary": "matched_ports",
+        "frequency_GHz": 1,
+        "incident_side": "left"
+      },
+      "resources": {
+        "max_dofs": 230000,
+        "max_port_dofs": 675,
+        "assembly_batch_elements": 2048,
+        "linear_solver": "ilu_lgmres",
+        "ilu_fill_factor": 12.0,
+        "ilu_precision": "single"
+      }
+    },
+    "export_implementation": {
+      "git_commit": "f2e41709fc4d8a02d695e27a077daf7421694633",
+      "source_sha256": {
+        "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+        "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/linear_lgmres_AP_pnc.py": "459589f4e5de39c888966305e28dbd2b16f2947ec427ae9c131c69ae47c609df",
+        "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/report_AP_pnc.py": "871fc6a358958c7908ad17f57521bdb51772ea82739d83cdbe5b4b536a5145c5",
+        "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+        "src/phononic/workflow_AP_pnc.py": "2ecccace6feee9456ed9a86744f246db7df34ade75a21dd3f0512d5ec553cbfa",
+        "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+      },
+      "packages": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "scikit-fem": "12.0.2",
+        "meshio": "5.3.5",
+        "gmsh": "4.15.2",
+        "matplotlib": "3.11.2",
+        "psutil": "7.2.2"
+      },
+      "python": "3.12.14",
+      "platform": "Windows-11-10.0.26200-SP0"
+    },
+    "physical_checks": {
+      "power_balance_passed": true,
+      "max_power_imbalance": 1.1498579866042746e-12,
+      "maximum_flux_power_imbalance": 1.1526335441658375e-12,
+      "maximum_net_outward_power_ratio": 1.2015943795518071e-12,
+      "maximum_modal_flux_difference": 2.814415367424772e-13,
+      "maximum_relative_solver_residual": 2.140243442412895e-14,
+      "maximum_relative_port_residual": 4.298888081297976e-15,
+      "spatial_convergence_established": false,
+      "channels": [
+        {
+          "incident_mode_order": 1,
+          "incident_root_index": 1348,
+          "reflection": 0.003172440986947174,
+          "transmission": 0.9968275590128604,
+          "reflection_flux": 0.003172440986939176,
+          "transmission_flux": 0.9968275590127454,
+          "power_balance": 1.9251267247000214e-13,
+          "flux_power_balance": 3.1541436129600697e-13,
+          "relative_residual": 2.1134948605723968e-14
+        },
+        {
+          "incident_mode_order": 2,
+          "incident_root_index": 1311,
+          "reflection": 0.00147423715390829,
+          "transmission": 0.9985257628465397,
+          "reflection_flux": 0.0014742371539135013,
+          "transmission_flux": 0.9985257628467084,
+          "power_balance": -4.4797499043625066e-13,
+          "flux_power_balance": -6.218359160925502e-13,
+          "relative_residual": 4.430191190130026e-15
+        },
+        {
+          "incident_mode_order": 3,
+          "incident_root_index": 1292,
+          "reflection": 0.0434215367982291,
+          "transmission": 0.956578463200621,
+          "reflection_flux": 0.04342153679820996,
+          "transmission_flux": 0.9565784632006374,
+          "power_balance": 1.1498579866042746e-12,
+          "flux_power_balance": 1.1526335441658375e-12,
+          "relative_residual": 2.140243442412895e-14
+        },
+        {
+          "incident_mode_order": 4,
+          "incident_root_index": 1284,
+          "reflection": 0.006950477694962805,
+          "transmission": 0.9930495223043866,
+          "reflection_flux": 0.0069504776949483125,
+          "transmission_flux": 0.9930495223043102,
+          "power_balance": 6.505906924303417e-13,
+          "flux_power_balance": 7.415179581471421e-13,
+          "relative_residual": 1.2187007226933537e-14
+        },
+        {
+          "incident_mode_order": 5,
+          "incident_root_index": 1274,
+          "reflection": 0.0031253578958920156,
+          "transmission": 0.9968746421044339,
+          "reflection_flux": 0.003125357895899136,
+          "transmission_flux": 0.9968746421041524,
+          "power_balance": -3.2585045772748344e-13,
+          "flux_power_balance": -5.162537064506978e-14,
+          "relative_residual": 4.907945901666079e-15
+        }
+      ],
+      "replay_relative_residuals": [
+        3.2734492799645096e-11,
+        3.345772500197364e-11,
+        2.0076848496155387e-11,
+        3.2848875486176974e-11,
+        1.0715828420795098e-11
+      ],
+      "replay_backward_residuals": [
+        2.1134948605723968e-14,
+        4.430191190130026e-15,
+        2.140243442412895e-14,
+        1.2187007226933537e-14,
+        4.907945901666079e-15
+      ]
+    },
+    "raw_files": {
+      "public_replay": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/public_replay_AP_pnc.json",
+        "sha256": "c00d0bea3b0f7f15f55c3d6babcfe043e0feeef9295147946909cc09ce063a8c",
+        "bytes": 6085
+      },
+      "public_summary": {
+        "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h130_ny12_z4-98860bb38cf7/summary_AP_pnc.json",
+        "sha256": "a1be82dc431b7f9f5afd8b71636c00966ded88b201dcc2a75a6661515b57f80a",
+        "bytes": 25114
+      },
+      "driver": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/export_AP_pnc.py",
+        "sha256": "3beff66416e76054b95cc65398aa78e907ef5100c8777de2964230a9a8cd867a",
+        "bytes": 10137
+      },
+      "stage": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/stages_AP_pnc.json",
+        "sha256": "8904453fae6bdf265f996dab00ad607f9b1e592ca0d59d504fb97d55a07ef392",
+        "bytes": 12853
+      },
+      "raw_solver": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/replay_AP_pnc.json",
+        "sha256": "47f2c034f1a7027af2494bc63fa47bf1d6c0bef0628248eb319d24df8908c4f6",
+        "bytes": 14803
+      },
+      "mesh": {
+        "path": "results/runs/full_device_layered_preflight/_meshes/b9e62272dea5ebcacee6bda955e2b7e47cdf457e6fa73a3ad204ddcdb02624b3/mesh_AP_pnc.npz",
+        "sha256": "19534b8071344fc61ffc6187f48a4c805b27fbe49f6c64678ca78c31639c4551",
+        "bytes": 369060
+      },
+      "solution": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/solution_AP_pnc.npy",
+        "sha256": "591c9c00f0c539e902c6a027d1d1f79eac2dfaf03f70e5eb10d1c7e2ca14721b",
+        "bytes": 18059888
+      },
+      "configuration_AP_pnc.json": {
+        "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h130_ny12_z4-98860bb38cf7/configuration_AP_pnc.json",
+        "sha256": "b6706cc975817e7d2a50b1525328d1d67916a606cab4d8310c2aaca0334fd6ba",
+        "bytes": 1336
+      },
+      "scattering_AP_pnc.csv": {
+        "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h130_ny12_z4-98860bb38cf7/scattering_AP_pnc.csv",
+        "sha256": "54d90dc397052012eddbc2d2df426c1c3da31dcadb948d0846128187d3c9f671",
+        "bytes": 919
+      },
+      "scattering_channels_AP_pnc.csv": {
+        "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h130_ny12_z4-98860bb38cf7/scattering_channels_AP_pnc.csv",
+        "sha256": "27865102f9e08a3520e555e169b561e6834bdeb0286419dc1d92eb7136929df7",
+        "bytes": 4680
+      },
+      "port_modes_AP_pnc.csv": {
+        "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h130_ny12_z4-98860bb38cf7/port_modes_AP_pnc.csv",
+        "sha256": "05772e7246425c3dabf48b2b230ab1a71e966db6e58bbb31112c3cb22f396480",
+        "bytes": 114211
+      },
+      "selected_fields_AP_pnc.npz": {
+        "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h130_ny12_z4-98860bb38cf7/selected_fields_AP_pnc.npz",
+        "sha256": "c6d629afb33e4a99e97a69ddb0db5ef542199a5ea50a208f6eee65b952c796bb",
+        "bytes": 33865996
+      },
+      "hole_pattern_AP_pnc.json": {
+        "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h130_ny12_z4-98860bb38cf7/hole_pattern_AP_pnc.json",
+        "sha256": "ad4b823990389fb26fe08c482281b11e3f2c32b1f52a78cf9b4ac62d79c70868",
+        "bytes": 3391
+      }
+    },
+    "elapsed_seconds": 6.2960000000020955,
+    "scattering": {
+      "frequency_hz": 1000000000.0,
+      "incident_side": "left",
+      "amplitude_format": "Each complex coefficient is stored as [real, imaginary]. Rows are outgoing modes and columns incident modes at the original end planes.",
+      "dimensions_nm": {
+        "length_nm": 16650,
+        "width_nm": 1000,
+        "thickness_nm": 200
+      },
+      "numerical_source_sha256": {
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+        "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+        "src/phononic/linear_lgmres_AP_pnc.py": "459589f4e5de39c888966305e28dbd2b16f2947ec427ae9c131c69ae47c609df"
+      },
+      "section_checkpoint": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/ports_AP_pnc.npz",
+        "sha256": "988670170e2daf71ee24a8ef75dbee0924251fe4d6fddf91e5a593d31bad58ee",
+        "bytes": 29223616
+      },
+      "groups": {
+        "incoming": {
+          "root_indices": [
+            1348,
+            1311,
+            1292,
+            1284,
+            1274
+          ],
+          "wavenumbers_rad_m": [
+            1446668.9722198995,
+            1455967.0707150882,
+            2796959.945550218,
+            4103493.19443145,
+            5196894.30896118
+          ],
+          "signed_power_w": [
+            1.0000000000000002,
+            0.9999999999999989,
+            0.9999999999999998,
+            0.9999999999999998,
+            1.0000000000000002
+          ]
+        },
+        "reflection": {
+          "root_indices": [
+            1349,
+            1312,
+            1293,
+            1285,
+            1275
+          ],
+          "wavenumbers_rad_m": [
+            -1446668.9722198995,
+            -1455967.0707150882,
+            -2796959.945550218,
+            -4103493.19443145,
+            -5196894.30896118
+          ],
+          "signed_power_w": [
+            -1.0000000000000002,
+            -0.9999999999999989,
+            -0.9999999999999998,
+            -0.9999999999999998,
+            -1.0000000000000002
+          ]
+        },
+        "transmission": {
+          "root_indices": [
+            1348,
+            1311,
+            1292,
+            1284,
+            1274
+          ],
+          "wavenumbers_rad_m": [
+            1446668.9722198995,
+            1455967.0707150882,
+            2796959.945550218,
+            4103493.19443145,
+            5196894.30896118
+          ],
+          "signed_power_w": [
+            1.0000000000000002,
+            0.9999999999999989,
+            0.9999999999999998,
+            0.9999999999999998,
+            1.0000000000000002
+          ]
+        }
+      },
+      "reflection_amplitudes": [
+        [
+          [
+            -0.020562503506234713,
+            0.052435743367099594
+          ],
+          [
+            0.00013404622035820306,
+            3.59644340222533e-05
+          ],
+          [
+            4.2489225256969875e-05,
+            -0.0002085288242117479
+          ],
+          [
+            5.524595238076216e-05,
+            -0.00021604881371167217
+          ],
+          [
+            3.083716595967642e-05,
+            4.497190518075987e-05
+          ]
+        ],
+        [
+          [
+            0.00013404622056588744,
+            3.5964436300947116e-05
+          ],
+          [
+            -0.0016683057419480498,
+            -0.0008528657667811544
+          ],
+          [
+            4.497345328930578e-05,
+            0.00022978649649482998
+          ],
+          [
+            0.0005227566275010168,
+            0.00015306838623048674
+          ],
+          [
+            0.03294906774094061,
+            0.019614144749115547
+          ]
+        ],
+        [
+          [
+            4.24892254577832e-05,
+            -0.00020852882422471114
+          ],
+          [
+            4.4973453075704224e-05,
+            0.00022978649554439203
+          ],
+          [
+            0.015784891035253542,
+            0.207779030790309
+          ],
+          [
+            -0.00012566693422246517,
+            -0.00017245681463183741
+          ],
+          [
+            -0.0003196788214267235,
+            -2.312885112113036e-05
+          ]
+        ],
+        [
+          [
+            5.524595296203745e-05,
+            -0.00021604881394444886
+          ],
+          [
+            0.0005227566293082422,
+            0.00015306838810077677
+          ],
+          [
+            -0.00012566693390716522,
+            -0.0001724568147868626
+          ],
+          [
+            0.02221730050080171,
+            0.08035202550455289
+          ],
+          [
+            0.00015964707117923082,
+            6.161484814283618e-05
+          ]
+        ],
+        [
+          [
+            3.083716454221801e-05,
+            4.4971903983287443e-05
+          ],
+          [
+            0.03294906774004107,
+            0.019614144748269436
+          ],
+          [
+            -0.0003196788212781973,
+            -2.312885237230016e-05
+          ],
+          [
+            0.00015964707064974542,
+            6.161484806899023e-05
+          ],
+          [
+            0.01191904304217996,
+            -0.038894775782125246
+          ]
+        ]
+      ],
+      "transmission_amplitudes": [
+        [
+          [
+            0.9283483412382973,
+            0.367419175242847
+          ],
+          [
+            7.693980800468869e-05,
+            1.4473258868087099e-05
+          ],
+          [
+            0.00022824761136732628,
+            2.1230168395159892e-05
+          ],
+          [
+            6.257510725854741e-05,
+            0.0001646518738658066
+          ],
+          [
+            -1.1942107922206713e-05,
+            1.3235359417764764e-05
+          ]
+        ],
+        [
+          [
+            3.860861868207928e-05,
+            7.11003286959184e-05
+          ],
+          [
+            -0.7081920905425415,
+            -0.7049688912301402
+          ],
+          [
+            -0.0001789256178552125,
+            0.0005386021102834009
+          ],
+          [
+            -0.0007042450158229012,
+            -0.0002715108823034666
+          ],
+          [
+            -0.001829199088902034,
+            -0.002373186581945257
+          ]
+        ],
+        [
+          [
+            -0.00017244862998092277,
+            -3.789720513497767e-05
+          ],
+          [
+            0.0001814069721974518,
+            -0.0005231380850239751
+          ],
+          [
+            0.9751371164595394,
+            -0.0754031166386815
+          ],
+          [
+            -1.0049516112334985e-05,
+            0.00010933076819122371
+          ],
+          [
+            -0.00019742551754067567,
+            -0.00013882848570591312
+          ]
+        ],
+        [
+          [
+            4.879244996540479e-05,
+            -0.00016031862299321472
+          ],
+          [
+            0.0007677771260498949,
+            6.198959521225061e-05
+          ],
+          [
+            -0.00010351534742777646,
+            -9.942031867714402e-05
+          ],
+          [
+            -0.9593107186757908,
+            0.26976255090437923
+          ],
+          [
+            -0.00010535368614054765,
+            3.9858486765661995e-05
+          ]
+        ],
+        [
+          [
+            -3.0392514255468793e-06,
+            1.3572641880337532e-05
+          ],
+          [
+            -0.0020994682196991414,
+            -0.0018095123334167208
+          ],
+          [
+            0.00020417442750647353,
+            -1.906418055301563e-05
+          ],
+          [
+            -0.00012995898624177364,
+            -6.179848947308452e-05
+          ],
+          [
+            0.9563992101593227,
+            0.2866463739019351
+          ]
+        ]
+      ]
+    }
+  },
+  "full_device_h160_h130_mixed_comparison": {
+    "status": "compared",
+    "comparison_hash": "ceb4dfa75228cbef5dc21e64cafe6ef2d1dd98f5881d959f3b8e37c15c8dd09b",
+    "implementation": {
+      "tool_sha256": "183d1945da57c89ac80ded6152efe6f57a2b9f9b14b645da7a6d2572588ccf12",
+      "python": "3.12.14",
+      "packages": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "scikit-fem": "12.0.2"
+      }
+    },
+    "comparison_kind": "mesh_sensitivity",
+    "scope": "Saved runs are compared at the same reference planes after matching unit-power channels. The comparison covers one frequency and incidence side. Mesh-pair checks require distinct discretizations and passing input power-balance checks. A pass does not establish continuum accuracy or a frequency-band result.",
+    "discretization_sha256": {
+      "reference": "a70f520dc2488d16dd67fc01c19f0678e220089933d69137d2385ffce683cb3f",
+      "candidate": "e76c419aee827f7cb2347bd7a284f8892d39f35dd2cd8ae0ab2f3cd683d52472"
+    },
+    "physical_inputs": {
+      "dimensions_nm": {
+        "length_nm": 16650,
+        "width_nm": 1000,
+        "thickness_nm": 200
+      },
+      "placed_holes_m": [
+        [
+          1.6250000000000005e-06,
+          2.5000000000000004e-07
+        ],
+        [
+          2.1750000000000004e-06,
+          2.5000000000000004e-07
+        ],
+        [
+          2.725e-06,
+          2.5000000000000004e-07
+        ],
+        [
+          3.275000000000001e-06,
+          2.5000000000000004e-07
+        ],
+        [
+          3.825000000000001e-06,
+          2.5000000000000004e-07
+        ],
+        [
+          4.3750000000000005e-06,
+          2.5000000000000004e-07
+        ],
+        [
+          4.925000000000001e-06,
+          2.5000000000000004e-07
+        ],
+        [
+          5.475000000000001e-06,
+          2.5000000000000004e-07
+        ],
+        [
+          6.015000000000001e-06,
+          2.55e-07
+        ],
+        [
+          6.545000000000001e-06,
+          2.6e-07
+        ],
+        [
+          7.065000000000001e-06,
+          2.65e-07
+        ],
+        [
+          7.575000000000001e-06,
+          2.7e-07
+        ],
+        [
+          8.075000000000001e-06,
+          2.75e-07
+        ],
+        [
+          8.575e-06,
+          2.75e-07
+        ],
+        [
+          9.075e-06,
+          2.7e-07
+        ],
+        [
+          9.585e-06,
+          2.65e-07
+        ],
+        [
+          1.0105e-05,
+          2.6e-07
+        ],
+        [
+          1.0635e-05,
+          2.55e-07
+        ],
+        [
+          1.1175e-05,
+          2.5000000000000004e-07
+        ],
+        [
+          1.1725e-05,
+          2.5000000000000004e-07
+        ],
+        [
+          1.2275e-05,
+          2.5000000000000004e-07
+        ],
+        [
+          1.2825e-05,
+          2.5000000000000004e-07
+        ],
+        [
+          1.3375e-05,
+          2.5000000000000004e-07
+        ],
+        [
+          1.3925000000000001e-05,
+          2.5000000000000004e-07
+        ],
+        [
+          1.4475000000000001e-05,
+          2.5000000000000004e-07
+        ],
+        [
+          1.5025000000000001e-05,
+          2.5000000000000004e-07
+        ]
+      ],
+      "material": {
+        "C11_Pa": 128500000000.0,
+        "C12_Pa": 48300000000.0,
+        "C44_Pa": 66800000000.0,
+        "density_kg_m3": 5323,
+        "crystal_rotation": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "temperature_policy": "fixed_property_control"
+      },
+      "frequency_hz": 1000000000.0,
+      "incident_side": "left",
+      "numerical_source_sha256": {
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+        "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+        "src/phononic/linear_lgmres_AP_pnc.py": "459589f4e5de39c888966305e28dbd2b16f2947ec427ae9c131c69ae47c609df"
+      }
+    },
+    "linear_solver_compatibility": null,
+    "input_power_checks_passed": true,
+    "matched_channels": {
+      "incoming": {
+        "reference_roots": [
+          1348,
+          1311,
+          1292,
+          1284,
+          1274
+        ],
+        "candidate_roots": [
+          1348,
+          1311,
+          1292,
+          1284,
+          1274
+        ],
+        "mass_overlaps": [
+          1.0,
+          0.9999999999999999,
+          0.9999999999999999,
+          0.9999999999999999,
+          0.9999999999999998
+        ],
+        "candidate_gauge_phase_rad": [
+          3.692106574277327e-29,
+          2.2302754560138722e-29,
+          -8.21164154325514e-31,
+          -8.659252394913517e-32,
+          2.8388720373445283e-31
+        ],
+        "reference_wavenumber_rad_m": [
+          1446668.9722198995,
+          1455967.0707150882,
+          2796959.945550218,
+          4103493.19443145,
+          5196894.30896118
+        ],
+        "candidate_wavenumber_rad_m": [
+          1446668.9722198995,
+          1455967.0707150882,
+          2796959.945550218,
+          4103493.19443145,
+          5196894.30896118
+        ],
+        "relative_wavenumber_change": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "reflection": {
+        "reference_roots": [
+          1349,
+          1312,
+          1293,
+          1285,
+          1275
+        ],
+        "candidate_roots": [
+          1349,
+          1312,
+          1293,
+          1285,
+          1275
+        ],
+        "mass_overlaps": [
+          1.0,
+          0.9999999999999999,
+          0.9999999999999999,
+          0.9999999999999999,
+          0.9999999999999998
+        ],
+        "candidate_gauge_phase_rad": [
+          -3.692106574277327e-29,
+          -2.2302754560138722e-29,
+          8.21164154325514e-31,
+          8.659252394913517e-32,
+          -2.8388720373445283e-31
+        ],
+        "reference_wavenumber_rad_m": [
+          -1446668.9722198995,
+          -1455967.0707150882,
+          -2796959.945550218,
+          -4103493.19443145,
+          -5196894.30896118
+        ],
+        "candidate_wavenumber_rad_m": [
+          -1446668.9722198995,
+          -1455967.0707150882,
+          -2796959.945550218,
+          -4103493.19443145,
+          -5196894.30896118
+        ],
+        "relative_wavenumber_change": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "transmission": {
+        "reference_roots": [
+          1348,
+          1311,
+          1292,
+          1284,
+          1274
+        ],
+        "candidate_roots": [
+          1348,
+          1311,
+          1292,
+          1284,
+          1274
+        ],
+        "mass_overlaps": [
+          1.0,
+          0.9999999999999999,
+          0.9999999999999999,
+          0.9999999999999999,
+          0.9999999999999998
+        ],
+        "candidate_gauge_phase_rad": [
+          3.692106574277327e-29,
+          2.2302754560138722e-29,
+          -8.21164154325514e-31,
+          -8.659252394913517e-32,
+          2.8388720373445283e-31
+        ],
+        "reference_wavenumber_rad_m": [
+          1446668.9722198995,
+          1455967.0707150882,
+          2796959.945550218,
+          4103493.19443145,
+          5196894.30896118
+        ],
+        "candidate_wavenumber_rad_m": [
+          1446668.9722198995,
+          1455967.0707150882,
+          2796959.945550218,
+          4103493.19443145,
+          5196894.30896118
+        ],
+        "relative_wavenumber_change": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "power_change_limit": 0.01,
+    "complex_change_limit": 0.01,
+    "maximum_power_change": 0.0008481044352414407,
+    "maximum_complex_change": 0.10704320140887089,
+    "power_passed": true,
+    "complex_passed": false,
+    "mesh_pair_passed": false,
+    "block_maximum_changes": {
+      "reflection": {
+        "maximum_power_change": 0.0008481044352414407,
+        "maximum_complex_change": 0.011026649998662031
+      },
+      "transmission": {
+        "maximum_power_change": 0.0008481044348653821,
+        "maximum_complex_change": 0.10704320140887089
+      }
+    },
+    "same_channel_transmission_phase_change_rad": [
+      0.009342669354298234,
+      0.1071828534757803,
+      0.03896365809076865,
+      0.10645206762416014,
+      0.08756374807312818
+    ],
+    "reference_case": "full_device_h160_lgmres_public_replay",
+    "candidate_case": "full_device_h130_lgmres_public_replay",
+    "reference_planes_m": {
+      "xleft": 0,
+      "xright": 1.665e-05
+    },
+    "phase_adjustment_applied": false,
+    "raw_files": {
+      "summary": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/comparison/scattering-ceb4dfa75228cbef/summary_AP_pnc.json",
+        "sha256": "47afacf20e6f331d07e1278a69b332dc0c70471147345165563ffd527256158f",
+        "bytes": 39389
+      },
+      "comparison_AP_pnc.csv": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/comparison/scattering-ceb4dfa75228cbef/comparison_AP_pnc.csv",
+        "sha256": "db325dc5bfd461739d9ab8d5f8ea74a562e02c6f1bcf09f81e883dd96953ff11",
+        "bytes": 1878
+      },
+      "report_AP_pnc.html": {
+        "path": "results/runs/full_device_resource_profile/full_h130_operator_84xaqgtd/lgmres_mixed_fill12/comparison/scattering-ceb4dfa75228cbef/report_AP_pnc.html",
+        "sha256": "bc91bc91241b859530cef677c17f7d8fca91832fc31953437c848c31e4e4e17f",
+        "bytes": 3416
+      }
+    }
+  },
+  "full_device_uniform_h160_h130_diagnostic": {
+    "status": "diagnostic_completed",
+    "length_m": 3e-06,
+    "frequency_hz": 1000000000.0,
+    "scope": "Uniform-guide in-plane sensitivity at a fixed discrete SAFE basis. No phase correction to patterned-device scattering.",
+    "roots": [
+      1348,
+      1311,
+      1292,
+      1284,
+      1274
+    ],
+    "wavenumbers_rad_m": [
+      1446668.9722198995,
+      1455967.0707150882,
+      2796959.945550218,
+      4103493.19443145,
+      5196894.30896118
+    ],
+    "same_channel_phase_difference_rad": [
+      3.5024907915573706e-06,
+      0.018359834988352683,
+      0.000347082618590965,
+      0.015579000858384127,
+      0.013504502877008063
+    ],
+    "same_channel_phase_difference_rad_per_um": [
+      1.1674969305191235e-06,
+      0.006119944996117561,
+      0.00011569420619698832,
+      0.005193000286128042,
+      0.0045015009590026875
+    ],
+    "maximum_power_change": 1.10162253258604e-06,
+    "maximum_reflection_complex_change": 0.0007024047932096515,
+    "maximum_transmission_complex_change": 0.018359561587340045,
+    "cases": {
+      "160": {
+        "ndof": 19197,
+        "same_channel_native_phase_error_rad": [
+          -6.0508602070933804e-06,
+          -0.029994663993413908,
+          -0.0006058863173682165,
+          -0.030544748677074015,
+          -0.027802568168695623
+        ],
+        "maximum_native_complex_error": 0.030543557421908136,
+        "maximum_reflection_amplitude": 0.001272118484284759,
+        "status": "completed_unverified",
+        "configuration": {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "schema_version": 1,
+          "name": "uniform_3um_layered_h160_ny12_z4",
+          "geometry": {
+            "length_nm": 3000,
+            "width_nm": 1000,
+            "thickness_nm": 200
+          },
+          "mesh": {
+            "kind": "layered",
+            "element_order": 2,
+            "mesh_size_nm": 160,
+            "port_size_nm": 83.33333333333333,
+            "circle_resolution": 32,
+            "thickness_layers": 4
+          },
+          "material": {
+            "name": "nominal_cubic_ge",
+            "C11_Pa": 128500000000.0,
+            "C12_Pa": 48300000000.0,
+            "C44_Pa": 66800000000.0,
+            "density_kg_m3": 5323,
+            "crystal_rotation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ],
+            "temperature_policy": "fixed_property_control",
+            "temperature_K": 4
+          },
+          "analysis": {
+            "kind": "scattering",
+            "boundary": "matched_ports",
+            "frequency_GHz": 1,
+            "incident_side": "left"
+          },
+          "resources": {
+            "max_dofs": 30000,
+            "max_port_dofs": 675,
+            "assembly_batch_elements": 2048,
+            "linear_solver": "ilu_lgmres",
+            "ilu_fill_factor": 12,
+            "ilu_precision": "single"
+          }
+        },
+        "implementation": {
+          "git_commit": null,
+          "source_sha256": {
+            "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+            "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+            "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+            "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+            "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+            "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+            "src/phononic/linear_lgmres_AP_pnc.py": "459589f4e5de39c888966305e28dbd2b16f2947ec427ae9c131c69ae47c609df",
+            "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+            "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+            "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+            "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+            "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+            "src/phononic/report_AP_pnc.py": "871fc6a358958c7908ad17f57521bdb51772ea82739d83cdbe5b4b536a5145c5",
+            "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+            "src/phononic/workflow_AP_pnc.py": "2ecccace6feee9456ed9a86744f246db7df34ade75a21dd3f0512d5ec553cbfa",
+            "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+          },
+          "packages": {
+            "numpy": "2.5.4",
+            "scipy": "1.18.1",
+            "scikit-fem": "12.0.2",
+            "meshio": "5.3.5",
+            "gmsh": "4.15.2",
+            "matplotlib": "3.11.2",
+            "psutil": "7.2.2"
+          },
+          "python": "3.12.14",
+          "platform": "Windows-11-10.0.26200-SP0"
+        },
+        "raw_files": {
+          "case": {
+            "path": "results/runs/full_device_uniform_diagnostic/h160_s349u1qd/case_AP_pnc.json",
+            "sha256": "f2e5f8c2924e0a61055f462d15897bad61076b3e632968c1ab6bca9ab0f2e584",
+            "bytes": 4882
+          },
+          "execution": {
+            "path": "results/runs/full_device_uniform_diagnostic/h160_s349u1qd/execution_AP_pnc.json",
+            "sha256": "fb2f191163ce005b3b235b42ec5e28340cb8c31905eba2c1b18443b4e862a01f",
+            "bytes": 524
+          },
+          "public_summary": {
+            "path": "results/runs/full_device_uniform_diagnostic/uniform_3um_layered_h160_ny12_z4-731fc387b5fe/summary_AP_pnc.json",
+            "sha256": "871292ded4d84668567ca1b0d10bc36c30ee176e3048a0196977e7bd87bfb69e",
+            "bytes": 12914
+          },
+          "configuration_AP_pnc.json": {
+            "path": "results/runs/full_device_uniform_diagnostic/uniform_3um_layered_h160_ny12_z4-731fc387b5fe/configuration_AP_pnc.json",
+            "sha256": "48ec0e81410d12954d544e383aabe8cc32315e662196810932d20943108aaccc",
+            "bytes": 1209
+          },
+          "selected_fields_AP_pnc.npz": {
+            "path": "results/runs/full_device_uniform_diagnostic/uniform_3um_layered_h160_ny12_z4-731fc387b5fe/selected_fields_AP_pnc.npz",
+            "sha256": "64d8d30f3a081adc3289aa5f0bb4bc0f603df7b05a9bdbf417e0bcb7470acc74",
+            "bytes": 14654688
+          },
+          "scattering_AP_pnc.csv": {
+            "path": "results/runs/full_device_uniform_diagnostic/uniform_3um_layered_h160_ny12_z4-731fc387b5fe/scattering_AP_pnc.csv",
+            "sha256": "b2d93f2241060a9d3191a2c6f7360dc045bc3690a6ccc2434557b08838abedaa",
+            "bytes": 932
+          },
+          "scattering_channels_AP_pnc.csv": {
+            "path": "results/runs/full_device_uniform_diagnostic/uniform_3um_layered_h160_ny12_z4-731fc387b5fe/scattering_channels_AP_pnc.csv",
+            "sha256": "5d5a065f4ad8ea256302b813ad635e5f7ce78e1d80e1a8c0710b9630332a358e",
+            "bytes": 4715
+          },
+          "log": {
+            "path": "results/runs/full_device_uniform_diagnostic/h160_s349u1qd/worker_AP_pnc.log",
+            "sha256": "8db443b88b4441b719b1b72d65b6ffe896f198262550cf0879dec0b7a6ee647e",
+            "bytes": 52
+          }
+        },
+        "run": {
+          "status": "completed",
+          "limits": {
+            "wall_seconds": 90,
+            "rss_mib": 1300,
+            "private_commit_mib": 2400,
+            "physical_available_floor_mib": 400,
+            "commit_headroom_floor_mib": 512
+          },
+          "exit_code": 0,
+          "elapsed_seconds": 21.594000000011874,
+          "peak_process_tree_rss_mib": 432.43359375,
+          "peak_process_tree_private_commit_mib": 958.56640625,
+          "minimum_system_available_mib": 2766.0625,
+          "minimum_commit_headroom_mib": 6823.51953125
+        },
+        "physical_checks": {
+          "power_balance_passed": true,
+          "matched_reference_passed": true,
+          "max_power_imbalance": 8.587575095475586e-13,
+          "maximum_flux_power_imbalance": 8.40105762733856e-13,
+          "maximum_net_outward_power_ratio": 2.032374268878811e-12,
+          "maximum_modal_flux_difference": 4.4841907964610073e-13,
+          "maximum_relative_solver_residual": 5.638962535500857e-14,
+          "maximum_relative_port_residual": 4.298888081297976e-15,
+          "spatial_convergence_established": false,
+          "channels": [
+            {
+              "incident_mode_order": 1,
+              "incident_root_index": 1348,
+              "reflection": 4.718970242119764e-11,
+              "transmission": 0.999999999953557,
+              "reflection_flux": 4.7189697135868015e-11,
+              "transmission_flux": 0.9999999999536504,
+              "power_balance": -7.467360063628803e-13,
+              "flux_power_balance": -8.40105762733856e-13,
+              "relative_residual": 1.6959557171561828e-14
+            },
+            {
+              "incident_mode_order": 2,
+              "incident_root_index": 1311,
+              "reflection": 2.010696794773289e-06,
+              "transmission": 0.9999979893026495,
+              "reflection_flux": 2.0106967942741283e-06,
+              "transmission_flux": 0.9999979893024926,
+              "power_balance": 5.557776461273534e-13,
+              "flux_power_balance": 7.13096248716738e-13,
+              "relative_residual": 6.726376185820032e-15
+            },
+            {
+              "incident_mode_order": 3,
+              "incident_root_index": 1292,
+              "reflection": 1.3120689444389765e-09,
+              "transmission": 0.9999999986878885,
+              "reflection_flux": 1.3120689569974429e-09,
+              "transmission_flux": 0.9999999986879345,
+              "power_balance": 4.263256414560601e-14,
+              "flux_power_balance": -3.552713678800501e-15,
+              "relative_residual": 8.954842285631765e-15
+            },
+            {
+              "incident_mode_order": 4,
+              "incident_root_index": 1284,
+              "reflection": 3.4476298506900804e-07,
+              "transmission": 0.9999996552370027,
+              "reflection_flux": 3.4476298539342796e-07,
+              "transmission_flux": 0.9999996552369687,
+              "power_balance": 1.2212453270876722e-14,
+              "flux_power_balance": 4.596323321948148e-14,
+              "relative_residual": 1.1922524948937495e-14
+            },
+            {
+              "incident_mode_order": 5,
+              "incident_root_index": 1274,
+              "reflection": 1.3327585429960414e-06,
+              "transmission": 0.9999986672423158,
+              "reflection_flux": 1.3327585409214885e-06,
+              "transmission_flux": 0.9999986672418674,
+              "power_balance": -8.587575095475586e-13,
+              "flux_power_balance": -4.083400284571326e-13,
+              "relative_residual": 5.638962535500857e-14
+            }
+          ]
+        },
+        "linear_solver": {
+          "method": "ilu_lgmres",
+          "working_dtype": "complex128",
+          "factor_dtype": "complex64",
+          "preconditioner": {
+            "drop_tol": 0.0001,
+            "fill_factor": 12.0,
+            "permc_spec": "COLAMD",
+            "elapsed_seconds": 7.3887937999970745,
+            "factor_nonzeros": 15197719
+          },
+          "lgmres": {
+            "rtol": 1e-10,
+            "atol": 0,
+            "inner_m": 50,
+            "outer_k": 3,
+            "maxiter": 30
+          },
+          "relative_residual_limit": 1e-09,
+          "backward_residual_limit": 1e-09,
+          "operator_nonzeros": 2289981,
+          "operator_storage_bytes": 45876412,
+          "channels": [
+            {
+              "column": 0,
+              "info": 0,
+              "relative_residual": 1.8287035763830824e-11,
+              "relative_backward_residual": 1.6959557171561828e-14
+            },
+            {
+              "column": 1,
+              "info": 0,
+              "relative_residual": 2.1972123666496863e-11,
+              "relative_backward_residual": 6.726376185820032e-15
+            },
+            {
+              "column": 2,
+              "info": 0,
+              "relative_residual": 7.28110923730971e-12,
+              "relative_backward_residual": 8.954842285631765e-15
+            },
+            {
+              "column": 3,
+              "info": 0,
+              "relative_residual": 1.2775113638049715e-11,
+              "relative_backward_residual": 1.1922524948937495e-14
+            },
+            {
+              "column": 4,
+              "info": 0,
+              "relative_residual": 2.8263320696387627e-11,
+              "relative_backward_residual": 5.638962535500857e-14
+            }
+          ]
+        },
+        "scattering": {
+          "frequency_hz": 1000000000.0,
+          "incident_side": "left",
+          "groups": {
+            "incoming": {
+              "root_indices": [
+                1348,
+                1311,
+                1292,
+                1284,
+                1274
+              ],
+              "wavenumbers_rad_m": [
+                1446668.9722198995,
+                1455967.0707150882,
+                2796959.945550218,
+                4103493.19443145,
+                5196894.30896118
+              ],
+              "signed_power_w": [
+                1.0000000000000002,
+                0.9999999999999989,
+                0.9999999999999998,
+                0.9999999999999998,
+                1.0000000000000002
+              ]
+            },
+            "reflection": {
+              "root_indices": [
+                1349,
+                1312,
+                1293,
+                1285,
+                1275
+              ],
+              "wavenumbers_rad_m": [
+                -1446668.9722198995,
+                -1455967.0707150882,
+                -2796959.945550218,
+                -4103493.19443145,
+                -5196894.30896118
+              ],
+              "signed_power_w": [
+                -1.0000000000000002,
+                -0.9999999999999989,
+                -0.9999999999999998,
+                -0.9999999999999998,
+                -1.0000000000000002
+              ]
+            },
+            "transmission": {
+              "root_indices": [
+                1348,
+                1311,
+                1292,
+                1284,
+                1274
+              ],
+              "wavenumbers_rad_m": [
+                1446668.9722198995,
+                1455967.0707150882,
+                2796959.945550218,
+                4103493.19443145,
+                5196894.30896118
+              ],
+              "signed_power_w": [
+                1.0000000000000002,
+                0.9999999999999989,
+                0.9999999999999998,
+                0.9999999999999998,
+                1.0000000000000002
+              ]
+            }
+          },
+          "reflection_amplitudes": [
+            [
+              [
+                8.94087230154982e-07,
+                -2.4038564131317356e-07
+              ],
+              [
+                -1.0633300801515373e-06,
+                3.9329110189193164e-07
+              ],
+              [
+                2.920909023262439e-07,
+                -8.135358709656084e-08
+              ],
+              [
+                5.5652285547986256e-06,
+                3.3900412132262296e-07
+              ],
+              [
+                3.4979192258696913e-06,
+                -1.2779331979216158e-06
+              ]
+            ],
+            [
+              [
+                -1.063329603574652e-06,
+                3.9329027761531326e-07
+              ],
+              [
+                0.001212664745096726,
+                0.00038435615522382975
+              ],
+              [
+                2.338382734488943e-06,
+                4.142231715484236e-07
+              ],
+              [
+                0.0005076764434828842,
+                -0.0001181805148162062
+              ],
+              [
+                0.00025280608555098937,
+                -0.00023830969067233315
+              ]
+            ],
+            [
+              [
+                2.920902663489699e-07,
+                -8.135386285779776e-08
+              ],
+              [
+                2.338382553638412e-06,
+                4.142233070896708e-07
+              ],
+              [
+                -1.5461498506041117e-05,
+                -7.3277493849191745e-06
+              ],
+              [
+                6.076556940422833e-06,
+                3.913555482029841e-06
+              ],
+              [
+                2.83700796320187e-05,
+                -1.2509265363047718e-05
+              ]
+            ],
+            [
+              [
+                5.565228270505484e-06,
+                3.390032831201001e-07
+              ],
+              [
+                0.0005076764438765989,
+                -0.00011818051577522744
+              ],
+              [
+                6.076556755917347e-06,
+                3.913555774253623e-06
+              ],
+              [
+                -0.00019149146212220299,
+                -0.00010053910057246383
+              ],
+              [
+                0.00014915898685560565,
+                6.286619649150749e-05
+              ]
+            ],
+            [
+              [
+                3.4979196465934426e-06,
+                -1.2779327618052452e-06
+              ],
+              [
+                0.0002528060854050335,
+                -0.00023830969127956923
+              ],
+              [
+                2.8370079305373877e-05,
+                -1.250926403067106e-05
+              ],
+              [
+                0.0001491589856445165,
+                6.286619725903198e-05
+              ],
+              [
+                -3.136536395087812e-05,
+                0.001088070106964066
+              ]
+            ]
+          ],
+          "transmission_amplitudes": [
+            [
+              [
+                -0.3638409031943405,
+                -0.9314611087051644
+              ],
+              [
+                2.57621320515919e-06,
+                -1.656480956215686e-06
+              ],
+              [
+                -5.209088599675727e-07,
+                -4.253455516460348e-07
+              ],
+              [
+                -3.2678898073809286e-06,
+                7.58775131371236e-06
+              ],
+              [
+                -7.512958817158054e-07,
+                2.7169250002155875e-06
+              ]
+            ],
+            [
+              [
+                3.0145895260731182e-06,
+                -5.322418422462891e-07
+              ],
+              [
+                -0.36579045032466945,
+                -0.9306959766749162
+              ],
+              [
+                -9.821501272725333e-05,
+                -3.3114564618489027e-06
+              ],
+              [
+                0.00019402366357616928,
+                -0.0002344640217092601
+              ],
+              [
+                -0.0002901835935183143,
+                0.0003850419066633536
+              ]
+            ],
+            [
+              [
+                5.833256711581599e-07,
+                -3.3476027242600373e-07
+              ],
+              [
+                9.746614670567959e-05,
+                1.2556123571884258e-05
+              ],
+              [
+                -0.5109523493913019,
+                0.8596090297785831
+              ],
+              [
+                3.030423163623478e-05,
+                -2.0925522610090112e-05
+              ],
+              [
+                -1.5696392266648444e-05,
+                1.4399025179207637e-06
+              ]
+            ],
+            [
+              [
+                3.998735008739012e-06,
+                -7.229762741591602e-06
+              ],
+              [
+                -6.668428011113896e-05,
+                0.0002969635705460391
+              ],
+              [
+                2.7794720533626062e-05,
+                -2.4169798127952026e-05
+              ],
+              [
+                0.9592567406191633,
+                -0.28253495225594566
+              ],
+              [
+                -0.00024265908992303597,
+                -9.318123755847048e-05
+              ]
+            ],
+            [
+              [
+                -1.992360865243438e-06,
+                1.994236210864009e-06
+              ],
+              [
+                -0.0001901511418482336,
+                0.00044305388945332274
+              ],
+              [
+                7.3281815344631844e-06,
+                -1.3945812403178461e-05
+              ],
+              [
+                -0.00018141577386430205,
+                0.00018604492093660045
+              ],
+              [
+                -0.9894931147709133,
+                0.14457435034234573
+              ]
+            ]
+          ]
+        }
+      },
+      "130": {
+        "ndof": 26703,
+        "same_channel_native_phase_error_rad": [
+          -2.548369415534783e-06,
+          -0.011634829005061253,
+          -0.0002588036987772585,
+          -0.014965747818689906,
+          -0.01429806529168755
+        ],
+        "maximum_native_complex_error": 0.01496560740890951,
+        "maximum_reflection_amplitude": 0.000943195533913764,
+        "status": "completed_unverified",
+        "configuration": {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "schema_version": 1,
+          "name": "uniform_3um_layered_h130_ny12_z4",
+          "geometry": {
+            "length_nm": 3000,
+            "width_nm": 1000,
+            "thickness_nm": 200
+          },
+          "mesh": {
+            "kind": "layered",
+            "element_order": 2,
+            "mesh_size_nm": 130,
+            "port_size_nm": 83.33333333333333,
+            "circle_resolution": 32,
+            "thickness_layers": 4
+          },
+          "material": {
+            "name": "nominal_cubic_ge",
+            "C11_Pa": 128500000000.0,
+            "C12_Pa": 48300000000.0,
+            "C44_Pa": 66800000000.0,
+            "density_kg_m3": 5323,
+            "crystal_rotation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ],
+            "temperature_policy": "fixed_property_control",
+            "temperature_K": 4
+          },
+          "analysis": {
+            "kind": "scattering",
+            "boundary": "matched_ports",
+            "frequency_GHz": 1,
+            "incident_side": "left"
+          },
+          "resources": {
+            "max_dofs": 30000,
+            "max_port_dofs": 675,
+            "assembly_batch_elements": 2048,
+            "linear_solver": "ilu_lgmres",
+            "ilu_fill_factor": 12,
+            "ilu_precision": "single"
+          }
+        },
+        "implementation": {
+          "git_commit": null,
+          "source_sha256": {
+            "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+            "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+            "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+            "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+            "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+            "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+            "src/phononic/linear_lgmres_AP_pnc.py": "459589f4e5de39c888966305e28dbd2b16f2947ec427ae9c131c69ae47c609df",
+            "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+            "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+            "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+            "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+            "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+            "src/phononic/report_AP_pnc.py": "871fc6a358958c7908ad17f57521bdb51772ea82739d83cdbe5b4b536a5145c5",
+            "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+            "src/phononic/workflow_AP_pnc.py": "2ecccace6feee9456ed9a86744f246db7df34ade75a21dd3f0512d5ec553cbfa",
+            "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+          },
+          "packages": {
+            "numpy": "2.5.4",
+            "scipy": "1.18.1",
+            "scikit-fem": "12.0.2",
+            "meshio": "5.3.5",
+            "gmsh": "4.15.2",
+            "matplotlib": "3.11.2",
+            "psutil": "7.2.2"
+          },
+          "python": "3.12.14",
+          "platform": "Windows-11-10.0.26200-SP0"
+        },
+        "raw_files": {
+          "case": {
+            "path": "results/runs/full_device_uniform_diagnostic/h130_jclzjvk4/case_AP_pnc.json",
+            "sha256": "a3ba2788a522479701eb2a7979eeeb703071e450c378f0a75a35ce6f8c2671d1",
+            "bytes": 4884
+          },
+          "execution": {
+            "path": "results/runs/full_device_uniform_diagnostic/h130_jclzjvk4/execution_AP_pnc.json",
+            "sha256": "ec3d134ad304712a153665e2e7df72e19972a942d4452954837601ae071b7344",
+            "bytes": 522
+          },
+          "public_summary": {
+            "path": "results/runs/full_device_uniform_diagnostic/uniform_3um_layered_h130_ny12_z4-b8c0bf2d5187/summary_AP_pnc.json",
+            "sha256": "653dcdb1b38d102b74cb3ec15fb61763ecc92218f288c05ca9db62067fd9e0fe",
+            "bytes": 12907
+          },
+          "configuration_AP_pnc.json": {
+            "path": "results/runs/full_device_uniform_diagnostic/uniform_3um_layered_h130_ny12_z4-b8c0bf2d5187/configuration_AP_pnc.json",
+            "sha256": "6a23e86153dd0d39c1337445926a61f14aa37bae1a9d2794aca5779008478cb4",
+            "bytes": 1209
+          },
+          "selected_fields_AP_pnc.npz": {
+            "path": "results/runs/full_device_uniform_diagnostic/uniform_3um_layered_h130_ny12_z4-b8c0bf2d5187/selected_fields_AP_pnc.npz",
+            "sha256": "d338925f72c6de7728004c4122b008ccae42202989c07646dc0121a72c903459",
+            "bytes": 15369264
+          },
+          "scattering_AP_pnc.csv": {
+            "path": "results/runs/full_device_uniform_diagnostic/uniform_3um_layered_h130_ny12_z4-b8c0bf2d5187/scattering_AP_pnc.csv",
+            "sha256": "37a33a23e02a5dd0f5551794e16def9318dab3d706e9f98267aeaf8c8a6b401c",
+            "bytes": 933
+          },
+          "scattering_channels_AP_pnc.csv": {
+            "path": "results/runs/full_device_uniform_diagnostic/uniform_3um_layered_h130_ny12_z4-b8c0bf2d5187/scattering_channels_AP_pnc.csv",
+            "sha256": "6b9dcdd866619986024182dc34a879f42bcc0bf3d8d6836d605aa66babe48631",
+            "bytes": 4727
+          },
+          "log": {
+            "path": "results/runs/full_device_uniform_diagnostic/h130_jclzjvk4/worker_AP_pnc.log",
+            "sha256": "7194051683e54bd2c0f4e9d6a7e360bb0a4639fac8c3bc2dba5d9965ac7cf600",
+            "bytes": 102
+          }
+        },
+        "run": {
+          "status": "completed",
+          "limits": {
+            "wall_seconds": 90,
+            "rss_mib": 1300,
+            "private_commit_mib": 2400,
+            "physical_available_floor_mib": 400,
+            "commit_headroom_floor_mib": 512
+          },
+          "exit_code": 0,
+          "elapsed_seconds": 33.10899999999674,
+          "peak_process_tree_rss_mib": 534.2890625,
+          "peak_process_tree_private_commit_mib": 1156.69140625,
+          "minimum_system_available_mib": 2620.68359375,
+          "minimum_commit_headroom_mib": 6581.375
+        },
+        "physical_checks": {
+          "power_balance_passed": true,
+          "matched_reference_passed": true,
+          "max_power_imbalance": 9.553469126899472e-13,
+          "maximum_flux_power_imbalance": 5.017097848281082e-13,
+          "maximum_net_outward_power_ratio": 5.052624985069088e-13,
+          "maximum_modal_flux_difference": 4.537481501643015e-13,
+          "maximum_relative_solver_residual": 7.853562925704549e-14,
+          "maximum_relative_port_residual": 4.298888081297976e-15,
+          "spatial_convergence_established": false,
+          "channels": [
+            {
+              "incident_mode_order": 1,
+              "incident_root_index": 1348,
+              "reflection": 2.2036787775594368e-11,
+              "transmission": 0.9999999999780851,
+              "reflection_flux": 2.2036787857754486e-11,
+              "transmission_flux": 0.9999999999781185,
+              "power_balance": -1.219024881038422e-13,
+              "flux_power_balance": -1.553202011450594e-13,
+              "relative_residual": 6.767335245820082e-15
+            },
+            {
+              "incident_mode_order": 2,
+              "incident_root_index": 1311,
+              "reflection": 9.090747703468971e-07,
+              "transmission": 0.9999990909251822,
+              "reflection_flux": 9.090747705751929e-07,
+              "transmission_flux": 0.9999990909252247,
+              "power_balance": 4.7406523151494184e-14,
+              "flux_power_balance": 4.773959005888173e-15,
+              "relative_residual": 1.8903603448317675e-14
+            },
+            {
+              "incident_mode_order": 3,
+              "incident_root_index": 1292,
+              "reflection": 4.4878178575535835e-10,
+              "transmission": 0.9999999995508517,
+              "reflection_flux": 4.487817960247048e-10,
+              "transmission_flux": 0.9999999995508437,
+              "power_balance": 3.6648462042876417e-13,
+              "flux_power_balance": 3.744782262060653e-13,
+              "relative_residual": 2.3129383731283786e-15
+            },
+            {
+              "incident_mode_order": 4,
+              "incident_root_index": 1284,
+              "reflection": 5.3846434274276565e-08,
+              "transmission": 0.999999946153577,
+              "reflection_flux": 5.384643407924066e-08,
+              "transmission_flux": 0.999999946153703,
+              "power_balance": -1.1324274851176597e-14,
+              "flux_power_balance": -1.3711254354120683e-13,
+              "relative_residual": 7.404334289235276e-15
+            },
+            {
+              "incident_mode_order": 5,
+              "incident_root_index": 1274,
+              "reflection": 2.441360429606738e-07,
+              "transmission": 0.9999997558649124,
+              "reflection_flux": 2.441360430507579e-07,
+              "transmission_flux": 0.9999997558644587,
+              "power_balance": -9.553469126899472e-13,
+              "flux_power_balance": -5.017097848281082e-13,
+              "relative_residual": 7.853562925704549e-14
+            }
+          ]
+        },
+        "linear_solver": {
+          "method": "ilu_lgmres",
+          "working_dtype": "complex128",
+          "factor_dtype": "complex64",
+          "preconditioner": {
+            "drop_tol": 0.0001,
+            "fill_factor": 12.0,
+            "permc_spec": "COLAMD",
+            "elapsed_seconds": 13.095918999999412,
+            "factor_nonzeros": 22023081
+          },
+          "lgmres": {
+            "rtol": 1e-10,
+            "atol": 0,
+            "inner_m": 50,
+            "outer_k": 3,
+            "maxiter": 30
+          },
+          "relative_residual_limit": 1e-09,
+          "backward_residual_limit": 1e-09,
+          "operator_nonzeros": 2862795,
+          "operator_storage_bytes": 57362716,
+          "channels": [
+            {
+              "column": 0,
+              "info": 0,
+              "relative_residual": 3.574559569807034e-12,
+              "relative_backward_residual": 6.767335245820082e-15
+            },
+            {
+              "column": 1,
+              "info": 0,
+              "relative_residual": 4.671758706385845e-11,
+              "relative_backward_residual": 1.8903603448317675e-14
+            },
+            {
+              "column": 2,
+              "info": 0,
+              "relative_residual": 3.0119007982487853e-12,
+              "relative_backward_residual": 2.3129383731283786e-15
+            },
+            {
+              "column": 3,
+              "info": 0,
+              "relative_residual": 1.1455948677878529e-11,
+              "relative_backward_residual": 7.404334289235276e-15
+            },
+            {
+              "column": 4,
+              "info": 0,
+              "relative_residual": 3.705807505856102e-11,
+              "relative_backward_residual": 7.853562925704549e-14
+            }
+          ]
+        },
+        "scattering": {
+          "frequency_hz": 1000000000.0,
+          "incident_side": "left",
+          "groups": {
+            "incoming": {
+              "root_indices": [
+                1348,
+                1311,
+                1292,
+                1284,
+                1274
+              ],
+              "wavenumbers_rad_m": [
+                1446668.9722198995,
+                1455967.0707150882,
+                2796959.945550218,
+                4103493.19443145,
+                5196894.30896118
+              ],
+              "signed_power_w": [
+                1.0000000000000002,
+                0.9999999999999989,
+                0.9999999999999998,
+                0.9999999999999998,
+                1.0000000000000002
+              ]
+            },
+            "reflection": {
+              "root_indices": [
+                1349,
+                1312,
+                1293,
+                1285,
+                1275
+              ],
+              "wavenumbers_rad_m": [
+                -1446668.9722198995,
+                -1455967.0707150882,
+                -2796959.945550218,
+                -4103493.19443145,
+                -5196894.30896118
+              ],
+              "signed_power_w": [
+                -1.0000000000000002,
+                -0.9999999999999989,
+                -0.9999999999999998,
+                -0.9999999999999998,
+                -1.0000000000000002
+              ]
+            },
+            "transmission": {
+              "root_indices": [
+                1348,
+                1311,
+                1292,
+                1284,
+                1274
+              ],
+              "wavenumbers_rad_m": [
+                1446668.9722198995,
+                1455967.0707150882,
+                2796959.945550218,
+                4103493.19443145,
+                5196894.30896118
+              ],
+              "signed_power_w": [
+                1.0000000000000002,
+                0.9999999999999989,
+                0.9999999999999998,
+                0.9999999999999998,
+                1.0000000000000002
+              ]
+            }
+          },
+          "reflection_amplitudes": [
+            [
+              [
+                3.87718538762657e-07,
+                -1.1576372865314099e-07
+              ],
+              [
+                2.441607934389024e-07,
+                1.9505976349757525e-07
+              ],
+              [
+                1.2615910071345421e-07,
+                -9.122990037239392e-08
+              ],
+              [
+                5.633691509461385e-07,
+                -3.1271155507105018e-06
+              ],
+              [
+                1.538414138098702e-06,
+                3.0476559325325265e-06
+              ]
+            ],
+            [
+              [
+                2.441608770185829e-07,
+                1.950599543961196e-07
+              ],
+              [
+                0.0009096454584019197,
+                -0.00024932499915498237
+              ],
+              [
+                1.8328731024589298e-06,
+                1.7516613840083772e-06
+              ],
+              [
+                6.498414692004839e-05,
+                -0.00010185549997755946
+              ],
+              [
+                4.876873194643599e-05,
+                -4.9744931325573786e-05
+              ]
+            ],
+            [
+              [
+                1.261588904073382e-07,
+                -9.12297000702456e-08
+              ],
+              [
+                1.8328725118300425e-06,
+                1.7516615052982063e-06
+              ],
+              [
+                -1.3336205647470174e-05,
+                -6.895903215396405e-06
+              ],
+              [
+                -4.8023249030418155e-06,
+                -1.0195239851081228e-05
+              ],
+              [
+                6.8756334383364206e-06,
+                -6.530111780183681e-06
+              ]
+            ],
+            [
+              [
+                5.633689282058833e-07,
+                -3.127114685157942e-06
+              ],
+              [
+                6.498414756183913e-05,
+                -0.00010185549975403376
+              ],
+              [
+                -4.802325255256654e-06,
+                -1.0195239892031171e-05
+              ],
+              [
+                -6.340024456844229e-05,
+                -0.00011667386062457285
+              ],
+              [
+                0.00014426914847172603,
+                2.580470225016704e-05
+              ]
+            ],
+            [
+              [
+                1.5384142304292296e-06,
+                3.047656456715187e-06
+              ],
+              [
+                4.876873126401767e-05,
+                -4.974493276669662e-05
+              ],
+              [
+                6.875633852579367e-06,
+                -6.530111630913748e-06
+              ],
+              [
+                0.0001442691483161261,
+                2.5804702107704646e-05
+              ],
+              [
+                2.3374433917835125e-05,
+                0.00046599966728817
+              ]
+            ]
+          ],
+          "transmission_amplitudes": [
+            [
+              [
+                -0.3638376407718809,
+                -0.9314623830840094
+              ],
+              [
+                1.7852869728622282e-07,
+                4.1569556878252113e-07
+              ],
+              [
+                2.9018710805469845e-07,
+                1.0659751626378454e-06
+              ],
+              [
+                -4.818557248935155e-07,
+                4.110279780835425e-06
+              ],
+              [
+                -7.273517080816736e-07,
+                -4.000387141709857e-06
+              ]
+            ],
+            [
+              [
+                -1.4464987220597615e-07,
+                -4.2822823444461613e-07
+              ],
+              [
+                -0.3486425637526247,
+                -0.9372552058820426
+              ],
+              [
+                -7.533536995689412e-05,
+                -6.1858174824889386e-06
+              ],
+              [
+                -0.00032083977732794806,
+                5.6677859461281915e-05
+              ],
+              [
+                -6.864085729881146e-05,
+                0.00012681311132053515
+              ]
+            ],
+            [
+              [
+                -4.6041123190023424e-07,
+                1.0042825150157777e-06
+              ],
+              [
+                7.522649160107417e-05,
+                7.450138672704818e-06
+              ],
+              [
+                -0.5112506749031213,
+                0.8594316369077382
+              ],
+              [
+                -2.9101506762252944e-05,
+                1.8802448486928277e-05
+              ],
+              [
+                -3.906475115914977e-05,
+                1.2328434419462946e-06
+              ]
+            ],
+            [
+              [
+                2.9981927271530897e-06,
+                -2.85133209009785e-06
+              ],
+              [
+                -0.00014243469056472228,
+                -0.00029314321278170317
+              ],
+              [
+                -2.5816955602904815e-05,
+                2.3149215739301957e-05
+              ],
+              [
+                0.9635419166496022,
+                -0.26755705054322415
+              ],
+              [
+                0.00019577071242672038,
+                -1.5664686347053617e-06
+              ]
+            ],
+            [
+              [
+                3.85607474093759e-06,
+                -1.2967484239006353e-06
+              ],
+              [
+                -7.986094094741232e-05,
+                0.00011999624857673218
+              ],
+              [
+                1.6524252058482627e-05,
+                -3.540741509391396e-05
+              ],
+              [
+                0.00018077936702049006,
+                -7.528691724660075e-05
+              ],
+              [
+                -0.991355892189946,
+                0.13119904808848157
+              ]
+            ]
+          ]
+        }
+      }
+    },
+    "phase_adjustment_applied": false,
+    "reused_safe_sources": {
+      "h200_summary": {
+        "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h200_ny12_z4-44ad87c9837d/summary_AP_pnc.json",
+        "sha256": "02f3a416dd75b398bcd043ac307dc86d01d7fc51840cfb0875a8d58e08691e09",
+        "bytes": 26501
+      },
+      "h200_stage": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/stages_AP_pnc.json",
+        "sha256": "e4ce7210e457521e648c1aea66709d28a187f7f25f6dc05f3a6d5c2ab135c144",
+        "bytes": 10345
+      },
+      "modes": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/ports_AP_pnc.npz",
+        "sha256": "ac2e0265423fe720db187246f3c21304bb3e0605dc579091f6ca29f92005de08",
+        "bytes": 29229016
+      },
+      "fields": {
+        "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h200_ny12_z4-44ad87c9837d/selected_fields_AP_pnc.npz",
+        "sha256": "f9a1e81d2ef6f7c78332abbbb1bb32b9e4218e4caa1c807a702eddfeafac726b",
+        "bytes": 27360256
+      }
+    },
+    "raw_files": {
+      "diagnostic": {
+        "path": "results/runs/full_device_uniform_diagnostic/diagnostic_AP_pnc.json",
+        "sha256": "436ce9a418a24a5be49ef98991f168393871203b0bb84d103ad9a39186a00e57",
+        "bytes": 3351
+      },
+      "driver": {
+        "path": "results/runs/full_device_uniform_diagnostic/run_uniform_AP_pnc.py",
+        "sha256": "544c890346b4722d93e802d38c10afa43d1ab33dadaf975436bf032f7a19f288",
+        "bytes": 16807
+      },
+      "monitor": {
+        "path": "results/runs/full_device_resource_profile/profile_AP_pnc.py",
+        "sha256": "f0dab5367f25016a5cea91d5809311ec89658a8c090ee53eb8dbafe934205911",
+        "bytes": 25492
+      }
+    },
+    "interpretation": "Finite uniform-guide body-mesh comparison at the saved discrete SAFE basis. Its phase differences apply to the 3 micrometre control only. The patterned-device phase remains at its original physical end planes.",
+    "finite_diagnostic_limit": 0.01,
+    "pair_power_passed": true,
+    "pair_complex_passed": false
   }
 }
