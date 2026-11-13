@@ -18,6 +18,7 @@ from check_device_refinement_AP_pnc import (
     ATOL, FREQUENCY_HZ, GROUPS, NUMERICAL_MODULES, POWER_LIMIT, QUANTITIES, RESIDUAL_LIMIT, ROOT,
     checked_array, checked_file, equivalent, file_sha, level_data, match_modes, read_csv, require, section_mass, unpack,
 )
+from check_phase_refinement_AP_pnc import check_recorded_source
 
 
 DEFAULT_EVIDENCE = ROOT / "verification/device_convergence_followup_AP_pnc.json"
@@ -29,10 +30,13 @@ CSV_FIELDS = (*AUTHOR, "comparison", "direction", "channel", "quantity", "refere
               "mass_overlap", "abs_delta_k_times_3um_rad", "abs_delta_k_times_16p65um_rad")
 
 
-def check_source(identity: dict) -> None:
+def check_source(identity: dict, reference: dict | None = None) -> None:
     for name in NUMERICAL_MODULES:
         relative = f"src/phononic/{name}_AP_pnc.py"
-        require(identity["source_sha256"][relative] == file_sha(ROOT / relative), f"Core source changed: {relative}.")
+        digest = identity["source_sha256"][relative]
+        check_recorded_source(relative, digest)
+        if reference is not None:
+            require(digest == reference["source_sha256"][relative], f"Core numerical source checksum differs: {relative}.")
 
 
 def compare_body(coarse, fine) -> tuple[dict, list[dict]]:
@@ -181,7 +185,7 @@ def check(path: Path) -> dict:
     for key, value in reference["levels"]["200"]["geometry_checks"].items():
         require(np.isclose(body["geometry_checks"][key], value, rtol=1e-7, atol=0), f"h130 geometry differs for {key}.")
     check_source(old["implementation"])
-    check_source(body["implementation"])
+    check_source(body["implementation"], old["implementation"])
     port = reference["port_geometry"]
     trace_mass = section_mass(port, config["geometry"], config["material"]["density_kg_m3"])
     coords = checked_array(body["port_coordinates_yz_m"], (99, 2), "h130 trace coordinates")
@@ -209,7 +213,7 @@ def check(path: Path) -> dict:
                 and settings["port_size_nm"] == size and settings["body_size_nm"] == 200
                 and settings["geometry_nm"] == {"length_nm": 400, "width_nm": 1000, "thickness_nm": 200}
                 and settings["holes"] == [] and settings["element_order"] == 2, f"Unexpected {label}-DOF SAFE settings.")
-        check_source(level["source"])
+        check_source(level["source"], old["implementation"])
         ports[label] = port_section(level["port_geometry"], ny, nz), propagating(level["propagating"], int(label))
     comparisons = {}
     for first, second in PORT_PAIRS:

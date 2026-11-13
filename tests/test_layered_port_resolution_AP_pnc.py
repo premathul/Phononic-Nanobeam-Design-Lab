@@ -12,6 +12,7 @@ from skfem.models.poisson import mass
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
+from check_phase_refinement_AP_pnc import check_recorded_source
 from compare_scattering_AP_pnc import Modes, Section, align, file_sha, interpolation
 from validate_perforated_AP_pnc import unpack
 
@@ -26,7 +27,7 @@ class LayeredPortEvidenceTests(unittest.TestCase):
         baseline = data["previous_evidence"]
         self.assertEqual(file_sha(ROOT / baseline["path"]), baseline["sha256"])
         for file, expected in data["numerical_source_sha256"].items():
-            self.assertEqual(file_sha(ROOT / file), expected)
+            check_recorded_source(file, expected)
         self.assertEqual(set(data["cases"]), {"4x2", "4x3", "4x4", "6x2", "8x2", "6x4", "8x4"})
         cases = {key: self.section(record) for key, record in data["cases"].items()}
 

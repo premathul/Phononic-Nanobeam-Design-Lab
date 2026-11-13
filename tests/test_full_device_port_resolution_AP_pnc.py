@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
 from check_device_followup_AP_pnc import port_section, propagating
+from check_phase_refinement_AP_pnc import check_recorded_source
 from compare_scattering_AP_pnc import align, file_sha, interpolation
 from compare_uniform_reference_AP_pnc import check_section_inputs, read_reference, read_section
 
@@ -65,7 +66,7 @@ class FullDevicePortResolutionEvidenceTests(unittest.TestCase):
         for label, (length_nm, _) in LENGTHS.items():
             self.assertAlmostEqual(data["diagnostic_lengths_m"][label] / 1e-9, length_nm, places=8)
         for source, checksum in data["numerical_source_sha256"].items():
-            self.assertEqual(file_sha(ROOT / source), checksum)
+            check_recorded_source(source, checksum)
             if source in self.fixed["numerical_source_sha256"]:
                 self.assertEqual(checksum, self.fixed["numerical_source_sha256"][source])
         for label, record in data["cases"].items():

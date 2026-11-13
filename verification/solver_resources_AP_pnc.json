@@ -1,0 +1,1403 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "status": "resource_diagnostic_completed",
+  "scope": "Windows CPU resource measurements for the 26-hole layered mesh. The connected pilot prefix keeps the original left impedance and has an artificial free right cut. Prescribed test right-hand sides verify the linear solution. The full-device operator checkpoint uses two matched ports and physical right-hand sides.",
+  "frequency_hz": 1000000000.0,
+  "prefix_cutoff_nm": 3600,
+  "environment": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "scikit-fem": "12.0.2",
+    "meshio": "5.3.5",
+    "gmsh": "4.15.2",
+    "matplotlib": "3.11.2",
+    "psutil": "7.2.2"
+  },
+  "measurement": "Elapsed seconds are stage wall time. Sampled RSS is worker-tree resident memory. Windows peak working set and private commit are process lifetime high-water marks observed by the end of each listed phase.",
+  "source_preallocation": {
+    "scipy_version": "1.18.1",
+    "factor_buffer_capacity_multiplier": 30,
+    "value_and_index_bytes_per_capacity_slot": 40,
+    "prefix_requested_initial_factor_buffer_bytes": 2954674800,
+    "prefix_requested_initial_factor_buffer_mib": 2817.7974700927734,
+    "sources": [
+      "https://github.com/scipy/scipy/blob/v1.18.1/scipy/sparse/linalg/_dsolve/SuperLU/SRC/zgstrf.c#L219-L247",
+      "https://github.com/scipy/scipy/blob/v1.18.1/scipy/sparse/linalg/_dsolve/SuperLU/SRC/sp_ienv.c#L64-L76",
+      "https://github.com/scipy/scipy/blob/v1.18.1/scipy/sparse/linalg/_dsolve/SuperLU/SRC/zmemory.c#L192-L252"
+    ],
+    "interpretation": "The exact factor path requests the same initial buffers for each ordering on this pattern. The estimate explains most of the observed private commit. It gives neither the touched resident bytes nor the numerical factors' storage count."
+  },
+  "evidence_builder": {
+    "path": "results/runs/full_device_resource_profile/build_resource_evidence_AP_pnc.py",
+    "sha256": "52262af55f13984670bbfbe457390a9d51dcd5db4fb7d39ab40b00e461a18108",
+    "bytes": 21589
+  },
+  "cases": {
+    "original_assembly_and_colamd": {
+      "scope": "Connected prefix of the saved layered device. Original left port uses saved outgoing SAFE impedance. Artificial jagged right cut is free. This is a complex factorization resource probe with no applied forcing, scattering response or full-case memory measurement.",
+      "status": "completed",
+      "mesh": {
+        "ndof": 28863,
+        "vertices": 1555,
+        "tetrahedra": 5328,
+        "true_left_facets": 96,
+        "retained_maximum_x_m": 3.5781172306613677e-06,
+        "face_connected": true
+      },
+      "frequency_hz": 1000000000.0,
+      "run": {
+        "elapsed_seconds": 15.40700000000652,
+        "initial_available_mib": 2668.19921875,
+        "minimum_available_mib": 1816.69140625,
+        "peak_worker_tree_rss_mib": 908.61328125,
+        "rss_cap_mib": 1800,
+        "available_floor_mib": 400,
+        "sample_interval_seconds": 0.1,
+        "exit_code": 0
+      },
+      "raw_files": {
+        "stages": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/stages_AP_pnc.json",
+          "sha256": "dcdc33cbeae38934f09c08df41ce3b9af571a5f98a5b604eb2f867591ea385bc",
+          "bytes": 7312
+        },
+        "execution": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/execution_AP_pnc.json",
+          "sha256": "684323531f034d3ce14dc8d930adcf6e18f78fdb04d365d2c4072f3a42c9e47e",
+          "bytes": 906
+        },
+        "driver": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/driver_AP_pnc.py",
+          "sha256": "f3bb13c5a90b209734ed1e9913fb83f1ca10eba0efbc59ee41f88995c6b3e93e",
+          "bytes": 12105
+        }
+      },
+      "source_revision": "c607a7b9e511105674790fe363fdb85ea4808e4b",
+      "numerical_thread_environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "BLIS_NUM_THREADS": "1"
+      },
+      "parent_mesh": {
+        "path": "results/runs/full_device_layered_preflight/_meshes/583529df668e42d40236757d52776eaee14af3ffa7da1ffa033d9cbf42925d00/mesh_AP_pnc.npz",
+        "sha256": "dac6819599fb4e483510135fe81be0f71e6498daa8fad6ac2c581eb7215192de",
+        "bytes": 245605
+      },
+      "subset_mesh": {
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/subset_AP_pnc.npz",
+        "sha256": "ba28817abff2f4f9b5a2552d70ae3706f38a9f299f8675e044e5b9f750495446",
+        "bytes": 32712
+      },
+      "K": {
+        "nonzero_storage": 2024925,
+        "array_bytes": 24414556,
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/K_AP_pnc.npz",
+        "sha256": "ad080862b461663ada79e81daa7ca7ee2d07cec4ef0600cc2aedc7dff5d89ae9",
+        "bytes": 10426315
+      },
+      "M": {
+        "nonzero_storage": 696051,
+        "array_bytes": 8468068,
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/M_AP_pnc.npz",
+        "sha256": "ccdc0702d0627a80e5607a9bff7d7fa43a3653a453221dd4b896bd77e1ed18db",
+        "bytes": 1797334
+      },
+      "SAFE_source": {
+        "checkpoint": {
+          "path": "results/runs/full_device_port_resolution/12x4/attempt_lpnbd9kr/checkpoint_AP_pnc.json",
+          "sha256": "677c64a816ea42a8b37e1358d5549d63ecaeec7623a9366139ba64d301bbea4e",
+          "bytes": 3969
+        },
+        "arrays": {
+          "path": "results/runs/full_device_port_resolution/12x4/attempt_lpnbd9kr/arrays_AP_pnc.npz",
+          "sha256": "2a2aa9347921ac6940f851f2eb53bc06480a28a6cf67c27a000faa357b1404e8",
+          "bytes": 12973330
+        },
+        "left_trace_dofs": 675
+      },
+      "operator": {
+        "nonzero_storage": 2462229,
+        "array_bytes": 49360036
+      },
+      "factorization": {
+        "ordering": "COLAMD",
+        "nnz_l_plus_u": 32901460,
+        "fill_ratio": 13.362469534718338
+      },
+      "basis_value_and_gradient_bytes": 168791040,
+      "phases": {
+        "assembly": {
+          "elapsed_seconds": 7.018402100002277,
+          "sampled_phase_rss_mib": 405.32421875,
+          "process_lifetime_peak_working_set_mib": 423.6796875,
+          "process_lifetime_peak_private_commit_mib": 462.6875
+        },
+        "factorization": {
+          "elapsed_seconds": 5.47717170001124,
+          "sampled_phase_rss_mib": 908.61328125,
+          "process_lifetime_peak_working_set_mib": 906.28125,
+          "process_lifetime_peak_private_commit_mib": 3199.46484375
+        }
+      }
+    },
+    "batched_assembly_2048": {
+      "scope": "Production batched assembly on the original profiled connected prefix; no factorization.",
+      "status": "completed",
+      "mesh": {
+        "ndof": 28863,
+        "vertices": 1555,
+        "tetrahedra": 5328,
+        "true_left_facets": 96,
+        "retained_maximum_x_m": 3.5781172306613677e-06,
+        "face_connected": true
+      },
+      "frequency_hz": 1000000000.0,
+      "run": {
+        "elapsed_seconds": 8.110000000000582,
+        "initial_available_mib": 3046.3359375,
+        "minimum_available_mib": 2741.01953125,
+        "peak_worker_tree_rss_mib": 186.12890625,
+        "rss_cap_mib": 1800,
+        "available_floor_mib": 400,
+        "sample_interval_seconds": 0.1,
+        "exit_code": 0,
+        "initial_windows_commit": {
+          "commit_total_mib": 27164.59765625,
+          "commit_limit_mib": 33086.86328125,
+          "commit_headroom_mib": 5922.265625,
+          "physical_available_mib": 3042.01953125
+        }
+      },
+      "raw_files": {
+        "stages": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_batched_assembly_aok6ks4x/stages_AP_pnc.json",
+          "sha256": "67c94b47722caeeb429a1290d9baa795cee56e94f668ad810d703dcd9cad813f",
+          "bytes": 5998
+        },
+        "execution": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_batched_assembly_aok6ks4x/execution_AP_pnc.json",
+          "sha256": "a0747dd3ebbdd3011b5a728a5b44ea1448f64987a436d340047ed576f3fc4358",
+          "bytes": 963
+        },
+        "driver": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_batched_assembly_aok6ks4x/driver_AP_pnc.py",
+          "sha256": "ae048ea752d2c6fd30f053947b4488664404fcdf3afb2380122eee504388a594",
+          "bytes": 24371
+        },
+        "layout_check": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_batched_assembly_aok6ks4x/layout_check_AP_pnc.json",
+          "sha256": "4b41095e85fcfe1a551388b4428bbd3dc089553bd946609f233bd4429161140c",
+          "bytes": 342
+        }
+      },
+      "source_revision": "c607a7b9e511105674790fe363fdb85ea4808e4b",
+      "numerical_thread_environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "BLIS_NUM_THREADS": "1"
+      },
+      "parent_profile": {
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/stages_AP_pnc.json",
+        "sha256": "dcdc33cbeae38934f09c08df41ce3b9af571a5f98a5b604eb2f867591ea385bc",
+        "bytes": 7312
+      },
+      "parent_mesh": {
+        "path": "results/runs/full_device_layered_preflight/_meshes/583529df668e42d40236757d52776eaee14af3ffa7da1ffa033d9cbf42925d00/mesh_AP_pnc.npz",
+        "sha256": "dac6819599fb4e483510135fe81be0f71e6498daa8fad6ac2c581eb7215192de",
+        "bytes": 245605
+      },
+      "subset_mesh": {
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/subset_AP_pnc.npz",
+        "sha256": "ba28817abff2f4f9b5a2552d70ae3706f38a9f299f8675e044e5b9f750495446",
+        "bytes": 32712
+      },
+      "K": {
+        "nonzero_storage": 2024925,
+        "array_bytes": 24414556,
+        "path": "results/runs/full_device_resource_profile/prefix_3600_batched_assembly_aok6ks4x/K_AP_pnc.npz",
+        "sha256": "b4cd133f5f26d30ae7aed2c6c120339773064bc87858ba00558345eac1842f8c",
+        "bytes": 10426825
+      },
+      "M": {
+        "nonzero_storage": 696051,
+        "array_bytes": 8468068,
+        "path": "results/runs/full_device_resource_profile/prefix_3600_batched_assembly_aok6ks4x/M_AP_pnc.npz",
+        "sha256": "4e31f25728ceb2ec47d00bd72850add6a1652c3878c54e7c70572d4dbc4ff21d",
+        "bytes": 1797099
+      },
+      "batch_elements": 2048,
+      "matrix_comparison": {
+        "K": {
+          "full_nnz": 2024925,
+          "batched_nnz": 2024925,
+          "max_absolute_difference": 4.3655745685100555e-11,
+          "relative_max_difference": 2.2816841809087206e-16,
+          "relative_frobenius_difference": 6.763722413670566e-17
+        },
+        "M": {
+          "full_nnz": 696051,
+          "batched_nnz": 696051,
+          "max_absolute_difference": 2.8888949165808538e-34,
+          "relative_max_difference": 3.188599795999185e-16,
+          "relative_frobenius_difference": 6.247324786942963e-17
+        }
+      },
+      "retained_dof_layout": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "scope": "The original diagnostic tested attribute presence. AbstractBasis exposes an empty class-level basis list; this replay checks the number and bytes of cached cell fields without reassembling.",
+        "evaluated_volume_fields": 0,
+        "cached_field_bytes": 0,
+        "ndof": 28863
+      },
+      "phases": {
+        "assembly": {
+          "elapsed_seconds": 5.218773800006602,
+          "sampled_phase_rss_mib": 186.12890625,
+          "process_lifetime_peak_working_set_mib": 223.7890625,
+          "process_lifetime_peak_private_commit_mib": 236.10546875
+        }
+      }
+    },
+    "mmd_at_plus_a": {
+      "scope": "Connected prefix of the saved layered device. Original left port uses saved outgoing SAFE impedance. Artificial jagged right cut is free. This is a complex factorization resource probe with no applied forcing, scattering response or full-case memory measurement.",
+      "status": "completed",
+      "mesh": {
+        "ndof": 28863,
+        "vertices": 1555,
+        "tetrahedra": 5328,
+        "true_left_facets": 96,
+        "retained_maximum_x_m": 3.5781172306613677e-06,
+        "face_connected": true
+      },
+      "frequency_hz": 1000000000.0,
+      "run": {
+        "elapsed_seconds": 14.593999999997322,
+        "initial_available_mib": 2740.15625,
+        "minimum_available_mib": 1807.62109375,
+        "peak_worker_tree_rss_mib": 1003.1484375,
+        "rss_cap_mib": 1800,
+        "available_floor_mib": 400,
+        "sample_interval_seconds": 0.1,
+        "exit_code": 0
+      },
+      "raw_files": {
+        "stages": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_mmd_at_plus_a_c4v2t8q5/stages_AP_pnc.json",
+          "sha256": "70fee9c27dd5f70ca8d08e39a9972f7d49a87cacb17ddc3e466ef628388434d0",
+          "bytes": 6879
+        },
+        "execution": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_mmd_at_plus_a_c4v2t8q5/execution_AP_pnc.json",
+          "sha256": "5f77f5b9b0661b1389f58f600ac0d0c25ebfcbfa0db2e1b667cb988fe771966d",
+          "bytes": 819
+        },
+        "driver": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_mmd_at_plus_a_c4v2t8q5/driver_AP_pnc.py",
+          "sha256": "aaacde1cd48f2364ede25e7a2eafb721db5c47ddf8f19c9051d863e6260fcc6c",
+          "bytes": 15294
+        }
+      },
+      "source_revision": "c607a7b9e511105674790fe363fdb85ea4808e4b",
+      "numerical_thread_environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "BLIS_NUM_THREADS": "1"
+      },
+      "parent_profile": {
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/stages_AP_pnc.json",
+        "sha256": "dcdc33cbeae38934f09c08df41ce3b9af571a5f98a5b604eb2f867591ea385bc",
+        "bytes": 7312
+      },
+      "parent_mesh": {
+        "path": "results/runs/full_device_layered_preflight/_meshes/583529df668e42d40236757d52776eaee14af3ffa7da1ffa033d9cbf42925d00/mesh_AP_pnc.npz",
+        "sha256": "dac6819599fb4e483510135fe81be0f71e6498daa8fad6ac2c581eb7215192de",
+        "bytes": 245605
+      },
+      "subset_mesh": {
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/subset_AP_pnc.npz",
+        "sha256": "ba28817abff2f4f9b5a2552d70ae3706f38a9f299f8675e044e5b9f750495446",
+        "bytes": 32712
+      },
+      "K": {
+        "nonzero_storage": 2024925,
+        "array_bytes": 24414556,
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/K_AP_pnc.npz",
+        "sha256": "ad080862b461663ada79e81daa7ca7ee2d07cec4ef0600cc2aedc7dff5d89ae9",
+        "bytes": 10426315
+      },
+      "M": {
+        "nonzero_storage": 696051,
+        "array_bytes": 8468068,
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/M_AP_pnc.npz",
+        "sha256": "ccdc0702d0627a80e5607a9bff7d7fa43a3653a453221dd4b896bd77e1ed18db",
+        "bytes": 1797334
+      },
+      "SAFE_source": {
+        "checkpoint": {
+          "path": "results/runs/full_device_port_resolution/12x4/attempt_lpnbd9kr/checkpoint_AP_pnc.json",
+          "sha256": "677c64a816ea42a8b37e1358d5549d63ecaeec7623a9366139ba64d301bbea4e",
+          "bytes": 3969
+        },
+        "arrays": {
+          "path": "results/runs/full_device_port_resolution/12x4/attempt_lpnbd9kr/arrays_AP_pnc.npz",
+          "sha256": "2a2aa9347921ac6940f851f2eb53bc06480a28a6cf67c27a000faa357b1404e8",
+          "bytes": 12973330
+        },
+        "left_trace_dofs": 675
+      },
+      "operator": {
+        "nonzero_storage": 2462229,
+        "array_bytes": 49360036,
+        "csc_arrays_sha256": "750d81efafa521e43ad484e4ebc79c856e12d0e087f4214a895d848e36cfb923"
+      },
+      "factorization": {
+        "ordering": "MMD_AT_PLUS_A",
+        "nnz_l_plus_u": 45034809,
+        "fill_ratio": 18.29026016670261
+      },
+      "known_solution_check": {
+        "rng_seed": 291026,
+        "relative_true_residual": [
+          8.161105988075336e-16,
+          8.430401953276718e-16,
+          8.386942490166053e-16,
+          8.356047877558189e-16,
+          8.558330890345127e-16
+        ],
+        "relative_solution_error": [
+          2.1160607081132666e-13,
+          1.7276126882853507e-13,
+          1.7943863431075268e-13,
+          1.518684859842781e-13,
+          1.7317766485837095e-13
+        ]
+      },
+      "phases": {
+        "factorization": {
+          "elapsed_seconds": 12.095908099989174,
+          "sampled_phase_rss_mib": 1003.1484375,
+          "process_lifetime_peak_working_set_mib": 1001.4375,
+          "process_lifetime_peak_private_commit_mib": 3164.8125
+        },
+        "five_known_rhs": {
+          "elapsed_seconds": 0.17186230000515934,
+          "sampled_phase_rss_mib": 1000.984375,
+          "process_lifetime_peak_working_set_mib": 1001.4375,
+          "process_lifetime_peak_private_commit_mib": 3164.8125
+        }
+      }
+    },
+    "axial_natural": {
+      "scope": "Connected prefix of the saved layered device. Original left port uses saved outgoing SAFE impedance. Artificial jagged right cut is free. This is a complex factorization resource probe with no applied forcing, scattering response or full-case memory measurement.",
+      "status": "completed",
+      "mesh": {
+        "ndof": 28863,
+        "vertices": 1555,
+        "tetrahedra": 5328,
+        "true_left_facets": 96,
+        "retained_maximum_x_m": 3.5781172306613677e-06,
+        "face_connected": true
+      },
+      "frequency_hz": 1000000000.0,
+      "run": {
+        "elapsed_seconds": 7.4060000000026776,
+        "initial_available_mib": 2614.2265625,
+        "minimum_available_mib": 1723.90625,
+        "peak_worker_tree_rss_mib": 989.5859375,
+        "rss_cap_mib": 1800,
+        "available_floor_mib": 400,
+        "sample_interval_seconds": 0.1,
+        "exit_code": 0
+      },
+      "raw_files": {
+        "stages": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_axial_natural_vixym_mv/stages_AP_pnc.json",
+          "sha256": "08b5dee545bd617c661dc39761dbbe3482c4ed5ffe31a986af621906b39d8712",
+          "bytes": 7695
+        },
+        "execution": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_axial_natural_vixym_mv/execution_AP_pnc.json",
+          "sha256": "c6610fe797a1dd1aab76cd37e34c04e21d784f517ab84c3afc5a8ed501cd9f99",
+          "bytes": 847
+        },
+        "driver": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_axial_natural_vixym_mv/driver_AP_pnc.py",
+          "sha256": "dc8252e923d652dd059c911839cd1ceb7c8f0509e863b7e365dca35bbd309ef1",
+          "bytes": 16664
+        }
+      },
+      "source_revision": "c607a7b9e511105674790fe363fdb85ea4808e4b",
+      "numerical_thread_environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "BLIS_NUM_THREADS": "1"
+      },
+      "parent_profile": {
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/stages_AP_pnc.json",
+        "sha256": "dcdc33cbeae38934f09c08df41ce3b9af571a5f98a5b604eb2f867591ea385bc",
+        "bytes": 7312
+      },
+      "parent_mesh": {
+        "path": "results/runs/full_device_layered_preflight/_meshes/583529df668e42d40236757d52776eaee14af3ffa7da1ffa033d9cbf42925d00/mesh_AP_pnc.npz",
+        "sha256": "dac6819599fb4e483510135fe81be0f71e6498daa8fad6ac2c581eb7215192de",
+        "bytes": 245605
+      },
+      "subset_mesh": {
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/subset_AP_pnc.npz",
+        "sha256": "ba28817abff2f4f9b5a2552d70ae3706f38a9f299f8675e044e5b9f750495446",
+        "bytes": 32712
+      },
+      "K": {
+        "nonzero_storage": 2024925,
+        "array_bytes": 24414556,
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/K_AP_pnc.npz",
+        "sha256": "ad080862b461663ada79e81daa7ca7ee2d07cec4ef0600cc2aedc7dff5d89ae9",
+        "bytes": 10426315
+      },
+      "M": {
+        "nonzero_storage": 696051,
+        "array_bytes": 8468068,
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/M_AP_pnc.npz",
+        "sha256": "ccdc0702d0627a80e5607a9bff7d7fa43a3653a453221dd4b896bd77e1ed18db",
+        "bytes": 1797334
+      },
+      "SAFE_source": {
+        "checkpoint": {
+          "path": "results/runs/full_device_port_resolution/12x4/attempt_lpnbd9kr/checkpoint_AP_pnc.json",
+          "sha256": "677c64a816ea42a8b37e1358d5549d63ecaeec7623a9366139ba64d301bbea4e",
+          "bytes": 3969
+        },
+        "arrays": {
+          "path": "results/runs/full_device_port_resolution/12x4/attempt_lpnbd9kr/arrays_AP_pnc.npz",
+          "sha256": "2a2aa9347921ac6940f851f2eb53bc06480a28a6cf67c27a000faa357b1404e8",
+          "bytes": 12973330
+        },
+        "left_trace_dofs": 675
+      },
+      "operator": {
+        "nonzero_storage": 2462229,
+        "array_bytes": 49360036,
+        "csc_arrays_sha256": "750d81efafa521e43ad484e4ebc79c856e12d0e087f4214a895d848e36cfb923"
+      },
+      "factorization": {
+        "ordering": "AXIAL_NATURAL",
+        "superlu_permc_spec": "NATURAL",
+        "nnz_l_plus_u": 41455885,
+        "fill_ratio": 16.83673005232251
+      },
+      "permutation": {
+        "definition": "Ascending laboratory x in metres; ties retain global volume DOF order. p maps sorted indices to original indices.",
+        "path": "results/runs/full_device_resource_profile/prefix_3600_axial_natural_vixym_mv/permutation_AP_pnc.npy",
+        "sha256": "f26a6650343299dc329fb1af375f6a6a9784d203f8c5bef3f6f09d2278564722",
+        "bytes": 231032
+      },
+      "known_solution_check": {
+        "rng_seed": 291026,
+        "relative_true_residual": [
+          1.1198450964744608e-15,
+          1.125578270525053e-15,
+          1.1052941945214867e-15,
+          1.1254504164216623e-15,
+          1.1420756036524092e-15
+        ],
+        "relative_solution_error": [
+          2.4304835944666903e-13,
+          2.800798501885162e-13,
+          3.149821829079365e-13,
+          2.736953310860853e-13,
+          2.7594693513941157e-13
+        ]
+      },
+      "phases": {
+        "factorization": {
+          "elapsed_seconds": 4.952061899995897,
+          "sampled_phase_rss_mib": 989.5859375,
+          "process_lifetime_peak_working_set_mib": 986.4921875,
+          "process_lifetime_peak_private_commit_mib": 3213.3046875
+        },
+        "five_known_rhs": {
+          "elapsed_seconds": 0.14195809999364428,
+          "sampled_phase_rss_mib": 987.59765625,
+          "process_lifetime_peak_working_set_mib": 986.4921875,
+          "process_lifetime_peak_private_commit_mib": 3213.3046875
+        }
+      }
+    },
+    "rcm_natural": {
+      "scope": "Connected prefix of the saved layered device. Original left port uses saved outgoing SAFE impedance. Artificial jagged right cut is free. This is a complex factorization resource probe with no applied forcing, scattering response or full-case memory measurement.",
+      "status": "completed",
+      "mesh": {
+        "ndof": 28863,
+        "vertices": 1555,
+        "tetrahedra": 5328,
+        "true_left_facets": 96,
+        "retained_maximum_x_m": 3.5781172306613677e-06,
+        "face_connected": true
+      },
+      "frequency_hz": 1000000000.0,
+      "run": {
+        "elapsed_seconds": 8.10899999999674,
+        "initial_available_mib": 3209.4609375,
+        "minimum_available_mib": 2288.5,
+        "peak_worker_tree_rss_mib": 927.35546875,
+        "rss_cap_mib": 1800,
+        "available_floor_mib": 400,
+        "sample_interval_seconds": 0.1,
+        "exit_code": 0,
+        "initial_windows_commit": {
+          "commit_total_mib": 27211.41796875,
+          "commit_limit_mib": 33086.86328125,
+          "commit_headroom_mib": 5875.4453125,
+          "physical_available_mib": 3209.67578125
+        }
+      },
+      "raw_files": {
+        "stages": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_rcm_natural_g6333fjc/stages_AP_pnc.json",
+          "sha256": "d4902c18032528c8235c6dfb0280d6bb79a4efd84b561bea79dcc161458c2b4c",
+          "bytes": 8242
+        },
+        "execution": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_rcm_natural_g6333fjc/execution_AP_pnc.json",
+          "sha256": "641cf26540cbbd68ed9bafff764d489d6cdf3ed122fdc2f01b20be204dd542ef",
+          "bytes": 1098
+        },
+        "driver": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_rcm_natural_g6333fjc/driver_AP_pnc.py",
+          "sha256": "5fc667797db7c30dd1e5b6543b0bd625dc91ceceb18d255f0c353b716625d66a",
+          "bytes": 18817
+        }
+      },
+      "source_revision": "c607a7b9e511105674790fe363fdb85ea4808e4b",
+      "numerical_thread_environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "BLIS_NUM_THREADS": "1"
+      },
+      "parent_profile": {
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/stages_AP_pnc.json",
+        "sha256": "dcdc33cbeae38934f09c08df41ce3b9af571a5f98a5b604eb2f867591ea385bc",
+        "bytes": 7312
+      },
+      "parent_mesh": {
+        "path": "results/runs/full_device_layered_preflight/_meshes/583529df668e42d40236757d52776eaee14af3ffa7da1ffa033d9cbf42925d00/mesh_AP_pnc.npz",
+        "sha256": "dac6819599fb4e483510135fe81be0f71e6498daa8fad6ac2c581eb7215192de",
+        "bytes": 245605
+      },
+      "subset_mesh": {
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/subset_AP_pnc.npz",
+        "sha256": "ba28817abff2f4f9b5a2552d70ae3706f38a9f299f8675e044e5b9f750495446",
+        "bytes": 32712
+      },
+      "K": {
+        "nonzero_storage": 2024925,
+        "array_bytes": 24414556,
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/K_AP_pnc.npz",
+        "sha256": "ad080862b461663ada79e81daa7ca7ee2d07cec4ef0600cc2aedc7dff5d89ae9",
+        "bytes": 10426315
+      },
+      "M": {
+        "nonzero_storage": 696051,
+        "array_bytes": 8468068,
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/M_AP_pnc.npz",
+        "sha256": "ccdc0702d0627a80e5607a9bff7d7fa43a3653a453221dd4b896bd77e1ed18db",
+        "bytes": 1797334
+      },
+      "SAFE_source": {
+        "checkpoint": {
+          "path": "results/runs/full_device_port_resolution/12x4/attempt_lpnbd9kr/checkpoint_AP_pnc.json",
+          "sha256": "677c64a816ea42a8b37e1358d5549d63ecaeec7623a9366139ba64d301bbea4e",
+          "bytes": 3969
+        },
+        "arrays": {
+          "path": "results/runs/full_device_port_resolution/12x4/attempt_lpnbd9kr/arrays_AP_pnc.npz",
+          "sha256": "2a2aa9347921ac6940f851f2eb53bc06480a28a6cf67c27a000faa357b1404e8",
+          "bytes": 12973330
+        },
+        "left_trace_dofs": 675
+      },
+      "operator": {
+        "nonzero_storage": 2462229,
+        "array_bytes": 49360036,
+        "csc_arrays_sha256": "750d81efafa521e43ad484e4ebc79c856e12d0e087f4214a895d848e36cfb923"
+      },
+      "factorization": {
+        "ordering": "RCM_NATURAL",
+        "superlu_permc_spec": "NATURAL",
+        "scipy_forces_superlu_symmetric_mode": true,
+        "nnz_l_plus_u": 37190608,
+        "fill_ratio": 15.104447230537858
+      },
+      "permutation": {
+        "definition": "SciPy reverse Cuthill\u2013McKee on the union of structural off-diagonal nonzero entries of A and A.T after dropping exact stored zeros. p maps sorted indices to original indices.",
+        "path": "results/runs/full_device_resource_profile/prefix_3600_rcm_natural_g6333fjc/permutation_AP_pnc.npy",
+        "sha256": "c0ae45d3774d76cb16c643423857bc3ec0e55d5ad3af4517c77df0bb588ee4e7",
+        "bytes": 115580
+      },
+      "known_solution_check": {
+        "rng_seed": 291026,
+        "relative_true_residual": [
+          1.1830355639078315e-15,
+          1.1779807889111954e-15,
+          1.1984010592203091e-15,
+          1.1856781535099115e-15,
+          1.2233837231951128e-15
+        ],
+        "relative_solution_error": [
+          2.4547489065815166e-13,
+          2.7116151860351633e-13,
+          2.931117587639785e-13,
+          2.0332197135655593e-13,
+          2.552852329304429e-13
+        ]
+      },
+      "phases": {
+        "factorization": {
+          "elapsed_seconds": 5.520205900000292,
+          "sampled_phase_rss_mib": 927.35546875,
+          "process_lifetime_peak_working_set_mib": 924.03125,
+          "process_lifetime_peak_private_commit_mib": 3214.0703125
+        },
+        "five_known_rhs": {
+          "elapsed_seconds": 0.14005489999544807,
+          "sampled_phase_rss_mib": 925.12109375,
+          "process_lifetime_peak_working_set_mib": 924.03125,
+          "process_lifetime_peak_private_commit_mib": 3214.0703125
+        }
+      }
+    },
+    "ilu_gmres_fill_10": {
+      "scope": "Connected prefix of the saved layered device. Original left port uses saved outgoing SAFE impedance. Artificial jagged right cut is free. This is a complex factorization resource probe with no applied forcing, scattering response or full-case memory measurement.",
+      "status": "completed",
+      "mesh": {
+        "ndof": 28863,
+        "vertices": 1555,
+        "tetrahedra": 5328,
+        "true_left_facets": 96,
+        "retained_maximum_x_m": 3.5781172306613677e-06,
+        "face_connected": true
+      },
+      "frequency_hz": 1000000000.0,
+      "run": {
+        "elapsed_seconds": 9.828000000008615,
+        "initial_available_mib": 3090.26171875,
+        "minimum_available_mib": 2570.89453125,
+        "peak_worker_tree_rss_mib": 521.01953125,
+        "rss_cap_mib": 1800,
+        "available_floor_mib": 400,
+        "sample_interval_seconds": 0.1,
+        "exit_code": 0,
+        "initial_windows_commit": {
+          "commit_total_mib": 27205.17578125,
+          "commit_limit_mib": 33086.86328125,
+          "commit_headroom_mib": 5881.6875,
+          "physical_available_mib": 3093.84765625
+        }
+      },
+      "raw_files": {
+        "stages": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_ilu_gmres_bxemc295/stages_AP_pnc.json",
+          "sha256": "ab538f1f24959a90d78c36b0e4f1ed97320f5a1d5b224406c1b804f2cff9ad4f",
+          "bytes": 11680
+        },
+        "execution": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_ilu_gmres_bxemc295/execution_AP_pnc.json",
+          "sha256": "ad5bcb81efef89aed3c99fe8f8ba677a55c200a7eacdf2a1585e1278b079f65c",
+          "bytes": 1181
+        },
+        "driver": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_ilu_gmres_bxemc295/driver_AP_pnc.py",
+          "sha256": "4a3de137c963c70b1cac6f1c289f05a960b771d82d4149da4c7e0629135fdfee",
+          "bytes": 21439
+        }
+      },
+      "source_revision": "c607a7b9e511105674790fe363fdb85ea4808e4b",
+      "numerical_thread_environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "BLIS_NUM_THREADS": "1"
+      },
+      "parent_profile": {
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/stages_AP_pnc.json",
+        "sha256": "dcdc33cbeae38934f09c08df41ce3b9af571a5f98a5b604eb2f867591ea385bc",
+        "bytes": 7312
+      },
+      "parent_mesh": {
+        "path": "results/runs/full_device_layered_preflight/_meshes/583529df668e42d40236757d52776eaee14af3ffa7da1ffa033d9cbf42925d00/mesh_AP_pnc.npz",
+        "sha256": "dac6819599fb4e483510135fe81be0f71e6498daa8fad6ac2c581eb7215192de",
+        "bytes": 245605
+      },
+      "subset_mesh": {
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/subset_AP_pnc.npz",
+        "sha256": "ba28817abff2f4f9b5a2552d70ae3706f38a9f299f8675e044e5b9f750495446",
+        "bytes": 32712
+      },
+      "K": {
+        "nonzero_storage": 2024925,
+        "array_bytes": 24414556,
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/K_AP_pnc.npz",
+        "sha256": "ad080862b461663ada79e81daa7ca7ee2d07cec4ef0600cc2aedc7dff5d89ae9",
+        "bytes": 10426315
+      },
+      "M": {
+        "nonzero_storage": 696051,
+        "array_bytes": 8468068,
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/M_AP_pnc.npz",
+        "sha256": "ccdc0702d0627a80e5607a9bff7d7fa43a3653a453221dd4b896bd77e1ed18db",
+        "bytes": 1797334
+      },
+      "SAFE_source": {
+        "checkpoint": {
+          "path": "results/runs/full_device_port_resolution/12x4/attempt_lpnbd9kr/checkpoint_AP_pnc.json",
+          "sha256": "677c64a816ea42a8b37e1358d5549d63ecaeec7623a9366139ba64d301bbea4e",
+          "bytes": 3969
+        },
+        "arrays": {
+          "path": "results/runs/full_device_port_resolution/12x4/attempt_lpnbd9kr/arrays_AP_pnc.npz",
+          "sha256": "2a2aa9347921ac6940f851f2eb53bc06480a28a6cf67c27a000faa357b1404e8",
+          "bytes": 12973330
+        },
+        "left_trace_dofs": 675
+      },
+      "operator": {
+        "nonzero_storage": 2462229,
+        "array_bytes": 49360036,
+        "csc_arrays_sha256": "750d81efafa521e43ad484e4ebc79c856e12d0e087f4214a895d848e36cfb923"
+      },
+      "iterative_solver": {
+        "preconditioner_settings": {
+          "drop_tol": 0.0001,
+          "fill_factor": 10,
+          "permc_spec": "COLAMD"
+        },
+        "gmres_settings": {
+          "rtol": 1e-10,
+          "atol": 0,
+          "restart": 50,
+          "maxiter": 10,
+          "callback_type": "pr_norm"
+        },
+        "rng_seed": 291026,
+        "preconditioner_nnz": 17127490,
+        "columns": [
+          {
+            "column": 1,
+            "info": 0,
+            "iterations": 12,
+            "relative_true_residual": 7.355207249976737e-13,
+            "relative_solution_error": 4.951614642754279e-11
+          },
+          {
+            "column": 2,
+            "info": 0,
+            "iterations": 12,
+            "relative_true_residual": 5.496828973642593e-13,
+            "relative_solution_error": 4.357768895387925e-11
+          },
+          {
+            "column": 3,
+            "info": 0,
+            "iterations": 12,
+            "relative_true_residual": 7.776201648066401e-13,
+            "relative_solution_error": 5.0999689160615844e-11
+          },
+          {
+            "column": 4,
+            "info": 0,
+            "iterations": 12,
+            "relative_true_residual": 6.979837797859362e-13,
+            "relative_solution_error": 6.925988157001966e-11
+          },
+          {
+            "column": 5,
+            "info": 0,
+            "iterations": 12,
+            "relative_true_residual": 4.636461964563984e-13,
+            "relative_solution_error": 3.8200413991953285e-11
+          }
+        ]
+      },
+      "phases": {
+        "preconditioner": {
+          "elapsed_seconds": 5.47424619999947,
+          "sampled_phase_rss_mib": 518.55859375,
+          "process_lifetime_peak_working_set_mib": 517.59765625,
+          "process_lifetime_peak_private_commit_mib": 1283.79296875
+        },
+        "five_known_rhs": {
+          "elapsed_seconds": 2.033704699992086,
+          "sampled_phase_rss_mib": 521.01953125,
+          "process_lifetime_peak_working_set_mib": 517.59765625,
+          "process_lifetime_peak_private_commit_mib": 1331.125
+        }
+      }
+    },
+    "ilu_gmres_fill_6": {
+      "scope": "Connected prefix of the saved layered device. Original left port uses saved outgoing SAFE impedance. Artificial jagged right cut is free. This is a complex factorization resource probe with no applied forcing, scattering response or full-case memory measurement.",
+      "status": "failed",
+      "reason": "RuntimeError: ILU-GMRES failed for RHS 1 (info=10, relative residual 1.446e-05, backward residual 6.420e-06).",
+      "mesh": {
+        "ndof": 28863,
+        "vertices": 1555,
+        "tetrahedra": 5328,
+        "true_left_facets": 96,
+        "retained_maximum_x_m": 3.5781172306613677e-06,
+        "face_connected": true
+      },
+      "operator": {
+        "nonzero_storage": 2462229,
+        "array_bytes": 49360036,
+        "csc_arrays_sha256": "750d81efafa521e43ad484e4ebc79c856e12d0e087f4214a895d848e36cfb923"
+      },
+      "raw_files": {
+        "stages": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_ilu_gmres_fill_6_g93qqeet/stages_AP_pnc.json",
+          "sha256": "10930a505b66400df75418e1a4f5aa150c66c080ca3b79c7f4a34068f2417204",
+          "bytes": 24074
+        },
+        "execution": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_ilu_gmres_fill_6_g93qqeet/execution_AP_pnc.json",
+          "sha256": "56250dd91c36c2fa9759078a5cc7b6bf33a022d0fca0090d4f87ad79664d95eb",
+          "bytes": 966
+        },
+        "driver": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_ilu_gmres_fill_6_g93qqeet/driver_AP_pnc.py",
+          "sha256": "f0dab5367f25016a5cea91d5809311ec89658a8c090ee53eb8dbafe934205911",
+          "bytes": 25492
+        },
+        "log": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_ilu_gmres_fill_6_g93qqeet/worker_AP_pnc.log",
+          "sha256": "969455aa7d115e0c2d6ea9d1f14ec72de034499b18f3b42c206f1866cd3aa8f2",
+          "bytes": 1361
+        }
+      },
+      "source_revision": "c607a7b9e511105674790fe363fdb85ea4808e4b",
+      "numerical_thread_environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "BLIS_NUM_THREADS": "1"
+      },
+      "run": {
+        "elapsed_seconds": 18.656000000002678,
+        "initial_available_mib": 3057.5234375,
+        "minimum_available_mib": 2661.53125,
+        "peak_worker_tree_rss_mib": 449.29296875,
+        "rss_cap_mib": 1800,
+        "available_floor_mib": 400,
+        "sample_interval_seconds": 0.1,
+        "exit_code": 1,
+        "initial_windows_commit": {
+          "commit_total_mib": 27135.62890625,
+          "commit_limit_mib": 33086.86328125,
+          "commit_headroom_mib": 5951.234375,
+          "physical_available_mib": 3057.34375
+        }
+      },
+      "parent_profile": {
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/stages_AP_pnc.json",
+        "sha256": "dcdc33cbeae38934f09c08df41ce3b9af571a5f98a5b604eb2f867591ea385bc",
+        "bytes": 7312
+      },
+      "parent_mesh": {
+        "path": "results/runs/full_device_layered_preflight/_meshes/583529df668e42d40236757d52776eaee14af3ffa7da1ffa033d9cbf42925d00/mesh_AP_pnc.npz",
+        "sha256": "dac6819599fb4e483510135fe81be0f71e6498daa8fad6ac2c581eb7215192de",
+        "bytes": 245605
+      },
+      "subset_mesh": {
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/subset_AP_pnc.npz",
+        "sha256": "ba28817abff2f4f9b5a2552d70ae3706f38a9f299f8675e044e5b9f750495446",
+        "bytes": 32712
+      },
+      "K": {
+        "nonzero_storage": 2024925,
+        "array_bytes": 24414556,
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/K_AP_pnc.npz",
+        "sha256": "ad080862b461663ada79e81daa7ca7ee2d07cec4ef0600cc2aedc7dff5d89ae9",
+        "bytes": 10426315
+      },
+      "M": {
+        "nonzero_storage": 696051,
+        "array_bytes": 8468068,
+        "path": "results/runs/full_device_resource_profile/prefix_3600_lpkcln_m/M_AP_pnc.npz",
+        "sha256": "ccdc0702d0627a80e5607a9bff7d7fa43a3653a453221dd4b896bd77e1ed18db",
+        "bytes": 1797334
+      },
+      "SAFE_source": {
+        "checkpoint": {
+          "path": "results/runs/full_device_port_resolution/12x4/attempt_lpnbd9kr/checkpoint_AP_pnc.json",
+          "sha256": "677c64a816ea42a8b37e1358d5549d63ecaeec7623a9366139ba64d301bbea4e",
+          "bytes": 3969
+        },
+        "arrays": {
+          "path": "results/runs/full_device_port_resolution/12x4/attempt_lpnbd9kr/arrays_AP_pnc.npz",
+          "sha256": "2a2aa9347921ac6940f851f2eb53bc06480a28a6cf67c27a000faa357b1404e8",
+          "bytes": 12973330
+        },
+        "left_trace_dofs": 675
+      },
+      "iterative_solver": {
+        "method": "ilu_gmres",
+        "preconditioner": {
+          "drop_tol": 0.0001,
+          "fill_factor": 6.0,
+          "permc_spec": "COLAMD",
+          "factor_nonzeros": 11733283,
+          "elapsed_seconds": 3.424788100004662
+        },
+        "gmres": {
+          "rtol": 1e-10,
+          "atol": 0,
+          "restart": 50,
+          "maxiter": 10,
+          "callback_type": "pr_norm"
+        },
+        "relative_residual_limit": 1e-09,
+        "backward_residual_limit": 1e-09,
+        "operator_nonzeros": 2462229,
+        "operator_storage_bytes": 49360036,
+        "channels": [
+          {
+            "column": 0,
+            "info": 10,
+            "iterations": 500,
+            "relative_residual": 1.4461407361805222e-05,
+            "relative_backward_residual": 6.419640424631756e-06,
+            "elapsed_seconds": 12.950616400004947
+          }
+        ]
+      },
+      "phases": {
+        "preconditioner": {
+          "elapsed_seconds": 3.424788100004662
+        },
+        "first_known_rhs": {
+          "elapsed_seconds": 12.950616400004947
+        }
+      }
+    }
+  },
+  "failed_preparatory_attempts": {
+    "prefix_3600_46z1x05m": {
+      "status": "failed",
+      "last_recorded_stage": "load_mesh_and_extract",
+      "reason": "Profile record serialization failed on a NumPy integer after prefix extraction.",
+      "elapsed_seconds": 1.8439999999973224,
+      "exit_code": 1,
+      "peak_worker_tree_rss_mib": 76.12109375,
+      "minimum_available_mib": 2623.54296875,
+      "raw_files": {
+        "stages": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_46z1x05m/stages_AP_pnc.json",
+          "sha256": "3ed71e258c6ba4c18db697f4b3db29062ad9075d13c6381968bd8f226e20bbd9",
+          "bytes": 2474
+        },
+        "execution": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_46z1x05m/execution_AP_pnc.json",
+          "sha256": "3c4b4f76264262ed4730867aba619318f07ae745b3ebc0612c9eabdcfdfa0605",
+          "bytes": 716
+        },
+        "driver": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_46z1x05m/driver_AP_pnc.py",
+          "sha256": "b961fc4bcdaab66b9f1ca91463b29cfa8e65c31a8baba3eed82ad5e83ba1b92a",
+          "bytes": 11739
+        },
+        "log": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_46z1x05m/worker_AP_pnc.log",
+          "sha256": "22d0913128b0a8b59df01b4c91929527a0aee803cb19a19e51f4bfe44b8915a3",
+          "bytes": 4794
+        }
+      }
+    },
+    "prefix_3600_7x4cp7hu": {
+      "status": "failed",
+      "last_recorded_stage": "volume_basis",
+      "reason": "The worker ended with exit code 15 after basis construction. The saved logs provide no error message.",
+      "elapsed_seconds": 1.8429999999934807,
+      "exit_code": 15,
+      "peak_worker_tree_rss_mib": 134.74609375,
+      "minimum_available_mib": 2579.9140625,
+      "raw_files": {
+        "stages": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_7x4cp7hu/stages_AP_pnc.json",
+          "sha256": "8badb1d0d74003cd87be8ff8be1d18d18c4fdb6d2b07818879338f670609b628",
+          "bytes": 3848
+        },
+        "execution": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_7x4cp7hu/execution_AP_pnc.json",
+          "sha256": "30981d7d8771289a642b7599ff888353c347494ca3e53d8d6837846ae3f4d4da",
+          "bytes": 713
+        },
+        "driver": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_7x4cp7hu/driver_AP_pnc.py",
+          "sha256": "6618b9dcee9ba2625461aac15d8c87388913d658116bfb02ea6955ae5b5a56ce",
+          "bytes": 11831
+        },
+        "log": {
+          "path": "results/runs/full_device_resource_profile/prefix_3600_7x4cp7hu/worker_AP_pnc.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      }
+    }
+  },
+  "full_device_operator": {
+    "status": "operator_ready",
+    "scope": "Full h200/12-by-4 nominal-Ge 1 GHz left-incidence two-port operator. Public workflow assembly and physical right-hand-side capture only.",
+    "configuration": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "schema_version": 1,
+      "name": "historical_26hole_layered_h200_ny12_z4",
+      "geometry": {
+        "length_nm": 16650,
+        "width_nm": 1000,
+        "thickness_nm": 200,
+        "pattern": {
+          "csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+          "x_offset_nm": 8325
+        }
+      },
+      "mesh": {
+        "kind": "layered",
+        "element_order": 2,
+        "mesh_size_nm": 200,
+        "port_size_nm": 83.33333333333333,
+        "circle_resolution": 32,
+        "thickness_layers": 4
+      },
+      "material": {
+        "name": "nominal_cubic_ge",
+        "C11_Pa": 128500000000.0,
+        "C12_Pa": 48300000000.0,
+        "C44_Pa": 66800000000.0,
+        "density_kg_m3": 5323,
+        "crystal_rotation": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "temperature_policy": "fixed_property_control",
+        "temperature_K": 4
+      },
+      "analysis": {
+        "kind": "scattering",
+        "boundary": "matched_ports",
+        "frequency_GHz": 1,
+        "incident_side": "left"
+      },
+      "resources": {
+        "max_dofs": 160000,
+        "max_port_dofs": 675,
+        "assembly_batch_elements": 2048,
+        "linear_solver": "ilu_gmres",
+        "ilu_fill_factor": 10.0
+      }
+    },
+    "mesh": {
+      "ndof": 157005,
+      "hash": "583529df668e42d40236757d52776eaee14af3ffa7da1ffa033d9cbf42925d00",
+      "checkpoint": {
+        "path": "results/runs/full_device_layered_preflight/_meshes/583529df668e42d40236757d52776eaee14af3ffa7da1ffa033d9cbf42925d00/mesh_AP_pnc.npz",
+        "sha256": "dac6819599fb4e483510135fe81be0f71e6498daa8fad6ac2c581eb7215192de",
+        "bytes": 245605
+      }
+    },
+    "frequency_hz": 1000000000.0,
+    "source_revision": "c607a7b9e511105674790fe363fdb85ea4808e4b",
+    "numerical_thread_environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1"
+    },
+    "factorization_attempted": false,
+    "scattering_computed": false,
+    "operator_callback_entry": {
+      "rss_mib": 710.515625,
+      "private_commit_mib": 805.328125,
+      "peak_working_set_mib": 1004.1484375,
+      "peak_private_commit_mib": 1088.1640625,
+      "commit_total_mib": 28226.44140625,
+      "commit_limit_mib": 33086.86328125,
+      "commit_headroom_mib": 4860.421875,
+      "physical_available_mib": 2123.84765625
+    },
+    "checkpoint_bytes": 458962759,
+    "predicted_initial_factor_buffers_mib": {
+      "ilu_fill_10": 4535.737228393555,
+      "direct_superlu": 13607.211685180664
+    },
+    "operator": {
+      "nonzero_storage": 11890163,
+      "array_bytes": 238431284
+    },
+    "raw_files": {
+      "stages": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/stages_AP_pnc.json",
+        "sha256": "e4ce7210e457521e648c1aea66709d28a187f7f25f6dc05f3a6d5c2ab135c144",
+        "bytes": 10345
+      },
+      "execution": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/execution_AP_pnc.json",
+        "sha256": "edd9e5898f00e83c6b5c114c4c136cee1b1a8a07c175f4a85684278aaac9c82d",
+        "bytes": 880
+      },
+      "driver": {
+        "path": "results/runs/full_device_resource_profile/stage_full_operator_AP_pnc.py",
+        "sha256": "73cb0ef16a9fb062bcc3c50d104d6e4772b2df249fb5b52577ff69d10085ab3b",
+        "bytes": 9987
+      },
+      "configuration": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/configuration_AP_pnc.json",
+        "sha256": "e85cac250ecf51db0a83221702f6ef97d02dcb0b91ae4edc750935d50db84ffa",
+        "bytes": 1303
+      },
+      "parent_preflight_configuration": {
+        "path": "results/runs/full_device_layered_preflight/configuration_AP_pnc.json",
+        "sha256": "efb01a26360329341879f45b2845582c53e205204b31d29939edbab29ba9bdba",
+        "bytes": 1199
+      },
+      "hole_pattern": {
+        "path": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+        "sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+        "bytes": 608
+      },
+      "K": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/K_AP_pnc.npz",
+        "sha256": "9467618ded2233a1fa3e9ea04198ba7541b052f45e539db80d9b7705a5e9efa1",
+        "bytes": 132731845,
+        "format": "csr",
+        "shape": [
+          157005,
+          157005
+        ],
+        "nnz": 11008547,
+        "array_bytes": 132730588
+      },
+      "M": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/M_AP_pnc.npz",
+        "sha256": "1dfe1d338dac35fb8bc141f83c716fbd21eecd299d5786b45362f78f7a13f520",
+        "bytes": 46008829,
+        "format": "csr",
+        "shape": [
+          157005,
+          157005
+        ],
+        "nnz": 3781629,
+        "array_bytes": 46007572
+      },
+      "A": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/A_AP_pnc.npz",
+        "sha256": "e3d5532741592a203098a0ed2b04966d23ea8850b1e7a1b09b34500c4c678c02",
+        "bytes": 238432541,
+        "format": "csc",
+        "shape": [
+          157005,
+          157005
+        ],
+        "nnz": 11890163,
+        "array_bytes": 238431284
+      },
+      "rhs": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/rhs_AP_pnc.npy",
+        "sha256": "9683440738dd42abe7d3db7fecb8ad282bc81fc66b6d41b2b6b185d2e9d77067",
+        "bytes": 12560528,
+        "shape": [
+          157005,
+          5
+        ],
+        "dtype": "complex128"
+      },
+      "port_modes": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/ports_AP_pnc.npz",
+        "sha256": "ac2e0265423fe720db187246f3c21304bb3e0605dc579091f6ca29f92005de08",
+        "bytes": 29229016,
+        "trace_dofs": 675,
+        "propagating_channels_per_direction": 5
+      },
+      "monitor_helpers": {
+        "path": "results/runs/full_device_resource_profile/profile_AP_pnc.py",
+        "sha256": "f0dab5367f25016a5cea91d5809311ec89658a8c090ee53eb8dbafe934205911",
+        "bytes": 25492
+      }
+    },
+    "run": {
+      "initial_memory": {
+        "commit_total_mib": 27408.890625,
+        "commit_limit_mib": 33086.86328125,
+        "commit_headroom_mib": 5677.97265625,
+        "physical_available_mib": 3019.70703125
+      },
+      "rss_cap_mib": 1800,
+      "available_floor_mib": 400,
+      "commit_headroom_floor_mib": 512,
+      "sample_interval_seconds": 0.1,
+      "worker_exit_code": 0,
+      "elapsed_seconds": 34.625,
+      "peak_tree_rss_mib": 747.5625,
+      "peak_tree_private_commit_mib": 1088.98046875,
+      "minimum_available_mib": 2058.01171875,
+      "minimum_commit_headroom_mib": 4569.63671875
+    },
+    "phases": {
+      "production_batched_assembly": {
+        "elapsed_seconds": 28.593999999997322,
+        "process_lifetime_peak_working_set_mib": 512.06640625,
+        "process_lifetime_peak_private_commit_mib": 651.8828125
+      },
+      "save_stiffness_and_mass": {
+        "elapsed_seconds": 0.2340000000112923,
+        "process_lifetime_peak_working_set_mib": 512.06640625,
+        "process_lifetime_peak_private_commit_mib": 651.8828125
+      },
+      "production_safe_modes": {
+        "elapsed_seconds": 2.5469999999913853,
+        "process_lifetime_peak_working_set_mib": 512.06640625,
+        "process_lifetime_peak_private_commit_mib": 651.8828125
+      },
+      "save_port_modes": {
+        "elapsed_seconds": 0.04700000000593718,
+        "process_lifetime_peak_working_set_mib": 512.06640625,
+        "process_lifetime_peak_private_commit_mib": 651.8828125
+      },
+      "save_physical_operator_and_rhs": {
+        "elapsed_seconds": 0.34300000000803266,
+        "process_lifetime_peak_working_set_mib": 1004.1484375,
+        "process_lifetime_peak_private_commit_mib": 1088.1640625
+      }
+    }
+  },
+  "full_device_solve_replay": {
+    "status": "failed",
+    "monitor_status": "failed",
+    "action": "solve",
+    "mesh": {
+      "ndof": 157005
+    },
+    "scattering_computed": false,
+    "run": {
+      "initial_memory": {
+        "commit_total_mib": 27123.03515625,
+        "commit_limit_mib": 33086.86328125,
+        "commit_headroom_mib": 5963.828125,
+        "physical_available_mib": 3146.49609375
+      },
+      "available_floor_mib": 400,
+      "commit_headroom_floor_mib": 512,
+      "wall_cap_seconds": 600,
+      "commit_margin_at_factorization_mib": 768,
+      "sample_interval_seconds": 0.1,
+      "worker_exit_code": 1,
+      "elapsed_seconds": 125.28200000000652,
+      "peak_tree_rss_mib": 2037.81640625,
+      "peak_tree_private_commit_mib": 5057.40234375,
+      "minimum_available_mib": 910.76171875,
+      "minimum_commit_headroom_mib": 651.65234375
+    },
+    "raw_files": {
+      "replay": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/solution_replay/replay_AP_pnc.json",
+        "sha256": "6f0ae69d918369397f6fdc13ff1c9227ed4810b0421052f146e05065d397c158",
+        "bytes": 21559
+      },
+      "execution": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/solution_replay/execution_AP_pnc.json",
+        "sha256": "a658147c0e83254608b83bd475c0f74871e4890204becbeea49aae43382e731e",
+        "bytes": 954
+      },
+      "driver": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/solution_replay/driver_AP_pnc.py",
+        "sha256": "4897c3f60478dcd2ace0e69cce27a36005715ea85120742f60f7580c9fcb8fcd",
+        "bytes": 11992
+      },
+      "log": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/solution_replay/worker_AP_pnc.log",
+        "sha256": "d7f2f64788acb365d14b1613a4f43d9eb7650741b30df36fd430c675e0ccfb2d",
+        "bytes": 883
+      }
+    },
+    "phases": {
+      "preconditioner": {
+        "elapsed_seconds": 32.38313040000503
+      },
+      "physical_rhs": {
+        "elapsed_seconds": 90.44207520000055
+      },
+      "solve_replay_total": {
+        "elapsed_seconds": 125.28200000000652,
+        "sampled_phase_rss_mib": 2037.81640625,
+        "process_lifetime_peak_working_set_mib": 2033.0078125,
+        "process_lifetime_peak_private_commit_mib": 5056.63671875
+      }
+    },
+    "before_factorization": {
+      "commit_total_mib": 27416.55078125,
+      "commit_limit_mib": 33086.86328125,
+      "commit_headroom_mib": 5670.3125,
+      "physical_available_mib": 2854.984375,
+      "private_commit_mib": 291.03515625
+    },
+    "predicted_initial_ilu_buffers_mib": 4535.737228393555,
+    "operator_csc_sha256": "4a9a4187ac23848b03efaa76ff123970020da1f19857cf03f40f549647dfaaf6",
+    "rhs_array_sha256": "549e5febe1d65547c56d38863aff552d884f04a18ea06f628d22430906c6fac1",
+    "error": "RuntimeError: ILU-GMRES failed for RHS 1 (info=10, relative residual 1.087e-05, backward residual 9.025e-09).",
+    "operator": {
+      "nonzero_storage": 11890163,
+      "array_bytes": 238431284
+    },
+    "iterative_solver": {
+      "method": "ilu_gmres",
+      "preconditioner": {
+        "drop_tol": 0.0001,
+        "fill_factor": 10.0,
+        "permc_spec": "COLAMD",
+        "factor_nonzeros": 92858621,
+        "elapsed_seconds": 32.38313040000503
+      },
+      "gmres": {
+        "rtol": 1e-10,
+        "atol": 0,
+        "restart": 50,
+        "maxiter": 10,
+        "callback_type": "pr_norm"
+      },
+      "relative_residual_limit": 1e-09,
+      "backward_residual_limit": 1e-09,
+      "operator_nonzeros": 11890163,
+      "operator_storage_bytes": 238431284,
+      "channels": [
+        {
+          "column": 0,
+          "info": 10,
+          "iterations": 500,
+          "relative_residual": 1.0867880906772434e-05,
+          "relative_backward_residual": 9.024561073889732e-09,
+          "elapsed_seconds": 90.44207520000055
+        }
+      ]
+    }
+  },
+  "csv_sha256": "1d6db5b80c86e8f31328ad8e640b2259525fa9d3e34fc7df00be66a28add5b29"
+}

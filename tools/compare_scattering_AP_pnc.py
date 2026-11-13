@@ -103,7 +103,10 @@ def read_run(directory: Path) -> tuple[dict, dict, dict]:
     require(fixed_material["temperature_policy"] == "fixed_property_control" and material["density_kg_m3"] > 0,
             f"Expected the supported fixed-property material model in {directory}.")
     core_hashes = summary["implementation"]["source_sha256"]
-    core = {f"src/phononic/{module}_AP_pnc.py": core_hashes.get(f"src/phononic/{module}_AP_pnc.py") for module in CORE}
+    modules = CORE + (("assembly_batched",) if "assembly_batch_elements" in configuration["resources"] else ())
+    if configuration["resources"].get("linear_solver", "direct") == "ilu_gmres":
+        modules += ("linear_solvers",)
+    core = {f"src/phononic/{module}_AP_pnc.py": core_hashes.get(f"src/phononic/{module}_AP_pnc.py") for module in modules}
     require(all(isinstance(value, str) and len(value) == 64 for value in core.values()),
             f"Missing numerical source hashes in {directory}.")
     fixed = {"dimensions_nm": {key: geometry[key] for key in ("length_nm", "width_nm", "thickness_nm")},
