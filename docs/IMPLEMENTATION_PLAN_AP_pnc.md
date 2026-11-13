@@ -34,6 +34,7 @@ Use scikit-fem to assemble 3D vector finite elements, SciPy for sparse eigenvalu
 | --- | --- |
 | `src/phononic/geometry_AP_pnc.py` | Parameterized straight beams, the original hole table, SI geometry and optional Gmsh meshes |
 | `perforated_AP_pnc.py` | Port-compatible Gmsh meshes with independently controlled body, end-face and circle resolutions; exact CAD/affine-mesh volume diagnostics |
+| `layered_AP_pnc.py` | Optional planar triangulation extruded into conforming affine tetrahedra, with independent in-plane size and explicit thickness layers |
 | `material_AP_pnc.py` | Cubic crystal tensor, crystal-to-lab rotation and material provenance |
 | `elasticity_AP_pnc.py` | Three-dimensional consistent mass and stiffness, eigenmodes and numerical residuals |
 | `lead_modes_AP_pnc.py` | Bloch constraints on the two ends of a single mesh and guided-wave dispersion with free sidewalls |
@@ -64,7 +65,11 @@ The original 26-hole, 56220-DOF pilot completed with five incident channels but 
 
 Independent SAFE-only ports with 99, 195 and 315 trace DOFs retain five propagating channels in each direction. The final pair changes k enough to give a 0.05638 rad phase indicator over the combined 3 micrometres of uniform leads, so port phase accuracy is unresolved. This indicator is not a full-device error bound and is not subtracted from the scattering coefficients. The completed follow-up and offline checker are `verification/device_convergence_followup_AP_pnc.*` and `tools/check_device_followup_AP_pnc.py`.
 
-The next bounded numerical milestone should isolate body propagation error with independent axial/thickness controls, use the saved SAFE results to choose port resolution, and compare a single representative frequency before expanding a campaign. Hole faceting remains a separate geometric check. Define the selected observable and resource cap first; retain phase at the physical port planes. The saved-run comparator already supports field-based matching across unequal P1/P2 port traces. Degenerate subspaces and changed channel counts need explicit treatment before those cases can use it. Do not rerun the unchanged straight-guide or two-hole campaigns.
+Directional controls are now implemented. A four-case 1.2 micrometre uniform-guide diagnostic independently varies axial spacing and thickness subdivision. At fixed ports, halving axial spacing decreases the maximum same-SAFE-reference phase error by about threefold; the finest case is still above 0.01. Its portable matrices and no-solve integrity test preserve the observed failures. The new layered mesh backend then applies separate footprint size and explicit z layers to through-hole geometries, with matching ports and unchanged polygonal holes. Layered z refinement changes both body and SAFE section; in-plane refinement at fixed layers holds the ports fixed.
+
+The layered two-hole h105/h80/h60 study is complete at two z layers and fixed 135-DOF ports. Only its final pair passes the 0.01 complex-change criterion (0.006834). The h60 difference from the saved unstructured h50 reference is still 0.013431, and both layered uniform same-port reference checks fail. Thus the next bounded study must check thickness and port resolution independently; a stable in-plane pair is insufficient. Reuse all five layered public runs and the old reference without repeating them.
+
+Use these controls and the saved SAFE results to choose a bounded full-device refinement before expanding a campaign. Hole faceting remains a separate geometric check. Define the selected observable and resource cap first; retain phase at the physical port planes. The saved-run comparator supports field-based matching across unequal P1/P2 port traces. Degenerate subspaces and changed channel counts need explicit treatment before those cases can use it. Do not rerun the unchanged straight-guide or two-hole campaigns.
 
 ## Resources and data
 

@@ -17,9 +17,13 @@ def mesh_inputs(geometry, pattern: dict | None, settings: dict, implementation: 
     kind = settings.get("kind", "structured")
     modules = ("mesh_checkpoint", "geometry")
     packages = ("numpy", "scikit-fem")
-    if kind == "gmsh":
+    if kind in ("gmsh", "layered"):
         modules += ("perforated",)
-        packages += ("gmsh", "meshio")
+        packages += ("gmsh",)
+    if kind == "gmsh":
+        packages += ("meshio",)
+    if kind == "layered":
+        modules += ("layered",)
     sources = [f"src/phononic/{module}_AP_pnc.py" for module in modules]
     return {
         "dimensions_m": [geometry.length_m, geometry.width_m, geometry.thickness_m],
@@ -33,15 +37,20 @@ def mesh_inputs(geometry, pattern: dict | None, settings: dict, implementation: 
 
 
 def build_mesh(geometry, holes, settings: dict, max_port_dofs: int | None) -> tuple[MeshTet, dict]:
-    if settings.get("kind", "structured") == "gmsh":
+    kind = settings.get("kind", "structured")
+    if kind in ("gmsh", "layered"):
         from .perforated_AP_pnc import make_perforated_mesh, volume_diagnostics
 
-        mesh = make_perforated_mesh(
-            geometry, holes, settings["mesh_size_nm"] * 1e-9,
-            port_mesh_size_m=settings["port_size_nm"] * 1e-9,
-            circle_points=settings["circle_resolution"], max_port_dofs=max_port_dofs,
-            element_order=settings["element_order"],
-        )
+        options = {"port_mesh_size_m": settings["port_size_nm"] * 1e-9,
+                   "circle_points": settings["circle_resolution"], "max_port_dofs": max_port_dofs,
+                   "element_order": settings["element_order"]}
+        mesh_size_m = settings["mesh_size_nm"] * 1e-9
+        if kind == "layered":
+            from .layered_AP_pnc import make_layered_mesh
+
+            mesh = make_layered_mesh(geometry, holes, mesh_size_m, thickness_layers=settings["thickness_layers"], **options)
+        else:
+            mesh = make_perforated_mesh(geometry, holes, mesh_size_m, **options)
         diagnostics = {"geometry_diagnostics": volume_diagnostics(mesh, geometry, holes)}
     else:
         mesh = make_straight_mesh(geometry, settings["cells"])

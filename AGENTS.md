@@ -12,6 +12,8 @@ The optional English Qt interface is `workbench_AP_pnc.py` (`Launch_Workbench_AP
 
 The workbench opens saved runs and compares scattering results through `tools/compare_scattering_AP_pnc.py` without new solves. Identical discretizations are repeatability checks, and failed input power checks cannot establish mesh-pair acceptance. The saved full-device/port follow-up is checked with `tools/check_device_followup_AP_pnc.py`; a successful integrity check does not mean the scientific convergence criteria passed.
 
+The additional `layered` mesh uses `src/phononic/layered_AP_pnc.py` and `configs/perforated_layered_AP_pnc.json`. Its in-plane size and `thickness_layers` are separate controls; z layers also define the port thickness mesh. This remains a full 3D displacement model. `tools/diagnose_wave_resolution_AP_pnc.py` and the saved directional diagnostic establish sensitivity, not complete-device convergence. Keep the existing unstructured Gmsh path and its numerical evidence unchanged.
+
 ## Project language
 
 Use English for all project artifacts, including code comments, user-interface text, generated reports and other output text, documentation, and GitHub communications. Standard scientific Unicode symbols and notation are welcome. Chinese may be used in direct conversation and progress updates to the user.

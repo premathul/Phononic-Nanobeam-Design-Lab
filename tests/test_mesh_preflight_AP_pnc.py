@@ -14,7 +14,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from phononic.workflow_AP_pnc import main, preflight_mesh, run_study
+from phononic.workflow_AP_pnc import main, preflight_mesh, resolve_config, run_study
 
 
 class MeshPreflightTests(unittest.TestCase):
@@ -22,6 +22,63 @@ class MeshPreflightTests(unittest.TestCase):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
         self.output = Path(temporary.name)
+
+    def test_layered_preflight_sets_exact_thickness_planes_and_supplies_scattering_mesh(self):
+        preset = ROOT / "configs/perforated_layered_AP_pnc.json"
+        config = json.loads(preset.read_bytes())
+        reference = json.loads((ROOT / "configs/perforated_phase_reference_AP_pnc.json").read_bytes())
+        for section in ("geometry", "material", "analysis"):
+            self.assertEqual(config[section], reference[section])
+        config["mesh"].update(mesh_size_nm=150, circle_resolution=16, thickness_layers=1)
+        config_file = self.output / "config_AP_pnc.json"
+        config_file.write_text(json.dumps(config), encoding="utf-8")
+        argv = ["--config", str(config_file), "--output-root", str(self.output), "--thickness-layers", "2"]
+        first = preflight_mesh(config, self.output)
+        self.assertEqual(first["end_face_dofs"], {"xleft": 81, "xright": 81})
+        with contextlib.redirect_stdout(io.StringIO()), patch("phononic.workflow_AP_pnc.assemble_elasticity") as assembly:
+            self.assertEqual(main([*argv, "--mesh-only"]), 0)
+            assembly.assert_not_called()
+        config["mesh"]["thickness_layers"] = 2
+        with patch("phononic.workflow_AP_pnc.build_mesh") as builder:
+            ready = preflight_mesh(config, self.output)
+            with contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(main(argv), 0)
+            builder.assert_not_called()
+        self.assertTrue(ready["reused"])
+        self.assertEqual(ready["end_face_dofs"], {"xleft": 135, "xright": 135})
+        self.assertNotEqual(first["mesh_hash"], ready["mesh_hash"])
+        self.assertEqual(ready["mesh_tetrahedra"], 2 * first["mesh_tetrahedra"])
+        self.assertEqual(ready["mesh_inputs"]["settings"]["thickness_layers"], 2)
+        self.assertIn("src/phononic/layered_AP_pnc.py", ready["mesh_inputs"]["source_sha256"])
+        self.assertIn("src/phononic/perforated_AP_pnc.py", ready["mesh_inputs"]["source_sha256"])
+        self.assertIn("gmsh", ready["mesh_inputs"]["packages"])
+        with np.load(Path(ready["output_directory"]) / "mesh_AP_pnc.npz", allow_pickle=False) as saved:
+            np.testing.assert_allclose(np.unique(saved["points_m"][2]), [-1e-7, 0, 1e-7], atol=1e-20, rtol=0)
+        finished = json.loads(next(self.output.glob("two_hole_layered_200nm-*/summary_AP_pnc.json")).read_bytes())
+        self.assertEqual(finished["status"], "completed_unverified")
+        self.assertEqual(finished["mesh_kind"], "layered")
+        self.assertEqual(finished["mesh_checkpoint"]["mesh_sha256"], ready["mesh_sha256"])
+        self.assertEqual(finished["port_dofs"], 135)
+        self.assertTrue(finished["power_balance_passed"])
+        self.assertFalse(finished["spatial_convergence_established"])
+
+    def test_thickness_layers_is_required_positive_integer_only_for_layered_meshes(self):
+        for name in ("straight_beam", "perforated_beam"):
+            with self.subTest(name=name):
+                config = json.loads((ROOT / "configs" / f"{name}_AP_pnc.json").read_bytes())
+                config["mesh"]["thickness_layers"] = 2
+                with self.assertRaisesRegex(ValueError, "mesh.thickness_layers requires mesh.kind=layered"):
+                    resolve_config(config)
+
+        layered = json.loads((ROOT / "configs/perforated_layered_AP_pnc.json").read_bytes())
+        layered["mesh"].pop("thickness_layers")
+        with self.assertRaisesRegex(ValueError, "mesh.thickness_layers must be a positive integer"):
+            resolve_config(layered)
+        for invalid in (0, -1, 1.5, True):
+            with self.subTest(invalid=invalid):
+                layered["mesh"]["thickness_layers"] = invalid
+                with self.assertRaisesRegex(ValueError, "mesh.thickness_layers must be a positive integer"):
+                    resolve_config(layered)
 
     def test_public_preflight_reuses_exact_tagged_gmsh_mesh_after_body_budget_changes(self):
         config = json.loads((ROOT / "configs/perforated_beam_AP_pnc.json").read_bytes())

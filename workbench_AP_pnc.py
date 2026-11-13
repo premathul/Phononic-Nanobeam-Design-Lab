@@ -34,6 +34,7 @@ PRESETS = (
     ("Two-hole beam · scattering", "perforated_beam_AP_pnc.json"),
     ("Two-hole phase reference · scattering", "perforated_phase_reference_AP_pnc.json"),
     ("Historical 26-hole device · pilot", "historical_26hole_AP_pnc.json"),
+    ("Two-hole beam · layered mesh", "perforated_layered_AP_pnc.json"),
 )
 ANALYSES = {"modes": "Finite-body modes", "bloch": "Bloch dispersion", "scattering": "Matched-port scattering"}
 BOUNDARIES = {"clamped_free": "Clamped–free", "clamped_clamped": "Clamped at both ends", "free": "Free",
@@ -44,15 +45,16 @@ FIELDS = (
     ("num_modes", "Requested modes"), ("k_points", "Wavevector samples"),
     ("cells", "Mesh cells (x, y, z)"), ("mesh_size_nm", "Body mesh size (nm)"),
     ("port_size_nm", "Port mesh size (nm)"), ("circle_resolution", "Circle segments"),
+    ("thickness_layers", "Thickness layers"),
     ("max_dofs", "Body DOF cap"), ("max_port_dofs", "Port DOF cap"),
 )
 NUMERICAL_FIELDS = {
     "geometry": ("length_nm", "width_nm", "thickness_nm"),
     "analysis": ("frequency_GHz", "num_modes", "k_points"),
-    "mesh": ("mesh_size_nm", "port_size_nm", "circle_resolution"),
+    "mesh": ("mesh_size_nm", "port_size_nm", "circle_resolution", "thickness_layers"),
     "resources": ("max_dofs", "max_port_dofs"),
 }
-WHOLE_FIELDS = {"num_modes", "k_points", "circle_resolution", "max_dofs", "max_port_dofs"}
+WHOLE_FIELDS = {"num_modes", "k_points", "circle_resolution", "thickness_layers", "max_dofs", "max_port_dofs"}
 JOB_RESULTS = {"mesh": "mesh_ready", "run": "completed_unverified", "compare": "compared"}
 JOB_MESSAGES = {"mesh": "Checking the mesh…", "run": "Running the study…", "compare": "Comparing saved scattering runs…"}
 
@@ -70,8 +72,8 @@ def _read_configuration(path: Path) -> dict:
     boundary = config["analysis"].get("boundary")
     if not isinstance(boundary, str) or boundary not in BOUNDARIES:
         raise ValueError("Select a supported boundary condition.")
-    if config["mesh"].get("kind", "structured") not in ("structured", "gmsh"):
-        raise ValueError("The mesh kind must be structured or gmsh.")
+    if config["mesh"].get("kind", "structured") not in ("structured", "gmsh", "layered"):
+        raise ValueError("The mesh kind must be structured, gmsh, or layered.")
     pattern = config["geometry"].get("pattern")
     if pattern is not None and not isinstance(pattern, dict):
         raise ValueError("The hole pattern must be a configuration object.")
@@ -255,10 +257,13 @@ class Workbench(QMainWindow):
         self.preset.blockSignals(was_blocked)
         mesh = config["mesh"]
         analysis = config["analysis"]
-        gmsh = mesh.get("kind", "structured") == "gmsh"
+        layered = mesh.get("kind") == "layered"
+        gmsh = mesh.get("kind", "structured") in ("gmsh", "layered")
         scattering = analysis["kind"] == "scattering"
         self.visible_fields = {"name", "length_nm", "width_nm", "thickness_nm", "max_dofs"}
         self.visible_fields.update(("mesh_size_nm", "port_size_nm", "circle_resolution") if gmsh else ("cells",))
+        if layered:
+            self.visible_fields.add("thickness_layers")
         self.visible_fields.update(("frequency_GHz",) if scattering else ("num_modes",))
         if analysis["kind"] == "bloch":
             self.visible_fields.add("k_points")
@@ -273,6 +278,10 @@ class Workbench(QMainWindow):
         for key, field in self.fields.items():
             field.setText(str(values.get(key, "")))
             self.form_layout.setRowVisible(field, key in self.visible_fields)
+        for key, label in (("mesh_size_nm", "In-plane mesh size (nm)" if layered else "Body mesh size (nm)"),
+                           ("port_size_nm", "Port width mesh size (nm)" if layered else "Port mesh size (nm)")):
+            self.form_layout.labelForField(self.fields[key]).setText(label)
+            self.fields[key].setAccessibleName(label)
         self._show_provenance(path)
         self.log.clear()
         self._clear_result()
@@ -284,6 +293,9 @@ class Workbench(QMainWindow):
         if analysis["kind"] == "scattering":
             lines.append(f"Incident side: {analysis.get('incident_side', 'left')}")
         lines.append(f"Displacement element order: {mesh.get('element_order', 'unspecified')}")
+        if mesh.get("kind") == "layered":
+            lines.append("Layered 3D mesh: in-plane size and thickness layers are independent.")
+            lines.append("Thickness layers also set the port thickness resolution.")
         lines.append(f"Configuration: {path}")
         pattern = self.config["geometry"].get("pattern")
         if pattern is None:
