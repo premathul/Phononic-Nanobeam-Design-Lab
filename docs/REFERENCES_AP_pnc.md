@@ -24,3 +24,15 @@ Investigate H. J. McSkimin, J. Appl. Phys. 24, 988-997 (1953), [10.1063/1.172144
 - [Available evidence audit](EVIDENCE_AND_RECOVERY_AP_pnc.md): distinguishes actually rechecked outputs from historical reports.
 
 For every numerical property eventually used, record the source page/figure/table, exact extracted values, extraction uncertainty, original measurement units and any conversion. Preserve a provenance trail to an authorized source copy or stable publisher link. Literature values, numerical verification and experimental validation are separate evidence categories.
+
+## Wave accuracy and mesh controls
+
+The device follow-up uses the sources below to guide targeted body and port checks. They motivate separate phase and energy checks; their mesh-size recommendations are not calibration data for this anisotropic Ge device.
+
+| Source | Relevance | Boundary for use |
+| --- | --- | --- |
+| D. L. Brown and D. Gallistl, *Multiscale Sub-grid Correction Method for Time-Harmonic High-Frequency Elastodynamics with Wavenumber Explicit Bounds*, [arXiv:1608.04243v2](https://arxiv.org/abs/1608.04243v2) | Documents frequency-dependent pollution error in elastodynamics and a multiscale treatment | Supports treating propagation-phase accuracy as a separate requirement. No multiscale method or transferable element-size threshold from this paper has been installed here. |
+| S. Geevers, W. A. Mulder and J. J. W. van der Vegt, *Dispersion Properties of Explicit Finite Element Methods for Wave Propagation Modelling on Tetrahedral Meshes*, J. Sci. Comput. 77, 372-396 (2018), [10.1007/s10915-018-0709-7](https://doi.org/10.1007/s10915-018-0709-7) | Examines elastic-wave dispersion, resolution and tetrahedron-shape sensitivity | Its mass-lumped and discontinuous-Galerkin time-domain schemes differ from this consistent-mass P2 harmonic solver. The lesson is to measure dispersion and element quality, not copy a points-per-wavelength rule. |
+| [Gmsh mesh-size fields](https://gmsh.info/doc/texinfo/gmsh.html#t10_003a-Mesh-size-fields) and [structured meshes](https://gmsh.info/doc/texinfo/gmsh.html#t6_003a-Transfinite-meshes) | Established controls for volume targets and prescribed surface subdivisions | The existing mesher holds port and circle subdivisions separately from the body target. Holding the number of wall layers fixed does not by itself fix the complete volume mesh. |
+
+In the current study, a matched-port wavenumber difference multiplied by a stated guide length is a propagation-phase sensitivity indicator. It is not a bound on the patterned device's scattering error, and it is not subtracted from the measured complex scattering difference. Direct saved-result comparisons retain the phase at the original physical reference planes.

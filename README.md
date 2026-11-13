@@ -27,6 +27,16 @@ On Windows, `Launch_Workbench_AP_pnc.cmd` opens the same interface. Choose a pre
 
 The workbench runs one background job at a time. **Stop** ends its process tree and preserves submitted inputs, logs and any partial scientific output. A mesh-ready message means only that meshing completed; a computed result remains unverified until the relevant convergence checks are established. The initial interface edits the main numerical inputs and retains the loaded analysis and boundary selection; broader material and geometry editors are future work. Windows offscreen interaction tests and a readable preview were checked. Native interaction on other operating systems has not been tested.
 
+Use **Open saved run** to reopen a completed result folder, including runs made from the command line. For scattering, **Compare saved run** selects a reference folder and compares it with the currently loaded result without solving again. The English report lists per-channel reflection/transmission powers, complex-coefficient changes and same-channel transmission phases. It matches signed-power modes by their field overlap before comparing amplitudes. Both input power-balance checks and the two 0.01 change criteria must pass for a mesh-pair acceptance; identical stored discretizations are labeled repeatability checks. A passing pair does not establish continuum convergence or certify other frequencies.
+
+The comparison is also available without Qt:
+
+```powershell
+.\.venv\Scripts\python.exe tools/compare_scattering_AP_pnc.py --reference path/to/coarser-run --candidate path/to/finer-run
+```
+
+Select two completed scattering run directories with the same physical geometry, material, frequency, incident end and numerical-core version. The tool verifies saved file checksums and retains the original reference-plane phase. It writes a separate HTML report, CSV and provenance summary under `results/runs/comparisons/`; source runs are preserved. Changed channel counts or unresolved mode matching require a separate analysis. Exit code 0 means the comparison completed, including a comparison whose scientific criteria failed; the report and JSON state those outcomes separately.
+
 Edit [straight_beam_AP_pnc.json](configs/straight_beam_AP_pnc.json) to configure a run, or use the following command-line options.
 
 ```powershell
@@ -71,7 +81,7 @@ For holes, `geometry.pattern.csv` is relative to the repository root and `x_offs
 
 ## Verification and capabilities
 
-The current Windows/Python 3.12 suite ran 55 tests: 54 passed and one was skipped because the process lacked permission to create a symbolic link. The checks cover tensor rotation, uniform strain, consistent mass, rigid-body subspaces, independent dense and sparse solutions, Bloch phase and the long-wavelength rod limit. Port checks cover trace mapping, directional energy flux, the dispersion-derivative identity, exact symmetry degeneracy, an independent 3D Bloch comparison, and explicit rejection of unresolved cutoffs. Scattering checks exercise both incidence directions, independent boundary flux, and reconstruction from exported fields. Geometry/workflow checks cover identical Gmsh end traces, analytic polygon volumes, independent curvature refinement, CSV provenance, cache invalidation, preflight budgets and exact tagged-mesh reuse.
+The current Windows/Python 3.12 suite ran 63 tests: 62 passed and one was skipped because the process lacked permission to create a symbolic link. The checks cover tensor rotation, uniform strain, consistent mass, rigid-body subspaces, independent dense and sparse solutions, Bloch phase and the long-wavelength rod limit. Port checks cover trace mapping, directional energy flux, the dispersion-derivative identity, exact symmetry degeneracy, an independent 3D Bloch comparison, and explicit rejection of unresolved cutoffs. Scattering checks exercise both incidence directions, independent boundary flux, and reconstruction from exported fields. Geometry/workflow checks cover identical Gmsh end traces, analytic polygon volumes, independent curvature refinement, CSV provenance, cache invalidation, preflight budgets and exact tagged-mesh reuse. Saved-run checks cover unequal P1/P2 port traces, mode ordering and phase invariance, repeatability labeling, input power-check failures, reopening results and the desktop comparison workflow.
 
 The [three-mesh convergence record](verification/straight_beam_validation_AP_pnc.json) covers the first four cantilever modes of the default geometry with 1755, 5187 and 11475 degrees of freedom. The maximum frequency change between the two finest meshes was about 0.468%, and the minimum mass-weighted mode overlap was about 0.999992. Independent fixed-property assemblies and solves labeled 20 mK and 4 K yielded identical matrices and frequencies. Convergence for other geometries, thicknesses and frequency bands requires its own checks.
 
@@ -86,6 +96,8 @@ The subsequent [two-hole phase refinement](verification/two_hole_phase_refinemen
 The [original 26-hole pilot](verification/historical_26hole_pilot_AP_pnc.json) ran at 1 GHz with 56220 DOFs and five propagating incident channels in the discretized lead. Transmission ranged from 0.96006 to 0.99974; direct power imbalance was below 2.3 × 10⁻¹³. The run used 14.76 s and approximately 1089 MiB sampled process memory. This is a single-mesh, single-frequency execution result, with no device-convergence or band-gap claim. The 32-segment holes have a 0.6413% removed-volume error relative to circular cylinders.
 
 A subsequent [26-hole mesh comparison](verification/historical_26hole_refinement_AP_pnc.json) reused that pilot and solved one finer, 82056-DOF mesh at the same 1 GHz frequency. The five left-incident channels changed T/R by up to 0.01136 and complex scattering coefficients by up to 0.42286; both exceed 0.01. The largest same-channel transmission phase change was 0.429 rad despite matching port modes and wavenumbers. The solve completed in 22.09 s with 1888 MiB monitored process-tree memory. Body refinement also changed hole-wall thickness partitioning from one to two layers, so this comparison does not isolate one source of discretization error. Full-device convergence remains failed, and the power balance alone cannot validate its phase or spectrum.
+
+The [device and port follow-up](verification/device_convergence_followup_AP_pnc.json) adds a 130 nm body mesh with 96903 DOFs, the same 32-segment holes and 99-DOF ports, and the same two hole-wall thickness layers as the 160 nm mesh. Its power change is 0.002339 (passes 0.01), while its complex-coefficient change is 0.137744 (fails 0.01). It took 31.41 s end to end with 2229 MiB peak process-tree memory. Independent SAFE-only port refinements from 99 to 195 to 315 trace DOFs retain five propagating channels each way. The last pair's wavenumber change corresponds to 0.05638 rad over the combined 3 micrometres of uniform leads. This is a phase-sensitivity indicator, not a bound on patterned-device scattering error or a phase correction to subtract. Port accuracy remains unresolved. The [offline follow-up checker](tools/check_device_followup_AP_pnc.py) reproduces these comparisons from compact saved evidence without new solves.
 
 | Capability | Status |
 | --- | --- |
@@ -112,6 +124,7 @@ $env:OMP_NUM_THREADS='1'
 .\.venv\Scripts\python.exe -B tools/validate_perforated_AP_pnc.py
 .\.venv\Scripts\python.exe -B tools/check_phase_refinement_AP_pnc.py
 .\.venv\Scripts\python.exe -B tools/check_device_refinement_AP_pnc.py
+.\.venv\Scripts\python.exe -B tools/check_device_followup_AP_pnc.py
 ```
 
 The validation tool uses three independent mesh solves, mass-weighted mode matching and a fixed-property temperature control. It reports failed checks with a nonzero exit code and retains the computed values and original material inputs. The `--quick` option exercises the workflow on coarser meshes, which may fail the 0.5% frequency-change threshold.
@@ -130,7 +143,7 @@ The device-refinement checker verifies preserved data without solving. Its defau
 - [Long-term research work packages](docs/NEXT_STEPS_AP_pnc.md)
 - [Material references and validity limits](docs/REFERENCES_AP_pnc.md)
 
-The next numerical work targets the full-device mesh and thickness-discretization sensitivity exposed by the failed comparison, then checks ports independently before broad spectral or resonance claims. Temperature-dependent properties, bends and larger sweeps follow when the corresponding inputs and checks are established. QTCAD served as a workflow reference. The phonon solver uses the libraries listed above.
+The next numerical work targets body propagation-phase error and port resolution using the saved three-level device study and independent SAFE results. Separate axial/thickness resolution from hole faceting before a larger frequency campaign; retain the failed comparisons. Temperature-dependent properties, bends and larger sweeps follow when the corresponding inputs and checks are established. QTCAD served as a workflow reference. The phonon solver uses the libraries listed above.
 
 ## Historical two-dimensional evidence
 

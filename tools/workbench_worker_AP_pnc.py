@@ -38,8 +38,10 @@ def write_response(path: Path, response: dict) -> None:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--config", type=Path, required=True)
-    parser.add_argument("--action", choices=("mesh", "run"), required=True)
+    parser.add_argument("--config", type=Path)
+    parser.add_argument("--reference", type=Path)
+    parser.add_argument("--candidate", type=Path)
+    parser.add_argument("--action", choices=("mesh", "run", "compare"), required=True)
     parser.add_argument("--output-root", type=Path, required=True)
     parser.add_argument("--response", type=Path, required=True)
     args = parser.parse_args(argv)
@@ -56,14 +58,22 @@ def main(argv: list[str] | None = None) -> int:
     sys.path.insert(0, str(ROOT / "src"))
     response = {"action": args.action}
     try:
-        config = json.loads(args.config.read_text(encoding="utf-8-sig"))
-        if not isinstance(config, dict):
-            raise ValueError("The configuration must be a JSON object.")
+        if args.action == "compare":
+            if args.reference is None or args.candidate is None or args.config is not None:
+                raise ValueError("Comparison requires --reference and --candidate. Omit --config.")
+            from compare_scattering_AP_pnc import compare_runs
 
-        from phononic.workflow_AP_pnc import preflight_mesh, run_study
+            summary = compare_runs(args.reference, args.candidate, args.output_root)
+        else:
+            if args.config is None or args.reference is not None or args.candidate is not None:
+                raise ValueError("Mesh checks and solves require --config. Omit --reference and --candidate.")
+            config = json.loads(args.config.read_text(encoding="utf-8-sig"))
+            if not isinstance(config, dict):
+                raise ValueError("The configuration must be a JSON object.")
+            from phononic.workflow_AP_pnc import preflight_mesh, run_study
 
-        execute = preflight_mesh if args.action == "mesh" else run_study
-        summary = execute(config, args.output_root)
+            execute = preflight_mesh if args.action == "mesh" else run_study
+            summary = execute(config, args.output_root)
         response.update(status=summary["status"], summary=summary)
         # A cold result can contain NumPy scalar values even though the
         # workflow's persisted summary has already normalized them to JSON.

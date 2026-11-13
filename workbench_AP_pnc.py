@@ -53,6 +53,8 @@ NUMERICAL_FIELDS = {
     "resources": ("max_dofs", "max_port_dofs"),
 }
 WHOLE_FIELDS = {"num_modes", "k_points", "circle_resolution", "max_dofs", "max_port_dofs"}
+JOB_RESULTS = {"mesh": "mesh_ready", "run": "completed_unverified", "compare": "compared"}
+JOB_MESSAGES = {"mesh": "Checking the mesh…", "run": "Running the study…", "compare": "Comparing saved scattering runs…"}
 
 
 def _read_configuration(path: Path) -> dict:
@@ -91,6 +93,7 @@ class Workbench(QMainWindow):
         self.config = {}
         self.result_directory = None
         self.report_path = None
+        self.scattering_directory = None
         self.action = None
         self.response_path = None
         self.stopping = False
@@ -126,11 +129,13 @@ class Workbench(QMainWindow):
             self.preset.addItem(label)
         self.preset.addItem("Loaded configuration")
         self.load_button = QPushButton("Load JSON…")
+        self.saved_run_button = QPushButton("Open saved run…")
         self.save_button = QPushButton("Save JSON…")
         choices.addWidget(QLabel("Preset"))
         choices.addWidget(self.preset, 1)
         choices.addWidget(self.load_button)
         choices.addWidget(self.save_button)
+        choices.addWidget(self.saved_run_button)
         main.addLayout(choices)
 
         columns = QHBoxLayout()
@@ -162,9 +167,11 @@ class Workbench(QMainWindow):
         self.run_button.setStyleSheet("font-weight: 600; padding-left: 15px; padding-right: 15px;")
         self.stop_button = QPushButton("Stop")
         self.stop_button.setEnabled(False)
+        self.compare_button = QPushButton("Compare saved run…")
         self.report_button = QPushButton("Open report")
         self.folder_button = QPushButton("Open folder")
-        for button in (self.mesh_button, self.run_button, self.stop_button, self.report_button, self.folder_button):
+        for button in (self.mesh_button, self.run_button, self.stop_button, self.compare_button,
+                       self.report_button, self.folder_button):
             actions.addWidget(button)
         actions.addStretch()
         main.addLayout(actions)
@@ -182,10 +189,12 @@ class Workbench(QMainWindow):
 
         self.preset.currentIndexChanged.connect(self._select_preset)
         self.load_button.clicked.connect(self._choose_load)
+        self.saved_run_button.clicked.connect(self._choose_saved_run)
         self.save_button.clicked.connect(self._choose_save)
         self.mesh_button.clicked.connect(lambda: self.start_job("mesh"))
         self.run_button.clicked.connect(lambda: self.start_job("run"))
         self.stop_button.clicked.connect(self.stop_job)
+        self.compare_button.clicked.connect(self._choose_reference)
         self.report_button.clicked.connect(lambda: self._open(self.report_path))
         self.folder_button.clicked.connect(lambda: self._open(self.result_directory))
         self._select_preset(0)
@@ -199,6 +208,11 @@ class Workbench(QMainWindow):
         if path:
             self.load_configuration(Path(path))
 
+    def _choose_saved_run(self) -> None:
+        path = QFileDialog.getExistingDirectory(self, "Open a saved simulation run", str(self.output_root))
+        if path:
+            self.open_saved_run(Path(path))
+
     def load_configuration(self, path: Path, index: int = len(PRESETS)) -> bool:
         if self.action is not None:
             return False
@@ -207,6 +221,34 @@ class Workbench(QMainWindow):
         except (OSError, ValueError) as exc:
             self.status.setText(f"Could not load configuration. {exc}")
             return False
+        self._apply_configuration(config, path, index)
+        self.status.setText("Configuration ready. Check the mesh or run the study.")
+        return True
+
+    def open_saved_run(self, directory: Path) -> bool:
+        if self.action is not None:
+            return False
+        try:
+            directory = directory.resolve()
+            config_path = directory / "configuration_AP_pnc.json"
+            config = _read_configuration(config_path)
+            summary = json.loads((directory / "summary_AP_pnc.json").read_text(encoding="utf-8-sig"))
+            if not isinstance(summary, dict) or summary.get("status") != "completed_unverified":
+                raise ValueError("Choose a completed simulation run.")
+            if summary.get("configuration") != config or summary.get("analysis_kind") != config["analysis"]["kind"]:
+                raise ValueError("The saved configuration and result summary do not match.")
+            if summary["analysis_kind"] == "scattering" and type(summary.get("power_balance_passed")) is not bool:
+                raise ValueError("The saved scattering result is missing its power-balance check.")
+            if not (directory / "report_AP_pnc.html").is_file():
+                raise ValueError("The saved run report is missing.")
+        except (OSError, ValueError) as exc:
+            self.status.setText(f"Could not open saved run. {exc}")
+            return False
+        self._apply_configuration(config, config_path, len(PRESETS))
+        self._show_result("completed_unverified", {**summary, "output_directory": str(directory)})
+        return True
+
+    def _apply_configuration(self, config: dict, path: Path, index: int) -> None:
         self.config = config
         was_blocked = self.preset.blockSignals(True)
         self.preset.setCurrentIndex(index)
@@ -234,8 +276,6 @@ class Workbench(QMainWindow):
         self._show_provenance(path)
         self.log.clear()
         self._clear_result()
-        self.status.setText("Configuration ready. Check the mesh or run the study.")
-        return True
 
     def _show_provenance(self, path: Path) -> None:
         material, analysis, mesh = (self.config[key] for key in ("material", "analysis", "mesh"))
@@ -312,31 +352,64 @@ class Workbench(QMainWindow):
     def _clear_result(self) -> None:
         self.result_directory = None
         self.report_path = None
-        self.report_button.setEnabled(False)
-        self.folder_button.setEnabled(False)
+        self.scattering_directory = None
+        self._set_result_buttons(False)
+
+    def _set_result_buttons(self, busy: bool) -> None:
+        self.compare_button.setEnabled(not busy and self.scattering_directory is not None)
+        self.report_button.setEnabled(not busy and self.report_path is not None)
+        self.folder_button.setEnabled(not busy and self.result_directory is not None)
 
     def _inputs_changed(self) -> None:
         self._clear_result()
         self.status.setText("Inputs changed. Check the mesh or run the study.")
 
     def _set_busy(self, busy: bool) -> None:
-        for widget in (self.preset, self.load_button, self.save_button, self.form, self.mesh_button, self.run_button):
+        for widget in (self.preset, self.load_button, self.saved_run_button, self.save_button, self.form,
+                       self.mesh_button, self.run_button):
             widget.setEnabled(not busy)
         self.stop_button.setEnabled(busy and not self.stopping and self.process.state() == QProcess.ProcessState.Running)
+        self._set_result_buttons(busy)
 
-    def start_job(self, action: str) -> bool:
-        if self.action is not None:
+    def _choose_reference(self) -> None:
+        if self.action is not None or self.scattering_directory is None:
+            return
+        reference = QFileDialog.getExistingDirectory(self, "Choose a saved reference scattering run", str(self.scattering_directory.parent))
+        if reference:
+            self.start_job("compare", Path(reference))
+
+    def start_job(self, action: str, reference: Path | None = None) -> bool:
+        if self.action is not None or action not in JOB_RESULTS:
             return False
-        self._clear_result()
+        comparing = action == "compare"
+        if comparing and (reference is None or self.scattering_directory is None):
+            return False
+        if not comparing:
+            self._clear_result()
         try:
-            config = self.edited_config()
+            if comparing:
+                reference = reference.resolve()
+                if reference == self.scattering_directory:
+                    raise ValueError("Choose a reference run different from the current result.")
+            else:
+                config = self.edited_config()
             jobs = self.output_root / "_workbench"
             jobs.mkdir(parents=True, exist_ok=True)
             directory = Path(mkdtemp(prefix="job-", dir=jobs))
-            config_path = directory / "configuration_AP_pnc.json"
-            self._write_config(config_path, config)
+            if comparing:
+                candidate = self.scattering_directory
+                self._write_config(directory / "comparison_request_AP_pnc.json", {
+                    "author": "Athul Prem", "file_tag": "_AP_pnc", "action": action,
+                    "reference": str(reference), "candidate": str(candidate),
+                })
+                job_args = ["--reference", str(reference), "--candidate", str(candidate)]
+            else:
+                config_path = directory / "configuration_AP_pnc.json"
+                self._write_config(config_path, config)
+                job_args = ["--config", str(config_path)]
         except (OSError, ValueError) as exc:
-            self.status.setText(f"Could not start the study. {exc}")
+            task = "comparison" if comparing else "study"
+            self.status.setText(f"Could not start the {task}. {exc}")
             return False
         self.response_path = directory / "response_AP_pnc.json"
         self.log_path = directory / "worker_AP_pnc.log"
@@ -344,8 +417,8 @@ class Workbench(QMainWindow):
         self.log.clear()
         self.log_decoder = codecs.getincrementaldecoder("utf-8")(errors="replace")
         self._set_busy(True)
-        self.status.setText("Checking the mesh…" if action == "mesh" else "Running the study…")
-        self.process.start(sys.executable, ["-u", "-B", str(WORKER), "--config", str(config_path),
+        self.status.setText(JOB_MESSAGES[action])
+        self.process.start(sys.executable, ["-u", "-B", str(WORKER), *job_args,
                                             "--action", action, "--output-root", str(self.output_root),
                                             "--response", str(self.response_path)])
         return True
@@ -366,7 +439,7 @@ class Workbench(QMainWindow):
 
     def _process_error(self, error: QProcess.ProcessError) -> None:
         if error == QProcess.ProcessError.FailedToStart and self.action is not None:
-            self.status.setText(f"Could not start the study worker. {self.process.errorString()}")
+            self.status.setText(f"Could not start the worker. {self.process.errorString()}")
             self._finish_job()
 
     def _finish_job(self) -> None:
@@ -381,7 +454,7 @@ class Workbench(QMainWindow):
             return
         self.stopping = True
         self._set_busy(True)
-        self.status.setText("Stopping the study…")
+        self.status.setText("Stopping the worker…")
         # The Windows virtual environment launcher may have a separate Python child.
         try:
             parent = psutil.Process(self.process.processId())
@@ -396,7 +469,7 @@ class Workbench(QMainWindow):
         except psutil.AccessDenied as exc:
             self.stopping = False
             self._set_busy(True)
-            self.status.setText(f"Could not stop the study worker. {exc}")
+            self.status.setText(f"Could not stop the worker. {exc}")
             return
         self.process.kill()
         self.stop_timer.start()
@@ -416,14 +489,15 @@ class Workbench(QMainWindow):
         if self.response_path.is_file():
             try:
                 response = json.loads(self.response_path.read_text(encoding="utf-8"))
-                expected_status = "mesh_ready" if self.action == "mesh" else "completed_unverified"
+                expected_status = JOB_RESULTS[self.action]
                 if response.get("action") == self.action and response.get("status") == expected_status:
                     self._show_result(expected_status, response["summary"])
                     self._finish_job()
                     return
             except (OSError, ValueError, KeyError, TypeError, AttributeError):
                 pass
-        self.status.setText("Study cancelled. The submitted configuration and any partial output were kept.")
+        task = "Comparison" if self.action == "compare" else "Study"
+        self.status.setText(f"{task} cancelled. The submitted inputs and any partial output were kept.")
         self._finish_job()
 
     def _job_finished(self, exit_code: int, exit_status: QProcess.ExitStatus) -> None:
@@ -437,14 +511,15 @@ class Workbench(QMainWindow):
             if response.get("action") != self.action:
                 raise ValueError("The worker response does not match this action.")
             if response.get("status") == "failed":
-                raise ValueError(response.get("error", "The study failed."))
-            expected_status = "mesh_ready" if self.action == "mesh" else "completed_unverified"
+                raise ValueError(response.get("error", "The worker failed."))
+            expected_status = JOB_RESULTS[self.action]
             if (exit_status != QProcess.ExitStatus.NormalExit or exit_code != 0
                     or response.get("status") != expected_status):
                 raise ValueError(f"The worker did not report {expected_status} (exit code {exit_code}).")
             self._show_result(expected_status, response["summary"])
         except (OSError, ValueError, KeyError, TypeError, AttributeError) as exc:
-            self.status.setText(f"Study could not complete. {exc}")
+            task = "Comparison" if self.action == "compare" else "Study"
+            self.status.setText(f"{task} could not complete. {exc}")
         finally:
             self._finish_job()
 
@@ -458,6 +533,25 @@ class Workbench(QMainWindow):
                        "Mechanical assembly and solving have not run.")
             if not summary["within_body_budget"]:
                 message += f" Body DOFs exceed the current cap of {summary['max_dofs']:,}."
+        elif status == "compared":
+            report = Path(summary["report_path"])
+            if not report.is_file():
+                raise ValueError("The comparison report is missing.")
+            power = "passed" if summary["power_passed"] else "failed"
+            complex_response = "passed" if summary["complex_passed"] else "failed"
+            reference_balance = "passed" if summary["reference"]["power_balance_passed"] else "failed"
+            candidate_balance = "passed" if summary["candidate"]["power_balance_passed"] else "failed"
+            repeatability = summary["comparison_kind"] == "repeatability"
+            heading = "Repeatability" if repeatability else "Mesh sensitivity"
+            message = (f"{heading} · maximum power change {summary['maximum_power_change']:.5g} ({power}). "
+                       f"Maximum complex-response change {summary['maximum_complex_change']:.5g} ({complex_response}). "
+                       f"Input power balance: reference {reference_balance}, candidate {candidate_balance}. ")
+            if repeatability:
+                message += "Both runs use the same discretization."
+            else:
+                acceptance = "passed" if summary["mesh_pair_passed"] else "failed"
+                message += f"Mesh-pair check {acceptance} for these runs."
+            self.report_path = report
         else:
             report = directory / "report_AP_pnc.html"
             if not report.is_file():
@@ -466,10 +560,10 @@ class Workbench(QMainWindow):
             if summary.get("analysis_kind") == "scattering":
                 power = "passed" if summary["power_balance_passed"] else "failed"
                 message += f" Power-balance check {power}."
+                self.scattering_directory = directory.resolve()
             self.report_path = report
         self.result_directory = directory
-        self.report_button.setEnabled(self.report_path is not None)
-        self.folder_button.setEnabled(True)
+        self._set_result_buttons(self.action is not None)
         self.status.setText(message)
 
     def _open(self, path: Path | None) -> None:
@@ -478,7 +572,7 @@ class Workbench(QMainWindow):
 
     def closeEvent(self, event) -> None:
         if self.action is not None:
-            self.status.setText("A study is still active. Use Stop or wait for the worker before closing.")
+            self.status.setText("A job is still active. Use Stop or wait for the worker before closing.")
             event.ignore()
         else:
             event.accept()

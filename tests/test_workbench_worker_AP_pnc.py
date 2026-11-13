@@ -5,7 +5,9 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+from types import SimpleNamespace
 import unittest
+from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -94,6 +96,41 @@ class WorkbenchWorkerTests(unittest.TestCase):
         self.assertEqual(response_path.read_bytes(), original_response)
         self.assertFalse((self.output / "_meshes").exists())
         self.assertEqual(list(response_path.parent.glob(".response-*.tmp")), [])
+
+    def test_comparison_uses_saved_folders_and_returns_scientific_failure_as_compared(self):
+        sys.path.insert(0, str(ROOT / "tools"))
+        self.addCleanup(sys.path.remove, str(ROOT / "tools"))
+        from workbench_worker_AP_pnc import main
+
+        reference, candidate = self.output / "reference", self.output / "candidate"
+        job = self.output / "_workbench" / "compare"
+        job.mkdir(parents=True)
+        response = job / "response_AP_pnc.json"
+        comparison = {
+            "status": "compared", "output_directory": str(self.output / "comparison"),
+            "report_path": str(self.output / "comparison" / "report_AP_pnc.html"),
+            "reference": {"path": str(reference), "power_balance_passed": True},
+            "candidate": {"path": str(candidate), "power_balance_passed": True},
+            "maximum_power_change": 0.00234, "maximum_complex_change": 0.138,
+            "comparison_kind": "mesh_sensitivity", "input_power_checks_passed": True,
+            "power_passed": True, "complex_passed": False, "mesh_pair_passed": False,
+        }
+        args = ["--action", "compare", "--output-root", str(self.output)]
+        with patch.dict(sys.modules, {"compare_scattering_AP_pnc": SimpleNamespace(compare_runs=None)}) as modules:
+            with patch.object(modules["compare_scattering_AP_pnc"], "compare_runs", return_value=comparison) as compare:
+                self.assertEqual(main([*args, "--reference", str(reference), "--candidate", str(candidate),
+                                       "--response", str(response)]), 0)
+                compare.assert_called_once_with(reference, candidate, self.output)
+                self.assertEqual(json.loads(response.read_bytes()), {
+                    "action": "compare", "status": "compared", "summary": comparison,
+                })
+
+                response = job / "missing_candidate_AP_pnc.json"
+                self.assertEqual(main([*args, "--reference", str(reference), "--response", str(response)]), 1)
+                compare.assert_called_once()
+                failure = json.loads(response.read_bytes())
+                self.assertEqual((failure["action"], failure["status"]), ("compare", "failed"))
+                self.assertIn("--candidate", failure["error"])
 
 
 if __name__ == "__main__":
