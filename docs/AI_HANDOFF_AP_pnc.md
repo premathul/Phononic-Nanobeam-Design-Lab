@@ -8,17 +8,24 @@ The original upload is cloned locally. Latest reliable historical inputs were au
 
 Active entrypoint: `simulate_AP_pnc.py` (or `Launch_AP_pnc.cmd` on this Windows machine). Old `run_AP_pnc.py` remains an archive readiness checker. Read README.md and docs/IMPLEMENTATION_PLAN_AP_pnc.md before expanding scope.
 
-Implemented: real 3D homogeneous beam meshes; nominal cubic-Ge tensor and rotation; P1/P2 stiffness/consistent mass; free/clamped finite-body eigenmodes; Bloch guided-wave dispersion; source/environment-bound result reuse; failure-attempt preservation; CSV/NPZ/VTU and offline interactive HTML. Gmsh through-hole geometry is available at module level and tested on two holes. The actual 26-hole table is read/validated, not yet integrated into the public simulation runner.
+Implemented: real 3D homogeneous beam meshes; nominal cubic-Ge tensor and rotation; P1/P2 stiffness/consistent mass; free/clamped finite-body eigenmodes; Bloch guided-wave dispersion; SAFE waveguide ports; power-normalized harmonic scattering from either end; source/environment-bound result reuse; failure-attempt preservation; CSV/NPZ/VTU and offline interactive HTML. Gmsh through-hole geometry is available at module level and tested on two holes. The actual 26-hole table is read/validated, not yet integrated into the public simulation runner.
+
+All project artifacts, software text and GitHub communications use English. Direct conversation and progress updates to the user may use Chinese. Six existing local reports were translated from saved fields without new solves; their numerical-file hashes and viewer payloads are unchanged. Presentation metadata records the old/new HTML hashes and generator identity. The original failed attempt retains its failed status.
 
 ## Verification actually completed
 
 - Archive upload hashes preserved; available saved-smoke evidence passes. Original full latest workflow remains incomplete. `verification/development_baseline_AP_pnc.json` is the actual local audit record, including the initial Windows symlink-permission failure.
-- 32 unit/integration tests: 31 passed, one Windows symlink-permission skip, no failures. Log: `verification/development_tests_AP_pnc.log`.
+- Current integrated suite: 41 tests, 40 passed, one Windows symlink-permission skip, no failures. Log: `verification/development_tests_AP_pnc.log`. This includes the unchanged first-milestone checks, six SAFE checks, two scattering checks, and a reconstructible scattering export test.
 - Three-mesh 200nm clamped-free reference (1755/5187/11475 DOFs), first four modes: final frequency changes all <0.5%, mass-weighted overlaps >0.99999. `verification/straight_beam_validation_AP_pnc.json` and CSV bind results to exact working source hashes and environment.
 - Fixed-property 0.02K/4K independent assemblies and solves: identical K/M hashes and frequencies. This is a null control, not a calibrated thermal-material prediction.
 - Bloch tests: four Gamma zero modes, +/-k reciprocity of eigenfrequencies, phase matching, mass normalization and free-sidewall rod-speed benchmark. Finite requested branch counts do not establish channel completeness.
 - Local CLI default model (6825 DOFs) and nine-wavevector Bloch pilot (945 DOFs) both completed, with interactive HTML output. Actual directories are printed by the runner; current default result is `results/runs/straight_beam_200nm-ea56bb1ac0e2/`, Bloch pilot `results/runs/straight_beam_200nm-a5e8900b7d62/`.
 - HTML generation and embedded script interactions were checked. Browser screenshot inspection was blocked by the browser's file-URL policy; do not bypass it or describe visual browser verification as completed.
+
+- Matched-port CLI: `python simulate_AP_pnc.py --config configs/straight_scattering_AP_pnc.json`. The default 0.3 GHz, 2000 × 1000 × 200 nm control has 2625 DOFs and four incident channels, max R=1.2064e-6, max solve residual=2.02e-16. Actual local output: `results/runs/straight_scattering_200nm-c151b24df56f/`. Its power check does not establish spatial convergence.
+- Bounded scattering acceptance at 1 GHz, 600 × 200 nm cross-section, 1 and 1.5 µm lengths, both incident ends: max complex transmission error against common finer SAFE reference 0.00453668/0.00683367; final section phase drift over 1.5 µm 0.00534454 rad; minimum mode overlap 0.999999820. Final long-guide max R about 1.20e-7, direct flux imbalance 5.11e-15, linear residual 5.66e-16. See `verification/straight_scattering_acceptance_AP_pnc.json` and CSV.
+- Original `straight_scattering_validation_AP_pnc` failed coarse axial/absolute-phase gates; `straight_scattering_refinement_AP_pnc` failed only long-guide absolute phase against its common reference. Both records remain unchanged and their hashes are linked by final acceptance. A complete energy budget alone did not establish accurate propagation phase.
+- Final acceptance reuses unchanged reference evidence after checking source/configuration/library hashes and performs one new long-guide solve plus a finer SAFE solve. Fresh CI output goes to `results/ci-scattering` with `python -B tools/validate_scattering_AP_pnc.py --acceptance --output-dir results/ci-scattering`. Do not rerun earlier cases merely because a conversation restarts.
 
 ## Resource evidence
 
@@ -26,9 +33,11 @@ Machine: roughly 15.31 GiB RAM, 8 physical/16 logical CPU cores, RTX4070 Laptop 
 
 Original tracked data about 31.9 MB; virtual environment and generated runs are gitignored. No original science files deleted, no large campaign launched, no reset used.
 
+Scattering resource measurements: default CLI 0.34 s and 105.4 MiB sampled process peak; final 14553-DOF long benchmark 19.64 s and 605.23 MiB. The finer SAFE reference used 429 trace DOFs and 1.29 s. These remain small CPU cases, not evidence that full-device or GPU calculations will cost the same.
+
 ## Next complete milestone
 
-Implement and validate matched elastic lead ports and the power-normalized scattering problem. Start with a homogeneous, lossless straight guide: identify propagating/evanescent channels, directional power and normalization, solve incident/outgoing waves, verify T near 1 and R near 0 plus complete energy budget and independent boundary/modal/mesh convergence. Then bring the preserved 26-hole pattern into this path. Do not call Bloch eigenvectors a scattering solver or use sponge absorption/probe ratios as physical transmission.
+Bring the preserved hole pattern into the matched-port path. Start with a small perforated case with unchanged uniform lead faces and compare against its no-hole control. Then integrate the original 26-hole geometry, preserving input provenance and checking surface/volume geometry accuracy, field mesh convergence and power/phase results. Maintain a practical mesh/port memory budget. Do not use sponge absorption or probe ratios as physical transmission.
 
 Temperature-dependent material properties, curved/ring geometries, loss, full thermal transport and a complete user-facing parameter application remain later work. Keep crystal axes fixed globally, and use evidence rather than assuming a geometry wins.
 
@@ -36,6 +45,8 @@ Temperature-dependent material properties, curved/ring geometries, loss, full th
 
 - Finite-body mesh gate currently covers four modes of one 200nm homogeneous cantilever; neither all eight display modes nor other thicknesses inherit that gate.
 - Bloch samples are frequency sorted, not branch tracked across k or proven complete. Degenerate-subspace tracking is still needed for broader campaigns.
+- SAFE computes all roots of the finite cross-section pencil, with flux orthogonalization of degenerate propagating modes and explicit failure at unresolved cutoffs. This does not prove continuum channel completeness. Current leads have identical sections and uniform material at both ends. The final phase reference is numerical and has no rigorous continuum error bound.
+- `matched_reference_passed` is a per-run power-only check. `spatial_convergence_established` and `calibrated_scattering_available` remain false in arbitrary run summaries; separate benchmark acceptance does not certify a different mesh, frequency or device. Full driven responses use displacement per square root of incident watt, not mass-normalized eigenvectors.
 - P2 displacement interpolation uses affine, straight-sided tetrahedral geometry. Circular hole surface accuracy must converge separately. Two-hole removed-volume error at 40nm mesh size remained about 2.18%; do not label the coarse perforated mesh geometry-converged.
 - Full results are reused only after identity/output checks. Failed attempts are retained and rerun in a new attempt directory. Partial Bloch rows are recorded but not resumed; large sweep checkpoint reuse is not implemented.
 - First CLI attempt revealed NumPy int32 JSON serialization failure. Fixed and end-to-end tested; its original fields remain local as failure evidence. Review also fixed boolean material inputs, initial lock cleanup and P2 field reconstruction metadata. Re-review those changed risks rather than repeating the entire physical review.

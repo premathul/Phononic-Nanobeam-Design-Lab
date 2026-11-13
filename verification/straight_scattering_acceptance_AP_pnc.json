@@ -1,0 +1,2486 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "quick": false,
+  "refinement": false,
+  "acceptance": true,
+  "scope": "One 1 GHz uniform straight guide control. Whole-band, patterned-device and experimental validation are outside this control.",
+  "frequency_hz": 1000000000.0,
+  "width_m": 6e-07,
+  "thickness_m": 2e-07,
+  "element_order": 2,
+  "max_displacement_dofs": 14553,
+  "max_port_dofs": 297,
+  "material": {
+    "name": "nominal cubic Ge",
+    "policy": "fixed_property_control",
+    "C11_Pa": 128500000000.0,
+    "C12_Pa": 48300000000.0,
+    "C44_Pa": 66800000000.0,
+    "rho_kg_m3": 5323.0,
+    "crystal_to_lab_rotation": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  },
+  "limits": {
+    "power_difference": 0.01,
+    "complex_amplitude_difference": 0.01,
+    "relative_residual": 1e-08,
+    "matching_minimum_mass_weighted_overlap": 0.9,
+    "near_degenerate_relative_wavenumber_gap": 0.001,
+    "relative_wavenumber_change": 0.01,
+    "accumulated_wavenumber_phase_change_rad": 0.01
+  },
+  "phase_reference": "exp(i*k*delta_x), delta_x is measured from incident to transmission face.",
+  "tracking_method": "Maximum total mass-weighted overlap of interpolated port displacement fields; wavenumber drift and kinetic polarization are recorded.",
+  "resource_method": "Elapsed includes assembly, port solve, and both incidence directions. Peak RSS is sampled for the current process.",
+  "implementation": {
+    "git_commit": "23aae0b82759f7c2c894ae270b809992278f6e81",
+    "source_sha256": {
+      "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+      "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+      "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+      "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+      "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+      "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+      "src/phononic/report_AP_pnc.py": "245d37b0606ca22bc9a755e8f52bdb8232bb7ae40100fd4c7ce297c219b9adcd",
+      "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+      "src/phononic/workflow_AP_pnc.py": "b3fa4bdf13ff6459552b8aee9d69b5f0b52a48d3579f5f71d627bea64979158a",
+      "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5",
+      "tools/validate_scattering_AP_pnc.py": "50fda0f3e5a162d22389ad2467b77636286e777f1126c640950fb96980acdf03"
+    },
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "scikit-fem": "12.0.2",
+      "meshio": "5.3.5",
+      "gmsh": "4.15.2",
+      "matplotlib": "3.11.2",
+      "psutil": "7.2.2"
+    },
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "cases": {
+    "transverse_refined": {
+      "name": "transverse_refined",
+      "length_m": 1e-06,
+      "cells": [
+        16,
+        5,
+        4
+      ],
+      "channels": [
+        {
+          "case": "transverse_refined",
+          "incident_side": "left",
+          "mode_index": 1,
+          "safe_root_index": 592,
+          "propagating_channels": 4,
+          "wavenumber_rad_m": 1438522.6640017997,
+          "kinetic_fractions_xyz": [
+            0.9941767393234956,
+            0.005327087278142892,
+            0.0004961733983614327
+          ],
+          "incident_power_W": 0.9999999999999998,
+          "R": 1.0078332381829234e-11,
+          "T": 0.9999999999899244,
+          "R_flux": 1.0078332292570536e-11,
+          "T_flux": 0.9999999999899214,
+          "R_gram": 1.0078332381838945e-11,
+          "T_gram": 0.9999999999899242,
+          "power_disagreement": 2.9976021664879227e-15,
+          "power_balance": -2.7755575615628914e-15,
+          "flux_power_balance": 2.220446049250313e-16,
+          "net_outward_power_ratio": -6.661338147750941e-16,
+          "linear_residual": 3.8484912555105385e-16,
+          "condition_left": 55.00073266421124,
+          "condition_right": 55.00073266425172,
+          "transmission_amplitude": {
+            "re": 0.13188874084820168,
+            "im": 0.9912645257145173
+          },
+          "expected_phase_factor": {
+            "re": 0.13188828298759106,
+            "im": 0.9912645866823777
+          },
+          "deembedded_amplitude": {
+            "re": 0.9999999999511688,
+            "im": -4.6190195538336444e-07
+          },
+          "phase_error_rad": -4.619019554058868e-07,
+          "complex_amplitude_error": 4.619019579544711e-07,
+          "transmitted_mode_conversion_power": 8.737288670346288e-11,
+          "matched_power_passed": true
+        },
+        {
+          "case": "transverse_refined",
+          "incident_side": "left",
+          "mode_index": 2,
+          "safe_root_index": 582,
+          "propagating_channels": 4,
+          "wavenumber_rad_m": 3075346.8969066846,
+          "kinetic_fractions_xyz": [
+            0.016760738191363395,
+            0.08932580983165392,
+            0.8939134519769825
+          ],
+          "incident_power_W": 1.0000000000000002,
+          "R": 7.073545424461614e-11,
+          "T": 0.9999999999292917,
+          "R_flux": 7.073545833617598e-11,
+          "T_flux": 0.9999999999292655,
+          "R_gram": 7.073545425939997e-11,
+          "T_gram": 0.999999999929291,
+          "power_disagreement": 2.6201263381153694e-14,
+          "power_balance": -2.708944180085382e-14,
+          "flux_power_balance": -8.881784197001252e-16,
+          "net_outward_power_ratio": 8.88178419700125e-16,
+          "linear_residual": 3.5208631339290006e-16,
+          "condition_left": 55.00073266421124,
+          "condition_right": 55.00073266425172,
+          "transmission_amplitude": {
+            "re": -0.9977415664487351,
+            "im": 0.06716879613565725
+          },
+          "expected_phase_factor": {
+            "re": -0.9978065521989767,
+            "im": 0.06619731406024457
+          },
+          "deembedded_amplitude": {
+            "re": 0.9999994662966593,
+            "im": -0.0009736530623088256
+          },
+          "phase_error_rad": -0.000973653274276217,
+          "complex_amplitude_error": 0.000973653208582298,
+          "transmitted_mode_conversion_power": 1.1933540222663908e-07,
+          "matched_power_passed": true
+        },
+        {
+          "case": "transverse_refined",
+          "incident_side": "left",
+          "mode_index": 3,
+          "safe_root_index": 584,
+          "propagating_channels": 4,
+          "wavenumber_rad_m": 3333627.0486962707,
+          "kinetic_fractions_xyz": [
+            0.13046976070056363,
+            0.8691154907532596,
+            0.00041474854617681563
+          ],
+          "incident_power_W": 1.0000000000000004,
+          "R": 1.2731470586004373e-09,
+          "T": 0.9999999987268452,
+          "R_flux": 1.273147057898404e-09,
+          "T_flux": 0.999999998726853,
+          "R_gram": 1.2731470586008069e-09,
+          "T_gram": 0.9999999987268455,
+          "power_disagreement": 7.771561172376096e-15,
+          "power_balance": 7.771561172376096e-15,
+          "flux_power_balance": 0.0,
+          "net_outward_power_ratio": 1.1102230246251561e-15,
+          "linear_residual": 3.1927053610299154e-16,
+          "condition_left": 55.00073266421124,
+          "condition_right": 55.00073266425172,
+          "transmission_amplitude": {
+            "re": -0.9816515282230663,
+            "im": -0.19068364822296982
+          },
+          "expected_phase_factor": {
+            "re": -0.9816179896296268,
+            "im": -0.1908562873878927
+          },
+          "deembedded_amplitude": {
+            "re": 0.9999999728165921,
+            "im": -0.00017586676143102397
+          },
+          "phase_error_rad": -0.0001758667643985473,
+          "complex_amplitude_error": 0.00017586676353187244,
+          "transmitted_mode_conversion_power": 2.2164542423652733e-08,
+          "matched_power_passed": true
+        },
+        {
+          "case": "transverse_refined",
+          "incident_side": "left",
+          "mode_index": 4,
+          "safe_root_index": 572,
+          "propagating_channels": 4,
+          "wavenumber_rad_m": 5218646.436537411,
+          "kinetic_fractions_xyz": [
+            0.06363250759831147,
+            0.0010805842679641815,
+            0.9352869081337242
+          ],
+          "incident_power_W": 1.0000000000000007,
+          "R": 2.241480446033803e-08,
+          "T": 0.9999999775851947,
+          "R_flux": 2.24148044627565e-08,
+          "T_flux": 0.9999999775851945,
+          "R_gram": 2.241480446034552e-08,
+          "T_gram": 0.9999999775851951,
+          "power_disagreement": 5.551115123125783e-16,
+          "power_balance": 8.881784197001252e-16,
+          "flux_power_balance": 9.992007221626409e-16,
+          "net_outward_power_ratio": 0.0,
+          "linear_residual": 5.773597745378807e-16,
+          "condition_left": 55.00073266421124,
+          "condition_right": 55.00073266425172,
+          "transmission_amplitude": {
+            "re": 0.48395996733635926,
+            "im": -0.8750900452719346
+          },
+          "expected_phase_factor": {
+            "re": 0.4849075510643776,
+            "im": -0.8745654160328706
+          },
+          "deembedded_amplitude": {
+            "re": 0.9999993320837431,
+            "im": -0.0010831206368516022
+          },
+          "phase_error_rad": -0.0010831209367309779,
+          "complex_amplitude_error": 0.0010831208427899176,
+          "transmitted_mode_conversion_power": 1.402669487227115e-07,
+          "matched_power_passed": true
+        },
+        {
+          "case": "transverse_refined",
+          "incident_side": "right",
+          "mode_index": 1,
+          "safe_root_index": 593,
+          "propagating_channels": 4,
+          "wavenumber_rad_m": -1438522.6640017997,
+          "kinetic_fractions_xyz": [
+            0.9941767393234956,
+            0.005327087278142892,
+            0.0004961733983614327
+          ],
+          "incident_power_W": 0.9999999999999998,
+          "R": 1.0078332403081557e-11,
+          "T": 0.9999999999899317,
+          "R_flux": 1.0078332415629165e-11,
+          "T_flux": 0.999999999989925,
+          "R_gram": 1.0078332403100132e-11,
+          "T_gram": 0.9999999999899317,
+          "power_disagreement": 6.772360450213455e-15,
+          "power_balance": -1.0103029524088925e-14,
+          "flux_power_balance": -3.3306690738754696e-15,
+          "net_outward_power_ratio": 2.5535129566378604e-15,
+          "linear_residual": 3.5553604270247124e-16,
+          "condition_left": 55.00073266421124,
+          "condition_right": 55.00073266425172,
+          "transmission_amplitude": {
+            "re": 0.13188874084819602,
+            "im": 0.9912645257145218
+          },
+          "expected_phase_factor": {
+            "re": 0.13188828298759106,
+            "im": 0.9912645866823777
+          },
+          "deembedded_amplitude": {
+            "re": 0.9999999999511726,
+            "im": -4.619019491653995e-07
+          },
+          "phase_error_rad": -4.619019491879201e-07,
+          "complex_amplitude_error": 4.6190195174105257e-07,
+          "transmitted_mode_conversion_power": 8.737288670346288e-11,
+          "matched_power_passed": true
+        },
+        {
+          "case": "transverse_refined",
+          "incident_side": "right",
+          "mode_index": 2,
+          "safe_root_index": 583,
+          "propagating_channels": 4,
+          "wavenumber_rad_m": -3075346.8969066846,
+          "kinetic_fractions_xyz": [
+            0.016760738191363395,
+            0.08932580983165392,
+            0.8939134519769825
+          ],
+          "incident_power_W": 1.0000000000000002,
+          "R": 7.073545438664626e-11,
+          "T": 0.9999999999292566,
+          "R_flux": 7.073545358815041e-11,
+          "T_flux": 0.999999999929265,
+          "R_gram": 7.073545438225104e-11,
+          "T_gram": 0.9999999999292565,
+          "power_disagreement": 8.548717289613705e-15,
+          "power_balance": 7.993605777301127e-15,
+          "flux_power_balance": -4.440892098500626e-16,
+          "net_outward_power_ratio": 1.77635683940025e-15,
+          "linear_residual": 3.140128992580852e-16,
+          "condition_left": 55.00073266421124,
+          "condition_right": 55.00073266425172,
+          "transmission_amplitude": {
+            "re": -0.997741566448719,
+            "im": 0.06716879613563648
+          },
+          "expected_phase_factor": {
+            "re": -0.9978065521989767,
+            "im": 0.06619731406024457
+          },
+          "deembedded_amplitude": {
+            "re": 0.9999994662966419,
+            "im": -0.0009736530622891624
+          },
+          "phase_error_rad": -0.0009736532742565707,
+          "complex_amplitude_error": 0.0009736532085626437,
+          "transmitted_mode_conversion_power": 1.1933540222663908e-07,
+          "matched_power_passed": true
+        },
+        {
+          "case": "transverse_refined",
+          "incident_side": "right",
+          "mode_index": 3,
+          "safe_root_index": 585,
+          "propagating_channels": 4,
+          "wavenumber_rad_m": -3333627.0486962707,
+          "kinetic_fractions_xyz": [
+            0.13046976070056363,
+            0.8691154907532596,
+            0.00041474854617681563
+          ],
+          "incident_power_W": 1.0000000000000004,
+          "R": 1.2731470591003987e-09,
+          "T": 0.9999999987268834,
+          "R_flux": 1.2731470586085658e-09,
+          "T_flux": 0.9999999987268516,
+          "R_gram": 1.273147059101071e-09,
+          "T_gram": 0.9999999987268837,
+          "power_disagreement": 3.2085445411667024e-14,
+          "power_balance": -3.042011087472929e-14,
+          "flux_power_balance": 1.3322676295501878e-15,
+          "net_outward_power_ratio": -8.881784197001248e-16,
+          "linear_residual": 4.3421762931627795e-16,
+          "condition_left": 55.00073266421124,
+          "condition_right": 55.00073266425172,
+          "transmission_amplitude": {
+            "re": -0.9816515282230862,
+            "im": -0.19068364822296868
+          },
+          "expected_phase_factor": {
+            "re": -0.9816179896296268,
+            "im": -0.1908562873878927
+          },
+          "deembedded_amplitude": {
+            "re": 0.9999999728166115,
+            "im": -0.00017586676143592814
+          },
+          "phase_error_rad": -0.00017586676440344806,
+          "complex_amplitude_error": 0.00017586676353677938,
+          "transmitted_mode_conversion_power": 2.2164542423652733e-08,
+          "matched_power_passed": true
+        },
+        {
+          "case": "transverse_refined",
+          "incident_side": "right",
+          "mode_index": 4,
+          "safe_root_index": 573,
+          "propagating_channels": 4,
+          "wavenumber_rad_m": -5218646.436537411,
+          "kinetic_fractions_xyz": [
+            0.06363250759831147,
+            0.0010805842679641815,
+            0.9352869081337242
+          ],
+          "incident_power_W": 1.0000000000000007,
+          "R": 2.2414804457071207e-08,
+          "T": 0.9999999775851725,
+          "R_flux": 2.2414804458179126e-08,
+          "T_flux": 0.9999999775852003,
+          "R_gram": 2.2414804457048357e-08,
+          "T_gram": 0.9999999775851731,
+          "power_disagreement": 2.786659791809143e-14,
+          "power_balance": 2.3092638912203256e-14,
+          "flux_power_balance": -4.773959005888173e-15,
+          "net_outward_power_ratio": 3.1086244689504363e-15,
+          "linear_residual": 6.46902088218048e-16,
+          "condition_left": 55.00073266421124,
+          "condition_right": 55.00073266425172,
+          "transmission_amplitude": {
+            "re": 0.4839599673363686,
+            "im": -0.8750900452719169
+          },
+          "expected_phase_factor": {
+            "re": 0.4849075510643776,
+            "im": -0.8745654160328706
+          },
+          "deembedded_amplitude": {
+            "re": 0.9999993320837323,
+            "im": -0.0010831206368349016
+          },
+          "phase_error_rad": -0.0010831209367142892,
+          "complex_amplitude_error": 0.0010831208427732083,
+          "transmitted_mode_conversion_power": 1.402669487227115e-07,
+          "matched_power_passed": true
+        }
+      ],
+      "amplitude_matrices": {
+        "left": {
+          "reflection": [
+            [
+              {
+                "re": -2.966012268385935e-07,
+                "im": 3.948269094212529e-08
+              },
+              {
+                "re": -1.728258427327374e-06,
+                "im": -1.413826751016661e-06
+              },
+              {
+                "re": 1.5945751572082186e-06,
+                "im": -1.5021263371663117e-06
+              },
+              {
+                "re": 4.437857388087512e-07,
+                "im": 8.377862784311809e-08
+              }
+            ],
+            [
+              {
+                "re": -1.7282584985956599e-06,
+                "im": -1.4138266549260362e-06
+              },
+              {
+                "re": -1.7569689081230622e-07,
+                "im": -2.570212571523218e-06
+              },
+              {
+                "re": 1.0871285696489656e-06,
+                "im": 7.33876292290908e-08
+              },
+              {
+                "re": -4.063055312014715e-06,
+                "im": -6.435616130543251e-06
+              }
+            ],
+            [
+              {
+                "re": 1.5945751303567628e-06,
+                "im": -1.5021263227420862e-06
+              },
+              {
+                "re": 1.0871285985078862e-06,
+                "im": 7.338761299054467e-08
+              },
+              {
+                "re": 7.936982040686499e-07,
+                "im": -4.113026287875833e-06
+              },
+              {
+                "re": -3.2025135403906694e-05,
+                "im": 1.4966780866710955e-05
+              }
+            ],
+            [
+              {
+                "re": 4.4378572107146996e-07,
+                "im": 8.377864275396197e-08
+              },
+              {
+                "re": -4.063055410320173e-06,
+                "im": -6.435616156365639e-06
+              },
+              {
+                "re": -3.20251354676782e-05,
+                "im": 1.4966780784708957e-05
+              },
+              {
+                "re": 0.00012713669247144018,
+                "im": 7.030876561653702e-05
+              }
+            ]
+          ],
+          "transmission": [
+            [
+              {
+                "re": 0.13188874084820168,
+                "im": 0.9912645257145173
+              },
+              {
+                "re": 4.511207036621251e-06,
+                "im": 3.6890045285700846e-06
+              },
+              {
+                "re": -3.0903727961605713e-06,
+                "im": 2.912215953119672e-06
+              },
+              {
+                "re": 5.845411522003962e-06,
+                "im": 1.1013440022497037e-06
+              }
+            ],
+            [
+              {
+                "re": 4.511207375809102e-06,
+                "im": 3.6890041079096684e-06
+              },
+              {
+                "re": -0.9977415664487351,
+                "im": 0.06716879613565725
+              },
+              {
+                "re": -2.461525690202597e-05,
+                "im": -1.5107912580538396e-06
+              },
+              {
+                "re": 0.00018487512137481234,
+                "im": 0.0002907136712838283
+              }
+            ],
+            [
+              {
+                "re": 3.090373067258701e-06,
+                "im": -2.9122158309843936e-06
+              },
+              {
+                "re": 2.461525652758118e-05,
+                "im": 1.5107915410201328e-06
+              },
+              {
+                "re": -0.9816515282230663,
+                "im": -0.19068364822296982
+              },
+              {
+                "re": 0.00013297215620893473,
+                "im": -6.210252310381146e-05
+              }
+            ],
+            [
+              {
+                "re": -5.845411531369358e-06,
+                "im": -1.1013439131282153e-06
+              },
+              {
+                "re": -0.00018487512109289557,
+                "im": -0.00029071367137760597
+              },
+              {
+                "re": 0.00013297215623649369,
+                "im": -6.210252298484951e-05
+              },
+              {
+                "re": 0.48395996733635926,
+                "im": -0.8750900452719346
+              }
+            ]
+          ],
+          "reflection_root_indices": [
+            593,
+            583,
+            585,
+            573
+          ],
+          "transmission_root_indices": [
+            592,
+            582,
+            584,
+            572
+          ],
+          "incident_root_indices": [
+            592,
+            582,
+            584,
+            572
+          ]
+        },
+        "right": {
+          "reflection": [
+            [
+              {
+                "re": -2.9660117786033934e-07,
+                "im": 3.9483084914611245e-08
+              },
+              {
+                "re": -1.728258375571243e-06,
+                "im": -1.4138268259116325e-06
+              },
+              {
+                "re": -1.5945750775646458e-06,
+                "im": 1.5021264230246838e-06
+              },
+              {
+                "re": -4.437857342867034e-07,
+                "im": -8.377864778886938e-08
+              }
+            ],
+            [
+              {
+                "re": -1.728258274463857e-06,
+                "im": -1.4138269165662463e-06
+              },
+              {
+                "re": -1.7569681089506913e-07,
+                "im": -2.5702126007233034e-06
+              },
+              {
+                "re": -1.087128602819308e-06,
+                "im": -7.338760995472652e-08
+              },
+              {
+                "re": 4.0630554208236715e-06,
+                "im": 6.435616063769107e-06
+              }
+            ],
+            [
+              {
+                "re": -1.5945750604715052e-06,
+                "im": 1.502126411545866e-06
+              },
+              {
+                "re": -1.0871285993383558e-06,
+                "im": -7.338764668378735e-08
+              },
+              {
+                "re": 7.936983085712011e-07,
+                "im": -4.113026282661183e-06
+              },
+              {
+                "re": -3.202513542726083e-05,
+                "im": 1.4966780823022295e-05
+              }
+            ],
+            [
+              {
+                "re": -4.437857351453823e-07,
+                "im": -8.377862889268201e-08
+              },
+              {
+                "re": 4.063055409312047e-06,
+                "im": 6.435616155477747e-06
+              },
+              {
+                "re": -3.2025135410665976e-05,
+                "im": 1.4966780916847663e-05
+              },
+              {
+                "re": 0.0001271366923514937,
+                "im": 7.030876580869107e-05
+              }
+            ]
+          ],
+          "transmission": [
+            [
+              {
+                "re": 0.13188874084819602,
+                "im": 0.9912645257145218
+              },
+              {
+                "re": 4.511207174471479e-06,
+                "im": 3.6890043548007215e-06
+              },
+              {
+                "re": 3.0903729944487786e-06,
+                "im": -2.912215730292231e-06
+              },
+              {
+                "re": -5.845411573180822e-06,
+                "im": -1.101343777675906e-06
+              }
+            ],
+            [
+              {
+                "re": 4.511206843330474e-06,
+                "im": 3.6890047729810705e-06
+              },
+              {
+                "re": -0.997741566448719,
+                "im": 0.06716879613563648
+              },
+              {
+                "re": 2.46152567810995e-05,
+                "im": 1.5107925388438342e-06
+              },
+              {
+                "re": -0.00018487512093840662,
+                "im": -0.0002907136715611444
+              }
+            ],
+            [
+              {
+                "re": -3.090372892897935e-06,
+                "im": 2.912216027397231e-06
+              },
+              {
+                "re": -2.4615256484067465e-05,
+                "im": -1.5107922087320748e-06
+              },
+              {
+                "re": -0.9816515282230862,
+                "im": -0.19068364822296868
+              },
+              {
+                "re": 0.00013297215626206609,
+                "im": -6.210252298309095e-05
+              }
+            ],
+            [
+              {
+                "re": 5.845411549541907e-06,
+                "im": 1.1013438646111527e-06
+              },
+              {
+                "re": 0.00018487512113757638,
+                "im": 0.00029071367134325855
+              },
+              {
+                "re": 0.00013297215619097785,
+                "im": -6.210252306192802e-05
+              },
+              {
+                "re": 0.4839599673363686,
+                "im": -0.8750900452719169
+              }
+            ]
+          ],
+          "reflection_root_indices": [
+            592,
+            582,
+            584,
+            572
+          ],
+          "transmission_root_indices": [
+            593,
+            583,
+            585,
+            573
+          ],
+          "incident_root_indices": [
+            593,
+            583,
+            585,
+            573
+          ]
+        }
+      },
+      "resources": {
+        "peak_process_memory_mib": 341.16796875,
+        "system_available_memory_mib_at_start": 2962.921875,
+        "process_lifetime_peak_working_set_mib": 344.60546875,
+        "elapsed_seconds": 6.717959499990684
+      },
+      "displacement_dofs": 9801,
+      "port_dofs": 297,
+      "safe_max_relative_residual": 3.031387036466588e-15,
+      "reused": true
+    },
+    "long_fine": {
+      "name": "long_fine",
+      "length_m": 1.5e-06,
+      "cells": [
+        24,
+        5,
+        4
+      ],
+      "channels": [
+        {
+          "case": "long_fine",
+          "incident_side": "left",
+          "mode_index": 1,
+          "safe_root_index": 592,
+          "propagating_channels": 4,
+          "wavenumber_rad_m": 1438522.6640017997,
+          "kinetic_fractions_xyz": [
+            0.9941767393234956,
+            0.005327087278142892,
+            0.0004961733983614327
+          ],
+          "incident_power_W": 0.9999999999999998,
+          "R": 1.4439794355853023e-11,
+          "T": 0.9999999999855623,
+          "R_flux": 1.4439794450797982e-11,
+          "T_flux": 0.999999999985562,
+          "R_gram": 1.4439794355855896e-11,
+          "T_gram": 0.9999999999855627,
+          "power_disagreement": 6.661338147750939e-16,
+          "power_balance": -2.1094237467877974e-15,
+          "flux_power_balance": -1.7763568394002505e-15,
+          "net_outward_power_ratio": 1.998401444325282e-15,
+          "linear_residual": 4.833829844374848e-16,
+          "condition_left": 55.00073266421124,
+          "condition_right": 55.00073266425172,
+          "transmission_amplitude": {
+            "re": -0.5538548506144144,
+            "im": 0.8326132381521845
+          },
+          "expected_phase_factor": {
+            "re": -0.5538554342580624,
+            "im": 0.8326128499745924
+          },
+          "deembedded_amplitude": {
+            "re": 0.9999999999474452,
+            "im": -7.009434699088095e-07
+          },
+          "phase_error_rad": -7.009434699455327e-07,
+          "complex_amplitude_error": 7.009434718985112e-07,
+          "transmitted_mode_conversion_power": 9.018086277734483e-11,
+          "matched_power_passed": true
+        },
+        {
+          "case": "long_fine",
+          "incident_side": "left",
+          "mode_index": 2,
+          "safe_root_index": 582,
+          "propagating_channels": 4,
+          "wavenumber_rad_m": 3075346.8969066846,
+          "kinetic_fractions_xyz": [
+            0.016760738191363395,
+            0.08932580983165392,
+            0.8939134519769825
+          ],
+          "incident_power_W": 1.0000000000000002,
+          "R": 1.1992413986096048e-07,
+          "T": 0.9999998800758909,
+          "R_flux": 1.1992413986318037e-07,
+          "T_flux": 0.9999998800758645,
+          "R_gram": 1.1992413986100837e-07,
+          "T_gram": 0.9999998800758907,
+          "power_disagreement": 2.6423307986078726e-14,
+          "power_balance": -3.0753177782116836e-14,
+          "flux_power_balance": -4.3298697960381105e-15,
+          "net_outward_power_ratio": 2.3314683517128283e-15,
+          "linear_residual": 3.5467591778661843e-16,
+          "condition_left": 55.00073266421124,
+          "condition_right": 55.00073266425172,
+          "transmission_amplitude": {
+            "re": -0.10068686336336076,
+            "im": -0.9949180254231016
+          },
+          "expected_phase_factor": {
+            "re": -0.09920518601040902,
+            "im": -0.9950669982813419
+          },
+          "deembedded_amplitude": {
+            "re": 0.9999987521025322,
+            "im": -0.0014891471161353686
+          },
+          "phase_error_rad": -0.001489147873680684,
+          "complex_amplitude_error": 0.0014891476390010375,
+          "transmitted_mode_conversion_power": 1.5831013566725005e-07,
+          "matched_power_passed": true
+        },
+        {
+          "case": "long_fine",
+          "incident_side": "left",
+          "mode_index": 3,
+          "safe_root_index": 584,
+          "propagating_channels": 4,
+          "wavenumber_rad_m": 3333627.0486962707,
+          "kinetic_fractions_xyz": [
+            0.13046976070056363,
+            0.8691154907532596,
+            0.00041474854617681563
+          ],
+          "incident_power_W": 1.0000000000000004,
+          "R": 3.645039931465588e-09,
+          "T": 0.9999999963549532,
+          "R_flux": 3.6450399335244664e-09,
+          "T_flux": 0.9999999963549617,
+          "R_gram": 3.645039931467255e-09,
+          "T_gram": 0.9999999963549538,
+          "power_disagreement": 8.548717289613705e-15,
+          "power_balance": 6.8833827526759706e-15,
+          "flux_power_balance": -1.6653345369377348e-15,
+          "net_outward_power_ratio": 2.4424906541753432e-15,
+          "linear_residual": 3.6912902447254617e-16,
+          "condition_left": 55.00073266421124,
+          "condition_right": 55.00073266425172,
+          "transmission_amplitude": {
+            "re": 0.28382953596373967,
+            "im": -0.9588747346258869
+          },
+          "expected_phase_factor": {
+            "re": 0.2840846341065338,
+            "im": -0.9587992076887406
+          },
+          "deembedded_amplitude": {
+            "re": 0.9999999457049381,
+            "im": -0.00026604393949824335
+          },
+          "phase_error_rad": -0.0002660439476663074,
+          "complex_amplitude_error": 0.00026604394503861484,
+          "transmitted_mode_conversion_power": 3.4165696716215166e-08,
+          "matched_power_passed": true
+        },
+        {
+          "case": "long_fine",
+          "incident_side": "left",
+          "mode_index": 4,
+          "safe_root_index": 572,
+          "propagating_channels": 4,
+          "wavenumber_rad_m": 5218646.436537411,
+          "kinetic_fractions_xyz": [
+            0.06363250759831147,
+            0.0010805842679641815,
+            0.9352869081337242
+          ],
+          "incident_power_W": 1.0000000000000007,
+          "R": 2.547025026933922e-08,
+          "T": 0.9999999745297499,
+          "R_flux": 2.5470250265852536e-08,
+          "T_flux": 0.9999999745297479,
+          "R_gram": 2.5470250269346947e-08,
+          "T_gram": 0.9999999745297502,
+          "power_disagreement": 2.3314683517128287e-15,
+          "power_balance": -1.1102230246251565e-16,
+          "flux_power_balance": 1.887379141862766e-15,
+          "net_outward_power_ratio": -4.440892098500623e-16,
+          "linear_residual": 5.664086527961003e-16,
+          "condition_left": 55.00073266421124,
+          "condition_right": 55.00073266425172,
+          "transmission_amplitude": {
+            "re": 0.02764217699248962,
+            "im": 0.9996177744327638
+          },
+          "expected_phase_factor": {
+            "re": 0.026009045883446838,
+            "im": 0.9996617075452239
+          },
+          "deembedded_amplitude": {
+            "re": 0.999998557931729,
+            "im": -0.0016337212914487097
+          },
+          "phase_error_rad": -0.0016337221938937628,
+          "complex_amplitude_error": 0.0016337219278976872,
+          "transmitted_mode_conversion_power": 1.896189543160176e-07,
+          "matched_power_passed": true
+        },
+        {
+          "case": "long_fine",
+          "incident_side": "right",
+          "mode_index": 1,
+          "safe_root_index": 593,
+          "propagating_channels": 4,
+          "wavenumber_rad_m": -1438522.6640017997,
+          "kinetic_fractions_xyz": [
+            0.9941767393234956,
+            0.005327087278142892,
+            0.0004961733983614327
+          ],
+          "incident_power_W": 0.9999999999999998,
+          "R": 1.4439794370772363e-11,
+          "T": 0.9999999999855699,
+          "R_flux": 1.4439794461976136e-11,
+          "T_flux": 0.9999999999855584,
+          "R_gram": 1.4439794370767057e-11,
+          "T_gram": 0.9999999999855699,
+          "power_disagreement": 1.1435297153639112e-14,
+          "power_balance": -9.658940314238862e-15,
+          "flux_power_balance": 1.7763568394002505e-15,
+          "net_outward_power_ratio": -1.776356839400251e-15,
+          "linear_residual": 4.462104877870861e-16,
+          "condition_left": 55.00073266421124,
+          "condition_right": 55.00073266425172,
+          "transmission_amplitude": {
+            "re": -0.5538548506144216,
+            "im": 0.832613238152184
+          },
+          "expected_phase_factor": {
+            "re": -0.5538554342580624,
+            "im": 0.8326128499745924
+          },
+          "deembedded_amplitude": {
+            "re": 0.9999999999474489,
+            "im": -7.009434636229849e-07
+          },
+          "phase_error_rad": -7.009434636597055e-07,
+          "complex_amplitude_error": 7.009434656437693e-07,
+          "transmitted_mode_conversion_power": 9.018086277734483e-11,
+          "matched_power_passed": true
+        },
+        {
+          "case": "long_fine",
+          "incident_side": "right",
+          "mode_index": 2,
+          "safe_root_index": 583,
+          "propagating_channels": 4,
+          "wavenumber_rad_m": -3075346.8969066846,
+          "kinetic_fractions_xyz": [
+            0.016760738191363395,
+            0.08932580983165392,
+            0.8939134519769825
+          ],
+          "incident_power_W": 1.0000000000000002,
+          "R": 1.1992413987235784e-07,
+          "T": 0.9999998800758472,
+          "R_flux": 1.1992413987366156e-07,
+          "T_flux": 0.999999880075855,
+          "R_gram": 1.1992413987239723e-07,
+          "T_gram": 0.9999998800758471,
+          "power_disagreement": 7.993605777301127e-15,
+          "power_balance": 1.2989609388114332e-14,
+          "flux_power_balance": 5.10702591327572e-15,
+          "net_outward_power_ratio": -3.996802888650563e-15,
+          "linear_residual": 3.157157444778545e-16,
+          "condition_left": 55.00073266421124,
+          "condition_right": 55.00073266425172,
+          "transmission_amplitude": {
+            "re": -0.10068686336333861,
+            "im": -0.9949180254230817
+          },
+          "expected_phase_factor": {
+            "re": -0.09920518601040902,
+            "im": -0.9950669982813419
+          },
+          "deembedded_amplitude": {
+            "re": 0.9999987521025103,
+            "im": -0.0014891471161153037
+          },
+          "phase_error_rad": -0.0014891478736606515,
+          "complex_amplitude_error": 0.0014891476389809878,
+          "transmitted_mode_conversion_power": 1.5831013566725005e-07,
+          "matched_power_passed": true
+        },
+        {
+          "case": "long_fine",
+          "incident_side": "right",
+          "mode_index": 3,
+          "safe_root_index": 585,
+          "propagating_channels": 4,
+          "wavenumber_rad_m": -3333627.0486962707,
+          "kinetic_fractions_xyz": [
+            0.13046976070056363,
+            0.8691154907532596,
+            0.00041474854617681563
+          ],
+          "incident_power_W": 1.0000000000000004,
+          "R": 3.645039929718555e-09,
+          "T": 0.9999999963549892,
+          "R_flux": 3.6450399292042096e-09,
+          "T_flux": 0.9999999963549578,
+          "R_gram": 3.6450399297223522e-09,
+          "T_gram": 0.9999999963549892,
+          "power_disagreement": 3.1308289294429414e-14,
+          "power_balance": -2.90878432451791e-14,
+          "flux_power_balance": 2.220446049250313e-15,
+          "net_outward_power_ratio": -2.2204460492503123e-15,
+          "linear_residual": 4.634121715473531e-16,
+          "condition_left": 55.00073266421124,
+          "condition_right": 55.00073266425172,
+          "transmission_amplitude": {
+            "re": 0.28382953596373944,
+            "im": -0.9588747346259057
+          },
+          "expected_phase_factor": {
+            "re": 0.2840846341065338,
+            "im": -0.9587992076887406
+          },
+          "deembedded_amplitude": {
+            "re": 0.999999945704956,
+            "im": -0.00026604393950377863
+          },
+          "phase_error_rad": -0.0002660439476718379,
+          "complex_amplitude_error": 0.00026604394504415425,
+          "transmitted_mode_conversion_power": 3.4165696716215166e-08,
+          "matched_power_passed": true
+        },
+        {
+          "case": "long_fine",
+          "incident_side": "right",
+          "mode_index": 4,
+          "safe_root_index": 573,
+          "propagating_channels": 4,
+          "wavenumber_rad_m": -5218646.436537411,
+          "kinetic_fractions_xyz": [
+            0.06363250759831147,
+            0.0010805842679641815,
+            0.9352869081337242
+          ],
+          "incident_power_W": 1.0000000000000007,
+          "R": 2.5470250267521297e-08,
+          "T": 0.9999999745297268,
+          "R_flux": 2.5470250270526702e-08,
+          "T_flux": 0.99999997452975,
+          "R_gram": 2.5470250267499747e-08,
+          "T_gram": 0.9999999745297274,
+          "power_disagreement": 2.3203661214665772e-14,
+          "power_balance": 2.298161660974074e-14,
+          "flux_power_balance": -2.220446049250313e-16,
+          "net_outward_power_ratio": 5.551115123125779e-16,
+          "linear_residual": 4.715099969020138e-16,
+          "condition_left": 55.00073266421124,
+          "condition_right": 55.00073266425172,
+          "transmission_amplitude": {
+            "re": 0.02764217699247047,
+            "im": 0.9996177744327529
+          },
+          "expected_phase_factor": {
+            "re": 0.026009045883446838,
+            "im": 0.9996617075452239
+          },
+          "deembedded_amplitude": {
+            "re": 0.9999985579317177,
+            "im": -0.001633721291429849
+          },
+          "phase_error_rad": -0.0016337221938749207,
+          "complex_amplitude_error": 0.0016337219278788387,
+          "transmitted_mode_conversion_power": 1.896189543160176e-07,
+          "matched_power_passed": true
+        }
+      ],
+      "amplitude_matrices": {
+        "left": {
+          "reflection": [
+            [
+              {
+                "re": -2.1728290769177695e-07,
+                "im": -1.4455744997323257e-07
+              },
+              {
+                "re": -1.2221894979627068e-07,
+                "im": 5.01949456659154e-07
+              },
+              {
+                "re": -9.790837740204824e-07,
+                "im": -4.5714910164049096e-07
+              },
+              {
+                "re": -9.928577320688515e-07,
+                "im": 3.4570852020486817e-06
+              }
+            ],
+            [
+              {
+                "re": -1.2221889053803773e-07,
+                "im": 5.019494561990597e-07
+              },
+              {
+                "re": -0.00033974997867804873,
+                "im": 3.4383351659393214e-05
+              },
+              {
+                "re": 5.3465864099368065e-06,
+                "im": -5.7100002958059394e-05
+              },
+              {
+                "re": 4.748049269094814e-06,
+                "im": -2.6420416798830007e-07
+              }
+            ],
+            [
+              {
+                "re": -9.790837568325875e-07,
+                "im": -4.571490882883235e-07
+              },
+              {
+                "re": 5.346586700064944e-06,
+                "im": -5.710000281983265e-05
+              },
+              {
+                "re": 1.789246716313033e-05,
+                "im": 5.294473635740318e-06
+              },
+              {
+                "re": -3.3438462352786267e-07,
+                "im": 2.5675614270602975e-06
+              }
+            ],
+            [
+              {
+                "re": -9.928578083069615e-07,
+                "im": 3.4570851890602895e-06
+              },
+              {
+                "re": 4.7480492794472536e-06,
+                "im": -2.6420415860650666e-07
+              },
+              {
+                "re": -3.343846311388893e-07,
+                "im": 2.5675614372020216e-06
+              },
+              {
+                "re": 0.00015940058079674612,
+                "im": -4.410209288297138e-06
+              }
+            ]
+          ],
+          "transmission": [
+            [
+              {
+                "re": -0.5538548506144144,
+                "im": 0.8326132381521845
+              },
+              {
+                "re": -1.83952481736729e-06,
+                "im": 7.420993539308729e-06
+              },
+              {
+                "re": -4.741632730620632e-06,
+                "im": -2.2167593055012836e-06
+              },
+              {
+                "re": -5.726832424253205e-07,
+                "im": 2.000188488907754e-06
+              }
+            ],
+            [
+              {
+                "re": -1.839524123074017e-06,
+                "im": 7.420993708978794e-06
+              },
+              {
+                "re": -0.10068686336336076,
+                "im": -0.9949180254231016
+              },
+              {
+                "re": 3.4306136120690375e-06,
+                "im": -3.709323807077419e-05
+              },
+              {
+                "re": -0.0003952431765484648,
+                "im": 2.5432945303201113e-05
+              }
+            ],
+            [
+              {
+                "re": 4.7416327088058164e-06,
+                "im": 2.216759671087326e-06
+              },
+              {
+                "re": -3.4306140336413223e-06,
+                "im": 3.7093237500573514e-05
+              },
+              {
+                "re": 0.28382953596373967,
+                "im": -0.9588747346258869
+              },
+              {
+                "re": -2.3465242952983537e-05,
+                "im": 0.00017944359734365964
+              }
+            ],
+            [
+              {
+                "re": 5.726832174503873e-07,
+                "im": -2.0001884764995343e-06
+              },
+              {
+                "re": 0.0003952431764899817,
+                "im": -2.54329449747388e-05
+              },
+              {
+                "re": -2.3465243103128177e-05,
+                "im": 0.00017944359729616456
+              },
+              {
+                "re": 0.02764217699248962,
+                "im": 0.9996177744327638
+              }
+            ]
+          ],
+          "reflection_root_indices": [
+            593,
+            583,
+            585,
+            573
+          ],
+          "transmission_root_indices": [
+            592,
+            582,
+            584,
+            572
+          ],
+          "incident_root_indices": [
+            592,
+            582,
+            584,
+            572
+          ]
+        },
+        "right": {
+          "reflection": [
+            [
+              {
+                "re": -2.1728308752537626e-07,
+                "im": -1.445571792577079e-07
+              },
+              {
+                "re": -1.2221899642466873e-07,
+                "im": 5.019494414872271e-07
+              },
+              {
+                "re": 9.790838171379123e-07,
+                "im": 4.571490264292205e-07
+              },
+              {
+                "re": 9.928578478781986e-07,
+                "im": -3.4570851605415864e-06
+              }
+            ],
+            [
+              {
+                "re": -1.2221902762451703e-07,
+                "im": 5.01949430185561e-07
+              },
+              {
+                "re": -0.0003397499786315963,
+                "im": 3.4383352279726636e-05
+              },
+              {
+                "re": -5.346586785313585e-06,
+                "im": 5.7100002907037084e-05
+              },
+              {
+                "re": -4.748049280686249e-06,
+                "im": 2.64204077368725e-07
+              }
+            ],
+            [
+              {
+                "re": 9.790837923407892e-07,
+                "im": 4.571490132481884e-07
+              },
+              {
+                "re": -5.346586466331398e-06,
+                "im": 5.710000284406129e-05
+              },
+              {
+                "re": 1.7892467044818988e-05,
+                "im": 5.294474036508411e-06
+              },
+              {
+                "re": -3.343846248369751e-07,
+                "im": 2.567561430506145e-06
+              }
+            ],
+            [
+              {
+                "re": 9.928577578228915e-07,
+                "im": -3.4570852045311884e-06
+              },
+              {
+                "re": -4.7480492882594896e-06,
+                "im": 2.642040754144185e-07
+              },
+              {
+                "re": -3.343846099093735e-07,
+                "im": 2.5675614477820183e-06
+              },
+              {
+                "re": 0.00015940058079514597,
+                "im": -4.410209137337407e-06
+              }
+            ]
+          ],
+          "transmission": [
+            [
+              {
+                "re": -0.5538548506144216,
+                "im": 0.832613238152184
+              },
+              {
+                "re": -1.8395245100643272e-06,
+                "im": 7.4209936094665125e-06
+              },
+              {
+                "re": 4.741632568410636e-06,
+                "im": 2.2167596337346805e-06
+              },
+              {
+                "re": 5.72683182137095e-07,
+                "im": -2.000188509739488e-06
+              }
+            ],
+            [
+              {
+                "re": -1.8395252040991112e-06,
+                "im": 7.420993448664779e-06
+              },
+              {
+                "re": -0.10068686336333861,
+                "im": -0.9949180254230817
+              },
+              {
+                "re": -3.430615520059138e-06,
+                "im": 3.709323785028946e-05
+              },
+              {
+                "re": 0.0003952431765818112,
+                "im": -2.5432944722592652e-05
+              }
+            ],
+            [
+              {
+                "re": -4.741632854469274e-06,
+                "im": -2.216759376659764e-06
+              },
+              {
+                "re": 3.4306149969234535e-06,
+                "im": -3.709323740875179e-05
+              },
+              {
+                "re": 0.28382953596373944,
+                "im": -0.9588747346259057
+              },
+              {
+                "re": -2.3465243123501535e-05,
+                "im": 0.00017944359732001067
+              }
+            ],
+            [
+              {
+                "re": -5.726832038247218e-07,
+                "im": 2.000188493940278e-06
+              },
+              {
+                "re": -0.00039524317648277635,
+                "im": 2.5432945040344855e-05
+              },
+              {
+                "re": -2.3465242985274757e-05,
+                "im": 0.00017944359730701306
+              },
+              {
+                "re": 0.02764217699247047,
+                "im": 0.9996177744327529
+              }
+            ]
+          ],
+          "reflection_root_indices": [
+            592,
+            582,
+            584,
+            572
+          ],
+          "transmission_root_indices": [
+            593,
+            583,
+            585,
+            573
+          ],
+          "incident_root_indices": [
+            593,
+            583,
+            585,
+            573
+          ]
+        }
+      },
+      "resources": {
+        "peak_process_memory_mib": 605.23046875,
+        "system_available_memory_mib_at_start": 3165.78125,
+        "process_lifetime_peak_working_set_mib": 605.54296875,
+        "elapsed_seconds": 19.637970900002983
+      },
+      "displacement_dofs": 14553,
+      "port_dofs": 297,
+      "safe_max_relative_residual": 3.031387036466588e-15
+    }
+  },
+  "comparisons": {
+    "length_fine_section": {
+      "comparison": "length_fine_section",
+      "reference_case": "transverse_refined",
+      "compared_case": "long_fine",
+      "sides": {
+        "left": {
+          "matching_channel_counts": true,
+          "overlap_matrix": [
+            [
+              1.0,
+              1.3840716820920011e-06,
+              1.0230192426400303e-13,
+              1.0273940775410479e-13
+            ],
+            [
+              1.3840716820533997e-06,
+              1.0,
+              4.155729343640051e-12,
+              6.345447040621077e-14
+            ],
+            [
+              1.0230794359439275e-13,
+              4.15571202405624e-12,
+              1.0,
+              4.763889243108201e-07
+            ],
+            [
+              1.0274771440749072e-13,
+              6.345447040621065e-14,
+              4.7638892432594305e-07,
+              1.0
+            ]
+          ],
+          "matches": [
+            {
+              "reference_mode_index": 1,
+              "compared_mode_index": 1,
+              "mass_weighted_overlap": 1.0,
+              "relative_wavenumber_change": 0.0,
+              "reference_kinetic_fractions_xyz": [
+                0.9941767393234956,
+                0.005327087278142892,
+                0.0004961733983614327
+              ],
+              "compared_kinetic_fractions_xyz": [
+                0.9941767393234956,
+                0.005327087278142892,
+                0.0004961733983614327
+              ],
+              "individual_mode_tracking": "matched",
+              "passed": true,
+              "deembedded_complex_amplitude_change": 2.3904151455444806e-07,
+              "absolute_phase_error_reference_rad": 4.619019554058868e-07,
+              "absolute_phase_error_compared_rad": 7.009434699455327e-07,
+              "raw_equal_length_amplitude_change": null,
+              "raw_length_transfer_error": 2.3904151439375686e-07,
+              "accumulated_wavenumber_phase_change_rad": 0.0
+            },
+            {
+              "reference_mode_index": 2,
+              "compared_mode_index": 2,
+              "mass_weighted_overlap": 1.0,
+              "relative_wavenumber_change": 0.0,
+              "reference_kinetic_fractions_xyz": [
+                0.016760738191363395,
+                0.08932580983165392,
+                0.8939134519769825
+              ],
+              "compared_kinetic_fractions_xyz": [
+                0.016760738191363395,
+                0.08932580983165392,
+                0.8939134519769825
+              ],
+              "individual_mode_tracking": "matched",
+              "passed": true,
+              "deembedded_complex_amplitude_change": 0.0005154945485684343,
+              "absolute_phase_error_reference_rad": 0.000973653274276217,
+              "absolute_phase_error_compared_rad": 0.001489147873680684,
+              "raw_equal_length_amplitude_change": null,
+              "raw_length_transfer_error": 0.0005154945485682205,
+              "accumulated_wavenumber_phase_change_rad": 0.0
+            },
+            {
+              "reference_mode_index": 3,
+              "compared_mode_index": 3,
+              "mass_weighted_overlap": 1.0,
+              "relative_wavenumber_change": 0.0,
+              "reference_kinetic_fractions_xyz": [
+                0.13046976070056363,
+                0.8691154907532596,
+                0.00041474854617681563
+              ],
+              "compared_kinetic_fractions_xyz": [
+                0.13046976070056363,
+                0.8691154907532596,
+                0.00041474854617681563
+              ],
+              "individual_mode_tracking": "matched",
+              "passed": true,
+              "deembedded_complex_amplitude_change": 9.017718214276146e-05,
+              "absolute_phase_error_reference_rad": 0.0001758667643985473,
+              "absolute_phase_error_compared_rad": 0.0002660439476663074,
+              "raw_equal_length_amplitude_change": null,
+              "raw_length_transfer_error": 9.01771821430064e-05,
+              "accumulated_wavenumber_phase_change_rad": 0.0
+            },
+            {
+              "reference_mode_index": 4,
+              "compared_mode_index": 4,
+              "mass_weighted_overlap": 1.0,
+              "relative_wavenumber_change": 0.0,
+              "reference_kinetic_fractions_xyz": [
+                0.06363250759831147,
+                0.0010805842679641815,
+                0.9352869081337242
+              ],
+              "compared_kinetic_fractions_xyz": [
+                0.06363250759831147,
+                0.0010805842679641815,
+                0.9352869081337242
+              ],
+              "individual_mode_tracking": "matched",
+              "passed": true,
+              "deembedded_complex_amplitude_change": 0.0005506011988309727,
+              "absolute_phase_error_reference_rad": 0.0010831209367309779,
+              "absolute_phase_error_compared_rad": 0.0016337221938937628,
+              "raw_equal_length_amplitude_change": null,
+              "raw_length_transfer_error": 0.0005506011988318945,
+              "accumulated_wavenumber_phase_change_rad": 0.0
+            }
+          ],
+          "passed": true
+        },
+        "right": {
+          "matching_channel_counts": true,
+          "overlap_matrix": [
+            [
+              1.0,
+              1.3840716820920011e-06,
+              1.0230192426400303e-13,
+              1.0273940775410479e-13
+            ],
+            [
+              1.3840716820533997e-06,
+              1.0,
+              4.155729343640051e-12,
+              6.345447040621077e-14
+            ],
+            [
+              1.0230794359439275e-13,
+              4.15571202405624e-12,
+              1.0,
+              4.763889243108201e-07
+            ],
+            [
+              1.0274771440749072e-13,
+              6.345447040621065e-14,
+              4.7638892432594305e-07,
+              1.0
+            ]
+          ],
+          "matches": [
+            {
+              "reference_mode_index": 1,
+              "compared_mode_index": 1,
+              "mass_weighted_overlap": 1.0,
+              "relative_wavenumber_change": 0.0,
+              "reference_kinetic_fractions_xyz": [
+                0.9941767393234956,
+                0.005327087278142892,
+                0.0004961733983614327
+              ],
+              "compared_kinetic_fractions_xyz": [
+                0.9941767393234956,
+                0.005327087278142892,
+                0.0004961733983614327
+              ],
+              "individual_mode_tracking": "matched",
+              "passed": true,
+              "deembedded_complex_amplitude_change": 2.390415144865885e-07,
+              "absolute_phase_error_reference_rad": 4.619019491879201e-07,
+              "absolute_phase_error_compared_rad": 7.009434636597055e-07,
+              "raw_equal_length_amplitude_change": null,
+              "raw_length_transfer_error": 2.3904151442470755e-07,
+              "accumulated_wavenumber_phase_change_rad": 0.0
+            },
+            {
+              "reference_mode_index": 2,
+              "compared_mode_index": 2,
+              "mass_weighted_overlap": 1.0,
+              "relative_wavenumber_change": 0.0,
+              "reference_kinetic_fractions_xyz": [
+                0.016760738191363395,
+                0.08932580983165392,
+                0.8939134519769825
+              ],
+              "compared_kinetic_fractions_xyz": [
+                0.016760738191363395,
+                0.08932580983165392,
+                0.8939134519769825
+              ],
+              "individual_mode_tracking": "matched",
+              "passed": true,
+              "deembedded_complex_amplitude_change": 0.000515494548568039,
+              "absolute_phase_error_reference_rad": 0.0009736532742565707,
+              "absolute_phase_error_compared_rad": 0.0014891478736606515,
+              "raw_equal_length_amplitude_change": null,
+              "raw_length_transfer_error": 0.0005154945485678249,
+              "accumulated_wavenumber_phase_change_rad": 0.0
+            },
+            {
+              "reference_mode_index": 3,
+              "compared_mode_index": 3,
+              "mass_weighted_overlap": 1.0,
+              "relative_wavenumber_change": 0.0,
+              "reference_kinetic_fractions_xyz": [
+                0.13046976070056363,
+                0.8691154907532596,
+                0.00041474854617681563
+              ],
+              "compared_kinetic_fractions_xyz": [
+                0.13046976070056363,
+                0.8691154907532596,
+                0.00041474854617681563
+              ],
+              "individual_mode_tracking": "matched",
+              "passed": true,
+              "deembedded_complex_amplitude_change": 9.017718214339301e-05,
+              "absolute_phase_error_reference_rad": 0.00017586676440344806,
+              "absolute_phase_error_compared_rad": 0.0002660439476718379,
+              "raw_equal_length_amplitude_change": null,
+              "raw_length_transfer_error": 9.017718214361792e-05,
+              "accumulated_wavenumber_phase_change_rad": 0.0
+            },
+            {
+              "reference_mode_index": 4,
+              "compared_mode_index": 4,
+              "mass_weighted_overlap": 1.0,
+              "relative_wavenumber_change": 0.0,
+              "reference_kinetic_fractions_xyz": [
+                0.06363250759831147,
+                0.0010805842679641815,
+                0.9352869081337242
+              ],
+              "compared_kinetic_fractions_xyz": [
+                0.06363250759831147,
+                0.0010805842679641815,
+                0.9352869081337242
+              ],
+              "individual_mode_tracking": "matched",
+              "passed": true,
+              "deembedded_complex_amplitude_change": 0.0005506011988288134,
+              "absolute_phase_error_reference_rad": 0.0010831209367142892,
+              "absolute_phase_error_compared_rad": 0.0016337221938749207,
+              "raw_equal_length_amplitude_change": null,
+              "raw_length_transfer_error": 0.000550601198829746,
+              "accumulated_wavenumber_phase_change_rad": 0.0
+            }
+          ],
+          "passed": true
+        }
+      },
+      "passed": true
+    }
+  },
+  "preserved_evidence": {
+    "original": {
+      "json_file": "straight_scattering_validation_AP_pnc.json",
+      "json_sha256": "d409bbfe37aa7874678c5ebb06be75f473f3ea9cb1d1959456f57e622f22ac48",
+      "csv_file": "straight_scattering_validation_AP_pnc.csv",
+      "csv_sha256": "950dca93d98c8e6006de0cdb59ef8d22ec09c6b602748ce69895a492b5005ce7",
+      "original_status": "failed_numerical_gate",
+      "original_failed_checks": [
+        "axial_8_to_16",
+        "absolute_complex_amplitude_on_finest_axial_transverse_and_long_cases"
+      ],
+      "reused_cases": [
+        "B_fine"
+      ],
+      "matching_numerical_source_sha256": {
+        "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac"
+      }
+    },
+    "refinement": {
+      "json_file": "straight_scattering_refinement_AP_pnc.json",
+      "json_sha256": "d299de40d8afc6f57b868fb4d67ec28328a00c812b934a0f83cfe6e0ebf2709c",
+      "csv_file": "straight_scattering_refinement_AP_pnc.csv",
+      "csv_sha256": "091a54ad924be47edec022c9ab0c68f187dc8a33fc2308cfba152e16a068c935",
+      "original_status": "failed_numerical_gate",
+      "original_failed_checks": [
+        "absolute_complex_amplitude_length_refined"
+      ],
+      "reused_cases": [
+        "transverse_refined"
+      ],
+      "matching_numerical_source_sha256": {
+        "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac"
+      },
+      "saved_python": "3.12.14",
+      "saved_platform": "Windows-11-10.0.26200-SP0"
+    }
+  },
+  "common_phase_reference": {
+    "name": "safe_reference",
+    "length_m": 1.5e-06,
+    "cells": [
+      1,
+      6,
+      5
+    ],
+    "scope": "Finer SAFE phase reference. No volume scattering solved and no continuum error bound established.",
+    "trace_dofs": 429,
+    "mesh_extraction_dofs": 1287,
+    "safe_max_relative_residual": 3.0066301496277165e-15,
+    "channels": [
+      {
+        "incident_side": "left",
+        "mode_index": 1,
+        "safe_root_index": 856,
+        "wavenumber_rad_m": 1438522.7338568962,
+        "kinetic_fractions_xyz": [
+          0.994176582816976,
+          0.0053272415218609485,
+          0.000496175661163111
+        ]
+      },
+      {
+        "incident_side": "left",
+        "mode_index": 2,
+        "safe_root_index": 850,
+        "wavenumber_rad_m": 3078909.9239999503,
+        "kinetic_fractions_xyz": [
+          0.01680552541315038,
+          0.08935984151067057,
+          0.8938346330761789
+        ]
+      },
+      {
+        "incident_side": "left",
+        "mode_index": 3,
+        "safe_root_index": 848,
+        "wavenumber_rad_m": 3333671.4785303017,
+        "kinetic_fractions_xyz": [
+          0.13045562266511543,
+          0.8691295663495684,
+          0.0004148109853161502
+        ]
+      },
+      {
+        "incident_side": "left",
+        "mode_index": 4,
+        "safe_root_index": 808,
+        "wavenumber_rad_m": 5219048.255109468,
+        "kinetic_fractions_xyz": [
+          0.06363800194539769,
+          0.0010903836743096805,
+          0.9352716143802928
+        ]
+      },
+      {
+        "incident_side": "right",
+        "mode_index": 1,
+        "safe_root_index": 857,
+        "wavenumber_rad_m": -1438522.7338568962,
+        "kinetic_fractions_xyz": [
+          0.994176582816976,
+          0.0053272415218609485,
+          0.000496175661163111
+        ]
+      },
+      {
+        "incident_side": "right",
+        "mode_index": 2,
+        "safe_root_index": 851,
+        "wavenumber_rad_m": -3078909.9239999503,
+        "kinetic_fractions_xyz": [
+          0.01680552541315038,
+          0.08935984151067057,
+          0.8938346330761789
+        ]
+      },
+      {
+        "incident_side": "right",
+        "mode_index": 3,
+        "safe_root_index": 849,
+        "wavenumber_rad_m": -3333671.4785303017,
+        "kinetic_fractions_xyz": [
+          0.13045562266511543,
+          0.8691295663495684,
+          0.0004148109853161502
+        ]
+      },
+      {
+        "incident_side": "right",
+        "mode_index": 4,
+        "safe_root_index": 809,
+        "wavenumber_rad_m": -5219048.255109468,
+        "kinetic_fractions_xyz": [
+          0.06363800194539769,
+          0.0010903836743096805,
+          0.9352716143802928
+        ]
+      }
+    ],
+    "resources": {
+      "peak_process_memory_mib": 140.80078125,
+      "system_available_memory_mib_at_start": 3129.66796875,
+      "process_lifetime_peak_working_set_mib": 605.54296875,
+      "elapsed_seconds": 1.290346399997361
+    },
+    "comparisons": {
+      "transverse_refined": {
+        "comparison": "common_phase_reference",
+        "reference_case": "safe_reference",
+        "compared_case": "transverse_refined",
+        "sides": {
+          "left": {
+            "matching_channel_counts": true,
+            "overlap_matrix": [
+              [
+                0.9999999999866176,
+                2.05542647425792e-06,
+                2.499951611171352e-13,
+                8.506114289259032e-14
+              ],
+              [
+                0.0001174394646273518,
+                0.9999998199719144,
+                2.2557357712789973e-12,
+                9.61933522848301e-13
+              ],
+              [
+                3.609322336441456e-13,
+                2.8929259507917136e-12,
+                0.999999992515645,
+                1.4980277206862937e-06
+              ],
+              [
+                9.157726078962614e-14,
+                4.021645059822301e-13,
+                2.404878453301855e-05,
+                0.9999999484994054
+              ]
+            ],
+            "matches": [
+              {
+                "reference_mode_index": 1,
+                "compared_mode_index": 1,
+                "mass_weighted_overlap": 0.9999999999866176,
+                "relative_wavenumber_change": 4.856030311195525e-08,
+                "reference_kinetic_fractions_xyz": [
+                  0.994176582816976,
+                  0.0053272415218609485,
+                  0.000496175661163111
+                ],
+                "compared_kinetic_fractions_xyz": [
+                  0.9941767393234956,
+                  0.005327087278142892,
+                  0.0004961733983614327
+                ],
+                "individual_mode_tracking": "matched",
+                "passed": true,
+                "reference_wavenumber_rad_m": 1438522.7338568962,
+                "reference_phase_factor": {
+                  "re": 0.1318882137427075,
+                  "im": 0.991264595895444
+                },
+                "absolute_complex_amplitude_error": 5.317570539832068e-07,
+                "absolute_phase_error_rad": 5.317570517744558e-07,
+                "accumulated_wavenumber_phase_change_rad": 1.047826447756961e-07
+              },
+              {
+                "reference_mode_index": 2,
+                "compared_mode_index": 2,
+                "mass_weighted_overlap": 0.9999998199719144,
+                "relative_wavenumber_change": 0.0011585772963855767,
+                "reference_kinetic_fractions_xyz": [
+                  0.01680552541315038,
+                  0.08935984151067057,
+                  0.8938346330761789
+                ],
+                "compared_kinetic_fractions_xyz": [
+                  0.016760738191363395,
+                  0.08932580983165392,
+                  0.8939134519769825
+                ],
+                "individual_mode_tracking": "matched",
+                "passed": true,
+                "reference_wavenumber_rad_m": 3078909.9239999503,
+                "reference_phase_factor": {
+                  "re": -0.9980360808721769,
+                  "im": 0.06264168961087783
+                },
+                "absolute_complex_amplitude_error": 0.004536676342027895,
+                "absolute_phase_error_rad": 0.004536680367541832,
+                "accumulated_wavenumber_phase_change_rad": 0.005344540639898507
+              },
+              {
+                "reference_mode_index": 3,
+                "compared_mode_index": 3,
+                "mass_weighted_overlap": 0.999999992515645,
+                "relative_wavenumber_change": 1.332777583762379e-05,
+                "reference_kinetic_fractions_xyz": [
+                  0.13045562266511543,
+                  0.8691295663495684,
+                  0.0004148109853161502
+                ],
+                "compared_kinetic_fractions_xyz": [
+                  0.13046976070056363,
+                  0.8691154907532596,
+                  0.00041474854617681563
+                ],
+                "individual_mode_tracking": "matched",
+                "passed": true,
+                "reference_wavenumber_rad_m": 3333671.4785303017,
+                "reference_phase_factor": {
+                  "re": -0.9816095089475952,
+                  "im": -0.19089990032386328
+                },
+                "absolute_complex_amplitude_error": 0.00022029659700492673,
+                "absolute_phase_error_rad": 0.00022029659842949192,
+                "accumulated_wavenumber_phase_change_rad": 6.664475104655139e-05
+              },
+              {
+                "reference_mode_index": 4,
+                "compared_mode_index": 4,
+                "mass_weighted_overlap": 0.9999999484994054,
+                "relative_wavenumber_change": 7.699670344463172e-05,
+                "reference_kinetic_fractions_xyz": [
+                  0.06363800194539769,
+                  0.0010903836743096805,
+                  0.9352716143802928
+                ],
+                "compared_kinetic_fractions_xyz": [
+                  0.06363250759831147,
+                  0.0010805842679641815,
+                  0.9352869081337242
+                ],
+                "individual_mode_tracking": "matched",
+                "passed": true,
+                "reference_wavenumber_rad_m": 5219048.255109468,
+                "reference_phase_factor": {
+                  "re": 0.48525892853542024,
+                  "im": -0.8743705005755031
+                },
+                "absolute_complex_amplitude_error": 0.0014849393141904922,
+                "absolute_phase_error_rad": 0.0014849395087874735,
+                "accumulated_wavenumber_phase_change_rad": 0.0006027278580847197
+              }
+            ],
+            "passed": true
+          },
+          "right": {
+            "matching_channel_counts": true,
+            "overlap_matrix": [
+              [
+                0.9999999999866176,
+                2.05542647425792e-06,
+                2.499951611171352e-13,
+                8.506114289259032e-14
+              ],
+              [
+                0.0001174394646273518,
+                0.9999998199719144,
+                2.2557357712789973e-12,
+                9.61933522848301e-13
+              ],
+              [
+                3.609322336441456e-13,
+                2.8929259507917136e-12,
+                0.999999992515645,
+                1.4980277206862937e-06
+              ],
+              [
+                9.157726078962614e-14,
+                4.021645059822301e-13,
+                2.404878453301855e-05,
+                0.9999999484994054
+              ]
+            ],
+            "matches": [
+              {
+                "reference_mode_index": 1,
+                "compared_mode_index": 1,
+                "mass_weighted_overlap": 0.9999999999866176,
+                "relative_wavenumber_change": 4.856030311195525e-08,
+                "reference_kinetic_fractions_xyz": [
+                  0.994176582816976,
+                  0.0053272415218609485,
+                  0.000496175661163111
+                ],
+                "compared_kinetic_fractions_xyz": [
+                  0.9941767393234956,
+                  0.005327087278142892,
+                  0.0004961733983614327
+                ],
+                "individual_mode_tracking": "matched",
+                "passed": true,
+                "reference_wavenumber_rad_m": -1438522.7338568962,
+                "reference_phase_factor": {
+                  "re": 0.1318882137427075,
+                  "im": 0.991264595895444
+                },
+                "absolute_complex_amplitude_error": 5.317570477698406e-07,
+                "absolute_phase_error_rad": 5.317570455564889e-07,
+                "accumulated_wavenumber_phase_change_rad": 1.047826447756961e-07
+              },
+              {
+                "reference_mode_index": 2,
+                "compared_mode_index": 2,
+                "mass_weighted_overlap": 0.9999998199719144,
+                "relative_wavenumber_change": 0.0011585772963855767,
+                "reference_kinetic_fractions_xyz": [
+                  0.01680552541315038,
+                  0.08935984151067057,
+                  0.8938346330761789
+                ],
+                "compared_kinetic_fractions_xyz": [
+                  0.016760738191363395,
+                  0.08932580983165392,
+                  0.8939134519769825
+                ],
+                "individual_mode_tracking": "matched",
+                "passed": true,
+                "reference_wavenumber_rad_m": -3078909.9239999503,
+                "reference_phase_factor": {
+                  "re": -0.9980360808721769,
+                  "im": 0.06264168961087783
+                },
+                "absolute_complex_amplitude_error": 0.004536676342008208,
+                "absolute_phase_error_rad": 0.004536680367522187,
+                "accumulated_wavenumber_phase_change_rad": 0.005344540639898507
+              },
+              {
+                "reference_mode_index": 3,
+                "compared_mode_index": 3,
+                "mass_weighted_overlap": 0.999999992515645,
+                "relative_wavenumber_change": 1.332777583762379e-05,
+                "reference_kinetic_fractions_xyz": [
+                  0.13045562266511543,
+                  0.8691295663495684,
+                  0.0004148109853161502
+                ],
+                "compared_kinetic_fractions_xyz": [
+                  0.13046976070056363,
+                  0.8691154907532596,
+                  0.00041474854617681563
+                ],
+                "individual_mode_tracking": "matched",
+                "passed": true,
+                "reference_wavenumber_rad_m": -3333671.4785303017,
+                "reference_phase_factor": {
+                  "re": -0.9816095089475952,
+                  "im": -0.19089990032386328
+                },
+                "absolute_complex_amplitude_error": 0.0002202965970098344,
+                "absolute_phase_error_rad": 0.00022029659843441908,
+                "accumulated_wavenumber_phase_change_rad": 6.664475104655139e-05
+              },
+              {
+                "reference_mode_index": 4,
+                "compared_mode_index": 4,
+                "mass_weighted_overlap": 0.9999999484994054,
+                "relative_wavenumber_change": 7.699670344463172e-05,
+                "reference_kinetic_fractions_xyz": [
+                  0.06363800194539769,
+                  0.0010903836743096805,
+                  0.9352716143802928
+                ],
+                "compared_kinetic_fractions_xyz": [
+                  0.06363250759831147,
+                  0.0010805842679641815,
+                  0.9352869081337242
+                ],
+                "individual_mode_tracking": "matched",
+                "passed": true,
+                "reference_wavenumber_rad_m": -5219048.255109468,
+                "reference_phase_factor": {
+                  "re": 0.48525892853542024,
+                  "im": -0.8743705005755031
+                },
+                "absolute_complex_amplitude_error": 0.0014849393141737805,
+                "absolute_phase_error_rad": 0.0014849395087707447,
+                "accumulated_wavenumber_phase_change_rad": 0.0006027278580847197
+              }
+            ],
+            "passed": true
+          }
+        },
+        "passed": true
+      },
+      "long_fine": {
+        "comparison": "common_phase_reference",
+        "reference_case": "safe_reference",
+        "compared_case": "long_fine",
+        "sides": {
+          "left": {
+            "matching_channel_counts": true,
+            "overlap_matrix": [
+              [
+                0.9999999999866176,
+                2.05542647425792e-06,
+                2.499951611171352e-13,
+                8.506114289259032e-14
+              ],
+              [
+                0.0001174394646273518,
+                0.9999998199719144,
+                2.2557357712789973e-12,
+                9.61933522848301e-13
+              ],
+              [
+                3.609322336441456e-13,
+                2.8929259507917136e-12,
+                0.999999992515645,
+                1.4980277206862937e-06
+              ],
+              [
+                9.157726078962614e-14,
+                4.021645059822301e-13,
+                2.404878453301855e-05,
+                0.9999999484994054
+              ]
+            ],
+            "matches": [
+              {
+                "reference_mode_index": 1,
+                "compared_mode_index": 1,
+                "mass_weighted_overlap": 0.9999999999866176,
+                "relative_wavenumber_change": 4.856030311195525e-08,
+                "reference_kinetic_fractions_xyz": [
+                  0.994176582816976,
+                  0.0053272415218609485,
+                  0.000496175661163111
+                ],
+                "compared_kinetic_fractions_xyz": [
+                  0.9941767393234956,
+                  0.005327087278142892,
+                  0.0004961733983614327
+                ],
+                "individual_mode_tracking": "matched",
+                "passed": true,
+                "reference_wavenumber_rad_m": 1438522.7338568962,
+                "reference_phase_factor": {
+                  "re": -0.5538555215014358,
+                  "im": 0.8326127919401506
+                },
+                "absolute_complex_amplitude_error": 8.057261163913094e-07,
+                "absolute_phase_error_rad": 8.057261147608397e-07,
+                "accumulated_wavenumber_phase_change_rad": 1.047826447756961e-07
+              },
+              {
+                "reference_mode_index": 2,
+                "compared_mode_index": 2,
+                "mass_weighted_overlap": 0.9999998199719144,
+                "relative_wavenumber_change": 0.0011585772963855767,
+                "reference_kinetic_fractions_xyz": [
+                  0.01680552541315038,
+                  0.08935984151067057,
+                  0.8938346330761789
+                ],
+                "compared_kinetic_fractions_xyz": [
+                  0.016760738191363395,
+                  0.08932580983165392,
+                  0.8939134519769825
+                ],
+                "individual_mode_tracking": "matched",
+                "passed": true,
+                "reference_wavenumber_rad_m": 3078909.9239999503,
+                "reference_phase_factor": {
+                  "re": -0.09388561846602059,
+                  "im": -0.995582990335438
+                },
+                "absolute_complex_amplitude_error": 0.006833674742642807,
+                "absolute_phase_error_rad": 0.006833688513578883,
+                "accumulated_wavenumber_phase_change_rad": 0.005344540639898507
+              },
+              {
+                "reference_mode_index": 3,
+                "compared_mode_index": 3,
+                "mass_weighted_overlap": 0.999999992515645,
+                "relative_wavenumber_change": 1.332777583762379e-05,
+                "reference_kinetic_fractions_xyz": [
+                  0.13045562266511543,
+                  0.8691295663495684,
+                  0.0004148109853161502
+                ],
+                "compared_kinetic_fractions_xyz": [
+                  0.13046976070056363,
+                  0.8691154907532596,
+                  0.00041474854617681563
+                ],
+                "individual_mode_tracking": "matched",
+                "passed": true,
+                "reference_wavenumber_rad_m": 3333671.4785303017,
+                "reference_phase_factor": {
+                  "re": 0.28414853241010246,
+                  "im": -0.9587802728097742
+                },
+                "absolute_complex_amplitude_error": 0.000332688694571075,
+                "absolute_phase_error_rad": 0.00033268869871300925,
+                "accumulated_wavenumber_phase_change_rad": 6.664475104655139e-05
+              },
+              {
+                "reference_mode_index": 4,
+                "compared_mode_index": 4,
+                "mass_weighted_overlap": 0.9999999484994054,
+                "relative_wavenumber_change": 7.699670344463172e-05,
+                "reference_kinetic_fractions_xyz": [
+                  0.06363800194539769,
+                  0.0010903836743096805,
+                  0.9352716143802928
+                ],
+                "compared_kinetic_fractions_xyz": [
+                  0.06363250759831147,
+                  0.0010805842679641815,
+                  0.9352869081337242
+                ],
+                "individual_mode_tracking": "matched",
+                "passed": true,
+                "reference_wavenumber_rad_m": 5219048.255109468,
+                "reference_phase_factor": {
+                  "re": 0.025406517235835452,
+                  "im": 0.9996772023418086
+                },
+                "absolute_complex_amplitude_error": 0.0022364494682188566,
+                "absolute_phase_error_rad": 0.0022364500519784477,
+                "accumulated_wavenumber_phase_change_rad": 0.0006027278580847197
+              }
+            ],
+            "passed": true
+          },
+          "right": {
+            "matching_channel_counts": true,
+            "overlap_matrix": [
+              [
+                0.9999999999866176,
+                2.05542647425792e-06,
+                2.499951611171352e-13,
+                8.506114289259032e-14
+              ],
+              [
+                0.0001174394646273518,
+                0.9999998199719144,
+                2.2557357712789973e-12,
+                9.61933522848301e-13
+              ],
+              [
+                3.609322336441456e-13,
+                2.8929259507917136e-12,
+                0.999999992515645,
+                1.4980277206862937e-06
+              ],
+              [
+                9.157726078962614e-14,
+                4.021645059822301e-13,
+                2.404878453301855e-05,
+                0.9999999484994054
+              ]
+            ],
+            "matches": [
+              {
+                "reference_mode_index": 1,
+                "compared_mode_index": 1,
+                "mass_weighted_overlap": 0.9999999999866176,
+                "relative_wavenumber_change": 4.856030311195525e-08,
+                "reference_kinetic_fractions_xyz": [
+                  0.994176582816976,
+                  0.0053272415218609485,
+                  0.000496175661163111
+                ],
+                "compared_kinetic_fractions_xyz": [
+                  0.9941767393234956,
+                  0.005327087278142892,
+                  0.0004961733983614327
+                ],
+                "individual_mode_tracking": "matched",
+                "passed": true,
+                "reference_wavenumber_rad_m": -1438522.7338568962,
+                "reference_phase_factor": {
+                  "re": -0.5538555215014358,
+                  "im": 0.8326127919401506
+                },
+                "absolute_complex_amplitude_error": 8.057261101366028e-07,
+                "absolute_phase_error_rad": 8.057261084750127e-07,
+                "accumulated_wavenumber_phase_change_rad": 1.047826447756961e-07
+              },
+              {
+                "reference_mode_index": 2,
+                "compared_mode_index": 2,
+                "mass_weighted_overlap": 0.9999998199719144,
+                "relative_wavenumber_change": 0.0011585772963855767,
+                "reference_kinetic_fractions_xyz": [
+                  0.01680552541315038,
+                  0.08935984151067057,
+                  0.8938346330761789
+                ],
+                "compared_kinetic_fractions_xyz": [
+                  0.016760738191363395,
+                  0.08932580983165392,
+                  0.8939134519769825
+                ],
+                "individual_mode_tracking": "matched",
+                "passed": true,
+                "reference_wavenumber_rad_m": -3078909.9239999503,
+                "reference_phase_factor": {
+                  "re": -0.09388561846602059,
+                  "im": -0.995582990335438
+                },
+                "absolute_complex_amplitude_error": 0.006833674742622697,
+                "absolute_phase_error_rad": 0.006833688513558847,
+                "accumulated_wavenumber_phase_change_rad": 0.005344540639898507
+              },
+              {
+                "reference_mode_index": 3,
+                "compared_mode_index": 3,
+                "mass_weighted_overlap": 0.999999992515645,
+                "relative_wavenumber_change": 1.332777583762379e-05,
+                "reference_kinetic_fractions_xyz": [
+                  0.13045562266511543,
+                  0.8691295663495684,
+                  0.0004148109853161502
+                ],
+                "compared_kinetic_fractions_xyz": [
+                  0.13046976070056363,
+                  0.8691154907532596,
+                  0.00041474854617681563
+                ],
+                "individual_mode_tracking": "matched",
+                "passed": true,
+                "reference_wavenumber_rad_m": -3333671.4785303017,
+                "reference_phase_factor": {
+                  "re": 0.28414853241010246,
+                  "im": -0.9587802728097742
+                },
+                "absolute_complex_amplitude_error": 0.0003326886945766153,
+                "absolute_phase_error_rad": 0.00033268869871853847,
+                "accumulated_wavenumber_phase_change_rad": 6.664475104655139e-05
+              },
+              {
+                "reference_mode_index": 4,
+                "compared_mode_index": 4,
+                "mass_weighted_overlap": 0.9999999484994054,
+                "relative_wavenumber_change": 7.699670344463172e-05,
+                "reference_kinetic_fractions_xyz": [
+                  0.06363800194539769,
+                  0.0010903836743096805,
+                  0.9352716143802928
+                ],
+                "compared_kinetic_fractions_xyz": [
+                  0.06363250759831147,
+                  0.0010805842679641815,
+                  0.9352869081337242
+                ],
+                "individual_mode_tracking": "matched",
+                "passed": true,
+                "reference_wavenumber_rad_m": -5219048.255109468,
+                "reference_phase_factor": {
+                  "re": 0.025406517235835452,
+                  "im": 0.9996772023418086
+                },
+                "absolute_complex_amplitude_error": 0.0022364494682000045,
+                "absolute_phase_error_rad": 0.0022364500519596086,
+                "accumulated_wavenumber_phase_change_rad": 0.0006027278580847197
+              }
+            ],
+            "passed": true
+          }
+        },
+        "passed": true
+      }
+    }
+  },
+  "gate_results": {
+    "matched_power_all_cases": true,
+    "linear_and_safe_residuals": true,
+    "direct_flux_balance_all_cases": true,
+    "safe_reference_residual": true,
+    "absolute_complex_amplitude_transverse_refined": true,
+    "absolute_complex_amplitude_long_fine": true,
+    "transverse_wavenumber_drift_at_1p5um": true,
+    "length_fine_section": true
+  },
+  "failed_checks": [],
+  "status": "passed",
+  "full_straight_guide_acceptance_passed": true,
+  "channel_csv_sha256": "9301c0c6dc4288c4909ef321f831fc16e0cb4d02170edd7e893a2efc262e5c1f"
+}

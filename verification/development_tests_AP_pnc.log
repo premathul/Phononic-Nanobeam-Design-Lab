@@ -28,13 +28,23 @@ test_acoustic_zero_and_zone_edge (test_nanobeam_AP_pnc.ChainTests.test_acoustic_
 test_example_partial_array (test_nanobeam_AP_pnc.GeometryTests.test_example_partial_array) ... ok
 test_known_adjacent_spacing (test_nanobeam_AP_pnc.GeometryTests.test_known_adjacent_spacing) ... ok
 test_overlap_and_sidewall (test_nanobeam_AP_pnc.GeometryTests.test_overlap_and_sidewall) ... ok
+test_all_roots_flux_orthogonality_and_propagation_pairing (test_port_modes_AP_pnc.PortModeTests.test_all_roots_flux_orthogonality_and_propagation_pairing) ... ok
+test_cutoff_fails_explicitly_and_resolved_sides_change_channel_count (test_port_modes_AP_pnc.PortModeTests.test_cutoff_fails_explicitly_and_resolved_sides_change_channel_count) ... ok
+test_end_face_basis_and_integrated_mass_match_for_p1_and_p2 (test_port_modes_AP_pnc.PortModeTests.test_end_face_basis_and_integrated_mass_match_for_p1_and_p2) ... ok
+test_signed_axial_power_agrees_with_dispersion_derivative (test_port_modes_AP_pnc.PortModeTests.test_signed_axial_power_agrees_with_dispersion_derivative) ... ok
+test_symmetry_degenerate_flexural_modes_are_flux_orthogonal (test_port_modes_AP_pnc.PortModeTests.test_symmetry_degenerate_flexural_modes_are_flux_orthogonal) ... ok
+test_wavenumbers_match_independent_three_dimensional_bloch_solve (test_port_modes_AP_pnc.PortModeTests.test_wavenumbers_match_independent_three_dimensional_bloch_solve) ... ok
+test_matched_guide_for_both_directions (test_scattering_AP_pnc.ScatteringTests.test_matched_guide_for_both_directions) ... ok
+test_rejects_incompatible_frequency_and_port_mapping (test_scattering_AP_pnc.ScatteringTests.test_rejects_incompatible_frequency_and_port_mapping) ... ok
 3D solid: 24 tetrahedra, 225 displacement DOFs
 3D solid: 24 tetrahedra, 225 displacement DOFs
 test_failed_attempt_is_retained_and_bad_material_creates_no_output (test_workflow3d_AP_pnc.Workflow3D.test_failed_attempt_is_retained_and_bad_material_creates_no_output) ... ok
 3D solid: 24 tetrahedra, 225 displacement DOFs
 test_output_can_be_reconstructed_and_cache_checks_files (test_workflow3d_AP_pnc.Workflow3D.test_output_can_be_reconstructed_and_cache_checks_files) ... ok
+3D solid: 72 tetrahedra, 585 displacement DOFs
+test_scattering_exports_power_channels_and_reconstructible_responses (test_workflow3d_AP_pnc.Workflow3D.test_scattering_exports_power_channels_and_reconstructible_responses) ... ok
 
 ----------------------------------------------------------------------
-Ran 32 tests in 1.542s
+Ran 41 tests in 2.482s
 
 OK (skipped=1)
