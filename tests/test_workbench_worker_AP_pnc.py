@@ -16,7 +16,8 @@ class WorkbenchWorkerTests(unittest.TestCase):
     def setUp(self):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
-        self.directory = Path(temporary.name)
+        # The worker returns resolved paths. Windows TEMP can use an 8.3 alias.
+        self.directory = Path(temporary.name).resolve()
         self.output = self.directory / "results"
         self.config = json.loads((ROOT / "configs" / "straight_beam_AP_pnc.json").read_bytes())
         self.config["mesh"]["cells"] = [2, 2, 1]
