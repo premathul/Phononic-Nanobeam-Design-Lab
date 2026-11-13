@@ -26,6 +26,8 @@ jobs:
         run: python -B -m unittest discover -s tests -p 'test*_AP_pnc.py' -v
       - name: Three-mesh convergence and fixed-property temperature control
         run: python -B tools/validate_3d_AP_pnc.py
+      - name: Matched-port power and phase acceptance
+        run: python -B tools/validate_scattering_AP_pnc.py --acceptance --output-dir results/ci-scattering
       - uses: actions/upload-artifact@v7
         if: always()
         with:
@@ -33,3 +35,5 @@ jobs:
           path: |
             verification/straight_beam_validation_AP_pnc.json
             verification/straight_beam_validation_AP_pnc.csv
+            results/ci-scattering/straight_scattering_acceptance_AP_pnc.json
+            results/ci-scattering/straight_scattering_acceptance_AP_pnc.csv

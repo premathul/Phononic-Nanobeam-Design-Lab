@@ -1,64 +1,68 @@
-# 三维直梁实施方案
+# Three-dimensional straight-beam implementation plan
 
 Author: Athul Prem | _AP_pnc
 
-## 本轮交付与范围
+## Scope and deliverables
 
-把当前仓库发展为可复现的三维各向异性弹性波工具。第一条可运行路径是：有单位的配置 → 三维实体与网格 → 材料张量 → 有限梁本征模式、周期直梁色散 → 数值验证 → 可查看的结果。随后建立匹配端口的功率散射，再添加真实26孔器件。当前不启动七温度、全部弯曲或环形的批量研究。
+Develop the repository into a reproducible three-dimensional anisotropic elastic-wave simulator. The implemented workflow takes a configuration with explicit units, builds a 3D solid and mesh, applies the material tensor, and computes finite-beam eigenmodes, periodic straight-guide dispersion or matched-port power scattering. The next milestone integrates the original 26-hole device with matched ports. A campaign spanning all seven temperatures, bends or ring variants is outside the current milestone.
 
-用户已授权自由调整架构，优先最新可靠模拟，不要求恢复全部旧档案。历史恢复与新三维开发分离。GitHub协作者写权限已确认；集成测试与审阅后推送开发分支并以PR合并。不自动发送邮件。
+The user authorized architectural changes and prioritized the latest reliable simulations. Historical recovery can proceed independently of the new 3D implementation. GitHub collaborator write access is confirmed. Push the development branch after integration checks and review, then merge through a pull request. Email delivery requires current user authorization.
 
-## 基线与复用判断
+## Baseline and reuse decisions
 
-本地下载基线为 `3aa7e12c0d033bc3494dbc8295ee2564c5743885`。
+The local checkout began at `3aa7e12c0d033bc3494dbc8295ee2564c5743885`.
 
-| 内容 | 决定 | 理由 |
+| Item | Decision | Rationale |
 | --- | --- | --- |
-| `data/geometry/hole_geometry_derived_AP_pnc.csv` 及原工作簿 | 复用 | 真实26孔基线；统一 position_nm/x_nm 接口，内部转换为 SI |
-| 最新保存的 cubic-Ge 配置、15条谐波记录与4GHz场 | 保留作有限参考 | 可核查保存证据，但无完整三维或功率透射验证 |
-| 名义 C11/C12/C44 = 128.5/48.3/66.8 GPa，密度5323 kg/m³ | 复用为固定物性情景 | 不能标作已校准的4K或mK样品参数 |
-| 原网格、张量/残差验证思路 | 复用思路 | 旧网格是二维，不能直接充当三维实体 |
-| `src/nanobeam_AP_pnc.py` | 保留为旧示例 | 一维质量弹簧链不是锗纳米梁求解器 |
-| 旧 isotropic 直接FEM与后期 portable runner | 保留归档，不作新求解核心 | 前者物性谱系不同；后者缺关键依赖，且限于二维 |
-| 完整旧图、所有496项档案恢复 | 不作开发前提 | 上传内容仅部分完整，追齐无关图片不改善新模型 |
+| `data/geometry/hole_geometry_derived_AP_pnc.csv` and its original workbook | Reuse | The baseline supplies the 26-hole design. Accept the `position_nm` and `x_nm` column formats and convert to SI internally. |
+| Latest available cubic-Ge configuration, 15 harmonic records and 4 GHz field | Retain as reference evidence | The saved results can be checked. Three-dimensional behavior and power transmission require independent verification. |
+| Nominal stiffnesses C11/C12/C44 = 128.5/48.3/66.8 GPa and density 5323 kg/m³ | Reuse for fixed-property cases | Calibration to a specimen at 4 K or millikelvin temperatures remains unestablished. |
+| Historical mesh, tensor and residual verification | Reuse the verification concepts | The historical mesh represents a two-dimensional solid. |
+| `src/nanobeam_AP_pnc.py` | Retain as a legacy example | Its one-dimensional mass-spring chain illustrates dispersion. |
+| Earlier isotropic FEM and later portable runner | Preserve in the archive | The isotropic solver uses different material assumptions. The portable runner is two-dimensional and lacks essential dependencies. |
+| Historical figures and all 496 inventory entries | Keep historical recovery independent | The upload covers only part of the inventory. Recovery of unrelated figures does not improve the new model. |
 
-关键缺件仍包括原 `handoff.py`、便携版 `numerics.py`、`config.json`、材料/数值方法说明和最新带隙/腔模的完整验证表。历史清单223项未解决（222缺失、1依赖文件内容不同），详细名单继续使用现有 provenance 文件，不另建重复清单。新代码明确是新实现。
+The missing items include the original `handoff.py`, portable `numerics.py`, `config.json`, material and numerical-method notes, and the complete validation tables for the latest band-gap and cavity-mode results. The existing provenance files list the 223 unresolved entries, including 222 missing entries and one dependency with different bytes. The new 3D solver has independent provenance.
 
-初次Windows检查发现符号链接测试缺系统权限（WinError 1314），并非物理计算失败；修订为明确记录跳过，不把未测项报告成通过。
+The initial Windows run encountered insufficient permission to create a symbolic link (WinError 1314). The test now records an explicit skip. The symbolic-link check remains unverified on that machine.
 
-## 最小技术架构
+## Technical architecture
 
-采用 scikit-fem 组装三维矢量有限元，SciPy稀疏本征求解，Gmsh处理真实圆孔几何，meshio输出通用场文件。CPU先行，不引入GPU或云计算依赖。结构化四面体网格用于均匀梁小基准，二次位移单元为默认，内部明确米、帕、千克。
+Use scikit-fem to assemble 3D vector finite elements, SciPy for sparse eigenvalue problems, Gmsh for circular-hole geometry and meshio for portable field output. Begin on CPU. Use structured tetrahedral meshes for small homogeneous-beam benchmarks and quadratic displacement elements by default. Use metres, pascals and kilograms internally.
 
-| 模块 | 职责 |
+| Module | Responsibility |
 | --- | --- |
-| `src/phononic/geometry_AP_pnc.py` | 参数化直梁、原孔表、SI几何与可选Gmsh网格 |
-| `material_AP_pnc.py` | 立方晶体张量、实验室坐标旋转、物性来源 |
-| `elasticity_AP_pnc.py` | 三维一致质量/刚度、本征模式、数值残差 |
-| `lead_modes_AP_pnc.py` | 同一网格两端的Bloch约束、自由侧面的导波色散 |
-| `workflow_AP_pnc.py` / `simulate_AP_pnc.py` | 配置入口、结果身份、资源实测、表/图/可读报告 |
+| `src/phononic/geometry_AP_pnc.py` | Parameterized straight beams, the original hole table, SI geometry and optional Gmsh meshes |
+| `material_AP_pnc.py` | Cubic crystal tensor, crystal-to-lab rotation and material provenance |
+| `elasticity_AP_pnc.py` | Three-dimensional consistent mass and stiffness, eigenmodes and numerical residuals |
+| `lead_modes_AP_pnc.py` | Bloch constraints on the two ends of a single mesh and guided-wave dispersion with free sidewalls |
+| `port_modes_AP_pnc.py` | Semi-analytical finite-element (SAFE) section modes, signed power and all discrete propagating/evanescent roots |
+| `scattering_AP_pnc.py` | Matched outgoing traction maps, incident drives, sparse harmonic solves and modal/direct-flux power checks |
+| `workflow_AP_pnc.py` and `simulate_AP_pnc.py` | Configuration entry point, result identity, measured resources, tables, figures and reports |
 
-前端先做到一个命令/启动入口、无需改源码的参数配置、直观结果页。成熟后增加面向研究人员的参数界面，避免现在先搭建庞大平台。
+Begin with a single launch command, editable configuration and a readable result page. Add a researcher-facing parameter interface after the workflow is established.
 
-## 里程碑与验收
+## Milestones and acceptance checks
 
-1. **三维力学核心。** 均匀梁三个位移分量、真实厚度、自由表面和显式夹持。验证六个自由体刚体模、均匀应变能、一致质量、刚度/质量对称性、小模型独立dense/sparse一致性。记录实际求解残差。
-2. **直梁导波。** `u(x+L)=exp(ikL)u(x)`，刚度和质量均用同一变换。检查Gamma四个零模、正负波矢一致性、[100]自由侧面长波伸缩速度。有限体六个刚体模与周期梁四个零模不可混淆。请求有限数量分支只代表搜索范围，不能宣称找全通道或完整带隙。
-3. **网格与厚度。** 先一个厚度的三个系统网格，比较可识别模式及变化；再试100/200/1000nm。起始频率变化目标0.5%，未通过则明确保留未收敛状态。验证固定物性下不同温度标签不改变机械结果。
-4. **匹配端口与功率散射。** 求传播与倏逝通道、按能流归一化、建立入射/出射边界；无孔无损控制要求T接近1、R接近0，误差与独立细化变化初始小于0.01。通过后再计算有孔器件，不能用吸收层或位移比冒充功率透射。
-5. **研究扩展。** 26孔三维对照、厚度图谱、受支持物性温度变化、开放弯梁，最后环/损耗/热输运。允许无带隙或无改善结论。
+1. **Three-dimensional mechanics.** Assemble the homogeneous beam with three displacement components, physical thickness, free surfaces and explicit clamps. Verify six free-body rigid modes, uniform strain energy, consistent mass, stiffness and mass symmetry, and agreement between independent dense and sparse solutions on a small problem. Record the measured residuals.
+2. **Straight guided waves.** Apply `u(x+L)=exp(ikL)u(x)` using the same transformation for stiffness and mass. Check four zero modes at Γ, reciprocity between positive and negative wavenumbers, and the long-wavelength [100] extensional speed for free sidewalls. A finite free body has six rigid modes and a periodic straight cell has four at Γ. Report the number of sampled branches. Channel completeness and a complete gap require separate checks.
+3. **Mesh and thickness.** Start with three systematically refined meshes at one thickness. Compare identified modes and changes before extending to 100, 200 and 1000 nm. Use an initial 0.5% frequency-change threshold and record any unconverged case. Verify the fixed-property null effect across temperature labels.
+4. **Matched ports and power scattering.** Solve propagating and evanescent channels, normalize by energy flux, and assemble incident and outgoing boundary conditions. The homogeneous lossless control must give T near 1 and R near 0. Use an initial 0.01 threshold for error and changes under independent refinement. Establish this benchmark before running perforated devices. Report power directly from flux.
+5. **Research extensions.** Study the 26-hole 3D control, thickness dependence, supported temperature-dependent properties, open bends, and eventually rings, loss and thermal transport. Absence of a gap or improvement is a valid result.
 
-本轮先实现和验证前两项，再由实测决定下一次计算。一个里程碑集成后做有针对性的审阅，不反复审阅已验证且未变化的代码。
+Use measured outcomes to select the next calculation. Review each integrated milestone and focus later checks on changes that affect the verified result.
 
-## 资源与数据
+The first mechanics and guided-wave milestone is merged. The matched-port implementation now passes the bounded 1 GHz, 600 × 200 nm uniform-guide benchmark for lengths of 1 and 1.5 µm. Its phase reference is a refined SAFE discretization, not an exact continuum solution. The initial coarse-mesh phase failures, subsequent refinements and final acceptance are retained in `verification/straight_scattering_*_AP_pnc.json`. Read the current handoff for measured results and limits before extending this benchmark.
 
-初次实测机器约15.31 GiB物理内存、8物理/16逻辑CPU，空闲内存约3.46 GiB，磁盘剩余约130 GiB；这些是当时读数，会变化。小型测试先低于约5000–10000自由度，较大计算由主线程顺序运行。默认上限30000自由度只是启动保护，不是已验证可承受的算例规模。保存每次运行时间、进程峰值内存和输出体积，测量后再调整。
+## Resources and data
 
-主结果保留配置、源码摘要、频率/模式表、必要的场与图。不同输入/源码得到不同运行身份，已完成相同结果可以复用，未完成结果保留状态；不保存每个扫描点的巨大全场。环境与生成结果使用现有gitignore。旧档案规模不大且有来源价值，暂不物理删除；通过Git版本与入口整理减少混乱，不为省小量空间丢失唯一证据。
+The initial machine measurements were about 15.31 GiB of physical RAM, 8 physical CPU cores and 16 logical processors, about 3.46 GiB of available RAM and about 130 GiB of free disk space. These values reflect the machine at the time of measurement. Begin with small tests of approximately 5000–10000 degrees of freedom or fewer. Run larger cases serially in the main workflow. The default 30000-degree-of-freedom limit bounds launch size. Safe capacity at that size still requires measurement. Record elapsed time, peak process memory and output size, then adjust based on the measurements.
 
-## 参考与组内需求边界
+Keep resolved configurations, source fingerprints, frequency and mode tables, selected fields and figures with the results. Assign separate run identities when inputs or sources change. Reuse verified complete runs and retain the status of unfinished attempts. Save selected fields to control output size during a sweep. Use the existing Git ignore rules for generated results and the local environment. Preserve the compact historical archive and its provenance, and organize access through versioned files and clear entry points.
 
-- [QTCAD 官方工作流](https://docs.nanoacademic.com/qtcad/getting_started/workflow/)：借鉴几何/网格区域、材料、边界、求解器与结果分离。[应变教程](https://docs.nanoacademic.com/qtcad/tutorials/device/holes_strain/)中的应变是给定输入用于电子结构，公开文档未提供本项目所需的弹性声子晶体求解器。
-- [scikit-fem 三维振动示例](https://scikit-fem.readthedocs.io/en/stable/listofexamples.html#example-21-structural-vibration)、[SciPy eigsh](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.eigsh.html)、[Gmsh 周期网格](https://gmsh.info/doc/texinfo/gmsh.html#t18_003a-Periodic-meshes)。
-- [Dongming Mei 的USD主页](https://www.usd.edu/research-and-faculty/faculty-and-staff/dongming-mei)及[锗非热声子探测器预印本](https://arxiv.org/abs/2610.29973)支持低温锗/稀有事件探测的研究背景，但公开材料没有给出本软件具体纳米梁验收指标。当前以仓库研究目标为可执行基线，不捏造组内需求。
-- [G4CMP原始论文](https://arxiv.org/abs/2302.05998)是未来非热声子输运的相邻技术参考。连续弹性波模式与探测器载流子/非热声子输运保留清楚边界，首轮不混入额外物理。
+## References and research scope
+
+- QTCAD provides a reference for organizing geometry, mesh regions, materials, boundaries, solvers and results. Its strain tutorial uses prescribed strain as an electronic-structure input. The public documentation does not provide the elastic phononic-crystal solver needed here. [QTCAD workflow](https://docs.nanoacademic.com/qtcad/getting_started/workflow/), [strain tutorial](https://docs.nanoacademic.com/qtcad/tutorials/device/holes_strain/)
+- The numerical implementation uses established examples and solver documentation. [scikit-fem 3D structural vibration](https://scikit-fem.readthedocs.io/en/stable/listofexamples.html#example-21-structural-vibration), [SciPy eigsh](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.eigsh.html), [Gmsh periodic meshes](https://gmsh.info/doc/texinfo/gmsh.html#t18_003a-Periodic-meshes)
+- The public material establishes context for cryogenic germanium and rare-event detection. The simulator's nanobeam acceptance checks come from the research goals documented in this repository. [Dongming Mei's University of South Dakota profile](https://www.usd.edu/research-and-faculty/faculty-and-staff/dongming-mei), [germanium athermal-phonon detector preprint](https://arxiv.org/abs/2610.29973)
+- G4CMP is a reference for potential future athermal-phonon transport work. The current scope is continuum elastic-wave modes. Detector carrier and athermal-phonon transport require separate models. [G4CMP paper](https://arxiv.org/abs/2302.05998)

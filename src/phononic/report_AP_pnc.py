@@ -1,4 +1,4 @@
-"""Offline report for computed 3D beam mode shapes.
+"""Offline report for 3D elastic modes and scattering responses.
 
 Author: Athul Prem | _AP_pnc
 """
@@ -15,26 +15,41 @@ from skfem import MeshTet
 
 
 _FIELD_LABELS = {
-    "mode_order": "频率序号",
-    "frequency_hz": "频率 (Hz)",
-    "frequency_GHz": "频率 (GHz)",
-    "k_rad_m": "波数 (rad/m)",
+    "mode_order": "Mode order",
+    "frequency_hz": "Frequency (Hz)",
+    "frequency_GHz": "Frequency (GHz)",
+    "k_rad_m": "Wavenumber (rad/m)",
     "kL_over_pi": "kL/π",
-    "relative_residual": "相对残差",
-    "rigid_mode": "刚体模态",
-    "kinetic_fraction_x": "x 向动能占比",
-    "kinetic_fraction_y": "y 向动能占比",
-    "kinetic_fraction_z": "z 向动能占比",
+    "relative_residual": "Relative residual",
+    "rigid_mode": "Rigid-body mode",
+    "kinetic_fraction_x": "Kinetic energy fraction (x)",
+    "kinetic_fraction_y": "Kinetic energy fraction (y)",
+    "kinetic_fraction_z": "Kinetic energy fraction (z)",
+    "incident_mode_order": "Incident channel",
+    "transmission": "Transmission (T)",
+    "reflection": "Reflection (R)",
+    "power_balance": "Power imbalance (1 − R − T)",
+    "transmission_flux": "Transmission from port flux",
+    "reflection_flux": "Reflection from port flux",
+    "flux_power_balance": "Power imbalance from port flux",
 }
 
 _VALUE_LABELS = {
-    "clamped_free": "一端固定、一端自由 (clamped-free)",
-    "free_free": "两端自由 (free-free)",
-    "bloch_periodic": "Bloch 周期边界",
-    "fixed_property_control": "固定材料参数对照",
-    "nominal fixed-property control; no temperature calibration": "名义材料参数固定，温度效应待标定",
-    "completed_unverified": "已计算，待验证",
-    "verified_within_model": "已通过模型内验证",
+    "clamped_free": "Clamped at one end",
+    "clamped_clamped": "Clamped at both ends",
+    "free": "Free at both ends",
+    "free_free": "Free at both ends",
+    "periodic_x": "Bloch periodicity along x",
+    "bloch_periodic": "Bloch periodicity along x",
+    "matched_ports": "Matched waveguide ports at both ends",
+    "left": "Left end",
+    "right": "Right end",
+    "fixed_property_control": "Fixed-property control",
+    "nominal fixed-property control; no temperature calibration": "Nominal fixed properties, no temperature calibration",
+    "completed_unverified": "Computed, verification pending",
+    "verified_within_model": "Verified within the model",
+    "failed": "Failed",
+    "interrupted": "Interrupted",
 }
 
 
@@ -44,18 +59,18 @@ def _display(value: object) -> str:
     if isinstance(value, (float, np.floating)):
         return escape(f"{value:.8g}")
     if isinstance(value, (bool, np.bool_)):
-        return "是" if value else "否"
+        return "Yes" if value else "No"
     return escape(_VALUE_LABELS.get(str(value), str(value)))
 
 
 def _result_table(rows: list[dict]) -> str:
     if not rows:
-        return "<p>无结果行。</p>"
+        return "<p>No results to display.</p>"
     columns = list(dict.fromkeys(column for row in rows for column in row))
     headers = "".join(f'<th scope="col">{escape(_FIELD_LABELS.get(key, key))}</th>' for key in columns)
     body = "".join("<tr>" + "".join(f"<td>{_display(row.get(key))}</td>" for key in columns) + "</tr>"
                    for row in rows)
-    return ('<div class="table-scroll" tabindex="0" aria-label="可滚动的频率结果表">'
+    return ('<div class="table-scroll" tabindex="0" aria-label="Scrollable results table">'
             f'<table><thead><tr>{headers}</tr></thead><tbody>{body}</tbody></table></div>')
 
 
@@ -69,8 +84,10 @@ def write_report(
 ) -> Path:
     """Write one self-contained report into an existing or new output directory.
 
-    Mode rows in the shape viewer follow the frequencies and vertex-mode array
-    order. The frequency table is independent and may contain other k samples.
+    The viewer follows the frequency and vertex displacement array order. For
+    scattering, each field is the harmonic response to one unit-power incident
+    channel at the same drive frequency. The table may contain other k samples
+    when viewing a Bloch report.
     """
     frequencies = np.asarray(frequencies_hz, dtype=float)
     modes = np.asarray(vertex_modes)
@@ -78,7 +95,7 @@ def write_report(
     if frequencies.ndim != 1 or len(frequencies) == 0 or not np.all(np.isfinite(frequencies)):
         raise ValueError("report requires a nonempty vector of finite frequencies")
     if modes.shape != (len(frequencies), len(points), 3) or not np.all(np.isfinite(modes)):
-        raise ValueError("vertex_modes must contain finite xyz displacements for each mode and vertex")
+        raise ValueError("vertex_modes must contain finite xyz displacements for each field and vertex")
     if not len(points) or not np.all(np.isfinite(points)):
         raise ValueError("report requires nonempty finite mesh coordinates")
 
@@ -90,8 +107,8 @@ def write_report(
     edges = np.concatenate([faces[:, [0, 1]], faces[:, [1, 2]], faces[:, [2, 0]]])
     edges = np.unique(np.sort(edges, axis=1), axis=0)
     surface_modes = modes[:, surface_vertices]
-    # Remove the units of each mass-normalized mode while retaining the
-    # relative displacement and phase at every displayed vertex.
+    # Rescale each field for viewing while preserving relative displacement and
+    # phase across its vertices.
     amplitudes = np.max(np.linalg.norm(surface_modes, axis=2), axis=1)
     amplitudes[amplitudes == 0] = 1.0
     relative_modes = surface_modes / amplitudes[:, None, None]
@@ -101,50 +118,100 @@ def write_report(
     if span <= 0 or not np.isfinite(span):
         raise ValueError("report requires a nondegenerate mesh extent")
 
-    bloch = summary["analysis_kind"] == "bloch"
-    complex_modes = bloch and np.iscomplexobj(relative_modes)
+    analysis_kind = summary["analysis_kind"]
+    bloch = analysis_kind == "bloch"
+    scattering = analysis_kind == "scattering"
+    complex_fields = (bloch or scattering) and np.iscomplexobj(relative_modes)
     viewer_data = {
         "points": np.round((surface_points - (low + high) / 2) / span, 9).tolist(),
         "edges": edges.tolist(),
         "real": np.round(relative_modes.real, 7).tolist(),
-        "imag": np.round(relative_modes.imag, 7).tolist() if complex_modes else None,
+        "imag": np.round(relative_modes.imag, 7).tolist() if complex_fields else None,
     }
     # Script-safe JSON even if a future version includes text in the payload.
     payload = json.dumps(viewer_data, ensure_ascii=True, allow_nan=False, separators=(",", ":"))
     payload = payload.replace("&", "\\u0026").replace("<", "\\u003c").replace(">", "\\u003e")
-    options = "".join(f'<option value="{index}">模态 {index + 1} · {frequency / 1e9:.7g} GHz</option>'
+    options = "".join(f'<option value="{index}">Mode {index + 1} · {frequency / 1e9:.7g} GHz</option>'
                       for index, frequency in enumerate(frequencies))
+    scope = "3D elastic finite-element results. Transmission and reflection require a separate scattering calculation."
+    figure_id = "mode_shapes"
+    shape_title = "Mode shape"
+    selection_label = "Mode"
+    table_title = "Frequencies"
+    amplitude_note = "The viewer scales mass-normalized eigenvectors to show relative displacement."
 
     geometry = summary.get("geometry_nm", {})
     dimension = " × ".join(_display(geometry.get(axis)) for axis in ("length_nm", "width_nm", "thickness_nm"))
     statistics = {
-        "长 × 宽 × 厚 (nm)": dimension,
-        "边界条件": _display(summary.get("boundary")),
-        "自由度": _display(summary.get("ndof")),
-        "耗时 (s)": _display(summary.get("elapsed_seconds")),
-        "进程峰值内存 (MiB)": _display(summary.get("peak_process_memory_mib")),
-        "材料状态": _display(summary.get("material_status")),
-        "计算状态": _display(summary.get("status")),
+        "Length × width × thickness (nm)": dimension,
+        "Boundary conditions": _display(summary.get("boundary")),
+        "Degrees of freedom": _display(summary.get("ndof")),
+        "Elapsed time (s)": _display(summary.get("elapsed_seconds")),
+        "Peak process memory (MiB)": _display(summary.get("peak_process_memory_mib")),
+        "Material model": _display(summary.get("material_status")),
+        "Run status": _display(summary.get("status")),
     }
+    if scattering:
+        incident_indices = summary["incident_mode_indices"]
+        if len(incident_indices) != len(frequencies):
+            raise ValueError("incident_mode_indices must identify every scattering field")
+        options = "".join(
+            f'<option value="{index}">Channel {index + 1} · Port mode index {_display(mode_id)}</option>'
+            for index, mode_id in enumerate(incident_indices)
+        )
+        title = "Straight-beam scattering with matched ports"
+        scope = "3D lossless elasticity with fixed material properties. Temperature effects and physical dissipation remain uncalibrated."
+        figure_id = "scattering_response"
+        shape_title = "Steady-state response"
+        selection_label = "Incident channel"
+        table_title = "Transmission, reflection, and power balance"
+        sample_note = ("Each incident channel uses a mathematical normalization of 1 W. "
+                       "Port mode indices start at 0.")
+        amplitude_note = ("The viewer scales each response separately to show relative displacement. "
+                          "The physical drive and displacement amplitude depend on the device and excitation.")
+        table_note = ("T and R give transmitted and reflected power as fractions of incident power. "
+                      "Port flux uses displacement and force at the end faces as an independent check. "
+                      "Power imbalance should approach zero for this lossless model.")
+        frequency_ghz = summary.get("frequency_hz", frequencies[0]) / 1e9
+        condition = summary.get("port_basis_condition")
+        statistics.update({
+            "Drive frequency (GHz)": _display(frequency_ghz),
+            "Incident side": _display(summary.get("incident_side")),
+            "Incident channels": _display(summary.get("num_incident_channels")),
+            "Maximum absolute power imbalance": _display(summary.get("max_power_imbalance")),
+            "Maximum reflection": _display(summary.get("maximum_reflection")),
+            "Matched-guide power check passed": _display(summary.get("matched_reference_passed")),
+            "Port basis condition numbers (left / right)": (
+                " / ".join(_display(value) for value in condition) if condition is not None else "—"
+            ),
+        })
+        if summary.get("matched_reference_passed"):
+            scope += " This case passed the matched-guide power check. Phase accuracy and mesh convergence require separate verification."
+        else:
+            scope += " This case has yet to pass the matched-guide power check."
+    elif bloch:
+        title = "Straight-beam Bloch modes"
+        k = summary.get("field_k_rad_m")
+        sample_note = (f"The viewer shows Bloch modes at k = {_display(k)} rad/m."
+                       if k is not None else "The viewer shows Bloch modes at one sampled wavenumber.")
+        table_note = ("The table includes all computed wavenumbers. Each wavenumber has its own frequency order. "
+                      "Tracking mode identity across wavenumbers requires a separate analysis.")
+    else:
+        title = "Finite straight-beam eigenmodes"
+        sample_note = "The modes reflect the specified end boundary conditions."
+        table_note = ""
+    if complex_fields:
+        sample_note += " The phase slider displays Re(u e⁻ⁱᵠ), starting at φ = 0°."
     statistics_html = "".join(f"<div><dt>{label}</dt><dd>{value}</dd></div>"
                               for label, value in statistics.items())
-    if bloch:
-        title = "直梁 Bloch 模态"
-        k = summary.get("field_k_rad_m")
-        sample_note = (f"显示波数 k = {_display(k)} rad/m 的 Bloch 模态形状。"
-                       if k is not None else "显示一个 Bloch 波数样本的模态形状。")
-        if complex_modes:
-            sample_note += " 相位滑块显示 Re(u e⁻ⁱᵠ)，初始相位 φ = 0°。"
-        table_note = "表中列出所有已计算波数。每个波数内独立按频率排序，跨波数的模态身份尚未追踪。"
-    else:
-        title = "有限直梁本征模态"
-        sample_note = "显示给定端部边界条件下的有限梁本征模态。"
-        table_note = ""
-    phase_control = ('<label>相位 <output id="phase-value">0°</output>'
+    phase_control = ('<label>Phase <output id="phase-value">0°</output>'
                      '<input id="phase" type="range" min="0" max="360" value="0" step="5"></label>'
-                     if complex_modes else "")
+                     if complex_fields else "")
     html = _PAGE.substitute(title=title, statistics=statistics_html, sample_note=sample_note,
                             phase_control=phase_control, options=options, payload=payload,
+                            scope=scope, figure_id=figure_id, shape_title=shape_title,
+                            selection_label=selection_label, amplitude_note=amplitude_note,
+                            table_title=table_title,
                             table_note=f'<p class="note">{table_note}</p>' if table_note else "",
                             table=_result_table(rows))
     output = Path(output)
@@ -157,7 +224,7 @@ def write_report(
 
 
 _PAGE = Template(r"""<!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -208,31 +275,31 @@ _PAGE = Template(r"""<!DOCTYPE html>
 <body>
 <main>
   <header>
-    <p class="author">Athul Prem | athul_simulation_pnc_mode_shapes</p>
+    <p class="author">Athul Prem | athul_simulation_pnc_$figure_id</p>
     <h1>$title</h1>
-    <p class="scope">三维弹性有限元结果。透射率与反射率 (T/R) 尚未校准。</p>
+    <p class="scope">$scope</p>
   </header>
-  <section class="card" aria-label="计算参数">
+  <section class="card" aria-label="Simulation parameters">
     <dl class="stats">$statistics</dl>
   </section>
   <section class="card" aria-labelledby="shape-title">
-    <h2 id="shape-title">模态形状</h2>
+    <h2 id="shape-title">$shape_title</h2>
     <div class="controls">
-      <label>选择模态 <select id="mode">$options</select></label>
-      <label>视角 <select id="view"><option value="iso">三维</option><option value="top">俯视 x–y</option>
-        <option value="side">侧视 x–z</option><option value="end">端视 y–z</option>
-        <option value="custom" disabled>手动旋转</option></select></label>
-      <label>显示放大 <output id="scale-value">1.0×</output>
+      <label>$selection_label <select id="mode">$options</select></label>
+      <label>View <select id="view"><option value="iso">3D</option><option value="top">Top (x–y)</option>
+        <option value="side">Side (x–z)</option><option value="end">End (y–z)</option>
+        <option value="custom" disabled>Manual rotation</option></select></label>
+      <label>Display scale <output id="scale-value">1.0×</output>
         <input id="scale" type="range" min="0" max="3" value="1" step="0.1"></label>
       $phase_control
     </div>
-    <canvas id="beam" tabindex="0" aria-label="三维表面线框图。拖动或使用方向键旋转。">三维表面线框图。</canvas>
-    <div class="legend"><span class="base">原几何</span><span class="shape">相对形状</span></div>
-    <p class="note">$sample_note 拖动或按方向键旋转。位移来自质量归一化本征向量，按相对形状放大显示，实际受驱位移幅值未知。</p>
-    <noscript><p>模态图需要启用 JavaScript。频率表可直接阅读。</p></noscript>
+    <canvas id="beam" tabindex="0" aria-label="3D surface wireframe. Drag or use the arrow keys to rotate.">3D surface wireframe.</canvas>
+    <div class="legend"><span class="base">Undeformed geometry</span><span class="shape">Relative displacement</span></div>
+    <p class="note">$sample_note Drag or use the arrow keys to rotate. $amplitude_note</p>
+    <noscript><p>Enable JavaScript to use the interactive view. The results table is available without it.</p></noscript>
   </section>
   <section class="card" aria-labelledby="table-title">
-    <h2 id="table-title">频率结果</h2>
+    <h2 id="table-title">$table_title</h2>
     $table_note
     $table
   </section>
