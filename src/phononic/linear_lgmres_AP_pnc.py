@@ -10,12 +10,14 @@ from scipy.sparse import issparse
 from scipy.sparse.linalg import LinearOperator, lgmres, spilu
 
 
-def solve_ilu_lgmres(A, rhs: np.ndarray, report: dict | None = None, *, fill_factor: float = 10.0) -> np.ndarray:
+def solve_ilu_lgmres(A, rhs: np.ndarray, report: dict | None = None, *, fill_factor: float = 10.0,
+                    single_precision: bool = False) -> np.ndarray:
     """Solve original complex CSC equations with one shared incomplete LU factor.
 
     Each right-hand side starts its own LGMRES augmentation. The report records
     the original-operator residual at every outer callback and at the returned
-    solution, including the last attempted channel on failure.
+    solution, including the last attempted channel on failure. Single precision
+    applies only to the ILU factorization and its inverse applications.
     """
     if not issparse(A) or A.format != "csc" or A.shape[0] != A.shape[1] or not A.shape[0] or A.dtype.kind != "c":
         raise ValueError("ILU-LGMRES requires a nonempty square complex CSC matrix.")
@@ -27,12 +29,22 @@ def solve_ilu_lgmres(A, rhs: np.ndarray, report: dict | None = None, *, fill_fac
     if (not isinstance(fill_factor, Real) or isinstance(fill_factor, (bool, np.bool_))
             or fill_factor < 1 or not isfinite(fill_factor)):
         raise ValueError("ILU-LGMRES fill_factor must be a finite real number greater than or equal to one.")
+    if not isinstance(single_precision, (bool, np.bool_)):
+        raise ValueError("ILU-LGMRES single_precision must be a boolean.")
+    if single_precision and A.dtype != np.dtype(np.complex128):
+        raise ValueError("Single-precision ILU requires a complex128 working operator.")
+    if single_precision and not np.can_cast(rhs.dtype, A.dtype, casting="safe"):
+        raise ValueError("Single-precision ILU requires right-hand sides representable as complex128.")
+    if single_precision:
+        rhs = rhs.astype(A.dtype, copy=False)
 
     ilu_settings = {"drop_tol": 1e-4, "fill_factor": float(fill_factor), "permc_spec": "COLAMD"}
     lgmres_settings = {"rtol": 1e-10, "atol": 0, "inner_m": 50, "outer_k": 3, "maxiter": 30}
     limit = 1e-9
     diagnostics = report if report is not None else {}
-    diagnostics.update(method="ilu_lgmres", preconditioner=ilu_settings.copy(), lgmres=lgmres_settings.copy(),
+    factor_dtype = np.dtype(np.complex64) if single_precision else A.dtype
+    diagnostics.update(method="ilu_lgmres", working_dtype=str(A.dtype), factor_dtype=str(factor_dtype),
+                       preconditioner=ilu_settings.copy(), lgmres=lgmres_settings.copy(),
                        relative_residual_limit=limit, backward_residual_limit=limit,
                        operator_nonzeros=int(A.nnz),
                        operator_storage_bytes=sum(array.nbytes for array in (A.data, A.indices, A.indptr)),
@@ -44,11 +56,25 @@ def solve_ilu_lgmres(A, rhs: np.ndarray, report: dict | None = None, *, fill_fac
     operator_norm = float(np.asarray(abs(A).sum(axis=1)).max())
     started = perf_counter()
     try:
-        factor = spilu(A, **ilu_settings)
+        if single_precision:
+            with np.errstate(over="ignore"):
+                factor_input = A.astype(factor_dtype)
+            if not np.isfinite(factor_input.data).all():
+                raise ValueError("The operator cannot be represented as a finite complex64 preconditioner input.")
+            factor = spilu(factor_input, **ilu_settings)
+            del factor_input
+        else:
+            factor = spilu(A, **ilu_settings)
     finally:
         diagnostics["preconditioner"]["elapsed_seconds"] = perf_counter() - started
     diagnostics["preconditioner"]["factor_nonzeros"] = int(factor.nnz)
-    preconditioner = LinearOperator(A.shape, matvec=factor.solve, dtype=A.dtype)
+    if single_precision:
+        def apply_factor(vector):
+            return factor.solve(vector.astype(factor_dtype)).astype(A.dtype)
+
+        preconditioner = LinearOperator(A.shape, matvec=apply_factor, dtype=A.dtype)
+    else:
+        preconditioner = LinearOperator(A.shape, matvec=factor.solve, dtype=A.dtype)
 
     solution = np.empty(rhs.shape, dtype=A.dtype)
     for column, b in enumerate(rhs.T):
