@@ -21,6 +21,8 @@ test_geometric_and_density_scaling_with_two_clamps (test_elasticity3d_AP_pnc.Ela
 test_quadratic_displacement_integrates_degree_four_mass (test_elasticity3d_AP_pnc.ElasticityTests.test_quadratic_displacement_integrates_degree_four_mass) ... ok
 test_resource_cap_and_disconnected_mesh_fail_before_assembly (test_elasticity3d_AP_pnc.ElasticityTests.test_resource_cap_and_disconnected_mesh_fail_before_assembly) ... ok
 test_sparse_clamped_modes_match_dense_mass_whitening (test_elasticity3d_AP_pnc.ElasticityTests.test_sparse_clamped_modes_match_dense_mass_whitening) ... ok
+test_historical_bridge_and_independent_axis_qualification (test_full_device_port_resolution_AP_pnc.FullDevicePortResolutionEvidenceTests.test_historical_bridge_and_independent_axis_qualification) ... ok
+test_saved_channels_and_phase_indicators_reproduce_from_fields (test_full_device_port_resolution_AP_pnc.FullDevicePortResolutionEvidenceTests.test_saved_channels_and_phase_indicators_reproduce_from_fields) ... ok
 test_historical_csv_and_example (test_geometry3d_AP_pnc.Geometry3DTests.test_historical_csv_and_example) ... ok
 test_reject_nonphysical_mesh_inputs (test_geometry3d_AP_pnc.Geometry3DTests.test_reject_nonphysical_mesh_inputs) ... ok
 test_straight_beam_si_volume_and_end_ports (test_geometry3d_AP_pnc.Geometry3DTests.test_straight_beam_si_volume_and_end_ports) ... ok
@@ -83,7 +85,7 @@ test_failed_attempt_is_retained_and_bad_material_creates_no_output (test_workflo
 3D solid: 352 tetrahedra, 435 displacement DOFs
 test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks (test_workflow3d_AP_pnc.Workflow3D.test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks) ... ok
 test_historical_hole_pattern_uses_source_origin_and_exact_provenance (test_workflow3d_AP_pnc.Workflow3D.test_historical_hole_pattern_uses_source_origin_and_exact_provenance) ... ok
-Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{36ecfd32-2a87-4704-b41f-a7199f8cb47d}\Temp\tmp_0k_zekg\two_hole_pilot_200nm-08ef0238491c
+Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{dc70156f-a5a7-41ed-8ef9-996777c2ef9a}\Temp\tmp761hg2hn\two_hole_pilot_200nm-c138dfaee5bd
 Max relative solve residual: 0
 Power balance check: True; max R=0
 Matched-guide power check: True
@@ -95,6 +97,6 @@ test_output_can_be_reconstructed_and_cache_checks_files (test_workflow3d_AP_pnc.
 test_scattering_exports_power_channels_and_reconstructible_responses (test_workflow3d_AP_pnc.Workflow3D.test_scattering_exports_power_channels_and_reconstructible_responses) ... ok
 
 ----------------------------------------------------------------------
-Ran 79 tests in 22.335s
+Ran 81 tests in 18.747s
 
 OK (skipped=1)
