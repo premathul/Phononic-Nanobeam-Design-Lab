@@ -13,16 +13,19 @@ jobs:
       OPENBLAS_NUM_THREADS: '1'
       OMP_NUM_THREADS: '1'
       MKL_NUM_THREADS: '1'
+      QT_QPA_PLATFORM: offscreen
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
           cache: pip
-          cache-dependency-path: requirements_3d_AP_pnc.txt
-      - name: Install numerical environment
-        run: python -m pip install -r requirements_3d_AP_pnc.txt
-      - name: Scientific and workflow tests
+          cache-dependency-path: |
+            requirements_3d_AP_pnc.txt
+            requirements_ui_AP_pnc.txt
+      - name: Install numerical and desktop test environment
+        run: python -m pip install -r requirements_ui_AP_pnc.txt
+      - name: Scientific, workflow and offscreen desktop tests
         run: python -B -m unittest discover -s tests -p 'test*_AP_pnc.py' -v
       - name: Three-mesh convergence and fixed-property temperature control
         run: python -B tools/validate_3d_AP_pnc.py

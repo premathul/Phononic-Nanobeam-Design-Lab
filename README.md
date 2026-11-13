@@ -16,6 +16,17 @@ python -m venv .venv
 
 Once the environment is set up, you can double-click `Launch_AP_pnc.cmd`. The default case is a homogeneous 3D cantilever benchmark measuring 2000 nm long, 1000 nm wide and 200 nm thick. Its left end is clamped and the other surfaces are traction free.
 
+For the optional English desktop workbench, install its separate interface dependencies and launch it:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements_ui_AP_pnc.txt
+.\.venv\Scripts\python.exe workbench_AP_pnc.py
+```
+
+On Windows, `Launch_Workbench_AP_pnc.cmd` opens the same interface. Choose a preset or load a JSON configuration, edit the displayed parameters, then use **Check mesh** or **Run**. The interface uses the existing solver and its saved meshes/results. Material properties, crystal orientation and hole placement retain the loaded configuration's provenance. Hole coordinates do not scale or recenter when beam dimensions change. **Open report** becomes available after a completed solve. The core command-line workflow does not require the Qt interface dependencies.
+
+The workbench runs one background job at a time. **Stop** ends its process tree and preserves submitted inputs, logs and any partial scientific output. A mesh-ready message means only that meshing completed; a computed result remains unverified until the relevant convergence checks are established. The initial interface edits the main numerical inputs and retains the loaded analysis and boundary selection; broader material and geometry editors are future work. Windows offscreen interaction tests and a readable preview were checked. Native interaction on other operating systems has not been tested.
+
 Edit [straight_beam_AP_pnc.json](configs/straight_beam_AP_pnc.json) to configure a run, or use the following command-line options.
 
 ```powershell
@@ -60,7 +71,7 @@ For holes, `geometry.pattern.csv` is relative to the repository root and `x_offs
 
 ## Verification and capabilities
 
-The current Windows/Python 3.12 suite ran 49 tests: 48 passed and one was skipped because the process lacked permission to create a symbolic link. The checks cover tensor rotation, uniform strain, consistent mass, rigid-body subspaces, independent dense and sparse solutions, Bloch phase and the long-wavelength rod limit. Port checks cover trace mapping, directional energy flux, the dispersion-derivative identity, exact symmetry degeneracy, an independent 3D Bloch comparison, and explicit rejection of unresolved cutoffs. Scattering checks exercise both incidence directions, independent boundary flux, and reconstruction from exported fields. Geometry/workflow checks cover identical Gmsh end traces, analytic polygon volumes, independent curvature refinement, CSV provenance, cache invalidation, preflight budgets and exact tagged-mesh reuse.
+The current Windows/Python 3.12 suite ran 55 tests: 54 passed and one was skipped because the process lacked permission to create a symbolic link. The checks cover tensor rotation, uniform strain, consistent mass, rigid-body subspaces, independent dense and sparse solutions, Bloch phase and the long-wavelength rod limit. Port checks cover trace mapping, directional energy flux, the dispersion-derivative identity, exact symmetry degeneracy, an independent 3D Bloch comparison, and explicit rejection of unresolved cutoffs. Scattering checks exercise both incidence directions, independent boundary flux, and reconstruction from exported fields. Geometry/workflow checks cover identical Gmsh end traces, analytic polygon volumes, independent curvature refinement, CSV provenance, cache invalidation, preflight budgets and exact tagged-mesh reuse.
 
 The [three-mesh convergence record](verification/straight_beam_validation_AP_pnc.json) covers the first four cantilever modes of the default geometry with 1755, 5187 and 11475 degrees of freedom. The maximum frequency change between the two finest meshes was about 0.468%, and the minimum mass-weighted mode overlap was about 0.999992. Independent fixed-property assemblies and solves labeled 20 mK and 4 K yielded identical matrices and frequencies. Convergence for other geometries, thicknesses and frequency bands requires its own checks.
 

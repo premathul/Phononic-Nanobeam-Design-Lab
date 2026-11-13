@@ -8,6 +8,8 @@ Read README.md, docs/AI_HANDOFF_AP_pnc.md, docs/IMPLEMENTATION_PLAN_AP_pnc.md an
 
 The active solver is `simulate_AP_pnc.py` and `src/phononic/`. Root `run_AP_pnc.py` remains a legacy readiness checker. Never confuse the two. Finite-body modes, Bloch dispersion and power-normalized uniform/perforated scattering are implemented. Two-hole power checks and a bounded 1 GHz complex-response mesh-pair check pass. The full 26-hole h200/h160 comparison failed both power and complex-response mesh criteria; port convergence remains unresolved. Reuse saved evidence before further solves, and keep those limits explicit before extending spectral or resonance claims.
 
+The optional English Qt interface is `workbench_AP_pnc.py` (`Launch_Workbench_AP_pnc.cmd` on Windows); its headless worker calls the same solver and mesh-preflight APIs. UI dependencies are separate in `requirements_ui_AP_pnc.txt`. Keep mesh readiness, successful computation and scientific convergence distinct in the interface.
+
 ## Project language
 
 Use English for all project artifacts, including code comments, user-interface text, generated reports and other output text, documentation, and GitHub communications. Standard scientific Unicode symbols and notation are welcome. Chinese may be used in direct conversation and progress updates to the user.

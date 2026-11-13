@@ -1,0 +1,4 @@
+# Optional desktop interface. Author: Athul Prem | _AP_pnc
+-r requirements_3d_AP_pnc.txt
+PySide6-Essentials==6.12.0
+shiboken6==6.12.0
