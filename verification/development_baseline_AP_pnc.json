@@ -1,0 +1,149 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "source_commit": "3aa7e12c0d033bc3494dbc8295ee2564c5743885",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "logical_cpus": 16,
+  "physical_cpus": 8,
+  "ram_total_gib": 15.311389923095703,
+  "ram_available_gib": 3.8286285400390625,
+  "disk_free_gib": 130.39004516601562,
+  "tracked_file_count": 244,
+  "tracked_bytes": 31899578,
+  "initial_failure": {
+    "command": "verify_AP_pnc.py --fields --safety",
+    "test": "test_symlink_source_and_parent_are_rejected",
+    "error": "WinError 1314: Windows account cannot create symbolic links",
+    "resolution": "Explicit skip for this unavailable platform capability; recorded as skipped, not passed"
+  },
+  "checks": [
+    {
+      "command": "python tools/audit_repository_AP_pnc.py",
+      "exit_code": 0,
+      "result": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "uploaded_files_checked": 199,
+        "uploaded_bytes_preserved": true,
+        "archive_manifest_entries": 496,
+        "available_expected_entries": 273,
+        "exact_hash_aliases": 84,
+        "unresolved_expected_entries": 223,
+        "archive_complete": false,
+        "critical_missing_runner_inputs": [
+          "handoff.py",
+          "results/4K/portable_template/numerics.py",
+          "results/4K/portable_template/config.json",
+          "results/4K/portable_template/MATERIAL_PROVENANCE.md",
+          "results/4K/portable_template/NUMERICAL_METHODS.md",
+          "results/4K/portable_template/finalize.py",
+          "results/4K/portable_template/verify_eigen_scaling.py",
+          "results/4K/portable_template/check_legacy_bloch.py"
+        ],
+        "integrity_errors": [],
+        "simulation_rerun": false,
+        "status": "PASS_UPLOAD_INTEGRITY"
+      },
+      "stderr": ""
+    },
+    {
+      "command": "python verify_AP_pnc.py --fields --safety",
+      "exit_code": 0,
+      "result": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "uploaded_files_checked": 199,
+        "uploaded_bytes_preserved": true,
+        "archive_manifest_entries": 496,
+        "available_expected_entries": 273,
+        "exact_hash_aliases": 84,
+        "unresolved_expected_entries": 223,
+        "archive_complete": false,
+        "critical_missing_runner_inputs": [
+          "handoff.py",
+          "results/4K/portable_template/numerics.py",
+          "results/4K/portable_template/config.json",
+          "results/4K/portable_template/MATERIAL_PROVENANCE.md",
+          "results/4K/portable_template/NUMERICAL_METHODS.md",
+          "results/4K/portable_template/finalize.py",
+          "results/4K/portable_template/verify_eigen_scaling.py",
+          "results/4K/portable_template/check_legacy_bloch.py"
+        ],
+        "integrity_errors": [],
+        "simulation_rerun": false,
+        "available_saved_smoke": {
+          "status": "PASS_AVAILABLE_SAVED_SMOKE",
+          "source_run": "results/4K/run_new_verified_smoke",
+          "saved_stage_outputs_hashed": 26,
+          "saved_frequencies_checked": 5,
+          "saved_structure_frequency_records_checked": 15,
+          "maximum_saved_algebraic_residual": 5.296414884797587e-13,
+          "maximum_saved_source_sponge_balance_error": 8.630743758784776e-14,
+          "maximum_displacement_ratio_arithmetic_error_dB": 0.0,
+          "saved_operator_comparisons_checked": 4,
+          "calibrated_power_transmission_validated": false,
+          "full_333_solve_60_mode_archive_reverified": false,
+          "simulation_rerun": false,
+          "saved_field_check": {
+            "status": "PASS_FINITE_ARRAYS_AND_TOPOLOGY",
+            "points": 18598,
+            "triangles": 35540,
+            "arrays_checked": 4
+          }
+        },
+        "archive_guard_tests": {
+          "status": "PASS_WITH_SKIPS",
+          "count": 8,
+          "skipped": [
+            {
+              "test": "test_symlink_source_and_parent_are_rejected (test_archive_runtime_AP_pnc.ArchiveGuards.test_symlink_source_and_parent_are_rejected)",
+              "reason": "Windows account cannot create symbolic links; symlink guard untested"
+            }
+          ]
+        },
+        "status": "PASS_AVAILABLE_EVIDENCE"
+      },
+      "stderr": ".......s\n----------------------------------------------------------------------\nRan 8 tests in 0.048s\n\nOK (skipped=1)\n"
+    },
+    {
+      "command": "python -m unittest discover -s tests -p test_nanobeam_AP_pnc.py -v",
+      "exit_code": 0,
+      "result": {
+        "stdout": ""
+      },
+      "stderr": "test_acoustic_zero_and_zone_edge (test_nanobeam_AP_pnc.ChainTests.test_acoustic_zero_and_zone_edge) ... ok\ntest_example_partial_array (test_nanobeam_AP_pnc.GeometryTests.test_example_partial_array) ... ok\ntest_known_adjacent_spacing (test_nanobeam_AP_pnc.GeometryTests.test_known_adjacent_spacing) ... ok\ntest_overlap_and_sidewall (test_nanobeam_AP_pnc.GeometryTests.test_overlap_and_sidewall) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "command": "python run_AP_pnc.py --name hpge_reference --dry-run",
+      "exit_code": 0,
+      "result": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "status": "DRY_RUN_BLOCKED",
+        "run_name": "hpge_reference",
+        "requested_stage": "smoke",
+        "planned_output": "results/runs/hpge_reference",
+        "archive_complete": false,
+        "unresolved_expected_entries": 223,
+        "critical_missing_runner_inputs": [
+          "handoff.py",
+          "results/4K/portable_template/numerics.py",
+          "results/4K/portable_template/config.json",
+          "results/4K/portable_template/MATERIAL_PROVENANCE.md",
+          "results/4K/portable_template/NUMERICAL_METHODS.md",
+          "results/4K/portable_template/finalize.py",
+          "results/4K/portable_template/verify_eigen_scaling.py",
+          "results/4K/portable_template/check_legacy_bloch.py"
+        ],
+        "execution_adapter_enabled": false,
+        "next_action": "Recover exact archived source/configuration, rerun strict verification, then review an execution adapter before starting the legacy smoke case.",
+        "new_3D_campaign_implemented": false,
+        "simulation_rerun": false,
+        "files_created": false
+      },
+      "stderr": ""
+    }
+  ],
+  "new_simulation_executed": false
+}

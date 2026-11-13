@@ -1,0 +1,40 @@
+test_all_inputs_checked_before_partial_restore (test_archive_runtime_AP_pnc.ArchiveGuards.test_all_inputs_checked_before_partial_restore) ... ok
+test_corrupted_hash_blocks_restore_before_writes (test_archive_runtime_AP_pnc.ArchiveGuards.test_corrupted_hash_blocks_restore_before_writes) ... ok
+test_exact_hash_alias_restores_original_paths (test_archive_runtime_AP_pnc.ArchiveGuards.test_exact_hash_alias_restores_original_paths) ... ok
+test_existing_restore_target_is_never_overwritten (test_archive_runtime_AP_pnc.ArchiveGuards.test_existing_restore_target_is_never_overwritten) ... ok
+test_missing_archive_does_not_turn_integrity_into_completeness (test_archive_runtime_AP_pnc.ArchiveGuards.test_missing_archive_does_not_turn_integrity_into_completeness) ... ok
+test_rejects_traversal_and_ambiguous_paths (test_archive_runtime_AP_pnc.ArchiveGuards.test_rejects_traversal_and_ambiguous_paths) ... ok
+test_run_name_and_existing_output_guards (test_archive_runtime_AP_pnc.ArchiveGuards.test_run_name_and_existing_output_guards) ... ok
+test_symlink_source_and_parent_are_rejected (test_archive_runtime_AP_pnc.ArchiveGuards.test_symlink_source_and_parent_are_rejected) ... skipped 'Windows account cannot create symbolic links; symlink guard untested'
+test_rejects_boolean_and_other_nonreal_material_inputs (test_elasticity3d_AP_pnc.CubicMaterialTests.test_rejects_boolean_and_other_nonreal_material_inputs) ... ok
+test_rejects_unstable_parameters_and_invalid_frames (test_elasticity3d_AP_pnc.CubicMaterialTests.test_rejects_unstable_parameters_and_invalid_frames) ... ok
+test_tensor_symmetry_rotation_and_strain_energy (test_elasticity3d_AP_pnc.CubicMaterialTests.test_tensor_symmetry_rotation_and_strain_energy) ... ok
+test_affine_patch_energy_consistent_mass_and_rigid_motion (test_elasticity3d_AP_pnc.ElasticityTests.test_affine_patch_energy_consistent_mass_and_rigid_motion) ... ok
+test_free_modes_mass_orthonormal_and_rigid_subspace (test_elasticity3d_AP_pnc.ElasticityTests.test_free_modes_mass_orthonormal_and_rigid_subspace) ... ok
+test_geometric_and_density_scaling_with_two_clamps (test_elasticity3d_AP_pnc.ElasticityTests.test_geometric_and_density_scaling_with_two_clamps) ... ok
+test_quadratic_displacement_integrates_degree_four_mass (test_elasticity3d_AP_pnc.ElasticityTests.test_quadratic_displacement_integrates_degree_four_mass) ... ok
+test_resource_cap_and_disconnected_mesh_fail_before_assembly (test_elasticity3d_AP_pnc.ElasticityTests.test_resource_cap_and_disconnected_mesh_fail_before_assembly) ... ok
+test_sparse_clamped_modes_match_dense_mass_whitening (test_elasticity3d_AP_pnc.ElasticityTests.test_sparse_clamped_modes_match_dense_mass_whitening) ... ok
+test_historical_csv_and_example (test_geometry3d_AP_pnc.Geometry3DTests.test_historical_csv_and_example) ... ok
+test_reject_nonphysical_mesh_inputs (test_geometry3d_AP_pnc.Geometry3DTests.test_reject_nonphysical_mesh_inputs) ... ok
+test_straight_beam_si_volume_and_end_ports (test_geometry3d_AP_pnc.Geometry3DTests.test_straight_beam_si_volume_and_end_ports) ... ok
+test_two_cylindrical_through_holes_remove_expected_volume (test_geometry3d_AP_pnc.Geometry3DTests.test_two_cylindrical_through_holes_remove_expected_volume) ... ok
+test_gamma_has_four_rigid_modes (test_lead_modes_AP_pnc.LeadModeTests.test_gamma_has_four_rigid_modes) ... ok
+test_matching_face_nodes_with_different_triangles_are_rejected (test_lead_modes_AP_pnc.LeadModeTests.test_matching_face_nodes_with_different_triangles_are_rejected) ... ok
+test_nonmatching_end_faces_are_rejected (test_lead_modes_AP_pnc.LeadModeTests.test_nonmatching_end_faces_are_rejected) ... ok
+test_opposite_wavenumbers_and_face_phase (test_lead_modes_AP_pnc.LeadModeTests.test_opposite_wavenumbers_and_face_phase) ... ok
+test_small_k_extension_uses_free_sidewall_rod_speed (test_lead_modes_AP_pnc.LeadModeTests.test_small_k_extension_uses_free_sidewall_rod_speed) ... ok
+test_acoustic_zero_and_zone_edge (test_nanobeam_AP_pnc.ChainTests.test_acoustic_zero_and_zone_edge) ... ok
+test_example_partial_array (test_nanobeam_AP_pnc.GeometryTests.test_example_partial_array) ... ok
+test_known_adjacent_spacing (test_nanobeam_AP_pnc.GeometryTests.test_known_adjacent_spacing) ... ok
+test_overlap_and_sidewall (test_nanobeam_AP_pnc.GeometryTests.test_overlap_and_sidewall) ... ok
+3D solid: 24 tetrahedra, 225 displacement DOFs
+3D solid: 24 tetrahedra, 225 displacement DOFs
+test_failed_attempt_is_retained_and_bad_material_creates_no_output (test_workflow3d_AP_pnc.Workflow3D.test_failed_attempt_is_retained_and_bad_material_creates_no_output) ... ok
+3D solid: 24 tetrahedra, 225 displacement DOFs
+test_output_can_be_reconstructed_and_cache_checks_files (test_workflow3d_AP_pnc.Workflow3D.test_output_can_be_reconstructed_and_cache_checks_files) ... ok
+
+----------------------------------------------------------------------
+Ran 32 tests in 1.542s
+
+OK (skipped=1)

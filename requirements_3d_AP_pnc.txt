@@ -1,0 +1,9 @@
+# Author: Athul Prem | _AP_pnc
+# CPU-only 3D finite-element environment. Python 3.12 is tested locally.
+numpy==2.5.4
+scipy==1.18.1
+scikit-fem==12.0.2
+matplotlib==3.11.2
+meshio==5.3.5
+psutil==7.2.2
+gmsh==4.15.2

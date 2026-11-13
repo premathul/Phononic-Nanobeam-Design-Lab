@@ -1,0 +1,33 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "name": "straight_beam_200nm",
+  "geometry": {
+    "length_nm": 2000,
+    "width_nm": 1000,
+    "thickness_nm": 200
+  },
+  "mesh": {
+    "cells": [12, 6, 3],
+    "element_order": 2
+  },
+  "material": {
+    "name": "nominal_cubic_ge",
+    "C11_Pa": 128500000000.0,
+    "C12_Pa": 48300000000.0,
+    "C44_Pa": 66800000000.0,
+    "density_kg_m3": 5323,
+    "crystal_rotation": [[1, 0, 0], [0, 1, 0], [0, 0, 1]],
+    "temperature_policy": "fixed_property_control",
+    "temperature_K": 4
+  },
+  "analysis": {
+    "kind": "modes",
+    "boundary": "clamped_free",
+    "num_modes": 8
+  },
+  "resources": {
+    "max_dofs": 30000
+  }
+}
