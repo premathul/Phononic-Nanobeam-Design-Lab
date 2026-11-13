@@ -22,3 +22,15 @@ Athul Prem,_AP_pnc,full_device_solve_replay,physical_rhs,failed,157005,11890163,
 Athul Prem,_AP_pnc,full_device_solve_replay,solve_replay_total,failed,157005,11890163,125.28200000000652,2037.81640625,2033.0078125,5056.63671875,,10.0,,,
 Athul Prem,_AP_pnc,prefix_3600_46z1x05m,load_mesh_and_extract,failed,,,1.8439999999973224,76.12109375,,,,,,,
 Athul Prem,_AP_pnc,prefix_3600_7x4cp7hu,volume_basis,failed,,,1.8429999999934807,134.74609375,,,,,,,
+Athul Prem,_AP_pnc,full_device_lgmres_initial,preconditioner,completed,157005,11890163,34.23400000001129,,,,92858621,10.0,,,
+Athul Prem,_AP_pnc,full_device_lgmres_initial,physical_rhs_1,failed,157005,11890163,180.75,,,,,10.0,,9.30270846408391e-11,8.165779459997752e-14
+Athul Prem,_AP_pnc,full_device_lgmres_initial,solve_replay_total,failed,157005,11890163,216.75,2172.61328125,2167.80859375,5148.109375,,10.0,,,
+Athul Prem,_AP_pnc,full_device_lgmres_checkpointed,preconditioner,completed,157005,11890163,31.077999999994063,,,,92858621,10.0,,,
+Athul Prem,_AP_pnc,full_device_lgmres_checkpointed,physical_rhs_1,accepted,157005,11890163,174.71900000001187,,,,,10.0,,9.30270846408391e-11,8.165779459997752e-14
+Athul Prem,_AP_pnc,full_device_lgmres_checkpointed,physical_rhs_2,accepted,157005,11890163,192.15599999998813,,,,,10.0,,3.0401630158842036e-11,7.154165227071632e-15
+Athul Prem,_AP_pnc,full_device_lgmres_checkpointed,physical_rhs_3,accepted,157005,11890163,147.45300000000861,,,,,10.0,,9.90282905349919e-11,9.036147437790218e-14
+Athul Prem,_AP_pnc,full_device_lgmres_checkpointed,physical_rhs_4,accepted,157005,11890163,177.78199999999197,,,,,10.0,,7.529779402473427e-11,3.788157643354245e-14
+Athul Prem,_AP_pnc,full_device_lgmres_checkpointed,physical_rhs_5,accepted,157005,11890163,165.73500000000058,,,,,10.0,,7.34365725084101e-11,8.698889438078344e-14
+Athul Prem,_AP_pnc,full_device_lgmres_checkpointed,solve_replay_total,solved,157005,11890163,890.6410000000033,2185.21875,2180.35546875,5160.98828125,,10.0,,,
+Athul Prem,_AP_pnc,full_device_lgmres_public_replay,public_scattering_replay,completed_unverified,157005,11890163,3.125,,,,,,,9.902829053499129e-11,
+Athul Prem,_AP_pnc,h160_candidate_preflight,mesh_only,mesh_ready,187623,,0.5365001000027405,114.484375,119.359375,,,,,,
