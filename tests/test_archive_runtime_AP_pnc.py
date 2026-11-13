@@ -34,7 +34,12 @@ class ArchiveGuards(unittest.TestCase):
                 relative_path(path)
 
     def test_symlink_source_and_parent_are_rejected(self):
-        (self.root / "alias").symlink_to(self.root / "evidence_AP_pnc.txt")
+        try:
+            (self.root / "alias").symlink_to(self.root / "evidence_AP_pnc.txt")
+        except OSError as exc:
+            if getattr(exc, "winerror", None) == 1314:
+                self.skipTest("Windows account cannot create symbolic links; symlink guard untested")
+            raise
         with self.assertRaises(ValueError):
             checked_path(self.root, "alias")
         (self.root / "linked_directory").symlink_to(self.root, target_is_directory=True)

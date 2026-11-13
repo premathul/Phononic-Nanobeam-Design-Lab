@@ -1,0 +1,349 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "scope": "Numerical verification of four finite-beam modes",
+  "quick": false,
+  "geometry_nm": {
+    "length": 2000,
+    "width": 1000,
+    "thickness": 200
+  },
+  "material": {
+    "name": "nominal cubic Ge",
+    "policy": "fixed_property_control",
+    "C11_Pa": 128500000000.0,
+    "C12_Pa": 48300000000.0,
+    "C44_Pa": 66800000000.0,
+    "density_kg_m3": 5323.0,
+    "crystal_to_lab_rotation": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  },
+  "boundary": "clamped_free",
+  "displacement_order": 2,
+  "num_modes": 4,
+  "max_dofs": 11475,
+  "tracking_method": "Coarse nodal interpolation onto finer mesh, fine-mass normalized overlaps, maximum total overlap assignment.",
+  "resource_method": "Elapsed time includes mesh, assembly, eigensolve and any comparison. RSS samples the current process at 50 ms intervals.",
+  "gates": {
+    "relative_frequency_change_below": 0.005,
+    "mass_weighted_overlap_above": 0.99,
+    "max_relative_residual": 1e-08,
+    "near_degeneracy_relative_gap": 0.001,
+    "temperature_null_max_relative_change": 1e-09
+  },
+  "implementation": {
+    "git_commit": "3aa7e12c0d033bc3494dbc8295ee2564c5743885",
+    "source_sha256": {
+      "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+      "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+      "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+      "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+      "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+      "src/phononic/report_AP_pnc.py": "9894e852f0afcca822e1817dbfc5219290032e6638e50679024c17420cb444e8",
+      "src/phononic/workflow_AP_pnc.py": "e39efe23022eaf3d40b2154da26766ae2db488d174ffd149286a8909aceb48f6",
+      "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5",
+      "tools/validate_3d_AP_pnc.py": "1dd42ff5f7603db4f104b5d28df6b15aa2be5c3b6f4a983d3922094fd06d1608"
+    },
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "scikit-fem": "12.0.2",
+      "meshio": "5.3.5",
+      "gmsh": "4.15.2",
+      "matplotlib": "3.11.2",
+      "psutil": "7.2.2"
+    },
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "levels": [
+    {
+      "level": 1,
+      "mesh_cells": [
+        6,
+        4,
+        2
+      ],
+      "displacement_dofs": 1755,
+      "frequencies_hz": [
+        36301123.0963708,
+        159804694.8049905,
+        181745146.9841477,
+        222696589.51344988
+      ],
+      "relative_residuals": [
+        4.8393636678354295e-17,
+        3.292813194612898e-17,
+        4.1806881422843876e-17,
+        6.087545164587304e-17
+      ],
+      "resources": {
+        "peak_process_memory_mib": 95.72265625,
+        "system_available_memory_mib_at_start": 3298.046875,
+        "process_lifetime_peak_working_set_mib": 99.82421875,
+        "elapsed_seconds": 0.1989642999978969
+      }
+    },
+    {
+      "level": 2,
+      "mesh_cells": [
+        9,
+        6,
+        3
+      ],
+      "displacement_dofs": 5187,
+      "frequencies_hz": [
+        36093530.40442072,
+        159329045.5922988,
+        178884554.31853846,
+        219289059.01823124
+      ],
+      "relative_residuals": [
+        6.0872064642275e-17,
+        4.765027353842389e-17,
+        6.079924666390479e-17,
+        6.887061114255559e-17
+      ],
+      "resources": {
+        "peak_process_memory_mib": 168.61328125,
+        "system_available_memory_mib_at_start": 3280.49609375,
+        "process_lifetime_peak_working_set_mib": 170.1171875,
+        "elapsed_seconds": 0.725494800004526
+      },
+      "comparison": {
+        "overlap_matrix": [
+          [
+            0.9999985487039578,
+            5.826109876908152e-05,
+            0.00017029304609302045,
+            0.0016514690043458744
+          ],
+          [
+            5.6846822808542794e-05,
+            0.9999873902067051,
+            0.0047551758237332235,
+            0.0005215418236596003
+          ],
+          [
+            0.0001454543196392994,
+            0.004764950152773444,
+            0.9999029789741025,
+            0.011112512356368882
+          ],
+          [
+            0.0016614222199290412,
+            0.00046456504556541977,
+            0.011122008640310417,
+            0.9998955072533238
+          ]
+        ],
+        "matches": [
+          {
+            "coarse_mode_index": 1,
+            "fine_mode_index": 1,
+            "coarse_frequency_hz": 36301123.0963708,
+            "fine_frequency_hz": 36093530.40442072,
+            "relative_frequency_change": 0.005751520830022683,
+            "mass_weighted_overlap": 0.9999985487039578,
+            "individual_mode_tracking": "matched"
+          },
+          {
+            "coarse_mode_index": 2,
+            "fine_mode_index": 2,
+            "coarse_frequency_hz": 159804694.8049905,
+            "fine_frequency_hz": 159329045.5922988,
+            "relative_frequency_change": 0.002985326441412419,
+            "mass_weighted_overlap": 0.9999873902067051,
+            "individual_mode_tracking": "matched"
+          },
+          {
+            "coarse_mode_index": 3,
+            "fine_mode_index": 3,
+            "coarse_frequency_hz": 181745146.9841477,
+            "fine_frequency_hz": 178884554.31853846,
+            "relative_frequency_change": 0.01599127815426369,
+            "mass_weighted_overlap": 0.9999029789741025,
+            "individual_mode_tracking": "matched"
+          },
+          {
+            "coarse_mode_index": 4,
+            "fine_mode_index": 4,
+            "coarse_frequency_hz": 222696589.51344988,
+            "fine_frequency_hz": 219289059.01823124,
+            "relative_frequency_change": 0.015538990000113684,
+            "mass_weighted_overlap": 0.9998955072533238,
+            "individual_mode_tracking": "matched"
+          }
+        ]
+      }
+    },
+    {
+      "level": 3,
+      "mesh_cells": [
+        12,
+        8,
+        4
+      ],
+      "displacement_dofs": 11475,
+      "frequencies_hz": [
+        36018511.68896991,
+        159131404.0798847,
+        178051945.2687496,
+        218357657.94196293
+      ],
+      "relative_residuals": [
+        8.007076854888639e-17,
+        6.631676964166453e-17,
+        7.164474475276151e-17,
+        8.783809876103202e-17
+      ],
+      "resources": {
+        "peak_process_memory_mib": 335.96875,
+        "system_available_memory_mib_at_start": 3265.87109375,
+        "process_lifetime_peak_working_set_mib": 337.34375,
+        "elapsed_seconds": 6.318128400002024
+      },
+      "comparison": {
+        "overlap_matrix": [
+          [
+            0.9999997818823562,
+            1.736675635319302e-05,
+            4.111089967245459e-05,
+            0.0006319443969628541
+          ],
+          [
+            1.7150160048162234e-05,
+            0.999998107469123,
+            0.0018295651991282612,
+            0.0001564576800219898
+          ],
+          [
+            4.1587391807507256e-05,
+            0.0018310451674582796,
+            0.9999928334324666,
+            0.0026581031488112743
+          ],
+          [
+            0.0006348460932267645,
+            0.00015108569381752258,
+            0.002647882543843959,
+            0.9999924060631904
+          ]
+        ],
+        "matches": [
+          {
+            "coarse_mode_index": 1,
+            "fine_mode_index": 1,
+            "coarse_frequency_hz": 36093530.40442072,
+            "fine_frequency_hz": 36018511.68896991,
+            "relative_frequency_change": 0.0020827822120640725,
+            "mass_weighted_overlap": 0.9999997818823562,
+            "individual_mode_tracking": "matched"
+          },
+          {
+            "coarse_mode_index": 2,
+            "fine_mode_index": 2,
+            "coarse_frequency_hz": 159329045.5922988,
+            "fine_frequency_hz": 159131404.0798847,
+            "relative_frequency_change": 0.001242001938943999,
+            "mass_weighted_overlap": 0.999998107469123,
+            "individual_mode_tracking": "matched"
+          },
+          {
+            "coarse_mode_index": 3,
+            "fine_mode_index": 3,
+            "coarse_frequency_hz": 178884554.31853846,
+            "fine_frequency_hz": 178051945.2687496,
+            "relative_frequency_change": 0.004676214284163713,
+            "mass_weighted_overlap": 0.9999928334324666,
+            "individual_mode_tracking": "matched"
+          },
+          {
+            "coarse_mode_index": 4,
+            "fine_mode_index": 4,
+            "coarse_frequency_hz": 219289059.01823124,
+            "fine_frequency_hz": 218357657.94196293,
+            "relative_frequency_change": 0.004265483908587587,
+            "mass_weighted_overlap": 0.9999924060631904,
+            "individual_mode_tracking": "matched"
+          }
+        ]
+      }
+    }
+  ],
+  "temperature_null": {
+    "policy": "fixed_property_control",
+    "scope": "Two independent solves of the same elastic inputs. Temperature labels have no constitutive effect.",
+    "mesh_cells": [
+      2,
+      2,
+      1
+    ],
+    "cases": [
+      {
+        "temperature_label_K": 0.02,
+        "K_sha256": "da7daf0f0fef75cef55aa1bec5fb90a0f4c1e94fb593aaa9a702b332a0e34179",
+        "M_sha256": "d32f7df67b782fcbfb29f8eec08a8f12fe9c72d427f8282686021e55a6f89f50",
+        "frequencies_hz": [
+          38607202.363843046,
+          164531649.52190304,
+          216104207.76926216,
+          335607806.4571397
+        ],
+        "relative_residuals": [
+          2.1616148081740862e-16,
+          1.7142183549982964e-16,
+          2.0782561669257344e-16,
+          1.6067049523925662e-16
+        ]
+      },
+      {
+        "temperature_label_K": 4.0,
+        "K_sha256": "da7daf0f0fef75cef55aa1bec5fb90a0f4c1e94fb593aaa9a702b332a0e34179",
+        "M_sha256": "d32f7df67b782fcbfb29f8eec08a8f12fe9c72d427f8282686021e55a6f89f50",
+        "frequencies_hz": [
+          38607202.363843046,
+          164531649.52190304,
+          216104207.76926216,
+          335607806.4571397
+        ],
+        "relative_residuals": [
+          2.1616148081740862e-16,
+          1.7142183549982964e-16,
+          2.0782561669257344e-16,
+          1.6067049523925662e-16
+        ]
+      }
+    ],
+    "identical_mechanical_operators": true,
+    "max_relative_frequency_change": 0.0,
+    "passed": true
+  },
+  "gate_results": {
+    "frequency_change": true,
+    "mass_weighted_overlap": true,
+    "individual_mode_tracking": true,
+    "relative_residual": true,
+    "temperature_null": true
+  },
+  "status": "passed",
+  "spatial_acceptance_passed": true,
+  "failed_checks": [],
+  "mode_csv_sha256": "b55e47c1abdf1f5cf86557335751a55ce573d5de02e1c8060efc2ffcf9578c0a"
+}

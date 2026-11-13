@@ -111,7 +111,11 @@ def main() -> int:
             suite = unittest.defaultTestLoader.discover(str(ROOT / "tests"), pattern="test_archive_runtime_AP_pnc.py")
             tested = unittest.TextTestRunner(verbosity=1, stream=sys.stderr).run(suite)
             require(tested.testsRun > 0 and tested.wasSuccessful(), "Archive guard tests failed or no tests found")
-            report["archive_guard_tests"] = {"status": "PASS", "count": tested.testsRun}
+            report["archive_guard_tests"] = {
+                "status": "PASS_WITH_SKIPS" if tested.skipped else "PASS",
+                "count": tested.testsRun,
+                "skipped": [{"test": str(test), "reason": reason} for test, reason in tested.skipped],
+            }
         code = 0
         report["status"] = "PASS_AVAILABLE_EVIDENCE"
         if args.compare_name:
