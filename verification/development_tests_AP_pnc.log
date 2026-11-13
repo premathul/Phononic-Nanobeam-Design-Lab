@@ -24,6 +24,12 @@ test_matching_face_nodes_with_different_triangles_are_rejected (test_lead_modes_
 test_nonmatching_end_faces_are_rejected (test_lead_modes_AP_pnc.LeadModeTests.test_nonmatching_end_faces_are_rejected) ... ok
 test_opposite_wavenumbers_and_face_phase (test_lead_modes_AP_pnc.LeadModeTests.test_opposite_wavenumbers_and_face_phase) ... ok
 test_small_k_extension_uses_free_sidewall_rod_speed (test_lead_modes_AP_pnc.LeadModeTests.test_small_k_extension_uses_free_sidewall_rod_speed) ... ok
+3D solid: 24 tetrahedra, 225 displacement DOFs
+test_checkpoint_identity_ignores_analysis_and_detects_changed_mesh_bytes (test_mesh_preflight_AP_pnc.MeshPreflightTests.test_checkpoint_identity_ignores_analysis_and_detects_changed_mesh_bytes) ... ok
+3D solid: 24 tetrahedra, 225 displacement DOFs
+3D solid: 24 tetrahedra, 225 displacement DOFs
+test_preflight_after_completed_uncached_mesh_uses_separate_run_identity (test_mesh_preflight_AP_pnc.MeshPreflightTests.test_preflight_after_completed_uncached_mesh_uses_separate_run_identity) ... ok
+test_public_preflight_reuses_exact_tagged_gmsh_mesh_after_body_budget_changes (test_mesh_preflight_AP_pnc.MeshPreflightTests.test_public_preflight_reuses_exact_tagged_gmsh_mesh_after_body_budget_changes) ... ok
 test_acoustic_zero_and_zone_edge (test_nanobeam_AP_pnc.ChainTests.test_acoustic_zero_and_zone_edge) ... ok
 test_example_partial_array (test_nanobeam_AP_pnc.GeometryTests.test_example_partial_array) ... ok
 test_known_adjacent_spacing (test_nanobeam_AP_pnc.GeometryTests.test_known_adjacent_spacing) ... ok
@@ -45,7 +51,7 @@ test_failed_attempt_is_retained_and_bad_material_creates_no_output (test_workflo
 3D solid: 352 tetrahedra, 435 displacement DOFs
 test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks (test_workflow3d_AP_pnc.Workflow3D.test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks) ... ok
 test_historical_hole_pattern_uses_source_origin_and_exact_provenance (test_workflow3d_AP_pnc.Workflow3D.test_historical_hole_pattern_uses_source_origin_and_exact_provenance) ... ok
-Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{b37d207b-5507-45e5-9a3b-c165ffc39cf8}\Temp\tmp3f3d6juk\two_hole_pilot_200nm-b10af6138265
+Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{4c1dc1fd-876a-4e35-aa72-0e124ac3a650}\Temp\tmpq4tcx7cr\two_hole_pilot_200nm-1ed1cc8838b4
 Max relative solve residual: 0
 Power balance check: True; max R=0
 Matched-guide power check: True
@@ -57,6 +63,6 @@ test_output_can_be_reconstructed_and_cache_checks_files (test_workflow3d_AP_pnc.
 test_scattering_exports_power_channels_and_reconstructible_responses (test_workflow3d_AP_pnc.Workflow3D.test_scattering_exports_power_channels_and_reconstructible_responses) ... ok
 
 ----------------------------------------------------------------------
-Ran 46 tests in 4.160s
+Ran 49 tests in 3.301s
 
 OK (skipped=1)

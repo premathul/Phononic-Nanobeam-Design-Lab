@@ -26,7 +26,8 @@ import meshio
 import numpy as np
 import psutil
 
-from .geometry_AP_pnc import BeamGeometry, Hole, make_straight_mesh, read_hole_pattern, validate_hole_clearances
+from .geometry_AP_pnc import BeamGeometry, Hole, read_hole_pattern, validate_hole_clearances
+from .mesh_checkpoint_AP_pnc import build_mesh, load_checkpoint, mesh_inputs, save_checkpoint
 from .material_AP_pnc import CubicMaterial
 from .elasticity_AP_pnc import assemble_elasticity, solve_modes
 from .lead_modes_AP_pnc import solve_bloch
@@ -78,7 +79,7 @@ def _resolve_geometry(config: dict) -> tuple[BeamGeometry, tuple[Hole, ...], dic
     return geometry, holes, provenance
 
 
-def resolve_config(config: dict) -> dict:
+def resolve_config(config: dict, *, check_body_budget: bool = True) -> dict:
     """Keep the first public configuration deliberately small and explicit."""
     config = copy.deepcopy(config)
     allowed = {"author", "file_tag", "schema_version", "name", "geometry", "mesh", "material", "analysis", "resources"}
@@ -133,7 +134,7 @@ def resolve_config(config: dict) -> dict:
         if not isinstance(cells, (list, tuple)) or len(cells) != 3 or any(type(n) is not int or n <= 0 for n in cells):
             raise ValueError("mesh.cells must contain three positive integers")
         predicted = 3 * math.prod(order * n + 1 for n in cells)
-        if predicted > maximum:
+        if check_body_budget and predicted > maximum:
             raise ValueError(f"Requested grid has {predicted} displacement DOFs; configured maximum is {maximum}")
     elif kind == "gmsh":
         if "cells" in mesh:
@@ -234,6 +235,38 @@ def measured_resources():
         record["elapsed_seconds"] = time.perf_counter() - start
 
 
+def _mesh_location(output_root: Path, geometry, pattern, settings, identity) -> tuple[Path, str, dict]:
+    inputs = mesh_inputs(geometry, pattern, settings, identity)
+    mesh_hash = digest(inputs)
+    return output_root / "_meshes" / mesh_hash, mesh_hash, inputs
+
+
+def preflight_mesh(config: dict, output_root: Path | None = None) -> dict:
+    """Build or reuse the exact tagged mesh without assembling a mechanical system."""
+    config = resolve_config(config, check_body_budget=False)
+    geometry, holes, pattern = _resolve_geometry(config)
+    identity = source_identity()
+    output_root = Path(output_root or ROOT / "results" / "runs")
+    directory, mesh_hash, inputs = _mesh_location(output_root, geometry, pattern, config["mesh"], identity)
+    reused = directory.exists()
+    if reused:
+        _, record = load_checkpoint(directory, mesh_hash)
+    else:
+        with measured_resources() as mesh_resources:
+            mesh, counts = build_mesh(geometry, holes, config["mesh"], config["resources"].get("max_port_dofs"))
+        record = {"author": "Athul Prem", "file_tag": "_AP_pnc", "status": "mesh_ready", "mesh_hash": mesh_hash,
+                  "mesh_inputs": inputs, "hole_pattern_provenance": pattern, "hole_count": len(holes),
+                  "mesh_resources": mesh_resources, **counts}
+        _, record, reused = save_checkpoint(directory, mesh, record)
+    body_cap = config["resources"]["max_dofs"]
+    port_cap = config["resources"].get("max_port_dofs")
+    port_dofs = max(record["end_face_dofs"].values())
+    if port_cap is not None and port_dofs > port_cap:
+        raise ValueError(f"Port has {port_dofs} DOFs, exceeding dense solver cap {port_cap}.")
+    return {**record, "output_directory": str(directory.resolve()), "reused": reused,
+            "max_dofs": body_cap, "max_port_dofs": port_cap, "within_body_budget": record["ndof"] <= body_cap}
+
+
 def run_study(config: dict, output_root: Path | None = None) -> dict:
     config = resolve_config(config)
     geometry, holes, pattern = _resolve_geometry(config)
@@ -246,13 +279,18 @@ def run_study(config: dict, output_root: Path | None = None) -> dict:
         # Hash the same parsed bytes used to create the mesh. The saved run
         # remains traceable if the original CSV is replaced during the solve.
         identity_inputs["hole_pattern"] = {key: pattern[key] for key in ("source_sha256", "x_offset_m", "holes")}
+    output_root = Path(output_root or ROOT / "results" / "runs")
+    directory, mesh_hash, _ = _mesh_location(output_root, geometry, pattern, mesh_settings, identity)
+    checkpoint = None
+    if directory.exists():
+        checkpoint = load_checkpoint(directory, mesh_hash)
+        identity_inputs["mesh_checkpoint_sha256"] = checkpoint[1]["mesh_sha256"]
     run_hash = digest({"configuration": config, **identity_inputs})
     mechanical = copy.deepcopy(config)
     for key in ("name", "author", "file_tag"):
         mechanical.pop(key, None)
     mechanical["material"].pop("temperature_K")
     operator_hash = digest({"configuration": mechanical, **identity_inputs})
-    output_root = Path(output_root or ROOT / "results" / "runs")
     stem = f"{config['name']}-{run_hash[:12]}"
     output = output_root / stem
     attempt = 1
@@ -304,24 +342,25 @@ def run_study(config: dict, output_root: Path | None = None) -> dict:
             params = config["material"]
             material = CubicMaterial(C11=params["C11_Pa"], C12=params["C12_Pa"], C44=params["C44_Pa"],
                                      rho=params["density_kg_m3"], rotation=params["crystal_rotation"])
-            if mesh_kind == "gmsh":
-                from .perforated_AP_pnc import make_perforated_mesh, volume_diagnostics
-
-                mesh = make_perforated_mesh(
-                    geometry, holes, mesh_settings["mesh_size_nm"] * 1e-9,
-                    port_mesh_size_m=mesh_settings["port_size_nm"] * 1e-9,
-                    circle_points=mesh_settings["circle_resolution"],
-                    max_port_dofs=config["resources"]["max_port_dofs"],
-                    element_order=mesh_settings["element_order"],
-                )
-                summary["geometry_diagnostics"] = volume_diagnostics(mesh, geometry, holes)
-                summary.update({"mesh_vertices": int(mesh.nvertices), "mesh_tetrahedra": int(mesh.nelements)})
-                write_json(summary_path, summary)
+            max_port_dofs = config["resources"].get("max_port_dofs")
+            if checkpoint is not None:
+                mesh, record = checkpoint
+                counts = {name: record[name] for name in ("ndof", "mesh_vertices", "mesh_tetrahedra", "end_face_dofs", "boundary_facet_counts")}
+                if "geometry_diagnostics" in record:
+                    counts["geometry_diagnostics"] = record["geometry_diagnostics"]
+                summary["mesh_checkpoint"] = {"mesh_hash": mesh_hash, "mesh_sha256": record["mesh_sha256"],
+                                              "directory": str(directory.resolve())}
             else:
-                mesh = make_straight_mesh(geometry, mesh_settings["cells"])
+                mesh, counts = build_mesh(geometry, holes, mesh_settings, max_port_dofs)
+            summary.update(counts)
+            max_dofs = config["resources"]["max_dofs"]
+            if counts["ndof"] > max_dofs:
+                raise ValueError(f"Mesh has {counts['ndof']} displacement DOFs, exceeding cap {max_dofs}.")
+            port_dofs = max(counts["end_face_dofs"].values())
+            if max_port_dofs is not None and port_dofs > max_port_dofs:
+                raise ValueError(f"Port has {port_dofs} DOFs, exceeding dense solver cap {max_port_dofs}.")
             system = assemble_elasticity(mesh, material, element_order=mesh_settings["element_order"],
-                                        max_dofs=config["resources"]["max_dofs"])
-            summary.update({"ndof": int(system.K.shape[0]), "mesh_vertices": int(mesh.nvertices), "mesh_tetrahedra": int(mesh.nelements)})
+                                        max_dofs=max_dofs)
             print(f"3D solid: {mesh.nelements} tetrahedra, {system.K.shape[0]} displacement DOFs", flush=True)
             analysis = config["analysis"]
             rows = []
@@ -523,10 +562,14 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--k-points", type=int)
     parser.add_argument("--frequency-ghz", type=float)
     parser.add_argument("--incident-side", choices=("left", "right"))
+    parser.add_argument("--max-dofs", type=int, help="Maximum displacement DOFs allowed for assembly")
     parser.add_argument("--max-port-dofs", type=int)
+    parser.add_argument("--mesh-only", action="store_true", help="Save and inspect a mesh before assembling or solving")
     parser.add_argument("--output-root", type=Path)
     parser.add_argument("--open", action="store_true", help="Open the offline interactive result page")
     args = parser.parse_args(argv)
+    if args.mesh_only and args.open:
+        parser.error("--open requires a solved result. Omit --open when using --mesh-only.")
     try:
         config = json.loads(args.config.read_text(encoding="utf-8-sig"))
         if args.uniform:
@@ -550,9 +593,23 @@ def main(argv: list[str] | None = None) -> int:
                                     (args.k_points, "analysis", "k_points"),
                                     (args.frequency_ghz, "analysis", "frequency_GHz"),
                                     (args.incident_side, "analysis", "incident_side"),
+                                    (args.max_dofs, "resources", "max_dofs"),
                                     (args.max_port_dofs, "resources", "max_port_dofs")):
             if value is not None:
                 config[section][key] = value
+        if args.mesh_only:
+            summary = preflight_mesh(config, args.output_root)
+            print(f"Mesh ready ({'reused' if summary['reused'] else 'built'}): {summary['output_directory']}")
+            print(f"Body: {summary['mesh_vertices']} vertices, {summary['mesh_tetrahedra']} tetrahedra, "
+                  f"{summary['ndof']} displacement DOFs (cap {summary['max_dofs']}).")
+            left, right = (summary["end_face_dofs"][face] for face in ("xleft", "xright"))
+            cap = summary["max_port_dofs"]
+            cap_text = f" (cap {cap} per port)" if cap is not None else ""
+            print(f"End-face displacement DOFs: left {left}, right {right}{cap_text}.")
+            if not summary["within_body_budget"]:
+                print("Body mesh exceeds the configured solve budget. Use --max-dofs to change that budget or adjust the mesh.")
+            print("Status: mesh_ready. No mechanical assembly or solve was run.")
+            return 0
         summary = run_study(config, args.output_root)
         output = Path(summary["output_directory"])
         print(f"{'Reused' if summary['reused'] else 'Completed'}: {output}")
