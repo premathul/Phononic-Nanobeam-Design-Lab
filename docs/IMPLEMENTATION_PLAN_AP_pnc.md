@@ -40,8 +40,9 @@ Use scikit-fem to assemble 3D vector finite elements, SciPy for sparse eigenvalu
 | `port_modes_AP_pnc.py` | Semi-analytical finite-element (SAFE) section modes, signed power and all discrete propagating/evanescent roots |
 | `scattering_AP_pnc.py` | Matched outgoing traction maps, incident drives, sparse harmonic solves and modal/direct-flux power checks |
 | `workflow_AP_pnc.py` and `simulate_AP_pnc.py` | Configuration entry point, result identity, measured resources, tables, figures and reports |
+| `mesh_checkpoint_AP_pnc.py` | Mesh-only preflight, exact tagged-mesh checkpoints and budget checks before assembly |
 
-Begin with a single launch command, editable configuration and a readable result page. Add a researcher-facing parameter interface after the workflow is established.
+The workflow has a single launch command, editable configuration and a readable result page. Mesh-only preflight now reports actual DOF counts and saves geometry for exact reuse after selecting a compute budget. Add a researcher-facing parameter interface on this established workflow.
 
 ## Milestones and acceptance checks
 
@@ -57,7 +58,7 @@ The first mechanics and guided-wave milestone is merged. The matched-port implem
 
 CSV-defined perforation now runs through the public workflow, with source-byte checksums and the original coordinate offset preserved. The two-hole 1 GHz study meets the 0.01 absolute T/R sensitivity checks across body, circle, port and lead variations. Its original complex-coefficient change of 0.03162 failed the separate phase criterion, and that failed check remains in the evidence. Targeted follow-up at 60 and 50 nm body sizes reduced successive complex changes to 0.01367 and 0.00337; final T/R change is 0.000425. The last pair passes the unchanged 0.01 checks with fixed 48-segment holes, ports, nominal material and 1 GHz frequency. The portable four-level record and offline checker require no new simulations for review. This bounds the tested mesh-pair response, not the continuum error or a wider frequency band.
 
-The original 26-hole, 56220-DOF pilot completed with five incident channels but is not mesh-converged. The next complete workflow reuses that pilot, measures a finer mesh before allocating a solve, compares the same five left-incident channels at 1 GHz, and records power and complex-response changes. Port and circle refinements remain separate checks. Finish this bounded comparison before extending a frequency campaign; do not rerun the unchanged straight-guide or two-hole campaigns.
+The original 26-hole, 56220-DOF pilot completed with five incident channels but is not mesh-converged. The bounded follow-up reused it and solved one 82056-DOF mesh at 1 GHz. It failed both 0.01 criteria: maximum power change 0.01136 and complex-coefficient change 0.42286. The five left-incident columns and independently aligned port bases are preserved for offline recomputation. Body and hole-wall thickness discretization changed together; the latter went from one to two layers. The next numerical step should distinguish these effects before extending a frequency campaign. Port and circle refinements remain separate checks. Do not rerun the unchanged straight-guide or two-hole campaigns.
 
 ## Resources and data
 
