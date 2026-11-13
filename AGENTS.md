@@ -6,7 +6,7 @@ Research owner: **Athul Prem** | Project tag: **_AP_pnc**.
 
 Read README.md, docs/AI_HANDOFF_AP_pnc.md, docs/IMPLEMENTATION_PLAN_AP_pnc.md and docs/PHYSICS_SPECIFICATION_AP_pnc.md. Current user authorization supersedes the historical handoff: architecture can change freely; prioritize the latest reliable physics and a usable configurable simulator. Full archive recovery is not a prerequisite for new development. Preserve actual evidence and label new implementation independently.
 
-The active solver is `simulate_AP_pnc.py` and `src/phononic/`. Root `run_AP_pnc.py` remains a legacy readiness checker. Never confuse the two. Finite-body modes, Bloch dispersion and power-normalized straight-guide scattering are implemented. The next milestone integrates the preserved hole geometry with matched ports and independent mesh checks.
+The active solver is `simulate_AP_pnc.py` and `src/phononic/`. Root `run_AP_pnc.py` remains a legacy readiness checker. Never confuse the two. Finite-body modes, Bloch dispersion and power-normalized uniform/perforated scattering are implemented. Two-hole power checks pass; perforated complex-response and full 26-hole mesh convergence remain unresolved. Keep those limits explicit before extending spectral or resonance claims.
 
 ## Project language
 

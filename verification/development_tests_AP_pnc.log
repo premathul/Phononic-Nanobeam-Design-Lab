@@ -28,6 +28,9 @@ test_acoustic_zero_and_zone_edge (test_nanobeam_AP_pnc.ChainTests.test_acoustic_
 test_example_partial_array (test_nanobeam_AP_pnc.GeometryTests.test_example_partial_array) ... ok
 test_known_adjacent_spacing (test_nanobeam_AP_pnc.GeometryTests.test_known_adjacent_spacing) ... ok
 test_overlap_and_sidewall (test_nanobeam_AP_pnc.GeometryTests.test_overlap_and_sidewall) ... ok
+test_circle_resolution_is_independent_of_body_size (test_perforated_AP_pnc.PerforatedMeshTests.test_circle_resolution_is_independent_of_body_size) ... ok
+test_periodic_trace_matches_control_and_assembles (test_perforated_AP_pnc.PerforatedMeshTests.test_periodic_trace_matches_control_and_assembles) ... ok
+test_rejects_port_budget_and_invalid_circle_divisions (test_perforated_AP_pnc.PerforatedMeshTests.test_rejects_port_budget_and_invalid_circle_divisions) ... ok
 test_all_roots_flux_orthogonality_and_propagation_pairing (test_port_modes_AP_pnc.PortModeTests.test_all_roots_flux_orthogonality_and_propagation_pairing) ... ok
 test_cutoff_fails_explicitly_and_resolved_sides_change_channel_count (test_port_modes_AP_pnc.PortModeTests.test_cutoff_fails_explicitly_and_resolved_sides_change_channel_count) ... ok
 test_end_face_basis_and_integrated_mass_match_for_p1_and_p2 (test_port_modes_AP_pnc.PortModeTests.test_end_face_basis_and_integrated_mass_match_for_p1_and_p2) ... ok
@@ -39,12 +42,21 @@ test_rejects_incompatible_frequency_and_port_mapping (test_scattering_AP_pnc.Sca
 3D solid: 24 tetrahedra, 225 displacement DOFs
 3D solid: 24 tetrahedra, 225 displacement DOFs
 test_failed_attempt_is_retained_and_bad_material_creates_no_output (test_workflow3d_AP_pnc.Workflow3D.test_failed_attempt_is_retained_and_bad_material_creates_no_output) ... ok
+3D solid: 352 tetrahedra, 435 displacement DOFs
+test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks (test_workflow3d_AP_pnc.Workflow3D.test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks) ... ok
+test_historical_hole_pattern_uses_source_origin_and_exact_provenance (test_workflow3d_AP_pnc.Workflow3D.test_historical_hole_pattern_uses_source_origin_and_exact_provenance) ... ok
+Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{b37d207b-5507-45e5-9a3b-c165ffc39cf8}\Temp\tmp3f3d6juk\two_hole_pilot_200nm-b10af6138265
+Max relative solve residual: 0
+Power balance check: True; max R=0
+Matched-guide power check: True
+Solve time 0.00 s; sampled process peak 0.0 MiB
+Model status: computed; phase accuracy, spatial convergence and physical adequacy require separate evidence.
 3D solid: 24 tetrahedra, 225 displacement DOFs
 test_output_can_be_reconstructed_and_cache_checks_files (test_workflow3d_AP_pnc.Workflow3D.test_output_can_be_reconstructed_and_cache_checks_files) ... ok
 3D solid: 72 tetrahedra, 585 displacement DOFs
 test_scattering_exports_power_channels_and_reconstructible_responses (test_workflow3d_AP_pnc.Workflow3D.test_scattering_exports_power_channels_and_reconstructible_responses) ... ok
 
 ----------------------------------------------------------------------
-Ran 41 tests in 2.482s
+Ran 46 tests in 4.160s
 
 OK (skipped=1)

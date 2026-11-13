@@ -1,0 +1,320 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "run_hash": "265d8f375158e5dacf6a2432a6e60e5e45a8b3a41c41245ce53e0e476291bbdb",
+  "mechanical_operator_hash": "a966f529d0d83ac0340c2d4712b590ba1a69f5199ce58d970882fa82835d9261",
+  "status": "completed_unverified",
+  "configuration": {
+    "author": "Athul Prem",
+    "file_tag": "_AP_pnc",
+    "schema_version": 1,
+    "name": "historical_26hole_pilot_200nm",
+    "geometry": {
+      "length_nm": 16650,
+      "width_nm": 1000,
+      "thickness_nm": 200,
+      "pattern": {
+        "csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+        "x_offset_nm": 8325
+      }
+    },
+    "mesh": {
+      "kind": "gmsh",
+      "element_order": 2,
+      "mesh_size_nm": 200,
+      "port_size_nm": 200,
+      "circle_resolution": 32
+    },
+    "material": {
+      "name": "nominal_cubic_ge",
+      "C11_Pa": 128500000000.0,
+      "C12_Pa": 48300000000.0,
+      "C44_Pa": 66800000000.0,
+      "density_kg_m3": 5323,
+      "crystal_rotation": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "temperature_policy": "fixed_property_control",
+      "temperature_K": 4
+    },
+    "analysis": {
+      "kind": "scattering",
+      "boundary": "matched_ports",
+      "frequency_GHz": 1,
+      "incident_side": "left"
+    },
+    "resources": {
+      "max_dofs": 60000,
+      "max_port_dofs": 400
+    }
+  },
+  "implementation": {
+    "git_commit": "e6d7bd3b39d0e9c275ebd38806d33b5b48395f2f",
+    "source_sha256": {
+      "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+      "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+      "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+      "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+      "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+      "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+      "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+      "src/phononic/report_AP_pnc.py": "52f621a0763c3b3f7bc3c2e1f33fdb76001ef9605b4c6015a19c774692342756",
+      "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+      "src/phononic/workflow_AP_pnc.py": "c3806d042bb9e1e8898145f9f50babc14800461e73e9c5332bc83b49f5df2a19",
+      "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+    },
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "scikit-fem": "12.0.2",
+      "meshio": "5.3.5",
+      "gmsh": "4.15.2",
+      "matplotlib": "3.11.2",
+      "psutil": "7.2.2"
+    },
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "analysis_kind": "scattering",
+  "geometry_nm": {
+    "length_nm": 16650,
+    "width_nm": 1000,
+    "thickness_nm": 200
+  },
+  "mesh_kind": "gmsh",
+  "hole_count": 26,
+  "hole_pattern_provenance": {
+    "author": "Athul Prem",
+    "file_tag": "_AP_pnc",
+    "source_csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+    "source_sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+    "x_offset_m": 8.325e-06,
+    "holes": [
+      {
+        "x_m": 1.6250000000000005e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 2.1750000000000004e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 2.725e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 3.275000000000001e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 3.825000000000001e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 4.3750000000000005e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 4.925000000000001e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 5.475000000000001e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 6.015000000000001e-06,
+        "diameter_m": 2.55e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 6.545000000000001e-06,
+        "diameter_m": 2.6e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 7.065000000000001e-06,
+        "diameter_m": 2.65e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 7.575000000000001e-06,
+        "diameter_m": 2.7e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 8.075000000000001e-06,
+        "diameter_m": 2.75e-07,
+        "region": "Central cavity"
+      },
+      {
+        "x_m": 8.575e-06,
+        "diameter_m": 2.75e-07,
+        "region": "Central cavity"
+      },
+      {
+        "x_m": 9.075e-06,
+        "diameter_m": 2.7e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 9.585e-06,
+        "diameter_m": 2.65e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 1.0105e-05,
+        "diameter_m": 2.6e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 1.0635e-05,
+        "diameter_m": 2.55e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 1.1175e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror transition"
+      },
+      {
+        "x_m": 1.1725e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.2275e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.2825e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.3375e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.3925000000000001e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.4475000000000001e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.5025000000000001e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      }
+    ],
+    "clearances": {
+      "min_side_ligament_m": 3.625000000000001e-07,
+      "min_end_ligament_m": 1.5000000000000005e-06,
+      "min_interhole_gap_m": 2.249999999999986e-07
+    }
+  },
+  "boundary": "matched_ports",
+  "material_status": "nominal fixed-property control; no temperature calibration",
+  "calibrated_scattering_available": false,
+  "experimental_validation": false,
+  "mode_completeness_established": false,
+  "spatial_convergence_established": false,
+  "geometry_diagnostics": {
+    "analytic_solid_volume_m3": 3.062532655455e-18,
+    "meshed_solid_volume_m3": 3.0642479633496313e-18,
+    "analytic_removed_volume_m3": 2.674673445450011e-19,
+    "meshed_removed_volume_m3": 2.657520366503699e-19,
+    "relative_solid_volume_error": 0.0005600945647309155,
+    "relative_removed_volume_error": 0.006413148855794574,
+    "rim_segments_min": 32,
+    "rim_segments_max": 32,
+    "max_radial_sagitta_m": 6.621000825729834e-10
+  },
+  "mesh_vertices": 3563,
+  "mesh_tetrahedra": 8019,
+  "ndof": 56220,
+  "frequency_hz": 1000000000.0,
+  "incident_side": "left",
+  "incident_mode_indices": [
+    193,
+    196,
+    186,
+    176,
+    174
+  ],
+  "num_incident_channels": 5,
+  "port_dofs": 99,
+  "discrete_port_roots": 198,
+  "maximum_relative_port_residual": 1.054715539798997e-15,
+  "port_basis_condition": [
+    20.196712221257872,
+    20.196712221257602
+  ],
+  "maximum_reflection": 0.03994442323669649,
+  "max_power_imbalance": 2.2659651932599445e-13,
+  "maximum_flux_power_imbalance": 2.233768725545815e-13,
+  "maximum_net_outward_power_ratio": 2.2082335959794369e-13,
+  "maximum_modal_flux_difference": 3.774758283725532e-15,
+  "power_balance_passed": true,
+  "matched_reference_passed": null,
+  "scattering_power_normalization_available": true,
+  "matched_reference_scope": "The unit-transmission reference applies to uniform guides",
+  "field_normalization": "Response per square root of incident watt; visualization has arbitrary amplitude; VTU samples vertices",
+  "maximum_relative_solver_residual": 2.291914086367409e-16,
+  "solved_frequency_rows": 5,
+  "selected_frequencies_hz": [
+    1000000000.0,
+    1000000000.0,
+    1000000000.0,
+    1000000000.0,
+    1000000000.0
+  ],
+  "peak_process_memory_mib": 1088.78515625,
+  "system_available_memory_mib_at_start": 3020.2578125,
+  "process_lifetime_peak_working_set_mib": 1091.47265625,
+  "elapsed_seconds": 14.759001800004626,
+  "numerical_interpretation": "Solved 3D model; convergence and physical adequacy require separate evidence",
+  "output_sha256": {
+    "configuration_AP_pnc.json": "25e5bbabd79605fc2a40daa98140aaf3555689170234b0757338783af96b0f97",
+    "hole_pattern_AP_pnc.json": "ad4b823990389fb26fe08c482281b11e3f2c32b1f52a78cf9b4ac62d79c70868",
+    "port_modes_AP_pnc.csv": "8c854244a78fd7a712210a4498f8dab9c7afd0fba715107d98960ebf739102e1",
+    "report_AP_pnc.html": "f518d1b20d44f7814b2d1a99780db75a690573caa55a751dae621decb0d9d731",
+    "scattering_AP_pnc.csv": "2fcbe37a99a631d972eae60d60c1d6a629864e5f1d5070bd560b2be54195819c",
+    "scattering_channels_AP_pnc.csv": "58635986ce7dfc8313c82add1f4ecb94fbadbccc841255a2428d48e071b7eba4",
+    "selected_fields_AP_pnc.npz": "7618203f4aaf76aa7268670e7458482f474c0f55f5cbaac2e1e9d0d027150f4b",
+    "selected_vertex_shapes_AP_pnc.vtu": "b10084e9f377fd1aa9c9b17b853e9180f98ab777815f5d3ef33787ba78b9f261"
+  },
+  "output_bytes": 7934359,
+  "scope": "One-frequency, one-mesh 26-hole pilot; no spatial, phase or full-device transmission convergence claim.",
+  "source_run_directory": "results/runs/historical_26hole_pilot_200nm-265d8f375158",
+  "source_summary_sha256": "c48e0c847b87d65c6a39131c971025f4adb2a1e841c84c58dde1856bc766f29e",
+  "channel_csv_sha256": "2fcbe37a99a631d972eae60d60c1d6a629864e5f1d5070bd560b2be54195819c"
+}

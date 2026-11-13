@@ -1,0 +1,4745 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "frequency_hz": 1000000000.0,
+  "scope": "One-frequency uniform and perforated matched-port controls.",
+  "mesh_only": false,
+  "cases": {
+    "empty": {
+      "path": "empty-cb4bd9bef21c/scattering_AP_pnc.json",
+      "sha256": "a4e6bc23f8ace2a201eb80809dcc4c8508fd353f9b703af5e5dc99e8491ab4cd",
+      "status": "solved"
+    },
+    "holes_coarse": {
+      "path": "holes_coarse-2c036f49e10e/scattering_AP_pnc.json",
+      "sha256": "9885b883ffbb92c97c0459a5872d43a17e5a161992404e3674327918faf485bb",
+      "status": "solved"
+    },
+    "holes_middle": {
+      "path": "holes_middle-47dfe5049b33/scattering_AP_pnc.json",
+      "sha256": "767b81bb85e6d549b819372cb2de46089a2561a9693af63db8ab6d9333227125",
+      "status": "solved"
+    },
+    "holes_fine": {
+      "path": "holes_fine-fc4bde2eccfd/scattering_AP_pnc.json",
+      "sha256": "9743cbd03869ffbd2bd02b9b5a7996e75318a6e93d86b5127e5fe875f015a131",
+      "status": "solved"
+    },
+    "curvature_fine": {
+      "path": "curvature_fine-06bf901d1d29/scattering_AP_pnc.json",
+      "sha256": "17af6791f90ae906963af766b1aed468a795554e4ae13dfcb27526749969debd",
+      "status": "solved"
+    },
+    "long_leads": {
+      "path": "long_leads-e64feb03b17e/scattering_AP_pnc.json",
+      "sha256": "ebc74b441e7a0e1c29c09fde1a936ac5c9d67b8a4ca3c39c825b8ff07d601a52",
+      "status": "solved"
+    },
+    "port_fine": {
+      "path": "port_fine-02c4b6c8daa1/scattering_AP_pnc.json",
+      "sha256": "5b8536a8af935c323ec4f44ffdd416954c94ef174650ffc8d8546c3b284a6b74",
+      "status": "solved"
+    },
+    "body_phase_fine": {
+      "path": "body_phase_fine-e9c590617c19/scattering_AP_pnc.json",
+      "sha256": "d704c0084756ca658d335a141d182914b804e3d88f621a597698201501d6ebab",
+      "status": "solved"
+    }
+  },
+  "comparisons": {
+    "holes_coarse_to_holes_middle": {
+      "channel_matching_overlap": [
+        0.9999999999999994,
+        0.9999999999999999,
+        1.0,
+        1.0
+      ],
+      "matched_relative_wavenumber_change": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "power_change_by_channel": {
+        "left": {
+          "reflection": [
+            0.0009011875375202205,
+            0.0028979415812653807,
+            0.003330729584606812,
+            1.3427888033957532e-05
+          ],
+          "transmission": [
+            0.000901187537522885,
+            0.002897941581266994,
+            0.0033307295846025653,
+            1.3427888038930469e-05
+          ]
+        },
+        "right": {
+          "reflection": [
+            0.0009016084620377812,
+            0.0028980379423761797,
+            0.0033302560362958866,
+            1.3384150716041419e-05
+          ],
+          "transmission": [
+            0.0009016084620380171,
+            0.00289803794237542,
+            0.00333025603630166,
+            1.338415071650001e-05
+          ]
+        }
+      },
+      "max_absolute_power_change": 0.003330729584606812,
+      "deembedded_complex_scattering_change": 0.029802318191559894,
+      "lead_extension_each_end_m": 0.0,
+      "power_converged": true,
+      "complex_scattering_change_below_0p01": false
+    },
+    "holes_middle_to_holes_fine": {
+      "channel_matching_overlap": [
+        0.9999999999999994,
+        0.9999999999999999,
+        1.0,
+        1.0
+      ],
+      "matched_relative_wavenumber_change": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "power_change_by_channel": {
+        "left": {
+          "reflection": [
+            0.0004912061855503608,
+            0.0012614418307935887,
+            0.0036609283416664806,
+            0.00011676576676150559
+          ],
+          "transmission": [
+            0.0004912061855500971,
+            0.0012614418307915765,
+            0.0036609283416634275,
+            0.00011676576676833417
+          ]
+        },
+        "right": {
+          "reflection": [
+            0.0004913665691892444,
+            0.001261501818653199,
+            0.0036607683902404736,
+            0.00011682618683311111
+          ],
+          "transmission": [
+            0.0004913665691878011,
+            0.001261501818655808,
+            0.003660768390241542,
+            0.00011682618682928858
+          ]
+        }
+      },
+      "max_absolute_power_change": 0.0036609283416664806,
+      "deembedded_complex_scattering_change": 0.026854467535048217,
+      "lead_extension_each_end_m": 0.0,
+      "power_converged": true,
+      "complex_scattering_change_below_0p01": false
+    },
+    "holes_fine_to_curvature_fine": {
+      "channel_matching_overlap": [
+        0.9999999999999994,
+        0.9999999999999999,
+        1.0,
+        1.0
+      ],
+      "matched_relative_wavenumber_change": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "power_change_by_channel": {
+        "left": {
+          "reflection": [
+            0.00018152576821679756,
+            0.0005392980508061897,
+            0.00019600523033076744,
+            7.746017073309038e-06
+          ],
+          "transmission": [
+            0.00018152576821850452,
+            0.0005392980508033274,
+            0.00019600523033302952,
+            7.746017083087864e-06
+          ]
+        },
+        "right": {
+          "reflection": [
+            0.00018127389945594985,
+            0.0005391875105835303,
+            0.0001962740092545101,
+            7.618566687141759e-06
+          ],
+          "transmission": [
+            0.00018127389945377104,
+            0.0005391875105861255,
+            0.00019627400925292804,
+            7.618566678524452e-06
+          ]
+        }
+      },
+      "max_absolute_power_change": 0.0005392980508061897,
+      "deembedded_complex_scattering_change": 0.005586080244173266,
+      "lead_extension_each_end_m": 0.0,
+      "power_converged": true,
+      "complex_scattering_change_below_0p01": true
+    },
+    "holes_fine_to_long_leads": {
+      "channel_matching_overlap": [
+        0.9999999999999994,
+        0.9999999999999999,
+        1.0,
+        1.0
+      ],
+      "matched_relative_wavenumber_change": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "power_change_by_channel": {
+        "left": {
+          "reflection": [
+            0.00013696653332125053,
+            0.0015243501266777697,
+            0.000375258384388108,
+            4.4578622423263543e-05
+          ],
+          "transmission": [
+            0.00013696653332084807,
+            0.0015243501266730686,
+            0.00037525838438301484,
+            4.457862242857047e-05
+          ]
+        },
+        "right": {
+          "reflection": [
+            0.0001371425697081069,
+            0.0015241311773669074,
+            0.00037511146029539644,
+            4.4388785411537615e-05
+          ],
+          "transmission": [
+            0.0001371425697085371,
+            0.001524131177374044,
+            0.000375111460300559,
+            4.4388785406690445e-05
+          ]
+        }
+      },
+      "max_absolute_power_change": 0.0015243501266777697,
+      "deembedded_complex_scattering_change": 0.006574064904533539,
+      "lead_extension_each_end_m": 3.0000000000000004e-07,
+      "power_converged": true,
+      "complex_scattering_change_below_0p01": true
+    },
+    "holes_fine_to_port_fine": {
+      "channel_matching_overlap": [
+        0.9999999997936895,
+        0.9999960954205228,
+        0.9999998710231978,
+        0.9999989938353158
+      ],
+      "matched_relative_wavenumber_change": [
+        2.2081363304504159e-07,
+        0.0060938670111809114,
+        5.661186825712208e-05,
+        0.0004942366219568925
+      ],
+      "power_change_by_channel": {
+        "left": {
+          "reflection": [
+            0.00016791614338559913,
+            0.0013444476883336907,
+            0.0006690736353620191,
+            2.9146860828754303e-05
+          ],
+          "transmission": [
+            0.00016791614339850547,
+            0.0013444476883494039,
+            0.0006690736353727189,
+            2.9146860837436783e-05
+          ]
+        },
+        "right": {
+          "reflection": [
+            0.00016823495285007983,
+            0.0013444137609776759,
+            0.0006688415830937849,
+            2.91996906818204e-05
+          ],
+          "transmission": [
+            0.0001682349528552285,
+            0.001344413760982155,
+            0.0006688415830604644,
+            2.9199690654513333e-05
+          ]
+        }
+      },
+      "max_absolute_power_change": 0.0013444476883494039,
+      "deembedded_complex_scattering_change": 0.004152791997130995,
+      "lead_extension_each_end_m": 0.0,
+      "power_converged": true,
+      "complex_scattering_change_below_0p01": true
+    },
+    "curvature_fine_to_body_phase_fine": {
+      "channel_matching_overlap": [
+        0.9999999999999994,
+        0.9999999999999999,
+        1.0,
+        1.0
+      ],
+      "matched_relative_wavenumber_change": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "power_change_by_channel": {
+        "left": {
+          "reflection": [
+            0.0009306958412781952,
+            0.0034120324479295985,
+            0.003992629877912768,
+            3.388595913484921e-05
+          ],
+          "transmission": [
+            0.0009306958412780286,
+            0.003412032447924651,
+            0.00399262987791027,
+            3.388595912456882e-05
+          ]
+        },
+        "right": {
+          "reflection": [
+            0.000930761822497711,
+            0.0034118968370588226,
+            0.003992567750778234,
+            3.401771591896824e-05
+          ],
+          "transmission": [
+            0.0009307618224976277,
+            0.0034118968370625558,
+            0.00399256775077772,
+            3.401771592681513e-05
+          ]
+        }
+      },
+      "max_absolute_power_change": 0.003992629877912768,
+      "deembedded_complex_scattering_change": 0.031624612756201466,
+      "lead_extension_each_end_m": 0.0,
+      "power_converged": true,
+      "complex_scattering_change_below_0p01": false
+    }
+  },
+  "gates": {
+    "empty_geometry": true,
+    "empty_scattering": true,
+    "holes_coarse_geometry": true,
+    "holes_coarse_scattering": true,
+    "holes_middle_geometry": true,
+    "holes_middle_scattering": true,
+    "holes_fine_geometry": true,
+    "holes_fine_scattering": true,
+    "curvature_fine_geometry": true,
+    "curvature_fine_scattering": true,
+    "long_leads_geometry": true,
+    "long_leads_scattering": true,
+    "port_fine_geometry": true,
+    "port_fine_scattering": true,
+    "body_phase_fine_geometry": true,
+    "body_phase_fine_scattering": true,
+    "holes_coarse_to_holes_middle": true,
+    "holes_middle_to_holes_fine": true,
+    "holes_fine_to_curvature_fine": true,
+    "holes_fine_to_long_leads": true,
+    "holes_fine_to_port_fine": true,
+    "curvature_fine_to_body_phase_fine": true,
+    "body_mesh_complex_scattering_converged": false
+  },
+  "three_mesh_two_hole_control_passed": true,
+  "body_mesh_phase_status": "not_converged_to_0p01",
+  "passed_requested_checks": false,
+  "implementation": {
+    "git_commit": "e6d7bd3b39d0e9c275ebd38806d33b5b48395f2f",
+    "source_sha256": {
+      "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+      "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+      "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+      "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+      "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+      "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+      "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+      "src/phononic/report_AP_pnc.py": "52f621a0763c3b3f7bc3c2e1f33fdb76001ef9605b4c6015a19c774692342756",
+      "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+      "src/phononic/workflow_AP_pnc.py": "c3806d042bb9e1e8898145f9f50babc14800461e73e9c5332bc83b49f5df2a19",
+      "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5",
+      "tools/validate_perforated_AP_pnc.py": "0866feeebd22bb94fe19f43803e18ebb2a1b4ad747db54a6427e0a1ed7376fb5"
+    },
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "scikit-fem": "12.0.2",
+      "meshio": "5.3.5",
+      "gmsh": "4.15.2",
+      "matplotlib": "3.11.2",
+      "psutil": "7.2.2"
+    },
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "case_metrics": {
+    "empty": {
+      "status": "solved",
+      "case_hash": "cb4bd9bef21cdfcefd2a22fbf2da9662b1db14601d1367b065eaea0a95197567",
+      "configuration": {
+        "length_nm": 1800,
+        "width_nm": 600,
+        "thickness_nm": 200,
+        "holes_nm": [],
+        "body_size_nm": 130,
+        "port_size_nm": 150,
+        "circle_points": 32,
+        "source_sha256": null
+      },
+      "implementation": {
+        "git_commit": "e6d7bd3b39d0e9c275ebd38806d33b5b48395f2f",
+        "source_sha256": {
+          "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+          "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+          "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+          "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+          "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+          "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+          "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+          "src/phononic/report_AP_pnc.py": "52f621a0763c3b3f7bc3c2e1f33fdb76001ef9605b4c6015a19c774692342756",
+          "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+          "src/phononic/workflow_AP_pnc.py": "c3806d042bb9e1e8898145f9f50babc14800461e73e9c5332bc83b49f5df2a19",
+          "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5",
+          "tools/validate_perforated_AP_pnc.py": "8b4b7bb3bfc405686a91c615bc32cff62f3f70dc89e8667c5d23f07972aac68c"
+        },
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2",
+          "meshio": "5.3.5",
+          "gmsh": "4.15.2",
+          "matplotlib": "3.11.2",
+          "psutil": "7.2.2"
+        },
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "geometry_checks": {
+        "analytic_solid_volume_m3": 2.1600000000000007e-19,
+        "meshed_solid_volume_m3": 2.1600000000000004e-19,
+        "analytic_removed_volume_m3": 0.0,
+        "meshed_removed_volume_m3": 2.407412430484045e-35,
+        "relative_solid_volume_error": 1.1145427918907612e-16,
+        "relative_removed_volume_error": null,
+        "rim_segments_min": null,
+        "rim_segments_max": null,
+        "max_radial_sagitta_m": null,
+        "tetrahedra": 612,
+        "displacement_dofs": 3981
+      },
+      "mesh_sha256": "5ced6b358e18d5409845d331727821489a4186d921589043d3876056c7b3a087",
+      "mesh_resources": {
+        "peak_process_memory_mib": 90.8515625,
+        "system_available_memory_mib_at_start": 3244.8828125,
+        "process_lifetime_peak_working_set_mib": 91.10546875,
+        "elapsed_seconds": 0.06397289999586064
+      },
+      "scattering_resources": {
+        "peak_process_memory_mib": 148.98828125,
+        "system_available_memory_mib_at_start": 3233.48046875,
+        "process_lifetime_peak_working_set_mib": 161.73828125,
+        "elapsed_seconds": 0.5188538999937009
+      },
+      "scattering": {
+        "channels": {
+          "left": {
+            "reflection": [
+              4.884728670720119e-10,
+              3.808559695757645e-06,
+              4.71911256297861e-09,
+              9.391579565801084e-06
+            ],
+            "transmission": [
+              0.9999999995115278,
+              0.9999961914403004,
+              0.9999999952808872,
+              0.9999906084204438
+            ],
+            "reflection_flux": [
+              4.884728670204032e-10,
+              3.8085596957789068e-06,
+              4.719112564725468e-09,
+              9.391579565768604e-06
+            ],
+            "transmission_flux": [
+              0.9999999995115293,
+              0.999996191440309,
+              0.9999999952808868,
+              0.9999906084204403
+            ],
+            "reflection_gram": [
+              4.884728670719765e-10,
+              3.808559695757691e-06,
+              4.719112562980451e-09,
+              9.391579565802433e-06
+            ],
+            "transmission_gram": [
+              0.9999999995115281,
+              0.9999961914402997,
+              0.9999999952808876,
+              0.999990608420444
+            ],
+            "power_balance": [
+              -6.661338147750939e-16,
+              3.885780586188048e-15,
+              2.220446049250313e-16,
+              -9.658940314238862e-15
+            ],
+            "flux_power_balance": [
+              -2.1094237467877974e-15,
+              -4.773959005888173e-15,
+              6.661338147750939e-16,
+              -6.106226635438361e-15
+            ],
+            "net_outward_power_ratio": [
+              1.9984014443252818e-15,
+              4.551914400963144e-15,
+              -3.330669073875469e-16,
+              6.328271240363389e-15
+            ],
+            "relative_residuals": [
+              2.347473921397992e-16,
+              1.0948090386805764e-16,
+              1.7475852924187602e-16,
+              1.6445863016360237e-16
+            ],
+            "incident_powers_w": [
+              1.0,
+              0.9999999999999994,
+              1.0000000000000002,
+              1.0000000000000004
+            ],
+            "safe_root_indices": [
+              268,
+              264,
+              262,
+              247
+            ],
+            "port_basis_condition": [
+              36.62891962255338,
+              36.62891962255007
+            ]
+          },
+          "right": {
+            "reflection": [
+              4.872514953590136e-10,
+              3.8072247250066682e-06,
+              4.683725024041391e-09,
+              9.392951145459297e-06
+            ],
+            "transmission": [
+              0.9999999995127492,
+              0.9999961927752735,
+              0.9999999953162715,
+              0.9999906070488462
+            ],
+            "reflection_flux": [
+              4.872514953999952e-10,
+              3.807224725011265e-06,
+              4.683725025059278e-09,
+              9.392951145443904e-06
+            ],
+            "transmission_flux": [
+              0.999999999512751,
+              0.9999961927752734,
+              0.9999999953162771,
+              0.999990607048852
+            ],
+            "reflection_gram": [
+              4.872514953589963e-10,
+              3.807224725006045e-06,
+              4.683725024042179e-09,
+              9.392951145460411e-06
+            ],
+            "transmission_gram": [
+              0.9999999995127496,
+              0.9999961927752731,
+              0.9999999953162719,
+              0.9999906070488467
+            ],
+            "power_balance": [
+              -6.661338147750939e-16,
+              1.4432899320127035e-15,
+              3.4416913763379853e-15,
+              8.326672684688674e-15
+            ],
+            "flux_power_balance": [
+              -2.4424906541753444e-15,
+              1.5543122344752192e-15,
+              -2.220446049250313e-15,
+              2.55351295663786e-15
+            ],
+            "net_outward_power_ratio": [
+              2.886579864025407e-15,
+              -1.2212453270876728e-15,
+              1.8873791418627657e-15,
+              -1.998401444325281e-15
+            ],
+            "relative_residuals": [
+              1.9204358078960782e-16,
+              9.702227852208914e-17,
+              2.1517063646801504e-16,
+              1.650208028156848e-16
+            ],
+            "incident_powers_w": [
+              1.0,
+              0.9999999999999994,
+              1.0000000000000002,
+              1.0000000000000004
+            ],
+            "safe_root_indices": [
+              269,
+              265,
+              263,
+              248
+            ],
+            "port_basis_condition": [
+              36.62891962255338,
+              36.62891962255007
+            ]
+          }
+        },
+        "propagating_modes_per_direction": 4,
+        "port_dofs": 135,
+        "safe_max_relative_residual": 1.5850343558247387e-15,
+        "max_power_budget_error": 9.658940314238862e-15,
+        "max_modal_flux_difference": 8.659739592076221e-15,
+        "max_reciprocity_error": 2.7993609087599336e-13,
+        "time_reversal_mode_overlap": [
+          1.0000000000000004,
+          1.0000000000000004,
+          0.9999999999999997,
+          0.9999999999999999
+        ],
+        "time_reversal_relative_wavenumber_error": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wavenumbers_positive_power_rad_m": [
+          1438522.4531530493,
+          3061012.9635697864,
+          3333511.089908331,
+          5216374.272506447
+        ],
+        "scattering_matrix_time_reversal_basis": [
+          [
+            [
+              -5.063869683021007e-07,
+              -7.712279239751856e-07
+            ],
+            [
+              5.678653207852851e-06,
+              -3.6421676658635085e-06
+            ],
+            [
+              -1.9330253034429325e-06,
+              -4.258869516604581e-06
+            ],
+            [
+              -9.631015846621183e-06,
+              1.8096356961053748e-05
+            ],
+            [
+              -0.8513434659944127,
+              0.5246087133364712
+            ],
+            [
+              7.785655400713663e-06,
+              -6.265440456308875e-06
+            ],
+            [
+              5.657296335985271e-07,
+              4.215640974167132e-07
+            ],
+            [
+              -4.688941584872186e-06,
+              -1.3756612781800202e-05
+            ]
+          ],
+          [
+            [
+              5.678653218903942e-06,
+              -3.6421676518146836e-06
+            ],
+            [
+              -0.000979697664693457,
+              -0.001673619932723311
+            ],
+            [
+              1.6984651438623146e-05,
+              -2.4187382530221973e-05
+            ],
+            [
+              9.052173351025008e-05,
+              -0.00019655863699041077
+            ],
+            [
+              7.884137685040626e-06,
+              -6.113454067424533e-06
+            ],
+            [
+              0.7086774448539872,
+              -0.7055291500766985
+            ],
+            [
+              8.028746363107032e-06,
+              -2.224167684330017e-05
+            ],
+            [
+              0.00013290591525727497,
+              0.001034729388840152
+            ]
+          ],
+          [
+            [
+              -1.9330253302596357e-06,
+              -4.2588695955299605e-06
+            ],
+            [
+              1.6984651397921092e-05,
+              -2.4187382527393036e-05
+            ],
+            [
+              1.0380090098244235e-05,
+              4.46343418486504e-05
+            ],
+            [
+              -1.4311287208249562e-06,
+              4.149350881768704e-05
+            ],
+            [
+              6.616933606812588e-08,
+              -7.051861090059977e-07
+            ],
+            [
+              -2.3505463871669025e-05,
+              -3.8508524122490756e-06
+            ],
+            [
+              0.9600918776294655,
+              -0.27968475319921726
+            ],
+            [
+              -0.00014075875868779883,
+              1.5422033049694663e-05
+            ]
+          ],
+          [
+            [
+              -9.631015849501954e-06,
+              1.8096356974889184e-05
+            ],
+            [
+              9.052173354227392e-05,
+              -0.00019655863693909334
+            ],
+            [
+              -1.431128770181108e-06,
+              4.149350884384077e-05
+            ],
+            [
+              1.1048082101708534e-05,
+              0.0030565477306374283
+            ],
+            [
+              -4.2763625970848295e-06,
+              -1.394628942752638e-05
+            ],
+            [
+              -0.0006975825306226934,
+              -0.0007765526081997727
+            ],
+            [
+              -0.00013731040239364529,
+              3.5217821247126576e-05
+            ],
+            [
+              -0.997049468441636,
+              0.07669325875270505
+            ]
+          ],
+          [
+            [
+              -0.8513434659944139,
+              0.524608713336469
+            ],
+            [
+              7.884137735765286e-06,
+              -6.113454031573168e-06
+            ],
+            [
+              6.616928370189434e-08,
+              -7.051863047220285e-07
+            ],
+            [
+              -4.276362594644914e-06,
+              -1.3946289451268243e-05
+            ],
+            [
+              -4.6126024205531937e-07,
+              -7.985492608354837e-07
+            ],
+            [
+              4.854799445147166e-06,
+              -4.660562744287145e-06
+            ],
+            [
+              1.8658504566225737e-06,
+              4.290360166979443e-06
+            ],
+            [
+              1.8395884629251717e-05,
+              8.989659033390871e-06
+            ]
+          ],
+          [
+            [
+              7.785655421697754e-06,
+              -6.265440397811694e-06
+            ],
+            [
+              0.7086774448539919,
+              -0.7055291500766923
+            ],
+            [
+              -2.350546362463044e-05,
+              -3.850852338671877e-06
+            ],
+            [
+              -0.0006975825304437633,
+              -0.0007765526081413614
+            ],
+            [
+              4.8547994418205865e-06,
+              -4.6605627585492455e-06
+            ],
+            [
+              -0.001669075781825993,
+              -0.0009867181343925508
+            ],
+            [
+              -2.937661531535061e-05,
+              3.147868714056611e-06
+            ],
+            [
+              0.0002076881797923203,
+              6.120063934886802e-05
+            ]
+          ],
+          [
+            [
+              5.657295238462064e-07,
+              4.215639238253466e-07
+            ],
+            [
+              8.028746427236147e-06,
+              -2.2241677098020816e-05
+            ],
+            [
+              0.9600918776294675,
+              -0.2796847531992162
+            ],
+            [
+              -0.00013731040263430513,
+              3.521782139011978e-05
+            ],
+            [
+              1.8658504984252383e-06,
+              4.290360240132787e-06
+            ],
+            [
+              -2.9376615293895385e-05,
+              3.147868693544905e-06
+            ],
+            [
+              1.5207047897226143e-05,
+              4.321688219451686e-05
+            ],
+            [
+              -1.5807530827029207e-05,
+              -3.7948788995881185e-05
+            ]
+          ],
+          [
+            [
+              -4.6889415694971165e-06,
+              -1.3756612770601679e-05
+            ],
+            [
+              0.00013290591519000944,
+              0.0010347293889960796
+            ],
+            [
+              -0.00014075875842567035,
+              1.542203310760456e-05
+            ],
+            [
+              -0.9970494684416452,
+              0.07669325875270068
+            ],
+            [
+              1.8395884639353246e-05,
+              8.989659050402051e-06
+            ],
+            [
+              0.00020768817976257582,
+              6.120063929589518e-05
+            ],
+            [
+              -1.5807530865946704e-05,
+              -3.7948788998917256e-05
+            ],
+            [
+              0.00045617453649774434,
+              0.0030225596484222236
+            ]
+          ]
+        ],
+        "gates": {
+          "energy_budget": true,
+          "modal_direct_flux_agreement": true,
+          "reciprocity": true,
+          "residuals": true,
+          "matched_no_hole_control": true
+        }
+      }
+    },
+    "holes_coarse": {
+      "status": "solved",
+      "case_hash": "2c036f49e10e9b47ccc4cd8cc653cdce463c9cd23aeb79c9b206206d108fdb52",
+      "configuration": {
+        "length_nm": 1800,
+        "width_nm": 600,
+        "thickness_nm": 200,
+        "holes_nm": [
+          [
+            625.0,
+            250.0
+          ],
+          [
+            1175.0,
+            250.0
+          ]
+        ],
+        "body_size_nm": 160,
+        "port_size_nm": 150,
+        "circle_points": 32,
+        "source_sha256": null
+      },
+      "implementation": {
+        "git_commit": "e6d7bd3b39d0e9c275ebd38806d33b5b48395f2f",
+        "source_sha256": {
+          "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+          "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+          "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+          "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+          "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+          "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+          "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+          "src/phononic/report_AP_pnc.py": "52f621a0763c3b3f7bc3c2e1f33fdb76001ef9605b4c6015a19c774692342756",
+          "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+          "src/phononic/workflow_AP_pnc.py": "c3806d042bb9e1e8898145f9f50babc14800461e73e9c5332bc83b49f5df2a19",
+          "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5",
+          "tools/validate_perforated_AP_pnc.py": "8b4b7bb3bfc405686a91c615bc32cff62f3f70dc89e8667c5d23f07972aac68c"
+        },
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2",
+          "meshio": "5.3.5",
+          "gmsh": "4.15.2",
+          "matplotlib": "3.11.2",
+          "psutil": "7.2.2"
+        },
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "geometry_checks": {
+        "analytic_solid_volume_m3": 1.9636504591506386e-19,
+        "meshed_solid_volume_m3": 1.9649096779838723e-19,
+        "analytic_removed_volume_m3": 1.9634954084936215e-20,
+        "meshed_removed_volume_m3": 1.9509032201612837e-20,
+        "relative_solid_volume_error": 0.0006412642470892793,
+        "relative_removed_volume_error": 0.00641314885579409,
+        "rim_segments_min": 32,
+        "rim_segments_max": 32,
+        "max_radial_sagitta_m": 6.019091659754117e-10,
+        "tetrahedra": 958,
+        "displacement_dofs": 6498,
+        "predicted_polygon_removed_volume_bias": 0.006413148855794248,
+        "polygon_volume_difference": 1.5872719805187785e-16,
+        "polygon_sagitta_upper_m": 6.01909165975384e-10
+      },
+      "mesh_sha256": "ef080228cbbb06666b83c78c18a482a43c16de86d2b2b9f2c3617a4f48e8c8b7",
+      "mesh_resources": {
+        "peak_process_memory_mib": 96.04296875,
+        "system_available_memory_mib_at_start": 3234.3046875,
+        "process_lifetime_peak_working_set_mib": 161.73828125,
+        "elapsed_seconds": 0.05365410000376869
+      },
+      "scattering_resources": {
+        "peak_process_memory_mib": 188.734375,
+        "system_available_memory_mib_at_start": 3236.796875,
+        "process_lifetime_peak_working_set_mib": 195.359375,
+        "elapsed_seconds": 0.9740874999988591
+      },
+      "scattering": {
+        "channels": {
+          "left": {
+            "reflection": [
+              0.08060328399624127,
+              0.024187989857561543,
+              0.0732864840139524,
+              0.00015173271583087043
+            ],
+            "transmission": [
+              0.9193967160037619,
+              0.9758120101424324,
+              0.9267135159860468,
+              0.9998482672841772
+            ],
+            "reflection_flux": [
+              0.08060328399624124,
+              0.0241879898575617,
+              0.07328648401395375,
+              0.0001517327158308839
+            ],
+            "transmission_flux": [
+              0.9193967160037607,
+              0.9758120101424395,
+              0.9267135159860418,
+              0.9998482672841713
+            ],
+            "reflection_gram": [
+              0.0806032839962412,
+              0.02418798985756161,
+              0.0732864840139526,
+              0.00015173271583088997
+            ],
+            "transmission_gram": [
+              0.9193967160037622,
+              0.9758120101424322,
+              0.9267135159860437,
+              0.9998482672841766
+            ],
+            "power_balance": [
+              -3.219646771412954e-15,
+              6.106226635438361e-15,
+              7.771561172376096e-16,
+              -8.104628079763643e-15
+            ],
+            "flux_power_balance": [
+              -1.9984014443252818e-15,
+              -1.1102230246251565e-15,
+              4.440892098500626e-15,
+              -2.220446049250313e-15
+            ],
+            "net_outward_power_ratio": [
+              1.5543122344752192e-15,
+              1.1102230246251573e-16,
+              -5.4400928206632655e-15,
+              2.3314683517128276e-15
+            ],
+            "relative_residuals": [
+              1.8049439081249202e-16,
+              7.384492044764445e-17,
+              1.5702213943492638e-16,
+              1.4743768069508554e-16
+            ],
+            "incident_powers_w": [
+              1.0,
+              0.9999999999999994,
+              1.0000000000000002,
+              1.0000000000000004
+            ],
+            "safe_root_indices": [
+              268,
+              264,
+              262,
+              247
+            ],
+            "port_basis_condition": [
+              36.62891962255338,
+              36.62891962255007
+            ]
+          },
+          "right": {
+            "reflection": [
+              0.08060288974586145,
+              0.024187854425048894,
+              0.073286922843113,
+              0.00015182356955847397
+            ],
+            "transmission": [
+              0.9193971102541364,
+              0.9758121455749473,
+              0.9267130771568857,
+              0.9998481764304341
+            ],
+            "reflection_flux": [
+              0.08060288974586123,
+              0.024187854425048144,
+              0.07328692284311188,
+              0.00015182356955851958
+            ],
+            "transmission_flux": [
+              0.9193971102541377,
+              0.9758121455749491,
+              0.9267130771568902,
+              0.9998481764304378
+            ],
+            "reflection_gram": [
+              0.08060288974586141,
+              0.024187854425048734,
+              0.0732869228431113,
+              0.0001518235695584863
+            ],
+            "transmission_gram": [
+              0.9193971102541367,
+              0.9758121455749473,
+              0.9267130771568871,
+              0.9998481764304337
+            ],
+            "power_balance": [
+              2.1094237467877974e-15,
+              3.774758283725532e-15,
+              1.3322676295501878e-15,
+              7.438494264988549e-15
+            ],
+            "flux_power_balance": [
+              9.992007221626409e-16,
+              2.7755575615628914e-15,
+              -2.1094237467877974e-15,
+              3.6637359812630166e-15
+            ],
+            "net_outward_power_ratio": [
+              -6.661338147750939e-16,
+              0.0,
+              5.3290705182007506e-15,
+              -1.2212453270876716e-15
+            ],
+            "relative_residuals": [
+              1.5159587282685265e-16,
+              7.517105587103807e-17,
+              1.4450587670273579e-16,
+              1.1915910392428096e-16
+            ],
+            "incident_powers_w": [
+              1.0,
+              0.9999999999999994,
+              1.0000000000000002,
+              1.0000000000000004
+            ],
+            "safe_root_indices": [
+              269,
+              265,
+              263,
+              248
+            ],
+            "port_basis_condition": [
+              36.62891962255338,
+              36.62891962255007
+            ]
+          }
+        },
+        "propagating_modes_per_direction": 4,
+        "port_dofs": 135,
+        "safe_max_relative_residual": 1.5850343558247387e-15,
+        "max_power_budget_error": 8.104628079763643e-15,
+        "max_modal_flux_difference": 7.105427357601002e-15,
+        "max_reciprocity_error": 2.7774456737238956e-13,
+        "time_reversal_mode_overlap": [
+          1.0000000000000004,
+          1.0000000000000004,
+          0.9999999999999997,
+          0.9999999999999999
+        ],
+        "time_reversal_relative_wavenumber_error": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wavenumbers_positive_power_rad_m": [
+          1438522.4531530493,
+          3061012.9635697864,
+          3333511.089908331,
+          5216374.272506447
+        ],
+        "scattering_matrix_time_reversal_basis": [
+          [
+            [
+              0.09809379849288781,
+              0.2664217796654317
+            ],
+            [
+              -4.3216610749568176e-05,
+              1.778481851985095e-05
+            ],
+            [
+              -0.00046076297256042405,
+              2.9930398918819533e-05
+            ],
+            [
+              0.00020166477810188422,
+              0.0002645040237622169
+            ],
+            [
+              -0.8999435319111029,
+              0.3309042331735094
+            ],
+            [
+              0.0001758442097550585,
+              0.0003800843049621992
+            ],
+            [
+              0.0001130611759529886,
+              -0.0006922792788332592
+            ],
+            [
+              0.00026891399371313355,
+              6.410576103853012e-05
+            ]
+          ],
+          [
+            [
+              -4.3216610749938925e-05,
+              1.7784818542592113e-05
+            ],
+            [
+              -0.03740622339299003,
+              -0.15094839968022344
+            ],
+            [
+              0.0007763400818388786,
+              -0.0007705443250605573
+            ],
+            [
+              -0.0006170002194987519,
+              -0.001328769088181742
+            ],
+            [
+              -6.76119707312022e-05,
+              -0.0004047027096023834
+            ],
+            [
+              0.9567834854234224,
+              -0.24571622566329962
+            ],
+            [
+              -0.0003637363446690783,
+              0.0003671927981407529
+            ],
+            [
+              -5.993877711458539e-05,
+              -0.0006852198399780631
+            ]
+          ],
+          [
+            [
+              -0.0004607629725570029,
+              2.9930398825551895e-05
+            ],
+            [
+              0.0007763400816486153,
+              -0.0007705443250311805
+            ],
+            [
+              0.059641937677595146,
+              -0.26406003787626087
+            ],
+            [
+              -0.0004458195575987709,
+              0.00010623040404311902
+            ],
+            [
+              0.0002235237127791952,
+              0.0009402039569555562
+            ],
+            [
+              3.986080650173983e-05,
+              0.00044399323034066977
+            ],
+            [
+              0.9400487700072891,
+              0.20741375391212094
+            ],
+            [
+              -0.0004529813194588489,
+              0.00015107823408051153
+            ]
+          ],
+          [
+            [
+              0.0002016647780961238,
+              0.00026450402377153404
+            ],
+            [
+              -0.0006170002194924458,
+              -0.0013287690881032908
+            ],
+            [
+              -0.00044581955765503984,
+              0.00010623040399952518
+            ],
+            [
+              -0.0018718776906752489,
+              0.012073185252594274
+            ],
+            [
+              -0.00017643296141948127,
+              6.828451672337955e-05
+            ],
+            [
+              -0.00016897898626226348,
+              0.0008008643466462001
+            ],
+            [
+              -0.0003621750774191968,
+              -0.00017752142171626722
+            ],
+            [
+              -0.9911301308415115,
+              -0.1323195473414393
+            ]
+          ],
+          [
+            [
+              -0.8999435319111057,
+              0.33090423317350814
+            ],
+            [
+              -6.76119706982268e-05,
+              -0.00040470270955566065
+            ],
+            [
+              0.00022352371279459507,
+              0.0009402039567690911
+            ],
+            [
+              -0.00017643296141232835,
+              6.82845166933418e-05
+            ],
+            [
+              0.09786089179101311,
+              0.26650671598917763
+            ],
+            [
+              -8.048195440401181e-07,
+              -3.004753013056185e-05
+            ],
+            [
+              -0.0004788509243524039,
+              -5.955011603147628e-05
+            ],
+            [
+              -0.00012378609555243952,
+              0.0002384648182947224
+            ]
+          ],
+          [
+            [
+              0.00017584420975061578,
+              0.0003800843050223135
+            ],
+            [
+              0.9567834854234223,
+              -0.24571622566329027
+            ],
+            [
+              3.9860806644413247e-05,
+              0.0004439932305218978
+            ],
+            [
+              -0.00016897898611699508,
+              0.0008008643467742837
+            ],
+            [
+              -8.048195393023769e-07,
+              -3.0047530144782073e-05
+            ],
+            [
+              -0.03995483206758782,
+              -0.15029354551434962
+            ],
+            [
+              -0.000627273249284693,
+              -0.0007704505537521713
+            ],
+            [
+              -0.000559717170983291,
+              0.0014194166505697295
+            ]
+          ],
+          [
+            [
+              0.0001130611759151843,
+              -0.0006922792790249694
+            ],
+            [
+              -0.0003637363445019306,
+              0.0003671927979752462
+            ],
+            [
+              0.9400487700072893,
+              0.2074137539121217
+            ],
+            [
+              -0.0003621750776939315,
+              -0.00017752142167548843
+            ],
+            [
+              -0.0004788509243362047,
+              -5.9550115920025095e-05
+            ],
+            [
+              -0.0006272732491768292,
+              -0.0007704505536949836
+            ],
+            [
+              0.057012495979956404,
+              -0.2646415166733865
+            ],
+            [
+              -0.00035896110157683183,
+              -0.00013051734217953752
+            ]
+          ],
+          [
+            [
+              0.0002689139937285539,
+              6.410576105677727e-05
+            ],
+            [
+              -5.9938777244117646e-05,
+              -0.0006852198398480069
+            ],
+            [
+              -0.0004529813192323014,
+              0.00015107823422896147
+            ],
+            [
+              -0.9911301308415186,
+              -0.1323195473414458
+            ],
+            [
+              -0.00012378609554042203,
+              0.00023846481830594254
+            ],
+            [
+              -0.0005597171709767308,
+              0.001419416650513832
+            ],
+            [
+              -0.00035896110159351835,
+              -0.00013051734221770998
+            ],
+            [
+              -0.0013582802832242814,
+              0.01214218023977567
+            ]
+          ]
+        ],
+        "gates": {
+          "energy_budget": true,
+          "modal_direct_flux_agreement": true,
+          "reciprocity": true,
+          "residuals": true
+        }
+      }
+    },
+    "holes_middle": {
+      "status": "solved",
+      "case_hash": "47dfe5049b33560611fdf475e9786d28cf0922185d4c65244359fd4c1c94fd00",
+      "configuration": {
+        "length_nm": 1800,
+        "width_nm": 600,
+        "thickness_nm": 200,
+        "holes_nm": [
+          [
+            625.0,
+            250.0
+          ],
+          [
+            1175.0,
+            250.0
+          ]
+        ],
+        "body_size_nm": 130,
+        "port_size_nm": 150,
+        "circle_points": 32,
+        "source_sha256": null
+      },
+      "implementation": {
+        "git_commit": "e6d7bd3b39d0e9c275ebd38806d33b5b48395f2f",
+        "source_sha256": {
+          "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+          "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+          "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+          "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+          "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+          "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+          "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+          "src/phononic/report_AP_pnc.py": "52f621a0763c3b3f7bc3c2e1f33fdb76001ef9605b4c6015a19c774692342756",
+          "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+          "src/phononic/workflow_AP_pnc.py": "c3806d042bb9e1e8898145f9f50babc14800461e73e9c5332bc83b49f5df2a19",
+          "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5",
+          "tools/validate_perforated_AP_pnc.py": "bb60013de2f4365124a340c3731db60fbe6504b2dc011d8f0fe9d09169777e81"
+        },
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2",
+          "meshio": "5.3.5",
+          "gmsh": "4.15.2",
+          "matplotlib": "3.11.2",
+          "psutil": "7.2.2"
+        },
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "geometry_checks": {
+        "analytic_solid_volume_m3": 1.9636504591506386e-19,
+        "meshed_solid_volume_m3": 1.9649096779838723e-19,
+        "analytic_removed_volume_m3": 1.9634954084936215e-20,
+        "meshed_removed_volume_m3": 1.9509032201612837e-20,
+        "relative_solid_volume_error": 0.0006412642470892793,
+        "relative_removed_volume_error": 0.00641314885579409,
+        "rim_segments_min": 32,
+        "rim_segments_max": 32,
+        "max_radial_sagitta_m": 6.019091659754117e-10,
+        "tetrahedra": 1154,
+        "displacement_dofs": 7623,
+        "predicted_polygon_removed_volume_bias": 0.006413148855794248,
+        "polygon_volume_difference": 1.5872719805187785e-16,
+        "polygon_sagitta_upper_m": 6.01909165975384e-10
+      },
+      "mesh_sha256": "1956f885c4e6e5903e4563a94f8d09515f545d63959c1f8d523be374985da702",
+      "mesh_resources": {
+        "peak_process_memory_mib": 91.1171875,
+        "system_available_memory_mib_at_start": 3597.15234375,
+        "process_lifetime_peak_working_set_mib": 92.0859375,
+        "elapsed_seconds": 0.11022549998597242
+      },
+      "scattering_resources": {
+        "peak_process_memory_mib": 216.80859375,
+        "system_available_memory_mib_at_start": 3602.875,
+        "process_lifetime_peak_working_set_mib": 222.24609375,
+        "elapsed_seconds": 1.6912872999964748
+      },
+      "scattering": {
+        "channels": {
+          "left": {
+            "reflection": [
+              0.08150447153376149,
+              0.027085931438826923,
+              0.0766172135985592,
+              0.00016516060386482796
+            ],
+            "transmission": [
+              0.918495528466239,
+              0.9729140685611654,
+              0.9233827864014442,
+              0.9998348393961383
+            ],
+            "reflection_flux": [
+              0.08150447153376138,
+              0.02708593143882722,
+              0.07661721359855869,
+              0.00016516060386471797
+            ],
+            "transmission_flux": [
+              0.9184955284662395,
+              0.9729140685611738,
+              0.9233827864014384,
+              0.999834839396133
+            ],
+            "reflection_gram": [
+              0.08150447153376138,
+              0.027085931438826965,
+              0.07661721359855973,
+              0.0001651606038648495
+            ],
+            "transmission_gram": [
+              0.9184955284662392,
+              0.9729140685611651,
+              0.92338278640144,
+              0.9998348393961378
+            ],
+            "power_balance": [
+              -5.551115123125783e-16,
+              7.771561172376096e-15,
+              -3.4416913763379853e-15,
+              -3.1086244689504383e-15
+            ],
+            "flux_power_balance": [
+              -8.881784197001252e-16,
+              -9.992007221626409e-16,
+              2.886579864025407e-15,
+              2.220446049250313e-15
+            ],
+            "net_outward_power_ratio": [
+              2.220446049250313e-15,
+              -2.2204460492503146e-16,
+              -1.1102230246251563e-15,
+              1.7763568394002497e-15
+            ],
+            "relative_residuals": [
+              2.0867951422338962e-16,
+              1.0305519060763109e-16,
+              2.2550379686737765e-16,
+              1.4567419469722463e-16
+            ],
+            "incident_powers_w": [
+              1.0,
+              0.9999999999999994,
+              1.0000000000000002,
+              1.0000000000000004
+            ],
+            "safe_root_indices": [
+              268,
+              264,
+              262,
+              247
+            ],
+            "port_basis_condition": [
+              36.62891962255338,
+              36.62891962255007
+            ]
+          },
+          "right": {
+            "reflection": [
+              0.08150449820789923,
+              0.027085892367425073,
+              0.07661717887940889,
+              0.00016520772027451538
+            ],
+            "transmission": [
+              0.9184955017920984,
+              0.9729141076325719,
+              0.923382821120584,
+              0.9998347922797176
+            ],
+            "reflection_flux": [
+              0.08150449820789932,
+              0.027085892367425226,
+              0.07661717887940742,
+              0.00016520772027457973
+            ],
+            "transmission_flux": [
+              0.9184955017920993,
+              0.9729141076325722,
+              0.9233828211205897,
+              0.9998347922797162
+            ],
+            "reflection_gram": [
+              0.0815044982078992,
+              0.027085892367425025,
+              0.07661717887940743,
+              0.00016520772027452305
+            ],
+            "transmission_gram": [
+              0.9184955017920992,
+              0.9729141076325709,
+              0.9233828211205859,
+              0.9998347922797175
+            ],
+            "power_balance": [
+              2.4424906541753444e-15,
+              2.9976021664879227e-15,
+              7.105427357601002e-15,
+              7.882583474838611e-15
+            ],
+            "flux_power_balance": [
+              1.4432899320127035e-15,
+              2.55351295663786e-15,
+              2.886579864025407e-15,
+              9.2148511043888e-15
+            ],
+            "net_outward_power_ratio": [
+              -2.7755575615628914e-15,
+              2.2204460492503143e-15,
+              1.8873791418627657e-15,
+              -7.438494264988546e-15
+            ],
+            "relative_residuals": [
+              1.4223521234110203e-16,
+              1.0620252140644801e-16,
+              2.3427644464105732e-16,
+              1.3293630562116103e-16
+            ],
+            "incident_powers_w": [
+              1.0,
+              0.9999999999999994,
+              1.0000000000000002,
+              1.0000000000000004
+            ],
+            "safe_root_indices": [
+              269,
+              265,
+              263,
+              248
+            ],
+            "port_basis_condition": [
+              36.62891962255338,
+              36.62891962255007
+            ]
+          }
+        },
+        "propagating_modes_per_direction": 4,
+        "port_dofs": 135,
+        "safe_max_relative_residual": 1.5850343558247387e-15,
+        "max_power_budget_error": 9.2148511043888e-15,
+        "max_modal_flux_difference": 8.43769498715119e-15,
+        "max_reciprocity_error": 2.788799540790984e-13,
+        "time_reversal_mode_overlap": [
+          1.0000000000000004,
+          1.0000000000000004,
+          0.9999999999999997,
+          0.9999999999999999
+        ],
+        "time_reversal_relative_wavenumber_error": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wavenumbers_positive_power_rad_m": [
+          1438522.4531530493,
+          3061012.9635697864,
+          3333511.089908331,
+          5216374.272506447
+        ],
+        "scattering_matrix_time_reversal_basis": [
+          [
+            [
+              0.09699204360083911,
+              0.2685088348354379
+            ],
+            [
+              -7.141842052052536e-05,
+              -4.5199816155637856e-05
+            ],
+            [
+              -0.00011310320328294886,
+              1.3154705274702473e-05
+            ],
+            [
+              -1.9086296063443015e-05,
+              1.2406780534274397e-05
+            ],
+            [
+              -0.9006913890857726,
+              0.3274904503053148
+            ],
+            [
+              0.00017644944472147567,
+              0.0006592635300252124
+            ],
+            [
+              0.00020611858444097585,
+              0.00016707673853559032
+            ],
+            [
+              0.00013110840130514106,
+              -4.123193537832098e-05
+            ]
+          ],
+          [
+            [
+              -7.141842051499536e-05,
+              -4.5199816134019875e-05
+            ],
+            [
+              -0.03702931263560646,
+              -0.1603575950541444
+            ],
+            [
+              -1.6128329992849553e-05,
+              0.0002586768758671859
+            ],
+            [
+              0.00018400067121112607,
+              -0.00030818712204780396
+            ],
+            [
+              -0.00021355195646686613,
+              -0.0006419187921228722
+            ],
+            [
+              0.9623252749883934,
+              -0.2164336926784542
+            ],
+            [
+              -6.778437419116743e-05,
+              -0.00032800740309490707
+            ],
+            [
+              7.426187035217748e-05,
+              0.00012243642083476647
+            ]
+          ],
+          [
+            [
+              -0.00011310320328193059,
+              1.3154705174146682e-05
+            ],
+            [
+              -1.6128330192920886e-05,
+              0.0002586768758915799
+            ],
+            [
+              0.061862077724316525,
+              -0.2697963853094817
+            ],
+            [
+              -0.0002667048146088688,
+              -0.00023694184801106453
+            ],
+            [
+              0.0001894465208783531,
+              -0.00012431479675100872
+            ],
+            [
+              0.00018467401928011127,
+              -0.00032019568973719467
+            ],
+            [
+              0.9355281397347763,
+              0.21947589534019663
+            ],
+            [
+              7.715969908040396e-05,
+              -0.00015363234288447774
+            ]
+          ],
+          [
+            [
+              -1.9086296068538714e-05,
+              1.2406780545458045e-05
+            ],
+            [
+              0.0001840006712130085,
+              -0.0003081871219674164
+            ],
+            [
+              -0.0002667048146654503,
+              -0.00023694184804942775
+            ],
+            [
+              -0.0018080505667623864,
+              0.012713572682424122
+            ],
+            [
+              -0.00013892437145014678,
+              -8.327921401878237e-06
+            ],
+            [
+              1.771033102952789e-05,
+              -0.00016345768677240944
+            ],
+            [
+              -5.008052858738383e-05,
+              0.0002591494695896718
+            ],
+            [
+              -0.9900572358232423,
+              -0.14007638317095075
+            ]
+          ],
+          [
+            [
+              -0.9006913890857738,
+              0.32749045030531304
+            ],
+            [
+              -0.00021355195643983342,
+              -0.0006419187920726798
+            ],
+            [
+              0.00018944652089891215,
+              -0.00012431479691786356
+            ],
+            [
+              -0.00013892437143949734,
+              -8.327921431082549e-06
+            ],
+            [
+              0.09811818418203237,
+              0.2680993955243525
+            ],
+            [
+              4.7686112288490006e-05,
+              6.094519825485485e-05
+            ],
+            [
+              -0.00011904617158279874,
+              -0.00011480813091767422
+            ],
+            [
+              9.757601880515495e-06,
+              -2.8702014024382872e-05
+            ]
+          ],
+          [
+            [
+              0.00017644944472105845,
+              0.0006592635300836288
+            ],
+            [
+              0.9623252749883912,
+              -0.21643369267844614
+            ],
+            [
+              0.000184674019413455,
+              -0.00032019568954507393
+            ],
+            [
+              1.7710331174208667e-05,
+              -0.00016345768664332487
+            ],
+            [
+              4.768611229634673e-05,
+              6.094519823693317e-05
+            ],
+            [
+              -0.035194409751323256,
+              -0.16077011547225184
+            ],
+            [
+              -0.00013314736609723775,
+              0.00024276673592232598
+            ],
+            [
+              0.00023000117379663607,
+              0.00028338664092604005
+            ]
+          ],
+          [
+            [
+              0.00020611858440299004,
+              0.00016707673836288637
+            ],
+            [
+              -6.77843740261728e-05,
+              -0.0003280074032637597
+            ],
+            [
+              0.9355281397347812,
+              0.21947589534019954
+            ],
+            [
+              -5.008052886319879e-05,
+              0.00025914946963090455
+            ],
+            [
+              -0.00011904617156884705,
+              -0.00011480813079746149
+            ],
+            [
+              -0.00013314736598740105,
+              0.00024276673597880405
+            ],
+            [
+              0.06457778310481468,
+              -0.26915910071968
+            ],
+            [
+              -0.0003898327908417569,
+              0.00010640506412645004
+            ]
+          ],
+          [
+            [
+              0.00013110840132341675,
+              -4.123193536087665e-05
+            ],
+            [
+              7.426187021815513e-05,
+              0.00012243642096048456
+            ],
+            [
+              7.715969930301478e-05,
+              -0.0001536323427303795
+            ],
+            [
+              -0.9900572358232467,
+              -0.14007638317095816
+            ],
+            [
+              9.757601891972364e-06,
+              -2.8702014011216114e-05
+            ],
+            [
+              0.00023000117380239727,
+              0.0002833866408696595
+            ],
+            [
+              -0.00038983279085438865,
+              0.00010640506408067906
+            ],
+            [
+              -0.0017898679584323126,
+              0.012716393898381683
+            ]
+          ]
+        ],
+        "gates": {
+          "energy_budget": true,
+          "modal_direct_flux_agreement": true,
+          "reciprocity": true,
+          "residuals": true
+        }
+      }
+    },
+    "holes_fine": {
+      "status": "solved",
+      "case_hash": "fc4bde2eccfd8791c4de17a33942a6c91da9ca84310a6d4a851369e5ea987f82",
+      "configuration": {
+        "length_nm": 1800,
+        "width_nm": 600,
+        "thickness_nm": 200,
+        "holes_nm": [
+          [
+            625.0,
+            250.0
+          ],
+          [
+            1175.0,
+            250.0
+          ]
+        ],
+        "body_size_nm": 105,
+        "port_size_nm": 150,
+        "circle_points": 32,
+        "source_sha256": null
+      },
+      "implementation": {
+        "git_commit": "e6d7bd3b39d0e9c275ebd38806d33b5b48395f2f",
+        "source_sha256": {
+          "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+          "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+          "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+          "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+          "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+          "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+          "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+          "src/phononic/report_AP_pnc.py": "52f621a0763c3b3f7bc3c2e1f33fdb76001ef9605b4c6015a19c774692342756",
+          "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+          "src/phononic/workflow_AP_pnc.py": "c3806d042bb9e1e8898145f9f50babc14800461e73e9c5332bc83b49f5df2a19",
+          "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5",
+          "tools/validate_perforated_AP_pnc.py": "bb60013de2f4365124a340c3731db60fbe6504b2dc011d8f0fe9d09169777e81"
+        },
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2",
+          "meshio": "5.3.5",
+          "gmsh": "4.15.2",
+          "matplotlib": "3.11.2",
+          "psutil": "7.2.2"
+        },
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "geometry_checks": {
+        "analytic_solid_volume_m3": 1.9636504591506386e-19,
+        "meshed_solid_volume_m3": 1.9649096779838723e-19,
+        "analytic_removed_volume_m3": 1.9634954084936215e-20,
+        "meshed_removed_volume_m3": 1.9509032201612837e-20,
+        "relative_solid_volume_error": 0.0006412642470892793,
+        "relative_removed_volume_error": 0.00641314885579409,
+        "rim_segments_min": 32,
+        "rim_segments_max": 32,
+        "max_radial_sagitta_m": 6.019091659754117e-10,
+        "tetrahedra": 1612,
+        "displacement_dofs": 10068,
+        "predicted_polygon_removed_volume_bias": 0.006413148855794248,
+        "polygon_volume_difference": 1.5872719805187785e-16,
+        "polygon_sagitta_upper_m": 6.01909165975384e-10
+      },
+      "mesh_sha256": "ac943bb8e42614ea9f28e28b7ab076636351190e1fc7a18c0ae2a75717270813",
+      "mesh_resources": {
+        "peak_process_memory_mib": 92.4765625,
+        "system_available_memory_mib_at_start": 3588.22265625,
+        "process_lifetime_peak_working_set_mib": 94.47265625,
+        "elapsed_seconds": 0.07535049998841714
+      },
+      "scattering_resources": {
+        "peak_process_memory_mib": 268.85546875,
+        "system_available_memory_mib_at_start": 3608.5,
+        "process_lifetime_peak_working_set_mib": 272.578125,
+        "elapsed_seconds": 2.546841300005326
+      },
+      "scattering": {
+        "channels": {
+          "left": {
+            "reflection": [
+              0.08199567771931185,
+              0.028347373269620512,
+              0.08027814194022569,
+              4.839483710332237e-05
+            ],
+            "transmission": [
+              0.918004322280689,
+              0.9716526267303738,
+              0.9197218580597808,
+              0.9999516051629066
+            ],
+            "reflection_flux": [
+              0.08199567771930964,
+              0.028347373269620047,
+              0.08027814194022577,
+              4.839483710335805e-05
+            ],
+            "transmission_flux": [
+              0.91800432228069,
+              0.971652626730384,
+              0.9197218580597751,
+              0.9999516051629009
+            ],
+            "reflection_gram": [
+              0.0819956777193117,
+              0.02834737326962048,
+              0.08027814194022627,
+              4.839483710333661e-05
+            ],
+            "transmission_gram": [
+              0.9180043222806888,
+              0.9716526267303737,
+              0.9197218580597771,
+              0.9999516051629057
+            ],
+            "power_balance": [
+              -7.771561172376096e-16,
+              5.662137425588298e-15,
+              -6.439293542825908e-15,
+              -9.880984919163893e-15
+            ],
+            "flux_power_balance": [
+              4.440892098500626e-16,
+              -3.9968028886505635e-15,
+              -8.881784197001252e-16,
+              -4.3298697960381105e-15
+            ],
+            "net_outward_power_ratio": [
+              3.3306690738754696e-16,
+              3.996802888650566e-15,
+              1.4432899320127031e-15,
+              2.77555756156289e-15
+            ],
+            "relative_residuals": [
+              2.1535186549889831e-16,
+              1.0743948934931157e-16,
+              1.940184734382712e-16,
+              1.534239555743414e-16
+            ],
+            "incident_powers_w": [
+              1.0,
+              0.9999999999999994,
+              1.0000000000000002,
+              1.0000000000000004
+            ],
+            "safe_root_indices": [
+              268,
+              264,
+              262,
+              247
+            ],
+            "port_basis_condition": [
+              36.62891962255338,
+              36.62891962255007
+            ]
+          },
+          "right": {
+            "reflection": [
+              0.08199586477708848,
+              0.028347394186078272,
+              0.08027794726964936,
+              4.838153344140427e-05
+            ],
+            "transmission": [
+              0.9180041352229106,
+              0.9716526058139161,
+              0.9197220527303425,
+              0.9999516184665469
+            ],
+            "reflection_flux": [
+              0.08199586477708853,
+              0.028347394186079598,
+              0.08027794726964704,
+              4.8381533441448596e-05
+            ],
+            "transmission_flux": [
+              0.9180041352229112,
+              0.9716526058139175,
+              0.9197220527303485,
+              0.9999516184665509
+            ],
+            "reflection_gram": [
+              0.08199586477708853,
+              0.028347394186078175,
+              0.08027794726964782,
+              4.838153344141105e-05
+            ],
+            "transmission_gram": [
+              0.9180041352229115,
+              0.9716526058139159,
+              0.9197220527303441,
+              0.9999516184665467
+            ],
+            "power_balance": [
+              9.992007221626409e-16,
+              5.662137425588298e-15,
+              8.215650382226158e-15,
+              1.1657341758564144e-14
+            ],
+            "flux_power_balance": [
+              2.220446049250313e-16,
+              2.886579864025407e-15,
+              4.440892098500626e-15,
+              7.66053886991358e-15
+            ],
+            "net_outward_power_ratio": [
+              3.3306690738754696e-16,
+              -7.7715611723761e-16,
+              3.4416913763379845e-15,
+              -5.995204332975843e-15
+            ],
+            "relative_residuals": [
+              1.5642050920807318e-16,
+              1.298825554335788e-16,
+              2.1783603051571637e-16,
+              1.700902046685034e-16
+            ],
+            "incident_powers_w": [
+              1.0,
+              0.9999999999999994,
+              1.0000000000000002,
+              1.0000000000000004
+            ],
+            "safe_root_indices": [
+              269,
+              265,
+              263,
+              248
+            ],
+            "port_basis_condition": [
+              36.62891962255338,
+              36.62891962255007
+            ]
+          }
+        },
+        "propagating_modes_per_direction": 4,
+        "port_dofs": 135,
+        "safe_max_relative_residual": 1.5850343558247387e-15,
+        "max_power_budget_error": 1.1657341758564144e-14,
+        "max_modal_flux_difference": 1.021405182655144e-14,
+        "max_reciprocity_error": 2.7952801782193944e-13,
+        "time_reversal_mode_overlap": [
+          1.0000000000000004,
+          1.0000000000000004,
+          0.9999999999999997,
+          0.9999999999999999
+        ],
+        "time_reversal_relative_wavenumber_error": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wavenumbers_positive_power_rad_m": [
+          1438522.4531530493,
+          3061012.9635697864,
+          3333511.089908331,
+          5216374.272506447
+        ],
+        "scattering_matrix_time_reversal_basis": [
+          [
+            [
+              0.09665622719732768,
+              0.2695410429140953
+            ],
+            [
+              2.6579783296349624e-05,
+              -6.184155963828955e-05
+            ],
+            [
+              0.0009034733706301922,
+              0.00014974501543767193
+            ],
+            [
+              -5.868155505977182e-05,
+              -0.00017602835826393428
+            ],
+            [
+              -0.9012639586845471,
+              0.32515682786952566
+            ],
+            [
+              0.00014438501973195502,
+              0.00041012122051995803
+            ],
+            [
+              -0.00046928081901830834,
+              -0.0004411486555235937
+            ],
+            [
+              -0.00011748599878617019,
+              0.00013660432757908836
+            ]
+          ],
+          [
+            [
+              2.657978329879184e-05,
+              -6.184155961745697e-05
+            ],
+            [
+              -0.0324810385066331,
+              -0.16520354485898264
+            ],
+            [
+              -0.00025504250716778295,
+              -0.0001043802948232263
+            ],
+            [
+              0.00012169615388744353,
+              -0.00022111181222827148
+            ],
+            [
+              -0.00010145115019822818,
+              -0.00045574633421987485
+            ],
+            [
+              0.96723334941901,
+              -0.19003154822057944
+            ],
+            [
+              1.3188314226511937e-05,
+              3.0492500101074954e-05
+            ],
+            [
+              0.00011830573462072008,
+              0.0002282234015746576
+            ]
+          ],
+          [
+            [
+              0.0009034733706360117,
+              0.00014974501534045534
+            ],
+            [
+              -0.0002550425073687761,
+              -0.00010438029480057977
+            ],
+            [
+              0.06760749338793466,
+              -0.27514794867175746
+            ],
+            [
+              -9.077459788974633e-05,
+              0.0002285827965924438
+            ],
+            [
+              -0.00044989766608832495,
+              -4.378011716841363e-05
+            ],
+            [
+              -5.8666726656711505e-05,
+              -1.9939338323736754e-06
+            ],
+            [
+              0.9307105093218183,
+              0.23129970784760362
+            ],
+            [
+              -0.00015303364661088252,
+              0.00014091712119060072
+            ]
+          ],
+          [
+            [
+              -5.868155506267421e-05,
+              -0.00017602835825731414
+            ],
+            [
+              0.00012169615388928728,
+              -0.00022111181214612698
+            ],
+            [
+              -9.077459795335604e-05,
+              0.00022858279655372382
+            ],
+            [
+              -0.0013046543238392676,
+              0.0068215902970564435
+            ],
+            [
+              9.256123636961801e-05,
+              0.00013564567505615244
+            ],
+            [
+              7.689472988831744e-05,
+              -0.0002566349141089718
+            ],
+            [
+              -2.2452566165121636e-05,
+              -0.00017109474623984748
+            ],
+            [
+              -0.9865513286098865,
+              -0.1633032536779745
+            ]
+          ],
+          [
+            [
+              -0.901263958684548,
+              0.3251568278695235
+            ],
+            [
+              -0.00010145115016723348,
+              -0.0004557463341707029
+            ],
+            [
+              -0.00044989766607238317,
+              -4.37801173391615e-05
+            ],
+            [
+              9.256123637522163e-05,
+              0.00013564567502689578
+            ],
+            [
+              0.0976968484608511,
+              0.2691660199166966
+            ],
+            [
+              0.00010376682071253847,
+              1.2585761809864172e-05
+            ],
+            [
+              0.0008962480821258674,
+              2.3695664003265406e-05
+            ],
+            [
+              6.876333978147114e-05,
+              -0.00015755522794727226
+            ]
+          ],
+          [
+            [
+              0.00014438501972673844,
+              0.00041012122057983245
+            ],
+            [
+              0.9672333494190102,
+              -0.19003154822057197
+            ],
+            [
+              -5.8666726529330645e-05,
+              -1.993933652917403e-06
+            ],
+            [
+              7.689473002755539e-05,
+              -0.0002566349139764218
+            ],
+            [
+              0.00010376682072083578,
+              1.2585761797363583e-05
+            ],
+            [
+              -0.03243564340675981,
+              -0.16521248647458736
+            ],
+            [
+              0.00026665971304086613,
+              -8.745819271903734e-05
+            ],
+            [
+              0.000167382723773448,
+              0.0001995907896232874
+            ]
+          ],
+          [
+            [
+              -0.00046928081904972136,
+              -0.00044114865570205053
+            ],
+            [
+              1.3188314393972763e-05,
+              3.0492499951334596e-05
+            ],
+            [
+              0.9307105093218258,
+              0.23129970784760537
+            ],
+            [
+              -2.2452566442568934e-05,
+              -0.00017109474620580472
+            ],
+            [
+              0.0008962480821436326,
+              2.369566411651069e-05
+            ],
+            [
+              0.000266659713154354,
+              -8.745819265745594e-05
+            ],
+            [
+              0.06906287534256107,
+              -0.2747859846074208
+            ],
+            [
+              4.795923791870844e-05,
+              -0.00021048482553786562
+            ]
+          ],
+          [
+            [
+              -0.00011748599877377051,
+              0.00013660432759865664
+            ],
+            [
+              0.00011830573448684852,
+              0.00022822340169540922
+            ],
+            [
+              -0.00015303364639097255,
+              0.00014091712134854073
+            ],
+            [
+              -0.986551328609896,
+              -0.16330325367798168
+            ],
+            [
+              6.876333979181454e-05,
+              -0.00015755522793645913
+            ],
+            [
+              0.00016738272378253916,
+              0.0001995907895651164
+            ],
+            [
+              4.795923790103827e-05,
+              -0.000210484825587084
+            ],
+            [
+              -0.0009630937678498145,
+              0.006878224653148369
+            ]
+          ]
+        ],
+        "gates": {
+          "energy_budget": true,
+          "modal_direct_flux_agreement": true,
+          "reciprocity": true,
+          "residuals": true
+        }
+      }
+    },
+    "curvature_fine": {
+      "status": "solved",
+      "case_hash": "06bf901d1d2905f96f8df904c150f99c07b4eace2d620b58281ddc9f8a0ef5a7",
+      "configuration": {
+        "length_nm": 1800,
+        "width_nm": 600,
+        "thickness_nm": 200,
+        "holes_nm": [
+          [
+            625.0,
+            250.0
+          ],
+          [
+            1175.0,
+            250.0
+          ]
+        ],
+        "body_size_nm": 105,
+        "port_size_nm": 150,
+        "circle_points": 48,
+        "source_sha256": null
+      },
+      "implementation": {
+        "git_commit": "e6d7bd3b39d0e9c275ebd38806d33b5b48395f2f",
+        "source_sha256": {
+          "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+          "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+          "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+          "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+          "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+          "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+          "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+          "src/phononic/report_AP_pnc.py": "52f621a0763c3b3f7bc3c2e1f33fdb76001ef9605b4c6015a19c774692342756",
+          "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+          "src/phononic/workflow_AP_pnc.py": "c3806d042bb9e1e8898145f9f50babc14800461e73e9c5332bc83b49f5df2a19",
+          "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5",
+          "tools/validate_perforated_AP_pnc.py": "bb60013de2f4365124a340c3731db60fbe6504b2dc011d8f0fe9d09169777e81"
+        },
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2",
+          "meshio": "5.3.5",
+          "gmsh": "4.15.2",
+          "matplotlib": "3.11.2",
+          "psutil": "7.2.2"
+        },
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "geometry_checks": {
+        "analytic_solid_volume_m3": 1.9636504591506386e-19,
+        "meshed_solid_volume_m3": 1.9642107116699231e-19,
+        "analytic_removed_volume_m3": 1.9634954084936215e-20,
+        "meshed_removed_volume_m3": 1.9578928833007755e-20,
+        "relative_solid_volume_error": 0.0002853117349239964,
+        "relative_removed_volume_error": 0.002853342650362612,
+        "rim_segments_min": 48,
+        "rim_segments_max": 48,
+        "max_radial_sagitta_m": 2.676345951745652e-10,
+        "tetrahedra": 1826,
+        "displacement_dofs": 11568,
+        "predicted_polygon_removed_volume_bias": 0.0028533426503630777,
+        "polygon_volume_difference": 4.657732532997727e-16,
+        "polygon_sagitta_upper_m": 2.676345951745652e-10
+      },
+      "mesh_sha256": "39a3d858fb32348d07cf20f52fa39e1a4dadbc32d58a18271b72a8e73788ddc2",
+      "mesh_resources": {
+        "peak_process_memory_mib": 94.7265625,
+        "system_available_memory_mib_at_start": 3582.3046875,
+        "process_lifetime_peak_working_set_mib": 95.39453125,
+        "elapsed_seconds": 0.08728609999525361
+      },
+      "scattering_resources": {
+        "peak_process_memory_mib": 299.85546875,
+        "system_available_memory_mib_at_start": 3610.87890625,
+        "process_lifetime_peak_working_set_mib": 302.85546875,
+        "elapsed_seconds": 2.957080699998187
+      },
+      "scattering": {
+        "channels": {
+          "left": {
+            "reflection": [
+              0.08217720348752865,
+              0.027808075218814322,
+              0.08047414717055645,
+              5.6140854176631405e-05
+            ],
+            "transmission": [
+              0.9178227965124705,
+              0.9721919247811771,
+              0.9195258528294478,
+              0.9999438591458235
+            ],
+            "reflection_flux": [
+              0.08217720348752917,
+              0.02780807521881423,
+              0.08047414717055534,
+              5.6140854176681814e-05
+            ],
+            "transmission_flux": [
+              0.9178227965124715,
+              0.9721919247811837,
+              0.9195258528294428,
+              0.9999438591458186
+            ],
+            "reflection_gram": [
+              0.08217720348752852,
+              0.02780807521881434,
+              0.08047414717055693,
+              5.61408541766442e-05
+            ],
+            "transmission_gram": [
+              0.9178227965124705,
+              0.9721919247811766,
+              0.9195258528294443,
+              0.9999438591458232
+            ],
+            "power_balance": [
+              8.881784197001252e-16,
+              8.548717289613705e-15,
+              -4.218847493575595e-15,
+              -1.1102230246251565e-16
+            ],
+            "flux_power_balance": [
+              -6.661338147750939e-16,
+              2.1094237467877974e-15,
+              1.887379141862766e-15,
+              4.6629367034256575e-15
+            ],
+            "net_outward_power_ratio": [
+              3.3306690738754696e-16,
+              -2.9976021664879242e-15,
+              -2.6645352591003753e-15,
+              -3.885780586188046e-15
+            ],
+            "relative_residuals": [
+              1.6332524456906777e-16,
+              1.0730763692871027e-16,
+              1.747550126250013e-16,
+              1.518075474847608e-16
+            ],
+            "incident_powers_w": [
+              1.0,
+              0.9999999999999994,
+              1.0000000000000002,
+              1.0000000000000004
+            ],
+            "safe_root_indices": [
+              268,
+              264,
+              262,
+              247
+            ],
+            "port_basis_condition": [
+              36.62891962255338,
+              36.62891962255007
+            ]
+          },
+          "right": {
+            "reflection": [
+              0.08217713867654443,
+              0.027808206675494742,
+              0.08047422127890387,
+              5.600010012854603e-05
+            ],
+            "transmission": [
+              0.9178228613234568,
+              0.9721917933245022,
+              0.9195257787210895,
+              0.9999439998998684
+            ],
+            "reflection_flux": [
+              0.08217713867654317,
+              0.02780820667549476,
+              0.08047422127890157,
+              5.600010012859118e-05
+            ],
+            "transmission_flux": [
+              0.9178228613234577,
+              0.9721917933245054,
+              0.919525778721094,
+              0.9999439998998735
+            ],
+            "reflection_gram": [
+              0.08217713867654444,
+              0.02780820667549467,
+              0.0804742212789022,
+              5.600010012855405e-05
+            ],
+            "transmission_gram": [
+              0.9178228613234574,
+              0.9721917933245021,
+              0.9195257787210912,
+              0.9999439998998683
+            ],
+            "power_balance": [
+              -1.2212453270876722e-15,
+              2.9976021664879227e-15,
+              6.5503158452884236e-15,
+              3.1086244689504383e-15
+            ],
+            "flux_power_balance": [
+              -8.881784197001252e-16,
+              -2.220446049250313e-16,
+              4.440892098500626e-15,
+              -2.1094237467877974e-15
+            ],
+            "net_outward_power_ratio": [
+              1.887379141862766e-15,
+              2.9976021664879242e-15,
+              1.8873791418627657e-15,
+              3.2196467714129524e-15
+            ],
+            "relative_residuals": [
+              1.9088931532352468e-16,
+              7.617811169902985e-17,
+              1.7931000244050973e-16,
+              1.827715567631934e-16
+            ],
+            "incident_powers_w": [
+              1.0,
+              0.9999999999999994,
+              1.0000000000000002,
+              1.0000000000000004
+            ],
+            "safe_root_indices": [
+              269,
+              265,
+              263,
+              248
+            ],
+            "port_basis_condition": [
+              36.62891962255338,
+              36.62891962255007
+            ]
+          }
+        },
+        "propagating_modes_per_direction": 4,
+        "port_dofs": 135,
+        "safe_max_relative_residual": 1.5850343558247387e-15,
+        "max_power_budget_error": 8.548717289613705e-15,
+        "max_modal_flux_difference": 6.5503158452884236e-15,
+        "max_reciprocity_error": 2.7516690146367717e-13,
+        "time_reversal_mode_overlap": [
+          1.0000000000000004,
+          1.0000000000000004,
+          0.9999999999999997,
+          0.9999999999999999
+        ],
+        "time_reversal_relative_wavenumber_error": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wavenumbers_positive_power_rad_m": [
+          1438522.4531530493,
+          3061012.9635697864,
+          3333511.089908331,
+          5216374.272506447
+        ],
+        "scattering_matrix_time_reversal_basis": [
+          [
+            [
+              0.09725428832322923,
+              0.2696642046122007
+            ],
+            [
+              2.497258938070526e-05,
+              -7.001263012422832e-06
+            ],
+            [
+              -8.440573627686182e-05,
+              9.963969145604859e-05
+            ],
+            [
+              -7.656733458563027e-05,
+              7.317030717870941e-06
+            ],
+            [
+              -0.901025575392648,
+              0.32553859542039
+            ],
+            [
+              1.796710758357788e-05,
+              8.549516698394792e-05
+            ],
+            [
+              1.4173685815395911e-05,
+              -0.000565457085231295
+            ],
+            [
+              -4.167492287227547e-05,
+              -5.08024875572674e-05
+            ]
+          ],
+          [
+            [
+              2.497258938031373e-05,
+              -7.0012629915796826e-06
+            ],
+            [
+              -0.03368939525338317,
+              -0.1633176556540424
+            ],
+            [
+              0.0001655158459020668,
+              -0.00010681197598053897
+            ],
+            [
+              0.0005392727380621893,
+              0.0003360445147650749
+            ],
+            [
+              -3.3418259792704734e-05,
+              -9.661373770607985e-05
+            ],
+            [
+              0.9664102172683948,
+              -0.19555664966371752
+            ],
+            [
+              -1.7679022430515207e-05,
+              0.00024012419966033103
+            ],
+            [
+              -0.0007492141154962368,
+              -0.000428681440274899
+            ]
+          ],
+          [
+            [
+              -8.440573627365201e-05,
+              9.963969136177957e-05
+            ],
+            [
+              0.00016551584569433078,
+              -0.0001068119759549235
+            ],
+            [
+              0.06761341013779629,
+              -0.275504072719289
+            ],
+            [
+              -0.000142311152793483,
+              6.120478097985002e-05
+            ],
+            [
+              7.519476429194527e-05,
+              0.0006147604872247907
+            ],
+            [
+              -4.374153652188876e-05,
+              0.00025227775442441527
+            ],
+            [
+              0.9304671958157155,
+              0.23185382927159387
+            ],
+            [
+              -4.3038027132368364e-05,
+              3.461222582372051e-05
+            ]
+          ],
+          [
+            [
+              -7.656733459002081e-05,
+              7.3170307282730555e-06
+            ],
+            [
+              0.0005392727380652935,
+              0.00033604451484720504
+            ],
+            [
+              -0.00014231115286143903,
+              6.12047809299575e-05
+            ],
+            [
+              -0.0016311199469835863,
+              0.007283312866283765
+            ],
+            [
+              3.5226061446397095e-05,
+              -3.777492380053547e-05
+            ],
+            [
+              -0.000687719787524501,
+              0.0003686569186076968
+            ],
+            [
+              -1.0083250674063189e-05,
+              -8.21996807321795e-06
+            ],
+            [
+              -0.9870372832133474,
+              -0.160314219547566
+            ]
+          ],
+          [
+            [
+              -0.9010255753926469,
+              0.3255385954203873
+            ],
+            [
+              -3.341825976105155e-05,
+              -9.661373765755077e-05
+            ],
+            [
+              7.519476430632878e-05,
+              0.0006147604870522874
+            ],
+            [
+              3.522606145317602e-05,
+              -3.777492382937607e-05
+            ],
+            [
+              0.0975636034386466,
+              0.2695523206995761
+            ],
+            [
+              3.70469619556334e-05,
+              -7.665436299799608e-06
+            ],
+            [
+              -9.724274524192124e-05,
+              -0.00011541738747353549
+            ],
+            [
+              6.429373193964473e-05,
+              4.882494225003065e-06
+            ]
+          ],
+          [
+            [
+              1.7967107577613395e-05,
+              8.549516704409598e-05
+            ],
+            [
+              0.966410217268392,
+              -0.19555664966370823
+            ],
+            [
+              -4.374153639830715e-05,
+              0.0002522777546089828
+            ],
+            [
+              -0.0006877197873849764,
+              0.00036865691873899924
+            ],
+            [
+              3.704696196061887e-05,
+              -7.665436311958038e-06
+            ],
+            [
+              -0.032456542547604036,
+              -0.1635680151784603
+            ],
+            [
+              -4.646763295653578e-05,
+              -0.00010954757796366406
+            ],
+            [
+              0.0004641767048449046,
+              -0.00022995818508115296
+            ]
+          ],
+          [
+            [
+              1.4173685784206274e-05,
+              -0.0005654570854117259
+            ],
+            [
+              -1.7679022267303203e-05,
+              0.00024012419950492265
+            ],
+            [
+              0.9304671958157208,
+              0.2318538292715969
+            ],
+            [
+              -1.0083250948009534e-05,
+              -8.219968047329275e-06
+            ],
+            [
+              -9.724274522619503e-05,
+              -0.00011541738736341303
+            ],
+            [
+              -4.646763283867331e-05,
+              -0.00010954757790110802
+            ],
+            [
+              0.0695658262627868,
+              -0.27501774326473055
+            ],
+            [
+              -0.00010131773125713403,
+              -0.00010383801865676602
+            ]
+          ],
+          [
+            [
+              -4.167492285747192e-05,
+              -5.080248753911711e-05
+            ],
+            [
+              -0.000749214115633963,
+              -0.0004286814401542048
+            ],
+            [
+              -4.303802690922384e-05,
+              3.461222597504695e-05
+            ],
+            [
+              -0.9870372832133479,
+              -0.16031421954757233
+            ],
+            [
+              6.429373194993305e-05,
+              4.882494238739541e-06
+            ],
+            [
+              0.0004641767048547118,
+              -0.00022995818514102485
+            ],
+            [
+              -0.00010131773128561722,
+              -0.00010383801869776598
+            ],
+            [
+              -0.0007587504822326752,
+              0.007425015280425287
+            ]
+          ]
+        ],
+        "gates": {
+          "energy_budget": true,
+          "modal_direct_flux_agreement": true,
+          "reciprocity": true,
+          "residuals": true
+        }
+      }
+    },
+    "long_leads": {
+      "status": "solved",
+      "case_hash": "e64feb03b17e3c50cf0700c3f56b0a1e63bf1b403bc9638d6dad9e6689bd90b0",
+      "configuration": {
+        "length_nm": 2400,
+        "width_nm": 600,
+        "thickness_nm": 200,
+        "holes_nm": [
+          [
+            925.0,
+            250.0
+          ],
+          [
+            1475.0,
+            250.0
+          ]
+        ],
+        "body_size_nm": 105,
+        "port_size_nm": 150,
+        "circle_points": 32,
+        "source_sha256": null
+      },
+      "implementation": {
+        "git_commit": "e6d7bd3b39d0e9c275ebd38806d33b5b48395f2f",
+        "source_sha256": {
+          "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+          "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+          "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+          "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+          "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+          "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+          "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+          "src/phononic/report_AP_pnc.py": "52f621a0763c3b3f7bc3c2e1f33fdb76001ef9605b4c6015a19c774692342756",
+          "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+          "src/phononic/workflow_AP_pnc.py": "c3806d042bb9e1e8898145f9f50babc14800461e73e9c5332bc83b49f5df2a19",
+          "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5",
+          "tools/validate_perforated_AP_pnc.py": "bb60013de2f4365124a340c3731db60fbe6504b2dc011d8f0fe9d09169777e81"
+        },
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2",
+          "meshio": "5.3.5",
+          "gmsh": "4.15.2",
+          "matplotlib": "3.11.2",
+          "psutil": "7.2.2"
+        },
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "geometry_checks": {
+        "analytic_solid_volume_m3": 2.6836504591506384e-19,
+        "meshed_solid_volume_m3": 2.684909677983873e-19,
+        "analytic_removed_volume_m3": 1.9634954084936215e-20,
+        "meshed_removed_volume_m3": 1.9509032201612765e-20,
+        "relative_solid_volume_error": 0.0004692186454242074,
+        "relative_removed_volume_error": 0.006413148855797768,
+        "rim_segments_min": 32,
+        "rim_segments_max": 32,
+        "max_radial_sagitta_m": 6.019091659753979e-10,
+        "tetrahedra": 1876,
+        "displacement_dofs": 11670,
+        "predicted_polygon_removed_volume_bias": 0.006413148855794248,
+        "polygon_volume_difference": 3.5197539327569416e-15,
+        "polygon_sagitta_upper_m": 6.01909165975384e-10
+      },
+      "mesh_sha256": "1086479e5616e1f0490a8ecdf807616b39a0ba48df4d0ab30cf9e6ae97a5b95f",
+      "mesh_resources": {
+        "peak_process_memory_mib": 95.66796875,
+        "system_available_memory_mib_at_start": 3590.296875,
+        "process_lifetime_peak_working_set_mib": 95.66796875,
+        "elapsed_seconds": 0.0850196999963373
+      },
+      "scattering_resources": {
+        "peak_process_memory_mib": 301.640625,
+        "system_available_memory_mib_at_start": 3591.5546875,
+        "process_lifetime_peak_working_set_mib": 304.4921875,
+        "elapsed_seconds": 3.253709600001457
+      },
+      "scattering": {
+        "channels": {
+          "left": {
+            "reflection": [
+              0.0818587111859906,
+              0.026823023142942742,
+              0.07990288355583758,
+              9.297345952658591e-05
+            ],
+            "transmission": [
+              0.9181412888140098,
+              0.9731769768570468,
+              0.9200971164441638,
+              0.999907026540478
+            ],
+            "reflection_flux": [
+              0.08185871118599118,
+              0.026823023142942944,
+              0.079902883555838,
+              9.297345952660621e-05
+            ],
+            "transmission_flux": [
+              0.9181412888140073,
+              0.973176976857054,
+              0.9200971164441598,
+              0.9999070265404725
+            ],
+            "reflection_gram": [
+              0.08185871118599061,
+              0.02682302314294273,
+              0.0799028835558379,
+              9.29734595265811e-05
+            ],
+            "transmission_gram": [
+              0.9181412888140098,
+              0.9731769768570465,
+              0.9200971164441629,
+              0.9999070265404786
+            ],
+            "power_balance": [
+              -4.440892098500626e-16,
+              1.0436096431476471e-14,
+              -1.3322676295501878e-15,
+              -4.6629367034256575e-15
+            ],
+            "flux_power_balance": [
+              1.5543122344752192e-15,
+              3.1086244689504383e-15,
+              2.220446049250313e-15,
+              8.881784197001252e-16
+            ],
+            "net_outward_power_ratio": [
+              -3.6637359812630166e-15,
+              -4.4408920985006285e-15,
+              -1.8873791418627657e-15,
+              -1.665334536937734e-15
+            ],
+            "relative_residuals": [
+              1.722060171580715e-16,
+              9.121630993148302e-17,
+              1.71733117376007e-16,
+              1.541417121212842e-16
+            ],
+            "incident_powers_w": [
+              1.0,
+              0.9999999999999994,
+              1.0000000000000002,
+              1.0000000000000004
+            ],
+            "safe_root_indices": [
+              268,
+              264,
+              262,
+              247
+            ],
+            "port_basis_condition": [
+              36.62891962255338,
+              36.62891962255007
+            ]
+          },
+          "right": {
+            "reflection": [
+              0.08185872220738037,
+              0.026823263008711365,
+              0.07990283580935396,
+              9.277031885294189e-05
+            ],
+            "transmission": [
+              0.9181412777926191,
+              0.9731767369912901,
+              0.920097164190643,
+              0.9999072296811402
+            ],
+            "reflection_flux": [
+              0.08185872220738263,
+              0.02682326300871176,
+              0.07990283580935423,
+              9.277031885292724e-05
+            ],
+            "transmission_flux": [
+              0.9181412777926204,
+              0.9731767369912908,
+              0.9200971641906475,
+              0.9999072296811473
+            ],
+            "reflection_gram": [
+              0.08185872220738043,
+              0.026823263008711493,
+              0.07990283580935353,
+              9.277031885294088e-05
+            ],
+            "transmission_gram": [
+              0.9181412777926194,
+              0.9731767369912891,
+              0.9200971641906439,
+              0.9999072296811399
+            ],
+            "power_balance": [
+              5.551115123125783e-16,
+              -1.5543122344752192e-15,
+              2.9976021664879227e-15,
+              6.8833827526759706e-15
+            ],
+            "flux_power_balance": [
+              -3.1086244689504383e-15,
+              -2.55351295663786e-15,
+              -1.6653345369377348e-15,
+              -2.220446049250313e-16
+            ],
+            "net_outward_power_ratio": [
+              1.1102230246251565e-16,
+              8.881784197001258e-16,
+              1.5543122344752188e-15,
+              4.5519144009631394e-15
+            ],
+            "relative_residuals": [
+              1.8343485659059843e-16,
+              6.152197129229482e-17,
+              2.1841404827045438e-16,
+              1.710849797691237e-16
+            ],
+            "incident_powers_w": [
+              1.0,
+              0.9999999999999994,
+              1.0000000000000002,
+              1.0000000000000004
+            ],
+            "safe_root_indices": [
+              269,
+              265,
+              263,
+              248
+            ],
+            "port_basis_condition": [
+              36.62891962255338,
+              36.62891962255007
+            ]
+          }
+        },
+        "propagating_modes_per_direction": 4,
+        "port_dofs": 135,
+        "safe_max_relative_residual": 1.5850343558247387e-15,
+        "max_power_budget_error": 1.0436096431476471e-14,
+        "max_modal_flux_difference": 7.105427357601002e-15,
+        "max_reciprocity_error": 3.0451964856970284e-13,
+        "time_reversal_mode_overlap": [
+          1.0000000000000004,
+          1.0000000000000004,
+          0.9999999999999997,
+          0.9999999999999999
+        ],
+        "time_reversal_relative_wavenumber_error": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wavenumbers_positive_power_rad_m": [
+          1438522.4531530493,
+          3061012.9635697864,
+          3333511.089908331,
+          5216374.272506447
+        ],
+        "scattering_matrix_time_reversal_basis": [
+          [
+            [
+              -0.14116958811067626,
+              0.24885697022777484
+            ],
+            [
+              -3.7199124263753774e-05,
+              -5.99360653006925e-05
+            ],
+            [
+              -3.98203868118265e-05,
+              0.00022762117790275547
+            ],
+            [
+              -7.480363821618443e-05,
+              5.457975913629942e-05
+            ],
+            [
+              -0.8334093780519541,
+              -0.4728317553092751
+            ],
+            [
+              -0.0004167784613920162,
+              0.0002098161975156294
+            ],
+            [
+              3.944846654254288e-05,
+              -5.6235119341132896e-05
+            ],
+            [
+              5.213341352130931e-05,
+              5.8280610703078424e-05
+            ]
+          ],
+          [
+            [
+              -3.7199124278190224e-05,
+              -5.993606529142908e-05
+            ],
+            [
+              0.16337543880772903,
+              0.011419667718524276
+            ],
+            [
+              -0.0003905317144406579,
+              -0.00031291912621303085
+            ],
+            [
+              0.00016797217245494343,
+              -0.000892581854026613
+            ],
+            [
+              0.0003885153111443284,
+              -0.0002211028366853161
+            ],
+            [
+              -0.07058814138322997,
+              0.9839676146484156
+            ],
+            [
+              0.0007196700965948902,
+              0.0005928427136054785
+            ],
+            [
+              -0.0007060618495001022,
+              -0.0006758215352552323
+            ]
+          ],
+          [
+            [
+              -3.9820386747883625e-05,
+              0.0002276211778916225
+            ],
+            [
+              -0.00039053171443023595,
+              -0.00031291912636401587
+            ],
+            [
+              0.22137594730187193,
+              0.17577004264699653
+            ],
+            [
+              6.018555313747397e-05,
+              -0.0003977023325393556
+            ],
+            [
+              6.79893833195289e-05,
+              -6.198662260807325e-05
+            ],
+            [
+              0.0008439389321919175,
+              0.00025551169675858614
+            ],
+            [
+              -0.5964580953768934,
+              0.7512214965852075
+            ],
+            [
+              -0.0001704022769833247,
+              -0.0005522235287319205
+            ]
+          ],
+          [
+            [
+              -7.480363818814015e-05,
+              5.457975918240567e-05
+            ],
+            [
+              0.00016797217248095114,
+              -0.0008925818540049796
+            ],
+            [
+              6.0185553138364804e-05,
+              -0.00039770233249394177
+            ],
+            [
+              0.0012516673791581568,
+              -0.009508496584695658
+            ],
+            [
+              9.58316959672754e-05,
+              7.72016529678812e-06
+            ],
+            [
+              0.0003671545931166902,
+              0.0008090498696571149
+            ],
+            [
+              0.0001511663807183822,
+              0.0005203469200483846
+            ],
+            [
+              0.9893580431966905,
+              0.14517781057306467
+            ]
+          ],
+          [
+            [
+              -0.8334093780519528,
+              -0.4728317553092765
+            ],
+            [
+              0.00038851531111336183,
+              -0.00022110283665355417
+            ],
+            [
+              6.798938343809223e-05,
+              -6.198662261355884e-05
+            ],
+            [
+              9.583169600606399e-05,
+              7.720165360102705e-06
+            ],
+            [
+              -0.14119763017092107,
+              0.2488410929280094
+            ],
+            [
+              -6.474473559467913e-06,
+              -1.132278292978449e-05
+            ],
+            [
+              9.436720566586211e-05,
+              0.00020183249932270657
+            ],
+            [
+              -9.56306133238638e-06,
+              -0.00010958460810202579
+            ]
+          ],
+          [
+            [
+              -0.00041677846143743934,
+              0.00020981619752191897
+            ],
+            [
+              -0.07058814138323757,
+              0.9839676146484094
+            ],
+            [
+              0.0008439389319199753,
+              0.0002555116968568859
+            ],
+            [
+              0.0003671545929792554,
+              0.0008090498696538843
+            ],
+            [
+              -6.474473542505586e-06,
+              -1.1322782929701249e-05
+            ],
+            [
+              0.163333338794617,
+              0.012020147921331112
+            ],
+            [
+              -0.0003723675546386988,
+              -0.0004179437038069114
+            ],
+            [
+              0.0008162454076984304,
+              0.0001404622314201768
+            ]
+          ],
+          [
+            [
+              3.944846665816427e-05,
+              -5.623511937723816e-05
+            ],
+            [
+              0.0007196700967038517,
+              0.0005928427138898368
+            ],
+            [
+              -0.596458095376896,
+              0.7512214965852096
+            ],
+            [
+              0.00015116638089539814,
+              0.0005203469198789074
+            ],
+            [
+              9.436720558943301e-05,
+              0.00020183249933904466
+            ],
+            [
+              -0.00037236755471873326,
+              -0.00041794370378670013
+            ],
+            [
+              0.2213759903068089,
+              0.1757697934170512
+            ],
+            [
+              0.00017279147979580277,
+              0.0003059643813687133
+            ]
+          ],
+          [
+            [
+              5.213341345192394e-05,
+              5.828061071100978e-05
+            ],
+            [
+              -0.0007060618494768292,
+              -0.0006758215353726101
+            ],
+            [
+              -0.0001704022772136441,
+              -0.0005522235287365984
+            ],
+            [
+              0.9893580431966955,
+              0.1451778105730712
+            ],
+            [
+              -9.563061278374759e-06,
+              -0.00010958460809684768
+            ],
+            [
+              0.0008162454076528278,
+              0.00014046223139144946
+            ],
+            [
+              0.0001727914797827999,
+              0.0003059643814083312
+            ],
+            [
+              0.0015313244558890734,
+              -0.009465928730085725
+            ]
+          ]
+        ],
+        "gates": {
+          "energy_budget": true,
+          "modal_direct_flux_agreement": true,
+          "reciprocity": true,
+          "residuals": true
+        }
+      }
+    },
+    "port_fine": {
+      "status": "solved",
+      "case_hash": "02c4b6c8daa1e42e3475a6caabbe029cf0e2e2d5bccf482e11ab9c54ff5b5c3b",
+      "configuration": {
+        "length_nm": 1800,
+        "width_nm": 600,
+        "thickness_nm": 200,
+        "holes_nm": [
+          [
+            625.0,
+            250.0
+          ],
+          [
+            1175.0,
+            250.0
+          ]
+        ],
+        "body_size_nm": 105,
+        "port_size_nm": 75,
+        "circle_points": 32,
+        "source_sha256": null
+      },
+      "implementation": {
+        "git_commit": "e6d7bd3b39d0e9c275ebd38806d33b5b48395f2f",
+        "source_sha256": {
+          "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+          "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+          "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+          "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+          "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+          "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+          "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+          "src/phononic/report_AP_pnc.py": "52f621a0763c3b3f7bc3c2e1f33fdb76001ef9605b4c6015a19c774692342756",
+          "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+          "src/phononic/workflow_AP_pnc.py": "c3806d042bb9e1e8898145f9f50babc14800461e73e9c5332bc83b49f5df2a19",
+          "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5",
+          "tools/validate_perforated_AP_pnc.py": "1cbd39b7fc4c5e6d794e49cc4666b42146a9efa2b871f408098b4f3b8bdaa919"
+        },
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2",
+          "meshio": "5.3.5",
+          "gmsh": "4.15.2",
+          "matplotlib": "3.11.2",
+          "psutil": "7.2.2"
+        },
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "geometry_checks": {
+        "analytic_solid_volume_m3": 1.9636504591506386e-19,
+        "meshed_solid_volume_m3": 1.9649096779838723e-19,
+        "analytic_removed_volume_m3": 1.9634954084936215e-20,
+        "meshed_removed_volume_m3": 1.9509032201612837e-20,
+        "relative_solid_volume_error": 0.0006412642470892793,
+        "relative_removed_volume_error": 0.00641314885579409,
+        "rim_segments_min": 32,
+        "rim_segments_max": 32,
+        "max_radial_sagitta_m": 6.019091659754117e-10,
+        "tetrahedra": 1732,
+        "displacement_dofs": 10908,
+        "predicted_polygon_removed_volume_bias": 0.006413148855794248,
+        "polygon_volume_difference": 1.5872719805187785e-16,
+        "polygon_sagitta_upper_m": 6.01909165975384e-10
+      },
+      "mesh_sha256": "5820c98958acbef5198fe45f7fdd4702110ac9f2b0729e65346682f91a63f854",
+      "mesh_resources": {
+        "peak_process_memory_mib": 92.47265625,
+        "system_available_memory_mib_at_start": 3155.07421875,
+        "process_lifetime_peak_working_set_mib": 93.6171875,
+        "elapsed_seconds": 0.12006630000541918
+      },
+      "scattering_resources": {
+        "peak_process_memory_mib": 366.78125,
+        "system_available_memory_mib_at_start": 3125.2734375,
+        "process_lifetime_peak_working_set_mib": 367.21875,
+        "elapsed_seconds": 9.109242599995923
+      },
+      "scattering": {
+        "channels": {
+          "left": {
+            "reflection": [
+              0.08182776157592625,
+              0.02700292558128682,
+              0.07960906830486367,
+              7.754169793207667e-05
+            ],
+            "transmission": [
+              0.9181722384240875,
+              0.9729970744187232,
+              0.9203909316951535,
+              0.9999224583020692
+            ],
+            "reflection_flux": [
+              0.08182776157592558,
+              0.02700292558128464,
+              0.07960906830486934,
+              7.754169793217212e-05
+            ],
+            "transmission_flux": [
+              0.9181722384240767,
+              0.9729970744187164,
+              0.920390931695137,
+              0.9999224583020645
+            ],
+            "reflection_gram": [
+              0.08182776157592618,
+              0.02700292558128676,
+              0.07960906830486539,
+              7.754169793208857e-05
+            ],
+            "transmission_gram": [
+              0.9181722384240868,
+              0.9729970744187229,
+              0.9203909316951512,
+              0.9999224583020693
+            ],
+            "power_balance": [
+              -1.3655743202889425e-14,
+              -9.992007221626409e-15,
+              -1.7208456881689926e-14,
+              -1.2212453270876722e-15
+            ],
+            "flux_power_balance": [
+              -2.220446049250313e-15,
+              -9.992007221626409e-16,
+              -6.328271240363392e-15,
+              3.3306690738754696e-15
+            ],
+            "net_outward_power_ratio": [
+              1.1102230246251565e-16,
+              2.4424906541753444e-15,
+              3.885780586188046e-15,
+              -1.887379141862765e-15
+            ],
+            "relative_residuals": [
+              3.2112993205245033e-16,
+              1.7922166934241618e-16,
+              2.248983763535348e-16,
+              1.630961102203992e-16
+            ],
+            "incident_powers_w": [
+              1.0,
+              1.0,
+              1.0000000000000004,
+              1.0000000000000007
+            ],
+            "safe_root_indices": [
+              712,
+              707,
+              702,
+              658
+            ],
+            "port_basis_condition": [
+              104.4515065185137,
+              104.45150651936525
+            ]
+          },
+          "right": {
+            "reflection": [
+              0.0818276298242384,
+              0.027002980425100596,
+              0.07960910568655558,
+              7.758122412322467e-05
+            ],
+            "transmission": [
+              0.9181723701757658,
+              0.9729970195748983,
+              0.9203908943134029,
+              0.9999224187758924
+            ],
+            "reflection_flux": [
+              0.0818276298242367,
+              0.027002980425098726,
+              0.0796091056865539,
+              7.75812241232785e-05
+            ],
+            "transmission_flux": [
+              0.9181723701757648,
+              0.9729970195748983,
+              0.9203908943134427,
+              0.9999224187758755
+            ],
+            "reflection_gram": [
+              0.0818276298242385,
+              0.027002980425100423,
+              0.07960910568655474,
+              7.758122412321136e-05
+            ],
+            "transmission_gram": [
+              0.9181723701757661,
+              0.9729970195748975,
+              0.9203908943134079,
+              0.9999224187758933
+            ],
+            "power_balance": [
+              -4.218847493575595e-15,
+              1.1102230246251565e-15,
+              4.1522341120980855e-14,
+              -1.5654144647214707e-14
+            ],
+            "flux_power_balance": [
+              -1.5543122344752192e-15,
+              2.9976021664879227e-15,
+              3.4416913763379853e-15,
+              1.2212453270876722e-15
+            ],
+            "net_outward_power_ratio": [
+              -1.9984014443252818e-15,
+              -1.4432899320127035e-15,
+              -4.440892098500624e-16,
+              4.440892098500623e-16
+            ],
+            "relative_residuals": [
+              2.0967774433685234e-16,
+              1.4397882142634247e-16,
+              1.8775484218617371e-16,
+              1.7856613197566e-16
+            ],
+            "incident_powers_w": [
+              1.0,
+              1.0,
+              1.0000000000000004,
+              1.0000000000000007
+            ],
+            "safe_root_indices": [
+              713,
+              708,
+              703,
+              659
+            ],
+            "port_basis_condition": [
+              104.4515065185137,
+              104.45150651936525
+            ]
+          }
+        },
+        "propagating_modes_per_direction": 4,
+        "port_dofs": 357,
+        "safe_max_relative_residual": 2.815714851182742e-15,
+        "max_power_budget_error": 4.1522341120980855e-14,
+        "max_modal_flux_difference": 3.9745984281580604e-14,
+        "max_reciprocity_error": 7.779425522287192e-13,
+        "time_reversal_mode_overlap": [
+          1.0000000000000007,
+          1.0000000000000004,
+          0.9999999999999991,
+          1.0000000000000002
+        ],
+        "time_reversal_relative_wavenumber_error": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wavenumbers_positive_power_rad_m": [
+          1438522.7707984184,
+          3079666.3694892814,
+          3333699.8061989867,
+          5218952.395705753
+        ],
+        "scattering_matrix_time_reversal_basis": [
+          [
+            [
+              0.0968075087453057,
+              0.26917643359618176
+            ],
+            [
+              5.250578307664242e-05,
+              8.721845568531772e-05
+            ],
+            [
+              -0.00029821868093625665,
+              8.349703392844136e-06
+            ],
+            [
+              4.6123532066252566e-05,
+              -0.00011801482292744774
+            ],
+            [
+              -0.9011242873308181,
+              0.325802167670681
+            ],
+            [
+              -1.9383224475742696e-05,
+              0.0003284423147567679
+            ],
+            [
+              0.00012725177254393368,
+              -0.0002677929515009728
+            ],
+            [
+              -4.880632550513121e-05,
+              7.880030376141571e-05
+            ]
+          ],
+          [
+            [
+              5.2505783106984844e-05,
+              8.721845564350234e-05
+            ],
+            [
+              -0.0326114389781257,
+              -0.16105280069818065
+            ],
+            [
+              0.00022367630226814887,
+              1.824429326207614e-05
+            ],
+            [
+              0.0006712005589993308,
+              -0.0009506725438322761
+            ],
+            [
+              -0.0001831511539468195,
+              -0.0002948484260780285
+            ],
+            [
+              0.9675139159977449,
+              -0.19212932719873022
+            ],
+            [
+              -3.9295194051570686e-05,
+              -6.069608987279975e-05
+            ],
+            [
+              0.0003019247966648934,
+              3.915271037520889e-05
+            ]
+          ],
+          [
+            [
+              -0.00029821868094602753,
+              8.34970333641681e-06
+            ],
+            [
+              0.00022367630241467004,
+              1.824429345752518e-05
+            ],
+            [
+              0.06657052444683112,
+              -0.27418444853168805
+            ],
+            [
+              6.659797870758179e-05,
+              -0.0004218527932605599
+            ],
+            [
+              0.00016476751769869258,
+              0.0004297134225947539
+            ],
+            [
+              4.637714671476795e-05,
+              -2.995746415613076e-05
+            ],
+            [
+              0.9316271521453927,
+              0.22904442947451167
+            ],
+            [
+              -8.948330004817559e-05,
+              -0.000455576269038868
+            ]
+          ],
+          [
+            [
+              4.61235320956915e-05,
+              -0.00011801482294108314
+            ],
+            [
+              0.0006712005591768672,
+              -0.000950672543772544
+            ],
+            [
+              6.659797869480571e-05,
+              -0.00042185279336372537
+            ],
+            [
+              -0.0021554179568278485,
+              0.008446486425660833
+            ],
+            [
+              2.855889738406289e-05,
+              5.832551758255689e-05
+            ],
+            [
+              0.00015539255715678947,
+              -0.00016766207098958594
+            ],
+            [
+              -0.00039281533828897737,
+              0.0003815592590414459
+            ],
+            [
+              -0.9867847660121468,
+              -0.16179594402266345
+            ]
+          ],
+          [
+            [
+              -0.9011242873308233,
+              0.32580216767068326
+            ],
+            [
+              -0.0001831511539338435,
+              -0.00029484842614913855
+            ],
+            [
+              0.00016476751764677575,
+              0.0004297134224970205
+            ],
+            [
+              2.855889730282703e-05,
+              5.832551762826434e-05
+            ],
+            [
+              0.09771545160347506,
+              0.2688479232229498
+            ],
+            [
+              5.1285920260309967e-05,
+              -6.755454181159953e-05
+            ],
+            [
+              -0.00030321478975529886,
+              -5.994235667158615e-05
+            ],
+            [
+              -4.56684765465154e-05,
+              -9.85348051207152e-05
+            ]
+          ],
+          [
+            [
+              -1.9383224509320867e-05,
+              0.00032844231468755886
+            ],
+            [
+              0.9675139159977504,
+              -0.19212932719872908
+            ],
+            [
+              4.6377146365637885e-05,
+              -2.9957463460930926e-05
+            ],
+            [
+              0.00015539255765021766,
+              -0.0001676620711329477
+            ],
+            [
+              5.1285920300986854e-05,
+              -6.755454178811524e-05
+            ],
+            [
+              -0.031400822184727235,
+              -0.16129351455878496
+            ],
+            [
+              -0.0002444275536461308,
+              2.328974366796952e-06
+            ],
+            [
+              0.0007184087958237545,
+              0.0008876357279228787
+            ]
+          ],
+          [
+            [
+              0.00012725177258565918,
+              -0.0002677929516228624
+            ],
+            [
+              -3.929519428633899e-05,
+              -6.0696090599095733e-05
+            ],
+            [
+              0.9316271521454276,
+              0.2290444294745163
+            ],
+            [
+              -0.00039281533866698316,
+              0.00038155925873831486
+            ],
+            [
+              -0.00030321478976330467,
+              -5.994235662295962e-05
+            ],
+            [
+              -0.00024442755412164144,
+              2.328974524005213e-06
+            ],
+            [
+              0.06815312255002351,
+              -0.2737952407303944
+            ],
+            [
+              -0.00023924960600508606,
+              0.00045956903787096575
+            ]
+          ],
+          [
+            [
+              -4.880632559365329e-05,
+              7.880030375878644e-05
+            ],
+            [
+              0.000301924796146701,
+              3.9152710210277985e-05
+            ],
+            [
+              -8.948329956730074e-05,
+              -0.0004555762691418738
+            ],
+            [
+              -0.9867847660121393,
+              -0.16179594402266553
+            ],
+            [
+              -4.566847659000828e-05,
+              -9.853480512305971e-05
+            ],
+            [
+              0.0007184087959864568,
+              0.0008876357279543998
+            ],
+            [
+              -0.0002392496060967304,
+              0.00045956903782256355
+            ],
+            [
+              -0.0006542530240958018,
+              0.008693039165227005
+            ]
+          ]
+        ],
+        "gates": {
+          "energy_budget": true,
+          "modal_direct_flux_agreement": true,
+          "reciprocity": true,
+          "residuals": true
+        }
+      }
+    },
+    "body_phase_fine": {
+      "status": "solved",
+      "case_hash": "e9c590617c19bbfe50d54fbf4a99d2f4541989d1a1ad53ae93afeb9bc31cde5a",
+      "configuration": {
+        "length_nm": 1800,
+        "width_nm": 600,
+        "thickness_nm": 200,
+        "holes_nm": [
+          [
+            625.0,
+            250.0
+          ],
+          [
+            1175.0,
+            250.0
+          ]
+        ],
+        "body_size_nm": 80,
+        "port_size_nm": 150,
+        "circle_points": 48,
+        "source_sha256": null
+      },
+      "implementation": {
+        "git_commit": "e6d7bd3b39d0e9c275ebd38806d33b5b48395f2f",
+        "source_sha256": {
+          "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+          "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+          "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+          "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+          "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+          "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+          "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+          "src/phononic/report_AP_pnc.py": "52f621a0763c3b3f7bc3c2e1f33fdb76001ef9605b4c6015a19c774692342756",
+          "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+          "src/phononic/workflow_AP_pnc.py": "c3806d042bb9e1e8898145f9f50babc14800461e73e9c5332bc83b49f5df2a19",
+          "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5",
+          "tools/validate_perforated_AP_pnc.py": "1cbd39b7fc4c5e6d794e49cc4666b42146a9efa2b871f408098b4f3b8bdaa919"
+        },
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2",
+          "meshio": "5.3.5",
+          "gmsh": "4.15.2",
+          "matplotlib": "3.11.2",
+          "psutil": "7.2.2"
+        },
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "geometry_checks": {
+        "analytic_solid_volume_m3": 1.9636504591506386e-19,
+        "meshed_solid_volume_m3": 1.9642107116699231e-19,
+        "analytic_removed_volume_m3": 1.9634954084936215e-20,
+        "meshed_removed_volume_m3": 1.9578928833007755e-20,
+        "relative_solid_volume_error": 0.0002853117349239964,
+        "relative_removed_volume_error": 0.002853342650362612,
+        "rim_segments_min": 48,
+        "rim_segments_max": 48,
+        "max_radial_sagitta_m": 2.676345951745652e-10,
+        "tetrahedra": 2925,
+        "displacement_dofs": 17817,
+        "predicted_polygon_removed_volume_bias": 0.0028533426503630777,
+        "polygon_volume_difference": 4.657732532997727e-16,
+        "polygon_sagitta_upper_m": 2.676345951745652e-10
+      },
+      "mesh_sha256": "eeb83edd79d37a22d1333e873eddc6b9f02277c6d976909f7e354e552a84dc64",
+      "mesh_resources": {
+        "peak_process_memory_mib": 94.08203125,
+        "system_available_memory_mib_at_start": 3131.01953125,
+        "process_lifetime_peak_working_set_mib": 97.171875,
+        "elapsed_seconds": 0.11584439998841844
+      },
+      "scattering_resources": {
+        "peak_process_memory_mib": 614.60546875,
+        "system_available_memory_mib_at_start": 3112.59765625,
+        "process_lifetime_peak_working_set_mib": 615.66796875,
+        "elapsed_seconds": 18.50773100000515
+      },
+      "scattering": {
+        "channels": {
+          "left": {
+            "reflection": [
+              0.08310789932880684,
+              0.03122010766674392,
+              0.08446677704846922,
+              9.002681331148062e-05
+            ],
+            "transmission": [
+              0.9168921006711924,
+              0.9687798923332525,
+              0.9155332229515375,
+              0.9999099731866989
+            ],
+            "reflection_flux": [
+              0.08310789932880557,
+              0.03122010766674398,
+              0.08446677704847134,
+              9.002681331136871e-05
+            ],
+            "transmission_flux": [
+              0.916892100671193,
+              0.9687798923332606,
+              0.9155332229515329,
+              0.9999099731866931
+            ],
+            "reflection_gram": [
+              0.08310789932880672,
+              0.031220107666743904,
+              0.08446677704846983,
+              9.002681331149445e-05
+            ],
+            "transmission_gram": [
+              0.9168921006711926,
+              0.9687798923332523,
+              0.9155332229515335,
+              0.9999099731866982
+            ],
+            "power_balance": [
+              7.771561172376096e-16,
+              3.6637359812630166e-15,
+              -6.772360450213455e-15,
+              -1.0436096431476471e-14
+            ],
+            "flux_power_balance": [
+              1.4432899320127035e-15,
+              -4.551914400963142e-15,
+              -4.3298697960381105e-15,
+              -4.440892098500626e-15
+            ],
+            "net_outward_power_ratio": [
+              -1.5543122344752192e-15,
+              1.6653345369377358e-15,
+              1.1102230246251563e-16,
+              7.882583474838608e-15
+            ],
+            "relative_residuals": [
+              2.442217926726252e-16,
+              1.4162739791543274e-16,
+              2.713538932699576e-16,
+              2.197950642344052e-16
+            ],
+            "incident_powers_w": [
+              1.0,
+              0.9999999999999994,
+              1.0000000000000002,
+              1.0000000000000004
+            ],
+            "safe_root_indices": [
+              268,
+              264,
+              262,
+              247
+            ],
+            "port_basis_condition": [
+              36.62891962255338,
+              36.62891962255007
+            ]
+          },
+          "right": {
+            "reflection": [
+              0.08310790049904214,
+              0.031220103512553565,
+              0.0844667890296821,
+              9.001781604751427e-05
+            ],
+            "transmission": [
+              0.9168920995009592,
+              0.9687798964874397,
+              0.9155332109703118,
+              0.9999099821839416
+            ],
+            "reflection_flux": [
+              0.08310790049904404,
+              0.031220103512553235,
+              0.08446678902968029,
+              9.001781604759932e-05
+            ],
+            "transmission_flux": [
+              0.9168920995009626,
+              0.9687798964874417,
+              0.9155332109703159,
+              0.9999099821839464
+            ],
+            "reflection_gram": [
+              0.08310790049904214,
+              0.031220103512553502,
+              0.08446678902968045,
+              9.001781604751833e-05
+            ],
+            "transmission_gram": [
+              0.9168920995009598,
+              0.9687798964874396,
+              0.9155332109703133,
+              0.999909982183941
+            ],
+            "power_balance": [
+              -1.3322676295501878e-15,
+              6.772360450213455e-15,
+              6.106226635438361e-15,
+              1.0880185641326534e-14
+            ],
+            "flux_power_balance": [
+              -6.661338147750939e-15,
+              5.10702591327572e-15,
+              3.774758283725532e-15,
+              5.995204332975845e-15
+            ],
+            "net_outward_power_ratio": [
+              7.66053886991358e-15,
+              -2.775557561562893e-15,
+              1.9984014443252814e-15,
+              -4.5519144009631394e-15
+            ],
+            "relative_residuals": [
+              4.0772792938658777e-16,
+              1.3928119266301865e-16,
+              2.1762346975227513e-16,
+              2.5496802392959187e-16
+            ],
+            "incident_powers_w": [
+              1.0,
+              0.9999999999999994,
+              1.0000000000000002,
+              1.0000000000000004
+            ],
+            "safe_root_indices": [
+              269,
+              265,
+              263,
+              248
+            ],
+            "port_basis_condition": [
+              36.62891962255338,
+              36.62891962255007
+            ]
+          }
+        },
+        "propagating_modes_per_direction": 4,
+        "port_dofs": 135,
+        "safe_max_relative_residual": 1.5850343558247387e-15,
+        "max_power_budget_error": 1.0880185641326534e-14,
+        "max_modal_flux_difference": 8.104628079763643e-15,
+        "max_reciprocity_error": 2.7352851619150527e-13,
+        "time_reversal_mode_overlap": [
+          1.0000000000000004,
+          1.0000000000000004,
+          0.9999999999999997,
+          0.9999999999999999
+        ],
+        "time_reversal_relative_wavenumber_error": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wavenumbers_positive_power_rad_m": [
+          1438522.4531530493,
+          3061012.9635697864,
+          3333511.089908331,
+          5216374.272506447
+        ],
+        "scattering_matrix_time_reversal_basis": [
+          [
+            [
+              0.09681734804632017,
+              0.27154059718581625
+            ],
+            [
+              -5.198584196086066e-05,
+              1.812699403140314e-05
+            ],
+            [
+              1.680084610599839e-05,
+              -1.3191748858044581e-05
+            ],
+            [
+              -1.900132458932601e-05,
+              -2.6030715271817483e-05
+            ],
+            [
+              -0.9018239065408488,
+              0.3218784144959337
+            ],
+            [
+              5.954941682126223e-05,
+              8.015831837285465e-05
+            ],
+            [
+              -5.849839861734038e-06,
+              0.00013142784058457364
+            ],
+            [
+              -3.1856389469772427e-05,
+              1.582295746996402e-05
+            ]
+          ],
+          [
+            [
+              -5.198584196197922e-05,
+              1.8126994053394465e-05
+            ],
+            [
+              -0.02957322508289136,
+              -0.17419955533659812
+            ],
+            [
+              -0.00015987526211796798,
+              2.960215212919815e-05
+            ],
+            [
+              0.0001269970140698436,
+              3.673864270521826e-05
+            ],
+            [
+              2.0381929898699594e-05,
+              -7.615184076962163e-05
+            ],
+            [
+              0.9704741776527899,
+              -0.16419424608915442
+            ],
+            [
+              6.915959611859364e-05,
+              6.167875228432474e-07
+            ],
+            [
+              -1.1177857417843268e-05,
+              3.564698563905854e-05
+            ]
+          ],
+          [
+            [
+              1.680084610897297e-05,
+              -1.3191748944139358e-05
+            ],
+            [
+              -0.00015987526232371873,
+              2.9602152141980304e-05
+            ],
+            [
+              0.07388138952336862,
+              -0.2810840876332251
+            ],
+            [
+              -8.229881733643022e-05,
+              0.00013908339243563254
+            ],
+            [
+              -1.721303315849958e-05,
+              -0.0001408678820940222
+            ],
+            [
+              -4.879836115373723e-05,
+              -2.3104766997079413e-05
+            ],
+            [
+              0.9248815189490593,
+              0.2452087708951904
+            ],
+            [
+              -0.0001535423636541146,
+              0.00010442059178750705
+            ]
+          ],
+          [
+            [
+              -1.90013245919587e-05,
+              -2.603071526029598e-05
+            ],
+            [
+              0.00012699701406756333,
+              3.673864278594531e-05
+            ],
+            [
+              -8.229881738927469e-05,
+              0.00013908339239706032
+            ],
+            [
+              -0.001697893610034735,
+              0.009332702539841998
+            ],
+            [
+              2.7379967323357686e-05,
+              1.642279410425218e-05
+            ],
+            [
+              -4.730298116101835e-06,
+              -6.0322630312232105e-05
+            ],
+            [
+              -5.8608036099744984e-05,
+              -0.000141516899377716
+            ],
+            [
+              -0.9842129588435692,
+              -0.17673368860679473
+            ]
+          ],
+          [
+            [
+              -0.9018239065408475,
+              0.32187841449593146
+            ],
+            [
+              2.038192993569175e-05,
+              -7.615184071311056e-05
+            ],
+            [
+              -1.721303313710543e-05,
+              -0.0001408678822708112
+            ],
+            [
+              2.737996733725926e-05,
+              1.6422794065611174e-05
+            ],
+            [
+              0.09699607419220024,
+              0.27147680932569485
+            ],
+            [
+              -4.9879704357324556e-05,
+              -1.0480861272459147e-05
+            ],
+            [
+              1.7796527623107338e-05,
+              1.8489844665735195e-05
+            ],
+            [
+              1.9954127085828042e-05,
+              -2.08348828658331e-05
+            ]
+          ],
+          [
+            [
+              5.95494168140384e-05,
+              8.015831844224313e-05
+            ],
+            [
+              0.9704741776527909,
+              -0.16419424608914665
+            ],
+            [
+              -4.879836103615065e-05,
+              -2.3104766820099888e-05
+            ],
+            [
+              -4.730297974102774e-06,
+              -6.0322630175656506e-05
+            ],
+            [
+              -4.9879704351164654e-05,
+              -1.0480861282573245e-05
+            ],
+            [
+              -0.029377918861412815,
+              -0.17423258612154546
+            ],
+            [
+              0.00015054481263718043,
+              5.081777841508822e-05
+            ],
+            [
+              0.00013541523930916992,
+              -3.38823903833897e-05
+            ]
+          ],
+          [
+            [
+              -5.849839897489969e-06,
+              0.0001314278404005973
+            ],
+            [
+              6.915959627943839e-05,
+              6.167873812731601e-07
+            ],
+            [
+              0.924881518949065,
+              0.24520877089519358
+            ],
+            [
+              -5.860803637189142e-05,
+              -0.0001415168993502539
+            ],
+            [
+              1.7796527636818213e-05,
+              1.8489844771030708e-05
+            ],
+            [
+              0.00015054481275312545,
+              5.081777847212999e-05
+            ],
+            [
+              0.07507906336641297,
+              -0.28076659822279526
+            ],
+            [
+              1.3602995107942607e-05,
+              -0.00012044203694980331
+            ]
+          ],
+          [
+            [
+              -3.185638944705199e-05,
+              1.5822957497383354e-05
+            ],
+            [
+              -1.1177857561156462e-05,
+              3.564698575844836e-05
+            ],
+            [
+              -0.00015354236343931017,
+              0.00010442059194150766
+            ],
+            [
+              -0.9842129588435787,
+              -0.17673368860680222
+            ],
+            [
+              1.9954127098037202e-05,
+              -2.0834882853521433e-05
+            ],
+            [
+              0.00013541523931878883,
+              -3.388239043971922e-05
+            ],
+            [
+              1.3602995100307146e-05,
+              -0.00012044203699730361
+            ],
+            [
+              -0.0016551640210532728,
+              0.009340408942987318
+            ]
+          ]
+        ],
+        "gates": {
+          "energy_budget": true,
+          "modal_direct_flux_agreement": true,
+          "reciprocity": true,
+          "residuals": true
+        }
+      }
+    }
+  },
+  "channel_csv_sha256": "014934549ee89709bd36fc6f23db39ede718326ca033b00291cc844049aad3f9"
+}

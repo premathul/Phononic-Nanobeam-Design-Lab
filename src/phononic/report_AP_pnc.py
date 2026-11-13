@@ -151,6 +151,15 @@ def write_report(
         "Material model": _display(summary.get("material_status")),
         "Run status": _display(summary.get("status")),
     }
+    hole_count = summary.get("hole_count", 0)
+    diagnostics = summary.get("geometry_diagnostics")
+    if diagnostics:
+        statistics["Through-holes"] = _display(hole_count)
+        statistics["Relative solid volume error"] = _display(diagnostics.get("relative_solid_volume_error"))
+        if hole_count:
+            statistics["Relative removed volume error"] = _display(diagnostics.get("relative_removed_volume_error"))
+            pattern = summary.get("hole_pattern_provenance", {})
+            statistics["Hole pattern source"] = _display(pattern.get("source_csv"))
     if scattering:
         incident_indices = summary["incident_mode_indices"]
         if len(incident_indices) != len(frequencies):
@@ -159,7 +168,7 @@ def write_report(
             f'<option value="{index}">Channel {index + 1} · Port mode index {_display(mode_id)}</option>'
             for index, mode_id in enumerate(incident_indices)
         )
-        title = "Straight-beam scattering with matched ports"
+        title = "Perforated-beam scattering with matched ports" if hole_count else "Straight-beam scattering with matched ports"
         scope = "3D lossless elasticity with fixed material properties. Temperature effects and physical dissipation remain uncalibrated."
         figure_id = "scattering_response"
         shape_title = "Steady-state response"
@@ -180,24 +189,31 @@ def write_report(
             "Incident channels": _display(summary.get("num_incident_channels")),
             "Maximum absolute power imbalance": _display(summary.get("max_power_imbalance")),
             "Maximum reflection": _display(summary.get("maximum_reflection")),
-            "Matched-guide power check passed": _display(summary.get("matched_reference_passed")),
             "Port basis condition numbers (left / right)": (
                 " / ".join(_display(value) for value in condition) if condition is not None else "—"
             ),
         })
-        if summary.get("matched_reference_passed"):
-            scope += " This case passed the matched-guide power check. Phase accuracy and mesh convergence require separate verification."
+        if "power_balance_passed" in summary:
+            statistics["Power balance check passed"] = _display(summary["power_balance_passed"])
+        if hole_count:
+            scope += (" The holes scatter and convert guided waves. Transmission need not approach one. "
+                      "A closed power budget alone does not establish mesh convergence or a band gap.")
+            table_note += " The hole walls are traction free. No intrinsic absorption is included."
         else:
-            scope += " This case has yet to pass the matched-guide power check."
+            statistics["Matched-guide power check passed"] = _display(summary.get("matched_reference_passed"))
+            if summary.get("matched_reference_passed"):
+                scope += " This case passed the matched-guide power check. Phase accuracy and mesh convergence require separate verification."
+            else:
+                scope += " This case has yet to pass the matched-guide power check."
     elif bloch:
-        title = "Straight-beam Bloch modes"
+        title = "Perforated-beam Bloch modes" if hole_count else "Straight-beam Bloch modes"
         k = summary.get("field_k_rad_m")
         sample_note = (f"The viewer shows Bloch modes at k = {_display(k)} rad/m."
                        if k is not None else "The viewer shows Bloch modes at one sampled wavenumber.")
         table_note = ("The table includes all computed wavenumbers. Each wavenumber has its own frequency order. "
                       "Tracking mode identity across wavenumbers requires a separate analysis.")
     else:
-        title = "Finite straight-beam eigenmodes"
+        title = "Finite perforated-beam eigenmodes" if hole_count else "Finite straight-beam eigenmodes"
         sample_note = "The modes reflect the specified end boundary conditions."
         table_note = ""
     if complex_fields:

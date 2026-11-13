@@ -1,0 +1,42 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "name": "two_hole_pilot_200nm",
+  "geometry": {
+    "length_nm": 1800,
+    "width_nm": 600,
+    "thickness_nm": 200,
+    "pattern": {
+      "csv": "data/examples/two_holes_AP_pnc.csv",
+      "x_offset_nm": 900
+    }
+  },
+  "mesh": {
+    "kind": "gmsh",
+    "element_order": 2,
+    "mesh_size_nm": 160,
+    "port_size_nm": 150,
+    "circle_resolution": 32
+  },
+  "material": {
+    "name": "nominal_cubic_ge",
+    "C11_Pa": 128500000000.0,
+    "C12_Pa": 48300000000.0,
+    "C44_Pa": 66800000000.0,
+    "density_kg_m3": 5323,
+    "crystal_rotation": [[1, 0, 0], [0, 1, 0], [0, 0, 1]],
+    "temperature_policy": "fixed_property_control",
+    "temperature_K": 4
+  },
+  "analysis": {
+    "kind": "scattering",
+    "boundary": "matched_ports",
+    "frequency_GHz": 1,
+    "incident_side": "left"
+  },
+  "resources": {
+    "max_dofs": 30000,
+    "max_port_dofs": 400
+  }
+}
