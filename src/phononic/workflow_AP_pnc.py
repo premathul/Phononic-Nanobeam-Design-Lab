@@ -92,7 +92,7 @@ def resolve_config(config: dict, *, check_body_budget: bool = True) -> dict:
         raise ValueError("name must use 1-80 letters, digits, underscores or hyphens")
     required = {
         "geometry": {*DIMENSIONS_NM, "pattern"},
-        "mesh": {"kind", "cells", "element_order", "mesh_size_nm", "port_size_nm", "circle_resolution"},
+        "mesh": {"kind", "cells", "element_order", "mesh_size_nm", "port_size_nm", "circle_resolution", "thickness_layers"},
         "material": {"name", "C11_Pa", "C12_Pa", "C44_Pa", "density_kg_m3", "crystal_rotation", "temperature_policy", "temperature_K"},
         "analysis": {"kind", "boundary", "num_modes", "k_points", "frequency_GHz", "incident_side"},
         "resources": {"max_dofs", "max_port_dofs"},
@@ -127,18 +127,24 @@ def resolve_config(config: dict, *, check_body_budget: bool = True) -> dict:
     if type(maximum) is not int or maximum <= 0:
         raise ValueError("max_dofs must be a positive integer")
     gmsh_fields = {"mesh_size_nm", "port_size_nm", "circle_resolution"}
+    if kind != "layered" and "thickness_layers" in mesh:
+        raise ValueError("mesh.thickness_layers requires mesh.kind=layered")
     if kind == "structured":
         if "pattern" in geometry or gmsh_fields.intersection(mesh):
-            raise ValueError("A hole pattern and Gmsh mesh settings require mesh.kind=gmsh")
+            raise ValueError("A hole pattern and Gmsh mesh settings require mesh.kind=gmsh or layered")
         cells = mesh.get("cells")
         if not isinstance(cells, (list, tuple)) or len(cells) != 3 or any(type(n) is not int or n <= 0 for n in cells):
             raise ValueError("mesh.cells must contain three positive integers")
         predicted = 3 * math.prod(order * n + 1 for n in cells)
         if check_body_budget and predicted > maximum:
             raise ValueError(f"Requested grid has {predicted} displacement DOFs; configured maximum is {maximum}")
-    elif kind == "gmsh":
+    elif kind in ("gmsh", "layered"):
         if "cells" in mesh:
-            raise ValueError("Omit mesh.cells for a Gmsh mesh")
+            raise ValueError(f"Omit mesh.cells for mesh.kind={kind}")
+        if kind == "layered":
+            layers = mesh.get("thickness_layers")
+            if type(layers) is not int or layers <= 0:
+                raise ValueError("mesh.thickness_layers must be a positive integer")
         for key in ("mesh_size_nm", "port_size_nm"):
             value = mesh.get(key)
             if not _finite_number(value) or value <= 0:
@@ -148,7 +154,7 @@ def resolve_config(config: dict, *, check_body_budget: bool = True) -> dict:
         if type(resolution) is not int or resolution < 8 or resolution % 4 != 0:
             raise ValueError("mesh.circle_resolution must be a multiple of 4 and at least 8")
     else:
-        raise ValueError("mesh.kind must be structured or gmsh")
+        raise ValueError("mesh.kind must be structured, gmsh or layered")
     material = config["material"]
     if material["temperature_policy"] != "fixed_property_control":
         raise ValueError("Only fixed_property_control is implemented; temperature-dependent material data are not installed")
@@ -158,7 +164,7 @@ def resolve_config(config: dict, *, check_body_budget: bool = True) -> dict:
     CubicMaterial(C11=material["C11_Pa"], C12=material["C12_Pa"], C44=material["C44_Pa"],
                   rho=material["density_kg_m3"], rotation=material["crystal_rotation"])
     analysis = config["analysis"]
-    if analysis["kind"] == "scattering" or kind == "gmsh":
+    if analysis["kind"] == "scattering" or kind in ("gmsh", "layered"):
         config["resources"].setdefault("max_port_dofs", 200)
         maximum_port = config["resources"]["max_port_dofs"]
         if type(maximum_port) is not int or maximum_port <= 0:
@@ -553,8 +559,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--analysis", choices=("modes", "bloch", "scattering"))
     parser.add_argument("--thickness-nm", type=float)
     parser.add_argument("--cells", nargs=3, type=int, metavar=("NX", "NY", "NZ"))
-    parser.add_argument("--mesh-size-nm", type=float, help="Target Gmsh body mesh size")
-    parser.add_argument("--port-size-nm", type=float, help="Target matched-port mesh size")
+    parser.add_argument("--mesh-size-nm", type=float, help="Target Gmsh body size or layered in-plane size")
+    parser.add_argument("--port-size-nm", type=float, help="Target matched-port mesh size (width only for layered meshes)")
+    parser.add_argument("--thickness-layers", type=int, help="Equal through-thickness intervals for a layered mesh")
     parser.add_argument("--circle-resolution", type=int, help="Number of straight segments around each hole")
     parser.add_argument("--uniform", action="store_true", help="Remove the hole pattern while retaining the geometry dimensions and mesh settings")
     parser.add_argument("--boundary", choices=("clamped_free", "clamped_clamped", "free", "periodic_x", "matched_ports"))
@@ -588,6 +595,7 @@ def main(argv: list[str] | None = None) -> int:
                     config["analysis"]["k_points"] = previous.get("k_points", 9)
         for value, section, key in ((args.thickness_nm, "geometry", "thickness_nm"), (args.cells, "mesh", "cells"),
                                     (args.mesh_size_nm, "mesh", "mesh_size_nm"), (args.port_size_nm, "mesh", "port_size_nm"),
+                                    (args.thickness_layers, "mesh", "thickness_layers"),
                                     (args.circle_resolution, "mesh", "circle_resolution"),
                                     (args.boundary, "analysis", "boundary"), (args.modes, "analysis", "num_modes"),
                                     (args.k_points, "analysis", "k_points"),

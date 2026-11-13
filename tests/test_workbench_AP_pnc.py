@@ -87,6 +87,32 @@ class WorkbenchTests(unittest.TestCase):
         self.assertIsNone(self.window.action)
         self.assertFalse((self.output / "_workbench").exists())
 
+    def test_layered_mesh_controls_keep_physical_thickness_and_other_settings(self):
+        config = json.loads((ROOT / "configs/perforated_beam_AP_pnc.json").read_bytes())
+        config["mesh"].update(kind="layered", thickness_layers=2)
+        path = self.output / "layered_AP_pnc.json"
+        path.write_text(json.dumps(config), encoding="utf-8")
+        self.assertTrue(self.window.load_configuration(path))
+        self.assertTrue(self.window.fields["thickness_layers"].isVisible())
+        self.assertFalse(self.window.fields["cells"].isVisible())
+        self.assertIn("also set the port thickness resolution", self.window.provenance.text())
+        self.assertEqual(self.window.fields["mesh_size_nm"].accessibleName(), "In-plane mesh size (nm)")
+        self.window.fields["thickness_layers"].setText("3")
+        self.window.fields["mesh_size_nm"].setText("120")
+        edited = self.window.edited_config()
+        self.assertEqual(edited["mesh"]["thickness_layers"], 3)
+        self.assertEqual(edited["mesh"]["mesh_size_nm"], 120)
+        self.assertEqual(edited["geometry"], config["geometry"])
+        self.assertEqual(edited["material"], config["material"])
+        self.assertEqual(edited["mesh"]["port_size_nm"], config["mesh"]["port_size_nm"])
+        self.window.fields["thickness_layers"].setText("0")
+        self.assertFalse(self.window.start_job("mesh"))
+        self.assertIn("Thickness layers must be a positive whole number", self.window.status.text())
+        self.assertFalse((self.output / "_workbench").exists())
+        self.window.preset.setCurrentIndex(2)
+        self.assertFalse(self.window.fields["thickness_layers"].isVisible())
+        self.assertEqual(self.window.fields["mesh_size_nm"].accessibleName(), "Body mesh size (nm)")
+
     def test_open_saved_run_uses_selected_folder_without_launching_or_changing_files(self):
         directory = self.output.resolve() / "moved scattering result"
         directory.mkdir()

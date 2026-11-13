@@ -1,0 +1,5644 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "status": "completed_diagnostic",
+  "scope": "Five 1 GHz left-incident layered solves with nominal fixed-property cubic Ge. Both uniform cases use their exact same-discrete SAFE port phase and fail the 0.01 complex-reference check. The two-hole meshes vary the x-y footprint target at fixed two z layers, ports and 48-segment holes. The 105-to-80 nm pair fails the 0.01 complex criterion. The 80-to-60 nm pair passes both 0.01 pair criteria. Comparisons with the saved tetrahedral h50 case retain their complex-response failures and serve as cross-discretization sensitivity checks. Continuum accuracy and transfer to the full 26-hole device require separate evidence.",
+  "complex_encoding": "[real, imaginary] pairs; outgoing rows and incoming columns.",
+  "preflight": {
+    "path": "results/runs/layered_acceptance/preflight_AP_pnc.json",
+    "sha256": "ea2fb3e329bbbdbf589542ef404d069aadd72af950d874f72796f9bbd9ea09ef"
+  },
+  "channel_csv_sha256": "0a065a50f156f27f5dc55a6c8a2b3bb6a12bc3924fa096892786145eb7f72383",
+  "cases": {
+    "uniform_h105": {
+      "configuration": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "schema_version": 1,
+        "name": "uniform_layered_h105_z2",
+        "geometry": {
+          "length_nm": 1800,
+          "width_nm": 600,
+          "thickness_nm": 200
+        },
+        "mesh": {
+          "kind": "layered",
+          "element_order": 2,
+          "mesh_size_nm": 105,
+          "port_size_nm": 150,
+          "thickness_layers": 2,
+          "circle_resolution": 48
+        },
+        "material": {
+          "name": "nominal_cubic_ge",
+          "C11_Pa": 128500000000.0,
+          "C12_Pa": 48300000000.0,
+          "C44_Pa": 66800000000.0,
+          "density_kg_m3": 5323,
+          "crystal_rotation": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "temperature_policy": "fixed_property_control",
+          "temperature_K": 4
+        },
+        "analysis": {
+          "kind": "scattering",
+          "boundary": "matched_ports",
+          "frequency_GHz": 1,
+          "incident_side": "left"
+        },
+        "resources": {
+          "max_dofs": 30000,
+          "max_port_dofs": 400
+        }
+      },
+      "implementation": {
+        "git_commit": "e3bbf16ef5cafa770b27bedf479b0e5d6b319c1f",
+        "source_sha256": {
+          "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+          "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+          "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+          "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+          "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+          "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+          "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+          "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+          "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+          "src/phononic/report_AP_pnc.py": "871fc6a358958c7908ad17f57521bdb51772ea82739d83cdbe5b4b536a5145c5",
+          "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+          "src/phononic/workflow_AP_pnc.py": "b364578c8b0d1fe04a47bf682475fcbca9f5f208ea53bb06272a07dd0c4b5da5",
+          "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+        },
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2",
+          "meshio": "5.3.5",
+          "gmsh": "4.15.2",
+          "matplotlib": "3.11.2",
+          "psutil": "7.2.2"
+        },
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "mesh_sha256": "a52d1543cdf2fa4d41dd31c0f573042cf973c6995e16843acbac490ceee343e3",
+      "hole_pattern_provenance": null,
+      "geometry_diagnostics": {
+        "analytic_solid_volume_m3": 2.1600000000000007e-19,
+        "meshed_solid_volume_m3": 2.1600000000000004e-19,
+        "analytic_removed_volume_m3": 0.0,
+        "meshed_removed_volume_m3": 2.407412430484045e-35,
+        "relative_solid_volume_error": 1.1145427918907612e-16,
+        "relative_removed_volume_error": null,
+        "rim_segments_min": null,
+        "rim_segments_max": null,
+        "max_radial_sagitta_m": null
+      },
+      "metrics": {
+        "ndof": 7935,
+        "mesh_vertices": 432,
+        "mesh_tetrahedra": 1452,
+        "port_dofs": 135,
+        "power_balance_passed": true,
+        "matched_reference_passed": true,
+        "maximum_relative_port_residual": 1.7011685905617461e-15,
+        "maximum_relative_solver_residual": 2.27498280918569e-16,
+        "maximum_flux_power_imbalance": 4.884981308350689e-15,
+        "maximum_modal_flux_difference": 5.773159728050814e-15,
+        "max_power_imbalance": 5.88418203051333e-15,
+        "elapsed_seconds": 3.2245968999923207,
+        "peak_process_memory_mib": 230.87890625
+      },
+      "execution": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "status": "completed",
+        "case": "uniform_h105",
+        "started_utc": "2026-11-13T19:46:59.133816+00:00",
+        "preflight_sha256": "ea2fb3e329bbbdbf589542ef404d069aadd72af950d874f72796f9bbd9ea09ef",
+        "driver_sha256": "93cc14e209b5e6a22817cbd2b49451d983ff19700d0be085bbcfe66ce87102e8",
+        "initial_available_mib": 1211.53125,
+        "maximum_worker_rss_mib": 768.0,
+        "minimum_system_available_mib": 256.0,
+        "sample_interval_s": 0.1,
+        "worker_pid": 24120,
+        "worker_exit_code": 0,
+        "completed_utc": "2026-11-13T19:47:04.837823+00:00",
+        "elapsed_seconds": 5.702999999994063,
+        "maximum_worker_tree_rss_mib": 233.13671875,
+        "minimum_available_mib": 1013.66015625
+      },
+      "root_indices": {
+        "incident": [
+          268,
+          262,
+          260,
+          247
+        ],
+        "reflection": [
+          269,
+          263,
+          261,
+          248
+        ],
+        "transmission": [
+          268,
+          262,
+          260,
+          247
+        ]
+      },
+      "amplitudes": {
+        "reflection": [
+          [
+            [
+              -2.8319088735956126e-08,
+              -3.036883235023808e-08
+            ],
+            [
+              -3.1436842242318766e-06,
+              2.2762636259307247e-06
+            ],
+            [
+              -2.779467216238278e-07,
+              4.448940493276533e-07
+            ],
+            [
+              -1.0533415241675023e-06,
+              1.2358861370346721e-06
+            ]
+          ],
+          [
+            [
+              -3.1436842042576792e-06,
+              2.2762636307575534e-06
+            ],
+            [
+              -0.0025866044237788433,
+              -0.0024413242351526377
+            ],
+            [
+              2.370425944511903e-06,
+              -1.0547621251732073e-05
+            ],
+            [
+              -5.0485909243500825e-05,
+              -2.9409141081211386e-05
+            ]
+          ],
+          [
+            [
+              -2.779466963958452e-07,
+              4.448940546375011e-07
+            ],
+            [
+              2.3704259604104933e-06,
+              -1.054762119239949e-05
+            ],
+            [
+              -3.540363369742962e-06,
+              -1.507484622610607e-05
+            ],
+            [
+              -0.000125135016102883,
+              -1.0271927608829699e-06
+            ]
+          ],
+          [
+            [
+              -1.0533415142414846e-06,
+              1.2358861406268425e-06
+            ],
+            [
+              -5.048590925386e-05,
+              -2.940914109637384e-05
+            ],
+            [
+              -0.0001251350161135897,
+              -1.0271927579925388e-06
+            ],
+            [
+              1.2482627428517114e-05,
+              7.29577076226424e-05
+            ]
+          ]
+        ],
+        "transmission": [
+          [
+            [
+              -0.8513449188377523,
+              0.5246063563741383
+            ],
+            [
+              -1.0192642030998785e-06,
+              9.87419804320499e-07
+            ],
+            [
+              2.472139833138186e-07,
+              -3.5871146989227255e-07
+            ],
+            [
+              -6.886303273351284e-07,
+              -5.772556905440038e-07
+            ]
+          ],
+          [
+            [
+              -1.2124020709477281e-06,
+              7.369345205808052e-07
+            ],
+            [
+              0.7292332997947432,
+              -0.6842558971481945
+            ],
+            [
+              5.854921913412388e-06,
+              -3.28470288561304e-06
+            ],
+            [
+              7.44722752444609e-05,
+              -4.394316446436784e-05
+            ]
+          ],
+          [
+            [
+              4.318656837040115e-07,
+              5.74035566277139e-08
+            ],
+            [
+              -5.801370734741075e-06,
+              3.39264292595573e-06
+            ],
+            [
+              0.9602662450668356,
+              -0.2790853541664109
+            ],
+            [
+              -0.00029371524936158715,
+              3.664770751058785e-05
+            ]
+          ],
+          [
+            [
+              2.4686488364068085e-07,
+              -8.64183547027379e-07
+            ],
+            [
+              8.369871085637349e-05,
+              -2.244129433750189e-05
+            ],
+            [
+              -0.0002900192685525355,
+              5.917644786524458e-05
+            ],
+            [
+              -0.9990956106101914,
+              0.04251871605530477
+            ]
+          ]
+        ]
+      },
+      "channels": [
+        {
+          "incident_mode_order": 1,
+          "frequency_GHz": 1.0,
+          "transmission": 0.9999999999820195,
+          "reflection": 1.7977978713681165e-11,
+          "power_balance": 2.55351295663786e-15,
+          "transmission_flux": 0.9999999999820172,
+          "reflection_flux": 1.7977978733579383e-11,
+          "flux_power_balance": 4.884981308350689e-15,
+          "relative_residual": 2.27498280918569e-16,
+          "incident_root": 268,
+          "wavenumber_rad_m": 1438522.4531531846
+        },
+        {
+          "incident_mode_order": 2,
+          "frequency_GHz": 1.0,
+          "transmission": 0.999987345867876,
+          "reflection": 1.2654132126227764e-05,
+          "power_balance": -2.220446049250313e-15,
+          "transmission_flux": 0.9999873458678749,
+          "reflection_flux": 1.2654132126189075e-05,
+          "flux_power_balance": -9.992007221626409e-16,
+          "relative_residual": 1.4562546991560738e-16,
+          "incident_root": 262,
+          "wavenumber_rad_m": 3061012.9635694223
+        },
+        {
+          "incident_mode_order": 3,
+          "frequency_GHz": 1.0,
+          "transmission": 0.9999999839832382,
+          "reflection": 1.601675896256459e-08,
+          "power_balance": 2.886579864025407e-15,
+          "transmission_flux": 0.9999999839832416,
+          "reflection_flux": 1.6016758965137887e-08,
+          "flux_power_balance": -5.551115123125783e-16,
+          "relative_residual": 2.1070197466147988e-16,
+          "incident_root": 260,
+          "wavenumber_rad_m": 3333511.089908365
+        },
+        {
+          "incident_mode_order": 4,
+          "frequency_GHz": 1.0,
+          "transmission": 0.9999999754451738,
+          "reflection": 2.455483202329479e-08,
+          "power_balance": -5.88418203051333e-15,
+          "transmission_flux": 0.999999975445168,
+          "reflection_flux": 2.4554832027313246e-08,
+          "flux_power_balance": -1.1102230246251565e-16,
+          "relative_residual": 2.135632078614204e-16,
+          "incident_root": 247,
+          "wavenumber_rad_m": 5216374.272506516
+        }
+      ],
+      "source": {
+        "summary": {
+          "path": "results/runs/layered_acceptance/uniform_layered_h105_z2-d3cb558389e1/summary_AP_pnc.json",
+          "sha256": "0131c453afac09720250ac89e734fdd98cb816037e1c60c15621c4c6be4d17f1"
+        },
+        "fields": {
+          "path": "results/runs/layered_acceptance/uniform_layered_h105_z2-d3cb558389e1/selected_fields_AP_pnc.npz",
+          "sha256": "d7fd08d0311160d829642d1af28402b2b88b92ac5b32d2fede4706453bf20874"
+        },
+        "channels": {
+          "path": "results/runs/layered_acceptance/uniform_layered_h105_z2-d3cb558389e1/scattering_AP_pnc.csv",
+          "sha256": "0d94812dac91f41552c95d6a936dc182f5937e6b8e204ed247fcbc06143a025b"
+        },
+        "report": {
+          "path": "results/runs/layered_acceptance/uniform_layered_h105_z2-d3cb558389e1/report_AP_pnc.html",
+          "sha256": "e894e0711ff9a5fe66d2287580464c9f82cb894131449956ff92d7434213682f"
+        },
+        "completion": {
+          "path": "results/runs/layered_acceptance/uniform_h105_completed_AP_pnc.json",
+          "sha256": "7d43338eb6964e898f6057c87431a7e4c53c054de60cb300321b6af9be9196b1"
+        },
+        "execution": {
+          "path": "results/runs/layered_acceptance/uniform_h105_execution_AP_pnc.json",
+          "sha256": "16977acaba1cf2a83b9831911900a6dfbbb50e3a24b3d6c7dc20cbe519dcb588"
+        },
+        "driver": {
+          "path": "results/runs/layered_acceptance/run_layered_acceptance_AP_pnc.py",
+          "sha256": "93cc14e209b5e6a22817cbd2b49451d983ff19700d0be085bbcfe66ce87102e8"
+        },
+        "mesh_manifest": {
+          "path": "results/runs/layered_acceptance/_meshes/4d3f9608b8b66c44feb4ac40b5ff43ab3127b1000c53a3165d0a87bb2cd8414b/summary_AP_pnc.json",
+          "sha256": "ea06486908f729e9b24906c90303b442ccc793e819d32d51f54df1009b05d4a6"
+        },
+        "mesh": {
+          "path": "results/runs/layered_acceptance/_meshes/4d3f9608b8b66c44feb4ac40b5ff43ab3127b1000c53a3165d0a87bb2cd8414b/mesh_AP_pnc.npz",
+          "sha256": "a52d1543cdf2fa4d41dd31c0f573042cf973c6995e16843acbac490ceee343e3"
+        }
+      }
+    },
+    "two_hole_h105": {
+      "configuration": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "schema_version": 1,
+        "name": "two_hole_layered_200nm",
+        "geometry": {
+          "length_nm": 1800,
+          "width_nm": 600,
+          "thickness_nm": 200,
+          "pattern": {
+            "csv": "data/examples/two_holes_AP_pnc.csv",
+            "x_offset_nm": 900
+          }
+        },
+        "mesh": {
+          "kind": "layered",
+          "element_order": 2,
+          "mesh_size_nm": 105,
+          "port_size_nm": 150,
+          "thickness_layers": 2,
+          "circle_resolution": 48
+        },
+        "material": {
+          "name": "nominal_cubic_ge",
+          "C11_Pa": 128500000000.0,
+          "C12_Pa": 48300000000.0,
+          "C44_Pa": 66800000000.0,
+          "density_kg_m3": 5323,
+          "crystal_rotation": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "temperature_policy": "fixed_property_control",
+          "temperature_K": 4
+        },
+        "analysis": {
+          "kind": "scattering",
+          "boundary": "matched_ports",
+          "frequency_GHz": 1,
+          "incident_side": "left"
+        },
+        "resources": {
+          "max_dofs": 30000,
+          "max_port_dofs": 400
+        }
+      },
+      "implementation": {
+        "git_commit": "e3bbf16ef5cafa770b27bedf479b0e5d6b319c1f",
+        "source_sha256": {
+          "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+          "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+          "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+          "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+          "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+          "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+          "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+          "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+          "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+          "src/phononic/report_AP_pnc.py": "871fc6a358958c7908ad17f57521bdb51772ea82739d83cdbe5b4b536a5145c5",
+          "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+          "src/phononic/workflow_AP_pnc.py": "b364578c8b0d1fe04a47bf682475fcbca9f5f208ea53bb06272a07dd0c4b5da5",
+          "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+        },
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2",
+          "meshio": "5.3.5",
+          "gmsh": "4.15.2",
+          "matplotlib": "3.11.2",
+          "psutil": "7.2.2"
+        },
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "mesh_sha256": "78b6c21233dec10c4f7a4a8a3d74711c7332a3621b27e2f29d805354cd2772d8",
+      "hole_pattern_provenance": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "source_csv": "data/examples/two_holes_AP_pnc.csv",
+        "source_sha256": "116ba207413da79d15dcd605205ef9ec88aad4807d69cce670c66317e0b85f32",
+        "x_offset_m": 9.000000000000001e-07,
+        "holes": [
+          {
+            "x_m": 6.25e-07,
+            "diameter_m": 2.5000000000000004e-07,
+            "region": "Pilot"
+          },
+          {
+            "x_m": 1.1750000000000002e-06,
+            "diameter_m": 2.5000000000000004e-07,
+            "region": "Pilot"
+          }
+        ],
+        "clearances": {
+          "min_side_ligament_m": 1.7500000000000002e-07,
+          "min_end_ligament_m": 4.999999999999999e-07,
+          "min_interhole_gap_m": 3.000000000000001e-07
+        }
+      },
+      "geometry_diagnostics": {
+        "analytic_solid_volume_m3": 1.9636504591506386e-19,
+        "meshed_solid_volume_m3": 1.9642107116699231e-19,
+        "analytic_removed_volume_m3": 1.9634954084936215e-20,
+        "meshed_removed_volume_m3": 1.9578928833007755e-20,
+        "relative_solid_volume_error": 0.0002853117349239964,
+        "relative_removed_volume_error": 0.002853342650362612,
+        "rim_segments_min": 48,
+        "rim_segments_max": 48,
+        "max_radial_sagitta_m": 2.6763459517457903e-10
+      },
+      "metrics": {
+        "ndof": 13485,
+        "mesh_vertices": 777,
+        "mesh_tetrahedra": 2280,
+        "port_dofs": 135,
+        "power_balance_passed": true,
+        "matched_reference_passed": null,
+        "maximum_relative_port_residual": 1.7011685905617461e-15,
+        "maximum_relative_solver_residual": 2.6798229702370787e-16,
+        "maximum_flux_power_imbalance": 3.6637359812630166e-15,
+        "maximum_modal_flux_difference": 3.9968028886505635e-15,
+        "max_power_imbalance": 7.66053886991358e-15,
+        "elapsed_seconds": 4.325614200002747,
+        "peak_process_memory_mib": 337.78125
+      },
+      "execution": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "status": "completed",
+        "case": "two_hole_h105",
+        "started_utc": "2026-11-13T19:48:30.320903+00:00",
+        "preflight_sha256": "ea2fb3e329bbbdbf589542ef404d069aadd72af950d874f72796f9bbd9ea09ef",
+        "driver_sha256": "c725d0473c628312db01efd9eef7eab817886a66d4a5f9edef682b34e3617907",
+        "initial_available_mib": 1385.94921875,
+        "maximum_worker_rss_mib": 1024.0,
+        "minimum_system_available_mib": 256.0,
+        "sample_interval_s": 0.1,
+        "worker_pid": 41808,
+        "worker_exit_code": 0,
+        "completed_utc": "2026-11-13T19:48:36.728490+00:00",
+        "elapsed_seconds": 6.4060000000026776,
+        "maximum_worker_tree_rss_mib": 337.36328125,
+        "minimum_available_mib": 850.5
+      },
+      "root_indices": {
+        "incident": [
+          268,
+          262,
+          260,
+          247
+        ],
+        "reflection": [
+          269,
+          263,
+          261,
+          248
+        ],
+        "transmission": [
+          268,
+          262,
+          260,
+          247
+        ]
+      },
+      "amplitudes": {
+        "reflection": [
+          [
+            [
+              0.09684249897195542,
+              0.2719381806907964
+            ],
+            [
+              1.3675709768460802e-05,
+              7.913110842452451e-05
+            ],
+            [
+              3.204991986582488e-05,
+              1.7368289167336442e-05
+            ],
+            [
+              -5.6218778871369875e-05,
+              3.761836796819572e-05
+            ]
+          ],
+          [
+            [
+              1.367570978244367e-05,
+              7.913110845132543e-05
+            ],
+            [
+              -0.031127837860209017,
+              -0.1697900007699509
+            ],
+            [
+              2.1365667275489647e-05,
+              -2.7347298238907543e-05
+            ],
+            [
+              9.80880087376968e-06,
+              -0.00015192664315533873
+            ]
+          ],
+          [
+            [
+              3.204991988780806e-05,
+              1.736828919719813e-05
+            ],
+            [
+              2.136566744645133e-05,
+              -2.734729839162261e-05
+            ],
+            [
+              0.07699195579208354,
+              -0.2832401438249615
+            ],
+            [
+              -0.00012019643793938591,
+              -5.46753419807201e-05
+            ]
+          ],
+          [
+            [
+              -5.621877886179435e-05,
+              3.761836796514649e-05
+            ],
+            [
+              9.808800864071045e-06,
+              -0.00015192664316420184
+            ],
+            [
+              -0.00012019643792178668,
+              -5.46753419598266e-05
+            ],
+            [
+              -0.0013925400278781024,
+              0.008742998916556208
+            ]
+          ]
+        ],
+        "transmission": [
+          [
+            [
+              -0.9020753541313897,
+              0.3208287757631453
+            ],
+            [
+              -0.0002426877363489238,
+              5.1090122633589244e-05
+            ],
+            [
+              -2.7638862961960143e-05,
+              -0.00018332769027754625
+            ],
+            [
+              -3.2380035475958134e-05,
+              -4.656240605504071e-05
+            ]
+          ],
+          [
+            [
+              -0.00023738532184063688,
+              8.057783408326621e-05
+            ],
+            [
+              0.968826253353926,
+              -0.17770195551226506
+            ],
+            [
+              1.947239499419882e-05,
+              8.46700363973132e-05
+            ],
+            [
+              9.998364708189143e-05,
+              -5.9097504554254436e-05
+            ]
+          ],
+          [
+            [
+              -1.413049021400851e-05,
+              0.00016608690075780523
+            ],
+            [
+              -4.090623847080046e-05,
+              8.217364392186783e-05
+            ],
+            [
+              0.9226511454571191,
+              0.25012408822125354
+            ],
+            [
+              -6.374451731626119e-05,
+              3.153887631909017e-05
+            ]
+          ],
+          [
+            [
+              3.1267963035294126e-05,
+              -6.653117958707304e-05
+            ],
+            [
+              0.0001239144715900857,
+              5.521591216285681e-05
+            ],
+            [
+              -4.336654219838844e-05,
+              -1.3262060666227045e-05
+            ],
+            [
+              -0.9852190857030456,
+              -0.17106988926943875
+            ]
+          ]
+        ]
+      },
+      "channels": [
+        {
+          "incident_mode_order": 1,
+          "frequency_GHz": 1.0,
+          "transmission": 0.916671143922142,
+          "reflection": 0.08332885607785831,
+          "power_balance": -3.3306690738754696e-16,
+          "transmission_flux": 0.916671143922143,
+          "reflection_flux": 0.08332885607785862,
+          "flux_power_balance": -1.6653345369377348e-15,
+          "relative_residual": 1.7349672495097795e-16,
+          "incident_root": 268,
+          "wavenumber_rad_m": 1438522.4531531846
+        },
+        {
+          "incident_mode_order": 2,
+          "frequency_GHz": 1.0,
+          "transmission": 0.970202382517648,
+          "reflection": 0.0297976174823527,
+          "power_balance": -6.661338147750939e-16,
+          "transmission_flux": 0.9702023825176475,
+          "reflection_flux": 0.029797617482355633,
+          "flux_power_balance": -3.1086244689504383e-15,
+          "relative_residual": 1.5571261086399531e-16,
+          "incident_root": 262,
+          "wavenumber_rad_m": 3061012.9635694223
+        },
+        {
+          "incident_mode_order": 3,
+          "frequency_GHz": 1.0,
+          "transmission": 0.9138472396995246,
+          "reflection": 0.08615276030047304,
+          "power_balance": 2.3314683517128287e-15,
+          "transmission_flux": 0.913847239699526,
+          "reflection_flux": 0.08615276030047242,
+          "flux_power_balance": 1.6653345369377348e-15,
+          "relative_residual": 2.6798229702370787e-16,
+          "incident_root": 260,
+          "wavenumber_rad_m": 3333511.089908365
+        },
+        {
+          "incident_mode_order": 4,
+          "frequency_GHz": 1.0,
+          "transmission": 0.9999215756120367,
+          "reflection": 7.84243879710412e-05,
+          "power_balance": -7.66053886991358e-15,
+          "transmission_flux": 0.9999215756120327,
+          "reflection_flux": 7.842438797101443e-05,
+          "flux_power_balance": -3.6637359812630166e-15,
+          "relative_residual": 2.1312888201820754e-16,
+          "incident_root": 247,
+          "wavenumber_rad_m": 5216374.272506516
+        }
+      ],
+      "source": {
+        "summary": {
+          "path": "results/runs/layered_acceptance/two_hole_layered_200nm-789e28616c79/summary_AP_pnc.json",
+          "sha256": "c03655cc95dbd397943562927a914fbcfa054ecea6668cc5caa2e193403b73b4"
+        },
+        "fields": {
+          "path": "results/runs/layered_acceptance/two_hole_layered_200nm-789e28616c79/selected_fields_AP_pnc.npz",
+          "sha256": "5f7458b36d33d2b7d74f4906c83cd9124b62c25006e0a3b0ec1509b47b92ec2c"
+        },
+        "channels": {
+          "path": "results/runs/layered_acceptance/two_hole_layered_200nm-789e28616c79/scattering_AP_pnc.csv",
+          "sha256": "842dc5e2bdd147994bd05638febd624c696c83b7bea992c1a42f7b58bb71e9a1"
+        },
+        "report": {
+          "path": "results/runs/layered_acceptance/two_hole_layered_200nm-789e28616c79/report_AP_pnc.html",
+          "sha256": "e1fd07dbce837b16a5081e50cb09ac88316b5fab20e2cbaf2ecb62e0d6c29038"
+        },
+        "completion": {
+          "path": "results/runs/layered_acceptance/two_hole_h105_completed_AP_pnc.json",
+          "sha256": "64d13b6290f2c380960710917352f79fa4d0d7ca5a28807a75d5e1df019cc88e"
+        },
+        "execution": {
+          "path": "results/runs/layered_acceptance/two_hole_h105_execution_AP_pnc.json",
+          "sha256": "e9f72bcc7f8bbdb31ea83b26a805695637886e133cea9be019a64d5962db4596"
+        },
+        "driver": {
+          "path": "results/runs/layered_acceptance/run_layered_two_hole_AP_pnc.py",
+          "sha256": "c725d0473c628312db01efd9eef7eab817886a66d4a5f9edef682b34e3617907"
+        },
+        "mesh_manifest": {
+          "path": "results/runs/layered_acceptance/_meshes/fdeed4b858f79cc0baad4f120de5afb5476c9534c08b1a0d76eae9bd52627bf5/summary_AP_pnc.json",
+          "sha256": "726ec17dffe95007b27082257b5f18a5222b8ec1da2214b2be29e35abfa44787"
+        },
+        "mesh": {
+          "path": "results/runs/layered_acceptance/_meshes/fdeed4b858f79cc0baad4f120de5afb5476c9534c08b1a0d76eae9bd52627bf5/mesh_AP_pnc.npz",
+          "sha256": "78b6c21233dec10c4f7a4a8a3d74711c7332a3621b27e2f29d805354cd2772d8"
+        }
+      }
+    },
+    "two_hole_h80": {
+      "configuration": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "schema_version": 1,
+        "name": "two_hole_layered_h80_z2",
+        "geometry": {
+          "length_nm": 1800,
+          "width_nm": 600,
+          "thickness_nm": 200,
+          "pattern": {
+            "csv": "data/examples/two_holes_AP_pnc.csv",
+            "x_offset_nm": 900
+          }
+        },
+        "mesh": {
+          "kind": "layered",
+          "element_order": 2,
+          "mesh_size_nm": 80,
+          "port_size_nm": 150,
+          "thickness_layers": 2,
+          "circle_resolution": 48
+        },
+        "material": {
+          "name": "nominal_cubic_ge",
+          "C11_Pa": 128500000000.0,
+          "C12_Pa": 48300000000.0,
+          "C44_Pa": 66800000000.0,
+          "density_kg_m3": 5323,
+          "crystal_rotation": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "temperature_policy": "fixed_property_control",
+          "temperature_K": 4
+        },
+        "analysis": {
+          "kind": "scattering",
+          "boundary": "matched_ports",
+          "frequency_GHz": 1,
+          "incident_side": "left"
+        },
+        "resources": {
+          "max_dofs": 30000,
+          "max_port_dofs": 400
+        }
+      },
+      "implementation": {
+        "git_commit": "e3bbf16ef5cafa770b27bedf479b0e5d6b319c1f",
+        "source_sha256": {
+          "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+          "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+          "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+          "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+          "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+          "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+          "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+          "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+          "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+          "src/phononic/report_AP_pnc.py": "871fc6a358958c7908ad17f57521bdb51772ea82739d83cdbe5b4b536a5145c5",
+          "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+          "src/phononic/workflow_AP_pnc.py": "b364578c8b0d1fe04a47bf682475fcbca9f5f208ea53bb06272a07dd0c4b5da5",
+          "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+        },
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2",
+          "meshio": "5.3.5",
+          "gmsh": "4.15.2",
+          "matplotlib": "3.11.2",
+          "psutil": "7.2.2"
+        },
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "mesh_sha256": "25bfa195d43ff9c89ec6d8cbede221ee658ae254f598cded695300bb6bd4f00b",
+      "hole_pattern_provenance": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "source_csv": "data/examples/two_holes_AP_pnc.csv",
+        "source_sha256": "116ba207413da79d15dcd605205ef9ec88aad4807d69cce670c66317e0b85f32",
+        "x_offset_m": 9.000000000000001e-07,
+        "holes": [
+          {
+            "x_m": 6.25e-07,
+            "diameter_m": 2.5000000000000004e-07,
+            "region": "Pilot"
+          },
+          {
+            "x_m": 1.1750000000000002e-06,
+            "diameter_m": 2.5000000000000004e-07,
+            "region": "Pilot"
+          }
+        ],
+        "clearances": {
+          "min_side_ligament_m": 1.7500000000000002e-07,
+          "min_end_ligament_m": 4.999999999999999e-07,
+          "min_interhole_gap_m": 3.000000000000001e-07
+        }
+      },
+      "geometry_diagnostics": {
+        "analytic_solid_volume_m3": 1.9636504591506386e-19,
+        "meshed_solid_volume_m3": 1.9642107116699231e-19,
+        "analytic_removed_volume_m3": 1.9634954084936215e-20,
+        "meshed_removed_volume_m3": 1.9578928833007755e-20,
+        "relative_solid_volume_error": 0.0002853117349239964,
+        "relative_removed_volume_error": 0.002853342650362612,
+        "rim_segments_min": 48,
+        "rim_segments_max": 48,
+        "max_radial_sagitta_m": 2.6763459517457903e-10
+      },
+      "metrics": {
+        "ndof": 17415,
+        "mesh_vertices": 981,
+        "mesh_tetrahedra": 3036,
+        "port_dofs": 135,
+        "power_balance_passed": true,
+        "matched_reference_passed": null,
+        "maximum_relative_port_residual": 1.7011685905617461e-15,
+        "maximum_relative_solver_residual": 3.549466742301974e-16,
+        "maximum_flux_power_imbalance": 5.551115123125783e-15,
+        "maximum_modal_flux_difference": 6.5503158452884236e-15,
+        "max_power_imbalance": 8.326672684688674e-15,
+        "elapsed_seconds": 5.3117427000106545,
+        "peak_process_memory_mib": 497.18359375
+      },
+      "execution": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "status": "completed",
+        "case": "two_hole_h80",
+        "started_utc": "2026-11-13T19:48:36.730500+00:00",
+        "preflight_sha256": "ea2fb3e329bbbdbf589542ef404d069aadd72af950d874f72796f9bbd9ea09ef",
+        "driver_sha256": "c725d0473c628312db01efd9eef7eab817886a66d4a5f9edef682b34e3617907",
+        "initial_available_mib": 1106.8984375,
+        "maximum_worker_rss_mib": 1024.0,
+        "minimum_system_available_mib": 256.0,
+        "sample_interval_s": 0.1,
+        "worker_pid": 41696,
+        "worker_exit_code": 0,
+        "completed_utc": "2026-11-13T19:48:44.137752+00:00",
+        "elapsed_seconds": 7.4060000000026776,
+        "maximum_worker_tree_rss_mib": 502.1171875,
+        "minimum_available_mib": 849.2578125
+      },
+      "root_indices": {
+        "incident": [
+          268,
+          262,
+          260,
+          247
+        ],
+        "reflection": [
+          269,
+          263,
+          261,
+          248
+        ],
+        "transmission": [
+          268,
+          262,
+          260,
+          247
+        ]
+      },
+      "amplitudes": {
+        "reflection": [
+          [
+            [
+              0.09662682632123747,
+              0.2724100617609406
+            ],
+            [
+              0.00015686013554246198,
+              2.146144422597595e-05
+            ],
+            [
+              -4.311836977149495e-05,
+              -2.1972222720480865e-05
+            ],
+            [
+              3.4028851317549014e-08,
+              1.7511218979088933e-05
+            ]
+          ],
+          [
+            [
+              0.00015686013555908738,
+              2.1461444246942096e-05
+            ],
+            [
+              -0.02987107999196426,
+              -0.1730413477756892
+            ],
+            [
+              5.244736907917371e-06,
+              3.8664900326318565e-05
+            ],
+            [
+              4.2510793686323333e-05,
+              -0.0001348829347005259
+            ]
+          ],
+          [
+            [
+              -4.311836974832026e-05,
+              -2.1972222694555205e-05
+            ],
+            [
+              5.244737082604924e-06,
+              3.866490017187213e-05
+            ],
+            [
+              0.07908016245433402,
+              -0.28534831077295164
+            ],
+            [
+              -0.00013680370821382738,
+              2.6077617707217538e-05
+            ]
+          ],
+          [
+            [
+              3.402886217968705e-08,
+              1.7511218980512274e-05
+            ],
+            [
+              4.2510793673901616e-05,
+              -0.00013488293470730669
+            ],
+            [
+              -0.00013680370819440645,
+              2.607761772953341e-05
+            ],
+            [
+              -0.001697199276054997,
+              0.009487747665433323
+            ]
+          ]
+        ],
+        "transmission": [
+          [
+            [
+              -0.9022556561581588,
+              0.3199854259332247
+            ],
+            [
+              -0.0001879662316055351,
+              3.00517489941682e-05
+            ],
+            [
+              2.202925422409172e-05,
+              -1.887594756385422e-05
+            ],
+            [
+              -3.540556385495589e-05,
+              -4.6169482373523616e-05
+            ]
+          ],
+          [
+            [
+              -0.00019789967431453514,
+              -1.0381931209602752e-06
+            ],
+            [
+              0.9701257461165241,
+              -0.16739281354196672
+            ],
+            [
+              -4.322163557106557e-06,
+              -3.3037025001798045e-05
+            ],
+            [
+              -3.0422417892923568e-05,
+              8.575228549884344e-05
+            ]
+          ],
+          [
+            [
+              2.409071699279491e-05,
+              4.324452767625775e-05
+            ],
+            [
+              2.6810241154218223e-05,
+              -3.341766367711738e-05
+            ],
+            [
+              0.9204437952629241,
+              0.2551584935711267
+            ],
+            [
+              -6.41414638505033e-05,
+              -8.832505884855248e-06
+            ]
+          ],
+          [
+            [
+              3.141209316308729e-05,
+              -4.9905776487014665e-05
+            ],
+            [
+              -6.978874832298156e-06,
+              -9.235286201805452e-05
+            ],
+            [
+              -8.313321661614571e-05,
+              1.5592039209605813e-05
+            ],
+            [
+              -0.9843015812765467,
+              -0.176231222252314
+            ]
+          ]
+        ]
+      },
+      "channels": [
+        {
+          "incident_mode_order": 1,
+          "frequency_GHz": 1.0,
+          "transmission": 0.9164559869721742,
+          "reflection": 0.08354401302782613,
+          "power_balance": -3.3306690738754696e-16,
+          "transmission_flux": 0.9164559869721773,
+          "reflection_flux": 0.08354401302782484,
+          "flux_power_balance": -2.220446049250313e-15,
+          "relative_residual": 2.237047083844489e-16,
+          "incident_root": 268,
+          "wavenumber_rad_m": 1438522.4531531846
+        },
+        {
+          "incident_mode_order": 2,
+          "frequency_GHz": 1.0,
+          "transmission": 0.9691643639513355,
+          "reflection": 0.03083563604866448,
+          "power_balance": 0.0,
+          "transmission_flux": 0.9691643639513328,
+          "reflection_flux": 0.030835636048662476,
+          "flux_power_balance": 4.773959005888173e-15,
+          "relative_residual": 3.549466742301974e-16,
+          "incident_root": 262,
+          "wavenumber_rad_m": 3061012.9635694223
+        },
+        {
+          "incident_mode_order": 3,
+          "frequency_GHz": 1.0,
+          "transmission": 0.9123226461854614,
+          "reflection": 0.08767735381453172,
+          "power_balance": 6.8833827526759706e-15,
+          "transmission_flux": 0.9123226461854628,
+          "reflection_flux": 0.08767735381453173,
+          "flux_power_balance": 5.551115123125783e-15,
+          "relative_residual": 3.3509020672211683e-16,
+          "incident_root": 260,
+          "wavenumber_rad_m": 3333511.089908365
+        },
+        {
+          "incident_mode_order": 4,
+          "frequency_GHz": 1.0,
+          "transmission": 0.9999070624563484,
+          "reflection": 9.293754365990475e-05,
+          "power_balance": -8.326672684688674e-15,
+          "transmission_flux": 0.9999070624563419,
+          "reflection_flux": 9.29375436599743e-05,
+          "flux_power_balance": -1.887379141862766e-15,
+          "relative_residual": 3.4865801100977163e-16,
+          "incident_root": 247,
+          "wavenumber_rad_m": 5216374.272506516
+        }
+      ],
+      "source": {
+        "summary": {
+          "path": "results/runs/layered_acceptance/two_hole_layered_h80_z2-1672dc73c355/summary_AP_pnc.json",
+          "sha256": "df9c23ebc718f38bedd8abb306fb45e344b942e0398014be68c2d5967293f4eb"
+        },
+        "fields": {
+          "path": "results/runs/layered_acceptance/two_hole_layered_h80_z2-1672dc73c355/selected_fields_AP_pnc.npz",
+          "sha256": "6fefcaf035dfc14dc22cd7d35b5291b69fcff591834f74410969e33bc59981e8"
+        },
+        "channels": {
+          "path": "results/runs/layered_acceptance/two_hole_layered_h80_z2-1672dc73c355/scattering_AP_pnc.csv",
+          "sha256": "6ccd801cade8ee76ffcc033a621ffa7ea86ac4448bdd994e19091fa63c095540"
+        },
+        "report": {
+          "path": "results/runs/layered_acceptance/two_hole_layered_h80_z2-1672dc73c355/report_AP_pnc.html",
+          "sha256": "dd4865ec0ac2f5a845fbf706cbe4e7073847ef61871d9dcaafd9f5d01b441539"
+        },
+        "completion": {
+          "path": "results/runs/layered_acceptance/two_hole_h80_completed_AP_pnc.json",
+          "sha256": "e8950c7073f05961c35b15b2eb6caa8dad660ed11a4d5604ebb285229121eead"
+        },
+        "execution": {
+          "path": "results/runs/layered_acceptance/two_hole_h80_execution_AP_pnc.json",
+          "sha256": "7025839277c14096eee38db939180675ec2ca1bec470a1d0ca8f692be95bf846"
+        },
+        "driver": {
+          "path": "results/runs/layered_acceptance/run_layered_two_hole_AP_pnc.py",
+          "sha256": "c725d0473c628312db01efd9eef7eab817886a66d4a5f9edef682b34e3617907"
+        },
+        "mesh_manifest": {
+          "path": "results/runs/layered_acceptance/_meshes/6b4049493c7b17f8718909bab1b5557f8e0cba3022e4dd5e7194dc31b5715aec/summary_AP_pnc.json",
+          "sha256": "479788802621c7638688f578f0deb65c75a7eab6112ea74c2c9799a36900ee0c"
+        },
+        "mesh": {
+          "path": "results/runs/layered_acceptance/_meshes/6b4049493c7b17f8718909bab1b5557f8e0cba3022e4dd5e7194dc31b5715aec/mesh_AP_pnc.npz",
+          "sha256": "25bfa195d43ff9c89ec6d8cbede221ee658ae254f598cded695300bb6bd4f00b"
+        }
+      }
+    },
+    "uniform_h60": {
+      "configuration": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "schema_version": 1,
+        "name": "uniform_h60_layered_z2",
+        "geometry": {
+          "length_nm": 1800,
+          "width_nm": 600,
+          "thickness_nm": 200
+        },
+        "mesh": {
+          "kind": "layered",
+          "element_order": 2,
+          "mesh_size_nm": 60,
+          "port_size_nm": 150,
+          "thickness_layers": 2,
+          "circle_resolution": 48
+        },
+        "material": {
+          "name": "nominal_cubic_ge",
+          "C11_Pa": 128500000000.0,
+          "C12_Pa": 48300000000.0,
+          "C44_Pa": 66800000000.0,
+          "density_kg_m3": 5323,
+          "crystal_rotation": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "temperature_policy": "fixed_property_control",
+          "temperature_K": 4
+        },
+        "analysis": {
+          "kind": "scattering",
+          "boundary": "matched_ports",
+          "frequency_GHz": 1,
+          "incident_side": "left"
+        },
+        "resources": {
+          "max_dofs": 30000,
+          "max_port_dofs": 400
+        }
+      },
+      "implementation": {
+        "git_commit": "e3bbf16ef5cafa770b27bedf479b0e5d6b319c1f",
+        "source_sha256": {
+          "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+          "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+          "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+          "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+          "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+          "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+          "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+          "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+          "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+          "src/phononic/report_AP_pnc.py": "871fc6a358958c7908ad17f57521bdb51772ea82739d83cdbe5b4b536a5145c5",
+          "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+          "src/phononic/workflow_AP_pnc.py": "b364578c8b0d1fe04a47bf682475fcbca9f5f208ea53bb06272a07dd0c4b5da5",
+          "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+        },
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2",
+          "meshio": "5.3.5",
+          "gmsh": "4.15.2",
+          "matplotlib": "3.11.2",
+          "psutil": "7.2.2"
+        },
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "mesh_sha256": "c23b5cc4d0c48ae3d590c967910ad027e6fff4d8f5f2865deffe0ecf7a3e15ee",
+      "hole_pattern_provenance": null,
+      "geometry_diagnostics": {
+        "analytic_solid_volume_m3": 2.1600000000000007e-19,
+        "meshed_solid_volume_m3": 2.1600000000000004e-19,
+        "analytic_removed_volume_m3": 0.0,
+        "meshed_removed_volume_m3": 2.407412430484045e-35,
+        "relative_solid_volume_error": 1.1145427918907612e-16,
+        "relative_removed_volume_error": null,
+        "rim_segments_min": null,
+        "rim_segments_max": null,
+        "max_radial_sagitta_m": null
+      },
+      "metrics": {
+        "ndof": 21915,
+        "mesh_vertices": 1149,
+        "mesh_tetrahedra": 4176,
+        "port_dofs": 135,
+        "power_balance_passed": true,
+        "matched_reference_passed": true,
+        "maximum_relative_port_residual": 1.7011685905617461e-15,
+        "maximum_relative_solver_residual": 5.041368136758862e-16,
+        "maximum_flux_power_imbalance": 3.885780586188048e-15,
+        "maximum_modal_flux_difference": 4.6629367034256575e-15,
+        "max_power_imbalance": 3.774758283725532e-15,
+        "elapsed_seconds": 10.542203100005281,
+        "peak_process_memory_mib": 742.74609375
+      },
+      "execution": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "status": "completed",
+        "case": "uniform_h60",
+        "started_utc": "2026-11-13T19:51:23.260388+00:00",
+        "preflight_sha256": "a0dfcf1e9103bbf902221b256aa7442b71f65e15d36c723375d50b7345dd037c",
+        "driver_sha256": "c32e6b872c5a2bb4b1fe646fb1921f5d9f992f36a9fe81ff148e1e2d9de5c88a",
+        "initial_available_mib": 1294.953125,
+        "maximum_worker_rss_mib": 900.0,
+        "minimum_system_available_mib": 256.0,
+        "sample_interval_s": 0.1,
+        "worker_pid": 12804,
+        "worker_exit_code": 0,
+        "completed_utc": "2026-11-13T19:51:35.838410+00:00",
+        "elapsed_seconds": 12.577999999994063,
+        "maximum_worker_tree_rss_mib": 747.58203125,
+        "minimum_available_mib": 701.70703125
+      },
+      "root_indices": {
+        "incident": [
+          268,
+          262,
+          260,
+          247
+        ],
+        "reflection": [
+          269,
+          263,
+          261,
+          248
+        ],
+        "transmission": [
+          268,
+          262,
+          260,
+          247
+        ]
+      },
+      "amplitudes": {
+        "reflection": [
+          [
+            [
+              2.9284079737064408e-08,
+              4.21381081750933e-08
+            ],
+            [
+              -1.784979296477827e-06,
+              1.2550366562639749e-06
+            ],
+            [
+              -5.0999195309122455e-08,
+              -1.4682038832669397e-08
+            ],
+            [
+              -2.823993220569763e-07,
+              -9.321237025480002e-07
+            ]
+          ],
+          [
+            [
+              -1.7849792754387393e-06,
+              1.2550366640185806e-06
+            ],
+            [
+              -0.0027586278460810143,
+              -0.002989571993577758
+            ],
+            [
+              -1.342331271857988e-06,
+              5.0715923442420965e-06
+            ],
+            [
+              7.144428065439822e-05,
+              1.7775986407194273e-05
+            ]
+          ],
+          [
+            [
+              -5.09991695961081e-08,
+              -1.4682031100199839e-08
+            ],
+            [
+              -1.3423312485697265e-06,
+              5.071592405370512e-06
+            ],
+            [
+              -4.982488349189966e-06,
+              -1.4507952123643923e-05
+            ],
+            [
+              -6.12604076260895e-05,
+              5.717850931044597e-06
+            ]
+          ],
+          [
+            [
+              -2.823993136419994e-07,
+              -9.321237001147467e-07
+            ],
+            [
+              7.144428064393978e-05,
+              1.7775986391719398e-05
+            ],
+            [
+              -6.126040763077583e-05,
+              5.717850932160948e-06
+            ],
+            [
+              -2.4402277423583578e-05,
+              -0.00017728156923846978
+            ]
+          ]
+        ],
+        "transmission": [
+          [
+            [
+              -0.8513452743360598,
+              0.5246057794126254
+            ],
+            [
+              6.3859354431573246e-06,
+              -4.974056628565152e-06
+            ],
+            [
+              -7.418244189761514e-08,
+              -2.4181781174050996e-07
+            ],
+            [
+              -1.049428704872403e-06,
+              -3.5710440439405447e-07
+            ]
+          ],
+          [
+            [
+              6.518423511263114e-06,
+              -4.798939626690967e-06
+            ],
+            [
+              0.734934817134625,
+              -0.6781255496800177
+            ],
+            [
+              1.5347507916875093e-06,
+              -3.828041679506442e-06
+            ],
+            [
+              1.8114937855424533e-05,
+              2.1709042976782664e-06
+            ]
+          ],
+          [
+            [
+              1.2943421520061253e-07,
+              2.1715017463558846e-07
+            ],
+            [
+              -4.058639678280218e-06,
+              -6.858196103114168e-07
+            ],
+            [
+              0.9603390792981913,
+              -0.27883478332395584
+            ],
+            [
+              -0.00011076264242635702,
+              6.943877065610632e-06
+            ]
+          ],
+          [
+            [
+              6.749273745091955e-07,
+              -8.795353752166163e-07
+            ],
+            [
+              1.1072240400278514e-05,
+              -1.4441487704526515e-05
+            ],
+            [
+              -0.0001073602993027985,
+              2.8101931422295216e-05
+            ],
+            [
+              -0.9993475972727761,
+              0.036115452973495
+            ]
+          ]
+        ]
+      },
+      "channels": [
+        {
+          "incident_mode_order": 1,
+          "frequency_GHz": 1.0,
+          "transmission": 0.9999999999942818,
+          "reflection": 5.715321661261117e-12,
+          "power_balance": 2.886579864025407e-15,
+          "transmission_flux": 0.9999999999942839,
+          "reflection_flux": 5.715321712306974e-12,
+          "flux_power_balance": 7.771561172376096e-16,
+          "relative_residual": 5.041368136758862e-16,
+          "incident_root": 268,
+          "wavenumber_rad_m": 1438522.4531531846
+        },
+        {
+          "incident_mode_order": 2,
+          "frequency_GHz": 1.0,
+          "transmission": 0.9999834469791468,
+          "reflection": 1.6553020853057805e-05,
+          "power_balance": 2.220446049250313e-16,
+          "transmission_flux": 0.9999834469791455,
+          "reflection_flux": 1.6553020853060027e-05,
+          "flux_power_balance": 1.4432899320127035e-15,
+          "relative_residual": 3.0062574164422727e-16,
+          "incident_root": 262,
+          "wavenumber_rad_m": 3061012.9635694223
+        },
+        {
+          "incident_mode_order": 3,
+          "frequency_GHz": 1.0,
+          "transmission": 0.9999999959516408,
+          "reflection": 4.0483629459727595e-09,
+          "power_balance": -3.774758283725532e-15,
+          "transmission_flux": 0.9999999959516409,
+          "reflection_flux": 4.04836294584458e-09,
+          "flux_power_balance": -3.885780586188048e-15,
+          "relative_residual": 4.1063134081369586e-16,
+          "incident_root": 260,
+          "wavenumber_rad_m": 3333511.089908365
+        },
+        {
+          "incident_mode_order": 4,
+          "frequency_GHz": 1.0,
+          "transmission": 0.9999999587690246,
+          "reflection": 4.1230976831843317e-08,
+          "power_balance": -1.4432899320127035e-15,
+          "transmission_flux": 0.9999999587690199,
+          "reflection_flux": 4.1230976830348224e-08,
+          "flux_power_balance": 3.219646771412954e-15,
+          "relative_residual": 3.3278998146746507e-16,
+          "incident_root": 247,
+          "wavenumber_rad_m": 5216374.272506516
+        }
+      ],
+      "source": {
+        "summary": {
+          "path": "results/runs/layered_acceptance/uniform_h60_layered_z2-e9b7d210e791/summary_AP_pnc.json",
+          "sha256": "08e35884056ccc8200037cd4b90f09a9c6a91bb5c94fe85b261135c013ce9e06"
+        },
+        "fields": {
+          "path": "results/runs/layered_acceptance/uniform_h60_layered_z2-e9b7d210e791/selected_fields_AP_pnc.npz",
+          "sha256": "5fed4a7a7cde97eaf7ae119f65484c4bbe73cbdee10f4f5f52eabb10ffe25003"
+        },
+        "channels": {
+          "path": "results/runs/layered_acceptance/uniform_h60_layered_z2-e9b7d210e791/scattering_AP_pnc.csv",
+          "sha256": "5287786d66975556d6fdc1d42d12dee0d8c9a5a95d3d2969ac8fb6dbf2a10d73"
+        },
+        "report": {
+          "path": "results/runs/layered_acceptance/uniform_h60_layered_z2-e9b7d210e791/report_AP_pnc.html",
+          "sha256": "d300f26e4ca82e9cb898f6e4427f8cee6d701911d1c35b1d74658d7f504c6d53"
+        },
+        "completion": {
+          "path": "results/runs/layered_acceptance/uniform_h60_completed_AP_pnc.json",
+          "sha256": "4e488eedce82b9332de308ed14987e92603ccee09168e31f40b9a488bd493bbf"
+        },
+        "execution": {
+          "path": "results/runs/layered_acceptance/uniform_h60_execution_AP_pnc.json",
+          "sha256": "1830330c3cea147b979b5ce5648568138d025a9867f6d98b53c0b4bee8f8b168"
+        },
+        "driver": {
+          "path": "results/runs/layered_acceptance/run_layered_uniform_h60_AP_pnc.py",
+          "sha256": "c32e6b872c5a2bb4b1fe646fb1921f5d9f992f36a9fe81ff148e1e2d9de5c88a"
+        },
+        "mesh_manifest": {
+          "path": "results/runs/layered_acceptance/_meshes/3506e72607d16ff246c94f176739f3a822e39276db07431107a84cd13faccc69/summary_AP_pnc.json",
+          "sha256": "51fad890105095a8838ed437accf62a13c6e3f57bfaad24b57fd7645e6e7ed9b"
+        },
+        "mesh": {
+          "path": "results/runs/layered_acceptance/_meshes/3506e72607d16ff246c94f176739f3a822e39276db07431107a84cd13faccc69/mesh_AP_pnc.npz",
+          "sha256": "c23b5cc4d0c48ae3d590c967910ad027e6fff4d8f5f2865deffe0ecf7a3e15ee"
+        }
+      }
+    },
+    "two_hole_h60": {
+      "configuration": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "schema_version": 1,
+        "name": "two_hole_h60_layered_z2",
+        "geometry": {
+          "length_nm": 1800,
+          "width_nm": 600,
+          "thickness_nm": 200,
+          "pattern": {
+            "csv": "data/examples/two_holes_AP_pnc.csv",
+            "x_offset_nm": 900
+          }
+        },
+        "mesh": {
+          "kind": "layered",
+          "element_order": 2,
+          "mesh_size_nm": 60,
+          "port_size_nm": 150,
+          "thickness_layers": 2,
+          "circle_resolution": 48
+        },
+        "material": {
+          "name": "nominal_cubic_ge",
+          "C11_Pa": 128500000000.0,
+          "C12_Pa": 48300000000.0,
+          "C44_Pa": 66800000000.0,
+          "density_kg_m3": 5323,
+          "crystal_rotation": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "temperature_policy": "fixed_property_control",
+          "temperature_K": 4
+        },
+        "analysis": {
+          "kind": "scattering",
+          "boundary": "matched_ports",
+          "frequency_GHz": 1,
+          "incident_side": "left"
+        },
+        "resources": {
+          "max_dofs": 30000,
+          "max_port_dofs": 400
+        }
+      },
+      "implementation": {
+        "git_commit": "e3bbf16ef5cafa770b27bedf479b0e5d6b319c1f",
+        "source_sha256": {
+          "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+          "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+          "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+          "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+          "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+          "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+          "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+          "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+          "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+          "src/phononic/report_AP_pnc.py": "871fc6a358958c7908ad17f57521bdb51772ea82739d83cdbe5b4b536a5145c5",
+          "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+          "src/phononic/workflow_AP_pnc.py": "b364578c8b0d1fe04a47bf682475fcbca9f5f208ea53bb06272a07dd0c4b5da5",
+          "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+        },
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2",
+          "meshio": "5.3.5",
+          "gmsh": "4.15.2",
+          "matplotlib": "3.11.2",
+          "psutil": "7.2.2"
+        },
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "mesh_sha256": "46169685f9e5add0d078de72751fa157745fcea1ca53c3a0acf87223c09d68bb",
+      "hole_pattern_provenance": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "source_csv": "data/examples/two_holes_AP_pnc.csv",
+        "source_sha256": "116ba207413da79d15dcd605205ef9ec88aad4807d69cce670c66317e0b85f32",
+        "x_offset_m": 9.000000000000001e-07,
+        "holes": [
+          {
+            "x_m": 6.25e-07,
+            "diameter_m": 2.5000000000000004e-07,
+            "region": "Pilot"
+          },
+          {
+            "x_m": 1.1750000000000002e-06,
+            "diameter_m": 2.5000000000000004e-07,
+            "region": "Pilot"
+          }
+        ],
+        "clearances": {
+          "min_side_ligament_m": 1.7500000000000002e-07,
+          "min_end_ligament_m": 4.999999999999999e-07,
+          "min_interhole_gap_m": 3.000000000000001e-07
+        }
+      },
+      "geometry_diagnostics": {
+        "analytic_solid_volume_m3": 1.9636504591506386e-19,
+        "meshed_solid_volume_m3": 1.9642107116699231e-19,
+        "analytic_removed_volume_m3": 1.9634954084936215e-20,
+        "meshed_removed_volume_m3": 1.9578928833007755e-20,
+        "relative_solid_volume_error": 0.0002853117349239964,
+        "relative_removed_volume_error": 0.002853342650362612,
+        "rim_segments_min": 48,
+        "rim_segments_max": 48,
+        "max_radial_sagitta_m": 2.6763459517457903e-10
+      },
+      "metrics": {
+        "ndof": 26025,
+        "mesh_vertices": 1422,
+        "mesh_tetrahedra": 4716,
+        "port_dofs": 135,
+        "power_balance_passed": true,
+        "matched_reference_passed": null,
+        "maximum_relative_port_residual": 1.7011685905617461e-15,
+        "maximum_relative_solver_residual": 3.393797292448503e-16,
+        "maximum_flux_power_imbalance": 3.3306690738754696e-15,
+        "maximum_modal_flux_difference": 5.440092820663267e-15,
+        "max_power_imbalance": 6.217248937900877e-15,
+        "elapsed_seconds": 8.293057899994892,
+        "peak_process_memory_mib": 743.4765625
+      },
+      "execution": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "status": "completed",
+        "case": "two_hole_h60",
+        "started_utc": "2026-11-13T19:51:53.722282+00:00",
+        "preflight_sha256": "a0dfcf1e9103bbf902221b256aa7442b71f65e15d36c723375d50b7345dd037c",
+        "driver_sha256": "e4115dec62acf555b067928fc10bcd710dab1c166e8e516b8b67240997dbce6f",
+        "initial_available_mib": 1567.87109375,
+        "maximum_worker_rss_mib": 1400.0,
+        "minimum_system_available_mib": 256.0,
+        "sample_interval_s": 0.1,
+        "worker_pid": 10824,
+        "worker_exit_code": 0,
+        "completed_utc": "2026-11-13T19:52:03.872532+00:00",
+        "elapsed_seconds": 10.139999999999418,
+        "maximum_worker_tree_rss_mib": 745.87109375,
+        "minimum_available_mib": 841.078125
+      },
+      "root_indices": {
+        "incident": [
+          268,
+          262,
+          260,
+          247
+        ],
+        "reflection": [
+          269,
+          263,
+          261,
+          248
+        ],
+        "transmission": [
+          268,
+          262,
+          260,
+          247
+        ]
+      },
+      "amplitudes": {
+        "reflection": [
+          [
+            [
+              0.09647047900180948,
+              0.27270507379409886
+            ],
+            [
+              -1.9127362885146562e-05,
+              6.022620091826237e-06
+            ],
+            [
+              -2.379413809256188e-05,
+              -1.749812664415735e-05
+            ],
+            [
+              5.767345588097283e-05,
+              -6.61951487474178e-07
+            ]
+          ],
+          [
+            [
+              -1.9127362867282725e-05,
+              6.022620117021828e-06
+            ],
+            [
+              -0.029006730776962298,
+              -0.17504661616344674
+            ],
+            [
+              9.388888100992934e-06,
+              4.060316254831276e-06
+            ],
+            [
+              3.6159127305272136e-05,
+              -4.909611767100812e-05
+            ]
+          ],
+          [
+            [
+              -2.37941380690366e-05,
+              -1.749812661287527e-05
+            ],
+            [
+              9.388888272788527e-06,
+              4.060316101831736e-06
+            ],
+            [
+              0.08059831265555108,
+              -0.28686970137047985
+            ],
+            [
+              3.0311190276634745e-05,
+              2.6643119835472033e-05
+            ]
+          ],
+          [
+            [
+              5.76734558903109e-05,
+              -6.619514858833004e-07
+            ],
+            [
+              3.615912729199436e-05,
+              -4.90961176813455e-05
+            ],
+            [
+              3.0311190303333298e-05,
+              2.664311985501425e-05
+            ],
+            [
+              -0.0016925847253201139,
+              0.009032254675428527
+            ]
+          ]
+        ],
+        "transmission": [
+          [
+            [
+              -0.9023998399705943,
+              0.31937424802584763
+            ],
+            [
+              -4.206798251901771e-06,
+              3.761448529177966e-05
+            ],
+            [
+              8.617391186482245e-06,
+              -3.299322892534301e-05
+            ],
+            [
+              -1.307297836099597e-05,
+              -8.065587161406394e-06
+            ]
+          ],
+          [
+            [
+              -1.9008085015957786e-05,
+              -2.0836224059682268e-05
+            ],
+            [
+              0.9709389983969019,
+              -0.16060740309963856
+            ],
+            [
+              5.174564657178483e-06,
+              1.4441988646355328e-05
+            ],
+            [
+              1.854248596749783e-05,
+              8.761649920455397e-05
+            ]
+          ],
+          [
+            [
+              1.1101073629317666e-05,
+              4.6718919467709967e-05
+            ],
+            [
+              -5.112616466999641e-06,
+              1.308129065323744e-05
+            ],
+            [
+              0.9188862194599478,
+              0.25856867262796585
+            ],
+            [
+              -0.0002003728060233095,
+              -9.77543706806578e-06
+            ]
+          ],
+          [
+            [
+              1.3576833927925018e-05,
+              6.3459910620833725e-06
+            ],
+            [
+              2.8010203931059473e-05,
+              -9.25306394318059e-05
+            ],
+            [
+              -0.00017888579169385687,
+              -8.746891897537745e-05
+            ],
+            [
+              -0.9837663557256571,
+              -0.17921845245464876
+            ]
+          ]
+        ]
+      },
+      "channels": [
+        {
+          "incident_mode_order": 1,
+          "frequency_GHz": 1.0,
+          "transmission": 0.9163253848069788,
+          "reflection": 0.08367461519302259,
+          "power_balance": -1.3322676295501878e-15,
+          "transmission_flux": 0.9163253848069799,
+          "reflection_flux": 0.08367461519302345,
+          "flux_power_balance": -3.3306690738754696e-15,
+          "relative_residual": 3.393797292448503e-16,
+          "incident_root": 268,
+          "wavenumber_rad_m": 1438522.4531531846
+        },
+        {
+          "incident_mode_order": 2,
+          "frequency_GHz": 1.0,
+          "transmission": 0.9685172875146855,
+          "reflection": 0.03148271248531685,
+          "power_balance": -2.3314683517128287e-15,
+          "transmission_flux": 0.9685172875146864,
+          "reflection_flux": 0.0314827124853162,
+          "flux_power_balance": -2.55351295663786e-15,
+          "relative_residual": 1.64343937706465e-16,
+          "incident_root": 262,
+          "wavenumber_rad_m": 3061012.9635694223
+        },
+        {
+          "incident_mode_order": 3,
+          "frequency_GHz": 1.0,
+          "transmission": 0.9112096838270816,
+          "reflection": 0.0887903161729172,
+          "power_balance": 1.2212453270876722e-15,
+          "transmission_flux": 0.9112096838270827,
+          "reflection_flux": 0.08879031617291473,
+          "flux_power_balance": 2.55351295663786e-15,
+          "relative_residual": 2.353370217833367e-16,
+          "incident_root": 260,
+          "wavenumber_rad_m": 3333511.089908365
+        },
+        {
+          "incident_mode_order": 4,
+          "frequency_GHz": 1.0,
+          "transmission": 0.999915544859231,
+          "reflection": 8.445514077522887e-05,
+          "power_balance": -6.217248937900877e-15,
+          "transmission_flux": 0.9999155448592255,
+          "reflection_flux": 8.445514077534225e-05,
+          "flux_power_balance": -8.881784197001252e-16,
+          "relative_residual": 2.718206633966467e-16,
+          "incident_root": 247,
+          "wavenumber_rad_m": 5216374.272506516
+        }
+      ],
+      "source": {
+        "summary": {
+          "path": "results/runs/layered_acceptance/two_hole_h60_layered_z2-b4d6bbe9b2a2/summary_AP_pnc.json",
+          "sha256": "f00f9695b3d0e254fcdb62f78ba03bcd9c278e0f59f86b97ee1329faa1fb305c"
+        },
+        "fields": {
+          "path": "results/runs/layered_acceptance/two_hole_h60_layered_z2-b4d6bbe9b2a2/selected_fields_AP_pnc.npz",
+          "sha256": "83b7b85be5744f1139afb9e3ecb480b1f10e6f6b6ac3b1127d7973b93d90bbc5"
+        },
+        "channels": {
+          "path": "results/runs/layered_acceptance/two_hole_h60_layered_z2-b4d6bbe9b2a2/scattering_AP_pnc.csv",
+          "sha256": "a9da4098827ed6f105f0e26f073e914791f8353a47ff58ecf4023a2d6dcef3d4"
+        },
+        "report": {
+          "path": "results/runs/layered_acceptance/two_hole_h60_layered_z2-b4d6bbe9b2a2/report_AP_pnc.html",
+          "sha256": "db0187f6eb37101d78de5f04fdf4a2bdc1c2f0dbeebdb4c146db8243c355d153"
+        },
+        "completion": {
+          "path": "results/runs/layered_acceptance/two_hole_h60_completed_AP_pnc.json",
+          "sha256": "00eadd91267ab64f159acaacfbb46c9eb86cd0decf7e33c554bf7b9e01557d7a"
+        },
+        "execution": {
+          "path": "results/runs/layered_acceptance/two_hole_h60_execution_AP_pnc.json",
+          "sha256": "bef0dd9eaf36a7c4d1b70b81f4017b1c84da362a8d94301de473d00a158d1478"
+        },
+        "driver": {
+          "path": "results/runs/layered_acceptance/run_layered_h60_AP_pnc.py",
+          "sha256": "e4115dec62acf555b067928fc10bcd710dab1c166e8e516b8b67240997dbce6f"
+        },
+        "mesh_manifest": {
+          "path": "results/runs/layered_acceptance/_meshes/68675c9ce463398ff8cbd2a3fac2f9317dc91ef908089c03856b86111ec68862/summary_AP_pnc.json",
+          "sha256": "f14f9660895343d140a4755e123997e417dfe60f97b6f32ce719b4cef6a0ed98"
+        },
+        "mesh": {
+          "path": "results/runs/layered_acceptance/_meshes/68675c9ce463398ff8cbd2a3fac2f9317dc91ef908089c03856b86111ec68862/mesh_AP_pnc.npz",
+          "sha256": "46169685f9e5add0d078de72751fa157745fcea1ca53c3a0acf87223c09d68bb"
+        }
+      }
+    }
+  },
+  "uniform_same_port_reference": {
+    "uniform_h105": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "status": "completed_diagnostic",
+      "scope": "Uniform layered guide at 1 GHz with left incidence and 135-DOF SAFE ports. Each transmitted root is compared with exp(i*k*L) in the same basis, at the physical end planes.",
+      "source_summary": {
+        "path": "results/runs/layered_acceptance/uniform_layered_h105_z2-d3cb558389e1/summary_AP_pnc.json",
+        "sha256": "0131c453afac09720250ac89e734fdd98cb816037e1c60c15621c4c6be4d17f1"
+      },
+      "source_fields": {
+        "path": "results/runs/layered_acceptance/uniform_layered_h105_z2-d3cb558389e1/selected_fields_AP_pnc.npz",
+        "sha256": "d7fd08d0311160d829642d1af28402b2b88b92ac5b32d2fede4706453bf20874"
+      },
+      "length_m": 1.8000000000000001e-06,
+      "frequency_hz": 1000000000.0,
+      "port_dofs": 135,
+      "incident_root_indices": [
+        268,
+        262,
+        260,
+        247
+      ],
+      "wavenumbers_rad_m": [
+        1438522.4531531846,
+        3061012.9635694223,
+        3333511.089908365,
+        5216374.272506516
+      ],
+      "reflection_amplitudes": [
+        [
+          [
+            -2.8319088735956126e-08,
+            -3.036883235023808e-08
+          ],
+          [
+            -3.1436842242318766e-06,
+            2.2762636259307247e-06
+          ],
+          [
+            -2.779467216238278e-07,
+            4.448940493276533e-07
+          ],
+          [
+            -1.0533415241675023e-06,
+            1.2358861370346721e-06
+          ]
+        ],
+        [
+          [
+            -3.1436842042576792e-06,
+            2.2762636307575534e-06
+          ],
+          [
+            -0.0025866044237788433,
+            -0.0024413242351526377
+          ],
+          [
+            2.370425944511903e-06,
+            -1.0547621251732073e-05
+          ],
+          [
+            -5.0485909243500825e-05,
+            -2.9409141081211386e-05
+          ]
+        ],
+        [
+          [
+            -2.779466963958452e-07,
+            4.448940546375011e-07
+          ],
+          [
+            2.3704259604104933e-06,
+            -1.054762119239949e-05
+          ],
+          [
+            -3.540363369742962e-06,
+            -1.507484622610607e-05
+          ],
+          [
+            -0.000125135016102883,
+            -1.0271927608829699e-06
+          ]
+        ],
+        [
+          [
+            -1.0533415142414846e-06,
+            1.2358861406268425e-06
+          ],
+          [
+            -5.048590925386e-05,
+            -2.940914109637384e-05
+          ],
+          [
+            -0.0001251350161135897,
+            -1.0271927579925388e-06
+          ],
+          [
+            1.2482627428517114e-05,
+            7.29577076226424e-05
+          ]
+        ]
+      ],
+      "transmission_amplitudes": [
+        [
+          [
+            -0.8513449188377523,
+            0.5246063563741383
+          ],
+          [
+            -1.0192642030998785e-06,
+            9.87419804320499e-07
+          ],
+          [
+            2.472139833138186e-07,
+            -3.5871146989227255e-07
+          ],
+          [
+            -6.886303273351284e-07,
+            -5.772556905440038e-07
+          ]
+        ],
+        [
+          [
+            -1.2124020709477281e-06,
+            7.369345205808052e-07
+          ],
+          [
+            0.7292332997947432,
+            -0.6842558971481945
+          ],
+          [
+            5.854921913412388e-06,
+            -3.28470288561304e-06
+          ],
+          [
+            7.44722752444609e-05,
+            -4.394316446436784e-05
+          ]
+        ],
+        [
+          [
+            4.318656837040115e-07,
+            5.74035566277139e-08
+          ],
+          [
+            -5.801370734741075e-06,
+            3.39264292595573e-06
+          ],
+          [
+            0.9602662450668356,
+            -0.2790853541664109
+          ],
+          [
+            -0.00029371524936158715,
+            3.664770751058785e-05
+          ]
+        ],
+        [
+          [
+            2.4686488364068085e-07,
+            -8.64183547027379e-07
+          ],
+          [
+            8.369871085637349e-05,
+            -2.244129433750189e-05
+          ],
+          [
+            -0.0002900192685525355,
+            5.917644786524458e-05
+          ],
+          [
+            -0.9990956106101914,
+            0.04251871605530477
+          ]
+        ]
+      ],
+      "expected_transmission_amplitudes": [
+        [
+          [
+            -0.8513451448139256,
+            0.5246059896739227
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ],
+        [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.7155662290956245,
+            -0.6985448960359443
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ],
+        [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.9602596397953953,
+            -0.27910826605462186
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ],
+        [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            -0.9993768689769219,
+            0.035296936890958856
+          ]
+        ]
+      ],
+      "reflection": [
+        1.797797871368116e-11,
+        1.2654132126227759e-05,
+        1.6016758962564585e-08,
+        2.4554832023294786e-08
+      ],
+      "transmission": [
+        0.999999999982019,
+        0.9999873458678756,
+        0.9999999839832381,
+        0.9999999754451737
+      ],
+      "same_channel_phase_error_rad": [
+        -4.307369022064248e-07,
+        0.019773201166396463,
+        2.3844948617291958e-05,
+        -0.007227269958228496
+      ],
+      "maximum_absolute_phase_error_rad": 0.019773201166396463,
+      "maximum_reflection_amplitude": 0.0035567662934547577,
+      "maximum_transmission_complex_error": 0.019772817470174127,
+      "maximum_reflection_power": 1.2654132126227759e-05,
+      "maximum_unit_transmission_power_error": 1.2654132124367834e-05,
+      "maximum_direct_flux_power_imbalance": 4.884981308350689e-15,
+      "maximum_relative_solver_residual": 2.27498280918569e-16,
+      "same_port_complex_reference_limit": 0.01,
+      "same_port_complex_reference_passed": false
+    },
+    "uniform_h60": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "status": "completed_diagnostic",
+      "scope": "Uniform layered guide at 1 GHz with left incidence and 135-DOF SAFE ports. Each transmitted root is compared with exp(i*k*L) in the same basis, at the physical end planes.",
+      "source_summary": {
+        "path": "results/runs/layered_acceptance/uniform_h60_layered_z2-e9b7d210e791/summary_AP_pnc.json",
+        "sha256": "08e35884056ccc8200037cd4b90f09a9c6a91bb5c94fe85b261135c013ce9e06"
+      },
+      "source_fields": {
+        "path": "results/runs/layered_acceptance/uniform_h60_layered_z2-e9b7d210e791/selected_fields_AP_pnc.npz",
+        "sha256": "5fed4a7a7cde97eaf7ae119f65484c4bbe73cbdee10f4f5f52eabb10ffe25003"
+      },
+      "length_m": 1.8000000000000001e-06,
+      "frequency_hz": 1000000000.0,
+      "port_dofs": 135,
+      "incident_root_indices": [
+        268,
+        262,
+        260,
+        247
+      ],
+      "wavenumbers_rad_m": [
+        1438522.4531531846,
+        3061012.9635694223,
+        3333511.089908365,
+        5216374.272506516
+      ],
+      "reflection_amplitudes": [
+        [
+          [
+            2.9284079737064408e-08,
+            4.21381081750933e-08
+          ],
+          [
+            -1.784979296477827e-06,
+            1.2550366562639749e-06
+          ],
+          [
+            -5.0999195309122455e-08,
+            -1.4682038832669397e-08
+          ],
+          [
+            -2.823993220569763e-07,
+            -9.321237025480002e-07
+          ]
+        ],
+        [
+          [
+            -1.7849792754387393e-06,
+            1.2550366640185806e-06
+          ],
+          [
+            -0.0027586278460810143,
+            -0.002989571993577758
+          ],
+          [
+            -1.342331271857988e-06,
+            5.0715923442420965e-06
+          ],
+          [
+            7.144428065439822e-05,
+            1.7775986407194273e-05
+          ]
+        ],
+        [
+          [
+            -5.09991695961081e-08,
+            -1.4682031100199839e-08
+          ],
+          [
+            -1.3423312485697265e-06,
+            5.071592405370512e-06
+          ],
+          [
+            -4.982488349189966e-06,
+            -1.4507952123643923e-05
+          ],
+          [
+            -6.12604076260895e-05,
+            5.717850931044597e-06
+          ]
+        ],
+        [
+          [
+            -2.823993136419994e-07,
+            -9.321237001147467e-07
+          ],
+          [
+            7.144428064393978e-05,
+            1.7775986391719398e-05
+          ],
+          [
+            -6.126040763077583e-05,
+            5.717850932160948e-06
+          ],
+          [
+            -2.4402277423583578e-05,
+            -0.00017728156923846978
+          ]
+        ]
+      ],
+      "transmission_amplitudes": [
+        [
+          [
+            -0.8513452743360598,
+            0.5246057794126254
+          ],
+          [
+            6.3859354431573246e-06,
+            -4.974056628565152e-06
+          ],
+          [
+            -7.418244189761514e-08,
+            -2.4181781174050996e-07
+          ],
+          [
+            -1.049428704872403e-06,
+            -3.5710440439405447e-07
+          ]
+        ],
+        [
+          [
+            6.518423511263114e-06,
+            -4.798939626690967e-06
+          ],
+          [
+            0.734934817134625,
+            -0.6781255496800177
+          ],
+          [
+            1.5347507916875093e-06,
+            -3.828041679506442e-06
+          ],
+          [
+            1.8114937855424533e-05,
+            2.1709042976782664e-06
+          ]
+        ],
+        [
+          [
+            1.2943421520061253e-07,
+            2.1715017463558846e-07
+          ],
+          [
+            -4.058639678280218e-06,
+            -6.858196103114168e-07
+          ],
+          [
+            0.9603390792981913,
+            -0.27883478332395584
+          ],
+          [
+            -0.00011076264242635702,
+            6.943877065610632e-06
+          ]
+        ],
+        [
+          [
+            6.749273745091955e-07,
+            -8.795353752166163e-07
+          ],
+          [
+            1.1072240400278514e-05,
+            -1.4441487704526515e-05
+          ],
+          [
+            -0.0001073602993027985,
+            2.8101931422295216e-05
+          ],
+          [
+            -0.9993475972727761,
+            0.036115452973495
+          ]
+        ]
+      ],
+      "expected_transmission_amplitudes": [
+        [
+          [
+            -0.8513451448139256,
+            0.5246059896739227
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ],
+        [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.7155662290956245,
+            -0.6985448960359443
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ],
+        [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.9602596397953953,
+            -0.27910826605462186
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ],
+        [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            -0.9993768689769219,
+            0.035296936890958856
+          ]
+        ]
+      ],
+      "reflection": [
+        5.7153216612611145e-12,
+        1.6553020853057798e-05,
+        4.048362945972759e-09,
+        4.1230976831843303e-08
+      ],
+      "transmission": [
+        0.9999999999942814,
+        0.9999834469791464,
+        0.9999999959516407,
+        0.9999999587690245
+      ],
+      "same_channel_phase_error_rad": [
+        2.4695302201618725e-07,
+        0.028145171632741734,
+        0.00028478665650333936,
+        -0.0008190393549038134
+      ],
+      "maximum_absolute_phase_error_rad": 0.028145171632741734,
+      "maximum_reflection_amplitude": 0.004067870241042365,
+      "maximum_transmission_complex_error": 0.028144127419904255,
+      "maximum_reflection_power": 1.6553020853057798e-05,
+      "maximum_unit_transmission_power_error": 1.6553020853571354e-05,
+      "maximum_direct_flux_power_imbalance": 3.885780586188048e-15,
+      "maximum_relative_solver_residual": 5.041368136758862e-16,
+      "same_port_complex_reference_limit": 0.01,
+      "same_port_complex_reference_passed": false
+    }
+  },
+  "uniform_same_port_source": {
+    "uniform_h105": {
+      "path": "results/runs/layered_acceptance/uniform_phase_AP_pnc.json",
+      "sha256": "45a64f2741eac6ffe33f779d0d7a309366c4d9fd1e6c070f9d584e5121086cf5"
+    },
+    "uniform_h60": {
+      "path": "results/runs/layered_acceptance/uniform_h60_phase_AP_pnc.json",
+      "sha256": "a9d448ae93246b400f2226365ef67d02c2aebf13127e92b622d9161607da4064"
+    }
+  },
+  "two_hole_comparison": {
+    "h105_to_h80": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "schema_version": 1,
+      "status": "compared",
+      "comparison_hash": "e1f77d01f99080164c634f579cda61e87ea4eef4ff016137380d5dccae246080",
+      "reference": {
+        "directory": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\results\\runs\\layered_acceptance\\two_hole_layered_200nm-789e28616c79",
+        "run_hash": "789e28616c79ae9131a61604aae790fe6119f7decbdfb113b70effd63dbe9d93",
+        "summary_sha256": "c03655cc95dbd397943562927a914fbcfa054ecea6668cc5caa2e193403b73b4",
+        "output_sha256": {
+          "configuration_AP_pnc.json": "98e00552ec15c42978a347e8bd4fe5551c272d03f83a826030977b890bc1949e",
+          "hole_pattern_AP_pnc.json": "0397cc3a18e236613a5e56ea7408c4aa7f0e585f9486660363c2f9507996d809",
+          "port_modes_AP_pnc.csv": "d34ae777e4562fca7f31f3b8c9820a6998d31e62170226aaabcba5f0b074099c",
+          "report_AP_pnc.html": "e1fd07dbce837b16a5081e50cb09ac88316b5fab20e2cbaf2ecb62e0d6c29038",
+          "scattering_AP_pnc.csv": "842dc5e2bdd147994bd05638febd624c696c83b7bea992c1a42f7b58bb71e9a1",
+          "scattering_channels_AP_pnc.csv": "ce60205340490e72c6e33fdba9053efae7f593d26e0e88d331bb1a69fe9dddf4",
+          "selected_fields_AP_pnc.npz": "5f7458b36d33d2b7d74f4906c83cd9124b62c25006e0a3b0ec1509b47b92ec2c",
+          "selected_vertex_shapes_AP_pnc.vtu": "a5c0dd6e8064eec6ce779303a6675403360125554a9c41caaecc6305d882b513"
+        },
+        "configuration": {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "schema_version": 1,
+          "name": "two_hole_layered_200nm",
+          "geometry": {
+            "length_nm": 1800,
+            "width_nm": 600,
+            "thickness_nm": 200,
+            "pattern": {
+              "csv": "data/examples/two_holes_AP_pnc.csv",
+              "x_offset_nm": 900
+            }
+          },
+          "mesh": {
+            "kind": "layered",
+            "element_order": 2,
+            "mesh_size_nm": 105,
+            "port_size_nm": 150,
+            "thickness_layers": 2,
+            "circle_resolution": 48
+          },
+          "material": {
+            "name": "nominal_cubic_ge",
+            "C11_Pa": 128500000000.0,
+            "C12_Pa": 48300000000.0,
+            "C44_Pa": 66800000000.0,
+            "density_kg_m3": 5323,
+            "crystal_rotation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ],
+            "temperature_policy": "fixed_property_control",
+            "temperature_K": 4
+          },
+          "analysis": {
+            "kind": "scattering",
+            "boundary": "matched_ports",
+            "frequency_GHz": 1,
+            "incident_side": "left"
+          },
+          "resources": {
+            "max_dofs": 30000,
+            "max_port_dofs": 400
+          }
+        },
+        "hole_pattern_provenance": {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "source_csv": "data/examples/two_holes_AP_pnc.csv",
+          "source_sha256": "116ba207413da79d15dcd605205ef9ec88aad4807d69cce670c66317e0b85f32",
+          "x_offset_m": 9.000000000000001e-07,
+          "holes": [
+            {
+              "x_m": 6.25e-07,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Pilot"
+            },
+            {
+              "x_m": 1.1750000000000002e-06,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Pilot"
+            }
+          ],
+          "clearances": {
+            "min_side_ligament_m": 1.7500000000000002e-07,
+            "min_end_ligament_m": 4.999999999999999e-07,
+            "min_interhole_gap_m": 3.000000000000001e-07
+          }
+        },
+        "implementation": {
+          "git_commit": "e3bbf16ef5cafa770b27bedf479b0e5d6b319c1f",
+          "source_sha256": {
+            "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+            "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+            "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+            "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+            "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+            "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+            "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+            "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+            "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+            "src/phononic/report_AP_pnc.py": "871fc6a358958c7908ad17f57521bdb51772ea82739d83cdbe5b4b536a5145c5",
+            "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+            "src/phononic/workflow_AP_pnc.py": "b364578c8b0d1fe04a47bf682475fcbca9f5f208ea53bb06272a07dd0c4b5da5",
+            "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+          },
+          "packages": {
+            "numpy": "2.5.4",
+            "scipy": "1.18.1",
+            "scikit-fem": "12.0.2",
+            "meshio": "5.3.5",
+            "gmsh": "4.15.2",
+            "matplotlib": "3.11.2",
+            "psutil": "7.2.2"
+          },
+          "python": "3.12.14",
+          "platform": "Windows-11-10.0.26200-SP0"
+        },
+        "ndof": 13485,
+        "port_dofs": 135,
+        "power_balance_passed": true
+      },
+      "candidate": {
+        "directory": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\results\\runs\\layered_acceptance\\two_hole_layered_h80_z2-1672dc73c355",
+        "run_hash": "1672dc73c355d71b7ba718dc5aae1bd8c5376fcd5acec31f3c162b370a6d3e2f",
+        "summary_sha256": "df9c23ebc718f38bedd8abb306fb45e344b942e0398014be68c2d5967293f4eb",
+        "output_sha256": {
+          "configuration_AP_pnc.json": "664662356b84258d5649d2310925f41970fecfa3d0c62e98ac3d322e3e154f69",
+          "hole_pattern_AP_pnc.json": "0397cc3a18e236613a5e56ea7408c4aa7f0e585f9486660363c2f9507996d809",
+          "port_modes_AP_pnc.csv": "d34ae777e4562fca7f31f3b8c9820a6998d31e62170226aaabcba5f0b074099c",
+          "report_AP_pnc.html": "dd4865ec0ac2f5a845fbf706cbe4e7073847ef61871d9dcaafd9f5d01b441539",
+          "scattering_AP_pnc.csv": "6ccd801cade8ee76ffcc033a621ffa7ea86ac4448bdd994e19091fa63c095540",
+          "scattering_channels_AP_pnc.csv": "42b4b1aaec8a3485819f6e970458093925188d434d655813a0250713baa9950f",
+          "selected_fields_AP_pnc.npz": "6fefcaf035dfc14dc22cd7d35b5291b69fcff591834f74410969e33bc59981e8",
+          "selected_vertex_shapes_AP_pnc.vtu": "92a50621d67b6d90765213ede47e3430f63643b96b528d55da71f68c210d48c2"
+        },
+        "configuration": {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "schema_version": 1,
+          "name": "two_hole_layered_h80_z2",
+          "geometry": {
+            "length_nm": 1800,
+            "width_nm": 600,
+            "thickness_nm": 200,
+            "pattern": {
+              "csv": "data/examples/two_holes_AP_pnc.csv",
+              "x_offset_nm": 900
+            }
+          },
+          "mesh": {
+            "kind": "layered",
+            "element_order": 2,
+            "mesh_size_nm": 80,
+            "port_size_nm": 150,
+            "thickness_layers": 2,
+            "circle_resolution": 48
+          },
+          "material": {
+            "name": "nominal_cubic_ge",
+            "C11_Pa": 128500000000.0,
+            "C12_Pa": 48300000000.0,
+            "C44_Pa": 66800000000.0,
+            "density_kg_m3": 5323,
+            "crystal_rotation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ],
+            "temperature_policy": "fixed_property_control",
+            "temperature_K": 4
+          },
+          "analysis": {
+            "kind": "scattering",
+            "boundary": "matched_ports",
+            "frequency_GHz": 1,
+            "incident_side": "left"
+          },
+          "resources": {
+            "max_dofs": 30000,
+            "max_port_dofs": 400
+          }
+        },
+        "hole_pattern_provenance": {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "source_csv": "data/examples/two_holes_AP_pnc.csv",
+          "source_sha256": "116ba207413da79d15dcd605205ef9ec88aad4807d69cce670c66317e0b85f32",
+          "x_offset_m": 9.000000000000001e-07,
+          "holes": [
+            {
+              "x_m": 6.25e-07,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Pilot"
+            },
+            {
+              "x_m": 1.1750000000000002e-06,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Pilot"
+            }
+          ],
+          "clearances": {
+            "min_side_ligament_m": 1.7500000000000002e-07,
+            "min_end_ligament_m": 4.999999999999999e-07,
+            "min_interhole_gap_m": 3.000000000000001e-07
+          }
+        },
+        "implementation": {
+          "git_commit": "e3bbf16ef5cafa770b27bedf479b0e5d6b319c1f",
+          "source_sha256": {
+            "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+            "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+            "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+            "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+            "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+            "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+            "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+            "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+            "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+            "src/phononic/report_AP_pnc.py": "871fc6a358958c7908ad17f57521bdb51772ea82739d83cdbe5b4b536a5145c5",
+            "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+            "src/phononic/workflow_AP_pnc.py": "b364578c8b0d1fe04a47bf682475fcbca9f5f208ea53bb06272a07dd0c4b5da5",
+            "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+          },
+          "packages": {
+            "numpy": "2.5.4",
+            "scipy": "1.18.1",
+            "scikit-fem": "12.0.2",
+            "meshio": "5.3.5",
+            "gmsh": "4.15.2",
+            "matplotlib": "3.11.2",
+            "psutil": "7.2.2"
+          },
+          "python": "3.12.14",
+          "platform": "Windows-11-10.0.26200-SP0"
+        },
+        "ndof": 17415,
+        "port_dofs": 135,
+        "power_balance_passed": true
+      },
+      "physical_inputs": {
+        "dimensions_nm": {
+          "length_nm": 1800,
+          "width_nm": 600,
+          "thickness_nm": 200
+        },
+        "placed_holes_m": [
+          [
+            6.25e-07,
+            2.5000000000000004e-07
+          ],
+          [
+            1.1750000000000002e-06,
+            2.5000000000000004e-07
+          ]
+        ],
+        "material": {
+          "C11_Pa": 128500000000.0,
+          "C12_Pa": 48300000000.0,
+          "C44_Pa": 66800000000.0,
+          "density_kg_m3": 5323,
+          "crystal_rotation": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "temperature_policy": "fixed_property_control"
+        },
+        "frequency_hz": 1000000000.0,
+        "incident_side": "left",
+        "numerical_source_sha256": {
+          "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+          "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+          "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+          "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+          "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+          "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+          "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac"
+        }
+      },
+      "implementation": {
+        "tool_sha256": "d1e2b4da88c83257f349a138fe64666851e6d87b2f77438e5fad1d1c02584adc",
+        "python": "3.12.14",
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2"
+        }
+      },
+      "comparison_kind": "mesh_sensitivity",
+      "input_power_checks_passed": true,
+      "discretization_sha256": {
+        "reference": "ac18bffb055b4cdf54d6c3cabef0025c6d8cf1b589b1da044c2e0c66103968e1",
+        "candidate": "ccf64e2ac594010d19c5f79dc86a04090b170f2aa6e7f0ad468244bba17d486a"
+      },
+      "matched_channels": {
+        "incoming": {
+          "reference_roots": [
+            268,
+            262,
+            260,
+            247
+          ],
+          "candidate_roots": [
+            268,
+            262,
+            260,
+            247
+          ],
+          "mass_overlaps": [
+            1.0,
+            0.9999999999999999,
+            1.0,
+            0.9999999999999998
+          ],
+          "candidate_gauge_phase_rad": [
+            -1.9575357680583401e-31,
+            7.7195688380983596e-31,
+            -5.2123654411493675e-31,
+            6.8026385560806385e-31
+          ],
+          "reference_wavenumber_rad_m": [
+            1438522.4531531846,
+            3061012.9635694223,
+            3333511.089908365,
+            5216374.272506516
+          ],
+          "candidate_wavenumber_rad_m": [
+            1438522.4531531846,
+            3061012.9635694223,
+            3333511.089908365,
+            5216374.272506516
+          ],
+          "relative_wavenumber_change": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "reflection": {
+          "reference_roots": [
+            269,
+            263,
+            261,
+            248
+          ],
+          "candidate_roots": [
+            269,
+            263,
+            261,
+            248
+          ],
+          "mass_overlaps": [
+            1.0,
+            0.9999999999999999,
+            1.0,
+            0.9999999999999998
+          ],
+          "candidate_gauge_phase_rad": [
+            1.9575357680583401e-31,
+            -7.7195688380983596e-31,
+            5.2123654411493675e-31,
+            -6.8026385560806385e-31
+          ],
+          "reference_wavenumber_rad_m": [
+            -1438522.4531531846,
+            -3061012.9635694223,
+            -3333511.089908365,
+            -5216374.272506516
+          ],
+          "candidate_wavenumber_rad_m": [
+            -1438522.4531531846,
+            -3061012.9635694223,
+            -3333511.089908365,
+            -5216374.272506516
+          ],
+          "relative_wavenumber_change": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "transmission": {
+          "reference_roots": [
+            268,
+            262,
+            260,
+            247
+          ],
+          "candidate_roots": [
+            268,
+            262,
+            260,
+            247
+          ],
+          "mass_overlaps": [
+            1.0,
+            0.9999999999999999,
+            1.0,
+            0.9999999999999998
+          ],
+          "candidate_gauge_phase_rad": [
+            -1.9575357680583401e-31,
+            7.7195688380983596e-31,
+            -5.2123654411493675e-31,
+            6.8026385560806385e-31
+          ],
+          "reference_wavenumber_rad_m": [
+            1438522.4531531846,
+            3061012.9635694223,
+            3333511.089908365,
+            5216374.272506516
+          ],
+          "candidate_wavenumber_rad_m": [
+            1438522.4531531846,
+            3061012.9635694223,
+            3333511.089908365,
+            5216374.272506516
+          ],
+          "relative_wavenumber_change": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "blocks": {
+        "reflection": {
+          "reference": [
+            [
+              [
+                0.09684249897195542,
+                0.2719381806907964
+              ],
+              [
+                1.3675709768460802e-05,
+                7.913110842452451e-05
+              ],
+              [
+                3.204991986582488e-05,
+                1.7368289167336442e-05
+              ],
+              [
+                -5.6218778871369875e-05,
+                3.761836796819572e-05
+              ]
+            ],
+            [
+              [
+                1.367570978244367e-05,
+                7.913110845132543e-05
+              ],
+              [
+                -0.031127837860209017,
+                -0.1697900007699509
+              ],
+              [
+                2.1365667275489647e-05,
+                -2.7347298238907543e-05
+              ],
+              [
+                9.80880087376968e-06,
+                -0.00015192664315533873
+              ]
+            ],
+            [
+              [
+                3.204991988780806e-05,
+                1.736828919719813e-05
+              ],
+              [
+                2.136566744645133e-05,
+                -2.734729839162261e-05
+              ],
+              [
+                0.07699195579208354,
+                -0.2832401438249615
+              ],
+              [
+                -0.00012019643793938591,
+                -5.46753419807201e-05
+              ]
+            ],
+            [
+              [
+                -5.621877886179435e-05,
+                3.761836796514649e-05
+              ],
+              [
+                9.808800864071045e-06,
+                -0.00015192664316420184
+              ],
+              [
+                -0.00012019643792178668,
+                -5.46753419598266e-05
+              ],
+              [
+                -0.0013925400278781024,
+                0.008742998916556208
+              ]
+            ]
+          ],
+          "candidate_aligned": [
+            [
+              [
+                0.09662682632123747,
+                0.2724100617609406
+              ],
+              [
+                0.00015686013554246198,
+                2.146144422597595e-05
+              ],
+              [
+                -4.311836977149495e-05,
+                -2.1972222720480865e-05
+              ],
+              [
+                3.4028851317549014e-08,
+                1.7511218979088933e-05
+              ]
+            ],
+            [
+              [
+                0.00015686013555908738,
+                2.1461444246942096e-05
+              ],
+              [
+                -0.02987107999196426,
+                -0.1730413477756892
+              ],
+              [
+                5.244736907917371e-06,
+                3.8664900326318565e-05
+              ],
+              [
+                4.2510793686323333e-05,
+                -0.0001348829347005259
+              ]
+            ],
+            [
+              [
+                -4.311836974832026e-05,
+                -2.1972222694555205e-05
+              ],
+              [
+                5.244737082604924e-06,
+                3.866490017187213e-05
+              ],
+              [
+                0.07908016245433402,
+                -0.28534831077295164
+              ],
+              [
+                -0.00013680370821382738,
+                2.6077617707217538e-05
+              ]
+            ],
+            [
+              [
+                3.402886217968705e-08,
+                1.7511218980512274e-05
+              ],
+              [
+                4.2510793673901616e-05,
+                -0.00013488293470730669
+              ],
+              [
+                -0.00013680370819440645,
+                2.607761772953341e-05
+              ],
+              [
+                -0.001697199276054997,
+                0.009487747665433323
+              ]
+            ]
+          ],
+          "reference_power": [
+            0.0833288560778583,
+            0.029797617482352694,
+            0.08615276030047303,
+            7.84243879710412e-05
+          ],
+          "candidate_power": [
+            0.08354401302782612,
+            0.03083563604866447,
+            0.0876773538145317,
+            9.293754365990475e-05
+          ],
+          "power_change": [
+            0.00021515694996782075,
+            0.001038018566311777,
+            0.0015245935140586753,
+            1.451315568886355e-05
+          ],
+          "maximum_power_change": 0.0015245935140586753,
+          "maximum_complex_change": 0.0034857850896345332
+        },
+        "transmission": {
+          "reference": [
+            [
+              [
+                -0.9020753541313897,
+                0.3208287757631453
+              ],
+              [
+                -0.0002426877363489238,
+                5.1090122633589244e-05
+              ],
+              [
+                -2.7638862961960143e-05,
+                -0.00018332769027754625
+              ],
+              [
+                -3.2380035475958134e-05,
+                -4.656240605504071e-05
+              ]
+            ],
+            [
+              [
+                -0.00023738532184063688,
+                8.057783408326621e-05
+              ],
+              [
+                0.968826253353926,
+                -0.17770195551226506
+              ],
+              [
+                1.947239499419882e-05,
+                8.46700363973132e-05
+              ],
+              [
+                9.998364708189143e-05,
+                -5.9097504554254436e-05
+              ]
+            ],
+            [
+              [
+                -1.413049021400851e-05,
+                0.00016608690075780523
+              ],
+              [
+                -4.090623847080046e-05,
+                8.217364392186783e-05
+              ],
+              [
+                0.9226511454571191,
+                0.25012408822125354
+              ],
+              [
+                -6.374451731626119e-05,
+                3.153887631909017e-05
+              ]
+            ],
+            [
+              [
+                3.1267963035294126e-05,
+                -6.653117958707304e-05
+              ],
+              [
+                0.0001239144715900857,
+                5.521591216285681e-05
+              ],
+              [
+                -4.336654219838844e-05,
+                -1.3262060666227045e-05
+              ],
+              [
+                -0.9852190857030456,
+                -0.17106988926943875
+              ]
+            ]
+          ],
+          "candidate_aligned": [
+            [
+              [
+                -0.9022556561581588,
+                0.3199854259332247
+              ],
+              [
+                -0.0001879662316055351,
+                3.00517489941682e-05
+              ],
+              [
+                2.202925422409172e-05,
+                -1.887594756385422e-05
+              ],
+              [
+                -3.540556385495589e-05,
+                -4.6169482373523616e-05
+              ]
+            ],
+            [
+              [
+                -0.00019789967431453514,
+                -1.0381931209602752e-06
+              ],
+              [
+                0.9701257461165241,
+                -0.16739281354196672
+              ],
+              [
+                -4.322163557106557e-06,
+                -3.3037025001798045e-05
+              ],
+              [
+                -3.0422417892923568e-05,
+                8.575228549884344e-05
+              ]
+            ],
+            [
+              [
+                2.409071699279491e-05,
+                4.324452767625775e-05
+              ],
+              [
+                2.6810241154218223e-05,
+                -3.341766367711738e-05
+              ],
+              [
+                0.9204437952629241,
+                0.2551584935711267
+              ],
+              [
+                -6.41414638505033e-05,
+                -8.832505884855248e-06
+              ]
+            ],
+            [
+              [
+                3.141209316308729e-05,
+                -4.9905776487014665e-05
+              ],
+              [
+                -6.978874832298156e-06,
+                -9.235286201805452e-05
+              ],
+              [
+                -8.313321661614571e-05,
+                1.5592039209605813e-05
+              ],
+              [
+                -0.9843015812765467,
+                -0.176231222252314
+              ]
+            ]
+          ],
+          "reference_power": [
+            0.9166711439221419,
+            0.9702023825176478,
+            0.9138472396995245,
+            0.9999215756120367
+          ],
+          "candidate_power": [
+            0.9164559869721741,
+            0.9691643639513353,
+            0.9123226461854613,
+            0.9999070624563484
+          ],
+          "power_change": [
+            -0.00021515694996776524,
+            -0.0010380185663124708,
+            -0.0015245935140631994,
+            -1.4513155688233859e-05
+          ],
+          "maximum_power_change": 0.0015245935140631994,
+          "maximum_complex_change": 0.01039072132259409,
+          "same_channel_phase_reference_rad": [
+            2.799887734936483,
+            -0.18140346588339423,
+            0.2647301077712691,
+            -2.9696703793310224
+          ],
+          "same_channel_phase_candidate_rad": [
+            2.8007808659569036,
+            -0.17086509697033014,
+            0.2704219564670882,
+            -2.9644279048974242
+          ],
+          "same_channel_phase_change_rad": [
+            0.0008931310204207658,
+            0.010538368913064106,
+            0.005691848695819109,
+            0.0052424744335980485
+          ]
+        }
+      },
+      "power_change_limit": 0.01,
+      "complex_change_limit": 0.01,
+      "maximum_power_change": 0.0015245935140631994,
+      "maximum_complex_change": 0.01039072132259409,
+      "power_passed": true,
+      "complex_passed": false,
+      "mesh_pair_passed": false,
+      "scope": "Saved runs are compared at the same reference planes after matching unit-power channels. The comparison covers one frequency and incidence side. Mesh-pair checks require distinct discretizations and passing input power-balance checks. A pass does not establish continuum accuracy or a frequency-band result.",
+      "output_sha256": {
+        "comparison_AP_pnc.csv": "340e81bddc70fd8ee9c47b7df939e16e7396212c2a1046b1a40da3121d1ad0b6",
+        "report_AP_pnc.html": "e74273c34845fbddb5bacdafecf4f505635eb42bcd7a33ffc78038c020be4608"
+      }
+    },
+    "h80_to_h60": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "schema_version": 1,
+      "status": "compared",
+      "comparison_hash": "19548dfcee3656815e190e6952bb70fc09efa2ef45c4e6965728cc12edf112cc",
+      "reference": {
+        "directory": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\results\\runs\\layered_acceptance\\two_hole_layered_h80_z2-1672dc73c355",
+        "run_hash": "1672dc73c355d71b7ba718dc5aae1bd8c5376fcd5acec31f3c162b370a6d3e2f",
+        "summary_sha256": "df9c23ebc718f38bedd8abb306fb45e344b942e0398014be68c2d5967293f4eb",
+        "output_sha256": {
+          "configuration_AP_pnc.json": "664662356b84258d5649d2310925f41970fecfa3d0c62e98ac3d322e3e154f69",
+          "hole_pattern_AP_pnc.json": "0397cc3a18e236613a5e56ea7408c4aa7f0e585f9486660363c2f9507996d809",
+          "port_modes_AP_pnc.csv": "d34ae777e4562fca7f31f3b8c9820a6998d31e62170226aaabcba5f0b074099c",
+          "report_AP_pnc.html": "dd4865ec0ac2f5a845fbf706cbe4e7073847ef61871d9dcaafd9f5d01b441539",
+          "scattering_AP_pnc.csv": "6ccd801cade8ee76ffcc033a621ffa7ea86ac4448bdd994e19091fa63c095540",
+          "scattering_channels_AP_pnc.csv": "42b4b1aaec8a3485819f6e970458093925188d434d655813a0250713baa9950f",
+          "selected_fields_AP_pnc.npz": "6fefcaf035dfc14dc22cd7d35b5291b69fcff591834f74410969e33bc59981e8",
+          "selected_vertex_shapes_AP_pnc.vtu": "92a50621d67b6d90765213ede47e3430f63643b96b528d55da71f68c210d48c2"
+        },
+        "configuration": {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "schema_version": 1,
+          "name": "two_hole_layered_h80_z2",
+          "geometry": {
+            "length_nm": 1800,
+            "width_nm": 600,
+            "thickness_nm": 200,
+            "pattern": {
+              "csv": "data/examples/two_holes_AP_pnc.csv",
+              "x_offset_nm": 900
+            }
+          },
+          "mesh": {
+            "kind": "layered",
+            "element_order": 2,
+            "mesh_size_nm": 80,
+            "port_size_nm": 150,
+            "thickness_layers": 2,
+            "circle_resolution": 48
+          },
+          "material": {
+            "name": "nominal_cubic_ge",
+            "C11_Pa": 128500000000.0,
+            "C12_Pa": 48300000000.0,
+            "C44_Pa": 66800000000.0,
+            "density_kg_m3": 5323,
+            "crystal_rotation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ],
+            "temperature_policy": "fixed_property_control",
+            "temperature_K": 4
+          },
+          "analysis": {
+            "kind": "scattering",
+            "boundary": "matched_ports",
+            "frequency_GHz": 1,
+            "incident_side": "left"
+          },
+          "resources": {
+            "max_dofs": 30000,
+            "max_port_dofs": 400
+          }
+        },
+        "hole_pattern_provenance": {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "source_csv": "data/examples/two_holes_AP_pnc.csv",
+          "source_sha256": "116ba207413da79d15dcd605205ef9ec88aad4807d69cce670c66317e0b85f32",
+          "x_offset_m": 9.000000000000001e-07,
+          "holes": [
+            {
+              "x_m": 6.25e-07,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Pilot"
+            },
+            {
+              "x_m": 1.1750000000000002e-06,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Pilot"
+            }
+          ],
+          "clearances": {
+            "min_side_ligament_m": 1.7500000000000002e-07,
+            "min_end_ligament_m": 4.999999999999999e-07,
+            "min_interhole_gap_m": 3.000000000000001e-07
+          }
+        },
+        "implementation": {
+          "git_commit": "e3bbf16ef5cafa770b27bedf479b0e5d6b319c1f",
+          "source_sha256": {
+            "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+            "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+            "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+            "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+            "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+            "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+            "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+            "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+            "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+            "src/phononic/report_AP_pnc.py": "871fc6a358958c7908ad17f57521bdb51772ea82739d83cdbe5b4b536a5145c5",
+            "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+            "src/phononic/workflow_AP_pnc.py": "b364578c8b0d1fe04a47bf682475fcbca9f5f208ea53bb06272a07dd0c4b5da5",
+            "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+          },
+          "packages": {
+            "numpy": "2.5.4",
+            "scipy": "1.18.1",
+            "scikit-fem": "12.0.2",
+            "meshio": "5.3.5",
+            "gmsh": "4.15.2",
+            "matplotlib": "3.11.2",
+            "psutil": "7.2.2"
+          },
+          "python": "3.12.14",
+          "platform": "Windows-11-10.0.26200-SP0"
+        },
+        "ndof": 17415,
+        "port_dofs": 135,
+        "power_balance_passed": true
+      },
+      "candidate": {
+        "directory": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\results\\runs\\layered_acceptance\\two_hole_h60_layered_z2-b4d6bbe9b2a2",
+        "run_hash": "b4d6bbe9b2a2a3b2205ce73007006bf2dea04f5c7ef7cc7c75ceb03589fffb61",
+        "summary_sha256": "f00f9695b3d0e254fcdb62f78ba03bcd9c278e0f59f86b97ee1329faa1fb305c",
+        "output_sha256": {
+          "configuration_AP_pnc.json": "4fdc1e999d0f501a2c8210c31a5674fd289775006fb022c8b8e3ea0dfbc6a0b5",
+          "hole_pattern_AP_pnc.json": "0397cc3a18e236613a5e56ea7408c4aa7f0e585f9486660363c2f9507996d809",
+          "port_modes_AP_pnc.csv": "d34ae777e4562fca7f31f3b8c9820a6998d31e62170226aaabcba5f0b074099c",
+          "report_AP_pnc.html": "db0187f6eb37101d78de5f04fdf4a2bdc1c2f0dbeebdb4c146db8243c355d153",
+          "scattering_AP_pnc.csv": "a9da4098827ed6f105f0e26f073e914791f8353a47ff58ecf4023a2d6dcef3d4",
+          "scattering_channels_AP_pnc.csv": "344d0e57dec4050a8d89100bbff3bc2a4372330979f244c98b548e9e3a9df468",
+          "selected_fields_AP_pnc.npz": "83b7b85be5744f1139afb9e3ecb480b1f10e6f6b6ac3b1127d7973b93d90bbc5",
+          "selected_vertex_shapes_AP_pnc.vtu": "2dc8575c657f0f45d5184195c95010ae9a7368d64fe2b0cf13710239d959eb1e"
+        },
+        "configuration": {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "schema_version": 1,
+          "name": "two_hole_h60_layered_z2",
+          "geometry": {
+            "length_nm": 1800,
+            "width_nm": 600,
+            "thickness_nm": 200,
+            "pattern": {
+              "csv": "data/examples/two_holes_AP_pnc.csv",
+              "x_offset_nm": 900
+            }
+          },
+          "mesh": {
+            "kind": "layered",
+            "element_order": 2,
+            "mesh_size_nm": 60,
+            "port_size_nm": 150,
+            "thickness_layers": 2,
+            "circle_resolution": 48
+          },
+          "material": {
+            "name": "nominal_cubic_ge",
+            "C11_Pa": 128500000000.0,
+            "C12_Pa": 48300000000.0,
+            "C44_Pa": 66800000000.0,
+            "density_kg_m3": 5323,
+            "crystal_rotation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ],
+            "temperature_policy": "fixed_property_control",
+            "temperature_K": 4
+          },
+          "analysis": {
+            "kind": "scattering",
+            "boundary": "matched_ports",
+            "frequency_GHz": 1,
+            "incident_side": "left"
+          },
+          "resources": {
+            "max_dofs": 30000,
+            "max_port_dofs": 400
+          }
+        },
+        "hole_pattern_provenance": {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "source_csv": "data/examples/two_holes_AP_pnc.csv",
+          "source_sha256": "116ba207413da79d15dcd605205ef9ec88aad4807d69cce670c66317e0b85f32",
+          "x_offset_m": 9.000000000000001e-07,
+          "holes": [
+            {
+              "x_m": 6.25e-07,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Pilot"
+            },
+            {
+              "x_m": 1.1750000000000002e-06,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Pilot"
+            }
+          ],
+          "clearances": {
+            "min_side_ligament_m": 1.7500000000000002e-07,
+            "min_end_ligament_m": 4.999999999999999e-07,
+            "min_interhole_gap_m": 3.000000000000001e-07
+          }
+        },
+        "implementation": {
+          "git_commit": "e3bbf16ef5cafa770b27bedf479b0e5d6b319c1f",
+          "source_sha256": {
+            "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+            "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+            "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+            "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+            "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+            "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+            "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+            "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+            "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+            "src/phononic/report_AP_pnc.py": "871fc6a358958c7908ad17f57521bdb51772ea82739d83cdbe5b4b536a5145c5",
+            "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+            "src/phononic/workflow_AP_pnc.py": "b364578c8b0d1fe04a47bf682475fcbca9f5f208ea53bb06272a07dd0c4b5da5",
+            "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+          },
+          "packages": {
+            "numpy": "2.5.4",
+            "scipy": "1.18.1",
+            "scikit-fem": "12.0.2",
+            "meshio": "5.3.5",
+            "gmsh": "4.15.2",
+            "matplotlib": "3.11.2",
+            "psutil": "7.2.2"
+          },
+          "python": "3.12.14",
+          "platform": "Windows-11-10.0.26200-SP0"
+        },
+        "ndof": 26025,
+        "port_dofs": 135,
+        "power_balance_passed": true
+      },
+      "physical_inputs": {
+        "dimensions_nm": {
+          "length_nm": 1800,
+          "width_nm": 600,
+          "thickness_nm": 200
+        },
+        "placed_holes_m": [
+          [
+            6.25e-07,
+            2.5000000000000004e-07
+          ],
+          [
+            1.1750000000000002e-06,
+            2.5000000000000004e-07
+          ]
+        ],
+        "material": {
+          "C11_Pa": 128500000000.0,
+          "C12_Pa": 48300000000.0,
+          "C44_Pa": 66800000000.0,
+          "density_kg_m3": 5323,
+          "crystal_rotation": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "temperature_policy": "fixed_property_control"
+        },
+        "frequency_hz": 1000000000.0,
+        "incident_side": "left",
+        "numerical_source_sha256": {
+          "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+          "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+          "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+          "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+          "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+          "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+          "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac"
+        }
+      },
+      "implementation": {
+        "tool_sha256": "d1e2b4da88c83257f349a138fe64666851e6d87b2f77438e5fad1d1c02584adc",
+        "python": "3.12.14",
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2"
+        }
+      },
+      "comparison_kind": "mesh_sensitivity",
+      "input_power_checks_passed": true,
+      "discretization_sha256": {
+        "reference": "ccf64e2ac594010d19c5f79dc86a04090b170f2aa6e7f0ad468244bba17d486a",
+        "candidate": "9ab39d5c6c792c24dd50ef26fd9733b96dc935b3db64b05984aad36ebb8038bb"
+      },
+      "matched_channels": {
+        "incoming": {
+          "reference_roots": [
+            268,
+            262,
+            260,
+            247
+          ],
+          "candidate_roots": [
+            268,
+            262,
+            260,
+            247
+          ],
+          "mass_overlaps": [
+            1.0,
+            0.9999999999999999,
+            1.0,
+            0.9999999999999998
+          ],
+          "candidate_gauge_phase_rad": [
+            -1.9575357680583401e-31,
+            7.7195688380983596e-31,
+            -5.2123654411493675e-31,
+            6.8026385560806385e-31
+          ],
+          "reference_wavenumber_rad_m": [
+            1438522.4531531846,
+            3061012.9635694223,
+            3333511.089908365,
+            5216374.272506516
+          ],
+          "candidate_wavenumber_rad_m": [
+            1438522.4531531846,
+            3061012.9635694223,
+            3333511.089908365,
+            5216374.272506516
+          ],
+          "relative_wavenumber_change": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "reflection": {
+          "reference_roots": [
+            269,
+            263,
+            261,
+            248
+          ],
+          "candidate_roots": [
+            269,
+            263,
+            261,
+            248
+          ],
+          "mass_overlaps": [
+            1.0,
+            0.9999999999999999,
+            1.0,
+            0.9999999999999998
+          ],
+          "candidate_gauge_phase_rad": [
+            1.9575357680583401e-31,
+            -7.7195688380983596e-31,
+            5.2123654411493675e-31,
+            -6.8026385560806385e-31
+          ],
+          "reference_wavenumber_rad_m": [
+            -1438522.4531531846,
+            -3061012.9635694223,
+            -3333511.089908365,
+            -5216374.272506516
+          ],
+          "candidate_wavenumber_rad_m": [
+            -1438522.4531531846,
+            -3061012.9635694223,
+            -3333511.089908365,
+            -5216374.272506516
+          ],
+          "relative_wavenumber_change": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "transmission": {
+          "reference_roots": [
+            268,
+            262,
+            260,
+            247
+          ],
+          "candidate_roots": [
+            268,
+            262,
+            260,
+            247
+          ],
+          "mass_overlaps": [
+            1.0,
+            0.9999999999999999,
+            1.0,
+            0.9999999999999998
+          ],
+          "candidate_gauge_phase_rad": [
+            -1.9575357680583401e-31,
+            7.7195688380983596e-31,
+            -5.2123654411493675e-31,
+            6.8026385560806385e-31
+          ],
+          "reference_wavenumber_rad_m": [
+            1438522.4531531846,
+            3061012.9635694223,
+            3333511.089908365,
+            5216374.272506516
+          ],
+          "candidate_wavenumber_rad_m": [
+            1438522.4531531846,
+            3061012.9635694223,
+            3333511.089908365,
+            5216374.272506516
+          ],
+          "relative_wavenumber_change": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "blocks": {
+        "reflection": {
+          "reference": [
+            [
+              [
+                0.09662682632123747,
+                0.2724100617609406
+              ],
+              [
+                0.00015686013554246198,
+                2.146144422597595e-05
+              ],
+              [
+                -4.311836977149495e-05,
+                -2.1972222720480865e-05
+              ],
+              [
+                3.4028851317549014e-08,
+                1.7511218979088933e-05
+              ]
+            ],
+            [
+              [
+                0.00015686013555908738,
+                2.1461444246942096e-05
+              ],
+              [
+                -0.02987107999196426,
+                -0.1730413477756892
+              ],
+              [
+                5.244736907917371e-06,
+                3.8664900326318565e-05
+              ],
+              [
+                4.2510793686323333e-05,
+                -0.0001348829347005259
+              ]
+            ],
+            [
+              [
+                -4.311836974832026e-05,
+                -2.1972222694555205e-05
+              ],
+              [
+                5.244737082604924e-06,
+                3.866490017187213e-05
+              ],
+              [
+                0.07908016245433402,
+                -0.28534831077295164
+              ],
+              [
+                -0.00013680370821382738,
+                2.6077617707217538e-05
+              ]
+            ],
+            [
+              [
+                3.402886217968705e-08,
+                1.7511218980512274e-05
+              ],
+              [
+                4.2510793673901616e-05,
+                -0.00013488293470730669
+              ],
+              [
+                -0.00013680370819440645,
+                2.607761772953341e-05
+              ],
+              [
+                -0.001697199276054997,
+                0.009487747665433323
+              ]
+            ]
+          ],
+          "candidate_aligned": [
+            [
+              [
+                0.09647047900180948,
+                0.27270507379409886
+              ],
+              [
+                -1.9127362885146562e-05,
+                6.022620091826237e-06
+              ],
+              [
+                -2.379413809256188e-05,
+                -1.749812664415735e-05
+              ],
+              [
+                5.767345588097283e-05,
+                -6.61951487474178e-07
+              ]
+            ],
+            [
+              [
+                -1.9127362867282725e-05,
+                6.022620117021828e-06
+              ],
+              [
+                -0.029006730776962298,
+                -0.17504661616344674
+              ],
+              [
+                9.388888100992934e-06,
+                4.060316254831276e-06
+              ],
+              [
+                3.6159127305272136e-05,
+                -4.909611767100812e-05
+              ]
+            ],
+            [
+              [
+                -2.37941380690366e-05,
+                -1.749812661287527e-05
+              ],
+              [
+                9.388888272788527e-06,
+                4.060316101831736e-06
+              ],
+              [
+                0.08059831265555108,
+                -0.28686970137047985
+              ],
+              [
+                3.0311190276634745e-05,
+                2.6643119835472033e-05
+              ]
+            ],
+            [
+              [
+                5.76734558903109e-05,
+                -6.619514858833004e-07
+              ],
+              [
+                3.615912729199436e-05,
+                -4.90961176813455e-05
+              ],
+              [
+                3.0311190303333298e-05,
+                2.664311985501425e-05
+              ],
+              [
+                -0.0016925847253201139,
+                0.009032254675428527
+              ]
+            ]
+          ],
+          "reference_power": [
+            0.08354401302782612,
+            0.03083563604866447,
+            0.0876773538145317,
+            9.293754365990475e-05
+          ],
+          "candidate_power": [
+            0.08367461519302258,
+            0.031482712485316845,
+            0.08879031617291719,
+            8.445514077522887e-05
+          ],
+          "power_change": [
+            0.00013060216519646117,
+            0.0006470764366523739,
+            0.001112962358385483,
+            -8.482402884675888e-06
+          ],
+          "maximum_power_change": 0.001112962358385483,
+          "maximum_complex_change": 0.0021836210459725567
+        },
+        "transmission": {
+          "reference": [
+            [
+              [
+                -0.9022556561581588,
+                0.3199854259332247
+              ],
+              [
+                -0.0001879662316055351,
+                3.00517489941682e-05
+              ],
+              [
+                2.202925422409172e-05,
+                -1.887594756385422e-05
+              ],
+              [
+                -3.540556385495589e-05,
+                -4.6169482373523616e-05
+              ]
+            ],
+            [
+              [
+                -0.00019789967431453514,
+                -1.0381931209602752e-06
+              ],
+              [
+                0.9701257461165241,
+                -0.16739281354196672
+              ],
+              [
+                -4.322163557106557e-06,
+                -3.3037025001798045e-05
+              ],
+              [
+                -3.0422417892923568e-05,
+                8.575228549884344e-05
+              ]
+            ],
+            [
+              [
+                2.409071699279491e-05,
+                4.324452767625775e-05
+              ],
+              [
+                2.6810241154218223e-05,
+                -3.341766367711738e-05
+              ],
+              [
+                0.9204437952629241,
+                0.2551584935711267
+              ],
+              [
+                -6.41414638505033e-05,
+                -8.832505884855248e-06
+              ]
+            ],
+            [
+              [
+                3.141209316308729e-05,
+                -4.9905776487014665e-05
+              ],
+              [
+                -6.978874832298156e-06,
+                -9.235286201805452e-05
+              ],
+              [
+                -8.313321661614571e-05,
+                1.5592039209605813e-05
+              ],
+              [
+                -0.9843015812765467,
+                -0.176231222252314
+              ]
+            ]
+          ],
+          "candidate_aligned": [
+            [
+              [
+                -0.9023998399705943,
+                0.31937424802584763
+              ],
+              [
+                -4.206798251901771e-06,
+                3.761448529177966e-05
+              ],
+              [
+                8.617391186482245e-06,
+                -3.299322892534301e-05
+              ],
+              [
+                -1.307297836099597e-05,
+                -8.065587161406394e-06
+              ]
+            ],
+            [
+              [
+                -1.9008085015957786e-05,
+                -2.0836224059682268e-05
+              ],
+              [
+                0.9709389983969019,
+                -0.16060740309963856
+              ],
+              [
+                5.174564657178483e-06,
+                1.4441988646355328e-05
+              ],
+              [
+                1.854248596749783e-05,
+                8.761649920455397e-05
+              ]
+            ],
+            [
+              [
+                1.1101073629317666e-05,
+                4.6718919467709967e-05
+              ],
+              [
+                -5.112616466999641e-06,
+                1.308129065323744e-05
+              ],
+              [
+                0.9188862194599478,
+                0.25856867262796585
+              ],
+              [
+                -0.0002003728060233095,
+                -9.77543706806578e-06
+              ]
+            ],
+            [
+              [
+                1.3576833927925018e-05,
+                6.3459910620833725e-06
+              ],
+              [
+                2.8010203931059473e-05,
+                -9.25306394318059e-05
+              ],
+              [
+                -0.00017888579169385687,
+                -8.746891897537745e-05
+              ],
+              [
+                -0.9837663557256571,
+                -0.17921845245464876
+              ]
+            ]
+          ],
+          "reference_power": [
+            0.9164559869721741,
+            0.9691643639513353,
+            0.9123226461854613,
+            0.9999070624563484
+          ],
+          "candidate_power": [
+            0.9163253848069787,
+            0.9685172875146852,
+            0.9112096838270815,
+            0.999915544859231
+          ],
+          "power_change": [
+            -0.0001306021651954481,
+            -0.0006470764366500736,
+            -0.0011129623583798764,
+            8.482402882536988e-06
+          ],
+          "maximum_power_change": 0.0011129623583798764,
+          "maximum_complex_change": 0.006833972061868247,
+          "same_channel_phase_reference_rad": [
+            2.8007808659569036,
+            -0.17086509697033014,
+            0.2704219564670882,
+            -2.9644279048974242
+          ],
+          "same_channel_phase_candidate_rad": [
+            2.801432962831458,
+            -0.16393012044221908,
+            0.2743004909059981,
+            -2.961392972088869
+          ],
+          "same_channel_phase_change_rad": [
+            0.0006520968745541265,
+            0.006934976528111086,
+            0.003878534438909909,
+            0.003034932808555222
+          ]
+        }
+      },
+      "power_change_limit": 0.01,
+      "complex_change_limit": 0.01,
+      "maximum_power_change": 0.001112962358385483,
+      "maximum_complex_change": 0.006833972061868247,
+      "power_passed": true,
+      "complex_passed": true,
+      "mesh_pair_passed": true,
+      "scope": "Saved runs are compared at the same reference planes after matching unit-power channels. The comparison covers one frequency and incidence side. Mesh-pair checks require distinct discretizations and passing input power-balance checks. A pass does not establish continuum accuracy or a frequency-band result.",
+      "output_sha256": {
+        "comparison_AP_pnc.csv": "250d10031d8fd610235e0171be1a5a0fbe0312940f639f7fd1980a9c991d8997",
+        "report_AP_pnc.html": "e496388e8d41898caa4b8529789750ba14c21d05c76703db2505e85eaa5f19cb"
+      }
+    }
+  },
+  "two_hole_comparison_source": {
+    "h105_to_h80": {
+      "summary": {
+        "path": "results/runs/layered_acceptance/comparisons/scattering-e1f77d01f9908016/summary_AP_pnc.json",
+        "sha256": "b0316cb0ca41a5ae0ad4ee8e7f4d06774bbfddbff617998affab29a5babe9b69"
+      },
+      "table": {
+        "path": "results/runs/layered_acceptance/comparisons/scattering-e1f77d01f9908016/comparison_AP_pnc.csv",
+        "sha256": "340e81bddc70fd8ee9c47b7df939e16e7396212c2a1046b1a40da3121d1ad0b6"
+      },
+      "report": {
+        "path": "results/runs/layered_acceptance/comparisons/scattering-e1f77d01f9908016/report_AP_pnc.html",
+        "sha256": "e74273c34845fbddb5bacdafecf4f505635eb42bcd7a33ffc78038c020be4608"
+      }
+    },
+    "h80_to_h60": {
+      "summary": {
+        "path": "results/runs/layered_acceptance/comparisons/scattering-19548dfcee365681/summary_AP_pnc.json",
+        "sha256": "98b82f8293907fb3c59519cea20cad45266c7b6fbbf5c01385b39f37b0e4524b"
+      },
+      "table": {
+        "path": "results/runs/layered_acceptance/comparisons/scattering-19548dfcee365681/comparison_AP_pnc.csv",
+        "sha256": "250d10031d8fd610235e0171be1a5a0fbe0312940f639f7fd1980a9c991d8997"
+      },
+      "report": {
+        "path": "results/runs/layered_acceptance/comparisons/scattering-19548dfcee365681/report_AP_pnc.html",
+        "sha256": "e496388e8d41898caa4b8529789750ba14c21d05c76703db2505e85eaa5f19cb"
+      }
+    }
+  },
+  "h60_preflight": {
+    "path": "results/runs/layered_acceptance/preflight_h60_AP_pnc.json",
+    "sha256": "a0dfcf1e9103bbf902221b256aa7442b71f65e15d36c723375d50b7345dd037c"
+  },
+  "cross_mesh_h50_checks": {
+    "h50_to_layered_h80": {
+      "comparison": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "status": "compared",
+        "scope": "Offline comparison of previous tetrahedral h50 and layered h80 two-hole runs at 1 GHz. In-plane and through-thickness discretization differ. This comparison is cross-mesh sensitivity for the selected pair, with no continuum error bound.",
+        "reference_evidence": {
+          "path": "verification/two_hole_phase_refinement_AP_pnc.json",
+          "sha256": "89ee208123b9579ebb32789e45c5a73ec8422df3cc795c6119844e53982eab78",
+          "case": "50"
+        },
+        "candidate_summary": {
+          "path": "C:/Users/kunmi/My Drive/Phononic Nanobeam Design Lab/results/runs/layered_acceptance/two_hole_layered_h80_z2-1672dc73c355/summary_AP_pnc.json",
+          "sha256": "df9c23ebc718f38bedd8abb306fb45e344b942e0398014be68c2d5967293f4eb"
+        },
+        "matches": {
+          "incoming": {
+            "reference_roots": [
+              268,
+              264,
+              262,
+              247
+            ],
+            "candidate_roots": [
+              268,
+              262,
+              260,
+              247
+            ],
+            "mass_overlaps": [
+              0.9999999999999999,
+              1.0,
+              0.9999999999999996,
+              0.9999999999999998
+            ],
+            "candidate_gauge_phase_rad": [
+              -3.016755294206224e-14,
+              1.2369506544699135e-14,
+              -3.1415926535897216,
+              -3.1415926535896745
+            ],
+            "reference_wavenumber_rad_m": [
+              1438522.4531530493,
+              3061012.9635697864,
+              3333511.089908331,
+              5216374.272506447
+            ],
+            "candidate_wavenumber_rad_m": [
+              1438522.4531531846,
+              3061012.9635694223,
+              3333511.089908365,
+              5216374.272506516
+            ],
+            "relative_wavenumber_change": [
+              9.403718632711945e-14,
+              1.1896294821632503e-13,
+              1.0197438393522714e-14,
+              1.339037221012108e-14
+            ]
+          },
+          "reflection": {
+            "reference_roots": [
+              269,
+              265,
+              263,
+              248
+            ],
+            "candidate_roots": [
+              269,
+              263,
+              261,
+              248
+            ],
+            "mass_overlaps": [
+              0.9999999999999999,
+              1.0,
+              0.9999999999999996,
+              0.9999999999999998
+            ],
+            "candidate_gauge_phase_rad": [
+              3.016755294206224e-14,
+              -1.2369506544699135e-14,
+              3.1415926535897216,
+              3.1415926535896745
+            ],
+            "reference_wavenumber_rad_m": [
+              -1438522.4531530493,
+              -3061012.9635697864,
+              -3333511.089908331,
+              -5216374.272506447
+            ],
+            "candidate_wavenumber_rad_m": [
+              -1438522.4531531846,
+              -3061012.9635694223,
+              -3333511.089908365,
+              -5216374.272506516
+            ],
+            "relative_wavenumber_change": [
+              9.403718632711945e-14,
+              1.1896294821632503e-13,
+              1.0197438393522714e-14,
+              1.339037221012108e-14
+            ]
+          },
+          "transmission": {
+            "reference_roots": [
+              268,
+              264,
+              262,
+              247
+            ],
+            "candidate_roots": [
+              268,
+              262,
+              260,
+              247
+            ],
+            "mass_overlaps": [
+              0.9999999999999999,
+              1.0,
+              0.9999999999999996,
+              0.9999999999999998
+            ],
+            "candidate_gauge_phase_rad": [
+              -3.016755294206224e-14,
+              1.2369506544699135e-14,
+              -3.1415926535897216,
+              -3.1415926535896745
+            ],
+            "reference_wavenumber_rad_m": [
+              1438522.4531530493,
+              3061012.9635697864,
+              3333511.089908331,
+              5216374.272506447
+            ],
+            "candidate_wavenumber_rad_m": [
+              1438522.4531531846,
+              3061012.9635694223,
+              3333511.089908365,
+              5216374.272506516
+            ],
+            "relative_wavenumber_change": [
+              9.403718632711945e-14,
+              1.1896294821632503e-13,
+              1.0197438393522714e-14,
+              1.339037221012108e-14
+            ]
+          }
+        },
+        "blocks": {
+          "reflection": {
+            "reference": [
+              [
+                [
+                  0.09653290540790514,
+                  0.27246849165077386
+                ],
+                [
+                  4.990623367910649e-06,
+                  -1.29838839724318e-05
+                ],
+                [
+                  -2.880749306721011e-06,
+                  4.722600210094551e-06
+                ],
+                [
+                  -9.028807326171295e-06,
+                  3.395387891291391e-06
+                ]
+              ],
+              [
+                [
+                  4.990623379764403e-06,
+                  -1.2983883945596879e-05
+                ],
+                [
+                  -0.027136418668141385,
+                  -0.1787216271503048
+                ],
+                [
+                  8.415213876304538e-05,
+                  6.405546642596211e-05
+                ],
+                [
+                  2.690549040900082e-05,
+                  9.669607222618831e-06
+                ]
+              ],
+              [
+                [
+                  -2.880749300082137e-06,
+                  4.7226001126340125e-06
+                ],
+                [
+                  8.415213855075797e-05,
+                  6.405546643965487e-05
+                ],
+                [
+                  0.07885535204437015,
+                  -0.28556919219667837
+                ],
+                [
+                  -8.220207680352332e-05,
+                  7.386607246736112e-05
+                ]
+              ],
+              [
+                [
+                  -9.028807332832525e-06,
+                  3.3953879060903607e-06
+                ],
+                [
+                  2.690549040688307e-05,
+                  9.669607305659136e-06
+                ],
+                [
+                  -8.220207685221753e-05,
+                  7.38660724255346e-05
+                ],
+                [
+                  -0.0018129466952873307,
+                  0.010146833488730963
+                ]
+              ]
+            ],
+            "candidate_aligned": [
+              [
+                [
+                  0.09662682632122103,
+                  0.2724100617609465
+                ],
+                [
+                  0.0001568601355424616,
+                  2.1461444225978742e-05
+                ],
+                [
+                  4.3118369771495856e-05,
+                  2.1972222720479082e-05
+                ],
+                [
+                  -3.4028851319096325e-08,
+                  -1.751121897908893e-05
+                ]
+              ],
+              [
+                [
+                  0.000156860135559087,
+                  2.1461444246944888e-05
+                ],
+                [
+                  -0.02987107999196854,
+                  -0.17304134777568847
+                ],
+                [
+                  -5.244736907920614e-06,
+                  -3.8664900326318125e-05
+                ],
+                [
+                  -4.251079368630568e-05,
+                  0.00013488293470053145
+                ]
+              ],
+              [
+                [
+                  4.311836974832117e-05,
+                  2.1972222694553423e-05
+                ],
+                [
+                  -5.2447370826081675e-06,
+                  -3.866490017187169e-05
+                ],
+                [
+                  0.07908016245429322,
+                  -0.28534831077296297
+                ],
+                [
+                  -0.00013680370821382242,
+                  2.6077617707243535e-05
+                ]
+              ],
+              [
+                [
+                  -3.402886218123436e-08,
+                  -1.751121898051227e-05
+                ],
+                [
+                  -4.2510793673883963e-05,
+                  0.00013488293470731224
+                ],
+                [
+                  -0.0001368037081944015,
+                  2.6077617729559407e-05
+                ],
+                [
+                  -0.0016971992760527479,
+                  0.009487747665433725
+                ]
+              ]
+            ],
+            "reference_power": [
+              0.08355768108607663,
+              0.03267781742496471,
+              0.08776795350656998,
+              0.00010625812940081664
+            ],
+            "candidate_power": [
+              0.08354401302782614,
+              0.030835636048664482,
+              0.08767735381453175,
+              9.293754365990475e-05
+            ],
+            "power_change": [
+              -1.3668058250482229e-05,
+              -0.0018421813763002254,
+              -9.059969203822904e-05,
+              -1.3320585740911884e-05
+            ],
+            "maximum_power_change": 0.0018421813763002254,
+            "maximum_complex_change": 0.006304280000898411
+          },
+          "transmission": {
+            "reference": [
+              [
+                [
+                  -0.9022756639070109,
+                  0.31990770568207
+                ],
+                [
+                  -3.360266378278192e-06,
+                  -7.270176546909582e-05
+                ],
+                [
+                  1.0274472771944002e-06,
+                  1.0380812911491604e-05
+                ],
+                [
+                  2.1203527587344323e-05,
+                  -7.558435924539365e-06
+                ]
+              ],
+              [
+                [
+                  3.077148227567688e-05,
+                  5.99339101558441e-05
+                ],
+                [
+                  0.9724385170462345,
+                  -0.14725999777009782
+                ],
+                [
+                  4.143282032122034e-05,
+                  1.3594863418386391e-05
+                ],
+                [
+                  2.1857929305510055e-05,
+                  -2.3144213727044e-05
+                ]
+              ],
+              [
+                [
+                  3.9484926358296417e-07,
+                  -8.590584200467186e-06
+                ],
+                [
+                  -1.4004114235140056e-05,
+                  -3.4589017281292894e-08
+                ],
+                [
+                  0.9202897613386843,
+                  0.255536261692974
+                ],
+                [
+                  -8.229414010174712e-05,
+                  -7.188282206306365e-05
+                ]
+              ],
+              [
+                [
+                  -2.0562117510790402e-05,
+                  -6.6790186388052285e-06
+                ],
+                [
+                  1.9180725583644203e-05,
+                  1.832601423576932e-05
+                ],
+                [
+                  -0.00013048475057477683,
+                  3.990014990934049e-05
+                ],
+                [
+                  -0.9824892217911868,
+                  -0.18603402235918987
+                ]
+              ]
+            ],
+            "candidate_aligned": [
+              [
+                [
+                  -0.9022556561581588,
+                  0.3199854259332247
+                ],
+                [
+                  -0.00018796623160553382,
+                  3.0051748994176198e-05
+                ],
+                [
+                  -2.2029254224089803e-05,
+                  1.887594756385646e-05
+                ],
+                [
+                  3.540556385496276e-05,
+                  4.616948237351835e-05
+                ]
+              ],
+              [
+                [
+                  -0.00019789967431453511,
+                  -1.0381931209686932e-06
+                ],
+                [
+                  0.9701257461165241,
+                  -0.16739281354196672
+                ],
+                [
+                  4.322163557108511e-06,
+                  3.303702500179779e-05
+                ],
+                [
+                  3.0422417892914464e-05,
+                  -8.575228549884667e-05
+                ]
+              ],
+              [
+                [
+                  -2.4090716992790512e-05,
+                  -4.32445276762602e-05
+                ],
+                [
+                  -2.68102411542202e-05,
+                  3.3417663677115796e-05
+                ],
+                [
+                  0.9204437952629241,
+                  0.2551584935711267
+                ],
+                [
+                  -6.414146385050371e-05,
+                  -8.83250588485223e-06
+                ]
+              ],
+              [
+                [
+                  -3.141209316309471e-05,
+                  4.9905776487009996e-05
+                ],
+                [
+                  6.9788748322883524e-06,
+                  9.235286201805527e-05
+                ],
+                [
+                  -8.313321661614644e-05,
+                  1.5592039209601904e-05
+                ],
+                [
+                  -0.9843015812765467,
+                  -0.176231222252314
+                ]
+              ]
+            ],
+            "reference_power": [
+              0.9164423189139249,
+              0.9673221825750263,
+              0.9122320464934408,
+              0.9998937418706003
+            ],
+            "candidate_power": [
+              0.9164559869721741,
+              0.9691643639513353,
+              0.9123226461854613,
+              0.9999070624563484
+            ],
+            "power_change": [
+              1.3668058249205473e-05,
+              0.0018421813763089823,
+              9.059969202052098e-05,
+              1.3320585748100022e-05
+            ],
+            "maximum_power_change": 0.0018421813763089823,
+            "maximum_complex_change": 0.02026522095308429,
+            "same_channel_phase_reference_rad": [
+              2.800864368381649,
+              -0.1502918387350633,
+              0.2708461886458401,
+              -2.954458440713344
+            ],
+            "same_channel_phase_candidate_rad": [
+              2.8007808659569036,
+              -0.17086509697033014,
+              0.2704219564670882,
+              -2.9644279048974242
+            ],
+            "same_channel_phase_change_rad": [
+              -8.350242474538707e-05,
+              -0.02057325823526682,
+              -0.0004242321787518461,
+              -0.009969464184080632
+            ]
+          }
+        },
+        "channels": [
+          {
+            "author": "Athul Prem",
+            "file_tag": "_AP_pnc",
+            "quantity": "reflection",
+            "incident_channel": 1,
+            "reference_incident_root": 268,
+            "candidate_incident_root": 268,
+            "reference_power": 0.08355768108607663,
+            "candidate_power": 0.08354401302782614,
+            "power_change": -1.3668058250482229e-05,
+            "maximum_complex_change": 0.00015572677792813065,
+            "reference_same_channel_transmission_phase_rad": null,
+            "candidate_same_channel_transmission_phase_rad": null,
+            "same_channel_transmission_phase_change_rad": null
+          },
+          {
+            "author": "Athul Prem",
+            "file_tag": "_AP_pnc",
+            "quantity": "reflection",
+            "incident_channel": 2,
+            "reference_incident_root": 264,
+            "candidate_incident_root": 262,
+            "reference_power": 0.03267781742496471,
+            "candidate_power": 0.030835636048664482,
+            "power_change": -0.0018421813763002254,
+            "maximum_complex_change": 0.006304280000898411,
+            "reference_same_channel_transmission_phase_rad": null,
+            "candidate_same_channel_transmission_phase_rad": null,
+            "same_channel_transmission_phase_change_rad": null
+          },
+          {
+            "author": "Athul Prem",
+            "file_tag": "_AP_pnc",
+            "quantity": "reflection",
+            "incident_channel": 3,
+            "reference_incident_root": 262,
+            "candidate_incident_root": 260,
+            "reference_power": 0.08776795350656998,
+            "candidate_power": 0.08767735381453175,
+            "power_change": -9.059969203822904e-05,
+            "maximum_complex_change": 0.00031516396328311937,
+            "reference_same_channel_transmission_phase_rad": null,
+            "candidate_same_channel_transmission_phase_rad": null,
+            "same_channel_transmission_phase_change_rad": null
+          },
+          {
+            "author": "Athul Prem",
+            "file_tag": "_AP_pnc",
+            "quantity": "reflection",
+            "incident_channel": 4,
+            "reference_incident_root": 247,
+            "candidate_incident_root": 247,
+            "reference_power": 0.00010625812940081664,
+            "candidate_power": 9.293754365990475e-05,
+            "power_change": -1.3320585740911884e-05,
+            "maximum_complex_change": 0.0006691723152752692,
+            "reference_same_channel_transmission_phase_rad": null,
+            "candidate_same_channel_transmission_phase_rad": null,
+            "same_channel_transmission_phase_change_rad": null
+          },
+          {
+            "author": "Athul Prem",
+            "file_tag": "_AP_pnc",
+            "quantity": "transmission",
+            "incident_channel": 1,
+            "reference_incident_root": 268,
+            "candidate_incident_root": 268,
+            "reference_power": 0.9164423189139249,
+            "candidate_power": 0.9164559869721741,
+            "power_change": 1.3668058249205473e-05,
+            "maximum_complex_change": 0.00023666029501017612,
+            "reference_same_channel_transmission_phase_rad": 2.800864368381649,
+            "candidate_same_channel_transmission_phase_rad": 2.8007808659569036,
+            "same_channel_transmission_phase_change_rad": -8.350242474538707e-05
+          },
+          {
+            "author": "Athul Prem",
+            "file_tag": "_AP_pnc",
+            "quantity": "transmission",
+            "incident_channel": 2,
+            "reference_incident_root": 264,
+            "candidate_incident_root": 262,
+            "reference_power": 0.9673221825750263,
+            "candidate_power": 0.9691643639513353,
+            "power_change": 0.0018421813763089823,
+            "maximum_complex_change": 0.02026522095308429,
+            "reference_same_channel_transmission_phase_rad": -0.1502918387350633,
+            "candidate_same_channel_transmission_phase_rad": -0.17086509697033014,
+            "same_channel_transmission_phase_change_rad": -0.02057325823526682
+          },
+          {
+            "author": "Athul Prem",
+            "file_tag": "_AP_pnc",
+            "quantity": "transmission",
+            "incident_channel": 3,
+            "reference_incident_root": 262,
+            "candidate_incident_root": 260,
+            "reference_power": 0.9122320464934408,
+            "candidate_power": 0.9123226461854613,
+            "power_change": 9.059969202052098e-05,
+            "maximum_complex_change": 0.000407964708891269,
+            "reference_same_channel_transmission_phase_rad": 0.2708461886458401,
+            "candidate_same_channel_transmission_phase_rad": 0.2704219564670882,
+            "same_channel_transmission_phase_change_rad": -0.0004242321787518461
+          },
+          {
+            "author": "Athul Prem",
+            "file_tag": "_AP_pnc",
+            "quantity": "transmission",
+            "incident_channel": 4,
+            "reference_incident_root": 247,
+            "candidate_incident_root": 247,
+            "reference_power": 0.9998937418706003,
+            "candidate_power": 0.9999070624563484,
+            "power_change": 1.3320585748100022e-05,
+            "maximum_complex_change": 0.009968928570289758,
+            "reference_same_channel_transmission_phase_rad": -2.954458440713344,
+            "candidate_same_channel_transmission_phase_rad": -2.9644279048974242,
+            "same_channel_transmission_phase_change_rad": -0.009969464184080632
+          }
+        ],
+        "maximum_power_change": 0.0018421813763089823,
+        "maximum_complex_change": 0.02026522095308429,
+        "power_limit": 0.01,
+        "complex_limit": 0.01,
+        "power_passed": true,
+        "complex_passed": false
+      },
+      "source": {
+        "path": "results/runs/layered_acceptance/two_hole_h50_reference_AP_pnc.json",
+        "sha256": "29c27c58198b0f8eacec4288851f8b11f7a570399c83a55c89cf5a687a8a0938"
+      }
+    },
+    "h50_to_layered_h60": {
+      "comparison": {
+        "author": "Athul Prem",
+        "file_tag": "_AP_pnc",
+        "status": "compared",
+        "scope": "Offline comparison of previous tetrahedral h50 and layered h60 two-hole runs at 1 GHz. In-plane and through-thickness discretization differ. This comparison is cross-mesh sensitivity for the selected pair, with no continuum error bound.",
+        "reference_evidence": {
+          "path": "verification/two_hole_phase_refinement_AP_pnc.json",
+          "sha256": "89ee208123b9579ebb32789e45c5a73ec8422df3cc795c6119844e53982eab78",
+          "case": "50"
+        },
+        "candidate_summary": {
+          "path": "C:/Users/kunmi/My Drive/Phononic Nanobeam Design Lab/results/runs/layered_acceptance/two_hole_h60_layered_z2-b4d6bbe9b2a2/summary_AP_pnc.json",
+          "sha256": "f00f9695b3d0e254fcdb62f78ba03bcd9c278e0f59f86b97ee1329faa1fb305c"
+        },
+        "matches": {
+          "incoming": {
+            "reference_roots": [
+              268,
+              264,
+              262,
+              247
+            ],
+            "candidate_roots": [
+              268,
+              262,
+              260,
+              247
+            ],
+            "mass_overlaps": [
+              0.9999999999999999,
+              1.0,
+              0.9999999999999996,
+              0.9999999999999998
+            ],
+            "candidate_gauge_phase_rad": [
+              -3.016755294206224e-14,
+              1.2369506544699135e-14,
+              -3.1415926535897216,
+              -3.1415926535896745
+            ],
+            "reference_wavenumber_rad_m": [
+              1438522.4531530493,
+              3061012.9635697864,
+              3333511.089908331,
+              5216374.272506447
+            ],
+            "candidate_wavenumber_rad_m": [
+              1438522.4531531846,
+              3061012.9635694223,
+              3333511.089908365,
+              5216374.272506516
+            ],
+            "relative_wavenumber_change": [
+              9.403718632711945e-14,
+              1.1896294821632503e-13,
+              1.0197438393522714e-14,
+              1.339037221012108e-14
+            ]
+          },
+          "reflection": {
+            "reference_roots": [
+              269,
+              265,
+              263,
+              248
+            ],
+            "candidate_roots": [
+              269,
+              263,
+              261,
+              248
+            ],
+            "mass_overlaps": [
+              0.9999999999999999,
+              1.0,
+              0.9999999999999996,
+              0.9999999999999998
+            ],
+            "candidate_gauge_phase_rad": [
+              3.016755294206224e-14,
+              -1.2369506544699135e-14,
+              3.1415926535897216,
+              3.1415926535896745
+            ],
+            "reference_wavenumber_rad_m": [
+              -1438522.4531530493,
+              -3061012.9635697864,
+              -3333511.089908331,
+              -5216374.272506447
+            ],
+            "candidate_wavenumber_rad_m": [
+              -1438522.4531531846,
+              -3061012.9635694223,
+              -3333511.089908365,
+              -5216374.272506516
+            ],
+            "relative_wavenumber_change": [
+              9.403718632711945e-14,
+              1.1896294821632503e-13,
+              1.0197438393522714e-14,
+              1.339037221012108e-14
+            ]
+          },
+          "transmission": {
+            "reference_roots": [
+              268,
+              264,
+              262,
+              247
+            ],
+            "candidate_roots": [
+              268,
+              262,
+              260,
+              247
+            ],
+            "mass_overlaps": [
+              0.9999999999999999,
+              1.0,
+              0.9999999999999996,
+              0.9999999999999998
+            ],
+            "candidate_gauge_phase_rad": [
+              -3.016755294206224e-14,
+              1.2369506544699135e-14,
+              -3.1415926535897216,
+              -3.1415926535896745
+            ],
+            "reference_wavenumber_rad_m": [
+              1438522.4531530493,
+              3061012.9635697864,
+              3333511.089908331,
+              5216374.272506447
+            ],
+            "candidate_wavenumber_rad_m": [
+              1438522.4531531846,
+              3061012.9635694223,
+              3333511.089908365,
+              5216374.272506516
+            ],
+            "relative_wavenumber_change": [
+              9.403718632711945e-14,
+              1.1896294821632503e-13,
+              1.0197438393522714e-14,
+              1.339037221012108e-14
+            ]
+          }
+        },
+        "blocks": {
+          "reflection": {
+            "reference": [
+              [
+                [
+                  0.09653290540790514,
+                  0.27246849165077386
+                ],
+                [
+                  4.990623367910649e-06,
+                  -1.29838839724318e-05
+                ],
+                [
+                  -2.880749306721011e-06,
+                  4.722600210094551e-06
+                ],
+                [
+                  -9.028807326171295e-06,
+                  3.395387891291391e-06
+                ]
+              ],
+              [
+                [
+                  4.990623379764403e-06,
+                  -1.2983883945596879e-05
+                ],
+                [
+                  -0.027136418668141385,
+                  -0.1787216271503048
+                ],
+                [
+                  8.415213876304538e-05,
+                  6.405546642596211e-05
+                ],
+                [
+                  2.690549040900082e-05,
+                  9.669607222618831e-06
+                ]
+              ],
+              [
+                [
+                  -2.880749300082137e-06,
+                  4.7226001126340125e-06
+                ],
+                [
+                  8.415213855075797e-05,
+                  6.405546643965487e-05
+                ],
+                [
+                  0.07885535204437015,
+                  -0.28556919219667837
+                ],
+                [
+                  -8.220207680352332e-05,
+                  7.386607246736112e-05
+                ]
+              ],
+              [
+                [
+                  -9.028807332832525e-06,
+                  3.3953879060903607e-06
+                ],
+                [
+                  2.690549040688307e-05,
+                  9.669607305659136e-06
+                ],
+                [
+                  -8.220207685221753e-05,
+                  7.38660724255346e-05
+                ],
+                [
+                  -0.0018129466952873307,
+                  0.010146833488730963
+                ]
+              ]
+            ],
+            "candidate_aligned": [
+              [
+                [
+                  0.09647047900179302,
+                  0.27270507379410464
+                ],
+                [
+                  -1.912736288514667e-05,
+                  6.022620091825897e-06
+                ],
+                [
+                  2.3794138092562602e-05,
+                  1.7498126644156368e-05
+                ],
+                [
+                  -5.767345588097277e-05,
+                  6.619514874792741e-07
+                ]
+              ],
+              [
+                [
+                  -1.9127362867282834e-05,
+                  6.022620117021487e-06
+                ],
+                [
+                  -0.029006730776966628,
+                  -0.17504661616344602
+                ],
+                [
+                  -9.388888100993274e-06,
+                  -4.0603162548304885e-06
+                ],
+                [
+                  -3.6159127305265705e-05,
+                  4.909611767101285e-05
+                ]
+              ],
+              [
+                [
+                  2.3794138069037322e-05,
+                  1.7498126612874286e-05
+                ],
+                [
+                  -9.388888272788868e-06,
+                  -4.060316101830948e-06
+                ],
+                [
+                  0.08059831265551005,
+                  -0.2868697013704914
+                ],
+                [
+                  3.0311190276639807e-05,
+                  2.6643119835466273e-05
+                ]
+              ],
+              [
+                [
+                  -5.767345589031084e-05,
+                  6.619514858883965e-07
+                ],
+                [
+                  -3.615912729198793e-05,
+                  4.909611768135023e-05
+                ],
+                [
+                  3.031119030333836e-05,
+                  2.664311985500849e-05
+                ],
+                [
+                  -0.0016925847253179728,
+                  0.00903225467542893
+                ]
+              ]
+            ],
+            "reference_power": [
+              0.08355768108607663,
+              0.03267781742496471,
+              0.08776795350656998,
+              0.00010625812940081664
+            ],
+            "candidate_power": [
+              0.08367461519302258,
+              0.03148271248531684,
+              0.08879031617291719,
+              8.445514077522892e-05
+            ],
+            "power_change": [
+              0.00011693410694595119,
+              -0.0011951049396478688,
+              0.0010223626663472124,
+              -2.1802988625587718e-05
+            ],
+            "maximum_power_change": 0.0011951049396478688,
+            "maximum_complex_change": 0.004123563160417332
+          },
+          "transmission": {
+            "reference": [
+              [
+                [
+                  -0.9022756639070109,
+                  0.31990770568207
+                ],
+                [
+                  -3.360266378278192e-06,
+                  -7.270176546909582e-05
+                ],
+                [
+                  1.0274472771944002e-06,
+                  1.0380812911491604e-05
+                ],
+                [
+                  2.1203527587344323e-05,
+                  -7.558435924539365e-06
+                ]
+              ],
+              [
+                [
+                  3.077148227567688e-05,
+                  5.99339101558441e-05
+                ],
+                [
+                  0.9724385170462345,
+                  -0.14725999777009782
+                ],
+                [
+                  4.143282032122034e-05,
+                  1.3594863418386391e-05
+                ],
+                [
+                  2.1857929305510055e-05,
+                  -2.3144213727044e-05
+                ]
+              ],
+              [
+                [
+                  3.9484926358296417e-07,
+                  -8.590584200467186e-06
+                ],
+                [
+                  -1.4004114235140056e-05,
+                  -3.4589017281292894e-08
+                ],
+                [
+                  0.9202897613386843,
+                  0.255536261692974
+                ],
+                [
+                  -8.229414010174712e-05,
+                  -7.188282206306365e-05
+                ]
+              ],
+              [
+                [
+                  -2.0562117510790402e-05,
+                  -6.6790186388052285e-06
+                ],
+                [
+                  1.9180725583644203e-05,
+                  1.832601423576932e-05
+                ],
+                [
+                  -0.00013048475057477683,
+                  3.990014990934049e-05
+                ],
+                [
+                  -0.9824892217911868,
+                  -0.18603402235918987
+                ]
+              ]
+            ],
+            "candidate_aligned": [
+              [
+                [
+                  -0.9023998399705943,
+                  0.31937424802584763
+                ],
+                [
+                  -4.206798251900171e-06,
+                  3.761448529177984e-05
+                ],
+                [
+                  -8.61739118647889e-06,
+                  3.2993228925343885e-05
+                ],
+                [
+                  1.307297836099717e-05,
+                  8.06558716140445e-06
+                ]
+              ],
+              [
+                [
+                  -1.90080850159569e-05,
+                  -2.0836224059683074e-05
+                ],
+                [
+                  0.9709389983969019,
+                  -0.16060740309963856
+                ],
+                [
+                  -5.174564657179337e-06,
+                  -1.4441988646355023e-05
+                ],
+                [
+                  -1.854248596750713e-05,
+                  -8.7616499204552e-05
+                ]
+              ],
+              [
+                [
+                  -1.1101073629312915e-05,
+                  -4.671891946771109e-05
+                ],
+                [
+                  5.112616467000415e-06,
+                  -1.3081290653237137e-05
+                ],
+                [
+                  0.9188862194599478,
+                  0.25856867262796585
+                ],
+                [
+                  -0.00020037280602330996,
+                  -9.775437068056357e-06
+                ]
+              ],
+              [
+                [
+                  -1.3576833927924074e-05,
+                  -6.345991062085392e-06
+                ],
+                [
+                  -2.8010203931069295e-05,
+                  9.253063943180293e-05
+                ],
+                [
+                  -0.00017888579169385277,
+                  -8.746891897538587e-05
+                ],
+                [
+                  -0.9837663557256571,
+                  -0.17921845245464876
+                ]
+              ]
+            ],
+            "reference_power": [
+              0.9164423189139249,
+              0.9673221825750263,
+              0.9122320464934408,
+              0.9998937418706003
+            ],
+            "candidate_power": [
+              0.9163253848069787,
+              0.9685172875146852,
+              0.9112096838270815,
+              0.999915544859231
+            ],
+            "power_change": [
+              -0.00011693410694624262,
+              0.0011951049396589086,
+              -0.0010223626663593555,
+              2.180298863063701e-05
+            ],
+            "maximum_power_change": 0.0011951049396589086,
+            "maximum_complex_change": 0.013431373169216493,
+            "same_channel_phase_reference_rad": [
+              2.800864368381649,
+              -0.1502918387350633,
+              0.2708461886458401,
+              -2.954458440713344
+            ],
+            "same_channel_phase_candidate_rad": [
+              2.801432962831458,
+              -0.16393012044221908,
+              0.2743004909059981,
+              -2.961392972088869
+            ],
+            "same_channel_phase_change_rad": [
+              0.0005685944498087042,
+              -0.013638281707155753,
+              0.0034543022601580525,
+              -0.0069345313755254006
+            ]
+          }
+        },
+        "channels": [
+          {
+            "author": "Athul Prem",
+            "file_tag": "_AP_pnc",
+            "quantity": "reflection",
+            "incident_channel": 1,
+            "reference_incident_root": 268,
+            "candidate_incident_root": 268,
+            "reference_power": 0.08355768108607663,
+            "candidate_power": 0.08367461519302258,
+            "power_change": 0.00011693410694595119,
+            "maximum_complex_change": 0.00024467972274600045,
+            "reference_same_channel_transmission_phase_rad": null,
+            "candidate_same_channel_transmission_phase_rad": null,
+            "same_channel_transmission_phase_change_rad": null
+          },
+          {
+            "author": "Athul Prem",
+            "file_tag": "_AP_pnc",
+            "quantity": "reflection",
+            "incident_channel": 2,
+            "reference_incident_root": 264,
+            "candidate_incident_root": 262,
+            "reference_power": 0.03267781742496471,
+            "candidate_power": 0.03148271248531684,
+            "power_change": -0.0011951049396478688,
+            "maximum_complex_change": 0.004123563160417332,
+            "reference_same_channel_transmission_phase_rad": null,
+            "candidate_same_channel_transmission_phase_rad": null,
+            "same_channel_transmission_phase_change_rad": null
+          },
+          {
+            "author": "Athul Prem",
+            "file_tag": "_AP_pnc",
+            "quantity": "reflection",
+            "incident_channel": 3,
+            "reference_incident_root": 262,
+            "candidate_incident_root": 260,
+            "reference_power": 0.08776795350656998,
+            "candidate_power": 0.08879031617291719,
+            "power_change": 0.0010223626663472124,
+            "maximum_complex_change": 0.002174680620954954,
+            "reference_same_channel_transmission_phase_rad": null,
+            "candidate_same_channel_transmission_phase_rad": null,
+            "same_channel_transmission_phase_change_rad": null
+          },
+          {
+            "author": "Athul Prem",
+            "file_tag": "_AP_pnc",
+            "quantity": "reflection",
+            "incident_channel": 4,
+            "reference_incident_root": 247,
+            "candidate_incident_root": 247,
+            "reference_power": 0.00010625812940081664,
+            "candidate_power": 8.445514077522892e-05,
+            "power_change": -2.1802988625587718e-05,
+            "maximum_complex_change": 0.0011210588454120833,
+            "reference_same_channel_transmission_phase_rad": null,
+            "candidate_same_channel_transmission_phase_rad": null,
+            "same_channel_transmission_phase_change_rad": null
+          },
+          {
+            "author": "Athul Prem",
+            "file_tag": "_AP_pnc",
+            "quantity": "transmission",
+            "incident_channel": 1,
+            "reference_incident_root": 268,
+            "candidate_incident_root": 268,
+            "reference_power": 0.9164423189139249,
+            "candidate_power": 0.9163253848069787,
+            "power_change": -0.00011693410694624262,
+            "maximum_complex_change": 0.0005477196050437944,
+            "reference_same_channel_transmission_phase_rad": 2.800864368381649,
+            "candidate_same_channel_transmission_phase_rad": 2.801432962831458,
+            "same_channel_transmission_phase_change_rad": 0.0005685944498087042
+          },
+          {
+            "author": "Athul Prem",
+            "file_tag": "_AP_pnc",
+            "quantity": "transmission",
+            "incident_channel": 2,
+            "reference_incident_root": 264,
+            "candidate_incident_root": 262,
+            "reference_power": 0.9673221825750263,
+            "candidate_power": 0.9685172875146852,
+            "power_change": 0.0011951049396589086,
+            "maximum_complex_change": 0.013431373169216493,
+            "reference_same_channel_transmission_phase_rad": -0.1502918387350633,
+            "candidate_same_channel_transmission_phase_rad": -0.16393012044221908,
+            "same_channel_transmission_phase_change_rad": -0.013638281707155753
+          },
+          {
+            "author": "Athul Prem",
+            "file_tag": "_AP_pnc",
+            "quantity": "transmission",
+            "incident_channel": 3,
+            "reference_incident_root": 262,
+            "candidate_incident_root": 260,
+            "reference_power": 0.9122320464934408,
+            "candidate_power": 0.9112096838270815,
+            "power_change": -0.0010223626663593555,
+            "maximum_complex_change": 0.003341473609655711,
+            "reference_same_channel_transmission_phase_rad": 0.2708461886458401,
+            "candidate_same_channel_transmission_phase_rad": 0.2743004909059981,
+            "same_channel_transmission_phase_change_rad": 0.0034543022601580525
+          },
+          {
+            "author": "Athul Prem",
+            "file_tag": "_AP_pnc",
+            "quantity": "transmission",
+            "incident_channel": 4,
+            "reference_incident_root": 247,
+            "candidate_incident_root": 247,
+            "reference_power": 0.9998937418706003,
+            "candidate_power": 0.999915544859231,
+            "power_change": 2.180298863063701e-05,
+            "maximum_complex_change": 0.006934195282097404,
+            "reference_same_channel_transmission_phase_rad": -2.954458440713344,
+            "candidate_same_channel_transmission_phase_rad": -2.961392972088869,
+            "same_channel_transmission_phase_change_rad": -0.0069345313755254006
+          }
+        ],
+        "maximum_power_change": 0.0011951049396589086,
+        "maximum_complex_change": 0.013431373169216493,
+        "power_limit": 0.01,
+        "complex_limit": 0.01,
+        "power_passed": true,
+        "complex_passed": false
+      },
+      "source": {
+        "path": "results/runs/layered_acceptance/two_hole_h60_to_h50_reference_AP_pnc.json",
+        "sha256": "5f515e9b0888a3eb08dee4c19efba27848cff2f66e5485c4a84a6b56e876f63d"
+      }
+    }
+  },
+  "interpretation": "The uniform exp(i*k*L) comparison measures deviation from the same discretized SAFE section at the physical end planes. Refining the x-y footprint also changes interior transverse resolution while the port section and the two thickness intervals stay fixed. It does not isolate axial error or establish continuum accuracy."
+}
