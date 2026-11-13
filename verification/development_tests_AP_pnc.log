@@ -45,13 +45,19 @@ test_symmetry_degenerate_flexural_modes_are_flux_orthogonal (test_port_modes_AP_
 test_wavenumbers_match_independent_three_dimensional_bloch_solve (test_port_modes_AP_pnc.PortModeTests.test_wavenumbers_match_independent_three_dimensional_bloch_solve) ... ok
 test_matched_guide_for_both_directions (test_scattering_AP_pnc.ScatteringTests.test_matched_guide_for_both_directions) ... ok
 test_rejects_incompatible_frequency_and_port_mapping (test_scattering_AP_pnc.ScatteringTests.test_rejects_incompatible_frequency_and_port_mapping) ... ok
+test_invalid_input_never_starts_a_worker (test_workbench_AP_pnc.WorkbenchTests.test_invalid_input_never_starts_a_worker) ... ok
+test_malformed_analysis_load_preserves_prior_inputs_and_result (test_workbench_AP_pnc.WorkbenchTests.test_malformed_analysis_load_preserves_prior_inputs_and_result) ... ok
+test_stop_waits_for_worker_descendants_and_keeps_job_record (test_workbench_AP_pnc.WorkbenchTests.test_stop_waits_for_worker_descendants_and_keeps_job_record) ... ok
+test_tiny_preflight_then_run_reuses_exact_mesh_and_resets_on_load (test_workbench_AP_pnc.WorkbenchTests.test_tiny_preflight_then_run_reuses_exact_mesh_and_resets_on_load) ... ok
+test_invalid_configuration_writes_failure_and_existing_response_is_preserved (test_workbench_worker_AP_pnc.WorkbenchWorkerTests.test_invalid_configuration_writes_failure_and_existing_response_is_preserved) ... ok
+test_mesh_and_solve_use_the_same_checkpoint_and_return_exact_paths (test_workbench_worker_AP_pnc.WorkbenchWorkerTests.test_mesh_and_solve_use_the_same_checkpoint_and_return_exact_paths) ... ok
 3D solid: 24 tetrahedra, 225 displacement DOFs
 3D solid: 24 tetrahedra, 225 displacement DOFs
 test_failed_attempt_is_retained_and_bad_material_creates_no_output (test_workflow3d_AP_pnc.Workflow3D.test_failed_attempt_is_retained_and_bad_material_creates_no_output) ... ok
 3D solid: 352 tetrahedra, 435 displacement DOFs
 test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks (test_workflow3d_AP_pnc.Workflow3D.test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks) ... ok
 test_historical_hole_pattern_uses_source_origin_and_exact_provenance (test_workflow3d_AP_pnc.Workflow3D.test_historical_hole_pattern_uses_source_origin_and_exact_provenance) ... ok
-Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{4c1dc1fd-876a-4e35-aa72-0e124ac3a650}\Temp\tmpq4tcx7cr\two_hole_pilot_200nm-1ed1cc8838b4
+Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{c636d8cb-5288-4e85-b876-52e72165cd4b}\Temp\tmpq4zgawt0\two_hole_pilot_200nm-0a5f6dcc2133
 Max relative solve residual: 0
 Power balance check: True; max R=0
 Matched-guide power check: True
@@ -63,6 +69,6 @@ test_output_can_be_reconstructed_and_cache_checks_files (test_workflow3d_AP_pnc.
 test_scattering_exports_power_channels_and_reconstructible_responses (test_workflow3d_AP_pnc.Workflow3D.test_scattering_exports_power_channels_and_reconstructible_responses) ... ok
 
 ----------------------------------------------------------------------
-Ran 49 tests in 3.301s
+Ran 55 tests in 14.611s
 
 OK (skipped=1)

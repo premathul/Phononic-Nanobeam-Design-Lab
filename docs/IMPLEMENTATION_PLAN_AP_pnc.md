@@ -41,8 +41,9 @@ Use scikit-fem to assemble 3D vector finite elements, SciPy for sparse eigenvalu
 | `scattering_AP_pnc.py` | Matched outgoing traction maps, incident drives, sparse harmonic solves and modal/direct-flux power checks |
 | `workflow_AP_pnc.py` and `simulate_AP_pnc.py` | Configuration entry point, result identity, measured resources, tables, figures and reports |
 | `mesh_checkpoint_AP_pnc.py` | Mesh-only preflight, exact tagged-mesh checkpoints and budget checks before assembly |
+| Root `workbench_AP_pnc.py` and `tools/workbench_worker_AP_pnc.py` | Optional English Qt parameter interface and a headless structured-response worker using the existing solver |
 
-The workflow has a single launch command, editable configuration and a readable result page. Mesh-only preflight now reports actual DOF counts and saves geometry for exact reuse after selecting a compute budget. Add a researcher-facing parameter interface on this established workflow.
+The workflow has a single launch command, editable configuration and a readable result page. Mesh-only preflight reports actual DOF counts and saves geometry for exact reuse after selecting a compute budget. The initial researcher-facing Qt interface now connects presets, parameter edits, preflight, one background solve, process-tree cancellation and report access. Its existing material and hole-placement metadata remain explicit; a successful run is still labeled unverified. Broader scientific editors can extend this interface after the corresponding models are established.
 
 ## Milestones and acceptance checks
 
