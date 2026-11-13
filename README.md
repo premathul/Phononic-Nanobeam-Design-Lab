@@ -38,6 +38,9 @@ Edit [straight_beam_AP_pnc.json](configs/straight_beam_AP_pnc.json) to configure
 .\.venv\Scripts\python.exe simulate_AP_pnc.py --config configs/perforated_beam_AP_pnc.json --open
 .\.venv\Scripts\python.exe simulate_AP_pnc.py --config configs/perforated_beam_AP_pnc.json --uniform --open
 
+# Reproduce the finer two-hole reference settings (about 2 GiB in the measured case).
+.\.venv\Scripts\python.exe simulate_AP_pnc.py --config configs/perforated_phase_reference_AP_pnc.json --open
+
 # Run the original 26-hole geometry as a single-frequency pilot.
 .\.venv\Scripts\python.exe simulate_AP_pnc.py --config configs/historical_26hole_AP_pnc.json --open
 ```
@@ -48,7 +51,7 @@ Scattering runs instead write `scattering_AP_pnc.csv` with per-input-channel pow
 
 The runner checks completed outputs before reusing results with the same configuration, source and numerical environment. It preserves failed or interrupted attempts and retries in new directories. Large frequency sweeps still require per-frequency checkpoint and restart support.
 
-For holes, `geometry.pattern.csv` is relative to the repository root and `x_offset_nm` explicitly places the CSV origin in the beam's 0-to-length coordinates. The original array uses an 8325 nm shift in a 16650 nm-long beam, leaving 1500 nm beyond each outer hole rim. Results retain the raw CSV checksum, placed SI coordinates, clearances and geometry diagnostics. CSV content changes invalidate cached results. Gmsh settings independently control body size, port size, and hole-circle segments (multiples of four). The affine mesh uses regular inscribed prisms to approximate exact CAD circles. `max_dofs` limits finite-element assembly after mesh generation; it does not bound Gmsh's mesh-generation memory. The 26-hole pilot explicitly allows up to 60000 DOFs, while other examples keep smaller caps.
+For holes, `geometry.pattern.csv` is relative to the repository root and `x_offset_nm` explicitly places the CSV origin in the beam's 0-to-length coordinates. The original array uses an 8325 nm shift in a 16650 nm-long beam, leaving 1500 nm beyond each outer hole rim. Results retain the raw CSV checksum, placed SI coordinates, clearances and geometry diagnostics. CSV content changes invalidate cached results. Gmsh settings independently control body size, port size, and hole-circle segments (multiples of four). The affine mesh uses regular inscribed prisms to approximate exact CAD circles. `max_dofs` limits finite-element assembly after mesh generation; it does not bound Gmsh's mesh-generation memory. The 26-hole pilot explicitly allows up to 60000 DOFs; the finer two-hole reference allows 55000. Other examples keep smaller caps.
 
 ## Verification and capabilities
 
@@ -58,7 +61,11 @@ The [three-mesh convergence record](verification/straight_beam_validation_AP_pnc
 
 The [straight-guide scattering acceptance](verification/straight_scattering_acceptance_AP_pnc.json) covers nominal Ge at 1 GHz, a 600 × 200 nm cross-section, lengths of 1 and 1.5 µm, and four incident channels from each end. Complex transmission errors against a common finer SAFE reference were at most 0.00454 and 0.00683, below the 0.01 criterion. The final section refinement changed accumulated phase by at most 0.00534 rad over 1.5 µm. The 14553-DOF long-guide case had maximum reflection about 1.20 × 10⁻⁷ and direct power imbalance below 5.2 × 10⁻¹⁵. These checks establish this numerical benchmark, with a finite-element reference rather than an exact continuum error bound. Earlier coarse-mesh failures and refinement evidence remain saved and linked by checksums. The 0.3 GHz quick-start case has its own power check and does not inherit this mesh acceptance.
 
-The [two-hole power study](verification/two_hole_scattering_validation_AP_pnc.json) uses a 1800 × 600 × 200 nm beam, two 250 nm holes 550 nm apart, and 1 GHz excitation. The largest T/R change between the final two main body meshes was 0.00366. Curvature, lead-length and port refinements changed T/R by at most 0.00054, 0.00153 and 0.00135. Power budgets and reciprocity passed. However, an additional body refinement changed a complex scattering coefficient by 0.03162, exceeding the 0.01 criterion. The requested phase gate remains failed; power convergence does not validate phase, resonances or cavity linewidths. The evidence retains all 64 directional channel records and the failed gate.
+The [two-hole power study](verification/two_hole_scattering_validation_AP_pnc.json) uses a 1800 × 600 × 200 nm beam, two 250 nm holes 550 nm apart, and 1 GHz excitation. The largest T/R change between the final two main body meshes was 0.00366. Curvature, lead-length and port refinements changed T/R by at most 0.00054, 0.00153 and 0.00135. Power budgets and reciprocity passed. An additional 105 to 80 nm body refinement changed a complex scattering coefficient by 0.03162, exceeding the 0.01 criterion. That original evidence retains all 64 directional channel records and the failed gate.
+
+The subsequent [two-hole phase refinement](verification/two_hole_phase_refinement_AP_pnc.json) holds the 48-segment holes and ports fixed and extends the body meshes to 60 and 50 nm. Complex changes decrease from 0.03162 to 0.01367 to 0.00337; the final pair's maximum T/R change is 0.000425. Both final changes meet the unchanged 0.01 criterion. The 45123-DOF finest solve took 58.75 s; its monitored process tree peaked at about 2064 MiB. This is a bounded mesh-pair acceptance for this two-hole case at 1 GHz, not a rigorous continuum error bound or validation of other frequencies, resonances or the full device. The [offline checker](tools/check_phase_refinement_AP_pnc.py) verifies the saved matrices, power budgets, reciprocity, source hashes and comparisons without new solves.
+
+![Two-hole mesh refinement](figures/verification/two_hole_phase_refinement_AP_pnc.png)
 
 The [original 26-hole pilot](verification/historical_26hole_pilot_AP_pnc.json) ran at 1 GHz with 56220 DOFs and five propagating incident channels in the discretized lead. Transmission ranged from 0.96006 to 0.99974; direct power imbalance was below 2.3 × 10⁻¹³. The run used 14.76 s and approximately 1089 MiB sampled process memory. This is a single-mesh, single-frequency execution result, with no device-convergence or band-gap claim. The 32-segment holes have a 0.6413% removed-volume error relative to circular cylinders.
 
@@ -70,7 +77,7 @@ The [original 26-hole pilot](verification/historical_26hole_pilot_AP_pnc.json) r
 | Bloch dispersion for guides with free sidewalls | Available for a finite branch sample. Channel completeness remains unverified. |
 | 26-hole inputs and clearance checks | Verified with the original `position_nm` and example `x_nm` column formats |
 | Gmsh three-dimensional through-holes | Configurable from CSV; fixed hole faceting and matching end traces. Two-hole checks and one full 26-hole pilot completed. |
-| Port power transmission, reflection and mode conversion | Available for uniform and perforated beams. Perforated phase and full-device mesh convergence remain unresolved. |
+| Port power transmission, reflection and mode conversion | Available for uniform and perforated beams. Bounded two-hole power/complex-response checks pass at 1 GHz; full-device mesh convergence remains unresolved. |
 | Temperature-dependent properties, physical loss, bent beams and rings | Planned |
 | GPU solver | CPU measurements will inform whether GPU development is warranted. |
 
@@ -85,6 +92,7 @@ $env:OMP_NUM_THREADS='1'
 .\.venv\Scripts\python.exe -B tools/validate_3d_AP_pnc.py
 .\.venv\Scripts\python.exe -B tools/validate_scattering_AP_pnc.py --acceptance --output-dir results/runs/scattering-verification
 .\.venv\Scripts\python.exe -B tools/validate_perforated_AP_pnc.py
+.\.venv\Scripts\python.exe -B tools/check_phase_refinement_AP_pnc.py
 ```
 
 The validation tool uses three independent mesh solves, mass-weighted mode matching and a fixed-property temperature control. It reports failed checks with a nonzero exit code and retains the computed values and original material inputs. The `--quick` option exercises the workflow on coarser meshes, which may fail the 0.5% frequency-change threshold.
@@ -101,7 +109,7 @@ The perforated validator defaults to the empty guide and three main two-hole mes
 - [Long-term research work packages](docs/NEXT_STEPS_AP_pnc.md)
 - [Material references and validity limits](docs/REFERENCES_AP_pnc.md)
 
-The next numerical work resolves the perforated complex-response convergence and establishes a resource-bounded full-device comparison before broad spectral or resonance claims. Temperature-dependent properties, bends and larger sweeps follow when the corresponding inputs and checks are established. QTCAD served as a workflow reference. The phonon solver uses the libraries listed above.
+The next numerical work establishes a resource-bounded full-device mesh/port comparison before broad spectral or resonance claims. Temperature-dependent properties, bends and larger sweeps follow when the corresponding inputs and checks are established. QTCAD served as a workflow reference. The phonon solver uses the libraries listed above.
 
 ## Historical two-dimensional evidence
 
