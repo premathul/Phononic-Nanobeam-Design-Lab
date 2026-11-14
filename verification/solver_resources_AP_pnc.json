@@ -1399,7 +1399,7 @@
       ]
     }
   },
-  "csv_sha256": "1daea93fa87fb2db309d1ede543c52a760dadba405876b5aa2ab0f6a94a7e789",
+  "csv_sha256": "9f3ff18b8010c291ecfe0529e1da5aaa2b99f6977ca2b4b55d3be2ee22204f49",
   "historical_full_workflow_source": {
     "source_path": "src/phononic/workflow_AP_pnc.py",
     "source_commit": "392ea7955bf6e5f96e01879264266bd45ff7a73c",
@@ -11523,6 +11523,269 @@
         "sha256": "05312a1a748fd4c73f24102301cefdd8032091260e57fd89c96e68a0ef782555",
         "bytes": 3421
       }
+    }
+  },
+  "h80_candidate_preflight": {
+    "status": "mesh_ready",
+    "scope": "Mesh-only. No SAFE extraction, matrix assembly or harmonic solve.",
+    "mesh_hash": "89cfa12d6b14109eb95dc873b3682aa5650045ccf5fe3a0d723e8d45b176ba33",
+    "mesh_sha256": "1bf8ad7aea98d1800b8bb8892954d5810b0907b7a7d4fd42979ae22dc75456de",
+    "ndof": 426627,
+    "mesh_tetrahedra": 87312,
+    "mesh_vertices": 21250,
+    "end_face_dofs": {
+      "xleft": 675,
+      "xright": 675
+    },
+    "hole_count": 26,
+    "geometry_diagnostics": {
+      "analytic_solid_volume_m3": 3.062532655455e-18,
+      "meshed_solid_volume_m3": 3.064247963349631e-18,
+      "analytic_removed_volume_m3": 2.674673445450011e-19,
+      "meshed_removed_volume_m3": 2.657520366503703e-19,
+      "relative_solid_volume_error": 0.0005600945647307897,
+      "relative_removed_volume_error": 0.006413148855793134,
+      "rim_segments_min": 32,
+      "rim_segments_max": 32,
+      "max_radial_sagitta_m": 6.621000825729834e-10
+    },
+    "mesh_resources": {
+      "peak_process_memory_mib": 164.35546875,
+      "system_available_memory_mib_at_start": 4378.65625,
+      "process_lifetime_peak_working_set_mib": 177.78515625,
+      "elapsed_seconds": 0.9659844000125304
+    },
+    "within_body_budget": false,
+    "reused": false,
+    "operation": "mesh_only",
+    "configuration": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "schema_version": 1,
+      "name": "historical_26hole_layered_h80_ny12_z4",
+      "geometry": {
+        "length_nm": 16650,
+        "width_nm": 1000,
+        "thickness_nm": 200,
+        "pattern": {
+          "csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+          "x_offset_nm": 8325
+        }
+      },
+      "mesh": {
+        "kind": "layered",
+        "element_order": 2,
+        "mesh_size_nm": 80,
+        "port_size_nm": 83.33333333333333,
+        "circle_resolution": 32,
+        "thickness_layers": 4
+      },
+      "material": {
+        "name": "nominal_cubic_ge",
+        "C11_Pa": 128500000000.0,
+        "C12_Pa": 48300000000.0,
+        "C44_Pa": 66800000000.0,
+        "density_kg_m3": 5323,
+        "crystal_rotation": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "temperature_policy": "fixed_property_control",
+        "temperature_K": 4
+      },
+      "analysis": {
+        "kind": "scattering",
+        "boundary": "matched_ports",
+        "frequency_GHz": 1,
+        "incident_side": "left"
+      },
+      "resources": {
+        "max_dofs": 60000,
+        "max_port_dofs": 675
+      }
+    },
+    "configuration_change_reference": {
+      "path": "results/runs/full_device_layered_preflight/h100_preflight/configuration_AP_pnc.json",
+      "sha256": "ba4e9f8a44261c6d22e5a0a3853f2db19c65b891ce8c230503a567db796a9b06",
+      "bytes": 1199
+    },
+    "boundary_verification": {
+      "ports": {
+        "xleft": {
+          "x_m": 0,
+          "triangles": 96,
+          "exact_h100_yz_match": true,
+          "dofs": 675,
+          "yz_triangles_sha256": "9bda6aa25956cc71582ab701df5a16555996f3216929fb49efb29fd8c2ff83d4"
+        },
+        "xright": {
+          "x_m": 1.665e-05,
+          "triangles": 96,
+          "exact_h100_yz_match": true,
+          "dofs": 675,
+          "yz_triangles_sha256": "9bda6aa25956cc71582ab701df5a16555996f3216929fb49efb29fd8c2ff83d4"
+        }
+      },
+      "z_planes_m": [
+        -1.0000000000000001e-07,
+        -5.0000000000000004e-08,
+        0.0,
+        5.000000000000001e-08,
+        1.0000000000000001e-07
+      ],
+      "z_planes_exact_h100_match": true,
+      "hole_count": 26,
+      "rim_segments_per_hole_per_plane": 32,
+      "wall_facets_per_hole": 256,
+      "hole_wall_connectivity_exact_h100_match": true,
+      "maximum_h100_hole_wall_vertex_change_m": 0.0,
+      "hole_wall_vertex_tolerance_m": 1e-15
+    },
+    "uncompressed_mesh_array_bytes": 2704464,
+    "source_revision": "a605eade4d93048746cecd888f14563b174b8f6d",
+    "mesh_inputs": {
+      "source_sha256": {
+        "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a"
+      },
+      "packages": {
+        "numpy": "2.5.4",
+        "scikit-fem": "12.0.2",
+        "gmsh": "4.15.2"
+      },
+      "python": "3.12.14",
+      "platform": "Windows-11-10.0.26200-SP0"
+    },
+    "run": {
+      "worker_exit_code": 0,
+      "wall_cap_seconds": 30,
+      "sample_interval_seconds": 0.02,
+      "rss_cap_mib": 512,
+      "private_commit_cap_mib": 768,
+      "physical_reserve_mib": 400,
+      "commit_reserve_mib": 512,
+      "initial_physical_available_mib": 4421.17578125,
+      "initial_commit_headroom_mib": 10145.49609375,
+      "elapsed_seconds": 3.326426299987361,
+      "peak_tree_rss_mib": 198.13671875,
+      "peak_tree_private_commit_mib": 196.36328125,
+      "minimum_physical_available_mib": 4276.75,
+      "minimum_commit_headroom_mib": 9935.7265625
+    },
+    "raw_files": {
+      "preflight": {
+        "path": "results/runs/full_device_layered_preflight/h80_preflight/preflight_AP_pnc.json",
+        "sha256": "f20972c06128b815e342ce63442fc470bd367f5d5c866086a70cd2616dbfd4eb",
+        "bytes": 16469
+      },
+      "mesh_summary": {
+        "path": "results/runs/full_device_layered_preflight/_meshes/89cfa12d6b14109eb95dc873b3682aa5650045ccf5fe3a0d723e8d45b176ba33/summary_AP_pnc.json",
+        "sha256": "4e0eda32c22840717c79456614bdc07130810b703d77e2ca0a7dcf8efaa6e023",
+        "bytes": 9556
+      },
+      "mesh": {
+        "path": "results/runs/full_device_layered_preflight/_meshes/89cfa12d6b14109eb95dc873b3682aa5650045ccf5fe3a0d723e8d45b176ba33/mesh_AP_pnc.npz",
+        "sha256": "1bf8ad7aea98d1800b8bb8892954d5810b0907b7a7d4fd42979ae22dc75456de",
+        "bytes": 962193
+      },
+      "configuration": {
+        "path": "results/runs/full_device_layered_preflight/h80_preflight/configuration_AP_pnc.json",
+        "sha256": "f0dd7ad1cebb573d25e3e665335b894bdba440ee19befc62236630110f7839e0",
+        "bytes": 1197
+      },
+      "execution": {
+        "path": "results/runs/full_device_layered_preflight/h80_preflight/execution_AP_pnc.json",
+        "sha256": "86822ef6e7dc7358c147a6536f635527a167aa4317e24c71a68d516ee463d9d0",
+        "bytes": 1507
+      },
+      "driver": {
+        "path": "results/runs/full_device_layered_preflight/h80_preflight/preflight_h80_AP_pnc.py",
+        "sha256": "9e72cc631a8f23eed5d3d3755efb0e4a7bd220af75bcdf4d099ecfec8c270807",
+        "bytes": 13110
+      }
+    },
+    "resource_forecast": {
+      "method": "Scale the observed h200 through h100 range of stored operator entries per body DOF to h80. This empirical range is not a structural bound or measured storage.",
+      "historical_cases": [
+        {
+          "operator_case": "full_device_operator",
+          "solve_case": "full_device_lgmres_checkpointed"
+        },
+        {
+          "operator_case": "full_device_h160_operator",
+          "solve_case": "full_device_h160_lgmres_mixed_fill12"
+        },
+        {
+          "operator_case": "full_device_h130_operator",
+          "solve_case": "full_device_h130_lgmres_mixed_fill12"
+        },
+        {
+          "operator_case": "full_device_h100_operator",
+          "solve_case": "full_device_h100_lgmres_continuation_fill12"
+        }
+      ],
+      "host_snapshot": {
+        "observed_utc": "2026-11-14T04:08:33.717453+00:00",
+        "physical_available_mib": 4391.91796875,
+        "commit_headroom_mib": 9175.04296875,
+        "disk_free_gib": 125.32948303222656
+      },
+      "csc_index_bytes_assumed": 4,
+      "expected_incident_drives": 5,
+      "solver_budget_implementation": "src/phononic/resumable_scattering_AP_pnc.py",
+      "solver_budget_source_sha256": "68c12549b47a9ec98abf7b39d78ad597dd114da00e326adf8ebbec060947b53f",
+      "solver_reference_case": "full_device_h100_lgmres_continuation_fill12",
+      "low_estimate": {
+        "operator_nnz": 32308936,
+        "operator_storage_bytes": 647885232,
+        "initial_ilu_buffer_mib": 8873.914306640625,
+        "h100_scaled_solve_peak_private_mib": 11345.880639682415,
+        "required_commit_mib": 12638.298965454102,
+        "required_physical_mib": 1200
+      },
+      "high_estimate": {
+        "operator_nnz": 32564108,
+        "operator_storage_bytes": 652988672,
+        "initial_ilu_buffer_mib": 8943.999389648438,
+        "h100_scaled_solve_peak_private_mib": 11435.252982547889,
+        "required_commit_mib": 12716.171279907227,
+        "required_physical_mib": 1200
+      },
+      "operator_only_stage": {
+        "status": "feasible_at_observed_headroom",
+        "method": "Apply the largest observed stage peak per byte of stored A to the high h80 storage estimate. Scale h100 checkpoint bytes by the same h80-to-h100 storage ratio. These are empirical planning estimates.",
+        "assembly_batch_elements": 2048,
+        "body_dofs_required": 426627,
+        "estimated_peak_tree_rss_mib": 2524.649474439163,
+        "estimated_peak_tree_private_commit_mib": 2982.376717490646,
+        "estimated_checkpoint_mib": 1178.6894289770628,
+        "physical_reserve_mib": 400,
+        "commit_reserve_mib": 512,
+        "safe_reference": {
+          "path": "results/runs/full_device_resource_profile/full_h100_operator_qr_jt4fp/ports_AP_pnc.npz",
+          "sha256": "ceb74741e6145a676b7f23631fb722f5c40404d76a1efc6a5900b497a6abecc1",
+          "bytes": 29223616
+        }
+      },
+      "solve_admission": "deferred_until_actual_storage_and_sufficient_live_memory",
+      "staging_performed": false,
+      "factorization_performed": false,
+      "scattering_computed": false
     }
   }
 }

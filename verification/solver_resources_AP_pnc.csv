@@ -104,3 +104,4 @@ Athul Prem,_AP_pnc,full_device_h100_lgmres_continuation_fill12,physical_rhs_5,ac
 Athul Prem,_AP_pnc,full_device_h100_lgmres_continuation_fill12,solve_replay_total,solved,307611,23479709,3195.8750000000146,3931.48828125,3926.625,8244.40625,,12.0,,,
 Athul Prem,_AP_pnc,full_device_h100_lgmres_public_replay,cached_public_export,completed_unverified,307611,23479709,5.125,,,,,,,8.962820923421051e-11,1.151758562663812e-13
 Athul Prem,_AP_pnc,full_device_h130_h100_mixed_comparison,offline_mesh_pair,mesh_pair_failed,,,,,,,,,,,
+Athul Prem,_AP_pnc,h80_candidate_preflight,mesh_only,mesh_ready,426627,,0.9659844000125304,164.35546875,177.78515625,,,,,,

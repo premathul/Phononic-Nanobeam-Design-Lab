@@ -4,13 +4,17 @@ import csv
 from hashlib import sha256
 import io
 import json
+from math import ceil, floor
 from pathlib import Path
+import sys
 import unittest
 
 import numpy as np
 
 
-LEDGER = Path(__file__).resolve().parents[1] / "verification/solver_resources_AP_pnc.json"
+ROOT = Path(__file__).resolve().parents[1]
+LEDGER = ROOT / "verification/solver_resources_AP_pnc.json"
+sys.path.insert(0, str(ROOT / "src"))
 
 
 def complex_block(scattering, direction):
@@ -168,6 +172,78 @@ class SolverResourceEvidenceTests(unittest.TestCase):
         self.assertEqual(run["worker_exit_code"], 0)
         self.assertGreaterEqual(run["minimum_available_mib"], run["available_floor_mib"])
         self.assertGreaterEqual(run["minimum_commit_headroom_mib"], run["commit_headroom_floor_mib"])
+
+    def test_h80_preflight_replays_the_resource_decision(self):
+        from phononic.resumable_scattering_AP_pnc import _solver_budget
+
+        preflight = self.ledger["h80_candidate_preflight"]
+        h100 = self.ledger["h100_candidate_preflight"]
+        config = preflight["configuration"]
+        self.assertEqual(preflight["status"], "mesh_ready")
+        self.assertGreater(preflight["ndof"], h100["ndof"])
+        self.assertGreater(preflight["ndof"], config["resources"]["max_dofs"])
+        self.assertFalse(preflight["within_body_budget"])
+        self.assertEqual(config["mesh"], h100["settings"] | {"mesh_size_nm": 80})
+        self.assertEqual(preflight["end_face_dofs"], h100["end_face_dofs"])
+        self.assertEqual(preflight["geometry_diagnostics"], h100["geometry_diagnostics"])
+        self.assertEqual(preflight["raw_files"]["mesh"]["sha256"], preflight["mesh_sha256"])
+        bounds = preflight["boundary_verification"]
+        self.assertTrue(bounds["z_planes_exact_h100_match"])
+        self.assertTrue(bounds["hole_wall_connectivity_exact_h100_match"])
+        self.assertEqual(bounds["maximum_h100_hole_wall_vertex_change_m"], 0)
+        self.assertEqual(set(bounds["ports"]), set(h100["end_face_dofs"]))
+        self.assertTrue(all(port["exact_h100_yz_match"] for port in bounds["ports"].values()))
+
+        forecast = preflight["resource_forecast"]
+        for status in ("staging_performed", "factorization_performed", "scattering_computed"):
+            self.assertFalse(forecast[status])
+        snapshot = forecast["host_snapshot"]
+        cases = forecast["historical_cases"]
+        stages = [self.ledger[case["operator_case"]] for case in cases]
+        solves = [self.ledger[case["solve_case"]] for case in cases]
+        rates = [stage["operator"]["nonzero_storage"] / solve["body_dofs"] for stage, solve in zip(stages, solves)]
+        reference = self.ledger[forecast["solver_reference_case"]]
+        peak = reference["run"]["peak_tree_private_commit_mib"]
+        options = {"single_precision": reference["factor_input_dtype"] == "complex64",
+                   "fill_factor": reference["ilu_settings"]["fill_factor"], **reference["lgmres_settings"]}
+        dofs, channels = preflight["ndof"], forecast["expected_incident_drives"]
+        index_bytes = forecast["csc_index_bytes_assumed"]
+        self.assertEqual(channels, len(reference["channels"]))
+        for endpoint, nnz in (("low_estimate", floor(dofs * min(rates))),
+                              ("high_estimate", ceil(dofs * max(rates)))):
+            estimate = forecast[endpoint]
+            storage = (16 + index_bytes) * nnz + index_bytes * (dofs + 1)
+            self.assertEqual(estimate["operator_nnz"], nnz)
+            self.assertEqual(estimate["operator_storage_bytes"], storage)
+            manifest = {"shape": [dofs, channels], "nnz": nnz,
+                        "operator_storage_bytes": storage, "index_bytes": index_bytes}
+            budget = _solver_budget(manifest, options, 0, peak)
+            for key, value in budget.items():
+                self.assertAlmostEqual(value, estimate[key])
+            self.assertGreater(budget["required_commit_mib"], snapshot["commit_headroom_mib"])
+
+        stage = forecast["operator_only_stage"]
+        high_storage = forecast["high_estimate"]["operator_storage_bytes"]
+        for observed, reserve, estimated, measured in (
+            ("physical_available_mib", "physical_reserve_mib", "estimated_peak_tree_rss_mib", "peak_tree_rss_mib"),
+            ("commit_headroom_mib", "commit_reserve_mib", "estimated_peak_tree_private_commit_mib",
+             "peak_tree_private_commit_mib"),
+        ):
+            planning_peak = max(old["run"][measured] / old["operator"]["array_bytes"] for old in stages) * high_storage
+            self.assertAlmostEqual(stage[estimated], planning_peak)
+            self.assertGreater(snapshot[observed], planning_peak + stage[reserve])
+        self.assertGreater(snapshot["disk_free_gib"] * 1024, stage["estimated_checkpoint_mib"])
+        self.assertEqual(stage["safe_reference"], self.ledger["full_device_h100_operator"]["raw_files"]["port_modes"])
+        self.assertEqual(forecast["solve_admission"], "deferred_until_actual_storage_and_sufficient_live_memory")
+
+        table = LEDGER.with_suffix(".csv").read_bytes()
+        self.assertEqual(sha256(table).hexdigest(), self.ledger["csv_sha256"])
+        row, = [row for row in csv.DictReader(io.StringIO(table.decode("utf-8")))
+                if row["case"] == "h80_candidate_preflight"]
+        self.assertEqual((row["phase"], row["status"], int(row["body_dofs"])), ("mesh_only", "mesh_ready", dofs))
+        self.assertEqual(float(row["elapsed_seconds"]), preflight["mesh_resources"]["elapsed_seconds"])
+        self.assertEqual(row["operator_nnz"], "")
+        self.assertEqual(row["factor_nnz"], "")
 
     def test_h100_recovery_reuses_the_failed_first_drive(self):
         operator = self.ledger["full_device_h100_operator"]
