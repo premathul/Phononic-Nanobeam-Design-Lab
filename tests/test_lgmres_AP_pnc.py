@@ -141,6 +141,144 @@ class LgmresScatteringTests(unittest.TestCase):
         self.assertEqual(channel["info"], 30)
         self.assertEqual(channel["terminal_confirmation"], {"info": 0, "callbacks": 1, "accepted": False})
 
+    def test_interrupted_matched_port_response_resumes_only_unfinished_channels(self):
+        mesh = make_straight_mesh(BeamGeometry(1e-6, 600e-9, 200e-9), (4, 2, 1))
+        material = CubicMaterial(rotation=Rotation.from_euler("xyz", (12, 17, -8), degrees=True).as_matrix())
+        system = assemble_elasticity(mesh, material)
+        frequency = 1e9
+        modes = solve_port_modes(assemble_port(system, material), frequency)
+        settings = {"inner_m": 4, "outer_k": 2, "single_precision": True}
+
+        def run(report, **kwargs):
+            return solve_scattering(
+                system, modes, frequency, "left",
+                linear_solver=lambda A, rhs: solve_ilu_lgmres(A, rhs, report, **settings, **kwargs),
+            )
+
+        baseline = run({})
+        accepted = {}
+        active = {}
+
+        class Interrupted(Exception):
+            pass
+
+        def interrupt(event, column, vector, channel):
+            if event == "accepted":
+                accepted[column] = vector
+            if event == "iterate" and column == 1 and channel["iterations"] == 2:
+                self.assertGreater(channel["relative_residual_history"][-1], 1e-9)
+                self.assertGreater(np.linalg.norm(vector), 0)
+                active[column] = vector
+                raise Interrupted
+
+        interrupted_report = {}
+        with self.assertRaises(Interrupted):
+            run(interrupted_report, checkpoint_callback=interrupt)
+        self.assertEqual(list(accepted), [0])
+        self.assertEqual(list(active), [1])
+        self.assertIsNone(interrupted_report["channels"][1]["info"])
+        active_bytes = active[1].tobytes()
+        resume_report = {}
+        events = []
+
+        def checkpoint(event, column, vector, channel):
+            if event == "iterate" and channel["iterations"] == 1:
+                expected = active[column] if column in active else np.zeros_like(vector)
+                np.testing.assert_array_equal(vector, expected)
+            events.append((event, column))
+
+        with patch("phononic.linear_lgmres_AP_pnc.lgmres", wraps=lgmres) as solve:
+            resumed = run(resume_report, accepted_solutions=accepted, initial_guesses=active,
+                          checkpoint_callback=checkpoint)
+        self.assertEqual(solve.call_count, 3)
+        self.assertEqual(active[1].tobytes(), active_bytes)
+        self.assertEqual(events[-1], ("accepted", 3))
+        self.assertNotIn(0, [column for _, column in events])
+        reused = resume_report["channels"][0]
+        self.assertTrue(reused["reused"])
+        self.assertEqual(reused["iterations"], 0)
+        self.assertTrue(resume_report["channels"][1]["warm_started"])
+        for channel in resume_report["channels"]:
+            self.assertEqual(channel["info"], 0)
+            self.assertLessEqual(channel["relative_residual"], 1e-9)
+            self.assertLessEqual(channel["relative_backward_residual"], 1e-9)
+        for name in ("reflection_amplitudes", "transmission_amplitudes"):
+            np.testing.assert_allclose(getattr(resumed, name), getattr(baseline, name), atol=1e-8, rtol=0)
+        np.testing.assert_allclose(resumed.power_balance, 0, atol=1e-8, rtol=0)
+        np.testing.assert_allclose(resumed.flux_power_balance, 0, atol=1e-8, rtol=0)
+
+    def test_reused_vectors_are_verified_before_factorization(self):
+        operator = csc_matrix(np.eye(3, dtype=complex))
+        rhs = np.column_stack((np.ones(3), np.arange(3))).astype(complex)
+        report = {}
+        accepted = {1: rhs[:, 1], 0: rhs[:, 0]}
+        with (patch("phononic.linear_lgmres_AP_pnc.spilu") as factor,
+              patch("phononic.linear_lgmres_AP_pnc.lgmres") as solve):
+            solution = solve_ilu_lgmres(operator, rhs, report, accepted_solutions=accepted)
+            np.testing.assert_array_equal(solution, rhs)
+            self.assertTrue(report["preconditioner"]["skipped"])
+            self.assertEqual([channel["column"] for channel in report["channels"]], [0, 1])
+            self.assertTrue(all(channel["reused"] and channel["iterations"] == 0 for channel in report["channels"]))
+            for vector, message in ((rhs[:, 0], "original residual gates"),
+                                    (np.full(3, np.nan), "finite vector"),
+                                    (np.zeros((3, 1)), "finite vector")):
+                with self.subTest(message=message), self.assertRaisesRegex(ValueError, message):
+                    solve_ilu_lgmres(operator, rhs, accepted_solutions={1: vector})
+            with self.assertRaisesRegex(ValueError, "finite vector"):
+                solve_ilu_lgmres(operator, rhs, initial_guesses={1: np.full(3, np.inf)})
+            with self.assertRaisesRegex(ValueError, "invalid RHS column"):
+                solve_ilu_lgmres(operator, rhs, accepted_solutions={-1: rhs[:, 0]})
+            with self.assertRaisesRegex(ValueError, "already accepted"):
+                solve_ilu_lgmres(operator, rhs, accepted_solutions={0: rhs[:, 0]}, initial_guesses={0: rhs[:, 0]})
+        factor.assert_not_called()
+        solve.assert_not_called()
+
+    def test_numerical_failure_checkpoints_latest_finite_vector_without_acceptance(self):
+        operator = csc_matrix(np.eye(3, dtype=complex))
+        rhs = np.ones((3, 1), dtype=complex)
+        for finite_terminal in (True, False):
+            with self.subTest(finite_terminal=finite_terminal):
+                events = []
+
+                def fail(_A, b, **settings):
+                    iterate = np.zeros_like(b)
+                    settings["callback"](iterate)
+                    iterate[:] = b / 4
+                    settings["callback"](iterate)
+                    iterate[:] = b / 2 if finite_terminal else np.nan
+                    return iterate, settings["maxiter"]
+
+                report = {}
+                with (patch("phononic.linear_lgmres_AP_pnc.lgmres", side_effect=fail),
+                      self.assertRaisesRegex(RuntimeError, "failed for RHS 1")):
+                    solve_ilu_lgmres(operator, rhs, report, maxiter=2,
+                                     checkpoint_callback=lambda *args: events.append(args))
+                self.assertEqual([event for event, *_ in events], ["iterate", "iterate", "terminal"])
+                np.testing.assert_array_equal(events[0][2], 0)
+                np.testing.assert_array_equal(events[1][2], 0.25)
+                expected = 0.5 if finite_terminal else 0.25
+                np.testing.assert_array_equal(events[2][2], expected)
+                self.assertEqual(events[0][3]["relative_residual_history"], [1])
+                self.assertEqual(events[2][3]["info"], 2)
+                self.assertAlmostEqual(events[2][3]["relative_residual"], 1 - expected)
+
+    def test_callback_failure_after_numerical_convergence_propagates(self):
+        operator = csc_matrix(np.eye(3, dtype=complex))
+        rhs = np.ones((3, 1), dtype=complex)
+        report = {}
+        events = []
+
+        def checkpoint(event, *_):
+            events.append(event)
+            if event == "accepted":
+                raise OSError("checkpoint write failed")
+
+        with self.assertRaisesRegex(OSError, "checkpoint write failed"):
+            solve_ilu_lgmres(operator, rhs, report, checkpoint_callback=checkpoint)
+        self.assertEqual(events, ["iterate", "iterate", "accepted"])
+        self.assertEqual(report["channels"][0]["raw_info"], 0)
+        self.assertIsNone(report["channels"][0]["info"])
+
 
 if __name__ == "__main__":
     unittest.main()

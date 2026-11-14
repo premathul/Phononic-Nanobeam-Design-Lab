@@ -235,6 +235,97 @@ class WorkbenchTests(unittest.TestCase):
         self.assertIn("reference passed, candidate failed", self.window.status.text())
         self.assertIn("Mesh-pair check failed for these runs", self.window.status.text())
 
+    def test_scattering_resume_routes_saved_inputs_and_displays_recoverable_status(self):
+        attempt = self.output.resolve() / "preserved attempt"
+        attempt.mkdir()
+        self.assertFalse(self.window.save_progress.isVisible())
+        self.window.preset.setCurrentIndex(1)
+        self.assertTrue(self.window.save_progress.isVisible())
+        self.assertFalse(self.window.save_progress.isChecked())
+        script = self.output / "synthetic_resumable_worker_AP_pnc.py"
+        script.write_text(
+            "import json, pathlib, sys\n"
+            "args = sys.argv[1:]\n"
+            "action = args[args.index('--action') + 1]\n"
+            "response = pathlib.Path(args[args.index('--response') + 1])\n"
+            "(response.parent / 'observed_args_AP_pnc.json').write_text(json.dumps(args))\n"
+            "status = 'interrupted' if action == 'run-resumable' else 'blocked'\n"
+            "summary = {'status': status, 'accepted_channels': 1, 'total_channels': 4, "
+            f"'resume_directory': {str(attempt)!r}, 'can_resume': True, 'message': 'Budget exhausted.'}}\n"
+            "response.write_text(json.dumps({'action': action, 'status': status, 'summary': summary}))\n"
+            "sys.exit(1 if action == 'resume' else 0)\n",
+            encoding="utf-8",
+        )
+        with patch("workbench_AP_pnc.WORKER", script):
+            self.window.save_progress.setChecked(True)
+            self.window.wall_seconds.setText("nan")
+            QTest.mouseClick(self.window.run_button, Qt.MouseButton.LeftButton)
+            self.assertIn("Wall-time limit (s) must be a finite positive number", self.window.status.text())
+            self.assertFalse((self.output / "_workbench").exists())
+
+            self.window.wall_seconds.setText("5.5")
+            QTest.mouseClick(self.window.run_button, Qt.MouseButton.LeftButton)
+            self.assertEqual(self.window.action, "run-resumable")
+            self.assertFalse(self.window.resume_button.isEnabled())
+            self.wait_for(lambda: self.window.action is None)
+            self.assertIn("Scattering interrupted", self.window.status.text())
+            self.assertIn("Accepted incident channels: 1/4", self.window.status.text())
+            self.assertIn("Budget exhausted", self.window.status.text())
+            self.assertEqual(self.window.result_directory, attempt)
+            self.assertFalse(self.window.report_button.isEnabled())
+            self.assertFalse(self.window.compare_button.isEnabled())
+            new_job = self.window.response_path.parent
+            new_config = json.loads((new_job / "configuration_AP_pnc.json").read_bytes())
+            self.assertEqual(new_config["resources"]["linear_solver"], "ilu_lgmres")
+            self.assertNotIn("linear_solver", self.window.edited_config()["resources"])
+            new_args = json.loads((new_job / "observed_args_AP_pnc.json").read_bytes())
+            self.assertEqual(new_args[new_args.index("--wall-seconds") + 1], "5.5")
+
+            self.window.fields["frequency_GHz"].setText("invalid unsaved field")
+            self.window.wall_seconds.setText("25")
+            with patch("workbench_AP_pnc.QFileDialog.getExistingDirectory", return_value=str(attempt)) as choose:
+                QTest.mouseClick(self.window.resume_button, Qt.MouseButton.LeftButton)
+            self.assertEqual(choose.call_args.args[2], str(attempt))
+            self.wait_for(lambda: self.window.action is None)
+        self.assertIn("Scattering blocked", self.window.status.text())
+        resume_job = self.window.response_path.parent
+        resume_args = json.loads((resume_job / "observed_args_AP_pnc.json").read_bytes())
+        self.assertEqual(resume_args[resume_args.index("--resume-from") + 1], str(attempt))
+        self.assertEqual(resume_args[resume_args.index("--wall-seconds") + 1], "25.0")
+        self.assertNotIn("--config", resume_args)
+        self.assertFalse((resume_job / "configuration_AP_pnc.json").exists())
+        self.assertEqual(self.window.fields["frequency_GHz"].text(), "invalid unsaved field")
+
+    def test_resumable_stop_requests_checkpoint_and_uses_saved_progress_without_final_response(self):
+        self.window.preset.setCurrentIndex(1)
+        attempt = self.output.resolve() / "preserved attempt"
+        attempt.mkdir()
+        script = self.output / "synthetic_stopped_worker_AP_pnc.py"
+        script.write_text(
+            "import json, pathlib, sys, time\n"
+            "response = pathlib.Path(sys.argv[sys.argv.index('--response') + 1])\n"
+            "summary = {'status': 'running', 'phase': 'solving', 'accepted_channels': 1, 'total_channels': 4, "
+            f"'resume_directory': {str(attempt)!r}}}\n"
+            "response.with_suffix('.progress.json').write_text(json.dumps("
+            "{'action': 'run-resumable', 'status': 'running', 'summary': summary}))\n"
+            "for i in range(200):\n"
+            "    if response.with_suffix('.cancel').exists(): sys.exit(3)\n"
+            "    time.sleep(0.05)\n",
+            encoding="utf-8",
+        )
+        with patch("workbench_AP_pnc.WORKER", script):
+            self.assertTrue(self.window.start_job("run-resumable"))
+            self.wait_for(lambda: "Accepted incident channels: 1/4" in self.window.status.text())
+            QTest.mouseClick(self.window.stop_button, Qt.MouseButton.LeftButton)
+            self.wait_for(lambda: self.window.action is None)
+        self.assertTrue(self.window.response_path.with_suffix(".cancel").is_file())
+        self.assertFalse(self.window.response_path.exists())
+        self.assertEqual(self.window.resume_directory, attempt)
+        self.assertIn("Resume checks the saved checkpoints", self.window.status.text())
+        self.assertIn("Last reported accepted incident channels: 1/4", self.window.status.text())
+        self.assertTrue(self.window.folder_button.isEnabled())
+        self.assertTrue(self.window.resume_button.isEnabled())
+
     def test_malformed_analysis_load_preserves_prior_inputs_and_result(self):
         report = self.output / "report_AP_pnc.html"
         report.touch()

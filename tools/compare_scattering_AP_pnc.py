@@ -37,11 +37,12 @@ MIN_OVERLAP = 0.99
 K_GAP_TOL = 1e-8
 PHASE_AMPLITUDE_FLOOR = 1e-10
 LGMRES_SOURCE = "src/phononic/linear_lgmres_AP_pnc.py"
-# Verified original and optional mixed-precision implementations. The elastic
+# Verified original, mixed-precision and checkpoint-capable implementations. The elastic
 # operator kernels remain subject to exact source identity below.
 VERIFIED_LGMRES_SOURCES = {
     "543f0be835f2f0f54502eae170584d531bd3126766175d7229a3818360d0aa67",
     "459589f4e5de39c888966305e28dbd2b16f2947ec427ae9c131c69ae47c609df",
+    "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
 }
 
 
