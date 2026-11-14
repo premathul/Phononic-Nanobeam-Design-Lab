@@ -245,6 +245,371 @@ class SolverResourceEvidenceTests(unittest.TestCase):
         self.assertEqual(row["operator_nnz"], "")
         self.assertEqual(row["factor_nnz"], "")
 
+    def test_h80_operator_replays_actual_storage_admission(self):
+        from phononic.resumable_scattering_AP_pnc import _solver_budget, _solver_options
+
+        stage = self.ledger["full_device_h80_operator"]
+        preflight = self.ledger["h80_candidate_preflight"]
+        reference = self.ledger["full_device_h100_operator"]
+        config = stage["configuration"]
+        ndof = preflight["ndof"]
+        self.assertEqual(stage["status"], "operator_ready")
+        for status in ("mesh_generated", "safe_eigensolve_attempted", "factorization_attempted",
+                       "solve_attempted", "scattering_computed", "spatial_convergence_established"):
+            self.assertFalse(stage[status])
+        raw = stage["raw_files"]
+        for key, saved in (("mesh", "mesh"), ("mesh_checkpoint_summary", "mesh_summary"),
+                           ("preflight", "preflight"), ("preflight_configuration", "configuration")):
+            self.assertEqual(raw[key], preflight["raw_files"][saved])
+        self.assertEqual(stage["mesh_hash"], preflight["mesh_hash"])
+        self.assertEqual(raw["h100_stage"], reference["raw_files"]["stages"])
+        for key in ("geometry", "material", "analysis", "mesh"):
+            self.assertEqual(config[key], preflight["configuration"][key])
+        self.assertEqual(config["resources"]["max_dofs"], ndof)
+        self.assertEqual(config["resources"]["max_dofs"], stage["stage_only_body_dof_cap"])
+        self.assertEqual(config["resources"]["assembly_batch_elements"], 2048)
+        self.assertFalse(preflight["within_body_budget"])
+        for key in ("exact_yz_triangulations", "exact_x_end_planes", "exact_z_planes",
+                    "exact_hole_walls_from_saved_preflight"):
+            self.assertTrue(stage["mesh_comparison"][key])
+
+        proof = stage["port_reuse_proof"]
+        self.assertEqual(proof["reference_port_modes"], reference["raw_files"]["port_modes"])
+        self.assertEqual(proof["reference_rhs"], reference["raw_files"]["rhs"])
+        self.assertTrue(proof["all_local_safe_arrays_bit_identical"])
+        self.assertTrue(proof["all_local_physical_rhs_values_bit_identical"])
+        self.assertFalse(proof["phase_adjustment_applied"])
+        self.assertEqual(proof["complete_discrete_roots"], 2 * preflight["end_face_dofs"]["xleft"])
+        h100_scattering = self.ledger["full_device_h100_lgmres_public_replay"]["scattering"]
+        self.assertEqual(proof["incoming_root_indices"], h100_scattering["groups"]["incoming"]["root_indices"])
+        channels = len(proof["incoming_root_indices"])
+        for side, port in proof["trace_mapping"].items():
+            self.assertTrue(port["matches_h100_in_saved_safe_order"])
+            self.assertEqual(port["trace_dofs"], preflight["end_face_dofs"][side])
+            self.assertEqual(port["end_plane_m"], preflight["boundary_verification"]["ports"][side]["x_m"])
+        self.assertEqual(proof["rhs_nonzero_rows_per_channel"], [preflight["end_face_dofs"]["xleft"]] * channels)
+        self.assertEqual(proof["rhs_shape"], [ndof, channels])
+        self.assertEqual(proof["rhs_array_bytes"], ndof * channels * np.dtype("complex128").itemsize)
+        self.assertEqual(stage["checkpoint_bytes"], sum(raw[key]["bytes"] for key in ("K", "M", "A", "rhs", "port_modes")))
+        for key, record, fmt, dtype in (
+            ("K", "stiffness", "csr", "float64"),
+            ("M", "mass", "csr", "float64"),
+            ("A", "operator", "csc", "complex128"),
+        ):
+            matrix = stage[record]
+            value_bytes = np.dtype(dtype).itemsize
+            index_bytes = np.dtype(matrix["index_dtype"]).itemsize
+            self.assertEqual(matrix["index_dtype"], "int32")
+            self.assertEqual((matrix["format"], matrix["data_dtype"], matrix["shape"]), (fmt, dtype, [ndof, ndof]))
+            storage = (value_bytes + index_bytes) * matrix["nonzero_storage"] + index_bytes * (ndof + 1)
+            self.assertEqual(matrix["array_bytes"], storage)
+            self.assertGreaterEqual(raw[key]["bytes"], storage)
+
+        run = stage["run"]
+        self.assertEqual(run["worker_exit_code"], 0)
+        self.assertLessEqual(run["elapsed_seconds"], run["wall_cap_seconds"])
+        self.assertLessEqual(run["peak_tree_rss_mib"], run["rss_cap_mib"])
+        self.assertLessEqual(run["peak_tree_private_commit_mib"], run["private_commit_cap_mib"])
+        self.assertGreaterEqual(run["minimum_available_mib"], run["available_floor_mib"])
+        self.assertGreaterEqual(run["minimum_commit_headroom_mib"], run["commit_headroom_floor_mib"])
+        admission = stage["solve_admission"]
+        self.assertEqual(admission["measured_stage_peak_private_commit_mib"], run["peak_tree_private_commit_mib"])
+        historical = self.ledger[admission["solver_reference_case"]]
+        for key in ("ilu_settings", "lgmres_settings", "factor_input_dtype", "outer_dtype",
+                    "relative_residual_limit", "backward_residual_limit"):
+            self.assertEqual(admission[key], historical[key])
+        options = _solver_options(config)
+        self.assertEqual(options, {"single_precision": True, "fill_factor": 12.0,
+                                   "inner_m": 100, "outer_k": 10, "maxiter": 60})
+        matrix = stage["operator"]
+        manifest = {"shape": proof["rhs_shape"], "nnz": matrix["nonzero_storage"],
+                    "operator_storage_bytes": matrix["array_bytes"],
+                    "index_bytes": np.dtype(matrix["index_dtype"]).itemsize}
+        self.assertEqual(admission["accepted_channels"], 0)
+        ilu_bytes = (np.dtype(admission["factor_input_dtype"]).itemsize + manifest["index_bytes"]) * 2
+        self.assertAlmostEqual(admission["initial_ilu_buffer_mib"],
+                               ilu_bytes * options["fill_factor"] * manifest["nnz"] / 2**20)
+        h100_peak = historical["run"]["peak_tree_private_commit_mib"]
+        self.assertEqual(admission["h100_solve_peak_private_mib"], h100_peak)
+        budget = _solver_budget(manifest, options, 0, h100_peak)
+        for key, value in budget.items():
+            self.assertAlmostEqual(admission[key], value)
+        scale = matrix["array_bytes"] / reference["operator"]["array_bytes"]
+        self.assertAlmostEqual(admission["h100_scaled_solve_peak_private_mib"], h100_peak * scale)
+        snapshot = admission["host_snapshot"]
+        self.assertGreaterEqual(snapshot["physical_available_mib"], budget["required_physical_mib"])
+        self.assertLess(snapshot["commit_headroom_mib"], budget["required_commit_mib"])
+        self.assertAlmostEqual(admission["commit_shortfall_mib"],
+                               budget["required_commit_mib"] - snapshot["commit_headroom_mib"])
+        self.assertEqual(admission["status"], "blocked_insufficient_commit")
+
+        table = LEDGER.with_suffix(".csv").read_bytes()
+        self.assertEqual(sha256(table).hexdigest(), self.ledger["csv_sha256"])
+        rows = {row["phase"]: row for row in csv.DictReader(io.StringIO(table.decode("utf-8")))
+                if row["case"] == "full_device_h80_operator"}
+        self.assertEqual(set(rows), {"production_batched_assembly", "operator_stage_total"})
+        for row in rows.values():
+            self.assertEqual(row["status"], stage["status"])
+            self.assertEqual(int(row["body_dofs"]), ndof)
+            self.assertEqual(int(row["operator_nnz"]), matrix["nonzero_storage"])
+            self.assertEqual(row["factor_nnz"], "")
+        self.assertEqual(float(rows["operator_stage_total"]["elapsed_seconds"]), run["elapsed_seconds"])
+        assembly = stage["phases"]["production_batched_assembly"]
+        self.assertEqual(float(rows["production_batched_assembly"]["elapsed_seconds"]), assembly["elapsed_seconds"])
+
+    def test_h80_first_drive_pilot_replays_memory_and_residual_gates(self):
+        from phononic.resumable_scattering_AP_pnc import _solver_budget, _solver_options
+
+        pilot = self.ledger["full_device_h80_lgmres_fill8_pilot"]
+        stage = self.ledger[pilot["reference_operator_case"]]
+        self.assertEqual(stage["solve_admission"]["status"], "blocked_insufficient_commit")
+        for key in ("A", "rhs", "stages"):
+            self.assertEqual(pilot["raw_files"][key], stage["raw_files"][key])
+        for key in ("source_sha256", "packages", "python", "platform"):
+            self.assertEqual(pilot["source"][key], stage["source"][key])
+        self.assertEqual(pilot["incident_columns"], [0])
+        self.assertEqual(pilot["incident_root_index"], stage["port_reuse_proof"]["incoming_root_indices"][0])
+        self.assertEqual(pilot["total_device_channels"], stage["port_reuse_proof"]["rhs_shape"][1])
+        self.assertFalse(pilot["scattering_computed"])
+        self.assertFalse(pilot["spatial_convergence_established"])
+
+        options = _solver_options(stage["configuration"]) | {"fill_factor": 8.0}
+        self.assertEqual(pilot["solver_options"], options)
+        matrix = stage["operator"]
+        manifest = {"shape": [pilot["body_dofs"], 1], "nnz": matrix["nonzero_storage"],
+                    "operator_storage_bytes": matrix["array_bytes"],
+                    "index_bytes": np.dtype(matrix["index_dtype"]).itemsize}
+        self.assertEqual(pilot["admission_manifest"], manifest)
+        self.assertEqual(pilot["admission"], _solver_budget(manifest, options, 0))
+        admission = pilot["admission"]
+        run = pilot["run"]
+        self.assertGreaterEqual(run["initial_memory"]["physical_available_mib"], admission["required_physical_mib"])
+        self.assertGreaterEqual(run["initial_memory"]["commit_headroom_mib"], admission["required_commit_mib"])
+        loaded_equation_mib = (matrix["array_bytes"] + pilot["body_dofs"] * np.dtype("complex128").itemsize) / 2**20
+        self.assertAlmostEqual(pilot["required_pre_factor_commit_headroom_mib"],
+                               admission["required_commit_mib"] - loaded_equation_mib)
+        self.assertGreaterEqual(pilot["before_factorization"]["commit_headroom_mib"],
+                                pilot["required_pre_factor_commit_headroom_mib"])
+        respects_limits = (run["minimum_available_mib"] >= run["available_floor_mib"]
+                           and run["minimum_commit_headroom_mib"] >= run["commit_headroom_floor_mib"]
+                           and run["peak_tree_rss_mib"] <= run["rss_cap_mib"]
+                           and run["peak_tree_private_commit_mib"] <= run["private_commit_cap_mib"])
+        self.assertEqual(pilot["memory_limits_respected"], respects_limits)
+        self.assertEqual(run["status"], "aborted_memory_limit")
+        self.assertEqual(run["status"], pilot["status"])
+        self.assertGreater(run["peak_tree_rss_mib"], run["rss_cap_mib"])
+        self.assertLessEqual(run["peak_tree_private_commit_mib"], run["private_commit_cap_mib"])
+        self.assertGreaterEqual(run["minimum_available_mib"], run["available_floor_mib"])
+        self.assertGreaterEqual(run["minimum_commit_headroom_mib"], run["commit_headroom_floor_mib"])
+        self.assertTrue(pilot["factorization_attempted"])
+        self.assertEqual(pilot["factor_dtype"], "complex64")
+        self.assertEqual(pilot["equation_dtype"], "complex128")
+        factorization = pilot["factorization"]
+        self.assertEqual(factorization["fill_factor"], options["fill_factor"])
+        self.assertGreater(factorization["factor_nonzeros"], 0)
+        self.assertGreater(factorization["elapsed_seconds"], 0)
+
+        kept = pilot["retained_checkpoint"]
+        self.assertEqual(kept["artifact"], pilot["raw_files"]["retained_vector"])
+        self.assertEqual(kept["column"], 0)
+        self.assertEqual(kept["event"], "iterate")
+        diagnostics = kept["diagnostics"]
+        history = diagnostics["relative_residual_history"]
+        self.assertEqual(len(history), diagnostics["iterations"])
+        self.assertAlmostEqual(history[0], 1.0)
+        observed = kept["independent_original_equation_checks"]
+        saved = diagnostics["relative_residual"]
+        self.assertTrue(np.isclose(observed["relative_residual"], history[-1] if saved is None else saved,
+                                   rtol=1e-10, atol=1e-15))
+        passed = (observed["relative_residual"] <= pilot["relative_residual_limit"]
+                  and observed["relative_backward_residual"] <= pilot["backward_residual_limit"])
+        self.assertEqual(kept["original_residual_gates_passed"], passed)
+        self.assertFalse(passed)
+        self.assertIsNone(diagnostics["info"])
+        self.assertEqual(pilot["accepted_channels"], 0)
+        self.assertEqual(run["accepted_channels"], pilot["accepted_channels"])
+
+        table = LEDGER.with_suffix(".csv").read_bytes()
+        self.assertEqual(sha256(table).hexdigest(), self.ledger["csv_sha256"])
+        row, = [row for row in csv.DictReader(io.StringIO(table.decode("utf-8")))
+                if row["case"] == "full_device_h80_lgmres_fill8_pilot"]
+        self.assertEqual((row["phase"], row["status"]), ("first_drive_pilot", pilot["status"]))
+        self.assertEqual(int(row["factor_nnz"]), factorization["factor_nonzeros"])
+        self.assertEqual(float(row["max_relative_true_residual"]), observed["relative_residual"])
+        self.assertEqual(float(row["max_relative_backward_residual"]), observed["relative_backward_residual"])
+
+    def test_h80_continuation_reuses_first_drive_with_original_equation_gates(self):
+        from phononic.resumable_scattering_AP_pnc import _solver_budget
+
+        continuation = self.ledger["full_device_h80_lgmres_fill8_continuation"]
+        previous = self.ledger[continuation["previous_attempt_case"]]
+        prior = continuation["resumed_from"]
+        for key, previous_key in (("execution", "execution"), ("journal", "channel_journal"),
+                                  ("profile", "profile"), ("seed", "retained_vector")):
+            self.assertEqual(prior[key], previous["raw_files"][previous_key])
+        for key in ("A", "rhs", "stages"):
+            self.assertEqual(continuation["raw_files"][key], previous["raw_files"][key])
+        for key in ("equation_dtype", "factor_dtype", "solver_options", "admission_manifest",
+                    "relative_tolerance", "absolute_tolerance", "relative_residual_limit", "backward_residual_limit"):
+            self.assertEqual(continuation[key], previous[key])
+        self.assertEqual(continuation["incident_columns"], [0])
+        self.assertTrue(prior["preconditioner_rebuild_required"])
+        seed = previous["retained_checkpoint"]
+        self.assertEqual(prior["original_csc_digest"], seed["operator_csc_sha256"])
+        self.assertEqual(prior["original_rhs_column_digest"], seed["input_rhs_column_sha256"])
+        self.assertEqual(prior["saved_outer_callbacks"], seed["diagnostics"]["iterations"])
+        initial_check = continuation["independent_initial_equation_checks"]
+        self.assertEqual(initial_check, seed["independent_original_equation_checks"])
+        self.assertAlmostEqual(initial_check["relative_residual"], continuation["verified_initial_relative_residual"])
+
+        run = continuation["run"]
+        prior_run = previous["run"]
+        self.assertEqual(prior["previous_wall_seconds"], prior_run["elapsed_seconds"])
+        self.assertEqual(prior["previous_peak_private_commit_mib"], prior_run["peak_tree_private_commit_mib"])
+        self.assertEqual(run["wall_cap_seconds"], floor(prior_run["wall_cap_seconds"] - prior["previous_wall_seconds"]))
+        self.assertEqual(continuation["total_pilot_elapsed_seconds"], prior["previous_wall_seconds"] + run["elapsed_seconds"])
+        self.assertEqual(run["rss_cap_mib"], 4608)
+        for key in ("available_floor_mib", "commit_headroom_floor_mib", "private_commit_cap_mib"):
+            self.assertEqual(run[key], prior_run[key])
+        budget = _solver_budget(continuation["admission_manifest"], continuation["solver_options"], 0,
+                                prior["previous_peak_private_commit_mib"])
+        self.assertEqual(continuation["admission"], budget)
+        self.assertEqual(run["admission"], budget)
+        self.assertGreaterEqual(run["initial_memory"]["physical_available_mib"], budget["required_physical_mib"])
+        self.assertGreaterEqual(run["initial_memory"]["commit_headroom_mib"], budget["required_commit_mib"])
+        respects_limits = (run["minimum_available_mib"] >= run["available_floor_mib"]
+                           and run["minimum_commit_headroom_mib"] >= run["commit_headroom_floor_mib"]
+                           and run["peak_tree_rss_mib"] <= run["rss_cap_mib"]
+                           and run["peak_tree_private_commit_mib"] <= run["private_commit_cap_mib"])
+        self.assertEqual(continuation["memory_limits_respected"], respects_limits)
+        self.assertEqual(continuation["status"], "aborted_memory_limit")
+        self.assertEqual(continuation["status"], run["status"])
+        self.assertLess(run["minimum_available_mib"], run["available_floor_mib"])
+        self.assertGreaterEqual(run["minimum_commit_headroom_mib"], run["commit_headroom_floor_mib"])
+        self.assertLessEqual(run["peak_tree_rss_mib"], run["rss_cap_mib"])
+        self.assertLessEqual(run["peak_tree_private_commit_mib"], run["private_commit_cap_mib"])
+        self.assertEqual(continuation["accepted_channels"], run["accepted_channels"])
+        self.assertFalse(continuation["scattering_computed"])
+        self.assertFalse(continuation["spatial_convergence_established"])
+
+        kept = continuation["retained_checkpoint"]
+        self.assertEqual(kept["column"], 0)
+        self.assertEqual(kept["event"], "iterate")
+        self.assertEqual(kept["artifact"], continuation["raw_files"]["retained_vector"])
+        diagnostic = kept["diagnostics"]
+        history = diagnostic["relative_residual_history"]
+        self.assertTrue(diagnostic["warm_started"])
+        self.assertAlmostEqual(history[0], initial_check["relative_residual"])
+        self.assertEqual(len(history), diagnostic["iterations"])
+        checked = kept["independent_original_equation_checks"]
+        expected = history[-1] if diagnostic["relative_residual"] is None else diagnostic["relative_residual"]
+        self.assertTrue(np.isclose(checked["relative_residual"], expected, rtol=1e-10, atol=1e-15))
+        passed = (checked["relative_residual"] <= continuation["relative_residual_limit"]
+                  and checked["relative_backward_residual"] <= continuation["backward_residual_limit"])
+        self.assertEqual(kept["original_residual_gates_passed"], passed)
+        self.assertFalse(passed)
+        self.assertEqual(continuation["accepted_channels"], 0)
+        self.assertLess(checked["relative_residual"], initial_check["relative_residual"])
+        self.assertLess(checked["relative_backward_residual"], initial_check["relative_backward_residual"])
+        self.assertEqual(continuation["factorization"]["factor_nonzeros"], previous["factorization"]["factor_nonzeros"])
+
+        table = LEDGER.with_suffix(".csv").read_bytes()
+        self.assertEqual(sha256(table).hexdigest(), self.ledger["csv_sha256"])
+        row, = [row for row in csv.DictReader(io.StringIO(table.decode("utf-8")))
+                if row["case"] == "full_device_h80_lgmres_fill8_continuation"]
+        self.assertEqual((row["phase"], row["status"]), ("first_drive_continuation", run["status"]))
+        self.assertEqual(float(row["elapsed_seconds"]), run["elapsed_seconds"])
+        self.assertEqual(float(row["max_relative_true_residual"]), checked["relative_residual"])
+        self.assertEqual(float(row["max_relative_backward_residual"]), checked["relative_backward_residual"])
+
+    def test_h80_inner50_continuation_reduces_workspace_with_same_equations(self):
+        from phononic.resumable_scattering_AP_pnc import _solver_budget
+
+        result = self.ledger["full_device_h80_lgmres_fill8_inner50_continuation"]
+        previous = self.ledger[result["previous_attempt_case"]]
+        starting = result["resumed_from"]
+        for artifact, name in (("execution", "execution"), ("journal", "channel_journal"),
+                               ("profile", "profile"), ("seed", "retained_vector")):
+            self.assertEqual(starting[artifact], previous["raw_files"][name])
+        self.assertEqual(starting["earlier_pilot"], previous["resumed_from"])
+        self.assertTrue(starting["preconditioner_rebuild_required"])
+        for key in ("A", "rhs", "stages"):
+            self.assertEqual(result["raw_files"][key], previous["raw_files"][key])
+        for key in ("equation_dtype", "factor_dtype", "admission_manifest", "relative_tolerance",
+                    "absolute_tolerance", "relative_residual_limit", "backward_residual_limit"):
+            self.assertEqual(result[key], previous[key])
+        before = previous["solver_options"]
+        after = result["solver_options"]
+        self.assertEqual(after, before | {"inner_m": 50, "maxiter": 120})
+        self.assertEqual(result["nominal_inner_step_budget"], before["inner_m"] * before["maxiter"])
+        self.assertEqual(result["nominal_inner_step_budget"], after["inner_m"] * after["maxiter"])
+        expected_reduction = (2 * (before["inner_m"] - after["inner_m"])
+                              * result["body_dofs"] * np.dtype("complex128").itemsize / 2**20)
+        self.assertAlmostEqual(result["modeled_krylov_workspace_reduction_mib"], expected_reduction)
+        prior_peak = result["prior_h80_solver_peak_private_commit_mib"]
+        self.assertEqual(prior_peak, previous["run"]["peak_tree_private_commit_mib"])
+        budget = _solver_budget(result["admission_manifest"], after, 0, prior_peak)
+        self.assertEqual(result["admission"], budget)
+        self.assertAlmostEqual(previous["admission"]["required_commit_mib"] - budget["required_commit_mib"],
+                               expected_reduction)
+
+        run = result["run"]
+        prior_run = previous["run"]
+        for key in ("rss_cap_mib", "private_commit_cap_mib", "available_floor_mib", "commit_headroom_floor_mib"):
+            self.assertEqual(run[key], prior_run[key])
+        self.assertEqual(run["wall_cap_seconds"], floor(1800 - previous["total_pilot_elapsed_seconds"]))
+        self.assertAlmostEqual(result["total_pilot_elapsed_seconds"],
+                               previous["total_pilot_elapsed_seconds"] + run["elapsed_seconds"])
+        self.assertEqual(result["comparison_case_for_sampled_peak_differences"], result["previous_attempt_case"])
+        for quantity in ("rss", "private_commit"):
+            peak_key = f"peak_tree_{quantity}_mib"
+            self.assertAlmostEqual(result[f"sampled_peak_tree_{quantity}_reduction_mib"],
+                                   prior_run[peak_key] - run[peak_key])
+        self.assertGreaterEqual(run["initial_memory"]["physical_available_mib"], budget["required_physical_mib"])
+        self.assertGreaterEqual(run["initial_memory"]["commit_headroom_mib"], budget["required_commit_mib"])
+        self.assertEqual(result["status"], "aborted_wall_time_limit")
+        self.assertEqual(result["status"], run["status"])
+        self.assertGreaterEqual(run["elapsed_seconds"], run["wall_cap_seconds"])
+        respects_limits = (run["minimum_available_mib"] >= run["available_floor_mib"]
+                           and run["minimum_commit_headroom_mib"] >= run["commit_headroom_floor_mib"]
+                           and run["peak_tree_rss_mib"] <= run["rss_cap_mib"]
+                           and run["peak_tree_private_commit_mib"] <= run["private_commit_cap_mib"])
+        self.assertEqual(result["memory_limits_respected"], respects_limits)
+        self.assertTrue(respects_limits)
+        self.assertGreater(result["sampled_peak_tree_rss_reduction_mib"], 0)
+        self.assertGreater(result["sampled_peak_tree_private_commit_reduction_mib"], 0)
+
+        initial = result["independent_initial_equation_checks"]
+        self.assertEqual(initial, previous["retained_checkpoint"]["independent_original_equation_checks"])
+        kept = result["retained_checkpoint"]
+        self.assertEqual(kept["artifact"], result["raw_files"]["retained_vector"])
+        self.assertEqual(kept["column"], 0)
+        self.assertEqual(kept["event"], "iterate")
+        diagnostics = kept["diagnostics"]
+        history = diagnostics["relative_residual_history"]
+        self.assertTrue(diagnostics["warm_started"])
+        self.assertAlmostEqual(history[0], initial["relative_residual"])
+        self.assertEqual(len(history), diagnostics["iterations"])
+        observed = kept["independent_original_equation_checks"]
+        passed = (observed["relative_residual"] <= result["relative_residual_limit"]
+                  and observed["relative_backward_residual"] <= result["backward_residual_limit"])
+        self.assertEqual(kept["original_residual_gates_passed"], passed)
+        self.assertFalse(passed)
+        self.assertEqual(result["accepted_channels"], 0)
+        self.assertLess(observed["relative_residual"], initial["relative_residual"])
+        self.assertLess(observed["relative_backward_residual"], initial["relative_backward_residual"])
+        self.assertEqual(result["accepted_channels"], run["accepted_channels"])
+        self.assertFalse(result["scattering_computed"])
+        self.assertFalse(result["spatial_convergence_established"])
+
+        table = LEDGER.with_suffix(".csv").read_bytes()
+        self.assertEqual(sha256(table).hexdigest(), self.ledger["csv_sha256"])
+        row, = [row for row in csv.DictReader(io.StringIO(table.decode("utf-8")))
+                if row["case"] == "full_device_h80_lgmres_fill8_inner50_continuation"]
+        self.assertEqual((row["phase"], row["status"]), ("first_drive_inner50_continuation", run["status"]))
+        self.assertEqual(float(row["max_relative_true_residual"]), observed["relative_residual"])
+        self.assertEqual(float(row["max_relative_backward_residual"]), observed["relative_backward_residual"])
+
     def test_h100_recovery_reuses_the_failed_first_drive(self):
         operator = self.ledger["full_device_h100_operator"]
         first_attempt = self.ledger["full_device_h100_lgmres_mixed_fill12"]
