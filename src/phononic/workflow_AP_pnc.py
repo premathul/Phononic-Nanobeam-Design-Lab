@@ -749,7 +749,10 @@ def main(argv: list[str] | None = None) -> int:
             print(f"Power balance check: {summary['power_balance_passed']}; max R={summary['maximum_reflection']:.6g}")
             if summary["matched_reference_passed"] is not None:
                 print(f"Matched-guide power check: {summary['matched_reference_passed']}")
-        print(f"Solve time {summary['elapsed_seconds']:.2f} s; sampled process peak {summary['peak_process_memory_mib']:.1f} MiB")
+        timing_scope = "Cached export" if "checkpointed_scattering" in summary else "Solve"
+        print(f"{timing_scope} time {summary['elapsed_seconds']:.2f} s; sampled process peak {summary['peak_process_memory_mib']:.1f} MiB")
+        if "checkpointed_scattering" in summary:
+            print("See execution_AP_pnc.json in the checkpoint attempts for staging and solver time and memory.")
         print("Model status: computed; phase accuracy, spatial convergence and physical adequacy require separate evidence.")
         if args.open:
             webbrowser.open((output / "report_AP_pnc.html").as_uri())

@@ -146,8 +146,10 @@ def write_report(
         "Length × width × thickness (nm)": dimension,
         "Boundary conditions": _display(summary.get("boundary")),
         "Degrees of freedom": _display(summary.get("ndof")),
-        "Elapsed time (s)": _display(summary.get("elapsed_seconds")),
-        "Peak process memory (MiB)": _display(summary.get("peak_process_memory_mib")),
+        ("Cached export time (s)" if "checkpointed_scattering" in summary else "Elapsed time (s)"):
+            _display(summary.get("elapsed_seconds")),
+        ("Export process memory (MiB)" if "checkpointed_scattering" in summary else "Peak process memory (MiB)"):
+            _display(summary.get("peak_process_memory_mib")),
         "Material model": _display(summary.get("material_status")),
         "Run status": _display(summary.get("status")),
     }

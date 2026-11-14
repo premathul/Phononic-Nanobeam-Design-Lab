@@ -142,6 +142,9 @@ class ResumableScatteringTests(unittest.TestCase):
             self.assertEqual(set(run["phases"]), {"solving", "exporting"})
             self.assertEqual(resumed["checkpointed_scattering"]["stage"], journal["stage"])
             self.assertEqual(resumed["checkpointed_scattering"]["accepted"][0], journal["accepted"][0])
+            html = (Path(resumed["output_directory"]) / "report_AP_pnc.html").read_text(encoding="utf-8")
+            self.assertIn("Cached export time (s)", html)
+            self.assertIn("Export process memory (MiB)", html)
             channels = resumed["linear_solver"]["channels"]
             self.assertTrue(channels[0]["reused"])
             self.assertEqual(channels[0]["iterations"], 0)
