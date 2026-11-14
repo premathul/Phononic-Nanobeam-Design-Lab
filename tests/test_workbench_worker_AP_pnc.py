@@ -5,7 +5,6 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
-from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
@@ -32,10 +31,11 @@ class WorkbenchWorkerTests(unittest.TestCase):
         config_path.write_text(json.dumps(config), encoding="utf-8")
         return config_path, directory / "response_AP_pnc.json"
 
-    def execute(self, action, config_path, response_path):
+    def execute(self, action, config_path, response_path, *extra):
+        config = [] if config_path is None else ["--config", str(config_path)]
         return subprocess.run(
-            [sys.executable, "-B", str(WORKER), "--action", action, "--config", str(config_path),
-             "--output-root", str(self.output), "--response", str(response_path)],
+            [sys.executable, "-B", str(WORKER), "--action", action, *config,
+             "--output-root", str(self.output), "--response", str(response_path), *extra],
             cwd=self.directory, capture_output=True, encoding="utf-8", timeout=45,
         )
 
@@ -100,6 +100,8 @@ class WorkbenchWorkerTests(unittest.TestCase):
     def test_comparison_uses_saved_folders_and_returns_scientific_failure_as_compared(self):
         sys.path.insert(0, str(ROOT / "tools"))
         self.addCleanup(sys.path.remove, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "src"))
+        self.addCleanup(sys.path.remove, str(ROOT / "src"))
         from workbench_worker_AP_pnc import main
 
         reference, candidate = self.output / "reference", self.output / "candidate"
@@ -116,21 +118,93 @@ class WorkbenchWorkerTests(unittest.TestCase):
             "power_passed": True, "complex_passed": False, "mesh_pair_passed": False,
         }
         args = ["--action", "compare", "--output-root", str(self.output)]
-        with patch.dict(sys.modules, {"compare_scattering_AP_pnc": SimpleNamespace(compare_runs=None)}) as modules:
-            with patch.object(modules["compare_scattering_AP_pnc"], "compare_runs", return_value=comparison) as compare:
-                self.assertEqual(main([*args, "--reference", str(reference), "--candidate", str(candidate),
-                                       "--response", str(response)]), 0)
-                compare.assert_called_once_with(reference, candidate, self.output)
-                self.assertEqual(json.loads(response.read_bytes()), {
-                    "action": "compare", "status": "compared", "summary": comparison,
-                })
+        with patch("compare_scattering_AP_pnc.compare_runs", return_value=comparison) as compare:
+            self.assertEqual(main([*args, "--reference", str(reference), "--candidate", str(candidate),
+                                   "--response", str(response)]), 0)
+            compare.assert_called_once_with(reference, candidate, self.output)
+            self.assertEqual(json.loads(response.read_bytes()), {
+                "action": "compare", "status": "compared", "summary": comparison,
+            })
 
-                response = job / "missing_candidate_AP_pnc.json"
-                self.assertEqual(main([*args, "--reference", str(reference), "--response", str(response)]), 1)
-                compare.assert_called_once()
-                failure = json.loads(response.read_bytes())
-                self.assertEqual((failure["action"], failure["status"]), ("compare", "failed"))
-                self.assertIn("--candidate", failure["error"])
+            response = job / "missing_candidate_AP_pnc.json"
+            self.assertEqual(main([*args, "--reference", str(reference), "--response", str(response)]), 1)
+            compare.assert_called_once()
+            failure = json.loads(response.read_bytes())
+            self.assertEqual((failure["action"], failure["status"]), ("compare", "failed"))
+            self.assertIn("--candidate", failure["error"])
+
+    def test_resume_protocol_uses_only_preserved_inputs_and_publishes_progress(self):
+        sys.path.insert(0, str(ROOT / "tools"))
+        self.addCleanup(sys.path.remove, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT / "src"))
+        self.addCleanup(sys.path.remove, str(ROOT / "src"))
+        from workbench_worker_AP_pnc import main
+
+        config, response = self.job("resume", self.config)
+        preserved = self.directory / "original checkpoints" / "attempt-1"
+        preserved.mkdir(parents=True)
+        progress_path = response.with_suffix(".progress.json")
+        cancel_path = response.with_suffix(".cancel")
+        summary = {"status": "running", "phase": "solving", "resume_directory": str(preserved),
+                   "accepted_channels": 2, "total_channels": 4}
+        interrupted = {**summary, "status": "interrupted", "message": "Stop requested.", "can_resume": True}
+
+        def execute(*, resume_from, wall_seconds, progress_callback, should_cancel):
+            self.assertEqual(resume_from, preserved)
+            self.assertEqual(wall_seconds, 42)
+            self.assertFalse(should_cancel())
+            progress_callback({**summary, "accepted_channels": 1})
+            progress_callback(summary)
+            self.assertFalse(response.exists())
+            self.assertEqual(json.loads(progress_path.read_bytes()),
+                             {"action": "resume", "status": "running", "summary": summary})
+            cancel_path.touch()
+            self.assertTrue(should_cancel())
+            return interrupted
+
+        actions = ["--action", "resume", "--resume-from", str(preserved), "--wall-seconds", "42",
+                   "--output-root", str(self.output)]
+        with patch("phononic.resumable_scattering_AP_pnc.run_resumable_scattering", side_effect=execute) as resume:
+            returncode = main([*actions, "--response", str(response)])
+            self.assertEqual(returncode, 0, response.read_text(encoding="utf-8"))
+            self.assertEqual(json.loads(response.read_bytes()),
+                             {"action": "resume", "status": "interrupted", "summary": interrupted})
+            rejected = response.parent / "rejected_AP_pnc.json"
+            self.assertEqual(main([*actions, "--response", str(rejected), "--config", str(config)]), 1)
+            self.assertIn("Omit --config", json.loads(rejected.read_bytes())["error"])
+            resume.assert_called_once()
+
+    def test_tiny_scattering_worker_resumes_from_a_bounded_interruption(self):
+        config = json.loads((ROOT / "configs" / "straight_scattering_AP_pnc.json").read_bytes())
+        config["geometry"].update(length_nm=1000, width_nm=600)
+        config["mesh"]["cells"] = [4, 2, 1]
+        config["analysis"]["frequency_GHz"] = 1.0
+        config["resources"]["linear_solver"] = "ilu_lgmres"
+        source, response = self.job("start", config)
+        completed = self.execute("run-resumable", source, response, "--wall-seconds", "0.001")
+        self.assertEqual(completed.returncode, 0, completed.stderr)
+        interrupted = json.loads(response.read_bytes())
+        self.assertEqual(interrupted["status"], "interrupted", interrupted)
+        self.assertTrue(interrupted["summary"]["can_resume"])
+        preserved = Path(interrupted["summary"]["resume_directory"])
+        self.assertTrue(preserved.is_dir())
+
+        source.unlink()
+        directory = response.parent.parent / "resume-real"
+        directory.mkdir()
+        resumed_response = directory / response.name
+        completed = self.execute("resume", None, resumed_response, "--resume-from", str(preserved),
+                                 "--wall-seconds", "30")
+        self.assertEqual(completed.returncode, 0, completed.stderr)
+        resumed = json.loads(resumed_response.read_bytes())
+        self.assertEqual(resumed["status"], "completed_unverified", resumed)
+        summary = resumed["summary"]
+        self.assertEqual(summary["analysis_kind"], "scattering")
+        self.assertEqual(summary["frequency_hz"], 1e9)
+        self.assertEqual(summary["accepted_channels"], summary["total_channels"])
+        self.assertTrue(summary["power_balance_passed"])
+        self.assertFalse(summary["spatial_convergence_established"])
+        self.assertTrue((Path(summary["output_directory"]) / "report_AP_pnc.html").is_file())
 
 
 if __name__ == "__main__":

@@ -37,6 +37,11 @@ from .scattering_AP_pnc import solve_scattering
 ROOT = Path(__file__).resolve().parents[2]
 PACKAGES = ("numpy", "scipy", "scikit-fem", "meshio", "gmsh", "matplotlib", "psutil")
 DIMENSIONS_NM = ("length_nm", "width_nm", "thickness_nm")
+LGMRES_DEFAULTS = {"inner_m": 50, "outer_k": 3, "maxiter": 30}
+
+
+def lgmres_options(resources: dict) -> dict:
+    return {key: resources.get(f"lgmres_{key}", default) for key, default in LGMRES_DEFAULTS.items()}
 
 
 def write_json(path: Path, value: dict) -> None:
@@ -95,7 +100,8 @@ def resolve_config(config: dict, *, check_body_budget: bool = True) -> dict:
         "mesh": {"kind", "cells", "element_order", "mesh_size_nm", "port_size_nm", "circle_resolution", "thickness_layers"},
         "material": {"name", "C11_Pa", "C12_Pa", "C44_Pa", "density_kg_m3", "crystal_rotation", "temperature_policy", "temperature_K"},
         "analysis": {"kind", "boundary", "num_modes", "k_points", "frequency_GHz", "incident_side"},
-        "resources": {"max_dofs", "max_port_dofs", "assembly_batch_elements", "linear_solver", "ilu_fill_factor", "ilu_precision"},
+        "resources": {"max_dofs", "max_port_dofs", "assembly_batch_elements", "linear_solver", "ilu_fill_factor", "ilu_precision",
+                      *(f"lgmres_{key}" for key in LGMRES_DEFAULTS)},
     }
     for section, keys in required.items():
         if section not in config or not isinstance(config[section], dict):
@@ -184,6 +190,13 @@ def resolve_config(config: dict, *, check_body_budget: bool = True) -> dict:
             raise ValueError("resources.ilu_precision must be double or single")
         if config["resources"].get("linear_solver") != "ilu_lgmres":
             raise ValueError("resources.ilu_precision requires linear_solver=ilu_lgmres")
+    for key, value in lgmres_options(config["resources"]).items():
+        field = f"lgmres_{key}"
+        if field in config["resources"] and config["resources"].get("linear_solver") != "ilu_lgmres":
+            raise ValueError(f"resources.{field} requires linear_solver=ilu_lgmres")
+        minimum = 0 if key == "outer_k" else 1
+        if type(value) is not int or value < minimum:
+            raise ValueError(f"resources.{field} must be an integer greater than or equal to {minimum}")
     if analysis["kind"] == "scattering" or kind in ("gmsh", "layered"):
         config["resources"].setdefault("max_port_dofs", 200)
         maximum_port = config["resources"]["max_port_dofs"]
@@ -273,6 +286,10 @@ def preflight_mesh(config: dict, output_root: Path | None = None) -> dict:
     geometry, holes, pattern = _resolve_geometry(config)
     identity = source_identity()
     output_root = Path(output_root or ROOT / "results" / "runs")
+    return _prepare_mesh_checkpoint(config, geometry, holes, pattern, identity, output_root)
+
+
+def _prepare_mesh_checkpoint(config, geometry, holes, pattern, identity, output_root) -> dict:
     directory, mesh_hash, inputs = _mesh_location(output_root, geometry, pattern, config["mesh"], identity)
     reused = directory.exists()
     if reused:
@@ -293,9 +310,23 @@ def preflight_mesh(config: dict, output_root: Path | None = None) -> dict:
             "max_dofs": body_cap, "max_port_dofs": port_cap, "within_body_budget": record["ndof"] <= body_cap}
 
 
-def run_study(config: dict, output_root: Path | None = None) -> dict:
+def _assemble_system(mesh, config, material):
+    resources = config["resources"]
+    options = {"element_order": config["mesh"]["element_order"], "max_dofs": resources["max_dofs"]}
+    batch = resources.get("assembly_batch_elements")
+    if batch is None:
+        return assemble_elasticity(mesh, material, **options)
+    from .assembly_batched_AP_pnc import assemble_elasticity_batched
+    return assemble_elasticity_batched(mesh, material, batch_elements=batch, **options)
+
+
+def run_study(config: dict, output_root: Path | None = None, *, _prepared_scattering=None) -> dict:
     config = resolve_config(config)
-    geometry, holes, pattern = _resolve_geometry(config)
+    if _prepared_scattering is None:
+        geometry, holes, pattern = _resolve_geometry(config)
+    else:
+        pattern = _prepared_scattering["pattern"]
+        holes = pattern["holes"] if pattern else ()
     mesh_settings = config["mesh"]
     mesh_kind = mesh_settings.get("kind", "structured")
     identity = source_identity()
@@ -306,12 +337,17 @@ def run_study(config: dict, output_root: Path | None = None) -> dict:
         # remains traceable if the original CSV is replaced during the solve.
         identity_inputs["hole_pattern"] = {key: pattern[key] for key in ("source_sha256", "x_offset_m", "holes")}
     output_root = Path(output_root or ROOT / "results" / "runs")
-    directory, mesh_hash, _ = _mesh_location(output_root, geometry, pattern, mesh_settings, identity)
-    checkpoint = None
-    if directory.exists():
-        checkpoint = load_checkpoint(directory, mesh_hash)
+    if _prepared_scattering is None:
+        directory, mesh_hash, _ = _mesh_location(output_root, geometry, pattern, mesh_settings, identity)
+        checkpoint = load_checkpoint(directory, mesh_hash) if directory.exists() else None
+    else:
+        directory = _prepared_scattering["mesh_directory"]
+        checkpoint = _prepared_scattering["mesh_checkpoint"]
+        mesh_hash = checkpoint[1]["mesh_hash"]
+    if checkpoint is not None:
         identity_inputs["mesh_checkpoint_sha256"] = checkpoint[1]["mesh_sha256"]
-    run_hash = digest({"configuration": config, **identity_inputs})
+    execution_identity = {} if _prepared_scattering is None else {"checkpoint_attempt": _prepared_scattering["attempt"]}
+    run_hash = digest({"configuration": config, **identity_inputs, **execution_identity})
     mechanical = copy.deepcopy(config)
     for key in ("name", "author", "file_tag"):
         mechanical.pop(key, None)
@@ -356,6 +392,8 @@ def run_study(config: dict, output_root: Path | None = None) -> dict:
                "calibrated_scattering_available": False, "experimental_validation": False,
                "mode_completeness_established": False, "spatial_convergence_established": False,
                "output_directory": str(output.resolve())}
+    if _prepared_scattering is not None:
+        summary["checkpointed_scattering"] = _prepared_scattering["provenance"]
     try:
         with lock.open("x", encoding="utf-8") as stream:
             process = psutil.Process()
@@ -387,15 +425,13 @@ def run_study(config: dict, output_root: Path | None = None) -> dict:
                 raise ValueError(f"Port has {port_dofs} DOFs, exceeding dense solver cap {max_port_dofs}.")
             batch = config["resources"].get("assembly_batch_elements")
             summary["assembly_method"] = "standard" if batch is None else "batched"
-            with measured_resources() as assembly_resources:
-                summary["assembly_resources"] = assembly_resources
-                if batch is None:
-                    system = assemble_elasticity(mesh, material, element_order=mesh_settings["element_order"],
-                                                max_dofs=max_dofs)
-                else:
-                    from .assembly_batched_AP_pnc import assemble_elasticity_batched
-                    system = assemble_elasticity_batched(mesh, material, element_order=mesh_settings["element_order"],
-                                                        max_dofs=max_dofs, batch_elements=batch)
+            if _prepared_scattering is None:
+                with measured_resources() as assembly_resources:
+                    summary["assembly_resources"] = assembly_resources
+                    system = _assemble_system(mesh, config, material)
+            else:
+                system = _prepared_scattering["system"]
+                summary["assembly_resources"] = _prepared_scattering["assembly_resources"]
             print(f"3D solid: {mesh.nelements} tetrahedra, {system.K.shape[0]} displacement DOFs", flush=True)
             analysis = config["analysis"]
             rows = []
@@ -403,19 +439,26 @@ def run_study(config: dict, output_root: Path | None = None) -> dict:
             extra_fields = {}
             if scattering:
                 frequency = analysis["frequency_GHz"] * 1e9
-                port = assemble_port(system, material, max_dofs=config["resources"]["max_port_dofs"])
-                port_modes = solve_port_modes(port, frequency)
                 solver_report = {"method": "direct"}
                 linear_solver = None
-                if config["resources"].get("linear_solver", "direct") == "ilu_gmres":
+                if _prepared_scattering is not None:
+                    port_modes = _prepared_scattering["port_modes"]
+                    port = port_modes.port
+                    solver_report = _prepared_scattering["solver_report"]
+                    linear_solver = _prepared_scattering["linear_solver"]
+                else:
+                    port = assemble_port(system, material, max_dofs=config["resources"]["max_port_dofs"])
+                    port_modes = solve_port_modes(port, frequency)
+                if _prepared_scattering is None and config["resources"].get("linear_solver", "direct") == "ilu_gmres":
                     from .linear_solvers_AP_pnc import solve_ilu_gmres
                     linear_solver = lambda operator, rhs: solve_ilu_gmres(
                         operator, rhs, report=solver_report, fill_factor=config["resources"].get("ilu_fill_factor", 10.0))
-                elif config["resources"].get("linear_solver") == "ilu_lgmres":
+                elif _prepared_scattering is None and config["resources"].get("linear_solver") == "ilu_lgmres":
                     from .linear_lgmres_AP_pnc import solve_ilu_lgmres
                     linear_solver = lambda operator, rhs: solve_ilu_lgmres(
                         operator, rhs, report=solver_report, fill_factor=config["resources"].get("ilu_fill_factor", 10.0),
-                        single_precision=config["resources"].get("ilu_precision", "double") == "single")
+                        single_precision=config["resources"].get("ilu_precision", "double") == "single",
+                        **lgmres_options(config["resources"]))
                 summary["linear_solver"] = solver_report
                 with measured_resources() as scattering_resources:
                     summary["scattering_resources"] = scattering_resources
@@ -599,7 +642,7 @@ def _write_csv(path: Path, rows: list[dict]) -> None:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="3D germanium beam modes, dispersion and matched-port scattering")
-    parser.add_argument("--config", type=Path, default=ROOT / "configs" / "straight_beam_AP_pnc.json")
+    parser.add_argument("--config", type=Path)
     parser.add_argument("--analysis", choices=("modes", "bloch", "scattering"))
     parser.add_argument("--thickness-nm", type=float)
     parser.add_argument("--cells", nargs=3, type=int, metavar=("NX", "NY", "NZ"))
@@ -622,13 +665,25 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--ilu-precision", choices=("double", "single"),
                         help="LGMRES preconditioner precision; equations and residuals stay double precision")
     parser.add_argument("--mesh-only", action="store_true", help="Save and inspect a mesh before assembling or solving")
+    checkpoint = parser.add_mutually_exclusive_group()
+    checkpoint.add_argument("--checkpoint", action="store_true", help="Checkpoint one ILU-LGMRES scattering run")
+    checkpoint.add_argument("--resume", type=Path, metavar="ATTEMPT", help="Continue a saved scattering attempt")
+    parser.add_argument("--wall-seconds", type=float, help="Wall-time budget per checkpointed attempt (default: 1800)")
     parser.add_argument("--output-root", type=Path)
     parser.add_argument("--open", action="store_true", help="Open the offline interactive result page")
     args = parser.parse_args(argv)
     if args.mesh_only and args.open:
         parser.error("--open requires a solved result. Omit --open when using --mesh-only.")
+    if args.wall_seconds is not None and not (args.checkpoint or args.resume):
+        parser.error("--wall-seconds requires --checkpoint or --resume.")
+    if args.checkpoint and args.mesh_only:
+        parser.error("--checkpoint requires a scattering solve.")
+    if args.resume and any(value is not None and value is not False for key, value in vars(args).items()
+                           if key not in ("resume", "wall_seconds", "open")):
+        parser.error("--resume uses the saved configuration and output root. Only --wall-seconds and --open may be changed.")
     try:
-        config = json.loads(args.config.read_text(encoding="utf-8-sig"))
+        config_path = args.config or ROOT / "configs" / "straight_beam_AP_pnc.json"
+        config = None if args.resume else json.loads(config_path.read_text(encoding="utf-8-sig"))
         if args.uniform:
             config["geometry"].pop("pattern", None)
         if args.analysis:
@@ -672,9 +727,23 @@ def main(argv: list[str] | None = None) -> int:
                 print("Body mesh exceeds the configured solve budget. Use --max-dofs to change that budget or adjust the mesh.")
             print("Status: mesh_ready. No mechanical assembly or solve was run.")
             return 0
-        summary = run_study(config, args.output_root)
+        if args.checkpoint or args.resume:
+            from .resumable_scattering_AP_pnc import run_resumable_scattering
+            options = {} if args.wall_seconds is None else {"wall_seconds": args.wall_seconds}
+            summary = run_resumable_scattering(config, args.output_root, resume_from=args.resume, **options)
+            if summary["status"] != "completed_unverified":
+                print(f"{summary['status'].capitalize()}: {summary['message']}")
+                if summary["total_channels"] is not None:
+                    print(f"Accepted channels: {summary['accepted_channels']}/{summary['total_channels']}")
+                if summary["resume_directory"]:
+                    print(f"Checkpoint attempt: {summary['resume_directory']}")
+                return 2 if summary["can_resume"] else 1
+        else:
+            summary = run_study(config, args.output_root)
         output = Path(summary["output_directory"])
         print(f"{'Reused' if summary['reused'] else 'Completed'}: {output}")
+        if "resume_directory" in summary:
+            print(f"Checkpoint attempt: {summary['resume_directory']}")
         print(f"Max relative solve residual: {summary['maximum_relative_solver_residual']:.3g}")
         if summary["analysis_kind"] == "scattering":
             print(f"Power balance check: {summary['power_balance_passed']}; max R={summary['maximum_reflection']:.6g}")
