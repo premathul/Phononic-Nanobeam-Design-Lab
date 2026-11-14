@@ -1399,7 +1399,7 @@
       ]
     }
   },
-  "csv_sha256": "3ae8a8a2eb7de2c11e1e2376953eb4e61581d340737d2c5b452b921a2367b606",
+  "csv_sha256": "1833549ad09052187d0e2ebc8f969cb854dca5bfb69d6c8358b9c4a89d9bbc5a",
   "historical_full_workflow_source": {
     "source_path": "src/phononic/workflow_AP_pnc.py",
     "source_commit": "392ea7955bf6e5f96e01879264266bd45ff7a73c",
@@ -13132,6 +13132,293 @@
       "retained_vector": {
         "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_short_krylov_fill8_hazy6byj/iterate-0.npy",
         "sha256": "7df15275c0ff46b61d51fd135819629a42f16eef9bc43308dedfe415ba62a8e2",
+        "bytes": 6826160
+      }
+    }
+  },
+  "full_device_h80_lgmres_fill8_inner50_long_continuation": {
+    "status": "iteration_limit",
+    "scope": "Warm-start the first left-incident drive of the saved full-device h80 operator at 1 GHz. Read only the original staged A/RHS and the saved warm-start vector as numerical inputs.",
+    "reference_operator_case": "full_device_h80_operator",
+    "previous_attempt_case": "full_device_h80_lgmres_fill8_inner50_continuation",
+    "resumed_from": {
+      "execution": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_short_krylov_fill8_hazy6byj/execution_AP_pnc.json",
+        "sha256": "66e579f7d4e18c1e5cb60afc661a62848741497f5349fb875009093896b98b13",
+        "bytes": 1977
+      },
+      "journal": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_short_krylov_fill8_hazy6byj/channels_AP_pnc.json",
+        "sha256": "c2b27253f6fe0755dda8c521a1190d26abbd18c226b83cd51710c8ad24385ab2",
+        "bytes": 8585
+      },
+      "profile": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_short_krylov_fill8_hazy6byj/pilot_profile_AP_pnc.json",
+        "sha256": "475188fcff7b30fd4c1fb9d0ba189fb6fd96b09fa2a9ba09fa37fd87fe2fc063",
+        "bytes": 10039
+      },
+      "seed": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_short_krylov_fill8_hazy6byj/iterate-0.npy",
+        "sha256": "7df15275c0ff46b61d51fd135819629a42f16eef9bc43308dedfe415ba62a8e2",
+        "bytes": 6826160
+      },
+      "saved_outer_callbacks": 87,
+      "preconditioner_rebuild_required": true,
+      "initial_guess_scope": "Saved finite first-drive solution vector. ILU factors and Krylov augmentation are rebuilt."
+    },
+    "inputs_sha256": "8289d35fe4735fbc019be4b7e0a2f3357d152b0402ac0d8de8a432511a26a1c8",
+    "equation_array_sha256": {
+      "operator_csc_sha256": "6c1ef8514f8d55ac0ac9ebd1011e4411117cda7b37211d41179b2ac5e3259d75",
+      "rhs_array_sha256": "0e812751c2da8e1e531fba3c187967876f7d33e3ef251cdae9d3b9a4be6094f1",
+      "rhs_column_sha256": "afe743a820e078694653d40fd83204bd3086f04388ca8cd0c66daaad97011355"
+    },
+    "body_dofs": 426627,
+    "frequency_hz": 1000000000.0,
+    "incident_side": "left",
+    "incident_columns": [
+      0
+    ],
+    "incident_root_index": 1348,
+    "total_device_channels": 5,
+    "accepted_channels": 0,
+    "factorization_attempted": true,
+    "memory_limits_respected": true,
+    "scattering_computed": false,
+    "spatial_convergence_established": false,
+    "source": {
+      "git_commit": "4ca81977c8ab0cfd5ca11d72c3d6a8c2e8c0a59d",
+      "source_sha256": {
+        "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+        "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+        "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+        "src/phononic/resumable_scattering_AP_pnc.py": "68c12549b47a9ec98abf7b39d78ad597dd114da00e326adf8ebbec060947b53f",
+        "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+        "src/phononic/workflow_AP_pnc.py": "0bdfc18674d68ae3f62947001f0a8aa0591f466e4d1ba895f0f962fb0bb3915d",
+        "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+      },
+      "packages": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "scikit-fem": "12.0.2",
+        "meshio": "5.3.5",
+        "gmsh": "4.15.2",
+        "matplotlib": "3.11.2",
+        "psutil": "7.2.2"
+      },
+      "python": "3.12.14",
+      "platform": "Windows-11-10.0.26200-SP0"
+    },
+    "numerical_thread_environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    },
+    "equation_dtype": "complex128",
+    "factor_dtype": "complex64",
+    "solver_options": {
+      "fill_factor": 8.0,
+      "single_precision": true,
+      "inner_m": 50,
+      "outer_k": 10,
+      "maxiter": 400
+    },
+    "relative_tolerance": 1e-10,
+    "absolute_tolerance": 0,
+    "relative_residual_limit": 1e-09,
+    "backward_residual_limit": 1e-09,
+    "admission_manifest": {
+      "shape": [
+        426627,
+        1
+      ],
+      "operator_storage_bytes": 655839372,
+      "nnz": 32706643,
+      "index_bytes": 4
+    },
+    "admission": {
+      "required_commit_mib": 9036.188034057617,
+      "required_physical_mib": 1200
+    },
+    "prior_h80_solver_peak_private_commit_mib": 8068.046875,
+    "before_factorization": {
+      "commit_total_mib": 23692.12890625,
+      "commit_limit_mib": 33086.86328125,
+      "commit_headroom_mib": 9394.734375,
+      "physical_available_mib": 3744.18359375,
+      "rss_mib": 710.046875,
+      "private_commit_mib": 691.46875,
+      "peak_working_set_mib": 736.00390625,
+      "peak_private_commit_mib": 704.53125
+    },
+    "loaded_equation_mib": 631.9669761657715,
+    "required_pre_factor_commit_headroom_mib": 8404.221057891846,
+    "factorization": {
+      "drop_tol": 0.0001,
+      "fill_factor": 8.0,
+      "permc_spec": "COLAMD",
+      "elapsed_seconds": 78.0147544000065,
+      "factor_nonzeros": 231119546
+    },
+    "wall_budget_basis": "A bounded continuation based on the prior mean outer-update cost of 16.81 s and late residual trends. Restart rebuilds the ILU and loses Krylov augmentation. The time budget is not a convergence prediction.",
+    "prior_pilot_wall_seconds": 1799.9219999999623,
+    "independent_initial_equation_checks": {
+      "relative_residual": 0.0003723038659191616,
+      "relative_backward_residual": 2.9254999153107137e-07
+    },
+    "retained_checkpoint": {
+      "artifact": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_first_drive_fill8_w9fwwwyq/iterate-0.npy",
+        "sha256": "9f1e137408f544b798bdcb4de8d443a11bf75b954d04e86dd2c663e60de0f36e",
+        "bytes": 6826160
+      },
+      "column": 0,
+      "event": "terminal",
+      "diagnostics": {
+        "iterations": 400,
+        "raw_info": 400,
+        "info": 400,
+        "warm_started": true,
+        "relative_residual": 1.6311628805419398e-08,
+        "relative_backward_residual": 1.3146771434376053e-11,
+        "terminal_confirmation": null
+      },
+      "independent_original_equation_checks": {
+        "relative_residual": 1.6311628805419123e-08,
+        "relative_backward_residual": 1.3146771434376053e-11
+      },
+      "relative_residual_passed": false,
+      "backward_residual_passed": true,
+      "original_residual_gates_passed": false
+    },
+    "preterminal_checkpoint": {
+      "callback": 400,
+      "artifact": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_first_drive_fill8_w9fwwwyq/iterate-1.npy",
+        "sha256": "1782c9440b17426e5e1c5c5f33ed2835af363563207fa9d3bedc7d8d5fb1193f",
+        "bytes": 6826160
+      },
+      "independent_original_equation_checks": {
+        "relative_residual": 1.631186215918024e-08,
+        "relative_backward_residual": 1.3147349088918008e-11
+      }
+    },
+    "relative_residual_history_summary": {
+      "callback_count": 400,
+      "samples_by_callback": {
+        "1": 0.00037230386591916075,
+        "50": 2.8904822759381214e-05,
+        "100": 4.7941598082759105e-06,
+        "150": 1.240420235307252e-06,
+        "200": 2.195034628926842e-07,
+        "250": 2.683383862662121e-08,
+        "300": 1.8510159483757532e-08,
+        "330": 1.629058069189394e-08,
+        "350": 1.628971202175928e-08,
+        "360": 1.630240125292564e-08,
+        "370": 1.6306033827398486e-08,
+        "380": 1.631122758226105e-08,
+        "390": 1.6310576024714555e-08,
+        "400": 1.631186215918041e-08
+      },
+      "minimum": 1.6271488847767375e-08,
+      "minimum_callback": 331,
+      "last_25_range": [
+        1.6310406451582965e-08,
+        1.631212157156602e-08
+      ],
+      "terminal_improvement_factor": 22824.444472122435
+    },
+    "run": {
+      "status": "iteration_limit",
+      "elapsed_seconds": 6896.969000000012,
+      "worker_exit_code": 1,
+      "accepted_channels": 0,
+      "wall_cap_seconds": 7200,
+      "sample_interval_seconds": 0.1,
+      "initial_memory": {
+        "commit_total_mib": 22998.01953125,
+        "commit_limit_mib": 33086.86328125,
+        "commit_headroom_mib": 10088.84375,
+        "physical_available_mib": 4418.71484375
+      },
+      "initial_disk_free_mib": 126993.6484375,
+      "required_disk_free_mib": 64,
+      "rss_cap_mib": 4608,
+      "private_commit_cap_mib": 9175,
+      "available_floor_mib": 400,
+      "commit_headroom_floor_mib": 512,
+      "peak_tree_rss_mib": 3959.52734375,
+      "peak_tree_private_commit_mib": 7761.63671875,
+      "minimum_available_mib": 467.76171875,
+      "minimum_commit_headroom_mib": 2217.06640625,
+      "reason": "RuntimeError: ILU-LGMRES failed for RHS 1 (info=400, relative residual 1.631e-08, backward residual 1.315e-11)."
+    },
+    "raw_files": {
+      "A": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/A_AP_pnc.npz",
+        "sha256": "2d1a0d342a293cd7f45874c396887d084e6ff3a42c5ba669a8f98c3c2554a56d",
+        "bytes": 655840629
+      },
+      "rhs": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/rhs_AP_pnc.npy",
+        "sha256": "80800b866d8e4358f7a4dab8478e2bd21ab9cf9083619fa1bf6f37854dab96a1",
+        "bytes": 34130288
+      },
+      "stages": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/stages_AP_pnc.json",
+        "sha256": "1c50971e27bfc52e63000c9d25df100e21bbe28b7fa47d7549f82cf465531a78",
+        "bytes": 14841
+      },
+      "driver": {
+        "path": "results/runs/full_device_resource_profile/continue_h80_first_drive_AP_pnc.py",
+        "sha256": "7f7e3288d921f24119c41f554796affd482d38dce4426330c8d7ee9383f127e3",
+        "bytes": 21571
+      },
+      "profile": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_first_drive_fill8_w9fwwwyq/pilot_profile_AP_pnc.json",
+        "sha256": "9ec37d472457786a28c24909c91c87078dbb223977140bbce7f65c562fda83db",
+        "bytes": 12012
+      },
+      "execution": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_first_drive_fill8_w9fwwwyq/execution_AP_pnc.json",
+        "sha256": "6e4dac850aef93ec4c7210ee08e122f32bdeb20878b69d20f4f224bb060152d8",
+        "bytes": 2325
+      },
+      "channel_journal": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_first_drive_fill8_w9fwwwyq/channels_AP_pnc.json",
+        "sha256": "b453fc411779e94b20e6b7d3912e22f3e77b6dcbbc14f4c3134eb06613790f29",
+        "bytes": 21316
+      },
+      "solver_report": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_first_drive_fill8_w9fwwwyq/linear_solver_AP_pnc.json",
+        "sha256": "20c4558e292c385248a22852aaca528cf511701b862f4c62a0084c02a442637d",
+        "bytes": 13924
+      },
+      "worker_log": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_first_drive_fill8_w9fwwwyq/worker_AP_pnc.log",
+        "sha256": "bcab119fd15a5745069717c96b45563d4ccc46b576201b0096430aef3b7e31cd",
+        "bytes": 1025
+      },
+      "retained_vector": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_first_drive_fill8_w9fwwwyq/iterate-0.npy",
+        "sha256": "9f1e137408f544b798bdcb4de8d443a11bf75b954d04e86dd2c663e60de0f36e",
+        "bytes": 6826160
+      },
+      "preterminal_vector": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_first_drive_fill8_w9fwwwyq/iterate-1.npy",
+        "sha256": "1782c9440b17426e5e1c5c5f33ed2835af363563207fa9d3bedc7d8d5fb1193f",
         "bytes": 6826160
       }
     }
