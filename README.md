@@ -225,7 +225,9 @@ The device-refinement checker verifies preserved data without solving. Its defau
 - [Long-term research work packages](docs/NEXT_STEPS_AP_pnc.md)
 - [Material references and validity limits](docs/REFERENCES_AP_pnc.md)
 
-The next bounded calculation is a 3 µm uniform guide at a 100 nm in-plane target with the same 675-DOF ports and four thickness layers. Reuse the saved h130 guide and compare both the native-reference phase error and the h130/h100 phase change before choosing the next full-device in-plane target. The h100 control is pending. Full-device phase, hole faceting and frequency coverage remain separate checks. Temperature-dependent properties, bends and larger sweeps follow when the corresponding inputs and checks are established. QTCAD served as a workflow reference. The phonon solver uses the libraries listed above.
+The 3 µm uniform h100 control is complete with the same 675-DOF ports and four thickness layers. Its maximum complex transmission error is 0.006355 against the native port reference and 0.008635 against the saved finer 20-by-6 SAFE reference. Both meet 0.01 for this finite guide. The h130/h100 complex change of 0.010495 exceeds the successive-mesh criterion, while its power change of 7.96e-7 passes. The 42579-DOF control completed in 111.859 s after a preserved timeout attempt. [Uniform control and resource evidence](verification/solver_resources_AP_pnc.json)
+
+The next full-device target is h100, starting with mesh preflight and operator staging to establish its memory budget. A bounded five-channel solve will be compared with saved h130 at the original physical port planes. Full-device phase convergence remains unresolved. Hole faceting and frequency coverage require their own checks. Temperature-dependent properties, bends and larger sweeps follow when the corresponding inputs and checks are established. QTCAD served as a workflow reference. The phonon solver uses the libraries listed above.
 
 ## Historical two-dimensional evidence
 

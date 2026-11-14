@@ -1399,7 +1399,7 @@
       ]
     }
   },
-  "csv_sha256": "21c0976eaf0ef5de7fd5adf31110f77923f313a81e572a6fcc8f647853c0733e",
+  "csv_sha256": "9aabfc7effbf6936ebbce20586b1d09e7ae9551cd9e0506c0123c10eef61db0e",
   "historical_full_workflow_source": {
     "source_path": "src/phononic/workflow_AP_pnc.py",
     "source_commit": "392ea7955bf6e5f96e01879264266bd45ff7a73c",
@@ -7662,5 +7662,1089 @@
     "finite_diagnostic_limit": 0.01,
     "pair_power_passed": true,
     "pair_complex_passed": false
+  },
+  "full_device_uniform_h130_h100_diagnostic": {
+    "status": "diagnostic_completed",
+    "length_m": 3e-06,
+    "frequency_hz": 1000000000.0,
+    "scope": "Uniform-guide in-plane sensitivity at a fixed discrete SAFE basis. No phase correction to patterned-device scattering.",
+    "roots": [
+      1348,
+      1311,
+      1292,
+      1284,
+      1274
+    ],
+    "wavenumbers_rad_m": [
+      1446668.9722198995,
+      1455967.0707150882,
+      2796959.945550218,
+      4103493.19443145,
+      5196894.30896118
+    ],
+    "reference_case": {
+      "entry": "full_device_uniform_h160_h130_diagnostic",
+      "size_nm": "130",
+      "public_summary": {
+        "path": "results/runs/full_device_uniform_diagnostic/uniform_3um_layered_h130_ny12_z4-b8c0bf2d5187/summary_AP_pnc.json",
+        "sha256": "653dcdb1b38d102b74cb3ec15fb61763ecc92218f288c05ca9db62067fd9e0fe",
+        "bytes": 12907
+      }
+    },
+    "cases": {
+      "100": {
+        "ndof": 42579,
+        "same_channel_native_phase_error_rad": [
+          -8.323407379490499e-07,
+          -0.0011393492137663198,
+          -8.11047705718647e-05,
+          -0.005063891817387881,
+          -0.006355110469526709
+        ],
+        "maximum_native_complex_error": 0.006355099698215295,
+        "maximum_reflection_amplitude": 0.0002970311761331945,
+        "status": "completed_unverified",
+        "configuration": {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "schema_version": 1,
+          "name": "uniform_3um_layered_h100_ny12_z4",
+          "geometry": {
+            "length_nm": 3000,
+            "width_nm": 1000,
+            "thickness_nm": 200
+          },
+          "mesh": {
+            "kind": "layered",
+            "element_order": 2,
+            "mesh_size_nm": 100,
+            "port_size_nm": 83.33333333333333,
+            "circle_resolution": 32,
+            "thickness_layers": 4
+          },
+          "material": {
+            "name": "nominal_cubic_ge",
+            "C11_Pa": 128500000000.0,
+            "C12_Pa": 48300000000.0,
+            "C44_Pa": 66800000000.0,
+            "density_kg_m3": 5323,
+            "crystal_rotation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ],
+            "temperature_policy": "fixed_property_control",
+            "temperature_K": 4
+          },
+          "analysis": {
+            "kind": "scattering",
+            "boundary": "matched_ports",
+            "frequency_GHz": 1,
+            "incident_side": "left"
+          },
+          "resources": {
+            "max_dofs": 42579,
+            "max_port_dofs": 675,
+            "assembly_batch_elements": 2048,
+            "linear_solver": "ilu_lgmres",
+            "ilu_fill_factor": 12,
+            "ilu_precision": "single"
+          }
+        },
+        "implementation": {
+          "git_commit": "fdb1892af4cef100d67b89195cd962f65074cb0f",
+          "source_sha256": {
+            "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+            "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+            "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+            "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+            "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+            "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+            "src/phononic/linear_lgmres_AP_pnc.py": "459589f4e5de39c888966305e28dbd2b16f2947ec427ae9c131c69ae47c609df",
+            "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+            "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+            "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+            "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+            "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+            "src/phononic/report_AP_pnc.py": "871fc6a358958c7908ad17f57521bdb51772ea82739d83cdbe5b4b536a5145c5",
+            "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+            "src/phononic/workflow_AP_pnc.py": "2ecccace6feee9456ed9a86744f246db7df34ade75a21dd3f0512d5ec553cbfa",
+            "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+          },
+          "packages": {
+            "numpy": "2.5.4",
+            "scipy": "1.18.1",
+            "scikit-fem": "12.0.2",
+            "meshio": "5.3.5",
+            "gmsh": "4.15.2",
+            "matplotlib": "3.11.2",
+            "psutil": "7.2.2"
+          },
+          "python": "3.12.14",
+          "platform": "Windows-11-10.0.26200-SP0"
+        },
+        "raw_files": {
+          "case": {
+            "path": "results/runs/full_device_uniform_diagnostic/h100_followup/h100_8i4mr26z/case_AP_pnc.json",
+            "sha256": "e966ef06bf18e342ab2f6fa230b04901a37dcc6e5f92a8baf8c233c29e8d2e6d",
+            "bytes": 4941
+          },
+          "execution": {
+            "path": "results/runs/full_device_uniform_diagnostic/h100_followup/h100_8i4mr26z/execution_AP_pnc.json",
+            "sha256": "f1447e9acaf6917f330ae354007f07b01235cef219dbe8892b102f3bfb67a8f0",
+            "bytes": 530
+          },
+          "public_summary": {
+            "path": "results/runs/full_device_uniform_diagnostic/h100_followup/uniform_3um_layered_h100_ny12_z4-e035d9a65c07-attempt2/summary_AP_pnc.json",
+            "sha256": "78f35d10fb3e6c87a845ee6959e97fede408328acb9a268aeadaa6231d1fd9e9",
+            "bytes": 13894
+          },
+          "configuration_AP_pnc.json": {
+            "path": "results/runs/full_device_uniform_diagnostic/h100_followup/uniform_3um_layered_h100_ny12_z4-e035d9a65c07-attempt2/configuration_AP_pnc.json",
+            "sha256": "d4714d71d901e05c866efbd508082208a01611ba4dd71bebf09fecc1e785c9cf",
+            "bytes": 1209
+          },
+          "port_modes_AP_pnc.csv": {
+            "path": "results/runs/full_device_uniform_diagnostic/h100_followup/uniform_3um_layered_h100_ny12_z4-e035d9a65c07-attempt2/port_modes_AP_pnc.csv",
+            "sha256": "05772e7246425c3dabf48b2b230ab1a71e966db6e58bbb31112c3cb22f396480",
+            "bytes": 114211
+          },
+          "report_AP_pnc.html": {
+            "path": "results/runs/full_device_uniform_diagnostic/h100_followup/uniform_3um_layered_h100_ny12_z4-e035d9a65c07-attempt2/report_AP_pnc.html",
+            "sha256": "05da247f2810bfec2f6d3f8667123008286f8057c075b03ce3a0ac723cdcb74f",
+            "bytes": 441307
+          },
+          "scattering_AP_pnc.csv": {
+            "path": "results/runs/full_device_uniform_diagnostic/h100_followup/uniform_3um_layered_h100_ny12_z4-e035d9a65c07-attempt2/scattering_AP_pnc.csv",
+            "sha256": "f06e37c66a5f658c0e74d5dadea783fd671117792102a873c0ec9a3b3c3d560d",
+            "bytes": 924
+          },
+          "scattering_channels_AP_pnc.csv": {
+            "path": "results/runs/full_device_uniform_diagnostic/h100_followup/uniform_3um_layered_h100_ny12_z4-e035d9a65c07-attempt2/scattering_channels_AP_pnc.csv",
+            "sha256": "25d0ee8c0168c86cee7b932b56f658a4cbabe2ebab71b6383116d33da566827b",
+            "bytes": 4730
+          },
+          "selected_fields_AP_pnc.npz": {
+            "path": "results/runs/full_device_uniform_diagnostic/h100_followup/uniform_3um_layered_h100_ny12_z4-e035d9a65c07-attempt2/selected_fields_AP_pnc.npz",
+            "sha256": "9d7116746086187def6e5f05df5c8aa4595a91af49bce0f1c97688f0937a634b",
+            "bytes": 16823298
+          },
+          "selected_vertex_shapes_AP_pnc.vtu": {
+            "path": "results/runs/full_device_uniform_diagnostic/h100_followup/uniform_3um_layered_h100_ny12_z4-e035d9a65c07-attempt2/selected_vertex_shapes_AP_pnc.vtu",
+            "sha256": "a497d27add186118fddf2cbdd648d88fd0318cd1e93cf60fd081fd77450b10c2",
+            "bytes": 616777
+          },
+          "log": {
+            "path": "results/runs/full_device_uniform_diagnostic/h100_followup/h100_8i4mr26z/worker_AP_pnc.log",
+            "sha256": "be5a48e00743adabf86dc7553316e55363214a94747e879e91d4627e5e3bcde5",
+            "bytes": 52
+          }
+        },
+        "run": {
+          "status": "completed",
+          "limits": {
+            "wall_seconds": 360,
+            "rss_mib": 1065,
+            "private_commit_mib": 2306,
+            "physical_available_floor_mib": 400,
+            "commit_headroom_floor_mib": 512
+          },
+          "exit_code": 0,
+          "elapsed_seconds": 111.85899999999674,
+          "peak_process_tree_rss_mib": 771.12890625,
+          "peak_process_tree_private_commit_mib": 1592.99609375,
+          "minimum_system_available_mib": 3339.72265625,
+          "minimum_commit_headroom_mib": 7214.94140625
+        },
+        "physical_checks": {
+          "power_balance_passed": true,
+          "matched_reference_passed": true,
+          "max_power_imbalance": 9.864431493866732e-11,
+          "maximum_flux_power_imbalance": 9.327127958869141e-11,
+          "maximum_net_outward_power_ratio": 9.32881549786658e-11,
+          "maximum_modal_flux_difference": 7.608136343151273e-12,
+          "maximum_relative_solver_residual": 3.023758149282572e-13,
+          "maximum_relative_port_residual": 4.298888081297976e-15,
+          "spatial_convergence_established": false,
+          "channels": [
+            {
+              "incident_mode_order": 1,
+              "incident_root_index": 1348,
+              "reflection": 9.3138732681498e-12,
+              "transmission": 0.9999999999816472,
+              "reflection_flux": 9.313872818088667e-12,
+              "transmission_flux": 0.9999999999811664,
+              "power_balance": 9.038880754985712e-12,
+              "flux_power_balance": 9.519718346950867e-12,
+              "relative_residual": 3.023758149282572e-13
+            },
+            {
+              "incident_mode_order": 2,
+              "incident_root_index": 1311,
+              "reflection": 1.1335068891730911e-07,
+              "transmission": 0.9999998865506667,
+              "reflection_flux": 1.1335068893079343e-07,
+              "transmission_flux": 0.9999998865560398,
+              "power_balance": 9.864431493866732e-11,
+              "flux_power_balance": 9.327127958869141e-11,
+              "relative_residual": 4.709562195259241e-14
+            },
+            {
+              "incident_mode_order": 3,
+              "incident_root_index": 1292,
+              "reflection": 3.0424354899358447e-10,
+              "transmission": 0.9999999996976269,
+              "reflection_flux": 3.042435488337464e-10,
+              "transmission_flux": 0.9999999996972919,
+              "power_balance": -1.8703927295860012e-12,
+              "flux_power_balance": -1.5354384430565915e-12,
+              "relative_residual": 9.44472102310372e-14
+            },
+            {
+              "incident_mode_order": 4,
+              "incident_root_index": 1284,
+              "reflection": 3.096586697253545e-08,
+              "transmission": 0.9999999690173896,
+              "reflection_flux": 3.096586697904001e-08,
+              "transmission_flux": 0.9999999690097815,
+              "power_balance": 1.6743384456674448e-11,
+              "flux_power_balance": 2.435152079982572e-11,
+              "relative_residual": 1.6098204162179672e-13
+            },
+            {
+              "incident_mode_order": 5,
+              "incident_root_index": 1274,
+              "reflection": 3.53128355455503e-08,
+              "transmission": 0.9999999646828487,
+              "reflection_flux": 3.531283556241888e-08,
+              "transmission_flux": 0.9999999646868908,
+              "power_balance": 4.315769963625371e-12,
+              "flux_power_balance": 2.736699755701011e-13,
+              "relative_residual": 2.828578178629562e-13
+            }
+          ]
+        },
+        "linear_solver": {
+          "method": "ilu_lgmres",
+          "working_dtype": "complex128",
+          "factor_dtype": "complex64",
+          "preconditioner": {
+            "drop_tol": 0.0001,
+            "fill_factor": 12.0,
+            "permc_spec": "COLAMD",
+            "elapsed_seconds": 12.915617600010592,
+            "factor_nonzeros": 37366855
+          },
+          "lgmres": {
+            "rtol": 1e-10,
+            "atol": 0,
+            "inner_m": 50,
+            "outer_k": 3,
+            "maxiter": 30
+          },
+          "relative_residual_limit": 1e-09,
+          "backward_residual_limit": 1e-09,
+          "operator_nonzeros": 4087801,
+          "operator_storage_bytes": 81926340,
+          "channels": [
+            {
+              "column": 0,
+              "raw_info": 0,
+              "info": 0,
+              "iterations": 9,
+              "relative_residual_history": [
+                1.0,
+                0.010407850194409313,
+                0.001129025064807576,
+                7.265093822925136e-05,
+                3.015299984004522e-06,
+                7.555091630242181e-08,
+                1.1081754722451806e-09,
+                1.1358946284220514e-10,
+                8.944559326594097e-11
+              ],
+              "relative_residual": 8.944559326594097e-11,
+              "relative_backward_residual": 3.023758149282572e-13,
+              "terminal_confirmation": null,
+              "elapsed_seconds": 16.404892900012783
+            },
+            {
+              "column": 1,
+              "raw_info": 0,
+              "info": 0,
+              "iterations": 10,
+              "relative_residual_history": [
+                1.0,
+                0.15269733126848847,
+                0.017037313053529138,
+                0.0008273106368607546,
+                4.950429972856626e-05,
+                2.1822045257524137e-06,
+                5.016806629891586e-08,
+                6.001364095364544e-09,
+                3.122570369749582e-10,
+                7.076156788815528e-11
+              ],
+              "relative_residual": 7.076156788815528e-11,
+              "relative_backward_residual": 4.709562195259241e-14,
+              "terminal_confirmation": null,
+              "elapsed_seconds": 18.90747679999913
+            },
+            {
+              "column": 2,
+              "raw_info": 0,
+              "info": 0,
+              "iterations": 10,
+              "relative_residual_history": [
+                1.0,
+                0.01538666747895726,
+                0.0018568435615445333,
+                0.0002880249726464984,
+                2.0239780727737797e-05,
+                7.821060936018823e-07,
+                2.236712126013935e-08,
+                9.778599810715247e-10,
+                1.0442511509622646e-10,
+                2.0876001242870682e-11
+              ],
+              "relative_residual": 2.0876001242870682e-11,
+              "relative_backward_residual": 9.44472102310372e-14,
+              "terminal_confirmation": null,
+              "elapsed_seconds": 18.655088900006376
+            },
+            {
+              "column": 3,
+              "raw_info": 0,
+              "info": 0,
+              "iterations": 9,
+              "relative_residual_history": [
+                1.0,
+                0.0514579468764262,
+                0.0052195803345958395,
+                0.00016744968861253452,
+                7.862168860097671e-06,
+                7.705775392776628e-08,
+                1.614279632486437e-09,
+                2.11266649498961e-10,
+                7.94226718462921e-11
+              ],
+              "relative_residual": 7.94226718462921e-11,
+              "relative_backward_residual": 1.6098204162179672e-13,
+              "terminal_confirmation": null,
+              "elapsed_seconds": 16.20688009999867
+            },
+            {
+              "column": 4,
+              "raw_info": 0,
+              "info": 0,
+              "iterations": 9,
+              "relative_residual_history": [
+                1.0,
+                0.0359225789280334,
+                0.002637565721635508,
+                0.000156098785325051,
+                1.0560169826174796e-05,
+                5.349378361761346e-07,
+                1.1459550780190318e-08,
+                6.886789557899571e-10,
+                7.977185794076355e-11
+              ],
+              "relative_residual": 7.977185794076355e-11,
+              "relative_backward_residual": 2.828578178629562e-13,
+              "terminal_confirmation": null,
+              "elapsed_seconds": 17.304338100002497
+            }
+          ]
+        },
+        "scattering": {
+          "frequency_hz": 1000000000.0,
+          "incident_side": "left",
+          "groups": {
+            "incoming": {
+              "root_indices": [
+                1348,
+                1311,
+                1292,
+                1284,
+                1274
+              ],
+              "wavenumbers_rad_m": [
+                1446668.9722198995,
+                1455967.0707150882,
+                2796959.945550218,
+                4103493.19443145,
+                5196894.30896118
+              ],
+              "signed_power_w": [
+                1.0000000000000002,
+                0.9999999999999989,
+                0.9999999999999998,
+                0.9999999999999998,
+                1.0000000000000002
+              ]
+            },
+            "reflection": {
+              "root_indices": [
+                1349,
+                1312,
+                1293,
+                1285,
+                1275
+              ],
+              "wavenumbers_rad_m": [
+                -1446668.9722198995,
+                -1455967.0707150882,
+                -2796959.945550218,
+                -4103493.19443145,
+                -5196894.30896118
+              ],
+              "signed_power_w": [
+                -1.0000000000000002,
+                -0.9999999999999989,
+                -0.9999999999999998,
+                -0.9999999999999998,
+                -1.0000000000000002
+              ]
+            },
+            "transmission": {
+              "root_indices": [
+                1348,
+                1311,
+                1292,
+                1284,
+                1274
+              ],
+              "wavenumbers_rad_m": [
+                1446668.9722198995,
+                1455967.0707150882,
+                2796959.945550218,
+                4103493.19443145,
+                5196894.30896118
+              ],
+              "signed_power_w": [
+                1.0000000000000002,
+                0.9999999999999989,
+                0.9999999999999998,
+                0.9999999999999998,
+                1.0000000000000002
+              ]
+            }
+          },
+          "reflection_amplitudes": [
+            [
+              [
+                1.411456407542671e-07,
+                -5.237213318010405e-08
+              ],
+              [
+                -4.1213016222176396e-08,
+                2.729520289388824e-07
+              ],
+              [
+                1.1457070252081363e-08,
+                -3.3108590292839814e-08
+              ],
+              [
+                -2.0917016210682223e-07,
+                -1.7839015503697252e-07
+              ],
+              [
+                -2.097096950343801e-06,
+                2.1772149047835452e-06
+              ]
+            ],
+            [
+              [
+                -4.109097713927814e-08,
+                2.729335782296873e-07
+              ],
+              [
+                0.0002906409113559727,
+                6.128115730988128e-05
+              ],
+              [
+                -1.3635364560183985e-06,
+                -1.275783867710531e-06
+              ],
+              [
+                3.2799824674042964e-05,
+                0.00012911605274183746
+              ],
+              [
+                4.816866141564617e-06,
+                -8.573002253646771e-05
+              ]
+            ],
+            [
+              [
+                1.1453782028918588e-08,
+                -3.309985091091216e-08
+              ],
+              [
+                -1.3635093021891643e-06,
+                -1.2757952683865006e-06
+              ],
+              [
+                -2.706550070362167e-06,
+                -1.6336927688185177e-06
+              ],
+              [
+                -6.250188250805711e-06,
+                1.9845467754870145e-06
+              ],
+              [
+                5.610028403353099e-06,
+                -1.4706624764873868e-05
+              ]
+            ],
+            [
+              [
+                -2.0913412273689669e-07,
+                -1.783980467957455e-07
+              ],
+              [
+                3.279988582162925e-05,
+                0.00012911600239397597
+              ],
+              [
+                -6.250201127423202e-06,
+                1.9845396591009005e-06
+              ],
+              [
+                -8.230014619185523e-05,
+                -7.807149513356439e-05
+              ],
+              [
+                -1.3593915582064715e-05,
+                1.107882804358835e-05
+              ]
+            ],
+            [
+              [
+                -2.097138373137179e-06,
+                2.1772110691555605e-06
+              ],
+              [
+                4.817026229120592e-06,
+                -8.57299713281664e-05
+              ],
+              [
+                5.6100469174790474e-06,
+                -1.4706633260267378e-05
+              ],
+              [
+                -1.3593865229159055e-05,
+                1.1078761506429484e-05
+              ],
+              [
+                1.1901263326597339e-05,
+                0.00016502704696672786
+              ]
+            ]
+          ],
+          "transmission_amplitudes": [
+            [
+              [
+                -0.36383604236006234,
+                -0.9314630074509532
+              ],
+              [
+                8.766849840497609e-07,
+                -6.499285980191478e-07
+              ],
+              [
+                7.336944966054268e-08,
+                -1.7038633452175387e-07
+              ],
+              [
+                -9.290425431450344e-07,
+                2.2486502299006602e-06
+              ],
+              [
+                -1.6194069364040649e-06,
+                1.43912936178092e-06
+              ]
+            ],
+            [
+              [
+                1.08762985363977e-06,
+                -8.727699226110976e-08
+              ],
+              [
+                -0.3387867532378243,
+                -0.9408631165718103
+              ],
+              [
+                -2.531168620948194e-05,
+                -1.40704172956391e-06
+              ],
+              [
+                -0.00012951773290603382,
+                -3.911354849903177e-06
+              ],
+              [
+                -2.2764052642672323e-05,
+                -1.7717976109816564e-05
+              ]
+            ],
+            [
+              [
+                -4.452531307406364e-08,
+                -1.8006978440843998e-07
+              ],
+              [
+                2.511566788552412e-05,
+                3.4253973768762675e-06
+              ],
+              [
+                -0.5114033888101943,
+                0.8593407778331283
+              ],
+              [
+                1.9246653296956346e-05,
+                -8.853643071136302e-06
+              ],
+              [
+                -8.035118606293512e-06,
+                2.876001030310206e-06
+              ]
+            ],
+            [
+              [
+                1.262461517985812e-06,
+                -2.0796462311361077e-06
+              ],
+              [
+                -7.704012797463555e-05,
+                -0.00010413708903916594
+              ],
+              [
+                1.3759086624441984e-05,
+                -1.6106016186752857e-05
+              ],
+              [
+                0.9661440162691257,
+                -0.2580032546480915
+              ],
+              [
+                -5.5361497178462205e-05,
+                -9.552197250962659e-05
+              ]
+            ],
+            [
+              [
+                -4.944577417048666e-07,
+                2.109769989914008e-06
+              ],
+              [
+                2.6096720519173322e-05,
+                1.2310359556604634e-05
+              ],
+              [
+                5.859582091124823e-06,
+                -6.203479773428264e-06
+              ],
+              [
+                -1.5485108591222838e-05,
+                0.0001093209683862843
+              ],
+              [
+                -0.992366844137142,
+                0.1233207129444966
+              ]
+            ]
+          ]
+        },
+        "preflight": {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "status": "mesh_ready",
+          "mesh_hash": "ab08173fa25fb9b82abf7b90beb7bf08359a61037b24bc3dc595b4d6b46eb415",
+          "mesh_inputs": {
+            "dimensions_m": [
+              3e-06,
+              1.0000000000000002e-06,
+              2.0000000000000002e-07
+            ],
+            "pattern": null,
+            "settings": {
+              "kind": "layered",
+              "element_order": 2,
+              "mesh_size_nm": 100,
+              "port_size_nm": 83.33333333333333,
+              "circle_resolution": 32,
+              "thickness_layers": 4
+            },
+            "source_sha256": {
+              "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+              "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+              "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+              "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a"
+            },
+            "packages": {
+              "numpy": "2.5.4",
+              "scikit-fem": "12.0.2",
+              "gmsh": "4.15.2"
+            },
+            "python": "3.12.14",
+            "platform": "Windows-11-10.0.26200-SP0"
+          },
+          "hole_pattern_provenance": null,
+          "hole_count": 0,
+          "mesh_resources": {
+            "peak_process_memory_mib": 87.37890625,
+            "system_available_memory_mib_at_start": 4140.97265625,
+            "process_lifetime_peak_working_set_mib": 91.015625,
+            "elapsed_seconds": 0.10580609999306034
+          },
+          "geometry_diagnostics": {
+            "analytic_solid_volume_m3": 6.000000000000002e-19,
+            "meshed_solid_volume_m3": 6.000000000000002e-19,
+            "analytic_removed_volume_m3": 0.0,
+            "meshed_removed_volume_m3": 0.0,
+            "relative_solid_volume_error": 0.0,
+            "relative_removed_volume_error": null,
+            "rim_segments_min": null,
+            "rim_segments_max": null,
+            "max_radial_sagitta_m": null
+          },
+          "ndof": 42579,
+          "mesh_vertices": 2080,
+          "mesh_tetrahedra": 8952,
+          "boundary_facet_counts": {
+            "xleft": 96,
+            "xright": 96,
+            "free": 1972
+          },
+          "end_face_dofs": {
+            "xleft": 675,
+            "xright": 675
+          },
+          "mesh_sha256": "c5374505a9ae3e6f3b05f2ee601bd4f0c33f2ec05de289a66453a1514b392cbb",
+          "reused": true,
+          "max_dofs": 42579,
+          "max_port_dofs": 675,
+          "within_body_budget": true
+        },
+        "mesh_checkpoint": {
+          "mesh_hash": "ab08173fa25fb9b82abf7b90beb7bf08359a61037b24bc3dc595b4d6b46eb415",
+          "mesh_sha256": "c5374505a9ae3e6f3b05f2ee601bd4f0c33f2ec05de289a66453a1514b392cbb",
+          "mesh_file": {
+            "path": "results/runs/full_device_uniform_diagnostic/h100_followup/_meshes/ab08173fa25fb9b82abf7b90beb7bf08359a61037b24bc3dc595b4d6b46eb415/mesh_AP_pnc.npz",
+            "sha256": "c5374505a9ae3e6f3b05f2ee601bd4f0c33f2ec05de289a66453a1514b392cbb",
+            "bytes": 60158
+          },
+          "reused": true
+        },
+        "cached_port_provenance": {
+          "execution_source": "Exact saved h200 SAFE modes; no SAFE eigensolve.",
+          "trace_dofs": 675,
+          "local_order": "Saved transverse coordinates and displacement components",
+          "driver": {
+            "path": "results/runs/full_device_uniform_diagnostic/run_uniform_h100_AP_pnc.py",
+            "sha256": "e64cd7e03ff3891bfc22057f52defc3b5d6968197aa6021a76c424c938716c7b",
+            "bytes": 8821
+          },
+          "source": {
+            "h200_summary": {
+              "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h200_ny12_z4-44ad87c9837d/summary_AP_pnc.json",
+              "sha256": "02f3a416dd75b398bcd043ac307dc86d01d7fc51840cfb0875a8d58e08691e09",
+              "bytes": 26501
+            },
+            "h200_stage": {
+              "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/stages_AP_pnc.json",
+              "sha256": "e4ce7210e457521e648c1aea66709d28a187f7f25f6dc05f3a6d5c2ab135c144",
+              "bytes": 10345
+            },
+            "modes": {
+              "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/ports_AP_pnc.npz",
+              "sha256": "ac2e0265423fe720db187246f3c21304bb3e0605dc579091f6ca29f92005de08",
+              "bytes": 29229016
+            },
+            "fields": {
+              "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h200_ny12_z4-44ad87c9837d/selected_fields_AP_pnc.npz",
+              "sha256": "f9a1e81d2ef6f7c78332abbbb1bb32b9e4218e4caa1c807a702eddfeafac726b",
+              "bytes": 27360256
+            }
+          }
+        },
+        "numerical_thread_environment": {
+          "OPENBLAS_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "BLIS_NUM_THREADS": "1"
+        },
+        "run_hash": "e035d9a65c0759fa9389e291ecc5c4d00958ebfdce1c0280b750d4a8fad5a2dd",
+        "mechanical_operator_hash": "5871d987d6d1670ec7666af7a93464c183bb6bfe96a6f09b03ffac06f3859f7e"
+      }
+    },
+    "initial_timed_out_attempt": {
+      "status": "stopped_timeout",
+      "worker_last_recorded_status": "solving",
+      "public_summary_last_recorded_status": "running",
+      "scattering_exported": false,
+      "ndof": 42579,
+      "mesh_sha256": "c5374505a9ae3e6f3b05f2ee601bd4f0c33f2ec05de289a66453a1514b392cbb",
+      "run_hash": "e035d9a65c0759fa9389e291ecc5c4d00958ebfdce1c0280b750d4a8fad5a2dd",
+      "mechanical_operator_hash": "5871d987d6d1670ec7666af7a93464c183bb6bfe96a6f09b03ffac06f3859f7e",
+      "run": {
+        "status": "stopped_timeout",
+        "limits": {
+          "wall_seconds": 106,
+          "rss_mib": 1065,
+          "private_commit_mib": 2306,
+          "physical_available_floor_mib": 400,
+          "commit_headroom_floor_mib": 512
+        },
+        "exit_code": 15,
+        "elapsed_seconds": 106.03100000000268,
+        "peak_process_tree_rss_mib": 770.625,
+        "peak_process_tree_private_commit_mib": 1592.265625,
+        "minimum_system_available_mib": 3397.82421875,
+        "minimum_commit_headroom_mib": 7656.75
+      },
+      "raw_files": {
+        "case": {
+          "path": "results/runs/full_device_uniform_diagnostic/h100_followup/h100_2d9lsty2/case_AP_pnc.json",
+          "sha256": "639d8db9cdc04023d904a1292d1e6c93a1b97817210b51682e00210c63b0bbba",
+          "bytes": 4658
+        },
+        "execution": {
+          "path": "results/runs/full_device_uniform_diagnostic/h100_followup/h100_2d9lsty2/execution_AP_pnc.json",
+          "sha256": "6d410c1b3200ae4b616c5295e552ed4ba8090cab09d42b50ffa2673a0f80fea4",
+          "bytes": 524
+        },
+        "log": {
+          "path": "results/runs/full_device_uniform_diagnostic/h100_followup/h100_2d9lsty2/worker_AP_pnc.log",
+          "sha256": "be5a48e00743adabf86dc7553316e55363214a94747e879e91d4627e5e3bcde5",
+          "bytes": 52
+        },
+        "interrupted_summary": {
+          "path": "results/runs/full_device_uniform_diagnostic/h100_followup/uniform_3um_layered_h100_ny12_z4-e035d9a65c07/summary_AP_pnc.json",
+          "sha256": "d53f9013a067f958d267e0b49ad3bc2b9477ba3bda6ac39817dbc5c6b4c1f437",
+          "bytes": 4485
+        },
+        "interrupted_run_lock": {
+          "path": "results/runs/full_device_uniform_diagnostic/h100_followup/uniform_3um_layered_h100_ny12_z4-e035d9a65c07/.run.lock",
+          "sha256": "1a21796900f8282fd5c01a5808fdad96e0bdf48f3c8806c7a1204c9bfb6c6245",
+          "bytes": 51
+        },
+        "budget": {
+          "path": "results/runs/full_device_uniform_diagnostic/h100_followup/budget_AP_pnc.json",
+          "sha256": "0c00a363eb41f34a6c673ef732f6dcf1eb8eb951bdf1cc00408f621e7f277614",
+          "bytes": 1305
+        }
+      }
+    },
+    "common_safe_reference": {
+      "source": {
+        "path": "verification/full_device_port_resolution_AP_pnc.json",
+        "sha256": "b7e91595acd0f2cfffa04af1468e6a0fa4a197ea610ee401aa114d2b2a3cfbbd",
+        "bytes": 2345862
+      },
+      "section": "20x6",
+      "trace_dofs": 1599,
+      "reference_roots": [
+        2992,
+        2975,
+        2960,
+        2949,
+        2931
+      ],
+      "reference_wavenumbers_rad_m": [
+        1446669.014217744,
+        1458356.499750812,
+        2796963.9613113287,
+        4104683.528194784,
+        5197136.916690025
+      ],
+      "cases": {
+        "130": {
+          "raw_files": {
+            "summary": {
+              "path": "results/runs/full_device_uniform_diagnostic/h100_followup/common_reference/uniform-reference-f4662b69f0cb3500/summary_AP_pnc.json",
+              "sha256": "345c29bab51366706b462541f68a889c7638b01b53c3b1211a5df40b1558803d",
+              "bytes": 27707
+            },
+            "channel_table": {
+              "path": "results/runs/full_device_uniform_diagnostic/h100_followup/common_reference/uniform-reference-f4662b69f0cb3500/uniform_reference_AP_pnc.csv",
+              "sha256": "e53c7e01e105392dba15136257df64dbf31e2a447113a0d588e0523560a492ee",
+              "bytes": 2207
+            }
+          },
+          "comparison_hash": "f4662b69f0cb3500f3928a12c7ad0e7b9c425a1fafccf9bfe1cf2ae3f6b926b1",
+          "same_channel_phase_error_rad": [
+            -2.674362949325193e-06,
+            -0.0188031161122331,
+            -0.000270850982108173,
+            -0.018536749108691748,
+            -0.015025888478221077
+          ],
+          "maximum_phase_error_rad": 0.0188031161122331,
+          "maximum_complex_error": 0.01880283422450616,
+          "maximum_power_error": 9.090748182005726e-07,
+          "uniform_response_passed": false,
+          "minimum_mode_mass_overlap": 0.9999998954918292
+        },
+        "100": {
+          "raw_files": {
+            "summary": {
+              "path": "results/runs/full_device_uniform_diagnostic/h100_followup/common_reference/uniform-reference-97d79382d566a0eb/summary_AP_pnc.json",
+              "sha256": "57f5f1e25939684bdd8e52e42da8e4e50053f138f4df34de71cafc03a37ee3a1",
+              "bytes": 27768
+            },
+            "channel_table": {
+              "path": "results/runs/full_device_uniform_diagnostic/h100_followup/common_reference/uniform-reference-97d79382d566a0eb/uniform_reference_AP_pnc.csv",
+              "sha256": "081fb1cc06af1e6f9c973449f1edb00b297d0105dbeb1ce8e0f1cedc35b31641",
+              "bytes": 2217
+            }
+          },
+          "comparison_hash": "97d79382d566a0ebdb85edf6e5093b478e4d6f1c4771afabd5e3956bfd3653da",
+          "same_channel_phase_error_rad": [
+            -9.583342717736252e-07,
+            -0.00830763632093818,
+            -9.31520539027437e-05,
+            -0.00863489310738797,
+            -0.007082933656060233
+          ],
+          "maximum_phase_error_rad": 0.00863489310738797,
+          "maximum_complex_error": 0.008634866150808983,
+          "maximum_power_error": 1.134493337051623e-07,
+          "uniform_response_passed": true,
+          "minimum_mode_mass_overlap": 0.9999998954918292
+        }
+      },
+      "phase_qualification": {
+        "status": "passed",
+        "length_m": 3e-06,
+        "phase_indicator_limit_rad": 0.01,
+        "pairs": {
+          "width": {
+            "pair": "16x6_to_20x6",
+            "coarser_subdivisions": 16,
+            "phase_indicators_rad": {
+              "positive": 0.001242315138172824,
+              "negative": 0.001242315138172824
+            },
+            "maximum_phase_indicator_rad": 0.001242315138172824
+          },
+          "thickness": {
+            "pair": "20x4_to_20x6",
+            "coarser_subdivisions": 4,
+            "phase_indicators_rad": {
+              "positive": 0.00130734220552817,
+              "negative": 0.00130734220552817
+            },
+            "maximum_phase_indicator_rad": 0.00130734220552817
+          }
+        },
+        "scope": "Successive SAFE section differences at this propagation distance. No continuum error bound."
+      },
+      "maximum_native_port_phase_drift_rad": 0.0071682871071717235
+    },
+    "retry_reason": "The initial watchdog stopped the worker before it exported scattering. The retry reused the accepted mesh and increased the wall-time allowance from 106 to 360 seconds. The memory limits were identical.",
+    "phase_adjustment_applied": false,
+    "reused_safe_sources": {
+      "h200_summary": {
+        "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h200_ny12_z4-44ad87c9837d/summary_AP_pnc.json",
+        "sha256": "02f3a416dd75b398bcd043ac307dc86d01d7fc51840cfb0875a8d58e08691e09",
+        "bytes": 26501
+      },
+      "h200_stage": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/stages_AP_pnc.json",
+        "sha256": "e4ce7210e457521e648c1aea66709d28a187f7f25f6dc05f3a6d5c2ab135c144",
+        "bytes": 10345
+      },
+      "modes": {
+        "path": "results/runs/full_device_resource_profile/full_h200_operator_ix6q9cku/ports_AP_pnc.npz",
+        "sha256": "ac2e0265423fe720db187246f3c21304bb3e0605dc579091f6ca29f92005de08",
+        "bytes": 29229016
+      },
+      "fields": {
+        "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h200_ny12_z4-44ad87c9837d/selected_fields_AP_pnc.npz",
+        "sha256": "f9a1e81d2ef6f7c78332abbbb1bb32b9e4218e4caa1c807a702eddfeafac726b",
+        "bytes": 27360256
+      }
+    },
+    "raw_files": {
+      "diagnostic": {
+        "path": "results/runs/full_device_uniform_diagnostic/h100_followup/diagnostic_AP_pnc.json",
+        "sha256": "e3d97bf0c28e0e286ec3053f31780e17da88243afdfd975b16deeb6c953a08c7",
+        "bytes": 5387
+      },
+      "driver": {
+        "path": "results/runs/full_device_uniform_diagnostic/run_uniform_h100_AP_pnc.py",
+        "sha256": "e64cd7e03ff3891bfc22057f52defc3b5d6968197aa6021a76c424c938716c7b",
+        "bytes": 8821
+      },
+      "archived_driver": {
+        "path": "results/runs/full_device_uniform_diagnostic/run_uniform_AP_pnc.py",
+        "sha256": "544c890346b4722d93e802d38c10afa43d1ab33dadaf975436bf032f7a19f288",
+        "bytes": 16807
+      },
+      "monitor": {
+        "path": "results/runs/full_device_resource_profile/profile_AP_pnc.py",
+        "sha256": "f0dab5367f25016a5cea91d5809311ec89658a8c090ee53eb8dbafe934205911",
+        "bytes": 25492
+      },
+      "budget": {
+        "path": "results/runs/full_device_uniform_diagnostic/h100_followup/retry_budget_AP_pnc.json",
+        "sha256": "559fcb61fb5084ced3fb6dc12009eac4fea857ff2cfa5a398f45b1464060772f",
+        "bytes": 2052
+      },
+      "preflight": {
+        "path": "results/runs/full_device_uniform_diagnostic/h100_followup/preflight_AP_pnc.json",
+        "sha256": "9eb668733330a74310fdb226135e2c2165e7812073c8db7563a53e44c368454b",
+        "bytes": 7746
+      },
+      "retry_driver": {
+        "path": "results/runs/full_device_uniform_diagnostic/retry_uniform_h100_AP_pnc.py",
+        "sha256": "e6b436f04c487119c62d7b370ef227ec63565532878238c0b5d6b02eb40adbea",
+        "bytes": 2855
+      },
+      "publisher": {
+        "path": "results/runs/full_device_uniform_diagnostic/publish_h100_evidence_AP_pnc.py",
+        "sha256": "2ba9b5f78a03602a2ed71c443c8c5ad2d4b71d3666a83daa49017f41452ecb1e",
+        "bytes": 27261
+      }
+    },
+    "same_channel_phase_difference_rad": [
+      1.7160286775718846e-06,
+      0.01049547979129495,
+      0.0001776989282053636,
+      0.009901856001303794,
+      0.007942954822160845
+    ],
+    "same_channel_phase_difference_rad_per_um": [
+      5.720095591906282e-07,
+      0.0034984932637649835,
+      5.9232976068454534e-05,
+      0.003300618667101265,
+      0.0026476516073869485
+    ],
+    "maximum_reflection_complex_change": 0.0006925624980443522,
+    "maximum_transmission_complex_change": 0.010495428550039784,
+    "maximum_power_change": 7.957240814295873e-07,
+    "finite_diagnostic_limit": 0.01,
+    "maximum_native_phase_error_rad": 0.006355110469526709,
+    "maximum_pair_phase_error_rad": 0.01049547979129495,
+    "native_phase_passed": true,
+    "pair_phase_passed": false,
+    "native_complex_passed": true,
+    "pair_power_passed": true,
+    "pair_complex_passed": false,
+    "interpretation": "Finite uniform-guide body-mesh comparison at the saved discrete SAFE basis. Its phase differences apply to the 3 micrometre control only. The patterned-device phase remains at its original physical end planes."
   }
 }
