@@ -1399,7 +1399,7 @@
       ]
     }
   },
-  "csv_sha256": "9f3ff18b8010c291ecfe0529e1da5aaa2b99f6977ca2b4b55d3be2ee22204f49",
+  "csv_sha256": "3ae8a8a2eb7de2c11e1e2376953eb4e61581d340737d2c5b452b921a2367b606",
   "historical_full_workflow_source": {
     "source_path": "src/phononic/workflow_AP_pnc.py",
     "source_commit": "392ea7955bf6e5f96e01879264266bd45ff7a73c",
@@ -11786,6 +11786,1354 @@
       "staging_performed": false,
       "factorization_performed": false,
       "scattering_computed": false
+    }
+  },
+  "full_device_h80_operator": {
+    "status": "operator_ready",
+    "scope": "Full 26-hole h80 layered mesh, four thickness layers, circle32, 1 GHz, five left drives. Assemble K/M and stage the matched operator using the exact saved h100 SAFE basis.",
+    "source": {
+      "git_commit": "8584ebbf2d099b8af768d34ec53590a9a2e62d95",
+      "source_sha256": {
+        "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+        "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+        "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+        "src/phononic/resumable_scattering_AP_pnc.py": "68c12549b47a9ec98abf7b39d78ad597dd114da00e326adf8ebbec060947b53f",
+        "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+        "src/phononic/workflow_AP_pnc.py": "0bdfc18674d68ae3f62947001f0a8aa0591f466e4d1ba895f0f962fb0bb3915d",
+        "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+      },
+      "packages": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "scikit-fem": "12.0.2",
+        "meshio": "5.3.5",
+        "gmsh": "4.15.2",
+        "matplotlib": "3.11.2",
+        "psutil": "7.2.2"
+      },
+      "python": "3.12.14",
+      "platform": "Windows-11-10.0.26200-SP0"
+    },
+    "configuration": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "schema_version": 1,
+      "name": "historical_26hole_layered_h80_ny12_z4",
+      "geometry": {
+        "length_nm": 16650,
+        "width_nm": 1000,
+        "thickness_nm": 200,
+        "pattern": {
+          "csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+          "x_offset_nm": 8325
+        }
+      },
+      "mesh": {
+        "kind": "layered",
+        "element_order": 2,
+        "mesh_size_nm": 80,
+        "port_size_nm": 83.33333333333333,
+        "circle_resolution": 32,
+        "thickness_layers": 4
+      },
+      "material": {
+        "name": "nominal_cubic_ge",
+        "C11_Pa": 128500000000.0,
+        "C12_Pa": 48300000000.0,
+        "C44_Pa": 66800000000.0,
+        "density_kg_m3": 5323,
+        "crystal_rotation": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "temperature_policy": "fixed_property_control",
+        "temperature_K": 4
+      },
+      "analysis": {
+        "kind": "scattering",
+        "boundary": "matched_ports",
+        "frequency_GHz": 1,
+        "incident_side": "left"
+      },
+      "resources": {
+        "max_dofs": 426627,
+        "max_port_dofs": 675,
+        "assembly_batch_elements": 2048,
+        "linear_solver": "ilu_lgmres",
+        "ilu_fill_factor": 12.0,
+        "ilu_precision": "single",
+        "lgmres_inner_m": 100,
+        "lgmres_outer_k": 10,
+        "lgmres_maxiter": 60
+      }
+    },
+    "mesh_hash": "89cfa12d6b14109eb95dc873b3682aa5650045ccf5fe3a0d723e8d45b176ba33",
+    "mesh_comparison": {
+      "exact_yz_triangulations": true,
+      "exact_x_end_planes": true,
+      "exact_z_planes": true,
+      "exact_hole_walls_from_saved_preflight": true,
+      "tetrahedra": 87312,
+      "vertices": 21250,
+      "ndof": 426627
+    },
+    "stage_only_body_dof_cap": 426627,
+    "assembly_batch_elements": 2048,
+    "numerical_thread_environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    },
+    "mesh_generated": false,
+    "safe_eigensolve_attempted": false,
+    "factorization_attempted": false,
+    "solve_attempted": false,
+    "scattering_computed": false,
+    "spatial_convergence_established": false,
+    "port_reuse_proof": {
+      "reference_stage": {
+        "path": "results/runs/full_device_resource_profile/full_h100_operator_qr_jt4fp/stages_AP_pnc.json",
+        "sha256": "48fab07dff1f8f79fa76b76ace8aac4246019c68666e03f4dd2fe755de8cbd9f",
+        "bytes": 13641
+      },
+      "reference_port_modes": {
+        "path": "results/runs/full_device_resource_profile/full_h100_operator_qr_jt4fp/ports_AP_pnc.npz",
+        "sha256": "ceb74741e6145a676b7f23631fb722f5c40404d76a1efc6a5900b497a6abecc1",
+        "bytes": 29223616
+      },
+      "reference_rhs": {
+        "path": "results/runs/full_device_resource_profile/full_h100_operator_qr_jt4fp/rhs_AP_pnc.npy",
+        "sha256": "6d046fe7753190c6be10cde8f6093252ce13c66616bd63f663196bafeb35a547",
+        "bytes": 24609008
+      },
+      "trace_mapping": {
+        "xleft": {
+          "trace_dofs": 675,
+          "end_plane_m": 0.0,
+          "transverse_coordinates_and_components_sha256": "22c66caa9c4943b9fc0e55921b5e54b64d2bc00d71ec52d484ce1a87d7b82122",
+          "matches_h100_in_saved_safe_order": true
+        },
+        "xright": {
+          "trace_dofs": 675,
+          "end_plane_m": 1.665e-05,
+          "transverse_coordinates_and_components_sha256": "22c66caa9c4943b9fc0e55921b5e54b64d2bc00d71ec52d484ce1a87d7b82122",
+          "matches_h100_in_saved_safe_order": true
+        }
+      },
+      "complete_discrete_roots": 1350,
+      "incoming_root_indices": [
+        1348,
+        1311,
+        1292,
+        1284,
+        1274
+      ],
+      "shared_local_safe_array_sha256": {
+        "axial_forces": "b0f3b058e6a354fbb593e383656a7b7aab18e47aa0f3b592b6f6997f06d8c138",
+        "displacements": "df991b7cf096464ca00b3d5a3dcef3b470877440baf4e29f72bf8d9d08d746b9",
+        "frequency_hz": "3743e2520ce26efc75a9a9fb439f5a9363b9db858a88cc95bcf647236a86c012",
+        "negative_indices": "d14b841e382d6b71261328e3b4ca604c2b4dd4a9ce8bec16e87c163948b013e8",
+        "positive_indices": "768fe7d5b5f89bde93d46f370ad4bb4ece4c8566633a951d5ae8726b9f9d4a34",
+        "powers_w": "efd51a5d71bf760eee125090522fb6f443032dcaf9cc3b01e777e1b9aafccf41",
+        "propagating": "0a67c4885e8247bc8256098dd5842b3df5845fd63d3c908820331debd70ecedb",
+        "relative_residuals": "8c2382a19117f9cdc9a54ea81032ea6cff8e4a9628db81661cb682d19c032a96",
+        "wavenumbers_rad_m": "01493395a1c1791d2dc0eef6e1659208a1e6dff8fafa72a7d4c1d741ba94e079"
+      },
+      "shared_local_rhs_sha256": "2b441e7e2327fcc5062c660bf6813aa6fa1ace6962c67a4452bfbf7672cd0a35",
+      "rhs_nonzero_rows_per_channel": [
+        675,
+        675,
+        675,
+        675,
+        675
+      ],
+      "rhs_shape": [
+        426627,
+        5
+      ],
+      "rhs_dtype": "complex128",
+      "rhs_array_bytes": 34130160,
+      "phase_adjustment_applied": false,
+      "all_local_safe_arrays_bit_identical": true,
+      "all_local_physical_rhs_values_bit_identical": true
+    },
+    "operator": {
+      "format": "csc",
+      "shape": [
+        426627,
+        426627
+      ],
+      "data_dtype": "complex128",
+      "index_dtype": "int32",
+      "nonzero_storage": 32706643,
+      "array_bytes": 655839372
+    },
+    "stiffness": {
+      "format": "csr",
+      "shape": [
+        426627,
+        426627
+      ],
+      "data_dtype": "float64",
+      "index_dtype": "int32",
+      "nonzero_storage": 31806681,
+      "array_bytes": 383386684
+    },
+    "mass": {
+      "format": "csr",
+      "shape": [
+        426627,
+        426627
+      ],
+      "data_dtype": "float64",
+      "index_dtype": "int32",
+      "nonzero_storage": 10907361,
+      "array_bytes": 132594844
+    },
+    "checkpoint_bytes": 1235178575,
+    "raw_files": {
+      "configuration": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/configuration_AP_pnc.json",
+        "sha256": "332190b8f4e70db8ff28c51ebe97317a5e94b2a11d70bd65e33d02e60ced2c76",
+        "bytes": 1416
+      },
+      "preflight": {
+        "path": "results/runs/full_device_layered_preflight/h80_preflight/preflight_AP_pnc.json",
+        "sha256": "f20972c06128b815e342ce63442fc470bd367f5d5c866086a70cd2616dbfd4eb",
+        "bytes": 16469
+      },
+      "preflight_configuration": {
+        "path": "results/runs/full_device_layered_preflight/h80_preflight/configuration_AP_pnc.json",
+        "sha256": "f0dd7ad1cebb573d25e3e665335b894bdba440ee19befc62236630110f7839e0",
+        "bytes": 1197
+      },
+      "mesh": {
+        "path": "results/runs/full_device_layered_preflight/_meshes/89cfa12d6b14109eb95dc873b3682aa5650045ccf5fe3a0d723e8d45b176ba33/mesh_AP_pnc.npz",
+        "sha256": "1bf8ad7aea98d1800b8bb8892954d5810b0907b7a7d4fd42979ae22dc75456de",
+        "bytes": 962193
+      },
+      "mesh_checkpoint_summary": {
+        "path": "results/runs/full_device_layered_preflight/_meshes/89cfa12d6b14109eb95dc873b3682aa5650045ccf5fe3a0d723e8d45b176ba33/summary_AP_pnc.json",
+        "sha256": "4e0eda32c22840717c79456614bdc07130810b703d77e2ca0a7dcf8efaa6e023",
+        "bytes": 9556
+      },
+      "driver": {
+        "path": "results/runs/full_device_resource_profile/stage_h80_operator_AP_pnc.py",
+        "sha256": "8972953fa47047483e1e2f8266839a7b12d58d4ceaf85d602580201f252d035d",
+        "bytes": 24174
+      },
+      "monitor_helpers": {
+        "path": "results/runs/full_device_resource_profile/profile_AP_pnc.py",
+        "sha256": "f0dab5367f25016a5cea91d5809311ec89658a8c090ee53eb8dbafe934205911",
+        "bytes": 25492
+      },
+      "shared_stage_helpers": {
+        "path": "results/runs/full_device_resource_profile/stage_h130_operator_AP_pnc.py",
+        "sha256": "6badd803904e67a2b4fafd4d5616351a0be4d92b363a620dc52f952b44198327",
+        "bytes": 16609
+      },
+      "hole_pattern": {
+        "path": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+        "sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+        "bytes": 608
+      },
+      "h100_stage": {
+        "path": "results/runs/full_device_resource_profile/full_h100_operator_qr_jt4fp/stages_AP_pnc.json",
+        "sha256": "48fab07dff1f8f79fa76b76ace8aac4246019c68666e03f4dd2fe755de8cbd9f",
+        "bytes": 13641
+      },
+      "K": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/K_AP_pnc.npz",
+        "sha256": "bc8502e57383f556ae0cb9329246e90c53fd413e22c139ab09379b922c0e726b",
+        "bytes": 383387941
+      },
+      "M": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/M_AP_pnc.npz",
+        "sha256": "1fba2f5be3de1162b3778d3153dba5447058cd8c7d337b4c2eccd4acc43d670a",
+        "bytes": 132596101
+      },
+      "A": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/A_AP_pnc.npz",
+        "sha256": "2d1a0d342a293cd7f45874c396887d084e6ff3a42c5ba669a8f98c3c2554a56d",
+        "bytes": 655840629
+      },
+      "rhs": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/rhs_AP_pnc.npy",
+        "sha256": "80800b866d8e4358f7a4dab8478e2bd21ab9cf9083619fa1bf6f37854dab96a1",
+        "bytes": 34130288
+      },
+      "port_modes": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/ports_AP_pnc.npz",
+        "sha256": "18c0ad4c8b28e597503a28bd5157c867bb09744c94e1eb1aff23f024cc879c8b",
+        "bytes": 29223616
+      },
+      "stages": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/stages_AP_pnc.json",
+        "sha256": "1c50971e27bfc52e63000c9d25df100e21bbe28b7fa47d7549f82cf465531a78",
+        "bytes": 14841
+      },
+      "execution": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/execution_AP_pnc.json",
+        "sha256": "cd865c84ba142988819d13de902e3a3b9c920fdb9063a27d4abeec83eba3a44e",
+        "bytes": 2092
+      },
+      "log": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/worker_AP_pnc.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    "phases": {
+      "verify_saved_mesh_and_sources": {
+        "elapsed_seconds": 0.34400000001187436,
+        "peak_working_set_mib_at_phase_end": 108.1171875,
+        "peak_private_commit_mib_at_phase_end": 88.20703125
+      },
+      "production_batched_assembly": {
+        "elapsed_seconds": 71.75,
+        "peak_working_set_mib_at_phase_end": 1346.515625,
+        "peak_private_commit_mib_at_phase_end": 1730.7109375
+      },
+      "save_stiffness": {
+        "elapsed_seconds": 0.5,
+        "peak_working_set_mib_at_phase_end": 1346.515625,
+        "peak_private_commit_mib_at_phase_end": 1730.7109375
+      },
+      "save_mass": {
+        "elapsed_seconds": 0.2029999999795109,
+        "peak_working_set_mib_at_phase_end": 1346.515625,
+        "peak_private_commit_mib_at_phase_end": 1730.7109375
+      },
+      "restore_exact_h100_safe_modes": {
+        "elapsed_seconds": 0.40700000000651926,
+        "peak_working_set_mib_at_phase_end": 1346.515625,
+        "peak_private_commit_mib_at_phase_end": 1730.7109375
+      },
+      "stage_physical_operator_and_rhs": {
+        "elapsed_seconds": 2.2030000000086147,
+        "peak_working_set_mib_at_phase_end": 2540.28515625,
+        "peak_private_commit_mib_at_phase_end": 2713.3203125
+      }
+    },
+    "run": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "status": "operator_ready",
+      "initial_memory": {
+        "commit_total_mib": 22964.1484375,
+        "commit_limit_mib": 33086.86328125,
+        "commit_headroom_mib": 10122.71484375,
+        "physical_available_mib": 4463.0703125
+      },
+      "initial_disk_free_mib": 128325.0859375,
+      "required_physical_available_mib": 3500,
+      "required_commit_headroom_mib": 4112,
+      "required_disk_free_mib": 2048,
+      "available_floor_mib": 400,
+      "commit_headroom_floor_mib": 512,
+      "rss_cap_mib": 3100,
+      "private_commit_cap_mib": 3600,
+      "wall_cap_seconds": 240,
+      "sample_interval_seconds": 0.1,
+      "supervisor_pid": 35504,
+      "supervisor_create_time": 1794633247.732826,
+      "driver": {
+        "path": "results/runs/full_device_resource_profile/stage_h80_operator_AP_pnc.py",
+        "sha256": "8972953fa47047483e1e2f8266839a7b12d58d4ceaf85d602580201f252d035d",
+        "bytes": 24174
+      },
+      "numerical_thread_environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "BLIS_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1"
+      },
+      "worker_guard_source": {
+        "path": "src/phononic/resumable_scattering_AP_pnc.py",
+        "sha256": "68c12549b47a9ec98abf7b39d78ad597dd114da00e326adf8ebbec060947b53f",
+        "bytes": 33110
+      },
+      "worker_pid": 43692,
+      "worker_create_time": 1794633248.0321105,
+      "stages": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/stages_AP_pnc.json",
+        "sha256": "1c50971e27bfc52e63000c9d25df100e21bbe28b7fa47d7549f82cf465531a78",
+        "bytes": 14841
+      },
+      "worker_exit_code": 0,
+      "elapsed_seconds": 77.28099999998813,
+      "peak_tree_rss_mib": 2328.8046875,
+      "peak_tree_private_commit_mib": 2728.3203125,
+      "minimum_available_mib": 1934.62890625,
+      "minimum_commit_headroom_mib": 7299.52734375,
+      "worker_log": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/worker_AP_pnc.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    "solve_admission": {
+      "status": "blocked_insufficient_commit",
+      "scope": "Planning assessment for an isolated solve using the exact staged operator and all five unstarted drives.",
+      "solver_reference_case": "full_device_h100_lgmres_continuation_fill12",
+      "solver_budget_implementation": "src/phononic/resumable_scattering_AP_pnc.py",
+      "solver_budget_source_sha256": "68c12549b47a9ec98abf7b39d78ad597dd114da00e326adf8ebbec060947b53f",
+      "host_snapshot": {
+        "observed_utc": "2026-11-14T05:15:48.874892+00:00",
+        "physical_available_mib": 4260.08984375,
+        "commit_headroom_mib": 9075.453125,
+        "disk_free_gib": 124.16666793823242
+      },
+      "ilu_settings": {
+        "drop_tol": 0.0001,
+        "fill_factor": 12.0,
+        "permc_spec": "COLAMD"
+      },
+      "lgmres_settings": {
+        "inner_m": 100,
+        "outer_k": 10,
+        "maxiter": 60,
+        "rtol": 1e-10,
+        "atol": 0.0
+      },
+      "factor_input_dtype": "complex64",
+      "outer_dtype": "complex128",
+      "relative_residual_limit": 1e-09,
+      "backward_residual_limit": 1e-09,
+      "accepted_channels": 0,
+      "required_commit_mib": 12759.669509887695,
+      "required_physical_mib": 1200,
+      "measured_stage_peak_private_commit_mib": 2728.3203125,
+      "commit_shortfall_mib": 3684.2163848876953,
+      "initial_ilu_buffer_mib": 8983.14779663086,
+      "h100_solve_peak_private_mib": 8245.1640625,
+      "h100_scaled_solve_peak_private_mib": 11485.174944559121,
+      "stage_memory_released_before_snapshot": true,
+      "method": "Apply the existing checkpoint solver budget to measured CSC storage with the completed h100 solver settings. The separately reported storage-scaled h100 solver peak is empirical."
+    }
+  },
+  "full_device_h80_lgmres_fill8_pilot": {
+    "status": "aborted_memory_limit",
+    "scope": "First left-incident drive of the saved full-device h80 operator at 1 GHz. No mesh, assembly, SAFE extraction or scattering export.",
+    "reference_operator_case": "full_device_h80_operator",
+    "inputs_sha256": "98979bbd813cd051a00c0b1852c7ddb9a15dbe44b53fac9162532024c14b3692",
+    "body_dofs": 426627,
+    "frequency_hz": 1000000000.0,
+    "incident_side": "left",
+    "incident_columns": [
+      0
+    ],
+    "incident_root_index": 1348,
+    "total_device_channels": 5,
+    "accepted_channels": 0,
+    "factorization_attempted": true,
+    "memory_limits_respected": false,
+    "scattering_computed": false,
+    "spatial_convergence_established": false,
+    "numerical_thread_environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    },
+    "source": {
+      "git_commit": "8584ebbf2d099b8af768d34ec53590a9a2e62d95",
+      "source_sha256": {
+        "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+        "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+        "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+        "src/phononic/resumable_scattering_AP_pnc.py": "68c12549b47a9ec98abf7b39d78ad597dd114da00e326adf8ebbec060947b53f",
+        "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+        "src/phononic/workflow_AP_pnc.py": "0bdfc18674d68ae3f62947001f0a8aa0591f466e4d1ba895f0f962fb0bb3915d",
+        "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+      },
+      "packages": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "scikit-fem": "12.0.2",
+        "meshio": "5.3.5",
+        "gmsh": "4.15.2",
+        "matplotlib": "3.11.2",
+        "psutil": "7.2.2"
+      },
+      "python": "3.12.14",
+      "platform": "Windows-11-10.0.26200-SP0"
+    },
+    "equation_dtype": "complex128",
+    "factor_dtype": "complex64",
+    "solver_options": {
+      "fill_factor": 8.0,
+      "single_precision": true,
+      "inner_m": 100,
+      "outer_k": 10,
+      "maxiter": 60
+    },
+    "relative_tolerance": 1e-10,
+    "absolute_tolerance": 0.0,
+    "relative_residual_limit": 1e-09,
+    "backward_residual_limit": 1e-09,
+    "admission_manifest": {
+      "shape": [
+        426627,
+        1
+      ],
+      "operator_storage_bytes": 655839372,
+      "nnz": 32706643,
+      "index_bytes": 4
+    },
+    "admission": {
+      "required_commit_mib": 9687.169174194336,
+      "required_physical_mib": 1200
+    },
+    "wall_budget_basis": "A diagnostic compute budget. The h100 first drive used 447.937 s in its first attempt and 660.844 s in recovery from the saved iterate, plus 74.390 s and 66.734 s for ILU. The h80 pilot starts cold, has 1.393 times the h100 CSC storage, and uses weaker fill. Its completion time is unknown.",
+    "before_factorization": {
+      "commit_total_mib": 23679.70703125,
+      "commit_limit_mib": 33086.86328125,
+      "commit_headroom_mib": 9407.15625,
+      "physical_available_mib": 3750.296875,
+      "rss_mib": 702.50390625,
+      "private_commit_mib": 684.015625,
+      "peak_working_set_mib": 735.05078125,
+      "peak_private_commit_mib": 684.109375
+    },
+    "required_pre_factor_commit_headroom_mib": 9055.202198028564,
+    "factorization": {
+      "drop_tol": 0.0001,
+      "fill_factor": 8.0,
+      "permc_spec": "COLAMD",
+      "elapsed_seconds": 82.16217490000417,
+      "factor_nonzeros": 231119546
+    },
+    "retained_checkpoint": {
+      "column": 0,
+      "event": "iterate",
+      "input_rhs_column_sha256": "afe743a820e078694653d40fd83204bd3086f04388ca8cd0c66daaad97011355",
+      "operator_csc_sha256": "6c1ef8514f8d55ac0ac9ebd1011e4411117cda7b37211d41179b2ac5e3259d75",
+      "artifact": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_pilot_fill8_802c16h6/iterate-1.npy",
+        "sha256": "0a0dda6ccf05d950e2a9d65a5079dc32afc5f0bdd0e937205b8ce6e521d86e28",
+        "bytes": 6826160
+      },
+      "diagnostics": {
+        "column": 0,
+        "raw_info": null,
+        "info": null,
+        "iterations": 2,
+        "relative_residual_history": [
+          1.0,
+          0.10538891575738929
+        ],
+        "relative_residual": null,
+        "relative_backward_residual": null,
+        "terminal_confirmation": null
+      },
+      "independent_original_equation_checks": {
+        "relative_residual": 0.10538891575738929,
+        "relative_backward_residual": 6.657266525491956e-05,
+        "original_csc_memory_mapped": true
+      },
+      "original_residual_gates_passed": false
+    },
+    "run": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "status": "aborted_memory_limit",
+      "initial_memory": {
+        "commit_total_mib": 22968.50390625,
+        "commit_limit_mib": 33086.86328125,
+        "commit_headroom_mib": 10118.359375,
+        "physical_available_mib": 4439.875
+      },
+      "initial_disk_free_mib": 127145.44921875,
+      "pilot_profile": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_pilot_fill8_802c16h6/pilot_profile_AP_pnc.json",
+        "sha256": "f07bd3a953d2cddf874f69e0764a810f353d224c56305c00e15285eef8a2c50f",
+        "bytes": 6061
+      },
+      "admission": {
+        "required_commit_mib": 9687.169174194336,
+        "required_physical_mib": 1200
+      },
+      "required_disk_free_mib": 64,
+      "available_floor_mib": 400,
+      "commit_headroom_floor_mib": 512,
+      "rss_cap_mib": 3950,
+      "private_commit_cap_mib": 9175,
+      "wall_cap_seconds": 1800,
+      "sample_interval_seconds": 0.1,
+      "supervisor_pid": 44644,
+      "supervisor_create_time": 1794634143.3720055,
+      "worker_pid": 42000,
+      "worker_create_time": 1794634144.9531553,
+      "reason": "The worker tree exceeded a memory cap.",
+      "channel_journal": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_pilot_fill8_802c16h6/channels_AP_pnc.json",
+        "sha256": "e54efe441ba4af7c540bdfcf8f0a89871b84f8ebdf3fb12781f3ab2f51ee4955",
+        "bytes": 2242
+      },
+      "accepted_channels": 0,
+      "active_checkpoint_available": true,
+      "worker_exit_code": 15,
+      "elapsed_seconds": 133.78099999998813,
+      "peak_tree_rss_mib": 3953.06640625,
+      "peak_tree_private_commit_mib": 7753.98828125,
+      "minimum_available_mib": 653.5234375,
+      "minimum_commit_headroom_mib": 2285.66015625,
+      "worker_log": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_pilot_fill8_802c16h6/worker_AP_pnc.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    "raw_files": {
+      "profile": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_pilot_fill8_802c16h6/pilot_profile_AP_pnc.json",
+        "sha256": "f07bd3a953d2cddf874f69e0764a810f353d224c56305c00e15285eef8a2c50f",
+        "bytes": 6061
+      },
+      "execution": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_pilot_fill8_802c16h6/execution_AP_pnc.json",
+        "sha256": "5033c55fb373252ea8c71f28a35f7b75025c6a09c3289f70127a3e821c31a08d",
+        "bytes": 1960
+      },
+      "driver": {
+        "path": "results/runs/full_device_resource_profile/pilot_h80_lgmres_AP_pnc.py",
+        "sha256": "c1d65742861e13f8d091df219295fcb39f243bf7b7d8ab21904026993342c257",
+        "bytes": 16067
+      },
+      "stages": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/stages_AP_pnc.json",
+        "sha256": "1c50971e27bfc52e63000c9d25df100e21bbe28b7fa47d7549f82cf465531a78",
+        "bytes": 14841
+      },
+      "A": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/A_AP_pnc.npz",
+        "sha256": "2d1a0d342a293cd7f45874c396887d084e6ff3a42c5ba669a8f98c3c2554a56d",
+        "bytes": 655840629
+      },
+      "rhs": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/rhs_AP_pnc.npy",
+        "sha256": "80800b866d8e4358f7a4dab8478e2bd21ab9cf9083619fa1bf6f37854dab96a1",
+        "bytes": 34130288
+      },
+      "worker_log": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_pilot_fill8_802c16h6/worker_AP_pnc.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "channel_journal": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_pilot_fill8_802c16h6/channels_AP_pnc.json",
+        "sha256": "e54efe441ba4af7c540bdfcf8f0a89871b84f8ebdf3fb12781f3ab2f51ee4955",
+        "bytes": 2242
+      },
+      "retained_vector": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_pilot_fill8_802c16h6/iterate-1.npy",
+        "sha256": "0a0dda6ccf05d950e2a9d65a5079dc32afc5f0bdd0e937205b8ce6e521d86e28",
+        "bytes": 6826160
+      }
+    }
+  },
+  "full_device_h80_lgmres_fill8_continuation": {
+    "status": "aborted_memory_limit",
+    "scope": "Warm-start the first left-incident drive of the saved full-device h80 operator at 1 GHz. No mesh, assembly, SAFE extraction or scattering export.",
+    "reference_operator_case": "full_device_h80_operator",
+    "previous_attempt_case": "full_device_h80_lgmres_fill8_pilot",
+    "resumed_from": {
+      "execution": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_pilot_fill8_802c16h6/execution_AP_pnc.json",
+        "sha256": "5033c55fb373252ea8c71f28a35f7b75025c6a09c3289f70127a3e821c31a08d",
+        "bytes": 1960
+      },
+      "journal": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_pilot_fill8_802c16h6/channels_AP_pnc.json",
+        "sha256": "e54efe441ba4af7c540bdfcf8f0a89871b84f8ebdf3fb12781f3ab2f51ee4955",
+        "bytes": 2242
+      },
+      "profile": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_pilot_fill8_802c16h6/pilot_profile_AP_pnc.json",
+        "sha256": "f07bd3a953d2cddf874f69e0764a810f353d224c56305c00e15285eef8a2c50f",
+        "bytes": 6061
+      },
+      "seed": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_pilot_fill8_802c16h6/iterate-1.npy",
+        "sha256": "0a0dda6ccf05d950e2a9d65a5079dc32afc5f0bdd0e937205b8ce6e521d86e28",
+        "bytes": 6826160
+      },
+      "previous_wall_seconds": 133.78099999998813,
+      "previous_peak_private_commit_mib": 7753.98828125,
+      "original_csc_digest": "6c1ef8514f8d55ac0ac9ebd1011e4411117cda7b37211d41179b2ac5e3259d75",
+      "original_rhs_digest": "0e812751c2da8e1e531fba3c187967876f7d33e3ef251cdae9d3b9a4be6094f1",
+      "original_rhs_column_digest": "afe743a820e078694653d40fd83204bd3086f04388ca8cd0c66daaad97011355",
+      "original_relative_residual": 0.10538891575738929,
+      "saved_outer_callbacks": 2,
+      "preconditioner_rebuild_required": true,
+      "initial_guess_scope": "Saved finite first-drive solution vector. ILU factors and Krylov augmentation are rebuilt."
+    },
+    "verified_initial_relative_residual": 0.10538891575739318,
+    "independent_initial_equation_checks": {
+      "relative_residual": 0.10538891575738929,
+      "relative_backward_residual": 6.657266525491956e-05,
+      "original_csc_memory_mapped": true
+    },
+    "inputs_sha256": "fc88b037ad2c2e583e3d24e803ca3e68d9c22d1f35aa174880e0bc7e35417fba",
+    "body_dofs": 426627,
+    "frequency_hz": 1000000000.0,
+    "incident_side": "left",
+    "incident_columns": [
+      0
+    ],
+    "incident_root_index": 1348,
+    "total_device_channels": 5,
+    "accepted_channels": 0,
+    "factorization_attempted": true,
+    "memory_limits_respected": false,
+    "scattering_computed": false,
+    "spatial_convergence_established": false,
+    "numerical_thread_environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    },
+    "source": {
+      "git_commit": "8584ebbf2d099b8af768d34ec53590a9a2e62d95",
+      "source_sha256": {
+        "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+        "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+        "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+        "src/phononic/resumable_scattering_AP_pnc.py": "68c12549b47a9ec98abf7b39d78ad597dd114da00e326adf8ebbec060947b53f",
+        "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+        "src/phononic/workflow_AP_pnc.py": "0bdfc18674d68ae3f62947001f0a8aa0591f466e4d1ba895f0f962fb0bb3915d",
+        "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+      },
+      "packages": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "scikit-fem": "12.0.2",
+        "meshio": "5.3.5",
+        "gmsh": "4.15.2",
+        "matplotlib": "3.11.2",
+        "psutil": "7.2.2"
+      },
+      "python": "3.12.14",
+      "platform": "Windows-11-10.0.26200-SP0"
+    },
+    "equation_dtype": "complex128",
+    "factor_dtype": "complex64",
+    "solver_options": {
+      "fill_factor": 8.0,
+      "single_precision": true,
+      "inner_m": 100,
+      "outer_k": 10,
+      "maxiter": 60
+    },
+    "relative_tolerance": 1e-10,
+    "absolute_tolerance": 0.0,
+    "relative_residual_limit": 1e-09,
+    "backward_residual_limit": 1e-09,
+    "admission_manifest": {
+      "shape": [
+        426627,
+        1
+      ],
+      "operator_storage_bytes": 655839372,
+      "nnz": 32706643,
+      "index_bytes": 4
+    },
+    "admission": {
+      "required_commit_mib": 9687.169174194336,
+      "required_physical_mib": 1200
+    },
+    "wall_budget_basis": "The original 1800 s diagnostic budget less 133.781 s spent in the RSS-capped pilot, rounded down. The restarted incomplete factorization uses part of the remaining budget.",
+    "total_pilot_elapsed_seconds": 275.9219999999623,
+    "before_factorization": {
+      "commit_total_mib": 23723.734375,
+      "commit_limit_mib": 33086.86328125,
+      "commit_headroom_mib": 9363.12890625,
+      "physical_available_mib": 3863.5859375,
+      "rss_mib": 709.4765625,
+      "private_commit_mib": 691.08203125,
+      "peak_working_set_mib": 735.43359375,
+      "peak_private_commit_mib": 704.1640625
+    },
+    "required_pre_factor_commit_headroom_mib": 9055.202198028564,
+    "factorization": {
+      "drop_tol": 0.0001,
+      "fill_factor": 8.0,
+      "permc_spec": "COLAMD",
+      "elapsed_seconds": 76.93406679999316,
+      "factor_nonzeros": 231119546
+    },
+    "retained_checkpoint": {
+      "column": 0,
+      "event": "iterate",
+      "input_rhs_column_sha256": "afe743a820e078694653d40fd83204bd3086f04388ca8cd0c66daaad97011355",
+      "operator_csc_sha256": "6c1ef8514f8d55ac0ac9ebd1011e4411117cda7b37211d41179b2ac5e3259d75",
+      "artifact": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_continuation_fill8_w08ucxab/iterate-1.npy",
+        "sha256": "4bedcbc78fa7b48034fa66f7ca403a9a5675ea3284cf319742b1404f727f80c1",
+        "bytes": 6826160
+      },
+      "diagnostics": {
+        "column": 0,
+        "raw_info": null,
+        "info": null,
+        "iterations": 2,
+        "relative_residual_history": [
+          0.10538891575738929,
+          0.08722988498617767
+        ],
+        "relative_residual": null,
+        "relative_backward_residual": null,
+        "terminal_confirmation": null,
+        "warm_started": true
+      },
+      "independent_original_equation_checks": {
+        "relative_residual": 0.08722988498617767,
+        "relative_backward_residual": 4.377170247939343e-05,
+        "original_csc_memory_mapped": true
+      },
+      "original_residual_gates_passed": false
+    },
+    "run": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "status": "aborted_memory_limit",
+      "initial_memory": {
+        "commit_total_mib": 23015.69140625,
+        "commit_limit_mib": 33086.86328125,
+        "commit_headroom_mib": 10071.171875,
+        "physical_available_mib": 4544.98828125
+      },
+      "initial_disk_free_mib": 127129.546875,
+      "pilot_profile": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_continuation_fill8_w08ucxab/pilot_profile_AP_pnc.json",
+        "sha256": "b7ae0a5bfdc4feb34e3aec09b4a7ad1a28fc6ffb2e76b433e9283f2ea1944578",
+        "bytes": 7767
+      },
+      "admission": {
+        "required_commit_mib": 9687.169174194336,
+        "required_physical_mib": 1200
+      },
+      "required_disk_free_mib": 64,
+      "available_floor_mib": 400,
+      "commit_headroom_floor_mib": 512,
+      "rss_cap_mib": 4608,
+      "private_commit_cap_mib": 9175,
+      "wall_cap_seconds": 1666,
+      "sample_interval_seconds": 0.1,
+      "supervisor_pid": 33084,
+      "supervisor_create_time": 1794634580.7250001,
+      "worker_pid": 44784,
+      "worker_create_time": 1794634582.3314376,
+      "reason": "Live system headroom fell below a reserve.",
+      "channel_journal": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_continuation_fill8_w08ucxab/channels_AP_pnc.json",
+        "sha256": "2459b50ac110030ca34c767f4de7fdee97f18680ad6714add3e90f7b40db109d",
+        "bytes": 4098
+      },
+      "accepted_channels": 0,
+      "active_checkpoint_available": true,
+      "worker_exit_code": 15,
+      "elapsed_seconds": 142.14099999997416,
+      "peak_tree_rss_mib": 4266.03515625,
+      "peak_tree_private_commit_mib": 8068.046875,
+      "minimum_available_mib": 388.609375,
+      "minimum_commit_headroom_mib": 2065.8515625,
+      "worker_log": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_continuation_fill8_w08ucxab/worker_AP_pnc.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    "raw_files": {
+      "profile": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_continuation_fill8_w08ucxab/pilot_profile_AP_pnc.json",
+        "sha256": "b7ae0a5bfdc4feb34e3aec09b4a7ad1a28fc6ffb2e76b433e9283f2ea1944578",
+        "bytes": 7767
+      },
+      "execution": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_continuation_fill8_w08ucxab/execution_AP_pnc.json",
+        "sha256": "189f027f48d9157d1658ca47bf169fbda532f6a374dfbd7768e65cd0fd7c6374",
+        "bytes": 1984
+      },
+      "driver": {
+        "path": "results/runs/full_device_resource_profile/continue_h80_lgmres_AP_pnc.py",
+        "sha256": "ea2734d0f081cf6958e4eb9eaba5a102d61a7c433f1b69a9c22dcc543da84f15",
+        "bytes": 20222
+      },
+      "stages": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/stages_AP_pnc.json",
+        "sha256": "1c50971e27bfc52e63000c9d25df100e21bbe28b7fa47d7549f82cf465531a78",
+        "bytes": 14841
+      },
+      "A": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/A_AP_pnc.npz",
+        "sha256": "2d1a0d342a293cd7f45874c396887d084e6ff3a42c5ba669a8f98c3c2554a56d",
+        "bytes": 655840629
+      },
+      "rhs": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/rhs_AP_pnc.npy",
+        "sha256": "80800b866d8e4358f7a4dab8478e2bd21ab9cf9083619fa1bf6f37854dab96a1",
+        "bytes": 34130288
+      },
+      "worker_log": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_continuation_fill8_w08ucxab/worker_AP_pnc.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "channel_journal": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_continuation_fill8_w08ucxab/channels_AP_pnc.json",
+        "sha256": "2459b50ac110030ca34c767f4de7fdee97f18680ad6714add3e90f7b40db109d",
+        "bytes": 4098
+      },
+      "retained_vector": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_continuation_fill8_w08ucxab/iterate-1.npy",
+        "sha256": "4bedcbc78fa7b48034fa66f7ca403a9a5675ea3284cf319742b1404f727f80c1",
+        "bytes": 6826160
+      }
+    }
+  },
+  "full_device_h80_lgmres_fill8_inner50_continuation": {
+    "status": "aborted_wall_time_limit",
+    "scope": "Warm-start the first left-incident drive of the saved full-device h80 operator at 1 GHz. No mesh, assembly, SAFE extraction or scattering export.",
+    "reference_operator_case": "full_device_h80_operator",
+    "previous_attempt_case": "full_device_h80_lgmres_fill8_continuation",
+    "resumed_from": {
+      "execution": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_continuation_fill8_w08ucxab/execution_AP_pnc.json",
+        "sha256": "189f027f48d9157d1658ca47bf169fbda532f6a374dfbd7768e65cd0fd7c6374",
+        "bytes": 1984
+      },
+      "journal": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_continuation_fill8_w08ucxab/channels_AP_pnc.json",
+        "sha256": "2459b50ac110030ca34c767f4de7fdee97f18680ad6714add3e90f7b40db109d",
+        "bytes": 4098
+      },
+      "profile": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_continuation_fill8_w08ucxab/pilot_profile_AP_pnc.json",
+        "sha256": "b7ae0a5bfdc4feb34e3aec09b4a7ad1a28fc6ffb2e76b433e9283f2ea1944578",
+        "bytes": 7767
+      },
+      "seed": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_continuation_fill8_w08ucxab/iterate-1.npy",
+        "sha256": "4bedcbc78fa7b48034fa66f7ca403a9a5675ea3284cf319742b1404f727f80c1",
+        "bytes": 6826160
+      },
+      "previous_wall_seconds": 142.14099999997416,
+      "previous_peak_private_commit_mib": 8068.046875,
+      "earlier_pilot": {
+        "execution": {
+          "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_pilot_fill8_802c16h6/execution_AP_pnc.json",
+          "sha256": "5033c55fb373252ea8c71f28a35f7b75025c6a09c3289f70127a3e821c31a08d",
+          "bytes": 1960
+        },
+        "journal": {
+          "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_pilot_fill8_802c16h6/channels_AP_pnc.json",
+          "sha256": "e54efe441ba4af7c540bdfcf8f0a89871b84f8ebdf3fb12781f3ab2f51ee4955",
+          "bytes": 2242
+        },
+        "profile": {
+          "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_pilot_fill8_802c16h6/pilot_profile_AP_pnc.json",
+          "sha256": "f07bd3a953d2cddf874f69e0764a810f353d224c56305c00e15285eef8a2c50f",
+          "bytes": 6061
+        },
+        "seed": {
+          "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_pilot_fill8_802c16h6/iterate-1.npy",
+          "sha256": "0a0dda6ccf05d950e2a9d65a5079dc32afc5f0bdd0e937205b8ce6e521d86e28",
+          "bytes": 6826160
+        },
+        "previous_wall_seconds": 133.78099999998813,
+        "previous_peak_private_commit_mib": 7753.98828125,
+        "original_csc_digest": "6c1ef8514f8d55ac0ac9ebd1011e4411117cda7b37211d41179b2ac5e3259d75",
+        "original_rhs_digest": "0e812751c2da8e1e531fba3c187967876f7d33e3ef251cdae9d3b9a4be6094f1",
+        "original_rhs_column_digest": "afe743a820e078694653d40fd83204bd3086f04388ca8cd0c66daaad97011355",
+        "original_relative_residual": 0.10538891575738929,
+        "saved_outer_callbacks": 2,
+        "preconditioner_rebuild_required": true,
+        "initial_guess_scope": "Saved finite first-drive solution vector. ILU factors and Krylov augmentation are rebuilt."
+      },
+      "original_csc_digest": "6c1ef8514f8d55ac0ac9ebd1011e4411117cda7b37211d41179b2ac5e3259d75",
+      "original_rhs_digest": "0e812751c2da8e1e531fba3c187967876f7d33e3ef251cdae9d3b9a4be6094f1",
+      "original_rhs_column_digest": "afe743a820e078694653d40fd83204bd3086f04388ca8cd0c66daaad97011355",
+      "original_relative_residual": 0.08722988498617767,
+      "saved_outer_callbacks": 2,
+      "preconditioner_rebuild_required": true,
+      "initial_guess_scope": "Saved finite first-drive solution vector. ILU factors and Krylov augmentation are rebuilt."
+    },
+    "verified_initial_relative_residual": 0.08722988498617765,
+    "independent_initial_equation_checks": {
+      "relative_residual": 0.08722988498617767,
+      "relative_backward_residual": 4.377170247939343e-05,
+      "original_csc_memory_mapped": true
+    },
+    "inputs_sha256": "9003299160b4748480358dfe361ea41f4760c31ce2b8164260ef0e1c83a7839f",
+    "body_dofs": 426627,
+    "frequency_hz": 1000000000.0,
+    "incident_side": "left",
+    "incident_columns": [
+      0
+    ],
+    "incident_root_index": 1348,
+    "total_device_channels": 5,
+    "accepted_channels": 0,
+    "factorization_attempted": true,
+    "memory_limits_respected": true,
+    "scattering_computed": false,
+    "spatial_convergence_established": false,
+    "numerical_thread_environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    },
+    "source": {
+      "git_commit": "8584ebbf2d099b8af768d34ec53590a9a2e62d95",
+      "source_sha256": {
+        "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+        "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+        "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+        "src/phononic/resumable_scattering_AP_pnc.py": "68c12549b47a9ec98abf7b39d78ad597dd114da00e326adf8ebbec060947b53f",
+        "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+        "src/phononic/workflow_AP_pnc.py": "0bdfc18674d68ae3f62947001f0a8aa0591f466e4d1ba895f0f962fb0bb3915d",
+        "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+      },
+      "packages": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "scikit-fem": "12.0.2",
+        "meshio": "5.3.5",
+        "gmsh": "4.15.2",
+        "matplotlib": "3.11.2",
+        "psutil": "7.2.2"
+      },
+      "python": "3.12.14",
+      "platform": "Windows-11-10.0.26200-SP0"
+    },
+    "equation_dtype": "complex128",
+    "factor_dtype": "complex64",
+    "solver_options": {
+      "fill_factor": 8.0,
+      "single_precision": true,
+      "inner_m": 50,
+      "outer_k": 10,
+      "maxiter": 120
+    },
+    "relative_tolerance": 1e-10,
+    "absolute_tolerance": 0.0,
+    "relative_residual_limit": 1e-09,
+    "backward_residual_limit": 1e-09,
+    "admission_manifest": {
+      "shape": [
+        426627,
+        1
+      ],
+      "operator_storage_bytes": 655839372,
+      "nnz": 32706643,
+      "index_bytes": 4
+    },
+    "admission": {
+      "required_commit_mib": 9036.188034057617,
+      "required_physical_mib": 1200
+    },
+    "wall_budget_basis": "The original 1800 s diagnostic budget less 275.922 s spent in both prior attempts, rounded down. The restarted incomplete factorization uses part of the remaining budget.",
+    "total_pilot_elapsed_seconds": 1799.9219999999623,
+    "modeled_krylov_workspace_reduction_mib": 650.9811401367188,
+    "nominal_inner_step_budget": 6000,
+    "prior_h80_solver_peak_private_commit_mib": 8068.046875,
+    "comparison_case_for_sampled_peak_differences": "full_device_h80_lgmres_fill8_continuation",
+    "sampled_peak_tree_rss_reduction_mib": 305.3125,
+    "sampled_peak_tree_private_commit_reduction_mib": 306.55078125,
+    "before_factorization": {
+      "commit_total_mib": 23758.703125,
+      "commit_limit_mib": 33086.86328125,
+      "commit_headroom_mib": 9328.16015625,
+      "physical_available_mib": 3883.109375,
+      "rss_mib": 709.80078125,
+      "private_commit_mib": 691.1796875,
+      "peak_working_set_mib": 735.7578125,
+      "peak_private_commit_mib": 704.25
+    },
+    "required_pre_factor_commit_headroom_mib": 8404.221057891846,
+    "factorization": {
+      "drop_tol": 0.0001,
+      "fill_factor": 8.0,
+      "permc_spec": "COLAMD",
+      "elapsed_seconds": 77.95279179999488,
+      "factor_nonzeros": 231119546
+    },
+    "retained_checkpoint": {
+      "column": 0,
+      "event": "iterate",
+      "input_rhs_column_sha256": "afe743a820e078694653d40fd83204bd3086f04388ca8cd0c66daaad97011355",
+      "operator_csc_sha256": "6c1ef8514f8d55ac0ac9ebd1011e4411117cda7b37211d41179b2ac5e3259d75",
+      "artifact": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_short_krylov_fill8_hazy6byj/iterate-0.npy",
+        "sha256": "7df15275c0ff46b61d51fd135819629a42f16eef9bc43308dedfe415ba62a8e2",
+        "bytes": 6826160
+      },
+      "diagnostics": {
+        "column": 0,
+        "raw_info": null,
+        "info": null,
+        "iterations": 87,
+        "relative_residual_history": [
+          0.08722988498617767,
+          0.08574441842406397,
+          0.0847445855554128,
+          0.08353182566963406,
+          0.0823237519047456,
+          0.08066729179553915,
+          0.07661456787094804,
+          0.07449940934738321,
+          0.07249982126272163,
+          0.07117732166361461,
+          0.06784290042836143,
+          0.06306455497819503,
+          0.06078840947838916,
+          0.057996343149686436,
+          0.05557487561701922,
+          0.053310637132871534,
+          0.05063391326597949,
+          0.048590101391626166,
+          0.046443802022791546,
+          0.04467274486178616,
+          0.04273000677795069,
+          0.039974445299343665,
+          0.03763050523633626,
+          0.03488670985614215,
+          0.03366308525684652,
+          0.030887511323147727,
+          0.027532218264867132,
+          0.025484318732656355,
+          0.02404680204015404,
+          0.021852401171477645,
+          0.019591534747121393,
+          0.017587740994096077,
+          0.015978712839501266,
+          0.013739057405158857,
+          0.011133530499739221,
+          0.009896905212936652,
+          0.009227810463285547,
+          0.008648065918842209,
+          0.008089785976460633,
+          0.007417090092620669,
+          0.006844396519152339,
+          0.006330545453639679,
+          0.005757501390690435,
+          0.005218385315654222,
+          0.004914501526586759,
+          0.0046737767599829925,
+          0.0044080990196066865,
+          0.004101492598285093,
+          0.0037914673014326707,
+          0.003439621297428098,
+          0.0031302166833242404,
+          0.002848705868813341,
+          0.0025692113475353348,
+          0.0023526153078541694,
+          0.0021588486953931273,
+          0.0019721461753101433,
+          0.0017138627365894847,
+          0.001592904614738918,
+          0.0014899331523613212,
+          0.0013977212945704852,
+          0.001304368237005301,
+          0.0012368360149300239,
+          0.001165521823202413,
+          0.0011114645258943653,
+          0.0010392143175490549,
+          0.0009957965225321276,
+          0.0009557237773494562,
+          0.0008952745791003791,
+          0.0008312963733713354,
+          0.0007842025668611582,
+          0.0007375570054118926,
+          0.0007019597757048987,
+          0.0006627597318773255,
+          0.0006365462750690588,
+          0.0006206404060621384,
+          0.0006045928975330407,
+          0.0005797417726226266,
+          0.0005524099905866828,
+          0.0005208773771048466,
+          0.0004993917474635131,
+          0.00048541495946893295,
+          0.00046655359917194614,
+          0.0004511339191663545,
+          0.00043186026842761277,
+          0.0004159779341915311,
+          0.00038351595963115765,
+          0.00037230386591916075
+        ],
+        "relative_residual": null,
+        "relative_backward_residual": null,
+        "terminal_confirmation": null,
+        "warm_started": true
+      },
+      "independent_original_equation_checks": {
+        "relative_residual": 0.00037230386591916075,
+        "relative_backward_residual": 2.9254999153107137e-07,
+        "original_csc_memory_mapped": true
+      },
+      "original_residual_gates_passed": false
+    },
+    "run": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "status": "aborted_wall_time_limit",
+      "initial_memory": {
+        "commit_total_mib": 23036.8515625,
+        "commit_limit_mib": 33086.86328125,
+        "commit_headroom_mib": 10050.01171875,
+        "physical_available_mib": 4586.82421875
+      },
+      "initial_disk_free_mib": 127114.44921875,
+      "pilot_profile": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_short_krylov_fill8_hazy6byj/pilot_profile_AP_pnc.json",
+        "sha256": "475188fcff7b30fd4c1fb9d0ba189fb6fd96b09fa2a9ba09fa37fd87fe2fc063",
+        "bytes": 10039
+      },
+      "admission": {
+        "required_commit_mib": 9036.188034057617,
+        "required_physical_mib": 1200
+      },
+      "required_disk_free_mib": 64,
+      "available_floor_mib": 400,
+      "commit_headroom_floor_mib": 512,
+      "rss_cap_mib": 4608,
+      "private_commit_cap_mib": 9175,
+      "wall_cap_seconds": 1524,
+      "sample_interval_seconds": 0.1,
+      "supervisor_pid": 40948,
+      "supervisor_create_time": 1794634981.467139,
+      "worker_pid": 25868,
+      "worker_create_time": 1794634983.0748916,
+      "reason": "The pilot reached its wall-time limit.",
+      "channel_journal": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_short_krylov_fill8_hazy6byj/channels_AP_pnc.json",
+        "sha256": "c2b27253f6fe0755dda8c521a1190d26abbd18c226b83cd51710c8ad24385ab2",
+        "bytes": 8585
+      },
+      "accepted_channels": 0,
+      "active_checkpoint_available": true,
+      "worker_exit_code": 15,
+      "elapsed_seconds": 1524.0,
+      "peak_tree_rss_mib": 3960.72265625,
+      "peak_tree_private_commit_mib": 7761.49609375,
+      "minimum_available_mib": 552.546875,
+      "minimum_commit_headroom_mib": 2240.65234375,
+      "worker_log": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_short_krylov_fill8_hazy6byj/worker_AP_pnc.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    "raw_files": {
+      "profile": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_short_krylov_fill8_hazy6byj/pilot_profile_AP_pnc.json",
+        "sha256": "475188fcff7b30fd4c1fb9d0ba189fb6fd96b09fa2a9ba09fa37fd87fe2fc063",
+        "bytes": 10039
+      },
+      "execution": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_short_krylov_fill8_hazy6byj/execution_AP_pnc.json",
+        "sha256": "66e579f7d4e18c1e5cb60afc661a62848741497f5349fb875009093896b98b13",
+        "bytes": 1977
+      },
+      "driver": {
+        "path": "results/runs/full_device_resource_profile/short_krylov_h80_AP_pnc.py",
+        "sha256": "c3ead758cdc74db26457dc8f84d4c9cf8e9aca30451efe99a9ea73385514322d",
+        "bytes": 21205
+      },
+      "stages": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/stages_AP_pnc.json",
+        "sha256": "1c50971e27bfc52e63000c9d25df100e21bbe28b7fa47d7549f82cf465531a78",
+        "bytes": 14841
+      },
+      "A": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/A_AP_pnc.npz",
+        "sha256": "2d1a0d342a293cd7f45874c396887d084e6ff3a42c5ba669a8f98c3c2554a56d",
+        "bytes": 655840629
+      },
+      "rhs": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/rhs_AP_pnc.npy",
+        "sha256": "80800b866d8e4358f7a4dab8478e2bd21ab9cf9083619fa1bf6f37854dab96a1",
+        "bytes": 34130288
+      },
+      "worker_log": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_short_krylov_fill8_hazy6byj/worker_AP_pnc.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "channel_journal": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_short_krylov_fill8_hazy6byj/channels_AP_pnc.json",
+        "sha256": "c2b27253f6fe0755dda8c521a1190d26abbd18c226b83cd51710c8ad24385ab2",
+        "bytes": 8585
+      },
+      "retained_vector": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_short_krylov_fill8_hazy6byj/iterate-0.npy",
+        "sha256": "7df15275c0ff46b61d51fd135819629a42f16eef9bc43308dedfe415ba62a8e2",
+        "bytes": 6826160
+      }
     }
   }
 }
