@@ -706,6 +706,125 @@ class SolverResourceEvidenceTests(unittest.TestCase):
         self.assertEqual(float(row["max_relative_true_residual"]), terminal["relative_residual"])
         self.assertEqual(float(row["max_relative_backward_residual"]), terminal["relative_backward_residual"])
 
+    def test_h80_residual_correction_replays_original_acceptance_and_memory(self):
+        from phononic.resumable_scattering_AP_pnc import _solver_budget
+
+        key = "full_device_h80_gcrotmk_residual_correction"
+        result = self.ledger[key]
+        prior = self.ledger[result["previous_attempt_case"]]
+        operator = self.ledger[result["reference_operator_case"]]
+        raw = result["raw_files"]
+        self.assertEqual(raw["seed"], prior["retained_checkpoint"]["artifact"])
+        for name in ("A", "rhs", "stages"):
+            self.assertEqual(raw[name], operator["raw_files"][name])
+        for name in ("source_sha256", "packages", "python", "platform"):
+            self.assertEqual(result["source"][name], operator["source"][name])
+        self.assertEqual(result["equation_array_sha256"], prior["equation_array_sha256"])
+        self.assertEqual(result["incident_columns"], [0])
+        self.assertEqual(result["incident_root_index"], prior["incident_root_index"])
+        self.assertEqual((result["equation_dtype"], result["preconditioner_side"]), ("complex128", "flexible_right"))
+        factor = result["factorization"]
+        self.assertEqual((factor["dtype"], factor["fill_factor"], factor["drop_tol"], factor["permc_spec"]),
+                         ("complex64", 8.0, 1e-4, "COLAMD"))
+
+        options = result["gcrotmk_settings"]
+        self.assertEqual((options["m"], options["k"], options["maxiter"], options["atol"]), (25, 5, 8, 0))
+        vectors = result["vector_accounting"]
+        inner = 2 * (2 * (options["m"] + options["k"]) + 1)
+        recycled = 2 * options["k"]
+        self.assertEqual(vectors["overlapping_inner_vectors_upper_bound"], inner)
+        self.assertEqual(vectors["recycled_vectors_upper_bound"], recycled)
+        self.assertEqual(vectors["budgeted_vectors"], inner + recycled + vectors["scratch_vector_slots"])
+        self.assertEqual(vectors["scratch_vector_slots"], 22)
+        self.assertEqual(vectors["bytes_per_complex128_vector"], 16 * result["body_dofs"])
+        budget = _solver_budget(result["admission_manifest"], result["admission_budget_profile"], 0,
+                                prior["run"]["peak_tree_private_commit_mib"])
+        self.assertEqual(result["admission"], budget)
+        self.assertEqual(result["admission"], prior["admission"])
+        run = result["run"]
+        self.assertEqual((run["status"], run["worker_exit_code"], run["wall_cap_seconds"]), ("iteration_limit", 1, 600))
+        self.assertEqual(result["status"], run["status"])
+        self.assertLess(run["elapsed_seconds"], run["wall_cap_seconds"])
+        self.assertGreaterEqual(run["initial_memory"]["physical_available_mib"], budget["required_physical_mib"])
+        self.assertGreaterEqual(run["initial_memory"]["commit_headroom_mib"], budget["required_commit_mib"])
+        self.assertGreaterEqual(result["before_factorization"]["commit_headroom_mib"],
+                                result["required_pre_factor_commit_headroom_mib"])
+        self.assertTrue(result["memory_limits_respected"])
+        for observed, limit, check in (
+                ("peak_tree_rss_mib", "rss_cap_mib", self.assertLessEqual),
+                ("peak_tree_private_commit_mib", "private_commit_cap_mib", self.assertLessEqual),
+                ("minimum_available_mib", "available_floor_mib", self.assertGreaterEqual),
+                ("minimum_commit_headroom_mib", "commit_headroom_floor_mib", self.assertGreaterEqual)):
+            self.assertEqual(run[limit], prior["run"][limit])
+            check(run[observed], run[limit])
+
+        target = result["relative_tolerance"]
+        relative_gate = result["relative_residual_limit"]
+        backward_gate = result["backward_residual_limit"]
+        self.assertEqual((target, relative_gate, backward_gate), (1e-10, 1e-9, 1e-9))
+        seed = result["seed_original_equation_checks"]
+        terminal = result["terminal_candidate"]
+        final = terminal["independent_original_equation_checks"]
+        self.assertEqual(terminal["artifact"], raw["terminal_vector"])
+        self.assertNotEqual(raw["terminal_vector"]["sha256"], raw["final_callback_vector"]["sha256"])
+        self.assertNotEqual(raw["terminal_vector"]["sha256"], raw["seed"]["sha256"])
+        self.assertTrue(terminal["returned_update_after_last_callback"])
+        self.assertIsNone(terminal["terminal_confirmation"])
+        for name in ("raw_info", "info", "iterations"):
+            self.assertEqual(terminal[name], options["maxiter"])
+        b_norm = result["original_rhs_norm_2"]
+        for vector, reference in ((seed, prior["retained_checkpoint"]["independent_original_equation_checks"]),
+                                  (final, terminal)):
+            backward_scale = (result["original_operator_inf_norm"] * vector["solution_norm_inf"]
+                              + result["original_rhs_norm_inf"])
+            np.testing.assert_allclose(
+                [vector["residual_norm_2"] / b_norm, vector["residual_norm_inf"] / backward_scale],
+                [reference["relative_residual"], reference["relative_backward_residual"]], rtol=1e-12, atol=0,
+            )
+        np.testing.assert_allclose(result["normalized_correction_rhs_norm"], 1, rtol=1e-12, atol=0)
+        np.testing.assert_allclose(options["rtol"] * seed["relative_residual"], target, rtol=1e-12, atol=0)
+        np.testing.assert_allclose(terminal["correction_normalized_relative_residual"] * seed["relative_residual"],
+                                   terminal["correction_relative_residual"], rtol=1e-8, atol=0)
+        self.assertGreater(terminal["correction_normalized_relative_residual"], options["rtol"])
+        np.testing.assert_allclose(terminal["correction_relative_residual"], final["relative_residual"], rtol=1e-8, atol=0)
+        self.assertEqual(terminal["solver_relative_target_passed"], final["relative_residual"] <= target)
+        self.assertEqual(terminal["relative_residual_gate_passed"], final["relative_residual"] <= relative_gate)
+        self.assertEqual(terminal["backward_residual_gate_passed"], final["relative_backward_residual"] <= backward_gate)
+        self.assertFalse(terminal["solver_relative_target_passed"])
+        self.assertFalse(terminal["relative_residual_gate_passed"])
+        self.assertTrue(terminal["backward_residual_gate_passed"])
+        history = result["callback_original_relative_residuals"]
+        self.assertEqual(len(history), terminal["iterations"])
+        np.testing.assert_allclose(history[0], seed["relative_residual"], rtol=1e-12, atol=0)
+        self.assertLess(final["relative_residual"], min(history))
+        self.assertAlmostEqual(result["original_relative_residual_reduction_fraction"],
+                               1 - final["relative_residual"] / seed["relative_residual"])
+        self.assertEqual((result["accepted_channels"], run["accepted_channels"], result["total_device_channels"]), (0, 0, 5))
+        self.assertFalse(result["scattering_computed"])
+        self.assertFalse(result["spatial_convergence_established"])
+
+        normal, last, limited = (result["algebraic_checks"][name] for name in ("normal", "last_update", "limited"))
+        for small, raw_info in ((normal, 0), (last, 1)):
+            self.assertEqual((small["status"], small["raw_info"], small["info"], small["accepted_count"]),
+                             ("first_drive_accepted", raw_info, 0, 1))
+            self.assertLessEqual(small["direct_relative_residual"], target)
+            self.assertLessEqual(small["relative_dense_solution_error"], target)
+        self.assertIsNone(normal["terminal_confirmation"])
+        self.assertEqual(last["terminal_confirmation"], {"callbacks": 1, "unchanged_start": True,
+                                                        "accepted": True, "info": 0})
+        self.assertEqual((limited["status"], limited["raw_info"], limited["info"], limited["accepted_count"]),
+                         ("iteration_limit", 1, 1, 0))
+        self.assertGreater(limited["direct_relative_residual"], target)
+        self.assertIsNone(limited["terminal_confirmation"])
+
+        table = LEDGER.with_suffix(".csv").read_bytes()
+        self.assertEqual(sha256(table).hexdigest(), self.ledger["csv_sha256"])
+        row, = [row for row in csv.DictReader(io.StringIO(table.decode("utf-8"))) if row["case"] == key]
+        self.assertEqual((row["phase"], row["status"]), ("first_drive_residual_correction", run["status"]))
+        self.assertEqual(int(row["max_gmres_iterations"]), terminal["iterations"])
+        self.assertEqual(float(row["max_relative_true_residual"]), final["relative_residual"])
+        self.assertEqual(float(row["max_relative_backward_residual"]), final["relative_backward_residual"])
+
     def test_h100_recovery_reuses_the_failed_first_drive(self):
         operator = self.ledger["full_device_h100_operator"]
         first_attempt = self.ledger["full_device_h100_lgmres_mixed_fill12"]
