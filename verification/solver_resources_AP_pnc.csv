@@ -79,3 +79,4 @@ Athul Prem,_AP_pnc,full_device_h160_h130_mixed_comparison,offline_mesh_pair,mesh
 Athul Prem,_AP_pnc,uniform_3um_layered_h160,cached_port_solve_total,completed_unverified,19197,2289981,21.594000000011874,432.43359375,428.16015625,,15197719,12.0,,2.8263320696387627e-11,5.638962535500857e-14
 Athul Prem,_AP_pnc,uniform_3um_layered_h130,cached_port_solve_total,completed_unverified,26703,2862795,33.10899999999674,534.2890625,530.140625,,22023081,12.0,,4.671758706385845e-11,7.853562925704549e-14
 Athul Prem,_AP_pnc,full_device_uniform_h160_h130_diagnostic,offline_comparison,diagnostic_completed,,,,,,,,,,,
+Athul Prem,_AP_pnc,uniform_3um_layered_h100,cached_port_solve_total,completed_unverified,42579,4087801,111.85899999999674,771.12890625,767.03515625,,37366855,12.0,,8.944559326594097e-11,3.023758149282572e-13

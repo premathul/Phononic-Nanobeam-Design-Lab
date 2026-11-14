@@ -1,5 +1,8 @@
 """Verify portable full-device scattering evidence. Author: Athul Prem | _AP_pnc."""
 
+import csv
+from hashlib import sha256
+import io
 import json
 from pathlib import Path
 import unittest
@@ -206,6 +209,96 @@ class SolverResourceEvidenceTests(unittest.TestCase):
 
     def test_uniform_body_diagnostic_replays_native_phase(self):
         diagnostic = self.ledger["full_device_uniform_h160_h130_diagnostic"]
+        self.check_uniform_body_diagnostic(diagnostic, [diagnostic["cases"][size] for size in ("160", "130")])
+
+    def test_h100_uniform_body_diagnostic_replays_saved_h130(self):
+        prior = self.ledger["full_device_uniform_h160_h130_diagnostic"]
+        diagnostic = self.ledger["full_device_uniform_h130_h100_diagnostic"]
+        reference = prior["cases"]["130"]
+        candidate = diagnostic["cases"]["100"]
+        self.assertEqual(diagnostic["reference_case"], {
+            "entry": "full_device_uniform_h160_h130_diagnostic", "size_nm": "130",
+            "public_summary": reference["raw_files"]["public_summary"],
+        })
+        self.assertEqual(diagnostic["reused_safe_sources"], prior["reused_safe_sources"])
+        self.assertEqual(candidate["cached_port_provenance"]["source"], prior["reused_safe_sources"])
+        self.assertEqual(candidate["cached_port_provenance"]["trace_dofs"], 675)
+        self.assertEqual(candidate["preflight"]["end_face_dofs"], {"xleft": 675, "xright": 675})
+        self.assertEqual(candidate["preflight"]["hole_count"], 0)
+        self.assertEqual(candidate["preflight"]["ndof"], candidate["ndof"])
+        self.assertEqual(candidate["preflight"]["mesh_sha256"], candidate["mesh_checkpoint"]["mesh_sha256"])
+        self.assertTrue(candidate["mesh_checkpoint"]["reused"])
+        self.assertGreater(candidate["ndof"], reference["ndof"])
+        for section in ("geometry", "material", "analysis"):
+            self.assertEqual(candidate["configuration"][section], reference["configuration"][section])
+        mesh = dict(candidate["configuration"]["mesh"])
+        self.assertEqual(mesh.pop("mesh_size_nm"), 100)
+        reference_mesh = dict(reference["configuration"]["mesh"])
+        self.assertEqual(reference_mesh.pop("mesh_size_nm"), 130)
+        self.assertEqual(mesh, reference_mesh)
+        self.check_uniform_body_diagnostic(diagnostic, [reference, candidate])
+        limit = diagnostic["finite_diagnostic_limit"]
+        for name, phase in (
+            ("native", candidate["same_channel_native_phase_error_rad"]),
+            ("pair", diagnostic["same_channel_phase_difference_rad"]),
+        ):
+            maximum = np.max(np.abs(phase))
+            self.assertAlmostEqual(maximum, diagnostic[f"maximum_{name}_phase_error_rad"], places=12)
+            self.assertEqual(diagnostic[f"{name}_phase_passed"], maximum < limit)
+        self.assertEqual(diagnostic["native_complex_passed"], candidate["maximum_native_complex_error"] < limit)
+        self.assertEqual(candidate["run"]["status"], "completed")
+        self.assertEqual(candidate["run"]["exit_code"], 0)
+        timeout = diagnostic["initial_timed_out_attempt"]
+        self.assertEqual(timeout["status"], "stopped_timeout")
+        self.assertFalse(timeout["scattering_exported"])
+        self.assertEqual(timeout["mesh_sha256"], candidate["mesh_checkpoint"]["mesh_sha256"])
+        self.assertEqual(timeout["mechanical_operator_hash"], candidate["mechanical_operator_hash"])
+        self.assertEqual(timeout["run"]["limits"]["wall_seconds"], 106)
+        self.assertGreaterEqual(timeout["run"]["elapsed_seconds"], 106)
+        self.assertEqual(candidate["run"]["limits"], timeout["run"]["limits"] | {"wall_seconds": 360})
+
+        table = LEDGER.with_suffix(".csv").read_bytes()
+        self.assertEqual(sha256(table).hexdigest(), self.ledger["csv_sha256"])
+        rows = csv.DictReader(io.StringIO(table.decode("utf-8")))
+        resource, = [row for row in rows if row["case"] == "uniform_3um_layered_h100"]
+        self.assertEqual(int(resource["body_dofs"]), candidate["ndof"])
+        self.assertEqual(resource["status"], candidate["status"])
+        self.assertEqual(float(resource["elapsed_seconds"]), candidate["run"]["elapsed_seconds"])
+
+    def test_h100_uniform_body_diagnostic_replays_common_safe_reference(self):
+        diagnostic = self.ledger["full_device_uniform_h130_h100_diagnostic"]
+        reference = self.ledger["full_device_uniform_h160_h130_diagnostic"]["cases"]["130"]
+        common = diagnostic["common_safe_reference"]
+        reference_file = LEDGER.parent / "full_device_port_resolution_AP_pnc.json"
+        reference_bytes = reference_file.read_bytes()
+        self.assertEqual(sha256(reference_bytes).hexdigest(), common["source"]["sha256"])
+        section = json.loads(reference_bytes)["cases"][common["section"]]
+        self.assertEqual(common["section"], "20x6")
+        self.assertEqual(common["trace_dofs"], section["trace_dofs"])
+        wave = np.asarray(section["propagating"]["positive"]["k_rad_m"])
+        np.testing.assert_array_equal(common["reference_wavenumbers_rad_m"], wave)
+        self.assertEqual(common["reference_roots"], section["propagating"]["positive"]["root_indices"])
+        length = diagnostic["length_m"]
+        ideal = np.diag(np.exp(1j * wave * length))
+        drift = np.max(abs(np.asarray(diagnostic["wavenumbers_rad_m"]) - wave)) * length
+        self.assertAlmostEqual(common["maximum_native_port_phase_drift_rad"], drift, places=12)
+        self.assertEqual(common["phase_qualification"]["status"], "passed")
+        self.assertEqual(set(common["phase_qualification"]["pairs"]), {"width", "thickness"})
+        for size, case in (("130", reference), ("100", diagnostic["cases"]["100"])):
+            with self.subTest(size=size):
+                summary = common["cases"][size]
+                r, t = (complex_block(case["scattering"], name) for name in ("reflection", "transmission"))
+                phase = np.angle(np.diag(t) / np.diag(ideal))
+                np.testing.assert_allclose(phase, summary["same_channel_phase_error_rad"], rtol=0, atol=1e-12)
+                self.assertAlmostEqual(np.max(abs(phase)), summary["maximum_phase_error_rad"], places=12)
+                complex_error = max(np.max(abs(r)), np.max(abs(t - ideal)))
+                power_error = max(np.max(np.sum(abs(r)**2, axis=0)), np.max(abs(np.sum(abs(t)**2, axis=0) - 1)))
+                self.assertAlmostEqual(complex_error, summary["maximum_complex_error"], places=12)
+                self.assertAlmostEqual(power_error, summary["maximum_power_error"], places=12)
+                self.assertEqual(summary["uniform_response_passed"], max(complex_error, power_error) < 0.01)
+                self.assertGreaterEqual(summary["minimum_mode_mass_overlap"], 0.99)
+
+    def check_uniform_body_diagnostic(self, diagnostic, cases):
         self.assertEqual(diagnostic["status"], "diagnostic_completed")
         self.assertFalse(diagnostic["phase_adjustment_applied"])
         h200 = self.ledger["full_device_lgmres_public_replay"]
@@ -219,9 +312,8 @@ class SolverResourceEvidenceTests(unittest.TestCase):
         phase_limit = diagnostic["finite_diagnostic_limit"]
         self.assertEqual(phase_limit, 0.01)
         reflection, transmission = [], []
-        for size in ("160", "130"):
-            with self.subTest(size=size):
-                case = diagnostic["cases"][size]
+        for case in cases:
+            with self.subTest(size=case["configuration"]["mesh"]["mesh_size_nm"]):
                 self.check_modal_power(case)
                 scattering = case["scattering"]
                 self.assertEqual(scattering["groups"], h200["scattering"]["groups"])
