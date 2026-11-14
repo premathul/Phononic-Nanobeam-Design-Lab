@@ -97,6 +97,10 @@ test_windows_journal_read_retries_transient_sharing_denial (test_resumable_scatt
 test_archived_scattering_baseline_remains_usable (test_saved_scattering_validation_AP_pnc.SavedScatteringValidationTests.test_archived_scattering_baseline_remains_usable) ... ok
 test_safe_source_mismatch_is_rejected (test_saved_scattering_validation_AP_pnc.SavedScatteringValidationTests.test_safe_source_mismatch_is_rejected) ... ok
 test_unknown_scattering_source_is_rejected (test_saved_scattering_validation_AP_pnc.SavedScatteringValidationTests.test_unknown_scattering_source_is_rejected) ... ok
+test_dense_operator_factor_and_reconstruction_preserve_original_equations (test_scaled_coordinate_correction_AP_pnc.ScaledCoordinateCorrectionTests.test_dense_operator_factor_and_reconstruction_preserve_original_equations) ... ok
+test_one_outer_update_truncated_before_tolerance_remains_unaccepted (test_scaled_coordinate_correction_AP_pnc.ScaledCoordinateCorrectionTests.test_one_outer_update_truncated_before_tolerance_remains_unaccepted) ... ok
+test_successful_last_update_requires_unchanged_original_confirmation (test_scaled_coordinate_correction_AP_pnc.ScaledCoordinateCorrectionTests.test_successful_last_update_requires_unchanged_original_confirmation) ... ok
+test_zero_transformed_residual_cannot_override_original_checks (test_scaled_coordinate_correction_AP_pnc.ScaledCoordinateCorrectionTests.test_zero_transformed_residual_cannot_override_original_checks) ... ok
 test_matched_guide_for_both_directions (test_scattering_AP_pnc.ScatteringTests.test_matched_guide_for_both_directions) ... ok
 test_rejects_incompatible_frequency_and_port_mapping (test_scattering_AP_pnc.ScatteringTests.test_rejects_incompatible_frequency_and_port_mapping) ... ok
 test_full_device_body_mesh_pair_replays_matching_and_gates (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_full_device_body_mesh_pair_replays_matching_and_gates) ... ok
@@ -147,7 +151,7 @@ test_failed_attempt_is_retained_and_bad_material_creates_no_output (test_workflo
 3D solid: 352 tetrahedra, 435 displacement DOFs
 test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks (test_workflow3d_AP_pnc.Workflow3D.test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks) ... ok
 test_historical_hole_pattern_uses_source_origin_and_exact_provenance (test_workflow3d_AP_pnc.Workflow3D.test_historical_hole_pattern_uses_source_origin_and_exact_provenance) ... ok
-Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{849402f2-c174-4567-9263-e6d8cce1d857}\Temp\tmpe64vm798\two_hole_pilot_200nm-86bd63905db9
+Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{b15c3516-1b81-4e4b-98e7-992b4ed6f980}\Temp\tmpo0pmgn4e\two_hole_pilot_200nm-f6b03c86cb1d
 Max relative solve residual: 0
 Power balance check: True; max R=0
 Matched-guide power check: True
@@ -159,6 +163,6 @@ test_output_can_be_reconstructed_and_cache_checks_files (test_workflow3d_AP_pnc.
 test_scattering_exports_power_channels_and_reconstructible_responses (test_workflow3d_AP_pnc.Workflow3D.test_scattering_exports_power_channels_and_reconstructible_responses) ... ok
 
 ----------------------------------------------------------------------
-Ran 135 tests in 47.979s
+Ran 139 tests in 47.825s
 
 OK (skipped=1)

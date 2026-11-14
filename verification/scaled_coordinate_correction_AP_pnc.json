@@ -1,0 +1,426 @@
+{
+  "author": "Athul Prem",
+  "tag": "_AP_pnc",
+  "status": "bounded_prototype_verified",
+  "scope": "Synthetic algebraic checks up to 256 equations and vector-only workspace at 426627 entries. No h80 matrix, RHS or incumbent vector was read, no device solver was started, and no scattering was exported.",
+  "reproduction": {
+    "portable_check": ".venv/Scripts/python.exe -B tools/scaled_coordinate_correction_AP_pnc.py",
+    "focused_tests": ".venv/Scripts/python.exe -B -m unittest discover -s tests -p test_scaled_coordinate_correction_AP_pnc.py",
+    "local_measurement_driver": ".venv/Scripts/python.exe -B results/runs/full_device_resource_profile/verify_scaled_coordinate_correction_AP_pnc.py",
+    "measurement_thread_count": 1
+  },
+  "base_commit": "ebbd0a2af9793c1e58091bca81d0a7716bd6d85a",
+  "source_sha256": {
+    "tools/scaled_coordinate_correction_AP_pnc.py": "0429a8cb080b5d8d9ff189fd878aa0e037b13b109e295ec99f311ee7d2081bef",
+    "tests/test_scaled_coordinate_correction_AP_pnc.py": "7dbd1a2351077552ef727461e64e6911ff4ea7200040b33b6a4aa7869cd7ddba",
+    "results/runs/full_device_resource_profile/verify_scaled_coordinate_correction_AP_pnc.py": "053d31d5bb883e53e76cd88c0ca74d63565832987b0474507b29ce6ba21f98fa",
+    "verification/solver_resources_AP_pnc.json": "bf31cd948d740399e03d85c4316999cb606d34e473dc69053f924593a6bedb5a"
+  },
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "numerical_thread_environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    }
+  },
+  "factorization": {
+    "fill_factor": 4.0,
+    "drop_tol": 0.0001,
+    "permc_spec": "COLAMD",
+    "dtype": "complex128"
+  },
+  "krylov": {
+    "m": 25,
+    "k": 5,
+    "maxiter": 8,
+    "atol": 0.0
+  },
+  "coordinate_map": {
+    "scales": "Inverse square roots of the respective original row and column modulus maxima.",
+    "operator": "B@y = Dr*(A@(Dc*y))",
+    "preconditioner": "ILU(B)^-1 on the right",
+    "normalized_rhs": "q = Dr*(b-A@x0)/rho, rho = ||Dr*(b-A@x0)||_2",
+    "original_reconstruction": "x = x0 + rho*Dc*y",
+    "sufficient_transformed_rtol": "original_relative_target*||b||_2*min(Dr)/rho, in exact arithmetic with ||q||_2=1"
+  },
+  "original_relative_target": 1e-10,
+  "original_relative_gate": 1e-09,
+  "original_backward_gate": 1e-09,
+  "independent_dense_case": {
+    "shape": [
+      4,
+      4
+    ],
+    "A": [
+      [
+        [
+          12.0,
+          4.0
+        ],
+        [
+          100.0,
+          -6.0
+        ],
+        [
+          -0.0,
+          -1.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ],
+      [
+        [
+          1.0,
+          2.0
+        ],
+        [
+          -210.0,
+          8.0
+        ],
+        [
+          10.0,
+          3.0
+        ],
+        [
+          -2.0,
+          0.0
+        ]
+      ],
+      [
+        [
+          -3.0,
+          1.0
+        ],
+        [
+          5.0,
+          0.0
+        ],
+        [
+          31.0,
+          -17.0
+        ],
+        [
+          0.0,
+          6.0
+        ]
+      ],
+      [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          -2.0,
+          8.0
+        ],
+        [
+          3.0,
+          0.0
+        ],
+        [
+          2.0,
+          2.0
+        ]
+      ]
+    ],
+    "b": [
+      [
+        2.0,
+        3.0
+      ],
+      [
+        -6.0,
+        9.0
+      ],
+      [
+        -0.0,
+        -1.0
+      ],
+      [
+        4.0,
+        -3.0
+      ]
+    ],
+    "x0": [
+      [
+        0.0,
+        1.0
+      ],
+      [
+        -0.25,
+        0.125
+      ],
+      [
+        0.25,
+        1.0
+      ],
+      [
+        -0.0,
+        -1.0
+      ]
+    ],
+    "probe": [
+      [
+        3.0,
+        4.0
+      ],
+      [
+        -1.0,
+        -9.0
+      ],
+      [
+        2.0,
+        8.0
+      ],
+      [
+        4.0,
+        -1.0
+      ]
+    ],
+    "condition_number_2": 85.61101255096989,
+    "batch_entries": 3,
+    "relative_errors": {
+      "scaled_csc": 0.0,
+      "scaled_matvec": 1.356655686018855e-16,
+      "swapped_scale_matvec": 0.7698837317455627,
+      "original_operator_infinity_norm": 0.0,
+      "dense_coordinate_round_trip": 3.954347153082623e-16,
+      "terminal_solution": 3.217032199053423e-16
+    },
+    "independent_terminal_residuals": {
+      "relative": 1.5940647223162136e-15,
+      "backward": 4.3745304318532575e-17
+    },
+    "accepted": true,
+    "scaled_rtol": 1.0107766873071537e-11,
+    "factor_csc_released_before_krylov": true,
+    "original_readonly_array_sha256_before_and_after": {
+      "data": "60be560d5ecd44884be164fd7b476d78ec27a36fa5361aa76910e3144e1aefb9",
+      "indices": "c6f3563c7efce76851195fcb6b45cf69d25af9c4351c298a1252fb401a6b858a",
+      "indptr": "b83cade0566bbe4cc01f82949c2bb3107a0a340e81991185f7ea9d3b9c217672",
+      "b": "7b80936529031b94315f180cbb049d13c695383925d74224a6bbb343158247e5",
+      "x0": "8291b7f6cf914e043f462e566e31b36a4624966648b431b76da3d1c53ca51d69"
+    }
+  },
+  "weighted_false_pass": {
+    "diagonal": [
+      1e+24,
+      1
+    ],
+    "b": [
+      1.0,
+      1.0
+    ],
+    "x0": [
+      0.0,
+      0.0
+    ],
+    "false_candidate": [
+      0.0,
+      1.0
+    ],
+    "raw_info_forced": 0,
+    "normalized_transformed_relative": 1e-12,
+    "corrected_scaled_rtol": 1.4142135623730953e-22,
+    "naive_scaled_relative_target": 1e-10,
+    "independent_original_residuals": {
+      "relative": 0.7071067811865475,
+      "backward": 1.0000000000000001e-24
+    },
+    "accepted": false
+  },
+  "reconstruction_rounding_cases": {
+    "A": "2-by-2 identity",
+    "seed": [
+      1152921504606846976,
+      [
+        0,
+        2
+      ]
+    ],
+    "rhs_second_entry": [
+      0,
+      2
+    ],
+    "cases": [
+      {
+        "rhs_first_entry": 1,
+        "normalized_transformed_relative": 0,
+        "independent_original_residuals": {
+          "relative": 0.4472135954999579,
+          "backward": 0.25
+        },
+        "relative_gate_passed": false,
+        "backward_gate_passed": false,
+        "accepted": false,
+        "solver_warnings": [
+          {
+            "category": "RuntimeWarning",
+            "message": "invalid value encountered in scalar divide",
+            "filename": "_gcrotmk.py",
+            "line": 132
+          }
+        ]
+      },
+      {
+        "rhs_first_entry": 5e-10,
+        "normalized_transformed_relative": 0,
+        "independent_original_residuals": {
+          "relative": 2.5e-10,
+          "backward": 1.25e-10
+        },
+        "relative_gate_passed": true,
+        "backward_gate_passed": true,
+        "accepted": false,
+        "solver_warnings": [
+          {
+            "category": "RuntimeWarning",
+            "message": "invalid value encountered in scalar divide",
+            "filename": "_gcrotmk.py",
+            "line": 132
+          }
+        ]
+      }
+    ],
+    "interpretation": "In both cases forming the correction RHS loses the first RHS entry to seed cancellation. SciPy returns success in the transformed equation. The reconstructed vector fails the strict original relative target even when both original gates pass."
+  },
+  "fair_factor_only_control": {
+    "n": 256,
+    "nnz": 2270,
+    "random_seed": 41803,
+    "shared_equation_arrays_sha256": {
+      "data": "c0f08d6656dc355946f7c218320c5ded5efb719f680079835150c1144396909e",
+      "indices": "63e67893ff7687c4f3fdb4fee306e3ea4c68d199ca8cd9997bf5e87d502bf991",
+      "indptr": "e4761707784014b2d85aae7eccceba42d5a03382dd1203d8f55e5435266bd449",
+      "b": "6edd876b2dc38b7d71d075e027f9802231c61c6ae9ee580a7c28d04eef38448e",
+      "x0": "a93dca0e55452f9d260337c4fd09a3667def454dd242fd4a1a6c7c38b4d1c683"
+    },
+    "shared_factor_csc_arrays_sha256": {
+      "data": "6023cc397861452a8be83d4c13e052733d8c72ed257c09d9bcdfed4840704cde",
+      "indices": "63e67893ff7687c4f3fdb4fee306e3ea4c68d199ca8cd9997bf5e87d502bf991",
+      "indptr": "e4761707784014b2d85aae7eccceba42d5a03382dd1203d8f55e5435266bd449"
+    },
+    "condition_number_2": 1354.0807605901152,
+    "initial_original_residuals": {
+      "relative": 0.0038434740213614273,
+      "backward": 8.089781452582802e-06
+    },
+    "seed_reproduced_by_both_first_callbacks": true,
+    "control_rtol": 2.6018128246533273e-08,
+    "scaled_rtol": 1.2939221097074668e-08,
+    "callback_counts": {
+      "factor_only_control": 2,
+      "scaled_coordinate": 2
+    },
+    "scaled_coordinate_retained_original_candidate_bytes": 12288,
+    "solver_raw_info": {
+      "factor_only_control": 0,
+      "scaled_coordinate": 0
+    },
+    "dense_solution_relative_error": {
+      "factor_only_control": 1.1328483625739768e-11,
+      "scaled_coordinate": 3.0010306371925895e-12
+    },
+    "callback_independent_original_relative_residuals": {
+      "factor_only_control": [
+        0.0038434740213614273,
+        6.132707592344983e-11
+      ],
+      "scaled_coordinate": [
+        0.0038434740213614273,
+        1.7062004894839544e-11
+      ]
+    },
+    "terminal_independent_original_residuals": {
+      "factor_only_control": {
+        "relative": 6.132707592344983e-11,
+        "backward": 8.241881344657249e-14
+      },
+      "scaled_coordinate": {
+        "relative": 1.7062004894839544e-11,
+        "backward": 2.4401188007503645e-14
+      }
+    },
+    "recipe": "default_rng(seed). For each row, draw eight uniformly random columns with replacement and add independent ordered real then imaginary normal arrays using add.at. Add 7+2j on the diagonal. Multiply rows by geomspace(0.1,10,n) and columns by geomspace(8,0.125,n). Draw next n real then n imaginary standard normals for b. Set x0 to dense solve(A,b) plus 1e-4 times the next n real and n imaginary standard normals."
+  },
+  "vector_workspace": {
+    "vector_length": 426627,
+    "complex128_vector_bytes": 6826032,
+    "retained_scale_vector_bytes": 6826032,
+    "simultaneous_extra_complex_vectors_in_one_matvec": 2,
+    "analytical_matvec_array_bytes": 13652064,
+    "isolated_call_measurements": [
+      {
+        "operation": "plain_diagonal_matvec",
+        "simultaneous_extra_complex_vectors": 1,
+        "traced_peak_bytes": 6826240,
+        "traced_live_bytes_at_return": 6826128,
+        "numpy_domain_live_bytes_at_return": 6826032
+      },
+      {
+        "operation": "scaled_operator_matvec",
+        "simultaneous_extra_complex_vectors": 2,
+        "traced_peak_bytes": 13652430,
+        "traced_live_bytes_at_return": 6826406,
+        "numpy_domain_live_bytes_at_return": 6826032
+      },
+      {
+        "operation": "factor_only_preconditioner_application_surrogate",
+        "simultaneous_extra_complex_vectors": 2,
+        "traced_peak_bytes": 13652256,
+        "traced_live_bytes_at_return": 6826128,
+        "numpy_domain_live_bytes_at_return": 6826032
+      },
+      {
+        "operation": "factor_only_preconditioner_then_original_operator_surrogate",
+        "simultaneous_extra_complex_vectors": 2,
+        "traced_peak_bytes": 13652528,
+        "traced_live_bytes_at_return": 6826128,
+        "numpy_domain_live_bytes_at_return": 6826032
+      },
+      {
+        "operation": "scaled_coordinate_preconditioner_then_scaled_operator_surrogate",
+        "simultaneous_extra_complex_vectors": 3,
+        "traced_peak_bytes": 20478718,
+        "traced_live_bytes_at_return": 6826406,
+        "numpy_domain_live_bytes_at_return": 6826032
+      }
+    ],
+    "synthetic_recipe": "Preallocate source=np.full(n,1-2j,dtype=complex128) and float64 scales np.linspace(0.005,0.023,n) and np.linspace(0.023,0.005,n). A @ v returns 2.0*v, allocating a fresh output. Use a copy in lieu of factor.solve, with the historical path applying Dr and Dc around it. In the sequential tests keep the factor output alive during the matvec. Start tracemalloc after preallocation and LinearOperator construction, execute one call, and query peak before snapshot. NumPy domain is filtered only for live bytes after return.",
+    "prior_factor_only_metadata": {
+      "operator_storage_bytes": 655839372,
+      "factor_input_bytes": 655839372,
+      "scaling_vectors_bytes": 6826032,
+      "scaling_application_bytes": 13652064,
+      "allocated_scaling_batch_bound_bytes": 15214640,
+      "krylov_workspace_bytes": 1051208928
+    },
+    "prior_factor_only_run_memory": {
+      "peak_tree_rss_mib": 3810.0390625,
+      "peak_tree_private_commit_mib": 6627.97265625,
+      "minimum_available_mib": 396.11328125,
+      "available_floor_mib": 400
+    },
+    "additional_csc_bytes_avoided_vs_retaining_scaled_operator_after_factorization": 655839372,
+    "prototype_callback_and_terminal_snapshot_upper_bound_bytes": 61434288,
+    "prototype_separate_last_transformed_callback_bytes": 6826032,
+    "comparison": "The scaled iteration adds one mapped input vector to the plain matvec peak. Its isolated matvec peak uses the same two complex arrays as the previous factor-only preconditioner surrogate. With the preconditioner output live through the matvec, the sequential surrogate peaks at three vectors for the scaled-coordinate method versus two for factor-only. Both approaches release the scaled factor input before iteration. During factor preparation the prototype allocates one float64 row-sum vector, released before allocating the scaled CSC, as well as bounded batch arrays.",
+    "limitations": "Isolated vector allocation plus metadata estimates. The measurement excludes sparse A, SuperLU, solver iteration, transient residual evaluation arrays, callback snapshots, total process RSS and private commit. Prior margin and factor fill are empirical. The small prototype retains callback snapshots in memory and has no resource admission or disk checkpoint streaming. This comparison cannot establish total memory use, numerical effectiveness, or admission for h80."
+  },
+  "h80_saved_state": {
+    "reference_record_key": "full_device_h80_gcrotmk_scaled_double_fill4_residual_correction",
+    "accepted_drives": 0,
+    "total_drives": 5,
+    "protected_unscaled_incumbent_relative_residual": 1.126353056592424e-08,
+    "protected_unscaled_incumbent_sha256": "6b6acc57fc3f6c208b55f2b353b38b8fa5da2ed085cd233f0ee6fd41b077dd30"
+  }
+}
