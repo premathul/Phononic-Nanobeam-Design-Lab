@@ -90,6 +90,10 @@ test_unknown_scattering_source_is_rejected (test_saved_scattering_validation_AP_
 test_matched_guide_for_both_directions (test_scattering_AP_pnc.ScatteringTests.test_matched_guide_for_both_directions) ... ok
 test_rejects_incompatible_frequency_and_port_mapping (test_scattering_AP_pnc.ScatteringTests.test_rejects_incompatible_frequency_and_port_mapping) ... ok
 test_full_device_body_mesh_pair_replays_matching_and_gates (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_full_device_body_mesh_pair_replays_matching_and_gates) ... ok
+test_h100_continuation_reuses_accepted_and_active_checkpoints (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h100_continuation_reuses_accepted_and_active_checkpoints) ... ok
+test_h100_pair_fails_complex_response_with_unchanged_mode_identities (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h100_pair_fails_complex_response_with_unchanged_mode_identities) ... ok
+test_h100_recovery_reuses_the_failed_first_drive (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h100_recovery_reuses_the_failed_first_drive) ... ok
+test_h100_stage_preserves_geometry_and_exact_ports (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h100_stage_preserves_geometry_and_exact_ports) ... ok
 test_h100_uniform_body_diagnostic_replays_common_safe_reference (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h100_uniform_body_diagnostic_replays_common_safe_reference) ... ok
 test_h100_uniform_body_diagnostic_replays_saved_h130 (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h100_uniform_body_diagnostic_replays_saved_h130) ... ok
 test_h160_continuation_reuses_failed_iterate (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h160_continuation_reuses_failed_iterate) ... ok
@@ -118,7 +122,7 @@ test_failed_attempt_is_retained_and_bad_material_creates_no_output (test_workflo
 3D solid: 352 tetrahedra, 435 displacement DOFs
 test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks (test_workflow3d_AP_pnc.Workflow3D.test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks) ... ok
 test_historical_hole_pattern_uses_source_origin_and_exact_provenance (test_workflow3d_AP_pnc.Workflow3D.test_historical_hole_pattern_uses_source_origin_and_exact_provenance) ... ok
-Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{19d66e5a-3d1a-4964-86de-4c98a4823c11}\Temp\tmp94vutkuc\two_hole_pilot_200nm-8e58074a6356
+Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{f297442b-d15d-49a9-9ee9-e3ff9d6d56e6}\Temp\tmpbts15fil\two_hole_pilot_200nm-73ff3ac8ec0f
 Max relative solve residual: 0
 Power balance check: True; max R=0
 Matched-guide power check: True
@@ -130,6 +134,6 @@ test_output_can_be_reconstructed_and_cache_checks_files (test_workflow3d_AP_pnc.
 test_scattering_exports_power_channels_and_reconstructible_responses (test_workflow3d_AP_pnc.Workflow3D.test_scattering_exports_power_channels_and_reconstructible_responses) ... ok
 
 ----------------------------------------------------------------------
-Ran 106 tests in 22.249s
+Ran 110 tests in 21.417s
 
 OK (skipped=1)
