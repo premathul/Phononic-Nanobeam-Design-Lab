@@ -1339,6 +1339,148 @@ class SolverResourceEvidenceTests(unittest.TestCase):
         self.assertEqual(float(row["max_relative_true_residual"]), original["relative_residual"])
         self.assertEqual(float(row["max_relative_backward_residual"]), original["relative_backward_residual"])
 
+    def test_h80_scaled_factor_probe_checks_same_seed_candidates_and_guards(self):
+        key = "full_device_h80_gcrotmk_scaled_double_fill4_residual_correction"
+        result = self.ledger[key]
+        control = self.ledger[result["control_case"]]
+        prior = self.ledger[result["seed_case"]]
+        stage = self.ledger[result["reference_operator_case"]]
+        raw = result["raw_files"]
+        for name in ("A", "rhs", "stages"):
+            self.assertEqual(raw[name], stage["raw_files"][name])
+        self.assertEqual(raw["seed"], control["raw_files"]["seed"])
+        self.assertEqual(raw["seed"], prior["raw_files"]["terminal_vector"])
+        self.assertEqual(raw["control_terminal"], control["raw_files"]["terminal_vector"])
+        self.assertEqual(result["equation_array_sha256"], control["equation_array_sha256"])
+        self.assertEqual(result["numerical_thread_environment"], control["numerical_thread_environment"])
+        self.assertEqual((result["frequency_hz"], result["incident_side"], result["incident_columns"]), (1e9, "left", [0]))
+        self.assertEqual(result["incident_root_index"], control["incident_root_index"])
+
+        source, compatibility = result["source"], result["source_compatibility_exception"]
+        path = "src/phononic/resumable_scattering_AP_pnc.py"
+        staged_sha = "68c12549b47a9ec98abf7b39d78ad597dd114da00e326adf8ebbec060947b53f"
+        current_sha = "dba6002d982647810f3fc714fdce73a0f34e306e06e8519df2d54778002205ec"
+        self.assertEqual(compatibility["path"], path)
+        self.assertEqual(compatibility["staged_sha256"], stage["source"]["source_sha256"][path])
+        self.assertEqual((compatibility["staged_sha256"], compatibility["current_sha256"]), (staged_sha, current_sha))
+        self.assertEqual(compatibility["staged_git_commit"], stage["source"]["git_commit"])
+        self.assertEqual(compatibility["current_git_commit"], source["git_commit"])
+        self.assertEqual(source["source_sha256"], stage["source"]["source_sha256"] | {path: current_sha})
+        for name in ("packages", "python", "platform"):
+            self.assertEqual(source[name], stage["source"][name])
+
+        factor = result["factorization"]
+        for name in ("dtype", "fill_factor", "drop_tol", "permc_spec"):
+            self.assertEqual(factor[name], control["factorization"][name])
+        self.assertEqual(result["equation_dtype"], "complex128")
+        self.assertEqual(result["preconditioner_side"], "flexible_right")
+        self.assertEqual(result["gcrotmk_settings"], control["gcrotmk_settings"])
+        target, relative_gate, backward_gate = (result[name] for name in (
+            "relative_tolerance", "relative_residual_limit", "backward_residual_limit"))
+        self.assertEqual((target, relative_gate, backward_gate), (1e-10, 1e-9, 1e-9))
+
+        estimate, admission, run = result["admission_estimate"], result["admission"], result["run"]
+        baseline = control["admission_estimate"]
+        for name in ("operator_storage_bytes", "rhs_workspace_bytes", "factor_input_bytes", "factor_buffer_bytes",
+                     "krylov_workspace_bytes", "large_factor_margin_mib"):
+            self.assertEqual(estimate[name], baseline[name])
+        dofs = result["body_dofs"]
+        workspace = (estimate["scaling_application_bytes"], estimate["scaling_vectors_bytes"],
+                     estimate["scaling_batch_workspace_bytes"])
+        self.assertEqual(workspace, (2 * 16 * dofs, 2 * 8 * dofs, 64 * 2**20))
+        self.assertLessEqual(estimate["allocated_scaling_batch_bound_bytes"], workspace[-1])
+        self.assertTrue(estimate["scaled_factor_fill_is_empirical"])
+        self.assertEqual(estimate["modeled_commit_mib"], baseline["modeled_commit_mib"] + sum(workspace) / 2**20)
+        peak = max(prior["run"]["peak_tree_private_commit_mib"], control["run"]["peak_tree_private_commit_mib"])
+        required_commit = max(estimate["modeled_commit_mib"], peak + run["commit_headroom_floor_mib"])
+        self.assertEqual(admission, {"required_commit_mib": required_commit, "required_physical_mib": 1200})
+        self.assertGreaterEqual(run["initial_memory"]["commit_headroom_mib"], required_commit)
+        self.assertGreaterEqual(run["initial_memory"]["physical_available_mib"], admission["required_physical_mib"])
+        required_pre_factor = required_commit - (estimate["operator_storage_bytes"] + 16 * dofs) / 2**20
+        self.assertEqual(estimate["required_pre_factor_commit_headroom_mib"], required_pre_factor)
+        self.assertGreaterEqual(result["before_factorization"]["commit_headroom_mib"], required_pre_factor)
+        self.assertGreaterEqual(result["before_factorization"]["physical_available_mib"], run["available_floor_mib"])
+        self.assertEqual(run["wall_cap_seconds"], control["run"]["wall_cap_seconds"])
+        self.assertLess(run["elapsed_seconds"], run["wall_cap_seconds"])
+        self.assertTrue(run["worker_stopped"])
+        self.assertGreaterEqual(run["initial_disk_free_mib"], run["required_disk_free_mib"])
+        for observed, limit, check in (
+                ("peak_tree_rss_mib", "rss_cap_mib", self.assertLessEqual),
+                ("peak_tree_private_commit_mib", "private_commit_cap_mib", self.assertLessEqual),
+                ("minimum_available_mib", "available_floor_mib", self.assertLess),
+                ("minimum_commit_headroom_mib", "commit_headroom_floor_mib", self.assertGreaterEqual)):
+            self.assertEqual(run[limit], control["run"][limit])
+            check(run[observed], run[limit])
+
+        scaling = factor["factor_scaling"]
+        self.assertEqual((scaling["steps"], scaling["max_norm"], scaling["scale_exponent"]),
+                         (1, "complex_modulus", -0.5))
+        self.assertEqual(scaling["matrix"], "D_r A D_c")
+        self.assertEqual(scaling["application"], "D_c ILU(D_r A D_c)^-1 D_r")
+        small = result["small_scaling_check"]
+        self.assertEqual((small["status"], small["correction_outcome"]), ("passed", "first_drive_accepted"))
+        self.assertTrue(small["unequal_row_column_scales"])
+        self.assertGreater(small["swapped_map_relative_dense_error"], 0.01)
+        for name in ("scaled_matrix_relative_dense_error", "native_application_relative_dense_error",
+                     "mapped_application_relative_dense_error"):
+            self.assertLessEqual(small[name], 1e-14)
+        self.assertEqual(small["original_csc_sha256_before"], small["original_csc_sha256_after"])
+
+        candidates = result["candidates"]
+        self.assertEqual(len({entry["artifact"]["path"] for entry in candidates}), len(candidates))
+        self.assertEqual([entry["event"] for entry in candidates], ["iterate"] * 3)
+        self.assertEqual([entry["iteration"] for entry in candidates], [1, 2, 3])
+        self.assertEqual(candidates[0]["artifact"]["sha256"], raw["seed"]["sha256"])
+        self.assertFalse(result["terminal_candidate_available"])
+        self.assertFalse(result["completed_probe_comparison_available"])
+        seed = result["seed_original_equation_checks"]
+        control_terminal = result["control_original_equation_checks"]
+        for measured, previous in (
+                (seed, prior["terminal_candidate"]["independent_original_equation_checks"]),
+                (control_terminal, control["terminal_candidate"]["independent_original_equation_checks"])):
+            np.testing.assert_allclose([measured[name] for name in previous], list(previous.values()), rtol=1e-12, atol=0)
+        self.assertAlmostEqual(seed["relative_residual"] * result["gcrotmk_settings"]["rtol"] / target, 1, places=12)
+        for candidate in candidates:
+            measured = candidate["independent_original_equation_checks"]
+            relative = measured["residual_norm_2"] / result["original_rhs_norm_2"]
+            scale = result["original_operator_inf_norm"] * measured["solution_norm_inf"] + result["original_rhs_norm_inf"]
+            backward = measured["residual_norm_inf"] / scale
+            np.testing.assert_allclose([relative, backward], [measured["relative_residual"], measured["relative_backward_residual"]],
+                                       rtol=1e-12, atol=0)
+            self.assertEqual(candidate["solver_relative_target_passed"], relative <= target)
+            self.assertEqual(candidate["relative_residual_gate_passed"], relative <= relative_gate)
+            self.assertEqual(candidate["backward_residual_gate_passed"], backward <= backward_gate)
+            control_relative = control["callback_original_relative_residuals"][candidate["iteration"] - 1]
+            self.assertEqual(candidate["control_callback_relative_residual"], control_relative)
+            self.assertAlmostEqual(candidate["relative_residual_change_from_control_fraction"],
+                                   relative / control_relative - 1)
+        self.assertTrue(all(entry["relative_residual_change_from_control_fraction"] > 0 for entry in candidates[1:]))
+        best = min(candidates, key=lambda entry: entry["independent_original_equation_checks"]["relative_residual"])
+        best_checks = best["independent_original_equation_checks"]
+        self.assertAlmostEqual(result["best_saved_relative_residual_reduction_fraction"],
+                               1 - best_checks["relative_residual"] / seed["relative_residual"])
+        self.assertEqual(result["best_saved_candidate"], best["artifact"])
+        self.assertGreater(best_checks["relative_residual"], control_terminal["relative_residual"])
+        self.assertEqual(result["best_retained_vector"], raw["control_terminal"])
+        self.assertFalse(best["relative_residual_gate_passed"])
+        self.assertTrue(best["backward_residual_gate_passed"])
+        self.assertEqual((result["status"], run["status"]), ("aborted_memory_limit", "aborted_memory_limit"))
+        self.assertEqual((result["accepted_channels"], run["accepted_channels"], result["total_device_channels"]), (0, 0, 5))
+        self.assertFalse(result["scattering_computed"])
+        self.assertFalse(result["spatial_convergence_established"])
+
+        table = LEDGER.with_suffix(".csv").read_bytes()
+        self.assertEqual(sha256(table).hexdigest(), self.ledger["csv_sha256"])
+        row, = [row for row in csv.DictReader(io.StringIO(table.decode("utf-8"))) if row["case"] == key]
+        self.assertEqual((row["phase"], row["status"]), ("first_drive_scaled_factor_correction", run["status"]))
+        for name, value in (
+                ("body_dofs", dofs), ("operator_nnz", result["operator_nnz"]),
+                ("elapsed_seconds", run["elapsed_seconds"]), ("sampled_phase_rss_mib", run["peak_tree_rss_mib"]),
+                ("factor_nnz", factor["factor_nonzeros"]), ("ilu_fill_factor", factor["fill_factor"]),
+                ("max_gmres_iterations", candidates[-1]["iteration"]), ("max_relative_true_residual", best_checks["relative_residual"]),
+                ("max_relative_backward_residual", best_checks["relative_backward_residual"])):
+            self.assertEqual(float(row[name]), value)
+
     def test_full_device_body_mesh_pair_replays_matching_and_gates(self):
         for case in ("full_device_h200_h160_mixed_comparison", "full_device_h160_h130_mixed_comparison",
                      "full_device_h130_h100_mixed_comparison"):
