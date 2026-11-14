@@ -114,3 +114,4 @@ Athul Prem,_AP_pnc,full_device_h80_lgmres_fill8_inner50_long_continuation,first_
 Athul Prem,_AP_pnc,full_device_h80_gcrotmk_residual_correction,first_drive_residual_correction,iteration_limit,426627,32706643,156.43700000000536,3816.7734375,,,231119546,8.0,8,1.4690187293775757e-08,1.0617068401507763e-11
 Athul Prem,_AP_pnc,full_device_h80_gcrotmk_fill9_residual_correction,first_drive_residual_correction,iteration_limit,426627,32706643,158.75,3775.5,,,256939917,9.0,13,1.406615118313466e-08,1.0971673359160857e-11
 Athul Prem,_AP_pnc,full_device_h80_gcrotmk_double_fill4_residual_correction,first_drive_residual_correction,iteration_limit,426627,32706643,131.56200000000536,3803.5234375,,,124760814,4.0,8,1.126353056592424e-08,8.999969224539398e-12
+Athul Prem,_AP_pnc,full_device_h80_residual_scaling_diagnostic,saved_operator_residual_scaling,diagnostic_completed,426627,32706643,4.375,824.671875,,,,,,1.126353056592445e-08,8.999969224539403e-12

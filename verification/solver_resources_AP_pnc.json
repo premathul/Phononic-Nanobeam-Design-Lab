@@ -1399,7 +1399,7 @@
       ]
     }
   },
-  "csv_sha256": "9300f4b08760726250bcb7ae1082cb93e25e6fa9c272ef211268cb54af51a459",
+  "csv_sha256": "a2bcce3fc0d83cfb7b8cdc016937a05f73289643610532d9e801c130128d2efb",
   "historical_full_workflow_source": {
     "source_path": "src/phononic/workflow_AP_pnc.py",
     "source_commit": "392ea7955bf6e5f96e01879264266bd45ff7a73c",
@@ -14381,6 +14381,685 @@
         "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_first_drive_correction_double_fill4_r4m1rklb/iterate-1.npy",
         "sha256": "43945aa28f52330dd00236ad22513a906f99f7ffac332e1ca870bf8fe75862a3",
         "bytes": 6826160
+      }
+    }
+  },
+  "full_device_h80_residual_scaling_diagnostic": {
+    "scope": "Read-only residual and magnitude scaling diagnostic on the stored 1 GHz h80 operator and first-drive terminal vector.",
+    "status": "diagnostic_completed",
+    "reference_operator_case": "full_device_h80_operator",
+    "previous_attempt_case": "full_device_h80_gcrotmk_double_fill4_residual_correction",
+    "source": {
+      "git_commit": "6c827b3870e5254cf99dcbf548295a9130083ade",
+      "source_sha256": {
+        "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+        "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+        "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+        "src/phononic/resumable_scattering_AP_pnc.py": "4dc59e08d0cbadcfe2bca554e1be08b01a9dd56c4e660f995189171527f45a2b",
+        "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+        "src/phononic/workflow_AP_pnc.py": "0bdfc18674d68ae3f62947001f0a8aa0591f466e4d1ba895f0f962fb0bb3915d",
+        "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+      },
+      "packages": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "scikit-fem": "12.0.2",
+        "meshio": "5.3.5",
+        "gmsh": "4.15.2",
+        "matplotlib": "3.11.2",
+        "psutil": "7.2.2"
+      },
+      "python": "3.12.14",
+      "platform": "Windows-11-10.0.26200-SP0"
+    },
+    "source_compatibility_exception": {
+      "path": "src/phononic/resumable_scattering_AP_pnc.py",
+      "staged_sha256": "68c12549b47a9ec98abf7b39d78ad597dd114da00e326adf8ebbec060947b53f",
+      "current_sha256": "4dc59e08d0cbadcfe2bca554e1be08b01a9dd56c4e660f995189171527f45a2b",
+      "staged_git_commit": "8584ebbf2d099b8af768d34ec53590a9a2e62d95",
+      "current_git_commit": "6c827b3870e5254cf99dcbf548295a9130083ade",
+      "review": "PR #21 worker shutdown only"
+    },
+    "inputs_sha256": "739bd04cce28ff5079874033bf6393d8c78b81c68c97d36a434a9d12c5d1b658",
+    "equation_array_sha256": {
+      "operator_csc_sha256": "6c1ef8514f8d55ac0ac9ebd1011e4411117cda7b37211d41179b2ac5e3259d75",
+      "rhs_array_sha256": "0e812751c2da8e1e531fba3c187967876f7d33e3ef251cdae9d3b9a4be6094f1",
+      "rhs_column_sha256": "afe743a820e078694653d40fd83204bd3086f04388ca8cd0c66daaad97011355"
+    },
+    "terminal_array_sha256": "1c86b35bbd60fd0af75b2bc2c32f8696485ff5675e0a436f6665480a9f4112fd",
+    "original_arrays_unchanged": true,
+    "trace_map_array_digests": {
+      "left_trace": "d7e2921c58f9904f7ccf0e3c63f8bb7640910948536fc0ed2443b509ac2c031b",
+      "right_trace": "cb0584cd99df5f9269eb81c8cc08e18c56a0cc0c20fe3c13c326153416da18d3"
+    },
+    "operator": {
+      "format": "csc",
+      "shape": [
+        426627,
+        426627
+      ],
+      "data_dtype": "complex128",
+      "index_dtype": "int32",
+      "nonzero_storage": 32706643,
+      "array_bytes": 655839372
+    },
+    "frequency_hz": 1000000000.0,
+    "incident_side": "left",
+    "incident_columns": [
+      0
+    ],
+    "incident_root_index": 1348,
+    "relative_tolerance": 1e-10,
+    "relative_residual_limit": 1e-09,
+    "backward_residual_limit": 1e-09,
+    "original_gate_results": {
+      "solver_relative_target_met": false,
+      "relative_residual_limit_met": false,
+      "backward_residual_limit_met": true
+    },
+    "numerical_thread_environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    },
+    "batch_entry_limit": 1000000,
+    "admission_storage_bytes": {
+      "csc_arrays_bytes": 655839372,
+      "possible_loading_copy_bytes": 655839372,
+      "mapped_rhs_bytes": 34130160,
+      "vector_and_summary_slots_bytes": 218433024,
+      "batch_slots_bytes": 64000000,
+      "port_archive_bytes": 29223616
+    },
+    "runtime_import_margin_mib": 512,
+    "modeled_worker_mib": 2092.6823196411133,
+    "admission": {
+      "required_commit_mib": 2604.6823196411133,
+      "required_physical_mib": 2492.6823196411133
+    },
+    "before_operator_load_memory": {
+      "commit_total_mib": 23168.7890625,
+      "commit_limit_mib": 33086.86328125,
+      "commit_headroom_mib": 9918.07421875,
+      "physical_available_mib": 4233.82421875
+    },
+    "run": {
+      "status": "completed",
+      "initial_memory": {
+        "commit_total_mib": 23095.61328125,
+        "commit_limit_mib": 33086.86328125,
+        "commit_headroom_mib": 9991.25,
+        "physical_available_mib": 4308.125
+      },
+      "initial_disk_free_mib": 126282.7578125,
+      "required_disk_free_mib": 64,
+      "available_floor_mib": 400,
+      "commit_headroom_floor_mib": 512,
+      "rss_cap_mib": 4608,
+      "private_commit_cap_mib": 9175,
+      "wall_cap_seconds": 300,
+      "sample_interval_seconds": 0.1,
+      "worker_stopped": true,
+      "worker_exit_code": 0,
+      "elapsed_seconds": 4.375,
+      "peak_tree_rss_mib": 824.671875,
+      "peak_tree_private_commit_mib": 775.2890625,
+      "minimum_available_mib": 3494.3125,
+      "minimum_commit_headroom_mib": 9152.8125
+    },
+    "dense_check": {
+      "status": "passed",
+      "shape": [
+        5,
+        5
+      ],
+      "batch_entry_limit": 3,
+      "batch_count": 3,
+      "dense_comparison_max_abs_errors": {
+        "row_max_abs": 0.0,
+        "col_max_abs": 0.0,
+        "row_l1": 0.0,
+        "col_l1": 0.0,
+        "row_l2": 4.440892098500626e-16,
+        "col_l2": 8.881784197001252e-16,
+        "row_stored_entries": 0.0,
+        "col_stored_entries": 0.0,
+        "abs_A_abs_x": 0.0
+      },
+      "known_exact_product_cancellation_residual": 5.551115123125783e-17,
+      "partition_check_passed": true,
+      "selected_row_check_passed": true
+    },
+    "independent_selected_row_check": {
+      "status": "passed",
+      "method": "Streamed CSC coefficient selection with exact Decimal.from_float products and sums at precision 4000 with the Inexact trap enabled.",
+      "row_count": 16,
+      "ordinary_residual_max_abs_difference": 0.0,
+      "rounded_exact_residual_max_abs_difference": 0.0,
+      "ordinary_minus_exact_error_max_abs_difference": 0.0,
+      "row_l1_max_abs_difference": 1.4551915228366852e-11,
+      "cancellation_activity_max_abs_difference": 8.673617379884035e-19
+    },
+    "measurement": {
+      "original": {
+        "relative_residual": 1.126353056592445e-08,
+        "relative_backward_residual": 8.999969224539403e-12,
+        "rhs_l2": 0.0004915271123155001,
+        "rhs_linf": 5.098087941021582e-05,
+        "residual_l2": 5.5363306535462154e-12,
+        "residual_linf": 2.746901456567378e-13,
+        "operator_linf": 210473.3828773642,
+        "solution_linf": 1.4477009095613249e-07,
+        "backward_denominator": 0.030521231662411132
+      },
+      "row_column_distributions": {
+        "row_max_abs": {
+          "min": 1898.9931926625372,
+          "p01": 3232.1815855625478,
+          "median": 16599.434274492265,
+          "p99": 29512.380246882516,
+          "max": 39836.945297894046,
+          "positive_min": 1898.9931926625372,
+          "max_over_positive_min": 20.977929490120776,
+          "p99_over_p01": 9.130792768174876,
+          "zero_count": 0
+        },
+        "row_l1": {
+          "min": 7868.930498762619,
+          "p01": 16947.372446262252,
+          "median": 72855.94926276726,
+          "p99": 162805.68851837615,
+          "max": 210473.3828773642,
+          "positive_min": 7868.930498762619,
+          "max_over_positive_min": 26.74739380535397,
+          "p99_over_p01": 9.606544556367673,
+          "zero_count": 0
+        },
+        "row_l2": {
+          "min": 2411.958082210983,
+          "p01": 4588.793193390699,
+          "median": 19326.97252942689,
+          "p99": 36867.6565137372,
+          "max": 49000.96933026548,
+          "positive_min": 2411.958082210983,
+          "max_over_positive_min": 20.315846154899795,
+          "p99_over_p01": 8.03428155508036,
+          "zero_count": 0
+        },
+        "col_max_abs": {
+          "min": 1898.9931926625372,
+          "p01": 3232.1815855625478,
+          "median": 16599.434274492265,
+          "p99": 29512.380246882516,
+          "max": 39836.945297894046,
+          "positive_min": 1898.9931926625372,
+          "max_over_positive_min": 20.977929490120776,
+          "p99_over_p01": 9.130792768174876,
+          "zero_count": 0
+        },
+        "col_l1": {
+          "min": 7868.930498762618,
+          "p01": 16947.37244626225,
+          "median": 72855.94926276726,
+          "p99": 162805.68851837618,
+          "max": 210473.38287736417,
+          "positive_min": 7868.930498762618,
+          "max_over_positive_min": 26.74739380535397,
+          "p99_over_p01": 9.606544556367677,
+          "zero_count": 0
+        },
+        "col_l2": {
+          "min": 2411.958082210983,
+          "p01": 4588.793193390698,
+          "median": 19326.97252942689,
+          "p99": 36867.6565137372,
+          "max": 49000.96933026547,
+          "positive_min": 2411.958082210983,
+          "max_over_positive_min": 20.31584615489979,
+          "p99_over_p01": 8.034281555080362,
+          "zero_count": 0
+        },
+        "row_stored_entries": {
+          "min": 25.0,
+          "p01": 30.0,
+          "median": 66.0,
+          "p99": 221.0,
+          "max": 774.0,
+          "positive_min": 25.0,
+          "max_over_positive_min": 30.96,
+          "p99_over_p01": 7.366666666666666,
+          "zero_count": 0
+        },
+        "col_stored_entries": {
+          "min": 25.0,
+          "p01": 30.0,
+          "median": 66.0,
+          "p99": 221.0,
+          "max": 774.0,
+          "positive_min": 25.0,
+          "max_over_positive_min": 30.96,
+          "p99_over_p01": 7.366666666666666,
+          "zero_count": 0
+        }
+      },
+      "partition": {
+        "left_trace": {
+          "row_count": 675,
+          "population_fraction": 0.001582178343142839,
+          "rhs_nonzero_rows": 675,
+          "relative_residual_l2": 1.0584746429903884e-10,
+          "residual_energy_fraction": 8.83103961613361e-05,
+          "residual_rms": 2.0025162558924387e-15,
+          "arithmetic_proxy_l2_over_rhs_l2": 7.898815232785927e-11,
+          "median_row_l1": 53091.76807955603,
+          "median_column_l1": 53091.7680795561
+        },
+        "right_trace": {
+          "row_count": 675,
+          "population_fraction": 0.001582178343142839,
+          "rhs_nonzero_rows": 0,
+          "relative_residual_l2": 3.354565737805555e-11,
+          "residual_energy_fraction": 8.869998166156068e-06,
+          "residual_rms": 6.346465138207789e-16,
+          "arithmetic_proxy_l2_over_rhs_l2": 7.641344696958053e-11,
+          "median_row_l1": 51412.8727244641,
+          "median_column_l1": 51412.87272446421
+        },
+        "other_dofs": {
+          "row_count": 425277,
+          "population_fraction": 0.9968356433137143,
+          "rhs_nonzero_rows": 0,
+          "relative_residual_l2": 1.1262983255456193e-08,
+          "residual_energy_fraction": 0.9999028196056383,
+          "residual_rms": 8.489164882829708e-15,
+          "arithmetic_proxy_l2_over_rhs_l2": 4.5485870607389823e-10,
+          "median_row_l1": 72932.3169402321,
+          "median_column_l1": 72932.3169402321
+        }
+      },
+      "residual_concentration": [
+        {
+          "top_fraction_of_rows": 0.001,
+          "row_count": 427,
+          "residual_energy_fraction": 0.19504042826391843
+        },
+        {
+          "top_fraction_of_rows": 0.01,
+          "row_count": 4267,
+          "residual_energy_fraction": 0.5531326545898253
+        },
+        {
+          "top_fraction_of_rows": 0.05,
+          "row_count": 21332,
+          "residual_energy_fraction": 0.8349504629524893
+        },
+        {
+          "top_fraction_of_rows": 0.1,
+          "row_count": 42663,
+          "residual_energy_fraction": 0.9268850028822373
+        }
+      ],
+      "arithmetic": {
+        "activity_definition": "abs(A) @ abs(x) + abs(b); entrywise complex magnitudes.",
+        "proxy_definition": "activity * gamma(8*(stored_entries+1)); gamma(k)=k*u/(1-k*u). Heuristic scale only.",
+        "binary64_unit_roundoff": 1.1102230246251565e-16,
+        "activity_per_row": {
+          "min": 0.00017878697748701324,
+          "p01": 0.00043126495512938606,
+          "median": 0.002616228456775524,
+          "p99": 0.00906484279301633,
+          "max": 0.012614880485227666,
+          "positive_min": 0.00017878697748701324,
+          "max_over_positive_min": 70.55816179980998,
+          "p99_over_p01": 21.01919640165693,
+          "zero_count": 0
+        },
+        "activity_l2_over_rhs_l2": 4659.002519655483,
+        "activity_max_over_rhs_l2": 25.664668680840663,
+        "arithmetic_proxy_l2_over_rhs_l2": 4.679472038351795e-10,
+        "arithmetic_proxy_over_solver_target": 4.679472038351795,
+        "arithmetic_proxy_over_original_relative_gate": 0.4679472038351795,
+        "arithmetic_proxy_over_measured_relative_residual": 0.04154533972241881
+      },
+      "selected_rows": [
+        {
+          "row_zero_based": 350504,
+          "group": "other_dofs",
+          "stored_entries": 94,
+          "row_max_abs": 30344.152699095514,
+          "row_l1": 126692.99517197482,
+          "abs_rhs": 0.0,
+          "abs_original_residual": 2.746901456567378e-13,
+          "ordinary_residual_real": -2.7462852843843953e-13,
+          "ordinary_residual_imag": -5.817859456622436e-15,
+          "exact_residual_real_rounded_to_float": -2.74628531555622e-13,
+          "exact_residual_imag_rounded_to_float": -5.817753941501998e-15,
+          "abs_ordinary_minus_exact_residual": 1.0556115510729951e-19,
+          "cancellation_activity": 0.0027942148510199096,
+          "arithmetic_proxy": 2.3576732641476087e-16
+        },
+        {
+          "row_zero_based": 108644,
+          "group": "other_dofs",
+          "stored_entries": 95,
+          "row_max_abs": 31820.90833475058,
+          "row_l1": 128689.00161480137,
+          "abs_rhs": 0.0,
+          "abs_original_residual": 2.1938254390984654e-13,
+          "ordinary_residual_real": -8.783851281284604e-14,
+          "ordinary_residual_imag": -2.0103008789527808e-13,
+          "exact_residual_real_rounded_to_float": -8.783855569000648e-14,
+          "exact_residual_imag_rounded_to_float": -2.010300920466851e-13,
+          "abs_ordinary_minus_exact_residual": 4.30776632156995e-20,
+          "cancellation_activity": 0.0021729284892528958,
+          "arithmetic_proxy": 1.8527502640379347e-16
+        },
+        {
+          "row_zero_based": 72572,
+          "group": "other_dofs",
+          "stored_entries": 82,
+          "row_max_abs": 35326.615715639164,
+          "row_l1": 134252.1101278323,
+          "abs_rhs": 0.0,
+          "abs_original_residual": 2.1875665851702015e-13,
+          "ordinary_residual_real": 2.0504566058405355e-13,
+          "ordinary_residual_imag": -7.622829344266645e-14,
+          "exact_residual_real_rounded_to_float": 2.0504562219542267e-13,
+          "exact_residual_imag_rounded_to_float": -7.622831669507475e-14,
+          "abs_ordinary_minus_exact_residual": 4.488163847711552e-20,
+          "cancellation_activity": 0.0035393997215361116,
+          "arithmetic_proxy": 2.609203314629828e-16
+        },
+        {
+          "row_zero_based": 151604,
+          "group": "other_dofs",
+          "stored_entries": 72,
+          "row_max_abs": 29615.909237199452,
+          "row_l1": 121005.5232769477,
+          "abs_rhs": 0.0,
+          "abs_original_residual": 2.1778547401210824e-13,
+          "ordinary_residual_real": -4.7213536380747265e-14,
+          "ordinary_residual_imag": 2.1260619622462214e-13,
+          "exact_residual_real_rounded_to_float": -4.7213539885606196e-14,
+          "exact_residual_imag_rounded_to_float": 2.1260618473182919e-13,
+          "abs_ordinary_minus_exact_residual": 1.2015337108838162e-20,
+          "cancellation_activity": 0.003679440239702094,
+          "arithmetic_proxy": 2.3856395747603037e-16
+        },
+        {
+          "row_zero_based": 154628,
+          "group": "other_dofs",
+          "stored_entries": 82,
+          "row_max_abs": 35326.615715639164,
+          "row_l1": 134252.1101278323,
+          "abs_rhs": 0.0,
+          "abs_original_residual": 2.146239696883808e-13,
+          "ordinary_residual_real": 2.0078409223766627e-13,
+          "ordinary_residual_imag": -7.582345724836959e-14,
+          "exact_residual_real_rounded_to_float": 2.0078409920149548e-13,
+          "exact_residual_imag_rounded_to_float": -7.582345560699454e-14,
+          "abs_ordinary_minus_exact_residual": 7.154650885414998e-21,
+          "cancellation_activity": 0.0033803029337032553,
+          "arithmetic_proxy": 2.491919057744515e-16
+        },
+        {
+          "row_zero_based": 69287,
+          "group": "other_dofs",
+          "stored_entries": 73,
+          "row_max_abs": 28548.539985137904,
+          "row_l1": 118243.96886354237,
+          "abs_rhs": 0.0,
+          "abs_original_residual": 2.1018860059212393e-13,
+          "ordinary_residual_real": -6.781008423670861e-14,
+          "ordinary_residual_imag": 1.989498436658996e-13,
+          "exact_residual_real_rounded_to_float": -6.781005553231284e-14,
+          "exact_residual_imag_rounded_to_float": 1.9894979690000327e-13,
+          "abs_ordinary_minus_exact_residual": 5.487250125965917e-20,
+          "cancellation_activity": 0.003769106702793928,
+          "arithmetic_proxy": 2.4772530338769713e-16
+        },
+        {
+          "row_zero_based": 152852,
+          "group": "other_dofs",
+          "stored_entries": 71,
+          "row_max_abs": 29012.159324202334,
+          "row_l1": 112145.84176331015,
+          "abs_rhs": 0.0,
+          "abs_original_residual": 2.0283495705891333e-13,
+          "ordinary_residual_real": -8.352945558495046e-15,
+          "ordinary_residual_imag": 2.0266289276921918e-13,
+          "exact_residual_real_rounded_to_float": -8.353069030812303e-15,
+          "exact_residual_imag_rounded_to_float": 2.026629378679569e-13,
+          "abs_ordinary_minus_exact_residual": 1.3145078650909589e-19,
+          "cancellation_activity": 0.0029531149466960646,
+          "arithmetic_proxy": 1.8884829359156386e-16
+        },
+        {
+          "row_zero_based": 151343,
+          "group": "other_dofs",
+          "stored_entries": 73,
+          "row_max_abs": 28548.539985137904,
+          "row_l1": 118243.96886354237,
+          "abs_rhs": 0.0,
+          "abs_original_residual": 1.9881332888396223e-13,
+          "ordinary_residual_real": -6.699797656718016e-14,
+          "ordinary_residual_imag": 1.871844301159317e-13,
+          "exact_residual_real_rounded_to_float": -6.699805764371052e-14,
+          "exact_residual_imag_rounded_to_float": 1.8718436266486028e-13,
+          "abs_ordinary_minus_exact_residual": 1.0546587508668135e-19,
+          "cancellation_activity": 0.003630298354544138,
+          "arithmetic_proxy": 2.3860209651286003e-16
+        },
+        {
+          "row_zero_based": 71009,
+          "group": "other_dofs",
+          "stored_entries": 75,
+          "row_max_abs": 29360.96835759468,
+          "row_l1": 122827.65027918543,
+          "abs_rhs": 0.0,
+          "abs_original_residual": 1.878818183478533e-13,
+          "ordinary_residual_real": 1.628121995167107e-13,
+          "ordinary_residual_imag": -9.37644141144525e-14,
+          "exact_residual_real_rounded_to_float": 1.6281224735458335e-13,
+          "exact_residual_imag_rounded_to_float": -9.376424795537096e-14,
+          "abs_ordinary_minus_exact_residual": 1.7290836429052747e-19,
+          "cancellation_activity": 0.003801777498306598,
+          "arithmetic_proxy": 2.566259115178235e-16
+        },
+        {
+          "row_zero_based": 387986,
+          "group": "other_dofs",
+          "stored_entries": 73,
+          "row_max_abs": 29047.190380344993,
+          "row_l1": 120537.5112523983,
+          "abs_rhs": 0.0,
+          "abs_original_residual": 1.8080071017081783e-13,
+          "ordinary_residual_real": 1.212664953476902e-13,
+          "ordinary_residual_imag": 1.3410195339502219e-13,
+          "exact_residual_real_rounded_to_float": 1.2126648357425346e-13,
+          "exact_residual_imag_rounded_to_float": 1.3410202168919623e-13,
+          "abs_ordinary_minus_exact_residual": 6.930157299868663e-20,
+          "cancellation_activity": 0.003605771913137801,
+          "arithmetic_proxy": 2.3699009117114296e-16
+        },
+        {
+          "row_zero_based": 69155,
+          "group": "other_dofs",
+          "stored_entries": 74,
+          "row_max_abs": 28136.792360477277,
+          "row_l1": 116807.60990141964,
+          "abs_rhs": 0.0,
+          "abs_original_residual": 1.8048282632376587e-13,
+          "ordinary_residual_real": -7.80890336100963e-14,
+          "ordinary_residual_imag": 1.6271494531128932e-13,
+          "exact_residual_real_rounded_to_float": -7.808897868138473e-14,
+          "exact_residual_imag_rounded_to_float": 1.6271491944678888e-13,
+          "abs_ordinary_minus_exact_residual": 6.071355480602751e-20,
+          "cancellation_activity": 0.003821158301801245,
+          "arithmetic_proxy": 2.5454027564385525e-16
+        },
+        {
+          "row_zero_based": 233399,
+          "group": "other_dofs",
+          "stored_entries": 73,
+          "row_max_abs": 28548.539985137904,
+          "row_l1": 118243.96886354238,
+          "abs_rhs": 0.0,
+          "abs_original_residual": 1.7941275563590222e-13,
+          "ordinary_residual_real": -5.585584281881349e-14,
+          "ordinary_residual_imag": 1.704965152367284e-13,
+          "exact_residual_real_rounded_to_float": -5.5855794434246125e-14,
+          "exact_residual_imag_rounded_to_float": 1.7049645052450117e-13,
+          "abs_ordinary_minus_exact_residual": 8.080061084656524e-20,
+          "cancellation_activity": 0.0036313682964093704,
+          "arithmetic_proxy": 2.3867241865921246e-16
+        },
+        {
+          "row_zero_based": 153311,
+          "group": "other_dofs",
+          "stored_entries": 73,
+          "row_max_abs": 31646.58555943043,
+          "row_l1": 131411.22870560348,
+          "abs_rhs": 0.0,
+          "abs_original_residual": 1.780173117595695e-13,
+          "ordinary_residual_real": 1.442472198696101e-13,
+          "ordinary_residual_imag": 1.043211524379985e-13,
+          "exact_residual_real_rounded_to_float": 1.4424712676611515e-13,
+          "exact_residual_imag_rounded_to_float": 1.0432129815081209e-13,
+          "abs_ordinary_minus_exact_residual": 1.7291756653986234e-19,
+          "cancellation_activity": 0.003943251552937527,
+          "arithmetic_proxy": 2.591710090248577e-16
+        },
+        {
+          "row_zero_based": 65489,
+          "group": "other_dofs",
+          "stored_entries": 69,
+          "row_max_abs": 24870.324684925235,
+          "row_l1": 116299.80904563793,
+          "abs_rhs": 0.0,
+          "abs_original_residual": 1.7429524060871145e-13,
+          "ordinary_residual_real": 1.6745316937356137e-13,
+          "ordinary_residual_imag": -4.835563013339797e-14,
+          "exact_residual_real_rounded_to_float": 1.6745318034193674e-13,
+          "exact_residual_imag_rounded_to_float": -4.8355588684712025e-14,
+          "abs_ordinary_minus_exact_residual": 4.287538716637125e-20,
+          "cancellation_activity": 0.003428328942835807,
+          "arithmetic_proxy": 2.1314774478622082e-16
+        },
+        {
+          "row_zero_based": 233288,
+          "group": "other_dofs",
+          "stored_entries": 73,
+          "row_max_abs": 28295.762230822656,
+          "row_l1": 119359.64376811091,
+          "abs_rhs": 0.0,
+          "abs_original_residual": 1.7203888343994707e-13,
+          "ordinary_residual_real": -1.2701813617724625e-13,
+          "ordinary_residual_imag": 1.1603348868892214e-13,
+          "exact_residual_real_rounded_to_float": -1.2701812611753638e-13,
+          "exact_residual_imag_rounded_to_float": 1.1603353550362447e-13,
+          "abs_ordinary_minus_exact_residual": 4.7883338620661476e-20,
+          "cancellation_activity": 0.0038478585954586923,
+          "arithmetic_proxy": 2.5290128752427595e-16
+        },
+        {
+          "row_zero_based": 152816,
+          "group": "other_dofs",
+          "stored_entries": 76,
+          "row_max_abs": 29063.524303094375,
+          "row_l1": 112190.47851259884,
+          "abs_rhs": 0.0,
+          "abs_original_residual": 1.719996008478597e-13,
+          "ordinary_residual_real": 1.966124049950134e-14,
+          "ordinary_residual_imag": 1.7087216951231065e-13,
+          "exact_residual_real_rounded_to_float": 1.966117099354174e-14,
+          "exact_residual_imag_rounded_to_float": 1.7087225715023133e-13,
+          "abs_ordinary_minus_exact_residual": 1.1185474312362881e-19,
+          "cancellation_activity": 0.0029259489137427055,
+          "arithmetic_proxy": 2.0010488053952334e-16
+        }
+      ],
+      "selected_residual_energy_fraction": 0.021003635050780838,
+      "selected_exact_error_l2_over_rhs_l2": 7.559934544491637e-16
+    },
+    "accepted_channels": 0,
+    "total_device_channels": 5,
+    "factorization_attempted": false,
+    "solve_attempted": false,
+    "scattering_computed": false,
+    "spatial_convergence_established": false,
+    "raw_files": {
+      "A": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/A_AP_pnc.npz",
+        "sha256": "2d1a0d342a293cd7f45874c396887d084e6ff3a42c5ba669a8f98c3c2554a56d",
+        "bytes": 655840629
+      },
+      "rhs": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/rhs_AP_pnc.npy",
+        "sha256": "80800b866d8e4358f7a4dab8478e2bd21ab9cf9083619fa1bf6f37854dab96a1",
+        "bytes": 34130288
+      },
+      "stages": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/stages_AP_pnc.json",
+        "sha256": "1c50971e27bfc52e63000c9d25df100e21bbe28b7fa47d7549f82cf465531a78",
+        "bytes": 14841
+      },
+      "configuration": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/configuration_AP_pnc.json",
+        "sha256": "332190b8f4e70db8ff28c51ebe97317a5e94b2a11d70bd65e33d02e60ced2c76",
+        "bytes": 1416
+      },
+      "port_modes": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/ports_AP_pnc.npz",
+        "sha256": "18c0ad4c8b28e597503a28bd5157c867bb09744c94e1eb1aff23f024cc879c8b",
+        "bytes": 29223616
+      },
+      "seed": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_first_drive_correction_double_fill4_r4m1rklb/terminal-000.npy",
+        "sha256": "6b6acc57fc3f6c208b55f2b353b38b8fa5da2ed085cd233f0ee6fd41b077dd30",
+        "bytes": 6826160
+      },
+      "driver": {
+        "path": "results/runs/full_device_resource_profile/diagnose_h80_operator_AP_pnc.py",
+        "sha256": "f7f8306ff6d520aa501ab44dace7b1ac0a07ff0424e4bf185e36281ea0d993a7",
+        "bytes": 33581
+      },
+      "dense_check": {
+        "path": "results/runs/full_device_resource_profile/h80_operator_diagnostic_dense_check_AP_pnc.json",
+        "sha256": "37e7b937cf31f400890b3d17fdc9ee96c5139b17a8952e6a73fc66e88efb81e2",
+        "bytes": 3342
+      },
+      "profile": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_operator_diagnostic_k95cz0o3/diagnostic_profile_AP_pnc.json",
+        "sha256": "d9c12c1c79185e2fe8335ccdfc165669f11b7d6f782ed99d7737b515111d7db0",
+        "bytes": 10487
+      },
+      "report": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_operator_diagnostic_k95cz0o3/operator_diagnostic_AP_pnc.json",
+        "sha256": "e6cfae2704689bfc9bb0dfcea3c27b1280adecc03dd75bdfabe67928babca837",
+        "bytes": 20992
+      },
+      "execution": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_operator_diagnostic_k95cz0o3/execution_AP_pnc.json",
+        "bytes": 1885,
+        "sha256": "09742a31b9c45c1c089e64da125e18f48a5122823dc2f5501baed642352faf87"
+      },
+      "worker_log": {
+        "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/h80_operator_diagnostic_k95cz0o3/worker_AP_pnc.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
       }
     }
   }

@@ -1,5 +1,6 @@
 """Small checkpointed-scattering acceptance. Author: Athul Prem | _AP_pnc."""
 
+from errno import EACCES
 import json
 from pathlib import Path
 from shutil import copytree
@@ -7,6 +8,7 @@ import subprocess
 import sys
 from tempfile import TemporaryDirectory
 from time import monotonic, sleep
+from types import SimpleNamespace
 import unittest
 from unittest.mock import Mock, patch
 
@@ -49,6 +51,39 @@ def pause_after_durable_iterate(phase, attempt, parent_pid, parent_start, deadli
 
 
 class ResumableScatteringTests(unittest.TestCase):
+    def test_windows_journal_read_retries_transient_sharing_denial(self):
+        path = Path(resume.JOURNAL_FILE)
+        denial = PermissionError(EACCES, "Permission denied", path)
+        with (
+            patch.object(resume, "os", SimpleNamespace(name="nt")),
+            patch.object(Path, "read_bytes", side_effect=[denial, b'{"accepted": [0]}']) as read,
+            patch.object(resume, "sleep") as wait,
+        ):
+            self.assertEqual(resume._read(path), {"accepted": [0]})
+        self.assertEqual(read.call_count, 2)
+        wait.assert_called_once_with(0.02)
+
+    def test_journal_read_surfaces_persistent_denial_and_corrupt_json(self):
+        journal = Path(resume.JOURNAL_FILE)
+        denied = PermissionError(EACCES, "Permission denied", journal)
+        cases = (
+            ("persistent Windows denial", "nt", journal, denied, PermissionError, 6),
+            ("corrupt Windows journal", "nt", journal, (b'{"accepted":',), json.JSONDecodeError, 1),
+            ("immutable Windows input", "nt", Path(resume.JOB_FILE), denied, PermissionError, 1),
+            ("non-Windows denial", "posix", journal, denied, PermissionError, 1),
+        )
+        for name, os_name, path, effect, expected, attempts in cases:
+            with (
+                self.subTest(name=name),
+                patch.object(resume, "os", SimpleNamespace(name=os_name)),
+                patch.object(Path, "read_bytes", side_effect=effect) as read,
+                patch.object(resume, "sleep") as wait,
+            ):
+                with self.assertRaises(expected):
+                    resume._read(path)
+                self.assertEqual(read.call_count, attempts)
+                self.assertEqual(wait.call_count, attempts - 1)
+
     def test_interrupted_phase_awaits_sampled_and_new_descendants(self):
         supervisor = Mock(pid=100, **{"create_time.return_value": 1.0})
         launcher = Mock(pid=101, **{"poll.return_value": None, "wait.return_value": 1})

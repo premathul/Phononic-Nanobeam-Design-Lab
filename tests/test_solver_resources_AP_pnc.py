@@ -1178,6 +1178,167 @@ class SolverResourceEvidenceTests(unittest.TestCase):
             self.assertEqual(totals[key]["status"], attempt["status"])
             self.assertEqual(int(totals[key]["body_dofs"]), attempt["body_dofs"])
 
+    def test_h80_saved_operator_diagnostic_replays_residual_scaling_and_scope(self):
+        key = "full_device_h80_residual_scaling_diagnostic"
+        result = self.ledger[key]
+        prior = self.ledger[result["previous_attempt_case"]]
+        stage = self.ledger[result["reference_operator_case"]]
+        self.assertEqual(result["previous_attempt_case"], "full_device_h80_gcrotmk_double_fill4_residual_correction")
+        self.assertEqual(result["reference_operator_case"], "full_device_h80_operator")
+        self.assertEqual(result["operator"], stage["operator"])
+        raw = result["raw_files"]
+        self.assertEqual(raw["seed"], prior["raw_files"]["terminal_vector"])
+        for name in ("A", "rhs", "stages", "port_modes"):
+            self.assertEqual(raw[name], stage["raw_files"][name])
+        self.assertEqual(result["equation_array_sha256"], prior["equation_array_sha256"])
+        source = result["source"]
+        self.assertEqual({k: v for k, v in source.items() if k != "git_commit"},
+                         {k: v for k, v in prior["source"].items() if k != "git_commit"})
+        self.assertEqual(result["source_compatibility_exception"],
+                         prior["source_compatibility_exception"] | {"current_git_commit": source["git_commit"]})
+
+        original = result["measurement"]["original"]
+        independent = prior["terminal_candidate"]["independent_original_equation_checks"]
+        np.testing.assert_allclose(
+            [original["residual_l2"], original["residual_linf"], original["solution_linf"],
+             original["operator_linf"], original["rhs_l2"], original["rhs_linf"]],
+            [independent["residual_norm_2"], independent["residual_norm_inf"], independent["solution_norm_inf"],
+             prior["original_operator_inf_norm"], prior["original_rhs_norm_2"], prior["original_rhs_norm_inf"]],
+            rtol=1e-12, atol=0,
+        )
+        scale = original["operator_linf"] * original["solution_linf"] + original["rhs_linf"]
+        relative = original["residual_l2"] / original["rhs_l2"]
+        backward = original["residual_linf"] / scale
+        np.testing.assert_allclose(
+            [scale, relative, backward],
+            [original["backward_denominator"], original["relative_residual"], original["relative_backward_residual"]],
+            rtol=1e-12, atol=0,
+        )
+        tolerance = result["relative_tolerance"]
+        relative_gate = result["relative_residual_limit"]
+        backward_gate = result["backward_residual_limit"]
+        self.assertEqual((tolerance, relative_gate, backward_gate), (1e-10, 1e-9, 1e-9))
+        self.assertEqual(result["original_gate_results"], {
+            "solver_relative_target_met": relative <= tolerance,
+            "relative_residual_limit_met": relative <= relative_gate,
+            "backward_residual_limit_met": backward <= backward_gate,
+        })
+        self.assertGreater(relative, relative_gate)
+        self.assertLess(backward, backward_gate)
+        self.assertTrue(result["original_arrays_unchanged"])
+        self.assertEqual((result["accepted_channels"], result["total_device_channels"]), (0, 5))
+        self.assertEqual((result["frequency_hz"], result["incident_side"], result["incident_columns"]), (1e9, "left", [0]))
+        self.assertEqual(result["incident_root_index"], prior["incident_root_index"])
+        self.assertFalse(any(result[name] for name in (
+            "factorization_attempted", "solve_attempted", "scattering_computed", "spatial_convergence_established")))
+
+        measurement = result["measurement"]
+        groups = measurement["partition"]
+        n = result["operator"]["shape"][0]
+        trace_dofs = stage["port_reuse_proof"]["trace_mapping"]["xleft"]["trace_dofs"]
+        self.assertEqual({name: item["row_count"] for name, item in groups.items()},
+                         {"left_trace": trace_dofs, "right_trace": trace_dofs, "other_dofs": n - 2 * trace_dofs})
+        self.assertEqual({name: item["rhs_nonzero_rows"] for name, item in groups.items()},
+                         {"left_trace": trace_dofs, "right_trace": 0, "other_dofs": 0})
+        for item in groups.values():
+            relative_l2 = item["relative_residual_l2"]
+            self.assertAlmostEqual(item["population_fraction"], item["row_count"] / n, places=15)
+            np.testing.assert_allclose(item["residual_energy_fraction"], (relative_l2 / relative) ** 2,
+                                       rtol=1e-12, atol=0)
+            np.testing.assert_allclose(item["residual_rms"],
+                                       relative_l2 * original["rhs_l2"] / np.sqrt(item["row_count"]), rtol=1e-12, atol=0)
+        np.testing.assert_allclose(sum(item["residual_energy_fraction"] for item in groups.values()), 1,
+                                   rtol=1e-12, atol=0)
+        concentration = measurement["residual_concentration"]
+        self.assertEqual([entry["row_count"] for entry in concentration],
+                         [ceil(n * item) for item in (0.001, 0.01, 0.05, 0.1)])
+        energies = [entry["residual_energy_fraction"] for entry in concentration]
+        self.assertEqual(energies, sorted(energies))
+        self.assertLess(energies[-1], 1)
+        for distribution in measurement["row_column_distributions"].values():
+            quantiles = [distribution[name] for name in ("min", "p01", "median", "p99", "max")]
+            self.assertEqual(quantiles, sorted(quantiles))
+            self.assertEqual(distribution["zero_count"], 0)
+            self.assertAlmostEqual(distribution["max_over_positive_min"], quantiles[-1] / quantiles[0], places=11)
+
+        arithmetic = measurement["arithmetic"]
+        u = arithmetic["binary64_unit_roundoff"]
+        self.assertEqual(u, np.finfo(np.float64).eps / 2)
+        proxy = arithmetic["arithmetic_proxy_l2_over_rhs_l2"]
+        np.testing.assert_allclose(
+            [proxy, proxy / tolerance, proxy / relative_gate, proxy / relative],
+            [np.linalg.norm([item["arithmetic_proxy_l2_over_rhs_l2"] for item in groups.values()]),
+             arithmetic["arithmetic_proxy_over_solver_target"], arithmetic["arithmetic_proxy_over_original_relative_gate"],
+             arithmetic["arithmetic_proxy_over_measured_relative_residual"]],
+            rtol=1e-12, atol=0,
+        )
+        selected = measurement["selected_rows"]
+        self.assertEqual(len(selected), 16)
+        self.assertEqual(len({row["row_zero_based"] for row in selected}), len(selected))
+        selected_norms = []
+        for row in selected:
+            with self.subTest(row=row["row_zero_based"]):
+                self.assertIn(row["row_zero_based"], range(n))
+                self.assertIn(row["group"], groups)
+                r = complex(row["ordinary_residual_real"], row["ordinary_residual_imag"])
+                exact = complex(row["exact_residual_real_rounded_to_float"], row["exact_residual_imag_rounded_to_float"])
+                gamma_input = 8 * (row["stored_entries"] + 1) * u
+                np.testing.assert_allclose(
+                    [abs(r), abs(r - exact), row["cancellation_activity"] * gamma_input / (1 - gamma_input)],
+                    [row["abs_original_residual"], row["abs_ordinary_minus_exact_residual"], row["arithmetic_proxy"]],
+                    rtol=1e-12, atol=4e-29,
+                )
+                selected_norms.append(abs(r))
+        np.testing.assert_allclose(selected_norms, sorted(selected_norms, reverse=True), rtol=1e-15, atol=0)
+        self.assertAlmostEqual(selected_norms[0] / original["residual_linf"], 1, places=13)
+        self.assertAlmostEqual(measurement["selected_residual_energy_fraction"],
+                               (np.linalg.norm(selected_norms) / original["residual_l2"]) ** 2, places=14)
+        np.testing.assert_allclose(measurement["selected_exact_error_l2_over_rhs_l2"],
+                                   np.linalg.norm([row["abs_ordinary_minus_exact_residual"] for row in selected])
+                                   / original["rhs_l2"], rtol=1e-12, atol=0)
+
+        run = result["run"]
+        self.assertEqual(result["status"], "diagnostic_completed")
+        self.assertEqual((run["status"], run["worker_exit_code"]), ("completed", 0))
+        self.assertTrue(run["worker_stopped"])
+        self.assertEqual(run["wall_cap_seconds"], 300)
+        self.assertLess(run["elapsed_seconds"], run["wall_cap_seconds"])
+        for observed, limit, check in (
+                ("peak_tree_rss_mib", "rss_cap_mib", self.assertLessEqual),
+                ("peak_tree_private_commit_mib", "private_commit_cap_mib", self.assertLessEqual),
+                ("minimum_available_mib", "available_floor_mib", self.assertGreaterEqual),
+                ("minimum_commit_headroom_mib", "commit_headroom_floor_mib", self.assertGreaterEqual)):
+            self.assertEqual(run[limit], prior["run"][limit])
+            check(run[observed], run[limit])
+        model = sum(result["admission_storage_bytes"].values()) / 2**20 + result["runtime_import_margin_mib"]
+        self.assertEqual(result["modeled_worker_mib"], model)
+        for required, floor, measured in (
+                ("required_physical_mib", "available_floor_mib", "physical_available_mib"),
+                ("required_commit_mib", "commit_headroom_floor_mib", "commit_headroom_mib")):
+            self.assertEqual(result["admission"][required], model + run[floor])
+            self.assertGreaterEqual(run["initial_memory"][measured], result["admission"][required])
+            self.assertGreaterEqual(result["before_operator_load_memory"][measured], result["admission"][required])
+        dense = result["dense_check"]
+        self.assertEqual(dense["status"], "passed")
+        self.assertEqual(dense["known_exact_product_cancellation_residual"], 2 ** -54)
+        self.assertTrue(dense["partition_check_passed"])
+        self.assertTrue(dense["selected_row_check_passed"])
+        replay = result["independent_selected_row_check"]
+        self.assertEqual((replay["status"], replay["row_count"]), ("passed", len(selected)))
+        self.assertEqual(replay["rounded_exact_residual_max_abs_difference"], 0)
+        self.assertEqual(replay["ordinary_residual_max_abs_difference"], 0)
+
+        table = LEDGER.with_suffix(".csv").read_bytes()
+        self.assertEqual(sha256(table).hexdigest(), self.ledger["csv_sha256"])
+        row, = [row for row in csv.DictReader(io.StringIO(table.decode("utf-8"))) if row["case"] == key]
+        self.assertEqual((row["phase"], row["status"]), ("saved_operator_residual_scaling", result["status"]))
+        self.assertEqual(int(row["body_dofs"]), n)
+        self.assertEqual(int(row["operator_nnz"]), result["operator"]["nonzero_storage"])
+        self.assertEqual(float(row["elapsed_seconds"]), run["elapsed_seconds"])
+        self.assertEqual(float(row["sampled_phase_rss_mib"]), run["peak_tree_rss_mib"])
+        self.assertEqual(float(row["max_relative_true_residual"]), original["relative_residual"])
+        self.assertEqual(float(row["max_relative_backward_residual"]), original["relative_backward_residual"])
+
     def test_full_device_body_mesh_pair_replays_matching_and_gates(self):
         for case in ("full_device_h200_h160_mixed_comparison", "full_device_h160_h130_mixed_comparison",
                      "full_device_h130_h100_mixed_comparison"):

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from contextlib import contextmanager
 from dataclasses import fields
+from errno import EACCES
 import hashlib
 import json
 import math
@@ -29,6 +30,8 @@ JOB_FILE = "job_AP_pnc.json"
 JOURNAL_FILE = "channels_AP_pnc.json"
 STAGE_FILE = "stage_AP_pnc.json"
 STATUS_FILE = "execution_AP_pnc.json"
+JOURNAL_IO_ATTEMPTS = 6
+JOURNAL_RETRY_SECONDS = 0.02
 MIB = 2**20
 PHYSICAL_FLOOR_MIB = 400
 COMMIT_FLOOR_MIB = 512
@@ -48,7 +51,20 @@ class _MemoryBlocked(RuntimeError):
 
 
 def _read(path):
-    return json.loads(path.read_bytes())
+    retries = JOURNAL_IO_ATTEMPTS - 1 if path.name == JOURNAL_FILE and os.name == "nt" else 0
+    for retry in range(retries + 1):
+        try:
+            data = path.read_bytes()
+        except PermissionError as exc:
+            if retry == retries:
+                raise
+            # During replacement the Windows CRT can report a sharing denial as bare EACCES.
+            winerror = getattr(exc, "winerror", None)
+            if winerror not in (5, 32) and (winerror is not None or exc.errno != EACCES):
+                raise
+            sleep(JOURNAL_RETRY_SECONDS)
+        else:
+            return json.loads(data)
 
 
 def _sha(path):
@@ -83,15 +99,15 @@ def _save_vector(path, vector):
 
 
 def _write_journal(path, state):
-    for retry in range(6):
+    for retry in range(JOURNAL_IO_ATTEMPTS):
         try:
             workflow.write_json(path, state)
             return
         except PermissionError as exc:
             # A Windows reader can briefly deny the sharing mode needed by replace.
-            if getattr(exc, "winerror", None) not in (5, 32) or retry == 5:
+            if getattr(exc, "winerror", None) not in (5, 32) or retry == JOURNAL_IO_ATTEMPTS - 1:
                 raise
-            sleep(0.02)
+            sleep(JOURNAL_RETRY_SECONDS)
 
 
 @contextmanager
