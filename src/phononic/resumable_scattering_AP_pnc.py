@@ -32,6 +32,7 @@ STATUS_FILE = "execution_AP_pnc.json"
 MIB = 2**20
 PHYSICAL_FLOOR_MIB = 400
 COMMIT_FLOOR_MIB = 512
+WORKER_EXIT_TIMEOUT = 5
 
 
 class _Busy(RuntimeError):
@@ -430,6 +431,46 @@ def _worker(phase, attempt, parent_pid, parent_start, deadline):
             watch.wait()
 
 
+def _worker_running(process):
+    try:
+        return process.is_running() and process.status() != psutil.STATUS_ZOMBIE
+    except psutil.NoSuchProcess:
+        return False
+    except psutil.AccessDenied:
+        return True
+
+
+def _stop_phase_worker(child, descendants):
+    deadline = monotonic() + WORKER_EXIT_TIMEOUT
+    discovered = True
+    if child.poll() is None:
+        try:
+            descendants.update(dict.fromkeys(psutil.Process(child.pid).children(recursive=True)))
+        except psutil.NoSuchProcess:
+            pass
+        except psutil.AccessDenied:
+            discovered = False
+    for member in reversed(descendants):
+        try:
+            member.kill()
+        except (psutil.NoSuchProcess, psutil.AccessDenied):
+            pass
+    try:
+        if child.poll() is None:
+            child.kill()
+        exit_code = child.wait(timeout=max(0, deadline - monotonic()))
+    except (OSError, subprocess.TimeoutExpired):
+        return child.poll(), False
+
+    # The Windows launcher can exit before the Python process releases its files.
+    while any(_worker_running(member) for member in descendants):
+        remaining = deadline - monotonic()
+        if remaining <= 0:
+            return exit_code, False
+        sleep(min(0.05, remaining))
+    return exit_code, discovered
+
+
 def _monitor(phase, attempt, deadline, update, should_cancel):
     parent = psutil.Process()
     script_root = str(Path(__file__).resolve().parents[1])
@@ -444,13 +485,14 @@ def _monitor(phase, attempt, deadline, update, should_cancel):
     with (attempt / f"{phase}_worker_AP_pnc.log").open("x", encoding="utf-8") as log:
         child = subprocess.Popen(command, env=env, cwd=workflow.ROOT, stdout=log, stderr=subprocess.STDOUT,
                                  creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0)
-        tree = []
+        descendants = {}
         try:
             while child.poll() is None:
                 try:
                     process = psutil.Process(child.pid)
-                    tree = [process, *process.children(recursive=True)]
-                    samples = [member.memory_info() for member in tree]
+                    children = process.children(recursive=True)
+                    descendants.update(dict.fromkeys(children))
+                    samples = [member.memory_info() for member in (process, *children)]
                     peak_rss = max(peak_rss, sum(sample.rss for sample in samples) / MIB)
                     peak_private = max(peak_private, sum(getattr(sample, "private", sample.rss) for sample in samples) / MIB)
                 except psutil.NoSuchProcess:
@@ -471,18 +513,13 @@ def _monitor(phase, attempt, deadline, update, should_cancel):
         except KeyboardInterrupt:
             status, message = "interrupted", "The attempt was stopped."
         finally:
-            if child.poll() is None:
-                for member in reversed(tree):
-                    try:
-                        member.kill()
-                    except psutil.NoSuchProcess:
-                        pass
-                if child.poll() is None:
-                    child.kill()
-            exit_code = child.wait()
+            exit_code, worker_stopped = _stop_phase_worker(child, descendants)
     error_path = attempt / f"{phase}_error_AP_pnc.json"
     invalid = False
-    if status == "completed" and exit_code:
+    if not worker_stopped:
+        status = "blocked"
+        message = f"Could not confirm the {phase} worker stopped. Wait for it to exit before resuming."
+    elif status == "completed" and exit_code:
         status = "interrupted" if monotonic() >= deadline else "failed"
         message = f"The {phase} worker exited with code {exit_code}. See its saved log."
         if error_path.exists():
@@ -491,6 +528,7 @@ def _monitor(phase, attempt, deadline, update, should_cancel):
             if error["blocked"]:
                 status = "blocked"
     return {"status": status, "message": message, "invalid_checkpoint": invalid, "exit_code": exit_code,
+            "worker_stopped": worker_stopped,
             "elapsed_seconds": monotonic() - started, "peak_rss_mib": peak_rss, "peak_private_mib": peak_private,
             "minimum_physical_available_mib": minimum_ram, "minimum_commit_headroom_mib": minimum_commit}
 
@@ -567,14 +605,15 @@ def _run_attempt(attempt, saved, prior, deadline, wall_seconds, progress_callbac
 
         result = _monitor(phase, attempt, deadline, update, cancel)
         execution["phases"][phase] = result
-        if phase == "staging":
+        if phase == "staging" and result["worker_stopped"]:
             # The stage may have committed just before the watchdog stopped the worker.
             committed = attempt / "stage" / STAGE_FILE
             if committed.is_file():
                 state.update(stage=_link(committed, job), total_channels=_read(committed)["shape"][1])
                 _write_journal(request_path, state)
         if result["status"] != "completed":
-            return finish(result["status"], result["message"], phase, can_resume=not result["invalid_checkpoint"])
+            can_resume = result["worker_stopped"] and not result["invalid_checkpoint"]
+            return finish(result["status"], result["message"], phase, can_resume=can_resume)
         workflow.write_json(execution_path, execution)
     summary = _read(attempt / "result_AP_pnc.json")
     complete = finish("completed_unverified", "Scattering results were exported.", "exporting", can_resume=False)

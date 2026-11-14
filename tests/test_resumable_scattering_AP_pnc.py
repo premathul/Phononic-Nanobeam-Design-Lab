@@ -8,7 +8,7 @@ import sys
 from tempfile import TemporaryDirectory
 from time import monotonic, sleep
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 import numpy as np
 import psutil
@@ -49,6 +49,34 @@ def pause_after_durable_iterate(phase, attempt, parent_pid, parent_start, deadli
 
 
 class ResumableScatteringTests(unittest.TestCase):
+    def test_interrupted_phase_awaits_sampled_and_new_descendants(self):
+        supervisor = Mock(pid=100, **{"create_time.return_value": 1.0})
+        launcher = Mock(pid=101, **{"poll.return_value": None, "wait.return_value": 1})
+        sampled_worker = Mock(**{"is_running.return_value": True, "status.return_value": psutil.STATUS_RUNNING})
+        new_worker = Mock(**{"is_running.return_value": True, "status.return_value": psutil.STATUS_RUNNING})
+        worker_process = Mock(**{"children.side_effect": [[sampled_worker], [new_worker]]})
+        for process in (worker_process, sampled_worker):
+            process.memory_info.return_value = Mock(rss=1024, private=2048)
+
+        def complete_shutdown(_):
+            launcher.wait.assert_called_once()
+            for worker in (sampled_worker, new_worker):
+                worker.kill.assert_called_once()
+                worker.is_running.return_value = False
+
+        with (
+            TemporaryDirectory() as directory,
+            patch.object(resume.psutil, "Process", side_effect=[supervisor, worker_process, worker_process]),
+            patch.object(resume.subprocess, "Popen", return_value=launcher),
+            patch.object(resume, "_memory_snapshot", return_value=(1024, 2048)),
+            patch.object(resume, "sleep", side_effect=complete_shutdown) as wait_for_exit,
+        ):
+            result = resume._monitor("solving", Path(directory), monotonic() + 30, lambda: None, lambda: True)
+
+        self.assertEqual(result["status"], "interrupted")
+        self.assertTrue(result["worker_stopped"])
+        wait_for_exit.assert_called_once()
+
     def test_watchdog_kills_only_worker_when_supervisor_exits(self):
         def sleeping_process():
             interpreter = getattr(sys, "_base_executable", sys.executable)

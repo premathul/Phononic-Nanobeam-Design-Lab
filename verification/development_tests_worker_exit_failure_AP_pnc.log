@@ -1,0 +1,206 @@
+test_all_inputs_checked_before_partial_restore (test_archive_runtime_AP_pnc.ArchiveGuards.test_all_inputs_checked_before_partial_restore) ... ok
+test_corrupted_hash_blocks_restore_before_writes (test_archive_runtime_AP_pnc.ArchiveGuards.test_corrupted_hash_blocks_restore_before_writes) ... ok
+test_exact_hash_alias_restores_original_paths (test_archive_runtime_AP_pnc.ArchiveGuards.test_exact_hash_alias_restores_original_paths) ... ok
+test_existing_restore_target_is_never_overwritten (test_archive_runtime_AP_pnc.ArchiveGuards.test_existing_restore_target_is_never_overwritten) ... ok
+test_missing_archive_does_not_turn_integrity_into_completeness (test_archive_runtime_AP_pnc.ArchiveGuards.test_missing_archive_does_not_turn_integrity_into_completeness) ... ok
+test_rejects_traversal_and_ambiguous_paths (test_archive_runtime_AP_pnc.ArchiveGuards.test_rejects_traversal_and_ambiguous_paths) ... ok
+test_run_name_and_existing_output_guards (test_archive_runtime_AP_pnc.ArchiveGuards.test_run_name_and_existing_output_guards) ... ok
+test_symlink_source_and_parent_are_rejected (test_archive_runtime_AP_pnc.ArchiveGuards.test_symlink_source_and_parent_are_rejected) ... skipped 'Windows account cannot create symbolic links; symlink guard untested'
+test_operators_layout_and_matched_response (test_batched_assembly_AP_pnc.BatchedAssemblyTests.test_operators_layout_and_matched_response) ... ok
+test_rejects_invalid_batch_size_and_dof_cap (test_batched_assembly_AP_pnc.BatchedAssemblyTests.test_rejects_invalid_batch_size_and_dof_cap) ... ok
+3D solid: 48 tetrahedra, 405 displacement DOFs
+3D solid: 48 tetrahedra, 405 displacement DOFs
+3D solid: 48 tetrahedra, 405 displacement DOFs
+3D solid: 48 tetrahedra, 405 displacement DOFs
+3D solid: 48 tetrahedra, 405 displacement DOFs
+test_batched_scattering_exports_global_dofs_and_reuses_exact_mesh (test_batched_workflow_AP_pnc.BatchedWorkflowTests.test_batched_scattering_exports_global_dofs_and_reuses_exact_mesh) ... ok
+3D solid: 48 tetrahedra, 405 displacement DOFs
+test_iterative_failure_preserves_diagnostics_and_rejects_invalid_options (test_batched_workflow_AP_pnc.BatchedWorkflowTests.test_iterative_failure_preserves_diagnostics_and_rejects_invalid_options) ... ok
+3D solid: 216 tetrahedra, 252 displacement DOFs
+3D solid: 288 tetrahedra, 1785 displacement DOFs
+test_changed_physical_input_is_rejected_before_comparing (test_compare_scattering_AP_pnc.ScatteringComparisonTests.test_changed_physical_input_is_rejected_before_comparing) ... ok
+test_failed_input_power_balance_prevents_mesh_acceptance (test_compare_scattering_AP_pnc.ScatteringComparisonTests.test_failed_input_power_balance_prevents_mesh_acceptance) ... ok
+test_signed_channel_gauge_and_permutation_leave_comparison_invariant (test_compare_scattering_AP_pnc.ScatteringComparisonTests.test_signed_channel_gauge_and_permutation_leave_comparison_invariant) ... ok
+test_unequal_traces_compare_and_reuse_with_checksum (test_compare_scattering_AP_pnc.ScatteringComparisonTests.test_unequal_traces_compare_and_reuse_with_checksum) ... ok
+3D solid: 216 tetrahedra, 252 displacement DOFs
+3D solid: 216 tetrahedra, 252 displacement DOFs
+test_verified_precision_change_retains_physical_and_residual_gates (test_compare_scattering_AP_pnc.ScatteringComparisonTests.test_verified_precision_change_retains_physical_and_residual_gates) ... ok
+test_rejects_boolean_and_other_nonreal_material_inputs (test_elasticity3d_AP_pnc.CubicMaterialTests.test_rejects_boolean_and_other_nonreal_material_inputs) ... ok
+test_rejects_unstable_parameters_and_invalid_frames (test_elasticity3d_AP_pnc.CubicMaterialTests.test_rejects_unstable_parameters_and_invalid_frames) ... ok
+test_tensor_symmetry_rotation_and_strain_energy (test_elasticity3d_AP_pnc.CubicMaterialTests.test_tensor_symmetry_rotation_and_strain_energy) ... ok
+test_affine_patch_energy_consistent_mass_and_rigid_motion (test_elasticity3d_AP_pnc.ElasticityTests.test_affine_patch_energy_consistent_mass_and_rigid_motion) ... ok
+test_free_modes_mass_orthonormal_and_rigid_subspace (test_elasticity3d_AP_pnc.ElasticityTests.test_free_modes_mass_orthonormal_and_rigid_subspace) ... ok
+test_geometric_and_density_scaling_with_two_clamps (test_elasticity3d_AP_pnc.ElasticityTests.test_geometric_and_density_scaling_with_two_clamps) ... ok
+test_quadratic_displacement_integrates_degree_four_mass (test_elasticity3d_AP_pnc.ElasticityTests.test_quadratic_displacement_integrates_degree_four_mass) ... ok
+test_resource_cap_and_disconnected_mesh_fail_before_assembly (test_elasticity3d_AP_pnc.ElasticityTests.test_resource_cap_and_disconnected_mesh_fail_before_assembly) ... ok
+test_sparse_clamped_modes_match_dense_mass_whitening (test_elasticity3d_AP_pnc.ElasticityTests.test_sparse_clamped_modes_match_dense_mass_whitening) ... ok
+test_historical_bridge_and_independent_axis_qualification (test_full_device_port_resolution_AP_pnc.FullDevicePortResolutionEvidenceTests.test_historical_bridge_and_independent_axis_qualification) ... ok
+test_saved_channels_and_phase_indicators_reproduce_from_fields (test_full_device_port_resolution_AP_pnc.FullDevicePortResolutionEvidenceTests.test_saved_channels_and_phase_indicators_reproduce_from_fields) ... ok
+test_historical_csv_and_example (test_geometry3d_AP_pnc.Geometry3DTests.test_historical_csv_and_example) ... ok
+test_reject_nonphysical_mesh_inputs (test_geometry3d_AP_pnc.Geometry3DTests.test_reject_nonphysical_mesh_inputs) ... ok
+test_straight_beam_si_volume_and_end_ports (test_geometry3d_AP_pnc.Geometry3DTests.test_straight_beam_si_volume_and_end_ports) ... ok
+test_two_cylindrical_through_holes_remove_expected_volume (test_geometry3d_AP_pnc.Geometry3DTests.test_two_cylindrical_through_holes_remove_expected_volume) ... ok
+test_current_archive_and_corruption (test_historical_source_AP_pnc.HistoricalSourceTests.test_current_archive_and_corruption) ... ok
+test_unregistered_archive_is_rejected (test_historical_source_AP_pnc.HistoricalSourceTests.test_unregistered_archive_is_rejected) ... ok
+test_fill_factor_is_validated_and_passed_to_preconditioner (test_iterative_scattering_AP_pnc.IterativeScatteringTests.test_fill_factor_is_validated_and_passed_to_preconditioner) ... ok
+test_rejects_failure_status_and_false_success (test_iterative_scattering_AP_pnc.IterativeScatteringTests.test_rejects_failure_status_and_false_success) ... ok
+test_rotated_germanium_both_incidence_sides (test_iterative_scattering_AP_pnc.IterativeScatteringTests.test_rotated_germanium_both_incidence_sides) ... ok
+test_layer_refinement_preserves_exact_footprint_and_polygon_volume (test_layered_AP_pnc.LayeredMeshTests.test_layer_refinement_preserves_exact_footprint_and_polygon_volume) ... ok
+test_layered_affine_patch_and_port_assembly (test_layered_AP_pnc.LayeredMeshTests.test_layered_affine_patch_and_port_assembly) ... ok
+test_rejects_invalid_layers_and_port_budget (test_layered_AP_pnc.LayeredMeshTests.test_rejects_invalid_layers_and_port_budget) ... ok
+test_xy_refinement_preserves_port_traces (test_layered_AP_pnc.LayeredMeshTests.test_xy_refinement_preserves_port_traces) ... ok
+test_saved_controls_and_scattering_comparisons (test_layered_evidence_AP_pnc.LayeredEvidenceTests.test_saved_controls_and_scattering_comparisons) ... ok
+test_saved_port_refinement (test_layered_port_resolution_AP_pnc.LayeredPortEvidenceTests.test_saved_port_refinement) ... ok
+test_saved_pairs_preserve_scope_and_reproduce_power_and_complex_changes (test_layered_resolution_AP_pnc.LayeredResolutionEvidenceTests.test_saved_pairs_preserve_scope_and_reproduce_power_and_complex_changes) ... ok
+test_saved_uniform_responses_against_common_safe_reference (test_layered_resolution_AP_pnc.LayeredResolutionEvidenceTests.test_saved_uniform_responses_against_common_safe_reference) ... ok
+test_gamma_has_four_rigid_modes (test_lead_modes_AP_pnc.LeadModeTests.test_gamma_has_four_rigid_modes) ... ok
+test_matching_face_nodes_with_different_triangles_are_rejected (test_lead_modes_AP_pnc.LeadModeTests.test_matching_face_nodes_with_different_triangles_are_rejected) ... ok
+test_nonmatching_end_faces_are_rejected (test_lead_modes_AP_pnc.LeadModeTests.test_nonmatching_end_faces_are_rejected) ... ok
+test_opposite_wavenumbers_and_face_phase (test_lead_modes_AP_pnc.LeadModeTests.test_opposite_wavenumbers_and_face_phase) ... ok
+test_small_k_extension_uses_free_sidewall_rod_speed (test_lead_modes_AP_pnc.LeadModeTests.test_small_k_extension_uses_free_sidewall_rod_speed) ... ok
+test_callback_failure_after_numerical_convergence_propagates (test_lgmres_AP_pnc.LgmresScatteringTests.test_callback_failure_after_numerical_convergence_propagates) ... ok
+test_interrupted_matched_port_response_resumes_only_unfinished_channels (test_lgmres_AP_pnc.LgmresScatteringTests.test_interrupted_matched_port_response_resumes_only_unfinished_channels) ... ok
+test_numerical_failure_checkpoints_latest_finite_vector_without_acceptance (test_lgmres_AP_pnc.LgmresScatteringTests.test_numerical_failure_checkpoints_latest_finite_vector_without_acceptance) ... ok
+test_rejects_bad_residual_even_with_success_status (test_lgmres_AP_pnc.LgmresScatteringTests.test_rejects_bad_residual_even_with_success_status) ... ok
+test_rejects_confirmation_that_returns_a_changed_iterate (test_lgmres_AP_pnc.LgmresScatteringTests.test_rejects_confirmation_that_returns_a_changed_iterate) ... ok
+test_reused_vectors_are_verified_before_factorization (test_lgmres_AP_pnc.LgmresScatteringTests.test_reused_vectors_are_verified_before_factorization) ... ok
+test_rotated_germanium_both_incidence_sides (test_lgmres_AP_pnc.LgmresScatteringTests.test_rotated_germanium_both_incidence_sides) ... ok
+test_single_precision_only_changes_ilu_input_and_inverse (test_lgmres_AP_pnc.LgmresScatteringTests.test_single_precision_only_changes_ilu_input_and_inverse) ... ok
+test_terminal_update_requires_unchanged_official_confirmation (test_lgmres_AP_pnc.LgmresScatteringTests.test_terminal_update_requires_unchanged_official_confirmation) ... ok
+3D solid: 24 tetrahedra, 225 displacement DOFs
+test_checkpoint_identity_ignores_analysis_and_detects_changed_mesh_bytes (test_mesh_preflight_AP_pnc.MeshPreflightTests.test_checkpoint_identity_ignores_analysis_and_detects_changed_mesh_bytes) ... ok
+test_layered_preflight_sets_exact_thickness_planes_and_supplies_scattering_mesh (test_mesh_preflight_AP_pnc.MeshPreflightTests.test_layered_preflight_sets_exact_thickness_planes_and_supplies_scattering_mesh) ... ok
+3D solid: 24 tetrahedra, 225 displacement DOFs
+3D solid: 24 tetrahedra, 225 displacement DOFs
+test_preflight_after_completed_uncached_mesh_uses_separate_run_identity (test_mesh_preflight_AP_pnc.MeshPreflightTests.test_preflight_after_completed_uncached_mesh_uses_separate_run_identity) ... ok
+test_public_preflight_reuses_exact_tagged_gmsh_mesh_after_body_budget_changes (test_mesh_preflight_AP_pnc.MeshPreflightTests.test_public_preflight_reuses_exact_tagged_gmsh_mesh_after_body_budget_changes) ... ok
+test_thickness_layers_is_required_positive_integer_only_for_layered_meshes (test_mesh_preflight_AP_pnc.MeshPreflightTests.test_thickness_layers_is_required_positive_integer_only_for_layered_meshes) ... ok
+test_acoustic_zero_and_zone_edge (test_nanobeam_AP_pnc.ChainTests.test_acoustic_zero_and_zone_edge) ... ok
+test_example_partial_array (test_nanobeam_AP_pnc.GeometryTests.test_example_partial_array) ... ok
+test_known_adjacent_spacing (test_nanobeam_AP_pnc.GeometryTests.test_known_adjacent_spacing) ... ok
+test_overlap_and_sidewall (test_nanobeam_AP_pnc.GeometryTests.test_overlap_and_sidewall) ... ok
+test_circle_resolution_is_independent_of_body_size (test_perforated_AP_pnc.PerforatedMeshTests.test_circle_resolution_is_independent_of_body_size) ... ok
+test_periodic_trace_matches_control_and_assembles (test_perforated_AP_pnc.PerforatedMeshTests.test_periodic_trace_matches_control_and_assembles) ... ok
+test_rejects_port_budget_and_invalid_circle_divisions (test_perforated_AP_pnc.PerforatedMeshTests.test_rejects_port_budget_and_invalid_circle_divisions) ... ok
+test_all_roots_flux_orthogonality_and_propagation_pairing (test_port_modes_AP_pnc.PortModeTests.test_all_roots_flux_orthogonality_and_propagation_pairing) ... ok
+test_cutoff_fails_explicitly_and_resolved_sides_change_channel_count (test_port_modes_AP_pnc.PortModeTests.test_cutoff_fails_explicitly_and_resolved_sides_change_channel_count) ... ok
+test_end_face_basis_and_integrated_mass_match_for_p1_and_p2 (test_port_modes_AP_pnc.PortModeTests.test_end_face_basis_and_integrated_mass_match_for_p1_and_p2) ... ok
+test_signed_axial_power_agrees_with_dispersion_derivative (test_port_modes_AP_pnc.PortModeTests.test_signed_axial_power_agrees_with_dispersion_derivative) ... ok
+test_symmetry_degenerate_flexural_modes_are_flux_orthogonal (test_port_modes_AP_pnc.PortModeTests.test_symmetry_degenerate_flexural_modes_are_flux_orthogonal) ... ok
+test_wavenumbers_match_independent_three_dimensional_bloch_solve (test_port_modes_AP_pnc.PortModeTests.test_wavenumbers_match_independent_three_dimensional_bloch_solve) ... ok
+test_offline_h100_admission (test_resumable_scattering_AP_pnc.ResumableScatteringTests.test_offline_h100_admission) ... ok
+test_real_interruption_and_continuation (test_resumable_scattering_AP_pnc.ResumableScatteringTests.test_real_interruption_and_continuation) ... ERROR
+test_watchdog_kills_only_worker_when_supervisor_exits (test_resumable_scattering_AP_pnc.ResumableScatteringTests.test_watchdog_kills_only_worker_when_supervisor_exits) ... ok
+test_archived_scattering_baseline_remains_usable (test_saved_scattering_validation_AP_pnc.SavedScatteringValidationTests.test_archived_scattering_baseline_remains_usable) ... ok
+test_safe_source_mismatch_is_rejected (test_saved_scattering_validation_AP_pnc.SavedScatteringValidationTests.test_safe_source_mismatch_is_rejected) ... ok
+test_unknown_scattering_source_is_rejected (test_saved_scattering_validation_AP_pnc.SavedScatteringValidationTests.test_unknown_scattering_source_is_rejected) ... ok
+test_matched_guide_for_both_directions (test_scattering_AP_pnc.ScatteringTests.test_matched_guide_for_both_directions) ... ok
+test_rejects_incompatible_frequency_and_port_mapping (test_scattering_AP_pnc.ScatteringTests.test_rejects_incompatible_frequency_and_port_mapping) ... ok
+test_full_device_body_mesh_pair_replays_matching_and_gates (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_full_device_body_mesh_pair_replays_matching_and_gates) ... ok
+test_h100_continuation_reuses_accepted_and_active_checkpoints (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h100_continuation_reuses_accepted_and_active_checkpoints) ... ok
+test_h100_pair_fails_complex_response_with_unchanged_mode_identities (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h100_pair_fails_complex_response_with_unchanged_mode_identities) ... ok
+test_h100_recovery_reuses_the_failed_first_drive (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h100_recovery_reuses_the_failed_first_drive) ... ok
+test_h100_stage_preserves_geometry_and_exact_ports (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h100_stage_preserves_geometry_and_exact_ports) ... ok
+test_h100_uniform_body_diagnostic_replays_common_safe_reference (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h100_uniform_body_diagnostic_replays_common_safe_reference) ... ok
+test_h100_uniform_body_diagnostic_replays_saved_h130 (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h100_uniform_body_diagnostic_replays_saved_h130) ... ok
+test_h160_continuation_reuses_failed_iterate (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h160_continuation_reuses_failed_iterate) ... ok
+test_h80_continuation_reuses_first_drive_with_original_equation_gates (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h80_continuation_reuses_first_drive_with_original_equation_gates) ... ok
+test_h80_first_drive_pilot_replays_memory_and_residual_gates (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h80_first_drive_pilot_replays_memory_and_residual_gates) ... ok
+test_h80_inner50_continuation_reduces_workspace_with_same_equations (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h80_inner50_continuation_reduces_workspace_with_same_equations) ... ok
+test_h80_long_continuation_replays_checkpoint_lineage_and_gates (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h80_long_continuation_replays_checkpoint_lineage_and_gates) ... ok
+test_h80_operator_replays_actual_storage_admission (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h80_operator_replays_actual_storage_admission) ... ok
+test_h80_preflight_replays_the_resource_decision (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h80_preflight_replays_the_resource_decision) ... ok
+test_h80_residual_correction_replays_original_acceptance_and_memory (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h80_residual_correction_replays_original_acceptance_and_memory) ... ok
+test_portable_modal_power_matches_boundary_flux (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_portable_modal_power_matches_boundary_flux) ... ok
+test_terminal_status_is_distinct_from_residual_failure (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_terminal_status_is_distinct_from_residual_failure) ... ok
+test_uniform_body_diagnostic_replays_native_phase (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_uniform_body_diagnostic_replays_native_phase) ... ok
+test_known_uniform_phase_and_full_reflection_survive_signed_channel_reordering (test_uniform_reference_AP_pnc.UniformReferenceTests.test_known_uniform_phase_and_full_reflection_survive_signed_channel_reordering) ... ok
+test_physical_and_source_mismatches_rejected (test_uniform_reference_AP_pnc.UniformReferenceTests.test_physical_and_source_mismatches_rejected) ... ok
+test_port_qualification_is_recomputed_from_independent_pairs_at_run_length (test_uniform_reference_AP_pnc.UniformReferenceTests.test_port_qualification_is_recomputed_from_independent_pairs_at_run_length) ... ok
+test_qualification_rejects_incompatible_predecessors (test_uniform_reference_AP_pnc.UniformReferenceTests.test_qualification_rejects_incompatible_predecessors) ... ok
+test_uniform_guide_power_phase_and_fixed_port_controls (test_wave_resolution_AP_pnc.WaveResolutionEvidenceTests.test_uniform_guide_power_phase_and_fixed_port_controls) ... ok
+test_compare_protocol_keeps_scattering_candidate_and_opens_comparison_report (test_workbench_AP_pnc.WorkbenchTests.test_compare_protocol_keeps_scattering_candidate_and_opens_comparison_report) ... ok
+test_comparison_status_separates_repeatability_and_input_power_checks (test_workbench_AP_pnc.WorkbenchTests.test_comparison_status_separates_repeatability_and_input_power_checks) ... ok
+test_invalid_input_never_starts_a_worker (test_workbench_AP_pnc.WorkbenchTests.test_invalid_input_never_starts_a_worker) ... ok
+test_layered_mesh_controls_keep_physical_thickness_and_other_settings (test_workbench_AP_pnc.WorkbenchTests.test_layered_mesh_controls_keep_physical_thickness_and_other_settings) ... ok
+test_malformed_analysis_load_preserves_prior_inputs_and_result (test_workbench_AP_pnc.WorkbenchTests.test_malformed_analysis_load_preserves_prior_inputs_and_result) ... ok
+test_open_saved_run_uses_selected_folder_without_launching_or_changing_files (test_workbench_AP_pnc.WorkbenchTests.test_open_saved_run_uses_selected_folder_without_launching_or_changing_files) ... ok
+test_resumable_stop_requests_checkpoint_and_uses_saved_progress_without_final_response (test_workbench_AP_pnc.WorkbenchTests.test_resumable_stop_requests_checkpoint_and_uses_saved_progress_without_final_response) ... ok
+test_scattering_resume_routes_saved_inputs_and_displays_recoverable_status (test_workbench_AP_pnc.WorkbenchTests.test_scattering_resume_routes_saved_inputs_and_displays_recoverable_status) ... ok
+test_stop_waits_for_worker_descendants_and_keeps_job_record (test_workbench_AP_pnc.WorkbenchTests.test_stop_waits_for_worker_descendants_and_keeps_job_record) ... ok
+test_tiny_preflight_then_run_reuses_exact_mesh_and_resets_on_load (test_workbench_AP_pnc.WorkbenchTests.test_tiny_preflight_then_run_reuses_exact_mesh_and_resets_on_load) ... ok
+test_comparison_uses_saved_folders_and_returns_scientific_failure_as_compared (test_workbench_worker_AP_pnc.WorkbenchWorkerTests.test_comparison_uses_saved_folders_and_returns_scientific_failure_as_compared) ... ok
+test_invalid_configuration_writes_failure_and_existing_response_is_preserved (test_workbench_worker_AP_pnc.WorkbenchWorkerTests.test_invalid_configuration_writes_failure_and_existing_response_is_preserved) ... ok
+test_mesh_and_solve_use_the_same_checkpoint_and_return_exact_paths (test_workbench_worker_AP_pnc.WorkbenchWorkerTests.test_mesh_and_solve_use_the_same_checkpoint_and_return_exact_paths) ... ok
+test_resume_protocol_uses_only_preserved_inputs_and_publishes_progress (test_workbench_worker_AP_pnc.WorkbenchWorkerTests.test_resume_protocol_uses_only_preserved_inputs_and_publishes_progress) ... ok
+test_tiny_scattering_worker_resumes_from_a_bounded_interruption (test_workbench_worker_AP_pnc.WorkbenchWorkerTests.test_tiny_scattering_worker_resumes_from_a_bounded_interruption) ... ok
+3D solid: 24 tetrahedra, 225 displacement DOFs
+3D solid: 24 tetrahedra, 225 displacement DOFs
+test_failed_attempt_is_retained_and_bad_material_creates_no_output (test_workflow3d_AP_pnc.Workflow3D.test_failed_attempt_is_retained_and_bad_material_creates_no_output) ... ok
+3D solid: 352 tetrahedra, 435 displacement DOFs
+test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks (test_workflow3d_AP_pnc.Workflow3D.test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks) ... ok
+test_historical_hole_pattern_uses_source_origin_and_exact_provenance (test_workflow3d_AP_pnc.Workflow3D.test_historical_hole_pattern_uses_source_origin_and_exact_provenance) ... ok
+Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{00523045-9d33-4df3-9c5a-ef1e57aa51d6}\Temp\tmp_upi_beo\two_hole_pilot_200nm-fa91a33d57bf
+Max relative solve residual: 0
+Power balance check: True; max R=0
+Matched-guide power check: True
+Solve time 0.00 s; sampled process peak 0.0 MiB
+Model status: computed; phase accuracy, spatial convergence and physical adequacy require separate evidence.
+3D solid: 24 tetrahedra, 225 displacement DOFs
+test_output_can_be_reconstructed_and_cache_checks_files (test_workflow3d_AP_pnc.Workflow3D.test_output_can_be_reconstructed_and_cache_checks_files) ... ok
+3D solid: 72 tetrahedra, 585 displacement DOFs
+test_scattering_exports_power_channels_and_reconstructible_responses (test_workflow3d_AP_pnc.Workflow3D.test_scattering_exports_power_channels_and_reconstructible_responses) ... ok
+
+======================================================================
+ERROR: test_real_interruption_and_continuation (test_resumable_scattering_AP_pnc.ResumableScatteringTests.test_real_interruption_and_continuation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\kunmi\My Drive\Phononic Nanobeam Design Lab\src\phononic\resumable_scattering_AP_pnc.py", line 105, in _exclusive
+    msvcrt.locking(stream.fileno(), msvcrt.LK_NBLCK, 1)
+PermissionError: [Errno 13] Permission denied
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\kunmi\My Drive\Phononic Nanobeam Design Lab\tests\test_resumable_scattering_AP_pnc.py", line 116, in test_real_interruption_and_continuation
+    with resume._exclusive(attempt.parent / "worker.lock"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "C:\Users\kunmi\My Drive\Phononic Nanobeam Design Lab\src\phononic\resumable_scattering_AP_pnc.py", line 107, in _exclusive
+    raise _Busy("Another process owns this scattering checkpoint.") from exc
+phononic.resumable_scattering_AP_pnc._Busy: Another process owns this scattering checkpoint.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\dependencies\python\Lib\shutil.py", line 633, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\kunmi\\AppData\\Local\\Packages\\openai.codex_2p2nqsd0c76g0\\AC\\#!sandbox.{00523045-9d33-4df3-9c5a-ef1e57aa51d6}\\Temp\\tmprin9omlm\\_checkpoints\\straight_beam_200nm-odk4pbpy\\attempt-000001\\solving_worker_AP_pnc.log'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\kunmi\My Drive\Phononic Nanobeam Design Lab\tests\test_resumable_scattering_AP_pnc.py", line 100, in test_real_interruption_and_continuation
+    with TemporaryDirectory() as directory:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\dependencies\python\Lib\tempfile.py", line 950, in __exit__
+    self.cleanup()
+  File "C:\Program Files\WindowsApps\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Program Files\WindowsApps\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Program Files\WindowsApps\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\dependencies\python\Lib\shutil.py", line 635, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+  File "C:\Program Files\WindowsApps\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\dependencies\python\Lib\tempfile.py", line 909, in onexc
+    _os.unlink(path)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\kunmi\\AppData\\Local\\Packages\\openai.codex_2p2nqsd0c76g0\\AC\\#!sandbox.{00523045-9d33-4df3-9c5a-ef1e57aa51d6}\\Temp\\tmprin9omlm\\_checkpoints\\straight_beam_200nm-odk4pbpy\\attempt-000001\\solving_worker_AP_pnc.log'
+
+----------------------------------------------------------------------
+Ran 128 tests in 36.008s
+
+FAILED (errors=1, skipped=1)

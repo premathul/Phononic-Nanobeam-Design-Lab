@@ -88,6 +88,7 @@ test_end_face_basis_and_integrated_mass_match_for_p1_and_p2 (test_port_modes_AP_
 test_signed_axial_power_agrees_with_dispersion_derivative (test_port_modes_AP_pnc.PortModeTests.test_signed_axial_power_agrees_with_dispersion_derivative) ... ok
 test_symmetry_degenerate_flexural_modes_are_flux_orthogonal (test_port_modes_AP_pnc.PortModeTests.test_symmetry_degenerate_flexural_modes_are_flux_orthogonal) ... ok
 test_wavenumbers_match_independent_three_dimensional_bloch_solve (test_port_modes_AP_pnc.PortModeTests.test_wavenumbers_match_independent_three_dimensional_bloch_solve) ... ok
+test_interrupted_phase_awaits_sampled_and_new_descendants (test_resumable_scattering_AP_pnc.ResumableScatteringTests.test_interrupted_phase_awaits_sampled_and_new_descendants) ... ok
 test_offline_h100_admission (test_resumable_scattering_AP_pnc.ResumableScatteringTests.test_offline_h100_admission) ... ok
 test_real_interruption_and_continuation (test_resumable_scattering_AP_pnc.ResumableScatteringTests.test_real_interruption_and_continuation) ... ok
 test_watchdog_kills_only_worker_when_supervisor_exits (test_resumable_scattering_AP_pnc.ResumableScatteringTests.test_watchdog_kills_only_worker_when_supervisor_exits) ... ok
@@ -110,6 +111,7 @@ test_h80_inner50_continuation_reduces_workspace_with_same_equations (test_solver
 test_h80_long_continuation_replays_checkpoint_lineage_and_gates (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h80_long_continuation_replays_checkpoint_lineage_and_gates) ... ok
 test_h80_operator_replays_actual_storage_admission (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h80_operator_replays_actual_storage_admission) ... ok
 test_h80_preflight_replays_the_resource_decision (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h80_preflight_replays_the_resource_decision) ... ok
+test_h80_residual_correction_replays_original_acceptance_and_memory (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_h80_residual_correction_replays_original_acceptance_and_memory) ... ok
 test_portable_modal_power_matches_boundary_flux (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_portable_modal_power_matches_boundary_flux) ... ok
 test_terminal_status_is_distinct_from_residual_failure (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_terminal_status_is_distinct_from_residual_failure) ... ok
 test_uniform_body_diagnostic_replays_native_phase (test_solver_resources_AP_pnc.SolverResourceEvidenceTests.test_uniform_body_diagnostic_replays_native_phase) ... ok
@@ -139,7 +141,7 @@ test_failed_attempt_is_retained_and_bad_material_creates_no_output (test_workflo
 3D solid: 352 tetrahedra, 435 displacement DOFs
 test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks (test_workflow3d_AP_pnc.Workflow3D.test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks) ... ok
 test_historical_hole_pattern_uses_source_origin_and_exact_provenance (test_workflow3d_AP_pnc.Workflow3D.test_historical_hole_pattern_uses_source_origin_and_exact_provenance) ... ok
-Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{241bc77c-4351-431d-87a7-72a190d548fc}\Temp\tmp2l2rlptd\two_hole_pilot_200nm-d9f259729a35
+Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{8227a784-42cb-4e9a-8261-03b6278757fd}\Temp\tmpny9sijj9\two_hole_pilot_200nm-dd7c34f10021
 Max relative solve residual: 0
 Power balance check: True; max R=0
 Matched-guide power check: True
@@ -151,6 +153,6 @@ test_output_can_be_reconstructed_and_cache_checks_files (test_workflow3d_AP_pnc.
 test_scattering_exports_power_channels_and_reconstructible_responses (test_workflow3d_AP_pnc.Workflow3D.test_scattering_exports_power_channels_and_reconstructible_responses) ... ok
 
 ----------------------------------------------------------------------
-Ran 127 tests in 48.252s
+Ran 129 tests in 46.828s
 
 OK (skipped=1)
