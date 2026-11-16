@@ -50,6 +50,46 @@ class ScatteringTests(unittest.TestCase):
                 expected = np.diag(np.exp(1j * k * distance))
                 np.testing.assert_allclose(result.transmission_amplitudes, expected, atol=0.05, rtol=0)
 
+    def test_full_two_port_unitarity_and_coherent_flux(self):
+        # Column-wise R + T checks only the diagonal of S^H S. Off-diagonal
+        # entries also matter for coherent superpositions of incident channels.
+        left = solve_scattering(self.system, self.modes, self.frequency_hz, "left")
+        right = solve_scattering(self.system, self.modes, self.frequency_hz, "right")
+        np.testing.assert_array_equal(left.reflection_mode_indices, right.incident_mode_indices)
+        np.testing.assert_array_equal(right.reflection_mode_indices, left.incident_mode_indices)
+        np.testing.assert_array_equal(left.transmission_mode_indices, left.incident_mode_indices)
+        np.testing.assert_array_equal(right.transmission_mode_indices, right.incident_mode_indices)
+        amplitudes = np.block([[left.reflection_amplitudes, right.transmission_amplitudes],
+                               [left.transmission_amplitudes, right.reflection_amplitudes]])
+        outgoing = np.r_[left.reflection_mode_indices, left.transmission_mode_indices]
+        incident_power = np.r_[left.incident_powers_w, right.incident_powers_w]
+        scattering = (np.sqrt(abs(self.modes.powers_w[outgoing]))[:, None] * amplitudes
+                      / np.sqrt(incident_power)[None, :])
+        np.testing.assert_allclose(scattering.conj().T @ scattering,
+                                   np.eye(len(incident_power)), atol=1e-8, rtol=0)
+
+        # Check a deterministic coherent drive against forces recovered directly
+        # from the finite-domain equation, not modal outgoing coefficients.
+        count = len(incident_power)
+        coefficients = np.arange(1, count + 1) * np.exp(0.37j * np.arange(count)**2)
+        coefficients /= np.linalg.norm(coefficients)
+        raw = coefficients / np.sqrt(incident_power)
+        field = np.column_stack((left.displacements, right.displacements)) @ raw
+        omega = 2 * np.pi * self.frequency_hz
+        force = (self.system.K - omega**2 * self.system.M) @ field
+        nleft = len(left.incident_mode_indices)
+        outgoing_power = 0.0
+        for result, dofs, sign, weights in (
+            (left, self.modes.port.left_dofs, -1, raw[:nleft]),
+            (right, self.modes.port.right_dofs, 1, raw[nleft:]),
+        ):
+            roots = result.incident_mode_indices
+            incoming_u = self.modes.displacements[:, roots] @ weights
+            incoming_force = sign * self.modes.axial_forces[:, roots] @ weights
+            outgoing_power += (omega / 2) * np.vdot(
+                field[dofs] - incoming_u, force[dofs] - incoming_force).imag
+        self.assertAlmostEqual(outgoing_power, 1.0, delta=1e-8)
+
     def test_rejects_incompatible_frequency_and_port_mapping(self):
         with self.assertRaisesRegex(ValueError, "same frequency"):
             solve_scattering(self.system, self.modes, self.frequency_hz * 2)
