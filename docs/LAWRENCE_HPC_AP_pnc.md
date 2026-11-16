@@ -50,6 +50,36 @@ The completed Linux export uses its own `.venv-lawrence-export` with the exact s
 
 Retrieve the public output directory and verify its files before opening it in the workbench or comparing it with `tools/compare_scattering_AP_pnc.py`. The current h100/h80 comparison is an offline result; it needs no new solve. Exact paths and the scientific acceptance outcomes are in the handoff.
 
+## Run the h80 uniform-guide control
+
+Check the [current handoff](AI_HANDOFF_AP_pnc.md) for job ownership and saved results before submitting anything. Reuse any completed preflight or solve. The control is a hole-free 3 µm guide at 1 GHz with a 1000 nm × 200 nm section, four thickness layers and the saved 12-by-4 semi-analytical finite element (SAFE) port modes. It uses `.venv-lawrence-export` and verifies the original h100 summary, fields and tagged mesh in `inputs/uniform_h100_AP_pnc/`, including the two checkpoint files in `mesh/`.
+
+From the Lawrence project directory, the mesh-only job uses `short` with 4 GiB and a three-minute allocation. Its `uniform_h80_AP_pnc.json` receipt reports `mesh_ready` and the measured `case_max_dofs`. The original iterative attempt ended at its 570-second limit. For a fresh solve, use `solve-direct` with the checked preflight job ID and DOF count. It reuses the exact mesh and trace map, with the measured DOF count as the case cap. The allocation is two CPUs and 16 GiB for ten minutes on `nodes`, with one numerical thread and a 570-second worker limit.
+
+```bash
+batch=scripts/hpc/lawrence_uniform_h80_AP_pnc.sbatch
+h100="$PWD/inputs/uniform_h100_AP_pnc"
+ports="$PWD/results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/ports_AP_pnc.npz"
+sbatch --parsable --partition=short --mem=4G --time=00:03:00 "$batch" "$PWD" preflight "$h100" "$ports"
+```
+
+```bash
+preflight="$PWD/runs/uniform-h80-preflight-PREFLIGHT_JOB_ID"
+cat "$preflight/uniform_h80_AP_pnc.json"
+sbatch --parsable "$batch" "$PWD" solve-direct "$h100" "$ports" "$preflight" MEASURED_DOFS
+```
+
+The solve checks available node and job memory before factoring the complex128 equations. One factor serves all five drives. `direct_channels_AP_pnc.json` records both original-equation residuals and the checksum of each accepted vector as it is saved. Both residual limits are `1e-9`. The solve receipt in `runs/uniform-h80-solve-direct-SOLVE_JOB_ID/` identifies the public result. Keep the allocation, timing and channel records and check the independent flux balance.
+
+Retrieve and verify the public result. From the local project directory, set `$h80` to that downloaded run directory and compare it with the saved h100 run and the qualified 20-by-6 section. The results retain the guide's original end-plane phases and apply to this uniform guide at 1 GHz. Leave the separate patterned-device results at their own end planes.
+
+```powershell
+$h100 = 'results/runs/full_device_uniform_diagnostic/h100_followup/uniform_3um_layered_h100_ny12_z4-e035d9a65c07-attempt2'
+$h80 = 'DOWNLOADED_H80_PUBLIC_RUN_DIRECTORY'
+.venv/Scripts/python.exe -B tools/compare_scattering_AP_pnc.py --reference $h100 --candidate $h80
+.venv/Scripts/python.exe -B tools/compare_uniform_reference_AP_pnc.py --run $h80 --reference verification/full_device_port_resolution_AP_pnc.json --reference-case 20x6
+```
+
 ## Open JupyterLab
 
 After the bootstrap succeeds, submit the optional notebook job from the same Lawrence project directory. It requests one CPU and 4 GiB for two hours. Use the node assigned to the running job. The server log is private and contains the token generated for this session.

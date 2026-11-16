@@ -1,5 +1,6 @@
 """Saved scattering comparison checks. Author: Athul Prem | _AP_pnc."""
 
+from copy import deepcopy
 import json
 from pathlib import Path
 import sys
@@ -12,7 +13,14 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
-from compare_scattering_AP_pnc import LGMRES_SOURCE, compare_runs, file_sha
+from compare_scattering_AP_pnc import (
+    LAWRENCE_UNIFORM_DIRECT,
+    LGMRES_SOURCE,
+    compare_runs,
+    compatible_inputs,
+    file_sha,
+    read_run,
+)
 from phononic.workflow_AP_pnc import run_study, write_json
 
 
@@ -163,6 +171,71 @@ class ScatteringComparisonTests(unittest.TestCase):
         write_json(bad_fields.parent / "summary_AP_pnc.json", altered)
         with self.assertRaisesRegex(ValueError, "unambiguous relative residual"):
             compare_runs(fields.parent, bad_fields.parent, self.output / "rejected-precision")
+
+    def test_lawrence_uniform_direct_compatibility_checks_provenance_and_original_residuals(self):
+        reference, physical, _ = read_run(self.reference)
+        direct, other, _ = read_run(self.candidate)
+        source = "459589f4e5de39c888966305e28dbd2b16f2947ec427ae9c131c69ae47c609df"
+        driver = file_sha(ROOT / "tools/run_lawrence_uniform_h80_AP_pnc.py")
+        helpers = file_sha(ROOT / "tools/lawrence_solver_AP_pnc.py")
+        roots = [26, 32, 14, 28, 30]
+        channels = [{"column": column, "incident_port_root": root, "info": 0,
+                     "relative_residual": 2e-10, "relative_backward_residual": 2e-12}
+                    for column, root in enumerate(roots)]
+        reference["configuration"]["resources"].update(linear_solver="ilu_lgmres", ilu_precision="single")
+        reference.update(num_incident_channels=5,
+                         linear_solver={"method": "ilu_lgmres", "working_dtype": "complex128", "factor_dtype": "complex64",
+                                        "channels": channels})
+        physical["numerical_source_sha256"][LGMRES_SOURCE] = source
+        direct["configuration"]["resources"]["linear_solver"] = "direct"
+        direct["configuration"]["mesh"]["kind"] = "layered"
+        direct["implementation"]["platform"] = "Linux-test"
+        direct_channels = [dict(row, accepted_vector={"file": f"accepted-{row['column']:03d}_AP_pnc.npy",
+                                                      "bytes": 1024, "sha256": "d" * 64}) for row in channels]
+        direct.update(num_incident_channels=5, incident_mode_indices=roots,
+                      linear_solver={"method": LAWRENCE_UNIFORM_DIRECT, "working_dtype": "complex128",
+                                     "operator_csc_sha256": "b" * 64, "rhs_array_sha256": "c" * 64,
+                                     "relative_residual_limit": 1e-9, "backward_residual_limit": 1e-9,
+                                     "channels": direct_channels},
+                      checkpointed_scattering={"method": LAWRENCE_UNIFORM_DIRECT, "reused_preflight_mesh": True,
+                                               "safe_eigensolve_performed": False,
+                                               "direct_solver_helpers": {"sha256": helpers},
+                                               "linux_assembly_and_solve": {"implementation": direct["implementation"],
+                                                                            "driver": {"sha256": driver},
+                                                                            "slurm_job_id": "12345"}})
+        inputs, compatible = compatible_inputs(reference, direct, physical, other)
+        self.assertEqual(compatible["checks"]["candidate"], {
+            "method": LAWRENCE_UNIFORM_DIRECT, "slurm_job_id": "12345", "source_sha256": driver,
+            "maximum_relative_residual": 2e-10, "maximum_backward_residual": 2e-12,
+        })
+        self.assertNotIn(LGMRES_SOURCE, inputs["numerical_source_sha256"])
+        provenance = ("checkpointed_scattering",)
+        linux = (*provenance, "linux_assembly_and_solve")
+        channel = ("linear_solver", "channels", 0)
+        cases = (
+            ((*linux, "driver", "sha256"), "0" * 64, "reviewed driver"),
+            ((*provenance, "direct_solver_helpers", "sha256"), "0" * 64, "reviewed residual and memory helper"),
+            ((*linux, "implementation"), {}, "matching Linux assembly"),
+            (("implementation", "packages", "scipy"), "different", "matching numerical package"),
+            (("implementation", "source_sha256", "src/phononic/layered_AP_pnc.py"), "0" * 64, "matching layered mesh"),
+            ((*channel, "incident_port_root"), 1, "five Lawrence uniform channels"),
+            ((*channel, "info"), True, "did not finish successfully"),
+            ((*channel, "accepted_vector", "file"), "accepted-001_AP_pnc.npy", "accepted vector identity"),
+            ((*channel, "relative_residual"), 2e-9, "both original-equation residual limits"),
+            ((*channel, "relative_backward_residual"), float("nan"), "both original-equation residual limits"),
+        )
+        for key_path, value, message in cases:
+            altered = deepcopy(direct)
+            entry = altered
+            for key in key_path[:-1]:
+                entry = entry[key]
+            entry[key_path[-1]] = value
+            with self.subTest(key_path=key_path), self.assertRaisesRegex(ValueError, message):
+                compatible_inputs(reference, altered, physical, other)
+        altered = deepcopy(direct)
+        altered["linear_solver"]["channels"][0]["relative_residual"] = 2e-9
+        with self.assertRaisesRegex(ValueError, "both original-equation residual limits"):
+            compatible_inputs(direct, altered, other, other)
 
     def copy_run(self, source: Path, name: str):
         directory = self.output / name
