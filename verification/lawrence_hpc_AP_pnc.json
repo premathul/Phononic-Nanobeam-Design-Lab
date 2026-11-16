@@ -1,0 +1,373 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "status": "scattering_export_verified_mesh_pair_failed_complex_gate",
+  "workflow": "Lawrence Linux solve of the existing Windows h80 scattering equations",
+  "repository_base_revision": "c41feaf8879c22fbcfc8f0ead129df51899b7e75",
+  "historical_jupyter_recovery": {
+    "service": "JupyterLab on a Slurm compute node, accessed with a single SSH local forward through Lawrence",
+    "compute_port": 8888,
+    "historically_used_local_ports": [
+      8899,
+      32136
+    ],
+    "confirmed_access": "Use the current server token from the matching per-job Jupyter log.",
+    "new_project_notebook_job_tested": false,
+    "source_scope": "Recovered from the user-owned prior chats and existing Lawrence scripts; private conversation identifiers are retained in the coordinating chat, not this repository."
+  },
+  "deployed_files": {
+    "tools/lawrence_solver_AP_pnc.py": "dd9e07d4955de6cf4cac97eec0485bfc34bd1d7f8173d4707718c2ea4ba89034",
+    "scripts/hpc/lawrence_bootstrap_AP_pnc.sbatch": "5f0aeebaf45f5a6e31c7874be6d5107fb8f48db2d10554a5cd29c1d27fa19be8",
+    "scripts/hpc/lawrence_pilot_AP_pnc.sbatch": "81b90f73083c3a63dd0c1489ebc9740af455ddfb1dda2f59a8795e1836c3fe32",
+    "scripts/hpc/lawrence_jupyter_AP_pnc.sbatch": "876c199572b7af6f87db035fd23f07aff654ee3dce3d904e00a14ec6cb287c7f",
+    "docs/LAWRENCE_HPC_AP_pnc.md": "002f891e6a2b099857b438c885c06b3fcb1051b47a53145915ecfed58f2385c1",
+    "tools/export_lawrence_scattering_AP_pnc.py": "4c2e76c81817154afeef4a0a9a9ff5b691d297544b9ae7659dd3fcc087aa4ad1",
+    "scripts/hpc/lawrence_export_AP_pnc.sbatch": "255c1bd2667e858fe89a824a3c0027ae6027dd78f185debcd7017f4de23b4477"
+  },
+  "checks_before_submission": {
+    "remote_deployed_file_sha256_match": true,
+    "remote_bash_syntax": "passed",
+    "local_focused_solver_tests_passed": 5,
+    "reviewed_runner_sha256": "dd9e07d4955de6cf4cac97eec0485bfc34bd1d7f8173d4707718c2ea4ba89034"
+  },
+  "integrated_windows_checks": {
+    "tests": 148,
+    "passed": 147,
+    "skipped": 1,
+    "skip_reason": "Windows symlink permission",
+    "elapsed_seconds": 51.836,
+    "log": "verification/development_tests_AP_pnc.log",
+    "log_sha256": "4b34bddf63e01fb8d97a1ac2fd46dde7325a9d46158de9945fa80cbc4046d352"
+  },
+  "windows_stage": {
+    "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft",
+    "frequency_hz": 1000000000,
+    "incident_side": "left",
+    "incident_root_indices_in_rhs_order": [
+      1348,
+      1311,
+      1292,
+      1284,
+      1274
+    ],
+    "body_dofs": 426627,
+    "complex128_csc_nonzeros": 32706643,
+    "operator_array_bytes": 655839372,
+    "operator_sha256": "2d1a0d342a293cd7f45874c396887d084e6ff3a42c5ba669a8f98c3c2554a56d",
+    "operator_csc_sha256": "6c1ef8514f8d55ac0ac9ebd1011e4411117cda7b37211d41179b2ac5e3259d75",
+    "rhs_sha256": "80800b866d8e4358f7a4dab8478e2bd21ab9cf9083619fa1bf6f37854dab96a1",
+    "rhs_array_sha256": "0e812751c2da8e1e531fba3c187967876f7d33e3ef251cdae9d3b9a4be6094f1",
+    "stage_metadata_sha256": "1c50971e27bfc52e63000c9d25df100e21bbe28b7fa47d7549f82cf465531a78",
+    "configuration_sha256": "332190b8f4e70db8ff28c51ebe97317a5e94b2a11d70bd65e33d02e60ced2c76",
+    "protected_seed": {
+      "column": 0,
+      "path_relative_to_stage": "h80_first_drive_correction_double_fill4_r4m1rklb/terminal-000.npy",
+      "sha256": "6b6acc57fc3f6c208b55f2b353b38b8fa5da2ed085cd233f0ee6fd41b077dd30",
+      "journal_sha256": "9db270c34633ff479e574eba149bf0dd4c9d61eb4c0d27a835ea554fec8f0ff1",
+      "saved_relative_residual": 1.126353056592445e-08,
+      "saved_relative_backward_residual": 8.999969224539398e-12,
+      "accepted": false
+    }
+  },
+  "bootstrap": {
+    "slurm_job_id": 1335027,
+    "account": "liu_lab",
+    "partition": "short",
+    "cpus": 2,
+    "requested_memory_gib": 4,
+    "slurm_wall_limit_seconds": 600,
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "qos": "normal",
+    "node": "node003.lawrence",
+    "slurm_elapsed_seconds": 39,
+    "environment": {
+      "python": "3.12.12",
+      "numpy": "2.5.5",
+      "scipy": "1.18.1",
+      "psutil": "7.2.2",
+      "threadpoolctl": "3.8.0",
+      "ipykernel": "7.4.0",
+      "platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28",
+      "cpu_model": "Intel(R) Xeon(R) Gold 5118 CPU @ 2.30GHz",
+      "openblas_versions": [
+        "0.3.34.237.2",
+        "0.3.31.dev"
+      ],
+      "observed_threads_per_blas_pool": [
+        1,
+        1
+      ],
+      "jupyter_kernel_registered": "phononic-ap-pnc"
+    },
+    "solver_smoke": {
+      "status": "smoke_passed",
+      "worker_stopped": true,
+      "factorizations": 1,
+      "right_hand_sides": 2,
+      "maximum_dense_relative_solution_error": 8.841315055741632e-17,
+      "maximum_original_relative_residual": 2.3746048995628646e-17,
+      "maximum_original_backward_residual": 1.0567329629376251e-17
+    },
+    "raw_evidence_root": "results/runs/full_device_resource_profile/lawrence_h80_AP_pnc",
+    "raw_evidence_sha256": {
+      "lawrence-bootstrap-1335027.out": "287063b84823b3d993a752750bfd16c48ab2c98ff2224b75c3f72f3e51f79187",
+      "bootstrap-1335027/allocation.txt": "ae4b5994c954653dd6c74e2d07bc9903b96fe4b8fbb730f83267bb8584e1913c",
+      "bootstrap-1335027/pip-freeze.txt": "60a7351314ec12e6b62da28fd6de28628c27fa8b95121efec4df76d60520a99d",
+      "bootstrap-1335027/platform-and-blas.txt": "a0bbf08febc16d7f4ac201d97e590cebec025d50725b218764de2516ab54aa68",
+      "bootstrap-1335027/smoke/execution_AP_pnc.json": "811359372a41cce8f2264e204ce5f5f36e974ba612752cad50ac4d78de560107",
+      "bootstrap-1335027/smoke/progress_AP_pnc.json": "fadcd8a5c1547450a648d5d8e82de9a11cd328c3c785456ba833a40e98eb6874",
+      "bootstrap-1335027/smoke/worker_AP_pnc.log": "c3a13f622a9b78fe81e3938caa775121859fd7e95f88abe38d1c4ea2e7f1d3e4"
+    }
+  },
+  "pilot": {
+    "state": "COMPLETED",
+    "slurm_exit_code": "0:0",
+    "slurm_job_id": 1335030,
+    "account": "liu_lab",
+    "qos": "normal",
+    "partition": "himem",
+    "node": "himem001.lawrence",
+    "submitted_script": {
+      "sha256": "b0e395911dfb6678efbc8935dd569eff333ab03ccc94e1259247d03d1f379cf3",
+      "preserved_basename": "submitted_AP_pnc.sbatch",
+      "stage_path_relative_to_project": "inputs/full_h80_operator_1r5fdlft"
+    },
+    "nodes": 1,
+    "tasks": 1,
+    "cpus_per_task": 2,
+    "numerical_threads": 1,
+    "requested_memory_gib": 128,
+    "slurm_wall_limit_seconds": 1500,
+    "supervisor_wall_limit_seconds": 1200,
+    "worker_rss_limit_gib": 112,
+    "minimum_job_memory_headroom_gib": 8,
+    "minimum_node_available_memory_mib": 400,
+    "max_factorizations": 1,
+    "max_updates_per_drive": 3,
+    "solver_relative_target": 1e-10,
+    "relative_residual_gate": 1e-09,
+    "relative_backward_residual_gate": 1e-09,
+    "residual_definition": "Original complex128 equation, norm(Ax-b,2)/norm(b,2) and norm(Ax-b,inf)/(norm(A,inf)*norm(x,inf)+norm(b,inf))",
+    "automatic_retry_or_requeue": false,
+    "execution": {
+      "worker_status": "all_drives_passed",
+      "worker_stopped": true,
+      "worker_exit_code": 0,
+      "slurm_elapsed_seconds": 522,
+      "supervisor_elapsed_seconds": 521.3778079263866,
+      "method": "Complex128 SuperLU COLAMD residual correction",
+      "factorizations": 1,
+      "factor_seconds": 496.28734052181244,
+      "factor_nonzeros": 803307165,
+      "slurm_memory_bytes": 137438953472,
+      "slurm_batch_max_rss_kib": 15958604,
+      "sampled_peak_worker_rss_bytes": 16350695424,
+      "job_cgroup_peak_bytes": 17093926912,
+      "job_cgroup_memory_fail_count": 0,
+      "admission_basis": "Slurm quota and cgroup-v1 usage",
+      "admission_bytes": 41096521256,
+      "pre_factor_job_headroom_bytes": 135948177408,
+      "pre_factor_node_available_bytes": 1597802999808,
+      "measured_guard_interruption": false,
+      "original_operator_preserved": true,
+      "all_five_passed_update": 1
+    },
+    "linux_environment": {
+      "python": "3.12.12",
+      "numpy": "2.5.5",
+      "scipy": "1.18.1",
+      "platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28",
+      "cpu_model": "Intel(R) Xeon(R) Gold 5118 CPU @ 2.30GHz",
+      "available_cpu_count": 2,
+      "openblas_versions": [
+        "0.3.34.237.2",
+        "0.3.31.dev"
+      ],
+      "observed_threads_per_blas_pool": [
+        1,
+        1
+      ],
+      "runner_sha256": "dd9e07d4955de6cf4cac97eec0485bfc34bd1d7f8173d4707718c2ea4ba89034"
+    },
+    "raw_evidence": {
+      "directory": "results/runs/full_device_resource_profile/lawrence_h80_AP_pnc/h80-pilot-1335030",
+      "transfer_manifest_matches": 11,
+      "transfer_manifest_sha256": "5a951c91ffd4b55ab1fcae9cd97df7c3347202cbbe7b2d3eadb5aecafe5339ee",
+      "execution_AP_pnc.json": "f5fef7e341e35ab56b8c04daea2cf5f844de0fd3de2c0b83862b77521a365b93",
+      "progress_AP_pnc.json": "cb6df0b6f7f76e73ed4964742f7ba25da2cb430b803bace61586d5cec601548a",
+      "slurm_accounting_AP_pnc.txt": "1771b3938f9afca72147ef3560c99c45aa2a36821607348b6497acf4b19bbaf6",
+      "submitted_sources_AP_pnc.sha256": "8ebc917602f3645106f47de071f183627543cd188b35c990a4fd191b9d0d8d80",
+      "worker_AP_pnc.log": "c3a13f622a9b78fe81e3938caa775121859fd7e95f88abe38d1c4ea2e7f1d3e4",
+      "../lawrence-pilot-1335030.out": "c8b772f341b2f6f19bfd7a45f827801d81499f1b63965633b1dd154998acea63"
+    },
+    "independent_local_replay": {
+      "status": "passed",
+      "method": "Original saved complex128 CSC and matching RHS for each drive, with independently accumulated row infinity norm",
+      "scope": "Residual validation of returned vectors using the unchanged original Windows files",
+      "environment": {
+        "python": "3.12.14",
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "helper_sha256": "82c32f1cd36519df62983bd0c19d27f67b879f53b180268539afe038f3c82ce9",
+      "report": "independent_original_equations_AP_pnc.json",
+      "report_sha256": "b6562e725f0d1d3a049187c77ef9371f87b6e4ef91c1a05013546f419cbb2cd0",
+      "maximum_relative_residual": 2.291215354453394e-12,
+      "maximum_backward_residual": 7.224683615497609e-16,
+      "channels": [
+        {
+          "column": 0,
+          "incident_root": 1348,
+          "file": "candidate-000-001.npy",
+          "sha256": "33c93a58461cea51e5912c06efca057c06878819c92ca6a30d5eea38cc19da08",
+          "relative_residual": 4.805541853952626e-13,
+          "relative_backward_residual": 2.5237817791719304e-16
+        },
+        {
+          "column": 1,
+          "incident_root": 1311,
+          "file": "candidate-001-001.npy",
+          "sha256": "523119f81b07caa9d992a6bc58c141c6dc921760b38d4a2c112c37d07be2cd4f",
+          "relative_residual": 2.291215354453394e-12,
+          "relative_backward_residual": 3.9190268134136136e-16
+        },
+        {
+          "column": 2,
+          "incident_root": 1292,
+          "file": "candidate-002-001.npy",
+          "sha256": "48fd7450e8bc8907966c4851ec1c39d39910193be9b317b481c0cbf584bcf28a",
+          "relative_residual": 1.1156547109039686e-12,
+          "relative_backward_residual": 5.820358194512887e-16
+        },
+        {
+          "column": 3,
+          "incident_root": 1284,
+          "file": "candidate-003-001.npy",
+          "sha256": "69333ddb577b436d9d7c8fba4e483504436a2d060679e83283ef08cecb8f4311",
+          "relative_residual": 1.1626544748415297e-12,
+          "relative_backward_residual": 5.225430545053645e-16
+        },
+        {
+          "column": 4,
+          "incident_root": 1274,
+          "file": "candidate-004-001.npy",
+          "sha256": "8e8333dc3d1d24c626895b61bd59ab7ef00bd4f43bca233a05280b7fac1483b7",
+          "relative_residual": 9.744053888440686e-13,
+          "relative_backward_residual": 7.224683615497609e-16
+        }
+      ]
+    },
+    "accepted_drives": 5,
+    "total_drives": 5,
+    "scattering_exported_in_solver_job": false,
+    "full_device_spatial_convergence_established": false
+  },
+  "scattering_postprocessing": {
+    "status": "linux_cached_export_completed_power_checks_passed",
+    "windows_admission": {
+      "status": "blocked_before_worker",
+      "initial_physical_available_mib": 2744.5234375,
+      "required_physical_available_mib": 3500,
+      "initial_commit_headroom_mib": 8346.73828125,
+      "required_commit_headroom_mib": 4112,
+      "physical_floor_mib": 400,
+      "commit_floor_mib": 512,
+      "evidence": "results/runs/full_device_resource_profile/lawrence_h80_AP_pnc/export-1335030-jvjfdp18/export_execution_AP_pnc.json",
+      "evidence_sha256": "2bf14bdea94784fde424b3b544aaaca1014520ba90c060b6059f05d89024acb8"
+    },
+    "linux_export": {
+      "slurm_job_id": 1335045,
+      "state": "COMPLETED",
+      "slurm_exit_code": "0:0",
+      "node": "node003",
+      "partition": "short",
+      "cpus": 2,
+      "requested_memory_gib": 8,
+      "slurm_wall_limit_seconds": 300,
+      "cached_export_time_limit_seconds": 120,
+      "slurm_elapsed_seconds_including_environment_bootstrap": 46,
+      "cached_export_elapsed_seconds": 17.32,
+      "cached_export_peak_rss_kib": 2618108,
+      "scattering_peak_sampled_process_memory_mib": 2421.359375,
+      "slurm_batch_sampled_max_rss_kib": 77328,
+      "peak_scope": "The direct GNU time measurement captured the cached export. Slurm accounting sampled the short job and reported a lower MaxRSS.",
+      "exporter_sha256": "4c2e76c81817154afeef4a0a9a9ff5b691d297544b9ae7659dd3fcc087aa4ad1",
+      "environment": {
+        "python": "3.12.12",
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28",
+        "pinned_packages_sha256": "b25c479041089021ee19edcc0e0f53202346e1a6b21382170078775b0356b0dd",
+        "resolved_pip_environment_sha256": "7f40d11d7087e3bdb4417bd8acbc14630c2d76a4dc0a6d7b94abee9d0764d3f0"
+      },
+      "inputs": {
+        "manifest": "results/runs/full_device_resource_profile/lawrence_h80_AP_pnc/export_inputs_AP_pnc.json",
+        "manifest_sha256": "d04b09e05a86f8924957a640185d766973b4b8953c91b4973af40b25ccf1c054",
+        "files": 25,
+        "remote_file_hashes_verified": true,
+        "upload_bytes": 546457600,
+        "upload_sha256": "7215f9f694394385f04386be9a1019e787fbe53303adeb995172830befa33d3d54"
+      },
+      "exact_original_operator_and_rhs_reconstructed": true,
+      "new_factorization_or_scientific_solve": false,
+      "new_safe_port_solve_or_remesh": false,
+      "transfer_manifest_matches": 14,
+      "transfer_manifest_sha256": "52f7790fac7df29d0a803b2b9bfb56fadf7d0611917dd986626a70af2dbf83ac",
+      "slurm_accounting_sha256": "e2bb02ddb86fe3a855b2f5e6188fe2dfcaa3783b0c3f8ba3ebe50dc6b3a5416f",
+      "stdout_sha256": "097646dfe22a9bd263010ad15144d4ad4e3917327cc28a7be6e49e7efccb62cb",
+      "output_directory": "results/runs/full_device_resource_profile/lawrence_h80_AP_pnc/h80-export-1335045/historical_26hole_layered_h80_ny12_z4-3385249d64d1",
+      "output_run_hash": "3385249d64d1caccdf2c9df3728d91ca8d42749d640c2d822ec54ba5c609cd7b",
+      "output_summary_sha256": "f65f61eaf62d69fa0574fe8566ba088fd7e090a019685bdac3db95261b61619f",
+      "power_balance_passed": true,
+      "maximum_modal_power_imbalance": 5.10702591327572e-14,
+      "maximum_independent_flux_power_imbalance": 3.441691376337985e-14,
+      "maximum_modal_flux_difference": 4.04121180963557e-14,
+      "maximum_net_outward_power_ratio": 3.430589146091734e-14,
+      "maximum_relative_port_residual": 4.298888081297976e-15
+    },
+    "h100_h80_comparison": {
+      "path": "results/runs/comparisons/scattering-f6e75a9694c42a2c",
+      "summary_sha256": "e7f66845ccdbf4aca57b6976fbc1320b07ead0d9e0007a768766a93b01f5056f",
+      "comparison_csv_sha256": "c2a02b6821b48eb01177195b9381a9fa73d18be818df5b0aa9196d3d71f3b431",
+      "reference_run": "historical_26hole_layered_h100_ny12_z4-2d4bb91449a7",
+      "reference_summary_sha256": "1a873882e9f16fd1604081a48319c80c92af34cac5f15a1a849fb1a3faabe0e8",
+      "comparison_kind": "mesh_sensitivity",
+      "input_power_checks_passed": true,
+      "port_trace_dofs_per_end": 675,
+      "exact_staged_h100_end_planes_retained": true,
+      "exact_staged_h100_transverse_port_triangulations_retained": true,
+      "exact_h100_safe_arrays_retained": true,
+      "propagation_phase_removed": false,
+      "incoming_and_transmission_root_order": [
+        1348,
+        1311,
+        1292,
+        1284,
+        1274
+      ],
+      "reflection_root_order": [
+        1349,
+        1312,
+        1293,
+        1285,
+        1275
+      ],
+      "minimum_port_mass_overlap": 0.9999999999999998,
+      "maximum_relative_port_wavenumber_change": 0.0,
+      "maximum_absolute_basis_gauge_phase_rad": 3.692106574277327e-29,
+      "maximum_power_change": 0.00017780889364368618,
+      "maximum_complex_amplitude_change": 0.039927184867442976,
+      "maximum_same_channel_transmission_phase_change_rad": 0.03995716586262313,
+      "largest_phase_change_incident_root": 1311,
+      "power_change_limit": 0.01,
+      "complex_change_limit": 0.01,
+      "power_gate_passed": true,
+      "complex_gate_passed": false,
+      "mesh_pair_passed": false
+    },
+    "full_device_spatial_convergence_established": false
+  }
+}

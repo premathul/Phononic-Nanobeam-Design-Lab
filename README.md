@@ -4,6 +4,8 @@
 
 A configurable three-dimensional anisotropic elastic-wave simulator for high-purity germanium nanobeams. It provides 3D beam eigenmodes, periodic guided-wave dispersion, power-normalized matched-port scattering, CSV-defined circular through-holes and offline interactive reports. The solver runs on a CPU using Python, scikit-fem, SciPy and Gmsh. All project documentation, software text and generated reports use English.
 
+For the saved h80 high-memory CPU workflow and the optional remote notebook, see the [Lawrence HPC runbook](docs/LAWRENCE_HPC_AP_pnc.md). It reuses the staged equations and records the Linux solve separately from the Windows assembly; consult the [current handoff](docs/AI_HANDOFF_AP_pnc.md) before submitting any job.
+
 ## Quick start
 
 Use Python 3.12 in a dedicated virtual environment. Run these commands from the project directory.
