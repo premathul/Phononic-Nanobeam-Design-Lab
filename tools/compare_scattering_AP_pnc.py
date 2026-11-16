@@ -161,6 +161,32 @@ def checked_lgmres_accuracy(summary: dict, source: str) -> dict:
             "maximum_relative_residual": max(relative), "maximum_backward_residual": max(backward)}
 
 
+def checked_lawrence_accuracy(summary: dict) -> dict:
+    report = summary.get("linear_solver", {})
+    replay = summary.get("checkpointed_scattering", {})
+    method = "lawrence_superlu_replay"
+    require(summary["configuration"]["resources"].get("linear_solver") == "direct"
+            and report.get("method") == method and replay.get("method") == method
+            and report.get("working_dtype") == "complex128" and summary.get("num_incident_channels") == 5,
+            "Different linear solvers require verified LGMRES or saved Lawrence direct-solve provenance.")
+    stage = replay.get("windows_assembly_source", {}).get("source_sha256", {})
+    implementation = summary["implementation"]["source_sha256"]
+    require(all(stage.get(key) and stage[key] == implementation.get(key) for key in
+                (f"src/phononic/{module}_AP_pnc.py" for module in (*CORE, "assembly_batched"))),
+            "Lawrence assembly and replay differ in physical numerical kernels.")
+    channels = report.get("channels", [])
+    require([row["column"] for row in channels] == list(range(5))
+            and [row["incident_port_root"] for row in channels] == summary.get("incident_mode_indices"),
+            "Missing original-equation accuracy checks for the saved Lawrence channels.")
+    relative = [row["relative_residual"] for row in channels]
+    backward = [row["relative_backward_residual"] for row in channels]
+    for values, limit in ((relative, 1e-10), (backward, 1e-9)):
+        require(all(type(value) in (int, float) and math.isfinite(value) and 0 <= value <= limit for value in values),
+                "Saved Lawrence vectors did not meet the original-equation residual limits.")
+    return {"method": method, "slurm_job_id": replay["slurm_job_id"],
+            "maximum_relative_residual": max(relative), "maximum_backward_residual": max(backward)}
+
+
 def compatible_inputs(a: dict, b: dict, fixed: dict, other: dict) -> tuple[dict, dict | None]:
     for key, value in fixed.items():
         if key != "numerical_source_sha256":
@@ -170,11 +196,12 @@ def compatible_inputs(a: dict, b: dict, fixed: dict, other: dict) -> tuple[dict,
     precision_b = b["configuration"]["resources"].get("ilu_precision", "double")
     compatibility = None
     if first.get(LGMRES_SOURCE) != second.get(LGMRES_SOURCE) or precision_a != precision_b:
-        checks = {"reference": checked_lgmres_accuracy(a, first.get(LGMRES_SOURCE)),
-                  "candidate": checked_lgmres_accuracy(b, second.get(LGMRES_SOURCE))}
+        checks = {label: (checked_lgmres_accuracy(run, source) if source is not None else checked_lawrence_accuracy(run))
+                  for label, run, source in (("reference", a, first.get(LGMRES_SOURCE)),
+                                             ("candidate", b, second.get(LGMRES_SOURCE)))}
         first.pop(LGMRES_SOURCE, None)
         second.pop(LGMRES_SOURCE, None)
-        compatibility = {"basis": "Verified LGMRES variants, identical physical kernels and unchanged original-equation residual limits.",
+        compatibility = {"basis": "Verified saved solver results with identical physical kernels and original-equation residual checks.",
                          "relative_residual_limit": 1e-9, "backward_residual_limit": 1e-9, "checks": checks}
     require(first == second, "Runs differ in numerical source sha256; a mesh comparison requires identical physical numerical kernels.")
     return {**fixed, "numerical_source_sha256": first}, compatibility
