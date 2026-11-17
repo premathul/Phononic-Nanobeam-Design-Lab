@@ -1,0 +1,454 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "status": "bounded_workflow_verified",
+  "scope": "Three frequencies (0.25, 0.30 and 0.35 GHz) on one 2 micrometre nominal-Ge uniform guide. Spatial and frequency convergence remain unresolved.",
+  "collaborator_review": {
+    "author": "premathul",
+    "url": "https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/32#issuecomment-6935341439",
+    "evidence": {
+      "device_spatial_gates": {
+        "complex_change_limit": 0.01,
+        "joint_body_and_SAFE_port_thickness_discretization_on_fixed_h80_planar_footprint": {
+          "pair": "z4/z6",
+          "maximum_complex_change": 0.01670625750875372,
+          "passed": false,
+          "record": "verification/device_thickness_AP_pnc.json"
+        },
+        "global_in_plane_discretization": {
+          "h100_h80_maximum_complex_change": 0.039927184867442976,
+          "h80_h60_maximum_complex_change": 0.026866990815575545,
+          "both_pairs_passed": false,
+          "record": "verification/device_h60_AP_pnc.json"
+        }
+      },
+      "frequency_point_records": "Each accepted point links its per-drive original-equation residuals in the summary, independent nodal-force flux in scattering_AP_pnc.csv, native signed roots in port_modes_AP_pnc.csv and signed-group tracking diagnostics in map_AP_pnc.json. The map states spatial and frequency convergence as unresolved for every point.",
+      "cutoff_and_missing_point_handling": "The focused interruption/reuse test injects a SAFE cutoff, checks its failed attempt and checks the break in tracking. The retained CLI pause preserves two pending points. Only accepted points contribute scattering-map CSV rows.",
+      "interpretation_and_scope": "Apparent gaps and resonances remain exploratory pending spatial and frequency-sampling checks. This acceptance pilot runs only the small uniform guide. A proposed device mesh change requires a stated scope and resource budget before launch."
+    }
+  },
+  "source": {
+    "git_base": "5aad5d4b820324f655975d70b9c6ebac71501b97",
+    "mapper": {
+      "path": "tools/map_scattering_AP_pnc.py",
+      "sha256": "d3dfa9ac0dab687715717da40af318ccdb718059165a0ca395f13a97a7aa6e6e",
+      "bytes": 28814
+    },
+    "all_recorded_numerical_source_hashes_verified": true,
+    "inputs_sha256": "0eb8e3ea73baa882f0ecac43090211ba880f9807c17beaa045657cf0b9e5378f",
+    "python": "3.12.14",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "scikit-fem": "12.0.2",
+      "meshio": "5.3.5",
+      "gmsh": "4.15.2",
+      "matplotlib": "3.11.2",
+      "psutil": "7.2.2"
+    },
+    "platform": "Windows-11-10.0.26200-SP0",
+    "thread_environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1"
+    }
+  },
+  "configuration": {
+    "author": "Athul Prem",
+    "file_tag": "_AP_pnc",
+    "schema_version": 1,
+    "name": "straight_scattering_200nm",
+    "geometry": {
+      "length_nm": 2000,
+      "width_nm": 1000,
+      "thickness_nm": 200
+    },
+    "mesh": {
+      "cells": [
+        12,
+        3,
+        2
+      ],
+      "element_order": 2
+    },
+    "material": {
+      "name": "nominal_cubic_ge",
+      "C11_Pa": 128500000000.0,
+      "C12_Pa": 48300000000.0,
+      "C44_Pa": 66800000000.0,
+      "density_kg_m3": 5323,
+      "crystal_rotation": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "temperature_policy": "fixed_property_control",
+      "temperature_K": 4
+    },
+    "analysis": {
+      "kind": "scattering",
+      "boundary": "matched_ports",
+      "frequency_GHz": 0.3,
+      "incident_side": "left"
+    },
+    "resources": {
+      "max_dofs": 30000,
+      "max_port_dofs": 200
+    }
+  },
+  "artifacts": {
+    "execution": {
+      "path": "results/runs/frequency_map_acceptance_AP_pnc/execution_AP_pnc.json",
+      "sha256": "88d468c3fd985a0638c379c73b890b11688f9afe047919ec8c56670521753a8e",
+      "bytes": 4223
+    },
+    "map": {
+      "path": "results/runs/frequency_map_acceptance_AP_pnc/map/map_AP_pnc.json",
+      "sha256": "0f6107fdbd5dbc1837c06521ad7cb6a86d5fb360ac4ea49ee96f474c5c08e6ac",
+      "bytes": 22931
+    },
+    "map_canonical_data_sha256": "1e1b2f4093013b726a229b80c9d939419c828e066ca7e048b9e7eb02edb848cb",
+    "checkpoint": {
+      "path": "results/runs/frequency_map_acceptance_AP_pnc/map/checkpoint_AP_pnc.json",
+      "sha256": "4bec89a0dea60c079899623980033e580f20aec7823951b34d5a35734be5b84b",
+      "bytes": 8145
+    },
+    "report": {
+      "path": "results/runs/frequency_map_acceptance_AP_pnc/map/report_AP_pnc.html",
+      "sha256": "df4535191d6461a882b060519faf57a986173a3b5bf0c6c8499f96cc10fd16f8",
+      "bytes": 2189
+    },
+    "compact_table": {
+      "path": "results/runs/frequency_map_acceptance_AP_pnc/map/scattering_map_AP_pnc.csv",
+      "sha256": "bc234753dd3814203ba5b00ca9279ce4ba438917d086e891204e1782909485be",
+      "bytes": 13966
+    },
+    "compact_table_rows": 96,
+    "selected_field_frequencies_hz": [
+      250000000.0,
+      300000000.0,
+      350000000.0
+    ]
+  },
+  "shared_discretization": {
+    "mesh_hash": "9b4b3a62b4f600a6fb31549cb2b8938ffd07a8f44712750467ea70167656a0c9",
+    "reference_planes_x_m": [
+      0.0,
+      2.0000000000000003e-06
+    ],
+    "body_displacement_dofs": 2625,
+    "tetrahedra": 432,
+    "trace_dofs": 105,
+    "linked_artifacts": {
+      "mesh_summary": {
+        "path": "results/runs/frequency_map_acceptance_AP_pnc/map/shared-vug7hpc0/_meshes/9b4b3a62b4f600a6fb31549cb2b8938ffd07a8f44712750467ea70167656a0c9/summary_AP_pnc.json",
+        "sha256": "e06706ffa65530dcac679e85d10bc8784850d11046ef52aa126c2015e691279d",
+        "bytes": 1499
+      },
+      "mesh": {
+        "path": "results/runs/frequency_map_acceptance_AP_pnc/map/shared-vug7hpc0/_meshes/9b4b3a62b4f600a6fb31549cb2b8938ffd07a8f44712750467ea70167656a0c9/mesh_AP_pnc.npz",
+        "sha256": "454c4ca1a7e26fb06f7045f6868e200004de8908693192afbc73307e7c84eca8",
+        "bytes": 2014
+      },
+      "stiffness": {
+        "path": "results/runs/frequency_map_acceptance_AP_pnc/map/shared-vug7hpc0/K.npz",
+        "sha256": "607a5398f0416e3be1fff1a2aa9c513e645f20249dc0b5f1aa7a9e3bb71379ab",
+        "bytes": 1917997
+      },
+      "mass": {
+        "path": "results/runs/frequency_map_acceptance_AP_pnc/map/shared-vug7hpc0/M.npz",
+        "sha256": "4cdba91eba62a4b0b3af5d12c91f09284764a539b67d163d8b73ed3a22ed0bd0",
+        "bytes": 722149
+      },
+      "port_section": {
+        "path": "results/runs/frequency_map_acceptance_AP_pnc/map/shared-vug7hpc0/port_section_AP_pnc.npz",
+        "sha256": "075830e9ffda5bae810f5cb3f59d615c9c4f253dcce8d54a62830cb2c5e9bd63",
+        "bytes": 357054
+      }
+    },
+    "distinct_frequency_operators_and_drives_verified": true
+  },
+  "retained_CLI_phases": [
+    {
+      "phase": "first_point",
+      "elapsed_seconds": 2.21054279996315,
+      "sampled_peak_process_tree_rss_bytes": 129814528,
+      "sampled_peak_process_tree_private_bytes": 375525376,
+      "physical_available_before_bytes": 3535024128,
+      "wall_limit_seconds": 120,
+      "exit_code": 0,
+      "point_states": [
+        "accepted",
+        "pending",
+        "pending"
+      ],
+      "point_attempt_counts": [
+        1,
+        0,
+        0
+      ],
+      "map_sha256": "1a9280f0684f95422f2326d7695b23a4688540cbaa8992ef40e18484b0fb32c5",
+      "accepted_summary_sha256": [
+        "a488faa58cc8b1c93f6d12eb82e0d40258474e18f73c697a3b9937159ac1f4f4"
+      ],
+      "stdout": {
+        "path": "results/runs/frequency_map_acceptance_AP_pnc/first_point_AP_pnc.log",
+        "sha256": "67e4c8cb92e5d8d1b6780e1cd9b6a4954cd9d28bc6cda47d26727a871348873a",
+        "bytes": 206
+      }
+    },
+    {
+      "phase": "resume",
+      "elapsed_seconds": 2.4106670999899507,
+      "sampled_peak_process_tree_rss_bytes": 120991744,
+      "sampled_peak_process_tree_private_bytes": 362627072,
+      "physical_available_before_bytes": 3512401920,
+      "wall_limit_seconds": 120,
+      "exit_code": 0,
+      "point_states": [
+        "accepted",
+        "accepted",
+        "accepted"
+      ],
+      "point_attempt_counts": [
+        1,
+        1,
+        1
+      ],
+      "map_sha256": "0f6107fdbd5dbc1837c06521ad7cb6a86d5fb360ac4ea49ee96f474c5c08e6ac",
+      "accepted_summary_sha256": [
+        "a488faa58cc8b1c93f6d12eb82e0d40258474e18f73c697a3b9937159ac1f4f4",
+        "482dcf59819a04cc02b35ca2cd8da1e2df9c5f586db877a9b75c3fd3b5b3fd17",
+        "27f2b832ffc9a28eec974c86edbee11f4f9ded852e2f842bca6c4176818eb11e"
+      ],
+      "stdout": {
+        "path": "results/runs/frequency_map_acceptance_AP_pnc/resume_AP_pnc.log",
+        "sha256": "53b15a5685c0250f4dfb8bf4811d070aa5f8b75570fbfdfa9aa7185481f798b3",
+        "bytes": 256
+      }
+    },
+    {
+      "phase": "completed_reuse",
+      "elapsed_seconds": 1.8964185999939218,
+      "sampled_peak_process_tree_rss_bytes": 99717120,
+      "sampled_peak_process_tree_private_bytes": 97333248,
+      "physical_available_before_bytes": 3499139072,
+      "wall_limit_seconds": 120,
+      "exit_code": 0,
+      "point_states": [
+        "accepted",
+        "accepted",
+        "accepted"
+      ],
+      "point_attempt_counts": [
+        1,
+        1,
+        1
+      ],
+      "map_sha256": "0f6107fdbd5dbc1837c06521ad7cb6a86d5fb360ac4ea49ee96f474c5c08e6ac",
+      "accepted_summary_sha256": [
+        "a488faa58cc8b1c93f6d12eb82e0d40258474e18f73c697a3b9937159ac1f4f4",
+        "482dcf59819a04cc02b35ca2cd8da1e2df9c5f586db877a9b75c3fd3b5b3fd17",
+        "27f2b832ffc9a28eec974c86edbee11f4f9ded852e2f842bca6c4176818eb11e"
+      ],
+      "stdout": {
+        "path": "results/runs/frequency_map_acceptance_AP_pnc/completed_reuse_AP_pnc.log",
+        "sha256": "c14a2fdfc0c39f0317b00e7b649fbdce32020c5ad34082767576333e5343bf5f",
+        "bytes": 156
+      }
+    }
+  ],
+  "accepted_first_point_bytes_preserved_on_resume": true,
+  "completed_reopen_bytes_preserved": true,
+  "verification_method": "Offline reconstruction from saved K/M, SAFE modes and selected fields. Reconstruct the original equations and incident drives, reproduce their hashes, evaluate original residuals, recover flux from finite-body nodal forces and independently recompute signed-group mass assignment and cumulative gauges for all compact rows. Evaluate native transmission against exp(i k delta_x) at the original physical planes.",
+  "bitwise_replay_environment": "All original equation and drive hashes reproduce with the recorded single-thread settings. The first replay with library-default thread settings matched the first operator hash and differed in the first incident-drive hash.",
+  "verification_elapsed_seconds": 0.08176859997911379,
+  "integrated_windows_suite": {
+    "tests_run": 163,
+    "passed": 162,
+    "skipped": 1,
+    "skip_reason": "Windows account cannot create symbolic links; symlink guard untested.",
+    "elapsed_seconds": 51.564,
+    "log": {
+      "path": "verification/development_tests_AP_pnc.log",
+      "sha256": "545611571ea9e6af70b4d5e9fb58083654758c33f6a0876bbce68c001c82cadf",
+      "bytes": 30032
+    }
+  },
+  "points": [
+    {
+      "frequency_hz": 250000000.0,
+      "accepted_summary": {
+        "path": "results/runs/frequency_map_acceptance_AP_pnc/map/point-001/attempt-uxa8bnnz/straight_scattering_200nm-4e2757f0884f/summary_AP_pnc.json",
+        "sha256": "a488faa58cc8b1c93f6d12eb82e0d40258474e18f73c697a3b9937159ac1f4f4",
+        "bytes": 9413
+      },
+      "full_fields": {
+        "path": "results/runs/frequency_map_acceptance_AP_pnc/map/point-001/attempt-uxa8bnnz/straight_scattering_200nm-4e2757f0884f/selected_fields_AP_pnc.npz",
+        "sha256": "38a6149c7be300c83527946eeaf1f7dda09e1b21fbd6557aa6e56019c40136b8",
+        "bytes": 475438
+      },
+      "full_discrete_SAFE_roots": 210,
+      "left_incident_propagating_roots": [
+        208,
+        204,
+        206,
+        196
+      ],
+      "incident_k_rad_m": [
+        358795.75186295,
+        1168955.976769322,
+        1190811.3572606922,
+        2506116.937012033
+      ],
+      "operator_csc_sha256": "0f316c8dc8c00091321f5c6ab9011f1153ea35e0e3894e4a07006e04179ce871",
+      "rhs_sha256": "d8c044f4229a6c1272485d3abb5b507007896dc2c7598edb5d5591e7c873b005",
+      "original_equation_hashes_reproduced": true,
+      "maximum_original_relative_residual": 3.2084349862109484e-13,
+      "maximum_original_backward_residual": 2.367264842291814e-16,
+      "maximum_SAFE_polynomial_backward_residual": 2.728895732201377e-15,
+      "maximum_relative_axial_force_replay_error": 4.623294266885018e-16,
+      "maximum_reconstructed_amplitude_difference": 0.0,
+      "maximum_nodal_flux_balance_error": 2.864375403532904e-14,
+      "maximum_net_outward_power_ratio": 2.7089441800853826e-14,
+      "maximum_modal_vs_nodal_flux_disagreement": 2.731148640577885e-14,
+      "maximum_reflection": 1.2554665511004744e-06,
+      "maximum_unit_transmission_error": 1.2554665553832223e-06,
+      "tracking_link": "segment_start",
+      "minimum_signed_group_mass_overlap_to_predecessor": null,
+      "native_uniform_complex_transmission_error": 0.005949736179979524,
+      "native_uniform_signed_diagonal_phase_errors_rad": [
+        -3.858719432519242e-08,
+        -0.002770574928886155,
+        -0.00022110101222102565,
+        -0.005949748155043294
+      ],
+      "native_uniform_maximum_diagonal_phase_error_rad": 0.005949748155043294
+    },
+    {
+      "frequency_hz": 300000000.0,
+      "accepted_summary": {
+        "path": "results/runs/frequency_map_acceptance_AP_pnc/map/point-002/attempt-p57qkdl_/straight_scattering_200nm-6f6347542fda/summary_AP_pnc.json",
+        "sha256": "482dcf59819a04cc02b35ca2cd8da1e2df9c5f586db877a9b75c3fd3b5b3fd17",
+        "bytes": 9395
+      },
+      "full_fields": {
+        "path": "results/runs/frequency_map_acceptance_AP_pnc/map/point-002/attempt-p57qkdl_/straight_scattering_200nm-6f6347542fda/selected_fields_AP_pnc.npz",
+        "sha256": "f791db9892c702fdceaca39c11fb67d83bbdca094d5128f5547064c1f8ae8f9f",
+        "bytes": 476032
+      },
+      "full_discrete_SAFE_roots": 210,
+      "left_incident_propagating_roots": [
+        208,
+        206,
+        204,
+        192
+      ],
+      "incident_k_rad_m": [
+        430636.2175783293,
+        1320595.8285887667,
+        1393420.2097940946,
+        2750894.27774209
+      ],
+      "operator_csc_sha256": "7f0abafec8ab59b4ee9fa8e0775e0ed415d35bf45c53d91b03483bbfc78b3a3a",
+      "rhs_sha256": "d930ae94c0358fb9e3263f8602aeef6a2cf5a2277f200e1bdd793bfad304ab47",
+      "original_equation_hashes_reproduced": true,
+      "maximum_original_relative_residual": 2.768284030141877e-13,
+      "maximum_original_backward_residual": 2.0244486910357545e-16,
+      "maximum_SAFE_polynomial_backward_residual": 1.6488223025236414e-15,
+      "maximum_relative_axial_force_replay_error": 4.726665203708239e-16,
+      "maximum_reconstructed_amplitude_difference": 0.0,
+      "maximum_nodal_flux_balance_error": 6.994405055138486e-15,
+      "maximum_net_outward_power_ratio": 7.327471962526035e-15,
+      "maximum_modal_vs_nodal_flux_disagreement": 2.042810365310288e-14,
+      "maximum_reflection": 1.206397744899082e-06,
+      "maximum_unit_transmission_error": 1.2063977469223275e-06,
+      "tracking_link": "matched",
+      "minimum_signed_group_mass_overlap_to_predecessor": 0.9998122518396849,
+      "native_uniform_complex_transmission_error": 0.007659326512308025,
+      "native_uniform_signed_diagonal_phase_errors_rad": [
+        -9.703188303685887e-08,
+        -0.0003128657446748535,
+        -0.004905274961594816,
+        -0.007659351864738475
+      ],
+      "native_uniform_maximum_diagonal_phase_error_rad": 0.007659351864738475
+    },
+    {
+      "frequency_hz": 350000000.0,
+      "accepted_summary": {
+        "path": "results/runs/frequency_map_acceptance_AP_pnc/map/point-003/attempt-u4r940d6/straight_scattering_200nm-349202888026/summary_AP_pnc.json",
+        "sha256": "27f2b832ffc9a28eec974c86edbee11f4f9ded852e2f842bca6c4176818eb11e",
+        "bytes": 9403
+      },
+      "full_fields": {
+        "path": "results/runs/frequency_map_acceptance_AP_pnc/map/point-003/attempt-u4r940d6/straight_scattering_200nm-349202888026/selected_fields_AP_pnc.npz",
+        "sha256": "3c3dbbe4fd5cb0732a3391956de7277612f4543a09128f978467b7b23e9bb348",
+        "bytes": 476116
+      },
+      "full_discrete_SAFE_roots": 210,
+      "left_incident_propagating_roots": [
+        208,
+        206,
+        204,
+        188
+      ],
+      "incident_k_rad_m": [
+        502522.46647618565,
+        1443642.9163744655,
+        1613482.9800102324,
+        2977656.0543762012
+      ],
+      "operator_csc_sha256": "0bea0069ae4ee9cbf536cd93ace531a8de172af37ae72db96edf7f18380d0c5f",
+      "rhs_sha256": "b0a3e7c60290e3b4f76f7907765e80e0305e8e8237890e5dbad1cc05a82fe786",
+      "original_equation_hashes_reproduced": true,
+      "maximum_original_relative_residual": 2.3835094840185185e-13,
+      "maximum_original_backward_residual": 2.907756719073745e-16,
+      "maximum_SAFE_polynomial_backward_residual": 2.0137669107175733e-15,
+      "maximum_relative_axial_force_replay_error": 5.974002161054629e-16,
+      "maximum_reconstructed_amplitude_difference": 0.0,
+      "maximum_nodal_flux_balance_error": 1.6431300764452317e-14,
+      "maximum_net_outward_power_ratio": 1.6209256159527285e-14,
+      "maximum_modal_vs_nodal_flux_disagreement": 1.8207657603852567e-14,
+      "maximum_reflection": 8.854098304586668e-07,
+      "maximum_unit_transmission_error": 8.854098140220756e-07,
+      "tracking_link": "matched",
+      "minimum_signed_group_mass_overlap_to_predecessor": 0.9998650455867801,
+      "native_uniform_complex_transmission_error": 0.009512183405573017,
+      "native_uniform_signed_diagonal_phase_errors_rad": [
+        -2.123723105851001e-07,
+        -0.00042303799374526053,
+        -0.007695553679900051,
+        -0.009512232503087657
+      ],
+      "native_uniform_maximum_diagonal_phase_error_rad": 0.009512232503087657
+    }
+  ],
+  "limits": {
+    "original_relative_residual": 1e-09,
+    "original_backward_residual": 1e-09,
+    "SAFE_backward_residual": 1e-08,
+    "lossless_power_balance": 0.01,
+    "per_link_minimum_mass_overlap": 0.99,
+    "native_uniform_phase_scope": "Finite-mesh propagation diagnostic at the original end planes. Map coefficients receive no propagation phase adjustment.",
+    "spatial_convergence_established": false,
+    "frequency_convergence_established": false,
+    "absence_of_intervening_cutoffs_established": false,
+    "full_device_frequency_solves": 0,
+    "independent_experimental_validation": false
+  }
+}
