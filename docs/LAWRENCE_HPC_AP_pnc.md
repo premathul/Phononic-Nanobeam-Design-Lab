@@ -135,6 +135,23 @@ Pass the exact SHA-256 of each prior receipt. Assembly reuses the accepted mesh 
 
 The completed control used jobs 1335307/1335308/1335309/1335321/1335341. Reuse their saved artifacts under `results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc/`; no job remains active. The five-drive solve took 2005.88 s with 33.712 GiB peak RSS and 34.776 GiB cgroup peak inside 128 GiB. Exact export on stage host node038 took 25.56 s within 16 GiB. The z4/z6 comparison passes power (0.0000647273) but fails complex response (0.0167063); independent residual and flux checks do not establish spatial convergence. [Verified outcomes and identities](../verification/device_thickness_AP_pnc.json)
 
+## Bounded port frequency inventory
+
+`tools/run_lawrence_port_inventory_AP_pnc.py` reuses the exact saved h80 z6 SAFE section and archived 1 GHz modes. The fixed sample list is 0.1, 1, 2.8, 5.2 and 6 GHz. It performs only four new section eigensolves, with no volume mesh, body assembly or factorization. Check the handoff and reuse completed inventory `runs/port-inventory-1335406/` before considering a submission.
+
+```bash
+# Initial bounded inventory; omit this when the accepted result already exists.
+sbatch --parsable scripts/hpc/lawrence_port_inventory_AP_pnc.sbatch PROJECT_ROOT SAFE_DIR
+# Resume untouched pending points or verify a complete inventory, using separate job logs.
+sbatch --parsable scripts/hpc/lawrence_port_inventory_AP_pnc.sbatch PROJECT_ROOT SAFE_DIR EXISTING_INVENTORY_DIR
+```
+
+`SAFE_DIR` is the immutable `runs/thickness-h80-safe-1335308/` archive. The runner pins its receipt and NPZ hashes, numerical source, Python and packages. The batch uses `.venv-lawrence-export`, 4 GiB, two allocated CPUs, one numerical thread and five minutes, with a 270-second worker limit. Admission requires current node/job headroom and output storage; there is no automatic escalation or retry of failed/interrupted points. Resume checks input identities, self-digested scientific receipts and raw arrays, and only attempts untouched pending points.
+
+Each sample retains its original 1950 finite roots, signed energy directions, reconstructed traction, original polynomial backward residual and full directional flux-Gram checks. Limits remain 1e-8 for eigenpair backward/relative traction errors and 1e-7 W for flux errors. JSON/CSV/HTML retain explicit incomplete states and root IDs local to each frequency. The 1 GHz modes reference their original NPZ rather than a copied array. Initial/reuse allocation and time evidence is separated under `runs/port-inventory-job-JOB_ID/`.
+
+Completed job 1335406 took 69.40 s with 486172 KiB peak process RSS. Independent Windows replay passed all five samples; each direction has 4/5/8/12/13 open channels. Reuse job 1335407 took 5.29 s and changed no inventory bytes or modification times. Both jobs exited 0:0. Transfer all retained files with their manifests and verify hashes before independent replay. Sparse fixed-section samples do not establish continuous branches, cutoff locations between points, full-device convergence or a gap. [Inventory evidence](../verification/port_inventory_AP_pnc.json)
+
 ## Open JupyterLab
 
 After the bootstrap succeeds, submit the optional notebook job from the same Lawrence project directory. It requests one CPU and 4 GiB for two hours. Use the node assigned to the running job. The server log is private and contains the token generated for this session.
