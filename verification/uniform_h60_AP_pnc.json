@@ -1,0 +1,559 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "status": "diagnostic_completed",
+  "scope": "Five left-incident 1 GHz drives on a 3 micrometre uniform nominal-Ge guide with a 1000 by 200 nm section. The 60 nm in-plane target extends the matched h100 and h80 controls. The separate 16.65 micrometre patterned device retains its original phase and unresolved spatial convergence.",
+  "physical_configuration": {
+    "author": "Athul Prem",
+    "file_tag": "_AP_pnc",
+    "schema_version": 1,
+    "name": "uniform_3um_layered_h60_ny12_z4",
+    "geometry": {
+      "length_nm": 3000,
+      "width_nm": 1000,
+      "thickness_nm": 200
+    },
+    "mesh": {
+      "kind": "layered",
+      "element_order": 2,
+      "mesh_size_nm": 60,
+      "port_size_nm": 83.33333333333333,
+      "circle_resolution": 32,
+      "thickness_layers": 4
+    },
+    "material": {
+      "name": "nominal_cubic_ge",
+      "C11_Pa": 128500000000.0,
+      "C12_Pa": 48300000000.0,
+      "C44_Pa": 66800000000.0,
+      "density_kg_m3": 5323,
+      "crystal_rotation": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "temperature_policy": "fixed_property_control",
+      "temperature_K": 4
+    },
+    "analysis": {
+      "kind": "scattering",
+      "boundary": "matched_ports",
+      "frequency_GHz": 1,
+      "incident_side": "left"
+    },
+    "resources": {
+      "max_dofs": 109539,
+      "max_port_dofs": 675,
+      "assembly_batch_elements": 2048,
+      "linear_solver": "direct"
+    }
+  },
+  "source_and_environment": {
+    "local_numerical_core_base_git_commit": "d9779355ec4cfe6b48eabfe01334c695d36bc3f9",
+    "linux_numerical_core_source_map_sha256": "b4003df3dda37617a26658100dd562278a9e301ca514928ab815a0ec0438039f",
+    "linux_python": "3.12.12",
+    "linux_platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28",
+    "linux_packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "scikit-fem": "12.0.2",
+      "meshio": "5.3.5",
+      "gmsh": "4.15.2",
+      "matplotlib": "3.11.2",
+      "psutil": "7.2.2"
+    },
+    "preflight_and_solve_numerical_source_hashes_match_local_replay": true,
+    "driver": {
+      "path": "tools/run_lawrence_uniform_h80_AP_pnc.py",
+      "sha256": "f20f11403fa1666a9fe0c5f9893c3fc0a32c83f6338f156f4d97ab12acb78bae",
+      "bytes": 23332
+    },
+    "batch": {
+      "path": "scripts/hpc/lawrence_uniform_h80_AP_pnc.sbatch",
+      "sha256": "93ee8b9f7cf0e8fe937614fc94daceb6f98d64e85487098f5c4cc4ce75f73344",
+      "bytes": 2117
+    },
+    "independent_replay": {
+      "path": "results/runs/full_device_uniform_diagnostic/h60_followup/replay_uniform_AP_pnc.py",
+      "sha256": "5bf273a06665388735e270a80b409581233dd76efe58d84fbca78c045f53588c",
+      "bytes": 21251
+    }
+  },
+  "native_ports": {
+    "section": "12x4",
+    "trace_dofs_per_end": 675,
+    "full_safe_artifact_from_h100_lineage": {
+      "path": "results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/ports_AP_pnc.npz",
+      "sha256": "18c0ad4c8b28e597503a28bd5157c867bb09744c94e1eb1aff23f024cc879c8b",
+      "bytes": 29223616
+    },
+    "incident_port_roots": [
+      1348,
+      1311,
+      1292,
+      1284,
+      1274
+    ],
+    "exact_saved_wavenumbers_displacements_and_axial_forces": true,
+    "safe_eigensolve_performed": false
+  },
+  "preflight": {
+    "slurm_job_id": "1335398",
+    "node": "node003.lawrence",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "slurm_elapsed": "00:00:03",
+    "slurm_requested_memory": "4G",
+    "allocated_cpus": 2,
+    "numerical_thread_environment": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    },
+    "gnu_wall_seconds": 2.68,
+    "gnu_maximum_rss_kib": 197556,
+    "verified_transfer_artifacts": 6,
+    "verified_transfer_bytes": 206125,
+    "job_allocation": {
+      "path": "results/runs/full_device_uniform_diagnostic/h60_followup/uniform-h60-preflight-1335398/allocation_AP_pnc.txt",
+      "sha256": "117792977e8fdda132ed5ac5389304a4f0a227453caad8bbf538a6f545e90e70",
+      "bytes": 3813
+    },
+    "slurm_accounting": {
+      "path": "results/runs/full_device_uniform_diagnostic/h60_followup/uniform-h60-preflight-1335398/slurm_accounting_AP_pnc.txt",
+      "sha256": "0e0d06b88f82867476ae3ec2c70f83c6d871413f4f725bf17bd61ddc4781195b",
+      "bytes": 182
+    },
+    "gnu_time": {
+      "path": "results/runs/full_device_uniform_diagnostic/h60_followup/uniform-h60-preflight-1335398/time_AP_pnc.txt",
+      "sha256": "a39a81a3489cc8c5b7e875e5f472efce63dfcfca50aaed8b8f9415101856b3d3",
+      "bytes": 1376
+    },
+    "transfer_manifest": {
+      "path": "results/runs/full_device_uniform_diagnostic/h60_followup/uniform-h60-preflight-1335398/transfer_AP_pnc.sha256",
+      "sha256": "562f3718340477fd700a2343c69c34792f6ba50f3b2a6a3bd6333e4186975b03",
+      "bytes": 680
+    },
+    "receipt": {
+      "path": "results/runs/full_device_uniform_diagnostic/h60_followup/uniform-h60-preflight-1335398/uniform_h60_AP_pnc.json",
+      "bytes": 11249,
+      "sha256": "881c25c1278a555078c4c27110dc273b382d534f33728cc241e84fe6d798a751"
+    },
+    "mesh": {
+      "path": "results/runs/full_device_uniform_diagnostic/h60_followup/uniform-h60-preflight-1335398/_meshes/17fc40cc9a6b97d0dce27821eb00969e2e09ecb601e577a907532b744e957407/mesh_AP_pnc.npz",
+      "bytes": 187335,
+      "sha256": "fc1adfff84282958cfe2fac7f7d3cc08a8a675f34a8445f49cef3805560a73fc"
+    },
+    "mesh_manifest": {
+      "path": "results/runs/full_device_uniform_diagnostic/h60_followup/uniform-h60-preflight-1335398/_meshes/17fc40cc9a6b97d0dce27821eb00969e2e09ecb601e577a907532b744e957407/summary_AP_pnc.json",
+      "bytes": 2170,
+      "sha256": "ddcaa57b3d7868d8f0ff02ae98a3b717786f01364e70e5f66c974765b1983e5a"
+    },
+    "body_dofs": 109539,
+    "mesh_vertices": 5230,
+    "mesh_tetrahedra": 23592,
+    "trace_dofs_per_end": 675,
+    "exact_tagged_facets_per_end": {
+      "xleft": 96,
+      "xright": 96
+    },
+    "exact_p2_trace_map_sha256": "1af486296904ada0c9649a69c31dbd0582192e2d19f5a05390dd4a6e550f9144",
+    "end_planes_m": [
+      0.0,
+      3e-06
+    ],
+    "exact_thickness_planes_m": [
+      -1.0000000000000001e-07,
+      -5.0000000000000004e-08,
+      0.0,
+      5.000000000000001e-08,
+      1.0000000000000001e-07
+    ],
+    "volume_m3": 6.000000000000007e-19,
+    "standard_reporting_cap_dofs": 60000,
+    "independent_replay_execution": {
+      "system": "Windows-11-10.0.26200-SP0",
+      "python": "3.12.14",
+      "elapsed_seconds": 0.5,
+      "peak_working_set_bytes": 107417600,
+      "peak_private_commit_bytes": 95952896
+    }
+  },
+  "direct_solve": {
+    "slurm_job_id": "1335400",
+    "node": "node030.lawrence",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "slurm_elapsed": "00:04:43",
+    "slurm_requested_memory": "32G",
+    "allocated_cpus": 2,
+    "numerical_thread_environment": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    },
+    "gnu_wall_seconds": 282.32,
+    "gnu_maximum_rss_kib": 5476168,
+    "verified_transfer_artifacts": 22,
+    "verified_transfer_bytes": 366461569,
+    "job_allocation": {
+      "path": "results/runs/full_device_uniform_diagnostic/h60_followup/uniform-h60-solve-direct-1335400/allocation_AP_pnc.txt",
+      "sha256": "9119fb4f48519cefcb866a5616b67774e39fa55ba6db94c874c2b43a128b1132",
+      "bytes": 3925
+    },
+    "slurm_accounting": {
+      "path": "results/runs/full_device_uniform_diagnostic/h60_followup/uniform-h60-solve-direct-1335400/slurm_accounting_AP_pnc.txt",
+      "sha256": "fb9399e91c7d8cfff774065c09910d15a49c14dd8e971df9fed7c16bfba2c7f8",
+      "bytes": 186
+    },
+    "gnu_time": {
+      "path": "results/runs/full_device_uniform_diagnostic/h60_followup/uniform-h60-solve-direct-1335400/time_AP_pnc.txt",
+      "sha256": "3e15b3e317633be5513b9c99151fef7055242f7d62e5e33d5e496fab10100695",
+      "bytes": 1525
+    },
+    "transfer_manifest": {
+      "path": "results/runs/full_device_uniform_diagnostic/h60_followup/uniform-h60-solve-direct-1335400/transfer_AP_pnc.sha256",
+      "sha256": "0d652a41c964e589c21b9252d83d0d55ff53d78d9e2e9ed506e5490815219c1a",
+      "bytes": 2349
+    },
+    "physical_drive_count_accepted": 5,
+    "original_relative_target": 1e-10,
+    "relative_l2_residual_gate": 1e-09,
+    "normwise_backward_residual_gate": 1e-09,
+    "linux_maximum_relative_l2_residual": 1.0712302636930944e-12,
+    "linux_maximum_normwise_backward_residual": 7.830938825546748e-16,
+    "linux_maximum_nodal_force_flux_imbalance": 2.1094237467877974e-15,
+    "method": "lawrence_uniform_superlu_direct",
+    "working_dtype": "complex128",
+    "operator_nonzeros": 9298699,
+    "operator_csc_bytes": 186412140,
+    "stage_array_bytes": 331704236,
+    "operator_csc_sha256": "e4f5b4d639314ae17188eb4e8e98693388979d3952429674a069ecf64fb9a4c6",
+    "rhs_array_sha256": "11e15197b95494cf060b6e4482330688f8d282a0fcf2ad3a4c24a9312b58fb3f",
+    "stiffness_array_sha256": "5d8a559998e012253acf86ab7af2a018c249e99b9a898d21613dbecbea2464fa",
+    "mass_array_sha256": "568b996cfe76ffd6c279e4bfe885ec5018527a554765b258c2384bc23321ff86",
+    "factor": {
+      "permc_spec": "COLAMD",
+      "elapsed_seconds": 241.53225197270513,
+      "nonzeros": 257324244
+    },
+    "factor_admission": {
+      "scope": "The staged system was measured before factorization. GNU peak RSS covers the whole job process.",
+      "admitted": true,
+      "slurm_node_quota_bytes": 34359738368,
+      "estimated_incremental_bytes": 12068133992,
+      "job_headroom_required_bytes": 20658068584,
+      "node_available_required_bytes": 12487564392,
+      "job_headroom_bytes": 33265352704,
+      "node_available_bytes": 89808220160,
+      "worker_rss_bytes": 671195136
+    },
+    "independent_windows_replay": {
+      "method": "Match sparse component hashes and verify exact accepted vectors against public fields. Recalculate A x minus b and matrix infinity norm. Reconstruct force as K x minus omega squared M x at the original planes. Replay both outgoing traction blocks, the incident traction RHS and modal displacement projections using the complete archived SAFE basis.",
+      "execution": {
+        "system": "Windows-11-10.0.26200-SP0",
+        "python": "3.12.14",
+        "elapsed_seconds": 1.625,
+        "peak_working_set_bytes": 394596352,
+        "peak_private_commit_bytes": 409128960
+      },
+      "receipt": {
+        "path": "results/runs/full_device_uniform_diagnostic/h60_followup/uniform-h60-solve-direct-1335400/uniform_h60_AP_pnc.json",
+        "bytes": 8742,
+        "sha256": "833b2e5b2ddda17b4b3348b65aac3f08c884fbab9519d156b9de2b0f7067e7aa"
+      },
+      "direct_channels": {
+        "path": "results/runs/full_device_uniform_diagnostic/h60_followup/uniform-h60-solve-direct-1335400/direct_channels_AP_pnc.json",
+        "bytes": 5428,
+        "sha256": "ead5fa8fed8aac4da251c17fcf213f8db1f974c8d6b54943b8e93313cd425bc7"
+      },
+      "public_summary": {
+        "path": "results/runs/full_device_uniform_diagnostic/h60_followup/uniform-h60-solve-direct-1335400/uniform_3um_layered_h60_ny12_z4-8d6bdd0e38c9/summary_AP_pnc.json",
+        "bytes": 21680,
+        "sha256": "5b9ede139207bf5ebb38e64074b3c2f8702ed4655edede73c56490bda9923d6a"
+      },
+      "public_selected_fields": {
+        "path": "results/runs/full_device_uniform_diagnostic/h60_followup/uniform-h60-solve-direct-1335400/uniform_3um_layered_h60_ny12_z4-8d6bdd0e38c9/selected_fields_AP_pnc.npz",
+        "bytes": 23191254,
+        "sha256": "0d90876448d743e64000e9a9483a20cc93f269db25d470fd96ec2b70fce1c526"
+      },
+      "array_files": {
+        "K": {
+          "path": "results/runs/full_device_uniform_diagnostic/h60_followup/uniform-h60-solve-direct-1335400/K_AP_pnc.npz",
+          "sha256": "c7e13c79d5d1facc13282f86579efd460035b4a040d24792328193de168498e3",
+          "bytes": 101477533
+        },
+        "M": {
+          "path": "results/runs/full_device_uniform_diagnostic/h60_followup/uniform-h60-solve-direct-1335400/M_AP_pnc.npz",
+          "sha256": "5acbb1338e723b805f267c8642db7839c628debd6fb8d3b541e1377af98572dc",
+          "bytes": 35053957
+        },
+        "A": {
+          "path": "results/runs/full_device_uniform_diagnostic/h60_followup/uniform-h60-solve-direct-1335400/A_AP_pnc.npz",
+          "sha256": "366ce7b6b7d66f1e3048657dd5ddf8c3043e9f5934b34ced3c4c88f43278ed44",
+          "bytes": 186413397
+        },
+        "rhs": {
+          "path": "results/runs/full_device_uniform_diagnostic/h60_followup/uniform-h60-solve-direct-1335400/rhs_AP_pnc.npy",
+          "sha256": "a98cd42fa0b577e9dcd189fd05d03adc27e86641427341083bd0a8ef65c605c1",
+          "bytes": 8763248
+        }
+      },
+      "admission_bytes_available": 3182501888,
+      "admission_bytes_required": 1200287182,
+      "maximum_relative_l2_residual": 1.07123026369309e-12,
+      "maximum_normwise_backward_residual": 7.830938825546744e-16,
+      "matrix_infinity_norm": 144757.846178536,
+      "maximum_rhs_relative_l2_difference": 6.218365669359709e-15,
+      "maximum_relative_outgoing_traction_difference_by_end": [
+        1.1331258320270024e-12,
+        1.1340615527602753e-12
+      ],
+      "maximum_relative_modal_displacement_reconstruction_error": {
+        "reflection": 2.6946480144471015e-14,
+        "transmission": 1.068071038431295e-15
+      },
+      "maximum_nodal_force_flux_imbalance": 2.6645352591003757e-15,
+      "maximum_net_outward_power_ratio": 3.108624468950439e-15,
+      "maximum_reflection_flux_difference_from_linux": 8.127152915910066e-19,
+      "maximum_transmission_flux_difference_from_linux": 4.218847493575595e-15,
+      "channels": [
+        {
+          "incident_port_root": 1348,
+          "relative_l2_residual": 4.327433948636088e-13,
+          "normwise_backward_residual": 6.002469266805981e-16,
+          "reflection_nodal_force_power": 1.5982751365795672e-13,
+          "transmission_nodal_force_power": 0.9999999999998407,
+          "accepted_vector_sha256": "27ae9be5408622112f0141361f878e91b1acd443073ca20e2057fc2bba19dfe2"
+        },
+        {
+          "incident_port_root": 1311,
+          "relative_l2_residual": 1.07123026369309e-12,
+          "normwise_backward_residual": 5.013857382110854e-16,
+          "reflection_nodal_force_power": 9.163363900990692e-09,
+          "transmission_nodal_force_power": 0.9999999908366335,
+          "accepted_vector_sha256": "4553714d326ed41e5058d04af83e4adbabb1ecf004275b23b3b39fb56ccd8793"
+        },
+        {
+          "incident_port_root": 1292,
+          "relative_l2_residual": 4.619707808773224e-13,
+          "normwise_backward_residual": 6.198146558530872e-16,
+          "reflection_nodal_force_power": 4.8971748002103436e-12,
+          "transmission_nodal_force_power": 0.9999999999951014,
+          "accepted_vector_sha256": "c99734b7e2b91d5fc353ec025f4479bba7460c544abc9496a28c576605e86afe"
+        },
+        {
+          "incident_port_root": 1284,
+          "relative_l2_residual": 4.729992886271778e-13,
+          "normwise_backward_residual": 6.97086383917449e-16,
+          "reflection_nodal_force_power": 1.305782891015878e-09,
+          "transmission_nodal_force_power": 0.999999998694217,
+          "accepted_vector_sha256": "622ba06c2da23c87e7473c41051157bc7893f7609a018e9c8d306720517af785"
+        },
+        {
+          "incident_port_root": 1274,
+          "relative_l2_residual": 3.983427410611436e-13,
+          "normwise_backward_residual": 7.830938825546744e-16,
+          "reflection_nodal_force_power": 7.576552116511556e-09,
+          "transmission_nodal_force_power": 0.9999999924234461,
+          "accepted_vector_sha256": "1366f37f5697ed8e9740934b0d0e2af52eee33efb1c3882cd0cd5ab4fe83f103"
+        }
+      ]
+    }
+  },
+  "uniform_h80_h60_pair": {
+    "summary": {
+      "path": "results/runs/full_device_uniform_diagnostic/h60_followup/comparisons/scattering-7fbc1586cd8ebba3/summary_AP_pnc.json",
+      "sha256": "99fdd30586ffa06bb2f3b27d4c332543b351721ef3ed9f87f0ba3604abba4402",
+      "bytes": 30242
+    },
+    "previous_h100_h80_evidence": {
+      "path": "verification/uniform_h80_AP_pnc.json",
+      "sha256": "5e6e2059f3acbd3d0e3b2a3071175349d54fd48dd5042730e4bf52c85cc8c27d",
+      "bytes": 22278
+    },
+    "minimum_signed_channel_mass_overlap": 0.9999999999999998,
+    "input_power_checks_passed": true,
+    "power_change_limit": 0.01,
+    "complex_change_limit": 0.01,
+    "maximum_power_change": 3.8753812381386865e-09,
+    "maximum_complex_change": 0.0028163511738657577,
+    "power_passed": true,
+    "complex_passed": true,
+    "mesh_pair_passed": true,
+    "maximum_same_channel_transmission_phase_change_rad": 0.0028163521252920517
+  },
+  "common_safe_reference": {
+    "summary": {
+      "path": "results/runs/full_device_uniform_diagnostic/h60_followup/common_reference/uniform-reference-58020167a2953c7d/summary_AP_pnc.json",
+      "sha256": "79888f763b0c4b9e674587d73bb37cc96dc2debf0163671116a1c9644576b782",
+      "bytes": 27726
+    },
+    "reference_file": {
+      "path": "verification/full_device_port_resolution_AP_pnc.json",
+      "sha256": "b7e91595acd0f2cfffa04af1468e6a0fa4a197ea610ee401aa114d2b2a3cfbbd",
+      "bytes": 2345862
+    },
+    "case": "20x6",
+    "qualification": {
+      "status": "passed",
+      "length_m": 3e-06,
+      "phase_indicator_limit_rad": 0.01,
+      "pairs": {
+        "width": {
+          "pair": "16x6_to_20x6",
+          "coarser_subdivisions": 16,
+          "phase_indicators_rad": {
+            "positive": 0.001242315138172824,
+            "negative": 0.001242315138172824
+          },
+          "maximum_phase_indicator_rad": 0.001242315138172824
+        },
+        "thickness": {
+          "pair": "20x4_to_20x6",
+          "coarser_subdivisions": 4,
+          "phase_indicators_rad": {
+            "positive": 0.00130734220552817,
+            "negative": 0.00130734220552817
+          },
+          "maximum_phase_indicator_rad": 0.00130734220552817
+        }
+      },
+      "scope": "Successive SAFE section differences at this propagation distance. No continuum error bound."
+    },
+    "minimum_signed_channel_mass_overlap": 0.9999998954918292,
+    "power_error_limit": 0.01,
+    "complex_error_limit": 0.01,
+    "maximum_power_error": 9.16341602597015e-09,
+    "maximum_complex_error": 0.0021116414219763224,
+    "power_passed": true,
+    "complex_passed": true,
+    "uniform_response_passed": true,
+    "maximum_same_channel_transmission_phase_error_rad": 0.00211164181531747,
+    "maximum_h100_h80_h60_common_complex_errors": [
+      0.008634866150808983,
+      0.004567875397362948,
+      0.0021116414219763224
+    ],
+    "maximum_h100_h80_h60_native_transmission_complex_errors": [
+      0.006355099698215295,
+      0.0031366794942976517,
+      0.005416753204104137
+    ],
+    "maximum_native_to_common_propagation_phase_drift_rad": 0.0071682871071717235
+  },
+  "signed_original_plane_phase_trends": {
+    "patterned_evidence": {
+      "path": "verification/device_thickness_AP_pnc.json",
+      "sha256": "81f1e195956c1986d067fc397ea1836c284d9e645073e032d323772918532f05",
+      "bytes": 26150
+    },
+    "uniform_end_planes_m": [
+      0.0,
+      3e-06
+    ],
+    "patterned_end_planes_m": [
+      0.0,
+      1.665e-05
+    ],
+    "method": "Use the principal angle of the matched same-channel transmission ratios at each guide's physical planes.",
+    "phase_adjustment_applied_to_patterned_device": false,
+    "channels": [
+      {
+        "native_left_incident_root": 1348,
+        "common_safe_root": 2992,
+        "uniform_h100_native_phase_error_rad": -8.323407379490499e-07,
+        "uniform_h80_native_phase_error_rad": -3.7797984642770746e-07,
+        "uniform_h100_common_phase_error_rad": -9.583342717736252e-07,
+        "uniform_h80_common_phase_error_rad": -5.039733802785478e-07,
+        "uniform_h100_to_h80_phase_change_rad": 4.543608915142228e-07,
+        "patterned_h100_to_h80_phase_change_rad": 0.0054150287511640395,
+        "uniform_h80_to_h60_phase_change_rad": 3.2038910403610637e-07,
+        "uniform_h60_common_phase_error_rad": -1.835842762541477e-07,
+        "patterned_h80_to_h60_phase_change_rad": 0.003890704740181008
+      },
+      {
+        "native_left_incident_root": 1311,
+        "common_safe_root": 2975,
+        "uniform_h100_native_phase_error_rad": -0.0011393492137663198,
+        "uniform_h80_native_phase_error_rad": 0.0026004077262884585,
+        "uniform_h100_common_phase_error_rad": -0.00830763632093818,
+        "uniform_h80_common_phase_error_rad": -0.004567879380883434,
+        "uniform_h100_to_h80_phase_change_rad": 0.003739756940054762,
+        "patterned_h100_to_h80_phase_change_rad": 0.03995716586262313,
+        "uniform_h80_to_h60_phase_change_rad": 0.0028163521252920517,
+        "uniform_h60_common_phase_error_rad": -0.0017515272555913856,
+        "patterned_h80_to_h60_phase_change_rad": 0.02688664932525669
+      },
+      {
+        "native_left_incident_root": 1292,
+        "common_safe_root": 2960,
+        "uniform_h100_native_phase_error_rad": -8.11047705718647e-05,
+        "uniform_h80_native_phase_error_rad": -3.4106615378678375e-05,
+        "uniform_h100_common_phase_error_rad": -9.31520539027437e-05,
+        "uniform_h80_common_phase_error_rad": -4.6153898709538656e-05,
+        "uniform_h100_to_h80_phase_change_rad": 4.6998155193230865e-05,
+        "patterned_h100_to_h80_phase_change_rad": 0.020768159482261312,
+        "uniform_h80_to_h60_phase_change_rad": 3.089520832277399e-05,
+        "uniform_h60_common_phase_error_rad": -1.5258690386707904e-05,
+        "patterned_h80_to_h60_phase_change_rad": 0.014417530066472747
+      },
+      {
+        "native_left_incident_root": 1284,
+        "common_safe_root": 2949,
+        "uniform_h100_native_phase_error_rad": -0.005063891817386107,
+        "uniform_h80_native_phase_error_rad": -0.0009715986120011328,
+        "uniform_h100_common_phase_error_rad": -0.00863489310738797,
+        "uniform_h80_common_phase_error_rad": -0.004542599902002982,
+        "uniform_h100_to_h80_phase_change_rad": 0.004092293205384948,
+        "patterned_h100_to_h80_phase_change_rad": 0.034447140882000946,
+        "uniform_h80_to_h60_phase_change_rad": 0.0024309580866855164,
+        "uniform_h60_common_phase_error_rad": -0.00211164181531747,
+        "patterned_h80_to_h60_phase_change_rad": 0.02307710545775567
+      },
+      {
+        "native_left_incident_root": 1274,
+        "common_safe_root": 2931,
+        "uniform_h100_native_phase_error_rad": -0.006355110469526709,
+        "uniform_h80_native_phase_error_rad": -0.003136680785159312,
+        "uniform_h100_common_phase_error_rad": -0.007082933656060233,
+        "uniform_h80_common_phase_error_rad": -0.00386450397169284,
+        "uniform_h100_to_h80_phase_change_rad": 0.0032184296843673975,
+        "patterned_h100_to_h80_phase_change_rad": 0.02606545652008876,
+        "uniform_h80_to_h60_phase_change_rad": 0.0018935717230717168,
+        "uniform_h60_common_phase_error_rad": -0.0019709322486211253,
+        "patterned_h80_to_h60_phase_change_rad": 0.016878485987459235
+      }
+    ]
+  },
+  "integrated_windows_tests": {
+    "total": 172,
+    "passed": 171,
+    "skipped": 1,
+    "skip_reason": "Windows symbolic-link creation permission",
+    "elapsed_seconds": 51.07,
+    "log": {
+      "path": "verification/development_tests_AP_pnc.log",
+      "sha256": "5559f20ed9a5dc978c1d0d40ed7dfe2010eb926e97c49656f1bf25e7aa844637",
+      "bytes": 31813
+    }
+  },
+  "interpretation": "The h80/h60 3 micrometre uniform pair passes both 0.01 change gates. All five positive signed increments decrease from the prior h100/h80 uniform pair and all five same-channel phase discrepancies decrease against the qualified 20-by-6 finite SAFE reference. The h60 maximum transmission error against the coarser native SAFE section increases from h80, as the fixed discrete section itself has a different propagation phase. These finite-guide comparisons quantify uniform propagation and trace-transition sensitivity. The patterned-device h80/h60 0.026866990816 complex change still fails 0.01, with both lead interiors and patterned region changed by global refinement. Original-plane patterned phases remain unadjusted. Full-device spatial and frequency convergence remain unresolved."
+}

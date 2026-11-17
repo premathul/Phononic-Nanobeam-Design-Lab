@@ -46,6 +46,8 @@ VERIFIED_LGMRES_SOURCES = {
 }
 LAWRENCE_UNIFORM_DIRECT = "lawrence_uniform_superlu_direct"
 LAWRENCE_UNIFORM_DIRECT_DRIVER_SHA256 = "1944ddfeb5c5ace7d2842086996aab658ce999803ab225ce61e4a44078db3013"
+LAWRENCE_UNIFORM_REFINEMENT_DRIVER_SHA256 = "f20f11403fa1666a9fe0c5f9893c3fc0a32c83f6338f156f4d97ab12acb78bae"
+LAWRENCE_UNIFORM_PORTS_SHA256 = "18c0ad4c8b28e597503a28bd5157c867bb09744c94e1eb1aff23f024cc879c8b"
 LAWRENCE_DEVICE_DIRECT = "lawrence_device_superlu_direct"
 LAWRENCE_DEVICE_DIRECT_DRIVER_SHA256 = "32efc149510d22744a0478ff9c171e770ba4cf9bf535b2ca5f2ceeb15c529730"
 LAWRENCE_THICKNESS_DIRECT = "lawrence_device_thickness_superlu_direct"
@@ -199,6 +201,27 @@ def is_sha256(value) -> bool:
     return isinstance(value, str) and len(value) == 64 and all(char in "0123456789abcdef" for char in value)
 
 
+def check_fixed_uniform_control(summary: dict, provenance: dict, driver: dict) -> None:
+    config = summary["configuration"]
+    mesh = config["mesh"]
+    require(config.get("geometry") == {"length_nm": 3000, "width_nm": 1000, "thickness_nm": 200}
+            and summary.get("frequency_hz") == 1e9 and summary.get("incident_side") == "left"
+            and mesh.get("mesh_size_nm") in (60, 80) and mesh.get("element_order") == 2
+            and mesh.get("thickness_layers") == 4 and mesh.get("port_size_nm") == 1000 / 12
+            and summary.get("port_dofs") == 675,
+            "The reviewed uniform-control driver requires the 3 micrometre h60 or h80 P2 guide at 1 GHz "
+            "with four thickness layers and the original 675-DOF ports.")
+    ports = provenance.get("reused_safe_artifact")
+    preflight = provenance.get("preflight_receipt")
+    require(provenance.get("end_planes_m") == [0.0, 3e-6]
+            and isinstance(ports, dict) and ports.get("sha256") == LAWRENCE_UNIFORM_PORTS_SHA256
+            and isinstance(preflight, dict) and is_sha256(preflight.get("sha256")),
+            "The reviewed uniform control requires the original end planes, archived SAFE modes and a linked mesh preflight.")
+    if mesh["mesh_size_nm"] == 60:
+        require(provenance.get("preflight_driver") == driver,
+                "The h60 uniform control requires the same reviewed driver for preflight and solve.")
+
+
 def checked_lawrence_direct_accuracy(summary: dict) -> dict | None:
     report = summary.get("linear_solver") or {}
     provenance = summary.get("checkpointed_scattering") or {}
@@ -217,6 +240,10 @@ def checked_lawrence_direct_accuracy(summary: dict) -> dict | None:
     if not device:
         scope, hole_count = "uniform", 0
         reviewed_source = LAWRENCE_UNIFORM_DIRECT_DRIVER_SHA256
+        driver = linux.get("driver") if isinstance(linux, dict) else None
+        if isinstance(driver, dict) and driver.get("sha256") == LAWRENCE_UNIFORM_REFINEMENT_DRIVER_SHA256:
+            reviewed_source = LAWRENCE_UNIFORM_REFINEMENT_DRIVER_SHA256
+            check_fixed_uniform_control(summary, provenance, driver)
         relative_limit = 1e-9
     else:
         scope, hole_count = ("thickness" if new_safe else "device"), 26

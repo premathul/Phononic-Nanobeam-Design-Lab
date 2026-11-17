@@ -80,6 +80,27 @@ $h80 = 'DOWNLOADED_H80_PUBLIC_RUN_DIRECTORY'
 .venv/Scripts/python.exe -B tools/compare_uniform_reference_AP_pnc.py --run $h80 --reference verification/full_device_port_resolution_AP_pnc.json --reference-case 20x6
 ```
 
+## Run the matched h60 uniform-guide control
+
+The same uniform runner supports the bounded h60 extension with `--h60` before the project path. It preserves the exact archived 675-DOF SAFE basis, four thickness layers and the 3 micrometre end planes. Consult the handoff first and reuse completed jobs. A new h60 preflight writes `uniform_h60_AP_pnc.json` under `runs/uniform-h60-preflight-JOB_ID/`; the measured `case_max_dofs` is required for a solve. The h60 path only supports direct solving.
+
+```bash
+sbatch --parsable --job-name=ap-pnc-uniform-h60 --output="$PWD/lawrence-uniform-h60-%j.out" \
+    --partition=short --mem=4G --time=00:03:00 scripts/hpc/lawrence_uniform_h80_AP_pnc.sbatch \
+    --h60 "$PWD" preflight "$PWD/inputs/uniform_h100_AP_pnc" \
+    "$PWD/results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/ports_AP_pnc.npz"
+```
+
+```bash
+sbatch --parsable --job-name=ap-pnc-uniform-h60 --output="$PWD/lawrence-uniform-h60-%j.out" \
+    --partition=nodes --mem=32G --time=00:10:00 scripts/hpc/lawrence_uniform_h80_AP_pnc.sbatch \
+    --h60 "$PWD" solve-direct "$PWD/inputs/uniform_h100_AP_pnc" \
+    "$PWD/results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/ports_AP_pnc.npz" \
+    "$PWD/runs/uniform-h60-preflight-PREFLIGHT_JOB_ID" MEASURED_DOFS
+```
+
+The one-thread solve stages exact K/M/A/RHS with hashes before applying the existing direct-factor memory admission, then saves each accepted vector and the public output. Original relative and backward residual limits remain 1e-9; the target remains 1e-10. The 570-second worker limit is inside the ten-minute allocation. A failure retains the staged equations and diagnostics; it does not request a larger allocation or retry automatically. Retrieve and verify the outputs for independent equation and nodal-force replay, then compare against the saved h80 uniform result and the finite 20-by-6 SAFE reference. This finite uniform control does not establish full-device convergence or supply a phase correction for the patterned device.
+
 ## Run the h60 full-device control
 
 Check the handoff for job ownership, approved receipt hashes, and current resource admission. Reuse completed phases and accepted drives. Both drivers use `.venv-lawrence-export` with one numerical thread. [Current handoff](AI_HANDOFF_AP_pnc.md)

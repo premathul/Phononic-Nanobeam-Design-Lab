@@ -175,22 +175,28 @@ class ScatteringComparisonTests(unittest.TestCase):
             compare_runs(fields.parent, bad_fields.parent, self.output / "rejected-precision")
 
     def test_lawrence_uniform_direct_compatibility_checks_provenance_and_original_residuals(self):
-        self.check_lawrence_direct_compatibility(LAWRENCE_UNIFORM_DIRECT, "run_lawrence_uniform_h80_AP_pnc.py")
+        evidence = json.loads((ROOT / "verification/uniform_h80_AP_pnc.json").read_bytes())
+        self.check_lawrence_direct_compatibility(LAWRENCE_UNIFORM_DIRECT, evidence["solve"]["driver_sha256"])
+
+    def test_lawrence_h60_uniform_refinement_retains_fixed_ports_and_original_planes(self):
+        driver = file_sha(ROOT / "tools/run_lawrence_uniform_h80_AP_pnc.py")
+        self.check_lawrence_direct_compatibility(LAWRENCE_UNIFORM_DIRECT, driver, uniform_refinement=True)
 
     def test_lawrence_device_direct_compatibility_with_saved_windows_assembly(self):
-        self.check_lawrence_direct_compatibility(LAWRENCE_DEVICE_DIRECT, "solve_lawrence_device_refinement_AP_pnc.py")
+        driver = file_sha(ROOT / "tools/solve_lawrence_device_refinement_AP_pnc.py")
+        self.check_lawrence_direct_compatibility(LAWRENCE_DEVICE_DIRECT, driver)
 
     def test_lawrence_thickness_direct_compatibility_with_new_safe_basis(self):
-        self.check_lawrence_direct_compatibility(LAWRENCE_THICKNESS_DIRECT, "solve_lawrence_thickness_AP_pnc.py")
+        driver = file_sha(ROOT / "tools/solve_lawrence_thickness_AP_pnc.py")
+        self.check_lawrence_direct_compatibility(LAWRENCE_THICKNESS_DIRECT, driver)
 
-    def check_lawrence_direct_compatibility(self, method, driver_file):
+    def check_lawrence_direct_compatibility(self, method, driver, *, uniform_refinement=False):
         reference, physical, _ = read_run(self.reference)
         direct, other, _ = read_run(self.candidate)
         device = method != LAWRENCE_UNIFORM_DIRECT
         new_safe = method == LAWRENCE_THICKNESS_DIRECT
         scope = "thickness" if new_safe else "device" if device else "uniform"
         source = "459589f4e5de39c888966305e28dbd2b16f2947ec427ae9c131c69ae47c609df"
-        driver = file_sha(ROOT / "tools" / driver_file)
         helpers = file_sha(ROOT / "tools/lawrence_solver_AP_pnc.py")
         roots = [1348, 1311, 1292, 1284, 1274]
         direct_roots = [1940, 1877, 1867, 1855, 1837] if new_safe else roots
@@ -251,6 +257,26 @@ class ScatteringComparisonTests(unittest.TestCase):
             provenance.update(linux_safe={"implementation": dict(direct["implementation"], platform="Linux-safe-test"),
                                           "driver": {"sha256": safe_driver}, "slurm_job_id": "12347"},
                               safe_receipt={"sha256": "2" * 64}, safe_modes={"sha256": "3" * 64})
+        if uniform_refinement:
+            mesh = direct["configuration"]["mesh"]
+            mesh.update(mesh_size_nm=60, element_order=2, thickness_layers=4, port_size_nm=1000 / 12)
+            dimensions = {"length_nm": 3000, "width_nm": 1000, "thickness_nm": 200}
+            direct["configuration"]["geometry"] = dimensions
+            direct.update(frequency_hz=1e9, incident_side="left", port_dofs=675)
+            physical.update(dimensions_nm=dimensions, frequency_hz=1e9)
+            other.update(dimensions_nm=dimensions, frequency_hz=1e9)
+            provenance = direct["checkpointed_scattering"]
+            evidence = json.loads((ROOT / "verification/uniform_h80_AP_pnc.json").read_bytes())
+            provenance.update(end_planes_m=[0.0, 3e-6], preflight_receipt={"sha256": "1" * 64},
+                              preflight_driver={"sha256": driver},
+                              reused_safe_artifact=evidence["native_ports"]["staged_artifact"])
+            archived = deepcopy(direct)
+            archived["configuration"]["mesh"]["mesh_size_nm"] = 80
+            archived_driver = evidence["solve"]["driver_sha256"]
+            archived["checkpointed_scattering"]["linux_assembly_and_solve"]["driver"]["sha256"] = archived_driver
+            _, pair = compatible_inputs(archived, direct, other, other)
+            self.assertEqual(pair["checks"]["reference"]["source_sha256"], archived_driver)
+            self.assertEqual(pair["checks"]["candidate"]["source_sha256"], driver)
         inputs, compatible = compatible_inputs(reference, direct, physical, other)
         self.assertEqual(compatible["checks"]["candidate"], {
             "method": method, "slurm_job_id": "12345", "source_sha256": driver,
@@ -292,6 +318,15 @@ class ScatteringComparisonTests(unittest.TestCase):
                 ((*provenance, "safe_eigensolve_performed"), False, "mesh and SAFE section"),
                 ((*provenance, "safe_modes"), {}, "linked phase receipts"),
                 ((*provenance, "linux_safe", "driver", "sha256"), driver, "reviewed driver"),
+            )
+        if uniform_refinement:
+            cases += (
+                (("configuration", "mesh", "mesh_size_nm"), 40, "h60 or h80 P2 guide"),
+                (("configuration", "mesh", "thickness_layers"), 6, "four thickness layers"),
+                (("port_dofs",), 975, "675-DOF ports"),
+                ((*provenance, "end_planes_m"), [0.0, 4e-6], "original end planes"),
+                ((*provenance, "reused_safe_artifact", "sha256"), "0" * 64, "archived SAFE modes"),
+                ((*provenance, "preflight_driver", "sha256"), "0" * 64, "same reviewed driver"),
             )
         for key_path, value, message in cases:
             altered = deepcopy(direct)
