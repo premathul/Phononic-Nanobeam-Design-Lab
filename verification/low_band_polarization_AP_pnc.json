@@ -1,0 +1,1142 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "status": "independently_verified_finite_section_association",
+  "base_revision": "21b4bf602c2b753f57442c9ff0f715a011386882",
+  "question": "Which mass-weighted lead-field templates associate with the persistent 0.1 GHz reflection groups?",
+  "frequency_hz": 100000000,
+  "physical_inputs": {
+    "section_width_m": 1e-06,
+    "physical_thickness_m": 2e-07,
+    "density_kg_m3": 5323,
+    "coordinate_convention": "x propagation, y in-plane width, z thickness; saved lab/crystal material frame unchanged",
+    "material_policy": "Nominal fixed-property Ge, not measured mK/4 K sample data",
+    "response_planes_m": [
+      0,
+      1.665e-05
+    ]
+  },
+  "inputs": [
+    {
+      "role": "low_band_inplane_verification",
+      "path": "verification/low_band_inplane_AP_pnc.json",
+      "bytes": 87739,
+      "sha256": "97dc09f33e85ede34cab6ef3eae0367b8bb8b1dec3610d36ea5f6d4c2e786d04"
+    },
+    {
+      "role": "low_band_thickness_verification",
+      "path": "verification/low_band_thickness_AP_pnc.json",
+      "bytes": 92026,
+      "sha256": "28df92da08af195c5ced321e05d17c14e664a2bf5da5a1594f6ea13a6e096bca"
+    },
+    {
+      "role": "low_band_device_verification",
+      "path": "verification/low_band_device_AP_pnc.json",
+      "bytes": 35725,
+      "sha256": "46df6b610e46867b7bded8f03576d3239504bb92b0a232f9259cae52d5845ddf"
+    },
+    {
+      "role": "port_inventory_verification",
+      "path": "verification/port_inventory_AP_pnc.json",
+      "bytes": 20549,
+      "sha256": "d49f6a54848fc05a2bffdeda1141954a567e449ccbf2983b06c69533eae89a56"
+    },
+    {
+      "role": "z4_safe_receipt",
+      "path": "results/runs/low_band_thickness_AP_pnc/h80-z4-low-band-safe-1335500/safe_AP_pnc.json",
+      "bytes": 28267,
+      "sha256": "59907315426ecf8b240ca8c37a40fe6cb8b019f9b79a941ce7fc65065c771cbe"
+    },
+    {
+      "role": "z6_safe_receipt",
+      "path": "results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc/thickness-h80-safe-1335308/thickness_h80_safe_AP_pnc.json",
+      "bytes": 12992,
+      "sha256": "b5c0d73656e90aa5ba312939c0ef25633af5a775974f5fc778031584d55c78f3"
+    },
+    {
+      "role": "thickness_comparison",
+      "path": "results/runs/low_band_thickness_AP_pnc/comparison/summary_AP_pnc.json",
+      "bytes": 42795,
+      "sha256": "0e93087580b622b0a587c94e4a072f405603129ec00bbf91daf329a4784c1591"
+    },
+    {
+      "role": "inplane_comparison",
+      "path": "results/runs/low_band_inplane_AP_pnc/comparison/summary_AP_pnc.json",
+      "bytes": 40479,
+      "sha256": "c8512b0e55c7d0ead6aeab891f93633c6735c3114e6994106f96cd812c1161df"
+    },
+    {
+      "role": "z4_section",
+      "path": "results/runs/full_device_port_resolution/12x4/attempt_lpnbd9kr/arrays_AP_pnc.npz",
+      "bytes": 12973330,
+      "sha256": "2a2aa9347921ac6940f851f2eb53bc06480a28a6cf67c27a000faa357b1404e8"
+    },
+    {
+      "role": "z4_modes",
+      "path": "results/runs/low_band_thickness_AP_pnc/h80-z4-low-band-safe-1335500/modes-100000000_AP_pnc.npz",
+      "bytes": 12862860,
+      "sha256": "f290088d3ca25210979444ed011e113e165bb4fd41ec90a04d51693f60261fee"
+    },
+    {
+      "role": "z6_section",
+      "path": "results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc/thickness-h80-safe-1335308/ports_AP_pnc.npz",
+      "bytes": 27241396,
+      "sha256": "a13a58e47dee91e4c7d75bb9ec77feb7656ae674392c2f1d7485129da76d0e6a"
+    },
+    {
+      "role": "z6_modes",
+      "path": "results/runs/port_frequency_inventory_AP_pnc/port-inventory-1335406/modes-100000000_AP_pnc.npz",
+      "bytes": 26939240,
+      "sha256": "8e5f8bb414b96b73cbaf82910d78e26a3cfc6d64b166fdc8164a55374638ea84"
+    },
+    {
+      "role": "h100_z4_summary",
+      "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-export-1335527/historical_26hole_layered_h100_ny12_z4-d80b611a700a/summary_AP_pnc.json",
+      "bytes": 54928,
+      "sha256": "ff2380daa2aed1aa9d485a583a079fc58518220d2af00f025d1b88a9b49e5fc8"
+    },
+    {
+      "role": "h100_z4_scattering",
+      "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-export-1335527/historical_26hole_layered_h100_ny12_z4-d80b611a700a/scattering_AP_pnc.csv",
+      "bytes": 764,
+      "sha256": "37da3d71f4e9c7e25be4c9423f50c381bccc28e19b854286d0bb9ed6f7d14a89"
+    },
+    {
+      "role": "h80_z4_summary",
+      "path": "results/runs/low_band_thickness_AP_pnc/h80-z4-low-band-export-1335512/historical_26hole_layered_h80_ny12_z4-a80dd9c4d431/summary_AP_pnc.json",
+      "bytes": 53701,
+      "sha256": "b71854daee471bfe0388f7fe7fbb188e46b4a50f6e9806f92f4d4d1b13d360ca"
+    },
+    {
+      "role": "h80_z4_scattering",
+      "path": "results/runs/low_band_thickness_AP_pnc/h80-z4-low-band-export-1335512/historical_26hole_layered_h80_ny12_z4-a80dd9c4d431/scattering_AP_pnc.csv",
+      "bytes": 763,
+      "sha256": "359d1b10d9f35ed74ba8fcf1af710e283f779fbd9f47f2b23c3b44b9f34eaef2"
+    },
+    {
+      "role": "h80_z6_summary",
+      "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-export-1335483/historical_26hole_layered_h80_ny12_z6-bb55473510a2/summary_AP_pnc.json",
+      "bytes": 51080,
+      "sha256": "6f972ea9640984e71bb5a54d2eb49350192b6db482e0f9997ffd1c6a4fe02ba5"
+    },
+    {
+      "role": "h80_z6_scattering",
+      "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-export-1335483/historical_26hole_layered_h80_ny12_z6-bb55473510a2/scattering_AP_pnc.csv",
+      "bytes": 766,
+      "sha256": "6a9bd6465247c6e39d1c3ee2abb801a1e1c9c1047ca7dce3cb7afe25bcbc14e5"
+    }
+  ],
+  "definitions": {
+    "component_fractions_xyz": "Re(u_c^H M_c u_c)/(u^H M u), lab axes x/y/z",
+    "template_order": [
+      "Tx",
+      "Ty",
+      "Tz",
+      "Rx"
+    ],
+    "templates": [
+      "(1,0,0)",
+      "(0,1,0)",
+      "(0,0,1)",
+      "(0,-(z-z_c),y-y_c)"
+    ],
+    "template_score": "abs(q^H M u)^2 / ((q^H M q)*(u^H M u))",
+    "template_projection_fraction": "Sum of the four scores after checking normalized template Gram=I",
+    "template_remainder_fraction": "1 - template_projection_fraction; content outside these four rigid templates",
+    "mass_centroid": "Consistent scalar-mass integral of (y,z) divided by section mass per unit length",
+    "displacement_mass_norm": "Original u^H M u; for saved m/sqrt(W) fields, units kg*m/W",
+    "roundoff_policy": "Raw values retained, including boundary excursions no larger than numerical_tolerance",
+    "descriptive_largest_template": "Numerically largest tested template; tied if indistinguishable within numerical_tolerance. No physical dominance threshold."
+  },
+  "sections": {
+    "z4": {
+      "mass_centroid_yz_m": [
+        3.7113699645567254e-23,
+        -1.3517321888937937e-23
+      ],
+      "mass_per_length_kg_m": 1.0646000000000023e-09,
+      "normalized_template_gram_real": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.8378318611619e-17
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -9.524883562948363e-17
+        ],
+        [
+          0.0,
+          -7.099667741106522e-17,
+          -9.209147953007512e-17,
+          1.0
+        ]
+      ],
+      "normalized_template_gram_imag": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "maximum_template_gram_error": 9.524883562948363e-17,
+      "modes": [
+        {
+          "displacement_mass_norm": 1.1569156587487313e-21,
+          "component_fractions_xyz": [
+            0.9998663823076287,
+            0.0001285031544774534,
+            5.114537893405441e-06
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            0.9998663381210783,
+            1.0200822574499776e-21,
+            6.37763802823704e-22,
+            1.0309715061250615e-19
+          ],
+          "template_projection_fraction": 0.9998663381210783,
+          "template_remainder_fraction": 0.00013366187892172032,
+          "descriptive_largest_template": "Tx",
+          "root": 1348,
+          "reverse_root": 1349,
+          "wavenumber_rad_m": 143467.41224097754,
+          "signed_power_w": 1.0
+        },
+        {
+          "displacement_mass_norm": 3.864036057681127e-21,
+          "component_fractions_xyz": [
+            0.0006272183508574392,
+            0.03827944002088928,
+            0.9610933416282531
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            1.566907216703942e-17,
+            4.5425020055106e-23,
+            2.883503805418093e-23,
+            0.9993721104513141
+          ],
+          "template_projection_fraction": 0.9993721104513141,
+          "template_remainder_fraction": 0.0006278895486858671,
+          "descriptive_largest_template": "Rx",
+          "root": 1346,
+          "reverse_root": 1347,
+          "wavenumber_rad_m": 482017.1917971944,
+          "signed_power_w": 1.0
+        },
+        {
+          "displacement_mass_norm": 3.077551337839686e-21,
+          "component_fractions_xyz": [
+            0.03648241725379454,
+            0.9635127150306813,
+            4.8677155244491816e-06
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            7.229702140712832e-27,
+            0.9634909306963271,
+            4.51846483573685e-15,
+            1.7293363075416046e-21
+          ],
+          "template_projection_fraction": 0.9634909306963316,
+          "template_remainder_fraction": 0.03650906930366837,
+          "descriptive_largest_template": "Ty",
+          "root": 1344,
+          "reverse_root": 1345,
+          "wavenumber_rad_m": 724588.4561241396,
+          "signed_power_w": 1.0
+        },
+        {
+          "displacement_mass_norm": 6.3937093927751025e-21,
+          "component_fractions_xyz": [
+            0.007992395473128041,
+            6.324038591504376e-05,
+            0.9919443641409577
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            6.546133415418285e-26,
+            4.13909193342436e-14,
+            0.9916605350192932,
+            2.713212593091706e-23
+          ],
+          "template_projection_fraction": 0.9916605350193346,
+          "template_remainder_fraction": 0.008339464980665401,
+          "descriptive_largest_template": "Tz",
+          "root": 1294,
+          "reverse_root": 1295,
+          "wavenumber_rad_m": 1577993.5692639728,
+          "signed_power_w": 1.0000000000000002
+        }
+      ],
+      "area_m2": 2.0000000000000044e-13,
+      "density_kg_m3": 5323.0,
+      "displacement_dofs": 675,
+      "mode_order": [
+        1348,
+        1346,
+        1344,
+        1294
+      ]
+    },
+    "z6": {
+      "mass_centroid_yz_m": [
+        -5.3553246432530684e-24,
+        2.9963669187807137e-24
+      ],
+      "mass_per_length_kg_m": 1.0646000000000019e-09,
+      "normalized_template_gram_real": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.136840941384162e-17
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -6.7595947866085306e-18
+        ],
+        [
+          0.0,
+          -1.2925327547667443e-18,
+          7.646703991240478e-17,
+          1.0
+        ]
+      ],
+      "normalized_template_gram_imag": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "maximum_template_gram_error": 7.646703991240478e-17,
+      "modes": [
+        {
+          "displacement_mass_norm": 1.156915658792687e-21,
+          "component_fractions_xyz": [
+            0.9998663823072784,
+            0.00012850315435023764,
+            5.11453837153014e-06
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            0.9998663381207298,
+            6.944485722810366e-23,
+            8.148678520891635e-22,
+            4.4812490077177146e-20
+          ],
+          "template_projection_fraction": 0.9998663381207298,
+          "template_remainder_fraction": 0.00013366187927021933,
+          "descriptive_largest_template": "Tx",
+          "root": 1948,
+          "reverse_root": 1949,
+          "wavenumber_rad_m": 143467.41223562727,
+          "signed_power_w": 1.0
+        },
+        {
+          "displacement_mass_norm": 3.864563452225607e-21,
+          "component_fractions_xyz": [
+            0.0006273766059887792,
+            0.038279526235698566,
+            0.9610930971583118
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            7.428655979641666e-18,
+            4.067229275893093e-21,
+            1.749916325598646e-20,
+            0.9993719542284555
+          ],
+          "template_projection_fraction": 0.9993719542284555,
+          "template_remainder_fraction": 0.0006280457715445165,
+          "descriptive_largest_template": "Rx",
+          "root": 1916,
+          "reverse_root": 1917,
+          "wavenumber_rad_m": 482084.49542814225,
+          "signed_power_w": 0.9999999999999999
+        },
+        {
+          "displacement_mass_norm": 3.0775513311165694e-21,
+          "component_fractions_xyz": [
+            0.03648241866747747,
+            0.9635127136127143,
+            4.867719808446311e-06
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            1.2064025204009403e-25,
+            0.9634909292745168,
+            1.2402653251103415e-15,
+            6.707768257620822e-24
+          ],
+          "template_projection_fraction": 0.9634909292745181,
+          "template_remainder_fraction": 0.03650907072548193,
+          "descriptive_largest_template": "Ty",
+          "root": 1940,
+          "reverse_root": 1941,
+          "wavenumber_rad_m": 724588.4555116334,
+          "signed_power_w": 1.0
+        },
+        {
+          "displacement_mass_norm": 6.3937817371350046e-21,
+          "component_fractions_xyz": [
+            0.007992383848522243,
+            6.3268138674574e-05,
+            0.9919443480128031
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            4.572449367279985e-26,
+            6.783813733237863e-15,
+            0.9916603942913976,
+            1.0096039252069151e-22
+          ],
+          "template_projection_fraction": 0.9916603942914044,
+          "template_remainder_fraction": 0.008339605708595599,
+          "descriptive_largest_template": "Tz",
+          "root": 1873,
+          "reverse_root": 1874,
+          "wavenumber_rad_m": 1578001.170120175,
+          "signed_power_w": 0.9999999999999999
+        }
+      ],
+      "area_m2": 2.0000000000000036e-13,
+      "density_kg_m3": 5323.0,
+      "displacement_dofs": 975,
+      "mode_order": [
+        1948,
+        1916,
+        1940,
+        1873
+      ]
+    }
+  },
+  "responses": {
+    "h100_z4": {
+      "section": "z4",
+      "run_hash": "d80b611a700a15161b701a7410db0ae0d7a4a0a52669f43c02108fbcf8e50d55",
+      "rows": [
+        {
+          "root": 1348,
+          "reverse_root": 1349,
+          "R": 0.019808007564664054,
+          "T": 0.9801919924352663,
+          "displacement_mass_norm": 1.1569156587487313e-21,
+          "component_fractions_xyz": [
+            0.9998663823076287,
+            0.0001285031544774534,
+            5.114537893405441e-06
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            0.9998663381210783,
+            1.0200822574499776e-21,
+            6.37763802823704e-22,
+            1.0309715061250615e-19
+          ],
+          "template_projection_fraction": 0.9998663381210783,
+          "template_remainder_fraction": 0.00013366187892172032,
+          "descriptive_largest_template": "Tx",
+          "wavenumber_rad_m": 143467.41224097754,
+          "signed_power_w": 1.0
+        },
+        {
+          "root": 1346,
+          "reverse_root": 1347,
+          "R": 0.01564324891361186,
+          "T": 0.9843567510856182,
+          "displacement_mass_norm": 3.864036057681127e-21,
+          "component_fractions_xyz": [
+            0.0006272183508574392,
+            0.03827944002088928,
+            0.9610933416282531
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            1.566907216703942e-17,
+            4.5425020055106e-23,
+            2.883503805418093e-23,
+            0.9993721104513141
+          ],
+          "template_projection_fraction": 0.9993721104513141,
+          "template_remainder_fraction": 0.0006278895486858671,
+          "descriptive_largest_template": "Rx",
+          "wavenumber_rad_m": 482017.1917971944,
+          "signed_power_w": 1.0
+        },
+        {
+          "root": 1344,
+          "reverse_root": 1345,
+          "R": 0.00018946328588843102,
+          "T": 0.9998105367143679,
+          "displacement_mass_norm": 3.077551337839686e-21,
+          "component_fractions_xyz": [
+            0.03648241725379454,
+            0.9635127150306813,
+            4.8677155244491816e-06
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            7.229702140712832e-27,
+            0.9634909306963271,
+            4.51846483573685e-15,
+            1.7293363075416046e-21
+          ],
+          "template_projection_fraction": 0.9634909306963316,
+          "template_remainder_fraction": 0.03650906930366837,
+          "descriptive_largest_template": "Ty",
+          "wavenumber_rad_m": 724588.4561241396,
+          "signed_power_w": 1.0
+        },
+        {
+          "root": 1294,
+          "reverse_root": 1295,
+          "R": 0.0001471198158156069,
+          "T": 0.999852880184296,
+          "displacement_mass_norm": 6.3937093927751025e-21,
+          "component_fractions_xyz": [
+            0.007992395473128041,
+            6.324038591504376e-05,
+            0.9919443641409577
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            6.546133415418285e-26,
+            4.13909193342436e-14,
+            0.9916605350192932,
+            2.713212593091706e-23
+          ],
+          "template_projection_fraction": 0.9916605350193346,
+          "template_remainder_fraction": 0.008339464980665401,
+          "descriptive_largest_template": "Tz",
+          "wavenumber_rad_m": 1577993.5692639728,
+          "signed_power_w": 1.0000000000000002
+        }
+      ]
+    },
+    "h80_z4": {
+      "section": "z4",
+      "run_hash": "a80dd9c4d431ef8f88afb22c3a246970f16e41f992bc875a4688ddb8372a84e1",
+      "rows": [
+        {
+          "root": 1348,
+          "reverse_root": 1349,
+          "R": 0.01984392770183553,
+          "T": 0.9801560722980995,
+          "displacement_mass_norm": 1.1569156587487313e-21,
+          "component_fractions_xyz": [
+            0.9998663823076287,
+            0.0001285031544774534,
+            5.114537893405441e-06
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            0.9998663381210783,
+            1.0200822574499776e-21,
+            6.37763802823704e-22,
+            1.0309715061250615e-19
+          ],
+          "template_projection_fraction": 0.9998663381210783,
+          "template_remainder_fraction": 0.00013366187892172032,
+          "descriptive_largest_template": "Tx",
+          "wavenumber_rad_m": 143467.41224097754,
+          "signed_power_w": 1.0
+        },
+        {
+          "root": 1346,
+          "reverse_root": 1347,
+          "R": 0.015887277828661752,
+          "T": 0.9841127221705791,
+          "displacement_mass_norm": 3.864036057681127e-21,
+          "component_fractions_xyz": [
+            0.0006272183508574392,
+            0.03827944002088928,
+            0.9610933416282531
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            1.566907216703942e-17,
+            4.5425020055106e-23,
+            2.883503805418093e-23,
+            0.9993721104513141
+          ],
+          "template_projection_fraction": 0.9993721104513141,
+          "template_remainder_fraction": 0.0006278895486858671,
+          "descriptive_largest_template": "Rx",
+          "wavenumber_rad_m": 482017.1917971944,
+          "signed_power_w": 1.0
+        },
+        {
+          "root": 1344,
+          "reverse_root": 1345,
+          "R": 0.00019113966566509499,
+          "T": 0.999808860334367,
+          "displacement_mass_norm": 3.077551337839686e-21,
+          "component_fractions_xyz": [
+            0.03648241725379454,
+            0.9635127150306813,
+            4.8677155244491816e-06
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            7.229702140712832e-27,
+            0.9634909306963271,
+            4.51846483573685e-15,
+            1.7293363075416046e-21
+          ],
+          "template_projection_fraction": 0.9634909306963316,
+          "template_remainder_fraction": 0.03650906930366837,
+          "descriptive_largest_template": "Ty",
+          "wavenumber_rad_m": 724588.4561241396,
+          "signed_power_w": 1.0
+        },
+        {
+          "root": 1294,
+          "reverse_root": 1295,
+          "R": 0.00014976264750421537,
+          "T": 0.9998502373527561,
+          "displacement_mass_norm": 6.3937093927751025e-21,
+          "component_fractions_xyz": [
+            0.007992395473128041,
+            6.324038591504376e-05,
+            0.9919443641409577
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            6.546133415418285e-26,
+            4.13909193342436e-14,
+            0.9916605350192932,
+            2.713212593091706e-23
+          ],
+          "template_projection_fraction": 0.9916605350193346,
+          "template_remainder_fraction": 0.008339464980665401,
+          "descriptive_largest_template": "Tz",
+          "wavenumber_rad_m": 1577993.5692639728,
+          "signed_power_w": 1.0000000000000002
+        }
+      ]
+    },
+    "h80_z6": {
+      "section": "z6",
+      "run_hash": "bb55473510a2fbab9bbb40c03f0b4a59befc9b2b337b340442277a73cf63dfe0",
+      "rows": [
+        {
+          "root": 1948,
+          "reverse_root": 1949,
+          "R": 0.01984481225812624,
+          "T": 0.9801551877418292,
+          "displacement_mass_norm": 1.156915658792687e-21,
+          "component_fractions_xyz": [
+            0.9998663823072784,
+            0.00012850315435023764,
+            5.11453837153014e-06
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            0.9998663381207298,
+            6.944485722810366e-23,
+            8.148678520891635e-22,
+            4.4812490077177146e-20
+          ],
+          "template_projection_fraction": 0.9998663381207298,
+          "template_remainder_fraction": 0.00013366187927021933,
+          "descriptive_largest_template": "Tx",
+          "wavenumber_rad_m": 143467.41223562727,
+          "signed_power_w": 1.0
+        },
+        {
+          "root": 1916,
+          "reverse_root": 1917,
+          "R": 0.015960427589381106,
+          "T": 0.9840395724104343,
+          "displacement_mass_norm": 3.864563452225607e-21,
+          "component_fractions_xyz": [
+            0.0006273766059887792,
+            0.038279526235698566,
+            0.9610930971583118
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            7.428655979641666e-18,
+            4.067229275893093e-21,
+            1.749916325598646e-20,
+            0.9993719542284555
+          ],
+          "template_projection_fraction": 0.9993719542284555,
+          "template_remainder_fraction": 0.0006280457715445165,
+          "descriptive_largest_template": "Rx",
+          "wavenumber_rad_m": 482084.49542814225,
+          "signed_power_w": 0.9999999999999999
+        },
+        {
+          "root": 1940,
+          "reverse_root": 1941,
+          "R": 0.000191213163195608,
+          "T": 0.9998087868370231,
+          "displacement_mass_norm": 3.0775513311165694e-21,
+          "component_fractions_xyz": [
+            0.03648241866747747,
+            0.9635127136127143,
+            4.867719808446311e-06
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            1.2064025204009403e-25,
+            0.9634909292745168,
+            1.2402653251103415e-15,
+            6.707768257620822e-24
+          ],
+          "template_projection_fraction": 0.9634909292745181,
+          "template_remainder_fraction": 0.03650907072548193,
+          "descriptive_largest_template": "Ty",
+          "wavenumber_rad_m": 724588.4555116334,
+          "signed_power_w": 1.0
+        },
+        {
+          "root": 1873,
+          "reverse_root": 1874,
+          "R": 0.0001507833242666369,
+          "T": 0.9998492166754257,
+          "displacement_mass_norm": 6.3937817371350046e-21,
+          "component_fractions_xyz": [
+            0.007992383848522243,
+            6.3268138674574e-05,
+            0.9919443480128031
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            4.572449367279985e-26,
+            6.783813733237863e-15,
+            0.9916603942913976,
+            1.0096039252069151e-22
+          ],
+          "template_projection_fraction": 0.9916603942914044,
+          "template_remainder_fraction": 0.008339605708595599,
+          "descriptive_largest_template": "Tz",
+          "wavenumber_rad_m": 1578001.170120175,
+          "signed_power_w": 0.9999999999999999
+        }
+      ]
+    }
+  },
+  "matched_rows": [
+    {
+      "z4_root": 1348,
+      "z6_root": 1948,
+      "mass_overlap": 1.0,
+      "accepted_mass_overlap": 1.0,
+      "z6_minus_z4_component_fractions_xyz": [
+        -3.502753642692369e-13,
+        -1.2721575637537896e-13,
+        4.781246995950962e-13
+      ],
+      "z6_minus_z4_template_scores_tx_ty_tz_rx": [
+        -3.4849900742983664e-13,
+        -9.50637400221874e-22,
+        1.7710404926545951e-22,
+        -5.8284660535329e-20
+      ],
+      "z6_minus_z4_template_remainder_fraction": 3.4849900742983664e-13
+    },
+    {
+      "z4_root": 1346,
+      "z6_root": 1916,
+      "mass_overlap": 0.9999999999150838,
+      "accepted_mass_overlap": 0.9999999999150838,
+      "z6_minus_z4_component_fractions_xyz": [
+        1.582551313400937e-07,
+        8.62148092847792e-08,
+        -2.4446994129068145e-07
+      ],
+      "z6_minus_z4_template_scores_tx_ty_tz_rx": [
+        -8.240416187397755e-18,
+        4.021804255837987e-21,
+        1.747032821793228e-20,
+        -1.5622285864935748e-07
+      ],
+      "z6_minus_z4_template_remainder_fraction": 1.5622285864935748e-07
+    },
+    {
+      "z4_root": 1344,
+      "z6_root": 1940,
+      "mass_overlap": 0.9999999999999888,
+      "accepted_mass_overlap": 0.999999999999989,
+      "z6_minus_z4_component_fractions_xyz": [
+        1.4136829346034219e-09,
+        -1.4179669660663308e-09,
+        4.283997129275415e-12
+      ],
+      "z6_minus_z4_template_scores_tx_ty_tz_rx": [
+        1.134105498993812e-25,
+        -1.4218102251106757e-09,
+        -3.2781995106265086e-15,
+        -1.7226285392839838e-21
+      ],
+      "z6_minus_z4_template_remainder_fraction": 1.4218135557797495e-09
+    },
+    {
+      "z4_root": 1294,
+      "z6_root": 1873,
+      "mass_overlap": 0.9999999999841417,
+      "accepted_mass_overlap": 0.9999999999841415,
+      "z6_minus_z4_component_fractions_xyz": [
+        -1.162460579878788e-08,
+        2.7752759530237777e-08,
+        -1.6128154589623023e-08
+      ],
+      "z6_minus_z4_template_scores_tx_ty_tz_rx": [
+        -1.9736840481382995e-26,
+        -3.460710560100574e-14,
+        -1.4072789555896748e-07,
+        7.382826658977445e-23
+      ],
+      "z6_minus_z4_template_remainder_fraction": 1.4072793019792584e-07
+    }
+  ],
+  "maximum_absolute_z4_z6_component_change": 2.4446994129068145e-07,
+  "maximum_absolute_z4_z6_template_score_change": 1.5622285864935748e-07,
+  "interpretation": "Stronger-R pair dominated by Tx/Rx; weaker-R pair dominated by Ty/Tz. Finite-section association only, not a causal explanation or global physical branch classification.",
+  "independent_verification": {
+    "author": "Athul Prem",
+    "file_tag": "_AP_pnc",
+    "status": "independently_verified_saved_section_diagnosis",
+    "method": "Explicit P2 triangle functions with 3x3 Gauss-Legendre and a Duffy map; no assembler or eigensolver.",
+    "implementation_agreement_tolerance": 1e-10,
+    "area_and_mass_relative_tolerance": 1e-12,
+    "maximum_dimensionless_metric_difference": 3.552713678800501e-15,
+    "independently_matched_overlaps": [
+      0.9999999999999998,
+      0.9999999999150829,
+      0.9999999999999881,
+      0.9999999999841407
+    ],
+    "responses": {
+      "h100_z4": {
+        "checked_rows": 4,
+        "R": [
+          0.019808007564664054,
+          0.01564324891361186,
+          0.00018946328588843102,
+          0.0001471198158156069
+        ]
+      },
+      "h80_z4": {
+        "checked_rows": 4,
+        "R": [
+          0.01984392770183553,
+          0.015887277828661752,
+          0.00019113966566509499,
+          0.00014976264750421537
+        ]
+      },
+      "h80_z6": {
+        "checked_rows": 4,
+        "R": [
+          0.01984481225812624,
+          0.015960427589381106,
+          0.000191213163195608,
+          0.0001507833242666369
+        ]
+      }
+    },
+    "section_rows_checked": 8,
+    "response_rows_checked": 12,
+    "spatial_convergence_established": false,
+    "physical_polarization_uncertainty_established": false,
+    "body_arrays_loaded": false,
+    "assembly_or_eigensolve_performed": false,
+    "scope": "Finite saved-mode displacement-family association only; scores are neither transmitted power nor uncertainty bounds.",
+    "publication_csv_rows_checked": 12,
+    "diagnosis": {
+      "path": "results/runs/low_band_polarization_AP_pnc/port_polarization_AP_pnc.json",
+      "bytes": 31194,
+      "sha256": "423c4afd18e55c8bf1af3a3a2c76c751817ad2ddbec75d1fcc1b0ce23e06994d"
+    },
+    "verifier_sha256": "d5cdd47c7df2de902224de6f7c70299862187fa372a0eecaaa38e358e4693779"
+  },
+  "execution": [
+    {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-B",
+        "tools\\diagnose_port_polarization_AP_pnc.py",
+        "--output",
+        "results\\runs\\low_band_polarization_AP_pnc"
+      ],
+      "script_sha256": "367eb1fa5ed0296df548716cb8eb02e422dd639a23f8ad434dc0e357af5d1e79",
+      "exit_code": 0,
+      "guard": null,
+      "elapsed_seconds": 2.1601986999739893,
+      "available_memory_before_bytes": 3618611200,
+      "limits": {
+        "memory_bytes": 1073741824,
+        "available_reserve_bytes": 536870912,
+        "wall_seconds": 60,
+        "numerical_threads": 1
+      },
+      "runtime": {
+        "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2"
+        },
+        "thread_environment": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "BLIS_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1"
+        }
+      },
+      "peak_sampled_process_tree_rss_sum_bytes": 122159104,
+      "peak_sampled_process_tree_private_sum_bytes": 136966144,
+      "sample_seconds": 0.05,
+      "processes": {
+        "31972": {
+          "name": "python.exe",
+          "peak_rss_bytes": 5070848,
+          "peak_private_bytes": 913408,
+          "samples": 42
+        },
+        "38128": {
+          "name": "python.exe",
+          "peak_rss_bytes": 117088256,
+          "peak_private_bytes": 136052736,
+          "samples": 40
+        }
+      },
+      "measurement_scope": "Sampled launcher and all observed numerical descendants; not an exact high-water mark."
+    },
+    {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-B",
+        "tools/verify_port_polarization_AP_pnc.py",
+        "--diagnosis",
+        "results/runs/low_band_polarization_AP_pnc/port_polarization_AP_pnc.json",
+        "--output",
+        "results/runs/low_band_polarization_AP_pnc/independent_verification_AP_pnc.json"
+      ],
+      "script_sha256": "d5cdd47c7df2de902224de6f7c70299862187fa372a0eecaaa38e358e4693779",
+      "exit_code": 0,
+      "guard": null,
+      "elapsed_seconds": 0.8279999999795109,
+      "available_memory_before_bytes": 3513954304,
+      "limits": {
+        "memory_bytes": 1073741824,
+        "available_reserve_bytes": 536870912,
+        "wall_seconds": 60,
+        "numerical_threads": 1
+      },
+      "runtime": {
+        "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2"
+        },
+        "thread_environment": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "BLIS_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1"
+        }
+      },
+      "peak_sampled_process_tree_rss_sum_bytes": 58269696,
+      "peak_sampled_process_tree_private_sum_bytes": 92266496,
+      "sample_seconds": 0.05,
+      "processes": {
+        "34484": {
+          "name": "python.exe",
+          "peak_rss_bytes": 5066752,
+          "peak_private_bytes": 909312,
+          "samples": 16
+        },
+        "5728": {
+          "name": "python.exe",
+          "peak_rss_bytes": 53202944,
+          "peak_private_bytes": 91357184,
+          "samples": 15
+        }
+      },
+      "measurement_scope": "Sampled launcher and all observed numerical descendants; not an exact high-water mark."
+    }
+  ],
+  "validation": {
+    "focused_diagnostic_tests": {
+      "tests": 8,
+      "passed": 8,
+      "seconds": 0.018
+    },
+    "focused_verifier_tests": {
+      "tests": 9,
+      "passed": 9,
+      "seconds": 0.436
+    },
+    "integrated_local": {
+      "tests": 227,
+      "passed": 226,
+      "skipped": 1,
+      "unittest_seconds": 53.772,
+      "execution": {
+        "exit_code": 0,
+        "elapsed_seconds": 56.31199999997625,
+        "log": "results\\runs\\low_band_polarization_AP_pnc\\local_checks\\integrated_tests_AP_pnc.log"
+      },
+      "skip_reason_lines": [
+        "test_symlink_source_and_parent_are_rejected (test_archive_runtime_AP_pnc.ArchiveGuards.test_symlink_source_and_parent_are_rejected) ... skipped 'Windows account cannot create symbolic links; symlink guard untested'"
+      ]
+    },
+    "review": "Independent implementation/verifier source cross-review passed. Scoped scientific-role binding correction and negative fixtures passed targeted review. Small published-data and final report/ledger review passed: all table values, signed joins, 5 local report links, 4 source hashes and 12 artifact/log hashes/sizes verified without reloading archive arrays or repeating computations.",
+    "ci": "Pending on reviewed PR head; final outcome will be recorded in handoff/local_checks."
+  },
+  "scope": {
+    "body_arrays_loaded": false,
+    "body_fields_loaded": false,
+    "matrix_assembly_performed": false,
+    "safe_eigensolve_performed": false,
+    "body_solve_performed": false,
+    "new_frequency_point_computed": false,
+    "phase_adjustment_applied": false,
+    "spatial_convergence_established": false,
+    "frequency_convergence_established": false,
+    "physical_branch_classification_established": false,
+    "reflection_mechanism_established": false,
+    "unknown_or_mixed_content_retained": true
+  },
+  "limits": [
+    "A finite-section association, not a causal explanation or continuum polarization assignment.",
+    "Template scores and Cartesian kinetic fractions are not scattering-power fractions or commercial effective masses.",
+    "Physical Ge properties are nominal fixed-property controls, not measured mK/4 K sample data.",
+    "Failed 1 GHz spatial checks, hole faceting and frequency sampling remain unresolved; no 1 GHz modes are analyzed.",
+    "The archived global in-plane increment also changes lead interiors; uniform-guide phase is not subtracted."
+  ],
+  "sources": [
+    {
+      "path": "tools/diagnose_port_polarization_AP_pnc.py",
+      "bytes": 29661,
+      "sha256": "367eb1fa5ed0296df548716cb8eb02e422dd639a23f8ad434dc0e357af5d1e79"
+    },
+    {
+      "path": "tools/verify_port_polarization_AP_pnc.py",
+      "bytes": 30715,
+      "sha256": "d5cdd47c7df2de902224de6f7c70299862187fa372a0eecaaa38e358e4693779"
+    },
+    {
+      "path": "tests/test_port_polarization_AP_pnc.py",
+      "bytes": 10522,
+      "sha256": "8ff87d5c7b9c7317a622589dccd8112f432c17cda6d2803b4f0c93910f264746"
+    },
+    {
+      "path": "tests/test_verify_port_polarization_AP_pnc.py",
+      "bytes": 14120,
+      "sha256": "585a626058ca48db235cb9b5d41a06fdd95b302f3cb169d968b8281795e0611a"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "results/runs/low_band_polarization_AP_pnc/independent_verification_AP_pnc.json",
+      "bytes": 1946,
+      "sha256": "7bbb1d28031f27d5db565d8b0397f559b78fca9046213f5614ea3b5d1ba3674d"
+    },
+    {
+      "path": "results/runs/low_band_polarization_AP_pnc/port_polarization_AP_pnc.csv",
+      "bytes": 3574,
+      "sha256": "2f535db757799d329c4ab69ce5ddbd60719074cc20fc2fc3a4cc40fc0382cad6"
+    },
+    {
+      "path": "results/runs/low_band_polarization_AP_pnc/port_polarization_AP_pnc.json",
+      "bytes": 31194,
+      "sha256": "423c4afd18e55c8bf1af3a3a2c76c751817ad2ddbec75d1fcc1b0ce23e06994d"
+    },
+    {
+      "path": "results/runs/low_band_polarization_AP_pnc/report_AP_pnc.html",
+      "bytes": 7251,
+      "sha256": "e9481800745ea504a7e06987ba97df847fcd29b6763ea1c611e88f380e9a94b4"
+    },
+    {
+      "path": "results/runs/low_band_polarization_AP_pnc/local_checks/diagnosis_execution_AP_pnc.json",
+      "bytes": 1605,
+      "sha256": "aa400559c3fb61ca7f7222d3f7e72eaaf9ea4af7dc01e11fd656e63929ecf807"
+    },
+    {
+      "path": "results/runs/low_band_polarization_AP_pnc/local_checks/diagnosis_stderr_AP_pnc.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/runs/low_band_polarization_AP_pnc/local_checks/diagnosis_stdout_AP_pnc.txt",
+      "bytes": 242,
+      "sha256": "9635bb72fbd0d75b18ae3c3caebd84812f3a1ff2718f2b6ef42742243afcec04"
+    },
+    {
+      "path": "results/runs/low_band_polarization_AP_pnc/local_checks/integrated_execution_AP_pnc.json",
+      "bytes": 165,
+      "sha256": "857d72d1e51894b37e68244e41f9bdafa23f12137b2d2c8cd1faf803edcbe806"
+    },
+    {
+      "path": "results/runs/low_band_polarization_AP_pnc/local_checks/integrated_tests_AP_pnc.log",
+      "bytes": 43266,
+      "sha256": "595399f902e3a726028a3b1fab356f9fb8ff388e68175674ce88cbe3d8365d1c"
+    },
+    {
+      "path": "results/runs/low_band_polarization_AP_pnc/local_checks/verification_execution_AP_pnc.json",
+      "bytes": 1968,
+      "sha256": "192ba803c839dc809d3d8b95f1aac6a1ed385122ee3681730319183eb4cc9f03"
+    },
+    {
+      "path": "results/runs/low_band_polarization_AP_pnc/local_checks/verification_stderr_AP_pnc.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/runs/low_band_polarization_AP_pnc/local_checks/verification_stdout_AP_pnc.txt",
+      "bytes": 281,
+      "sha256": "bb96a6313aece543d94e4573612411be8d3489b6236a20875cccc78a5971144b"
+    }
+  ]
+}

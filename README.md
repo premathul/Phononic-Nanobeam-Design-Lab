@@ -150,6 +150,15 @@ Omit `--mesh-only` to solve after selecting a resource budget. The default layer
 
 For the refined two-hole case described below, select **Two-hole refined layers · scattering**, or use `--config configs/perforated_layered_reference_AP_pnc.json`. It uses an 80 nm in-plane target, four thickness layers and a 100 nm port-width target. The measured case has 31887 body DOFs and 351 per port, with about 1255 MiB peak process-tree memory. Its settings and checks apply to the stated two-hole case at 1 GHz; arbitrary geometry/frequency changes require new checks.
 
+The archived 0.1 GHz mode-shape diagnostic identifies translation/rotation template content and joins it to the accepted reflection rows without a new solve. [Portable result and limits](verification/low_band_polarization_AP_pnc.json). With the exact retained workspace archive, fresh publications can be reproduced using:
+
+```powershell
+.\.venv\Scripts\python.exe -B tools/diagnose_port_polarization_AP_pnc.py --output path/to/fresh-diagnosis
+.\.venv\Scripts\python.exe -B tools/verify_port_polarization_AP_pnc.py --diagnosis path/to/fresh-diagnosis/port_polarization_AP_pnc.json --output path/to/fresh-verification.json
+```
+
+The raw section/device archive is not included in Git. The helpers reject changed inputs and existing output paths. Saved template associations do not establish a reflection mechanism, continuous branches or spatial convergence; reuse the completed publication for normal analysis.
+
 ## Verification and capabilities
 
 The Windows/Python 3.12 suite ran 176 tests in 52.224 s. Of those, 175 passed and one was skipped because the process lacked permission to create a symbolic link. The checks cover tensor rotation, uniform strain, consistent mass, rigid-body subspaces, independent dense and sparse solutions, Bloch phase and the long-wavelength rod limit. Port checks cover trace mapping, directional energy flux, the dispersion-derivative identity, exact symmetry degeneracy, an independent 3D Bloch comparison, and explicit rejection of unresolved cutoffs. Scattering checks exercise both incidence directions, independent boundary flux, and reconstruction from exported fields. Geometry and workflow checks cover exact tagged-mesh reuse, preflight budgets and scientific provenance. The suite includes Athul Prem's two-port coherent-drive test and focused Lawrence checks for exact equation reconstruction, accepted-drive recovery, archive reuse and refusal of corrupt data. [Test scope](tests/README.md)
