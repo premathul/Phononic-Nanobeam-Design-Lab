@@ -96,6 +96,24 @@ sbatch --parsable scripts/hpc/lawrence_device_compute_AP_pnc.sbatch PROJECT_ROOT
 
 Athul Prem's two-port coherent-drive test verifies power consistency for a small uniform guide. The h60 comparison measures in-plane sensitivity at 1 GHz with fixed ports and hole faceting. Separate thickness, faceting, port, and frequency checks are required for broader full-device claims.
 
+## Run the h80 thickness control
+
+The h80 control keeps the physical 200 nm thickness, 26 hole polygons, width subdivisions, end planes, and exact in-plane footprint. Six thickness layers change the body discretization and its matching port traces together. Reuse verified artifacts and check ownership, accepted-drive records, and current resource admission before submitting work. [Current handoff](AI_HANDOFF_AP_pnc.md)
+
+```bash
+sbatch --parsable scripts/hpc/lawrence_thickness_AP_pnc.sbatch PROJECT_ROOT preflight H80_CONFIG H80_MESH_DIR
+sbatch --parsable scripts/hpc/lawrence_thickness_AP_pnc.sbatch PROJECT_ROOT safe PREFLIGHT_DIR PREFLIGHT_SHA
+sbatch --parsable scripts/hpc/lawrence_thickness_compute_AP_pnc.sbatch PROJECT_ROOT stage WALL_SECONDS PREFLIGHT_DIR PREFLIGHT_SHA SAFE_DIR SAFE_SHA
+sbatch --parsable scripts/hpc/lawrence_thickness_compute_AP_pnc.sbatch PROJECT_ROOT solve WALL_SECONDS STAGE_DIR STAGE_SHA [PRIOR_SOLVE_DIR PRIOR_SOLVE_SHA]
+sbatch --parsable scripts/hpc/lawrence_thickness_compute_AP_pnc.sbatch PROJECT_ROOT export WALL_SECONDS STAGE_DIR STAGE_SHA SOLVE_DIR SOLVE_SHA
+```
+
+The mesh preflight checks exact x-y equality against the archived h80 mesh and records the measured displacement count for the case cap in `thickness_h80_preflight_AP_pnc.json`. The `safe` phase uses that same mesh's P2 trace layout to calculate the complete 12-by-6 semi-analytical finite element section at 1 GHz. It saves the local trace order, section operators and modes in `ports_AP_pnc.npz`, with their identity in `thickness_h80_safe_AP_pnc.json`.
+
+Pass the exact SHA-256 of each prior receipt. Assembly reuses the accepted mesh and SAFE section to save the original stiffness, mass, harmonic operator and drives under `stage_AP_pnc.json`. Choose solve memory and time from the measured operator and live allocation checks. A solve can take a stopped prior `solve_AP_pnc.json` receipt to replay accepted drives and compute the remaining channels. Export uses the completed solve receipt to reconstruct the exact original equations, replay the vectors and check independent flux. The comparison uses both saved runs at the original end planes and measures the combined change in thickness discretization and its matching SAFE section at 1 GHz.
+
+The completed control used jobs 1335307/1335308/1335309/1335321/1335341. Reuse their saved artifacts under `results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc/`; no job remains active. The five-drive solve took 2005.88 s with 33.712 GiB peak RSS and 34.776 GiB cgroup peak inside 128 GiB. Exact export on stage host node038 took 25.56 s within 16 GiB. The z4/z6 comparison passes power (0.0000647273) but fails complex response (0.0167063); independent residual and flux checks do not establish spatial convergence. [Verified outcomes and identities](../verification/device_thickness_AP_pnc.json)
+
 ## Open JupyterLab
 
 After the bootstrap succeeds, submit the optional notebook job from the same Lawrence project directory. It requests one CPU and 4 GiB for two hours. Use the node assigned to the running job. The server log is private and contains the token generated for this session.
