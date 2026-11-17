@@ -113,8 +113,11 @@ def work_gram(displacement, force):
     return -0.25 * (work + work.conj().T)
 
 
-def check_coherent_power(reflection, transmission, incident, reflected_basis, left_total, right_total):
+def check_coherent_power(reflection, transmission, incident, reflected_basis, left_total, right_total,
+                         *, incident_roots=None, returning_roots=None):
     """Check left-incident columns in their archived propagating basis."""
+    incident_roots = INCIDENT if incident_roots is None else tuple(incident_roots)
+    returning_roots = RETURNING if returning_roots is None else tuple(returning_roots)
     u_in, f_in = incident
     size = reflection.shape[1]
     identity = np.eye(size)
@@ -157,7 +160,7 @@ def check_coherent_power(reflection, transmission, incident, reflected_basis, le
     values = (incident_power, modal_r, modal_t, direct_r, direct_t, net)
     errors = check_power(*(np.atleast_1d(value) for value in values))
     return {"scope": "Left-incident propagating reflection and transmission in the original SAFE basis",
-            "incident_roots": INCIDENT, "reflected_roots": RETURNING, "transmitted_roots": INCIDENT,
+            "incident_roots": incident_roots, "reflected_roots": returning_roots, "transmitted_roots": incident_roots,
             "flux_gram_entry_limit_w": FLUX_GRAM_LIMIT_W, "flux_gram_errors": gram_errors,
             "flux_gram_cross_direction_maximum_w": cross_error,
             "defect_matrix_real": defect.real.tolist(), "defect_matrix_imag": defect.imag.tolist(),
@@ -171,28 +174,34 @@ def check_coherent_power(reflection, transmission, incident, reflected_basis, le
                 "power_errors": dict(zip(POWER_CHECKS, errors.tolist(), strict=True))}}
 
 
-def body_action(path, vectors):
+def body_action(path, vectors, *, expected_dofs=None):
+    expected_dofs = DOFS if expected_dofs is None else expected_dofs
     matrix = load_npz(path)
-    require(matrix.shape == (DOFS, DOFS) and matrix.dtype == np.float64,
+    require(matrix.shape == (expected_dofs, expected_dofs) and matrix.dtype == np.float64,
             f"Saved body matrix differs from the real displacement space: {path}")
     return matrix @ vectors
 
 
-def replay_fields(fields, mesh_path, section, modes, vectors):
+def replay_fields(fields, mesh_path, section, modes, vectors, *, expected_dofs=None,
+                  incident_roots=None, returning_roots=None, trace_sha256=None):
+    expected_dofs = DOFS if expected_dofs is None else expected_dofs
+    incident_roots = INCIDENT if incident_roots is None else tuple(incident_roots)
+    returning_roots = RETURNING if returning_roots is None else tuple(returning_roots)
+    trace_sha256 = TRACE_SHA if trace_sha256 is None else trace_sha256
     with np.load(mesh_path, allow_pickle=False) as mesh:
         points, tetrahedra = mesh["points_m"].T, mesh["tetrahedra"].T
     arrays = {"points_m": points, "tetrahedra": tetrahedra, "displacements_per_sqrt_w": vectors,
-              "element_order": 2, "frequencies_hz": np.full(len(INCIDENT), FREQUENCY),
-              "incident_mode_indices": INCIDENT, "transmission_mode_indices": INCIDENT,
-              "reflection_mode_indices": RETURNING, "port_wavenumbers_rad_m": modes["wavenumbers_rad_m"],
+              "element_order": 2, "frequencies_hz": np.full(len(incident_roots), FREQUENCY),
+              "incident_mode_indices": incident_roots, "transmission_mode_indices": incident_roots,
+              "reflection_mode_indices": returning_roots, "port_wavenumbers_rad_m": modes["wavenumbers_rad_m"],
               "port_displacements": modes["displacements"], "port_axial_forces": modes["axial_forces"],
               "port_left_dofs": section["left_dofs"], "port_right_dofs": section["right_dofs"]}
     for key, value in arrays.items():
         require(np.array_equal(fields[key], value), f"Exported field identity differs: {key}.")
 
     coordinates, components, elements = (fields[key] for key in ("dof_coordinates_m", "dof_component", "element_dofs"))
-    require(coordinates.shape == (DOFS, 3) and components.shape == (DOFS,)
-            and elements.shape == (30, len(tetrahedra)) and 0 <= elements.min() <= elements.max() < DOFS,
+    require(coordinates.shape == (expected_dofs, 3) and components.shape == (expected_dofs,)
+            and elements.shape == (30, len(tetrahedra)) and 0 <= elements.min() <= elements.max() < expected_dofs,
             "Exported P2 element-to-displacement field layout differs.")
     # The six TetP2 edge midpoints follow the four vertex nodes in the saved layout.
     sites = ((0, 0), (1, 1), (2, 2), (3, 3), (0, 1), (1, 2), (0, 2), (0, 3), (1, 3), (2, 3))
@@ -203,15 +212,15 @@ def replay_fields(fields, mesh_path, section, modes, vectors):
                 and np.allclose(coordinates[ids], expected, rtol=0, atol=2e-20),
                 "A TetP2 node does not have three correctly located Cartesian field components.")
     node_ids = fields["nodal_dofs"]
-    require(node_ids.shape == (3, len(points)) and 0 <= node_ids.min() <= node_ids.max() < DOFS
+    require(node_ids.shape == (3, len(points)) and 0 <= node_ids.min() <= node_ids.max() < expected_dofs
             and np.all(components[node_ids] == np.arange(3)[:, None])
             and np.allclose(coordinates[node_ids], points, rtol=0, atol=2e-20),
             "Exported vertex DOFs do not sample the saved spatial field.")
 
     left, right = section["left_dofs"], section["right_dofs"]
     trace_json = json.dumps([left.tolist(), right.tolist()], separators=(",", ":"))
-    require(hashlib.sha256(trace_json.encode()).hexdigest() == TRACE_SHA, "Ordered trace map SHA-256 differs.")
-    component_ids = np.empty(PORT_DOFS, dtype=int)
+    require(hashlib.sha256(trace_json.encode()).hexdigest() == trace_sha256, "Ordered trace map SHA-256 differs.")
+    component_ids = np.empty(len(left), dtype=int)
     for component, ids in enumerate(section["component_dofs_xyz"]):
         component_ids[ids] = component
     for trace, plane in zip((left, right), PLANES, strict=True):
@@ -221,18 +230,21 @@ def replay_fields(fields, mesh_path, section, modes, vectors):
                 "An original-plane SAFE trace is incomplete or has an incorrect component map.")
 
 
-def replay_ports(modes, fields, left, right, vectors, nodal_force, rhs, rhs_norm):
+def replay_ports(modes, fields, left, right, vectors, nodal_force, rhs, rhs_norm,
+                 *, incident_roots=None, returning_roots=None):
+    incident_roots = INCIDENT if incident_roots is None else tuple(incident_roots)
+    returning_roots = RETURNING if returning_roots is None else tuple(returning_roots)
     plus, minus = (modes[key] for key in ("positive_indices", "negative_indices"))
     propagating = modes["propagating"]
-    require(np.array_equal(plus[propagating[plus]], INCIDENT) and np.array_equal(minus[propagating[minus]], RETURNING),
+    require(np.array_equal(plus[propagating[plus]], incident_roots) and np.array_equal(minus[propagating[minus]], returning_roots),
             "Signed open-channel order differs from the accepted 0.1 GHz point.")
     wavenumbers = modes["wavenumbers_rad_m"]
-    counterparts = np.isclose(wavenumbers[list(INCIDENT), None], -wavenumbers[list(RETURNING)].conj(),
+    counterparts = np.isclose(wavenumbers[list(incident_roots), None], -wavenumbers[list(returning_roots)].conj(),
                               rtol=1e-8, atol=0)
-    require(np.array_equal(counterparts, np.eye(len(INCIDENT), dtype=bool)),
+    require(np.array_equal(counterparts, np.eye(len(incident_roots), dtype=bool)),
             "A within-frequency counterpropagating channel does not have a unique reciprocal wavenumber.")
     u, f = modes["displacements"], modes["axial_forces"]
-    u_in, f_in = u[:, INCIDENT], -f[:, INCIDENT]
+    u_in, f_in = u[:, incident_roots], -f[:, incident_roots]
     u_ref, u_trn = vectors[left] - u_in, vectors[right]
     f_ref, f_trn = nodal_force[left] - f_in, nodal_force[right]
     ref = np.linalg.solve(u[:, minus], u_ref)
@@ -268,18 +280,21 @@ def replay_ports(modes, fields, left, right, vectors, nodal_force, rhs, rhs_norm
     modal_r, modal_t = (result[label][1].sum(axis=0) for label in ("reflection", "transmission"))
     power_maxima = check_power(incident_p, modal_r, modal_t, direct_r, direct_t, net)
     coherent = check_coherent_power(result["reflection"][0], result["transmission"][0], (u_in, f_in),
-                                    (u[:, RETURNING], -f[:, RETURNING]),
-                                    (vectors[left], nodal_force[left]), (u_trn, f_trn))
+                                    (u[:, returning_roots], -f[:, returning_roots]),
+                                    (vectors[left], nodal_force[left]), (u_trn, f_trn),
+                                    incident_roots=incident_roots, returning_roots=returning_roots)
     return result, (modal_r, modal_t, direct_r, direct_t, net), power_maxima, rhs_error, physical_residual, coherent
 
 
-def compare_public_tables(public, blocks, totals):
-    counts = len(INCIDENT)
+def compare_public_tables(public, blocks, totals, *, incident_roots=None, returning_roots=None):
+    incident_roots = INCIDENT if incident_roots is None else tuple(incident_roots)
+    returning_roots = RETURNING if returning_roots is None else tuple(returning_roots)
+    counts = len(incident_roots)
     with (public / "scattering_channels_AP_pnc.csv").open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
     expected = {(kind, incoming, outgoing): (column, row)
-                for kind, roots in (("reflection", RETURNING), ("transmission", INCIDENT))
-                for column, incoming in enumerate(INCIDENT) for row, outgoing in enumerate(roots)}
+                for kind, roots in (("reflection", returning_roots), ("transmission", incident_roots))
+                for column, incoming in enumerate(incident_roots) for row, outgoing in enumerate(roots)}
     for row in rows:
         kind = row["kind"]
         column, index = expected.pop((kind, int(row["incident_port_index"]), int(row["outgoing_port_index"])))

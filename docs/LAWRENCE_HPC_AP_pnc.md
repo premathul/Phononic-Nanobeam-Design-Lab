@@ -204,6 +204,22 @@ Verify transfer hashes and independently replay the original equations and physi
 
 Preserve every existing 0.01 power gate and link representative 3D fields to the accepted vectors. Neither algebraic success nor power balance resolves the existing failed spatial checks. The four-channel and five-channel points retain separate signed inventories; channel-by-channel frequency differences require independent signed correspondence. Select any next sample or refinement from the actual response and field evidence. No dense map, finer-mesh ladder, gap, resonance or Q claim follows from this single exploratory point.
 
+## Matched 0.1 GHz four/six-layer control
+
+`tools/run_lawrence_low_band_z4_AP_pnc.py` and `scripts/hpc/lawrence_low_band_z4_AP_pnc.sbatch` reuse the original Windows h80 four-layer mesh/K/M and the exact frequency-independent 12-by-4 section in `results/runs/full_device_port_resolution/12x4/attempt_lpnbd9kr/`. They preserve the physical geometry, nominal Ge properties and original end planes. No body mesh, body matrix or section matrix is regenerated; only the new 0.1 GHz section modes and frequency-dependent A/RHS are computed. The accepted six-layer point is reused.
+
+The four phases are `safe BODY_STAGE_DIR MESH_DIR SECTION_DIR`, `stage SAFE_DIR SAFE_SHA ORIGINAL_1GHZ_A`, `solve STAGE_DIR STAGE_SHA`, and `export STAGE_DIR STAGE_SHA SOLVE_DIR SOLVE_SHA`. Each batch invocation begins with `PROJECT_ROOT PHASE WORKER_WALL_SECONDS`, followed by these phase inputs. Exact receipt hashes bind the phases. A stopped solve may additionally supply `PRIOR_SOLVE_DIR PRIOR_SOLVE_SHA`; accepted channels are replayed before reuse. Do not resume without a justified continuation and matching identities.
+
+The bounded resource ceilings are 4 GiB/two CPUs/three minutes (150-second worker) for SAFE, 16 GiB/two CPUs/ten minutes (550 seconds) for preparation/export, and one 64-GiB/two-CPU/25-minute direct solve (1400 seconds). Each uses one numerical thread. These are hard ceilings, not predicted usage. The prepared CSC graph and initial factor storage/index exposure must pass before submission, and actual Slurm/cgroup/node headroom is checked before factorization. No automatic retry, allocation escalation or next mesh/frequency is implied. Select the original stage node for exact cached export.
+
+Retrieve each immutable phase and verify every transferred file. Independently replay the saved new modes, four original equations, nodal-force flux, coherent left-incident block and full P2 fields using:
+
+```powershell
+.venv/Scripts/python.exe -B tools/replay_lawrence_z4_control_AP_pnc.py --safe RETURNED_SAFE/safe_AP_pnc.json --stage RETURNED_STAGE/stage_AP_pnc.json --solve RETURNED_SOLVE/solve_AP_pnc.json --export RETURNED_EXPORT/export_AP_pnc.json --compare-z6
+```
+
+The comparison binds the separately accepted z6 replay, establishes signed incoming/reflected/transmitted mass-overlap and gauge correspondence, and retains original-plane complex amplitudes. Power and complex changes each use 0.01. A passing pair is a finite joint body/port thickness-discretization result, not full spatial or frequency convergence. The old failed 1 GHz comparisons remain independent evidence. See the current handoff and `verification/low_band_thickness_AP_pnc.json` for actual state and retained jobs; never rerun a phase merely to follow this recipe.
+
 ## Open JupyterLab
 
 After the bootstrap succeeds, submit the optional notebook job from the same Lawrence project directory. It requests one CPU and 4 GiB for two hours. Use the node assigned to the running job. The server log is private and contains the token generated for this session.
