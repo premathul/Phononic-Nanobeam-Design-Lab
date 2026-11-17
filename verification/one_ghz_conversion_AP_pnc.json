@@ -1,0 +1,2220 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "status": "independently_verified_finite_conversion_pair_diagnosis",
+  "base_revision": "5d7f482622fb6af651c64653c33676665c02e857",
+  "question": "Which rigid-template contents and remainders associate with the dominant 1 GHz reflected conversion pair, and how do they change between the saved z4/z6 sections?",
+  "frequency_hz": 1000000000,
+  "physical_inputs": {
+    "section_width_m": 1e-06,
+    "physical_thickness_m": 2e-07,
+    "density_kg_m3": 5323,
+    "coordinate_convention": "x propagation, y in-plane width, z thickness; saved lab-aligned crystal tensor unchanged",
+    "material_policy": "Nominal fixed-property Ge, not measured mK/4 K sample data",
+    "response_planes_m": [
+      0,
+      1.665e-05
+    ]
+  },
+  "inputs": [
+    {
+      "role": "metric_source",
+      "path": "tools/diagnose_port_polarization_AP_pnc.py",
+      "sha256": "367eb1fa5ed0296df548716cb8eb02e422dd639a23f8ad434dc0e357af5d1e79",
+      "bytes": 29661
+    },
+    {
+      "role": "matching_source",
+      "path": "tools/compare_scattering_AP_pnc.py",
+      "sha256": "148f7efa58ad668a7a57be9db68a3241ffb67ed94067499ce6dcd4a0f8c59313",
+      "bytes": 44347
+    },
+    {
+      "role": "device_thickness_verification",
+      "path": "verification/device_thickness_AP_pnc.json",
+      "sha256": "81f1e195956c1986d067fc397ea1836c284d9e645073e032d323772918532f05",
+      "bytes": 26150
+    },
+    {
+      "role": "thickness_comparison",
+      "path": "results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc/comparisons/scattering-b06d34228c560e43/summary_AP_pnc.json",
+      "sha256": "8a5aea4238d3f09bdd7e97f82cd73d2b74f6a64846ca946633aec08d0b6dede3",
+      "bytes": 40647
+    },
+    {
+      "role": "z4_safe_receipt",
+      "path": "results/runs/full_device_port_resolution/12x4/attempt_lpnbd9kr/checkpoint_AP_pnc.json",
+      "sha256": "677c64a816ea42a8b37e1358d5549d63ecaeec7623a9366139ba64d301bbea4e",
+      "bytes": 3969
+    },
+    {
+      "role": "z6_safe_receipt",
+      "path": "results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc/thickness-h80-safe-1335308/thickness_h80_safe_AP_pnc.json",
+      "sha256": "b5c0d73656e90aa5ba312939c0ef25633af5a775974f5fc778031584d55c78f3",
+      "bytes": 12992
+    },
+    {
+      "role": "h80_z4_summary",
+      "path": "results/runs/full_device_resource_profile/lawrence_h80_AP_pnc/h80-export-1335045/historical_26hole_layered_h80_ny12_z4-3385249d64d1/summary_AP_pnc.json",
+      "sha256": "f65f61eaf62d69fa0574fe8566ba088fd7e090a019685bdac3db95261b61619f",
+      "bytes": 33286
+    },
+    {
+      "role": "h80_z6_summary",
+      "path": "results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc/thickness-h80-export-1335341/historical_26hole_layered_h80_ny12_z6-585ccac1d4f2/summary_AP_pnc.json",
+      "sha256": "040a219f54446219b6a610cf08382ff7e93a6dcb01f31f3be810977651301c4e",
+      "bytes": 59069
+    },
+    {
+      "role": "z4_section",
+      "path": "results/runs/full_device_port_resolution/12x4/attempt_lpnbd9kr/arrays_AP_pnc.npz",
+      "sha256": "2a2aa9347921ac6940f851f2eb53bc06480a28a6cf67c27a000faa357b1404e8",
+      "bytes": 12973330
+    },
+    {
+      "role": "z6_section",
+      "path": "results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc/thickness-h80-safe-1335308/ports_AP_pnc.npz",
+      "sha256": "a13a58e47dee91e4c7d75bb9ec77feb7656ae674392c2f1d7485129da76d0e6a",
+      "bytes": 27241396
+    },
+    {
+      "role": "h80_z4_scattering",
+      "path": "results/runs/full_device_resource_profile/lawrence_h80_AP_pnc/h80-export-1335045/historical_26hole_layered_h80_ny12_z4-3385249d64d1/scattering_AP_pnc.csv",
+      "sha256": "5b718ef9bbdf526540f027af433342209bed3dd8f26b9258ee2bb42158074fc0",
+      "bytes": 918
+    },
+    {
+      "role": "h80_z4_coefficients",
+      "path": "results/runs/full_device_resource_profile/lawrence_h80_AP_pnc/h80-export-1335045/historical_26hole_layered_h80_ny12_z4-3385249d64d1/scattering_channels_AP_pnc.csv",
+      "sha256": "3f8094e029e3abd3c705eb72f0e9f5c360f6e12a00e77fe48f17ce5fb01c9978",
+      "bytes": 4677
+    },
+    {
+      "role": "h80_z6_scattering",
+      "path": "results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc/thickness-h80-export-1335341/historical_26hole_layered_h80_ny12_z6-585ccac1d4f2/scattering_AP_pnc.csv",
+      "sha256": "54cb1ff9cf3d69cef63f3c9858ec7587efee7cec4fe9324751f7094ea323598a",
+      "bytes": 920
+    },
+    {
+      "role": "h80_z6_coefficients",
+      "path": "results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc/thickness-h80-export-1335341/historical_26hole_layered_h80_ny12_z6-585ccac1d4f2/scattering_channels_AP_pnc.csv",
+      "sha256": "bca65a396d45a15c0f3b8ba58a5d85e9add2b1a7b24b3ec111bbebb0310d6014",
+      "bytes": 4670
+    }
+  ],
+  "definitions": {
+    "templates": [
+      "(1,0,0)",
+      "(0,1,0)",
+      "(0,0,1)",
+      "(0,-(z-z_c),y-y_c)"
+    ],
+    "template_order": [
+      "Tx",
+      "Ty",
+      "Tz",
+      "Rx"
+    ],
+    "template_score": "abs(q^H M u)^2 / ((q^H M q)*(u^H M u)); mass-weighted shape overlap, not power",
+    "template_remainder_fraction": "Content outside all four tested rigid templates; retain mixed or higher section shapes",
+    "converted_R": "Sum of reflected power except the unique negative-wavenumber partner of the incident root",
+    "converted_T": "Sum of transmitted power except the incident positive-wavenumber root",
+    "complex_alignment": "S_z6_aligned[out,in] = exp(i*phase_out) * S_z6_raw[out,in] / exp(i*phase_in), using accepted signed section overlaps",
+    "relative_delta": "(value_z6-value_z4)/max(abs(value_z4),1e-12); reporting guard only, not uncertainty",
+    "signed_delta": "z6 minus z4, at the original physical end planes"
+  },
+  "sections": {
+    "z4": {
+      "mass_centroid_yz_m": [
+        3.7113699645567254e-23,
+        -1.3517321888937937e-23
+      ],
+      "mass_per_length_kg_m": 1.0646000000000023e-09,
+      "normalized_template_gram_real": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.8378318611619e-17
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -9.524883562948363e-17
+        ],
+        [
+          0.0,
+          -7.099667741106522e-17,
+          -9.209147953007512e-17,
+          1.0
+        ]
+      ],
+      "normalized_template_gram_imag": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "maximum_template_gram_error": 9.524883562948363e-17,
+      "modes": [
+        {
+          "displacement_mass_norm": 1.19120483738795e-23,
+          "component_fractions_xyz": [
+            0.9795825899073788,
+            0.01997467369299929,
+            0.0004427363996218508
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            0.9788311311234125,
+            6.928548833170599e-26,
+            1.2039774889807933e-24,
+            1.381132034644612e-13
+          ],
+          "template_projection_fraction": 0.9788311311235506,
+          "template_remainder_fraction": 0.02116886887644942,
+          "descriptive_largest_template": "Tx",
+          "root": 1348,
+          "reverse_root": 1349,
+          "wavenumber_rad_m": 1446668.9722198995,
+          "signed_power_w": 1.0
+        },
+        {
+          "displacement_mass_norm": 4.066839899107751e-23,
+          "component_fractions_xyz": [
+            0.0031234918154133084,
+            0.12392533566517491,
+            0.872951172519412
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            3.8512396846626175e-22,
+            1.4787598558274036e-12,
+            0.00027432498627875756,
+            1.7264936877990925e-27
+          ],
+          "template_projection_fraction": 0.00027432498775751743,
+          "template_remainder_fraction": 0.9997256750122425,
+          "descriptive_largest_template": "Tz",
+          "root": 1311,
+          "reverse_root": 1312,
+          "wavenumber_rad_m": 1455967.0707150882,
+          "signed_power_w": 1.0
+        },
+        {
+          "displacement_mass_norm": 1.5483077113624098e-23,
+          "component_fractions_xyz": [
+            0.15566042652061526,
+            0.8439589073183795,
+            0.000380666161005727
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            5.078188734687936e-28,
+            0.8435423239380272,
+            2.705631333962789e-13,
+            7.289264490957207e-27
+          ],
+          "template_projection_fraction": 0.8435423239382978,
+          "template_remainder_fraction": 0.15645767606170224,
+          "descriptive_largest_template": "Ty",
+          "root": 1292,
+          "reverse_root": 1293,
+          "wavenumber_rad_m": 2796959.945550218,
+          "signed_power_w": 1.0
+        },
+        {
+          "displacement_mass_norm": 2.6374754535865388e-23,
+          "component_fractions_xyz": [
+            0.037778906989134484,
+            0.029169022601528923,
+            0.9330520704093362
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            2.670630427272095e-12,
+            2.0413015812009215e-28,
+            1.437760926231769e-25,
+            0.9609004498662373
+          ],
+          "template_projection_fraction": 0.960900449868908,
+          "template_remainder_fraction": 0.03909955013109201,
+          "descriptive_largest_template": "Rx",
+          "root": 1284,
+          "reverse_root": 1285,
+          "wavenumber_rad_m": 4103493.19443145,
+          "signed_power_w": 1.0
+        },
+        {
+          "displacement_mass_norm": 2.2985553354149347e-23,
+          "component_fractions_xyz": [
+            0.06304698064630092,
+            0.0008098539929151502,
+            0.9361431653607835
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            3.994223931125273e-29,
+            1.7610590645257613e-12,
+            0.9341944340631861,
+            1.4990650827482478e-25
+          ],
+          "template_projection_fraction": 0.9341944340649472,
+          "template_remainder_fraction": 0.06580556593505282,
+          "descriptive_largest_template": "Tz",
+          "root": 1274,
+          "reverse_root": 1275,
+          "wavenumber_rad_m": 5196894.30896118,
+          "signed_power_w": 1.0
+        }
+      ],
+      "area_m2": 2.0000000000000044e-13,
+      "density_kg_m3": 5323,
+      "displacement_dofs": 675,
+      "mode_order": [
+        1348,
+        1311,
+        1292,
+        1284,
+        1274
+      ]
+    },
+    "z6": {
+      "mass_centroid_yz_m": [
+        -5.3553246432530684e-24,
+        2.9963669187807137e-24
+      ],
+      "mass_per_length_kg_m": 1.0646000000000019e-09,
+      "normalized_template_gram_real": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.136840941384162e-17
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -6.7595947866085306e-18
+        ],
+        [
+          0.0,
+          -1.2925327547667443e-18,
+          7.646703991240478e-17,
+          1.0
+        ]
+      ],
+      "normalized_template_gram_imag": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "maximum_template_gram_error": 7.646703991240478e-17,
+      "modes": [
+        {
+          "displacement_mass_norm": 1.1912048407094107e-23,
+          "component_fractions_xyz": [
+            0.979582588287709,
+            0.019974671151549554,
+            0.0004427405607412711
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            0.9788311300201284,
+            1.6250438528951146e-25,
+            1.463806523002803e-23,
+            6.056259883224786e-14
+          ],
+          "template_projection_fraction": 0.978831130020189,
+          "template_remainder_fraction": 0.021168869979811045,
+          "descriptive_largest_template": "Tx",
+          "root": 1940,
+          "reverse_root": 1941,
+          "wavenumber_rad_m": 1446668.9734316254,
+          "signed_power_w": 1.0
+        },
+        {
+          "displacement_mass_norm": 4.067162126305366e-23,
+          "component_fractions_xyz": [
+            0.0031258987605419673,
+            0.12391452230175648,
+            0.8729595789377026
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            7.368029938618358e-22,
+            6.11956760974911e-13,
+            0.0002748244723726995,
+            4.36407998594994e-24
+          ],
+          "template_projection_fraction": 0.0002748244729846563,
+          "template_remainder_fraction": 0.9997251755270153,
+          "descriptive_largest_template": "Tz",
+          "root": 1877,
+          "reverse_root": 1878,
+          "wavenumber_rad_m": 1456713.117747428,
+          "signed_power_w": 0.9999999999999998
+        },
+        {
+          "displacement_mass_norm": 1.5483077406581955e-23,
+          "component_fractions_xyz": [
+            0.15566055191481515,
+            0.8439587743128492,
+            0.0003806737723353357
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            4.877161789496939e-26,
+            0.8435421867088423,
+            4.406502691223319e-14,
+            1.7099711764941616e-24
+          ],
+          "template_projection_fraction": 0.8435421867088864,
+          "template_remainder_fraction": 0.15645781329111363,
+          "descriptive_largest_template": "Ty",
+          "root": 1867,
+          "reverse_root": 1868,
+          "wavenumber_rad_m": 2796959.950050019,
+          "signed_power_w": 0.9999999999999999
+        },
+        {
+          "displacement_mass_norm": 2.6376498187328465e-23,
+          "component_fractions_xyz": [
+            0.03778065254221569,
+            0.02917314414604169,
+            0.9330462033117418
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            1.1644526568036208e-12,
+            4.509596458545986e-26,
+            4.549234152143164e-24,
+            0.9609022520139164
+          ],
+          "template_projection_fraction": 0.9609022520150808,
+          "template_remainder_fraction": 0.03909774798491916,
+          "descriptive_largest_template": "Rx",
+          "root": 1855,
+          "reverse_root": 1856,
+          "wavenumber_rad_m": 4103881.6497028815,
+          "signed_power_w": 1.0
+        },
+        {
+          "displacement_mass_norm": 2.298669359924368e-23,
+          "component_fractions_xyz": [
+            0.0630415433227545,
+            0.0008115020856082035,
+            0.9361469545916374
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            2.7933730188685375e-28,
+            9.257307592821962e-15,
+            0.9341942309535402,
+            3.354482502324249e-25
+          ],
+          "template_projection_fraction": 0.9341942309535494,
+          "template_remainder_fraction": 0.06580576904645064,
+          "descriptive_largest_template": "Tz",
+          "root": 1837,
+          "reverse_root": 1838,
+          "wavenumber_rad_m": 5197002.628338026,
+          "signed_power_w": 1.0
+        }
+      ],
+      "area_m2": 2.0000000000000036e-13,
+      "density_kg_m3": 5323,
+      "displacement_dofs": 975,
+      "mode_order": [
+        1940,
+        1877,
+        1867,
+        1855,
+        1837
+      ]
+    }
+  },
+  "responses": {
+    "h80_z4": {
+      "run_hash": "3385249d64d1caccdf2c9df3728d91ca8d42749d640c2d822ec54ba5c609cd7b",
+      "rows": [
+        {
+          "root": 1348,
+          "reverse_root": 1349,
+          "R": 0.002920405436301207,
+          "T": 0.9970795945637203,
+          "converted_R": 1.3264643626050203e-08,
+          "converted_T": 9.254636981216738e-09,
+          "displacement_mass_norm": 1.19120483738795e-23,
+          "component_fractions_xyz": [
+            0.9795825899073788,
+            0.01997467369299929,
+            0.0004427363996218508
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            0.9788311311234125,
+            6.928548833170599e-26,
+            1.2039774889807933e-24,
+            1.381132034644612e-13
+          ],
+          "template_projection_fraction": 0.9788311311235506,
+          "template_remainder_fraction": 0.02116886887644942,
+          "descriptive_largest_template": "Tx",
+          "wavenumber_rad_m": 1446668.9722198995,
+          "signed_power_w": 1.0
+        },
+        {
+          "root": 1311,
+          "reverse_root": 1312,
+          "R": 0.0013703220548834465,
+          "T": 0.9986296779450655,
+          "converted_R": 0.0011241827982985798,
+          "converted_T": 8.046162011757953e-06,
+          "displacement_mass_norm": 4.066839899107751e-23,
+          "component_fractions_xyz": [
+            0.0031234918154133084,
+            0.12392533566517491,
+            0.872951172519412
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            3.8512396846626175e-22,
+            1.4787598558274036e-12,
+            0.00027432498627875756,
+            1.7264936877990925e-27
+          ],
+          "template_projection_fraction": 0.00027432498775751743,
+          "template_remainder_fraction": 0.9997256750122425,
+          "descriptive_largest_template": "Tz",
+          "wavenumber_rad_m": 1455967.0707150882,
+          "signed_power_w": 1.0
+        },
+        {
+          "root": 1292,
+          "reverse_root": 1293,
+          "R": 0.04451559786503775,
+          "T": 0.9554844021349305,
+          "converted_R": 1.0554154782324788e-08,
+          "converted_T": 8.895240135396596e-08,
+          "displacement_mass_norm": 1.5483077113624098e-23,
+          "component_fractions_xyz": [
+            0.15566042652061526,
+            0.8439589073183795,
+            0.000380666161005727
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            5.078188734687936e-28,
+            0.8435423239380272,
+            2.705631333962789e-13,
+            7.289264490957207e-27
+          ],
+          "template_projection_fraction": 0.8435423239382978,
+          "template_remainder_fraction": 0.15645767606170224,
+          "descriptive_largest_template": "Ty",
+          "wavenumber_rad_m": 2796959.945550218,
+          "signed_power_w": 1.0
+        },
+        {
+          "root": 1284,
+          "reverse_root": 1285,
+          "R": 0.007497118826734592,
+          "T": 0.9925028811732542,
+          "converted_R": 4.050332226278454e-08,
+          "converted_T": 3.7006983244215685e-08,
+          "displacement_mass_norm": 2.6374754535865388e-23,
+          "component_fractions_xyz": [
+            0.037778906989134484,
+            0.029169022601528923,
+            0.9330520704093362
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            2.670630427272095e-12,
+            2.0413015812009215e-28,
+            1.437760926231769e-25,
+            0.9609004498662373
+          ],
+          "template_projection_fraction": 0.960900449868908,
+          "template_remainder_fraction": 0.03909955013109201,
+          "descriptive_largest_template": "Rx",
+          "wavenumber_rad_m": 4103493.19443145,
+          "signed_power_w": 1.0
+        },
+        {
+          "root": 1274,
+          "reverse_root": 1275,
+          "R": 0.0027479555089634546,
+          "T": 0.9972520444910562,
+          "converted_R": 0.0011241960522103682,
+          "converted_T": 8.150973978422514e-06,
+          "displacement_mass_norm": 2.2985553354149347e-23,
+          "component_fractions_xyz": [
+            0.06304698064630092,
+            0.0008098539929151502,
+            0.9361431653607835
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            3.994223931125273e-29,
+            1.7610590645257613e-12,
+            0.9341944340631861,
+            1.4990650827482478e-25
+          ],
+          "template_projection_fraction": 0.9341944340649472,
+          "template_remainder_fraction": 0.06580556593505282,
+          "descriptive_largest_template": "Tz",
+          "wavenumber_rad_m": 5196894.30896118,
+          "signed_power_w": 1.0
+        }
+      ],
+      "coefficients": [
+        {
+          "kind": "reflection",
+          "incident_root": 1348,
+          "outgoing_root": 1349,
+          "amplitude_real": -0.020606080389786285,
+          "amplitude_imag": 0.049957798416536005,
+          "power_fraction": 0.0029203921716575813
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1348,
+          "outgoing_root": 1312,
+          "amplitude_real": 3.246822274993629e-05,
+          "amplitude_imag": 1.3063478341790133e-05,
+          "power_fraction": 1.2248399549259003e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1348,
+          "outgoing_root": 1293,
+          "amplitude_real": 6.752681188736011e-06,
+          "amplitude_imag": -5.853594748928397e-05,
+          "power_fraction": 3.4720558517049206e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1348,
+          "outgoing_root": 1285,
+          "amplitude_real": 5.397876668494034e-06,
+          "amplitude_imag": -8.021925829441304e-05,
+          "power_fraction": 6.464266473834025e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1348,
+          "outgoing_root": 1275,
+          "amplitude_real": -2.4916477790135808e-05,
+          "amplitude_imag": 3.8505200689244904e-05,
+          "power_fraction": 2.1034813455853572e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1348,
+          "outgoing_root": 1348,
+          "amplitude_real": 0.9230461115482504,
+          "amplitude_imag": 0.3808746004457876,
+          "power_fraction": 0.9970795853090834
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1348,
+          "outgoing_root": 1311,
+          "amplitude_real": -1.8814560008580856e-06,
+          "amplitude_imag": 6.4023747233940785e-06,
+          "power_fraction": 4.4530278781920294e-11
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1348,
+          "outgoing_root": 1292,
+          "amplitude_real": -6.265875853546999e-05,
+          "amplitude_imag": -2.3202805748593507e-05,
+          "power_fraction": 4.464490215813297e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1348,
+          "outgoing_root": 1284,
+          "amplitude_real": 3.4149810734306e-05,
+          "amplitude_imag": -4.768176792161024e-05,
+          "power_fraction": 3.4397605653192206e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1348,
+          "outgoing_root": 1274,
+          "amplitude_real": -1.9981711909180828e-05,
+          "amplitude_imag": -3.0109585026712014e-05,
+          "power_fraction": 1.3058559213022992e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1311,
+          "outgoing_root": 1349,
+          "amplitude_real": 3.246822197283994e-05,
+          "amplitude_imag": 1.3063475478342575e-05,
+          "power_fraction": 1.2248398296508648e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1311,
+          "outgoing_root": 1312,
+          "amplitude_real": -0.012471989029013716,
+          "amplitude_imag": 0.009517812051360755,
+          "power_fraction": 0.0002461392565848668
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1311,
+          "outgoing_root": 1293,
+          "amplitude_real": 3.120109157202959e-05,
+          "amplitude_imag": -1.6278459352482154e-05,
+          "power_fraction": 1.2384963541765905e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1311,
+          "outgoing_root": 1285,
+          "amplitude_real": 4.8737397177994904e-05,
+          "amplitude_imag": 9.920693214006098e-05,
+          "power_fraction": 1.22173492683283e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1311,
+          "outgoing_root": 1275,
+          "amplitude_real": 0.026869004689650075,
+          "amplitude_imag": 0.02005554049634885,
+          "power_fraction": 0.0011241681176131276
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1311,
+          "outgoing_root": 1348,
+          "amplitude_real": 4.6244311220937676e-06,
+          "amplitude_imag": -8.04916166814375e-07,
+          "power_fraction": 2.2033253238588587e-11
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1311,
+          "outgoing_root": 1311,
+          "amplitude_real": -0.617516354566102,
+          "amplitude_imag": -0.7856813499291205,
+          "power_fraction": 0.9986216317830537
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1311,
+          "outgoing_root": 1292,
+          "amplitude_real": 8.732473690141774e-05,
+          "amplitude_imag": -0.0002633156134988989,
+          "power_fraction": 7.69607219872034e-08
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1311,
+          "outgoing_root": 1284,
+          "amplitude_real": 9.312002370878113e-05,
+          "amplitude_imag": -2.8011213263061426e-05,
+          "power_fraction": 9.455966883992677e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1311,
+          "outgoing_root": 1274,
+          "amplitude_real": -0.0016072860293027307,
+          "amplitude_imag": -0.0023186968127898422,
+          "power_fraction": 7.959723289633518e-06
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1292,
+          "outgoing_root": 1349,
+          "amplitude_real": 6.752681241891165e-06,
+          "amplitude_imag": -5.8535947444658685e-05,
+          "power_fraction": 3.472055847198433e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1292,
+          "outgoing_root": 1312,
+          "amplitude_real": 3.120109154719243e-05,
+          "amplitude_imag": -1.6278459235237148e-05,
+          "power_fraction": 1.2384963488095604e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1292,
+          "outgoing_root": 1293,
+          "amplitude_real": 0.004440854281068098,
+          "amplitude_imag": 0.21094043264423554,
+          "power_fraction": 0.04451558731088296
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1292,
+          "outgoing_root": 1285,
+          "amplitude_real": 2.9818218682518926e-05,
+          "amplitude_imag": 5.289040898810562e-06,
+          "power_fraction": 9.171001190278121e-10
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1292,
+          "outgoing_root": 1275,
+          "amplitude_real": 4.519812222499949e-07,
+          "amplitude_imag": 7.018759278008981e-05,
+          "power_fraction": 4.9265024672889825e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1292,
+          "outgoing_root": 1348,
+          "amplitude_real": 8.06100083720897e-05,
+          "amplitude_imag": 4.543965514316055e-06,
+          "power_fraction": 6.518621072343667e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1292,
+          "outgoing_root": 1311,
+          "amplitude_real": -0.00015294426558577854,
+          "amplitude_imag": 0.00023271493165040311,
+          "power_fraction": 7.754818778862497e-08
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1292,
+          "outgoing_root": 1292,
+          "amplitude_real": 0.9772759208578021,
+          "amplitude_imag": -0.020398227718694834,
+          "power_fraction": 0.9554843131825291
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1292,
+          "outgoing_root": 1284,
+          "amplitude_real": 2.3192710920528424e-05,
+          "amplitude_imag": 3.7567498854438336e-05,
+          "power_fraction": 1.949218810021424e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1292,
+          "outgoing_root": 1274,
+          "amplitude_real": -5.391507261532765e-05,
+          "amplitude_imag": -5.434945065025472e-06,
+          "power_fraction": 2.9363736829758986e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1284,
+          "outgoing_root": 1349,
+          "amplitude_real": 5.3978767921012925e-06,
+          "amplitude_imag": -8.021925821469526e-05,
+          "power_fraction": 6.46426646237866e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1284,
+          "outgoing_root": 1312,
+          "amplitude_real": 4.8737397122471874e-05,
+          "amplitude_imag": 9.920693214473229e-05,
+          "power_fraction": 1.2217349263843052e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1284,
+          "outgoing_root": 1293,
+          "amplitude_real": 2.9818218703729048e-05,
+          "amplitude_imag": 5.289040928781224e-06,
+          "power_fraction": 9.171001206097404e-10
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1284,
+          "outgoing_root": 1285,
+          "amplitude_real": 0.014227475588391634,
+          "amplitude_imag": 0.0854087657198841,
+          "power_fraction": 0.00749707832341233
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1284,
+          "outgoing_root": 1275,
+          "amplitude_real": 4.795745932206947e-05,
+          "amplitude_imag": -0.00013639900480327973,
+          "power_fraction": 2.0904606415953086e-08
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1284,
+          "outgoing_root": 1348,
+          "amplitude_real": 3.3710283077745226e-05,
+          "amplitude_imag": 5.540954027651595e-05,
+          "power_fraction": 4.2066003388365616e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1284,
+          "outgoing_root": 1311,
+          "amplitude_real": -4.1921735081057405e-05,
+          "amplitude_imag": -7.868280854727274e-05,
+          "power_fraction": 7.948416233093139e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1284,
+          "outgoing_root": 1292,
+          "amplitude_real": 1.4113092840304113e-05,
+          "amplitude_imag": -3.809222505218726e-05,
+          "power_fraction": 1.6501969989455267e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1284,
+          "outgoing_root": 1284,
+          "amplitude_real": -0.9828528280037817,
+          "amplitude_imag": 0.1627979196772465,
+          "power_fraction": 0.992502844166271
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1284,
+          "outgoing_root": 1274,
+          "amplitude_real": 2.451383966131426e-05,
+          "amplitude_imag": -0.00015033576200758033,
+          "power_fraction": 2.320176967334046e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1274,
+          "outgoing_root": 1349,
+          "amplitude_real": -2.491647673991258e-05,
+          "amplitude_imag": 3.8505202401713626e-05,
+          "power_fraction": 2.103481425127537e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1274,
+          "outgoing_root": 1312,
+          "amplitude_real": 0.02686900468970344,
+          "amplitude_imag": 0.020055540496449063,
+          "power_fraction": 0.0011241681176200138
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1274,
+          "outgoing_root": 1293,
+          "amplitude_real": 4.5198120623612286e-07,
+          "amplitude_imag": 7.018759280724291e-05,
+          "power_fraction": 4.926502471086125e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1274,
+          "outgoing_root": 1285,
+          "amplitude_real": 4.795745949205643e-05,
+          "amplitude_imag": -0.00013639900489852976,
+          "power_fraction": 2.0904606458241375e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1274,
+          "outgoing_root": 1275,
+          "amplitude_real": 0.014780109123016732,
+          "amplitude_imag": -0.037487435642689734,
+          "power_fraction": 0.001623759456753086
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1274,
+          "outgoing_root": 1348,
+          "amplitude_real": 3.4090520083704585e-05,
+          "amplitude_imag": -9.600173652787245e-06,
+          "power_fraction": 1.2543268937411356e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1274,
+          "outgoing_root": 1311,
+          "amplitude_real": -0.0015665564094565249,
+          "amplitude_imag": -0.0023817127480119916,
+          "power_fraction": 8.12665459805215e-06
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1274,
+          "outgoing_root": 1292,
+          "amplitude_real": 4.091623121775621e-05,
+          "amplitude_imag": 1.3117876443112484e-05,
+          "power_fraction": 1.8462166594416527e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1274,
+          "outgoing_root": 1284,
+          "amplitude_real": -1.0137554559619625e-05,
+          "amplitude_imag": 0.0001453136841619951,
+          "power_fraction": 2.1218836817181326e-08
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1274,
+          "outgoing_root": 1274,
+          "amplitude_real": 0.929675812307192,
+          "amplitude_imag": 0.36461867413510357,
+          "power_fraction": 0.9972438935170778
+        }
+      ],
+      "section": "z4"
+    },
+    "h80_z6": {
+      "run_hash": "585ccac1d4f291515df074be553b2dd3ff0a920b164c545f9825197ed6027ed3",
+      "rows": [
+        {
+          "root": 1940,
+          "reverse_root": 1941,
+          "R": 0.002916720366016116,
+          "T": 0.9970832796339524,
+          "converted_R": 7.865409710537996e-09,
+          "converted_T": 7.657619193957599e-09,
+          "displacement_mass_norm": 1.1912048407094107e-23,
+          "component_fractions_xyz": [
+            0.979582588287709,
+            0.019974671151549554,
+            0.0004427405607412711
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            0.9788311300201284,
+            1.6250438528951146e-25,
+            1.463806523002803e-23,
+            6.056259883224786e-14
+          ],
+          "template_projection_fraction": 0.978831130020189,
+          "template_remainder_fraction": 0.021168869979811045,
+          "descriptive_largest_template": "Tx",
+          "wavenumber_rad_m": 1446668.9734316254,
+          "signed_power_w": 1.0
+        },
+        {
+          "root": 1877,
+          "reverse_root": 1878,
+          "R": 0.0013941418050240583,
+          "T": 0.9986058581950351,
+          "converted_R": 0.0010807682236590754,
+          "converted_T": 7.484674361702e-06,
+          "displacement_mass_norm": 4.067162126305366e-23,
+          "component_fractions_xyz": [
+            0.0031258987605419673,
+            0.12391452230175648,
+            0.8729595789377026
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            7.368029938618358e-22,
+            6.11956760974911e-13,
+            0.0002748244723726995,
+            4.36407998594994e-24
+          ],
+          "template_projection_fraction": 0.0002748244729846563,
+          "template_remainder_fraction": 0.9997251755270153,
+          "descriptive_largest_template": "Tz",
+          "wavenumber_rad_m": 1456713.117747428,
+          "signed_power_w": 0.9999999999999998
+        },
+        {
+          "root": 1867,
+          "reverse_root": 1868,
+          "R": 0.044529404406506164,
+          "T": 0.9554705955934778,
+          "converted_R": 5.999956568996667e-09,
+          "converted_T": 4.488249776433918e-08,
+          "displacement_mass_norm": 1.5483077406581955e-23,
+          "component_fractions_xyz": [
+            0.15566055191481515,
+            0.8439587743128492,
+            0.0003806737723353357
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            4.877161789496939e-26,
+            0.8435421867088423,
+            4.406502691223319e-14,
+            1.7099711764941616e-24
+          ],
+          "template_projection_fraction": 0.8435421867088864,
+          "template_remainder_fraction": 0.15645781329111363,
+          "descriptive_largest_template": "Ty",
+          "wavenumber_rad_m": 2796959.950050019,
+          "signed_power_w": 0.9999999999999999
+        },
+        {
+          "root": 1855,
+          "reverse_root": 1856,
+          "R": 0.007561846123301554,
+          "T": 0.9924381538767205,
+          "converted_R": 3.0991574351810655e-08,
+          "converted_T": 2.334664054368253e-08,
+          "displacement_mass_norm": 2.6376498187328465e-23,
+          "component_fractions_xyz": [
+            0.03778065254221569,
+            0.02917314414604169,
+            0.9330462033117418
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            1.1644526568036208e-12,
+            4.509596458545986e-26,
+            4.549234152143164e-24,
+            0.9609022520139164
+          ],
+          "template_projection_fraction": 0.9609022520150808,
+          "template_remainder_fraction": 0.03909774798491916,
+          "descriptive_largest_template": "Rx",
+          "wavenumber_rad_m": 4103881.6497028815,
+          "signed_power_w": 1.0
+        },
+        {
+          "root": 1837,
+          "reverse_root": 1838,
+          "R": 0.0027156395289467065,
+          "T": 0.9972843604709828,
+          "converted_R": 0.0010807800752418203,
+          "converted_T": 7.602590176352907e-06,
+          "displacement_mass_norm": 2.298669359924368e-23,
+          "component_fractions_xyz": [
+            0.0630415433227545,
+            0.0008115020856082035,
+            0.9361469545916374
+          ],
+          "template_scores_tx_ty_tz_rx": [
+            2.7933730188685375e-28,
+            9.257307592821962e-15,
+            0.9341942309535402,
+            3.354482502324249e-25
+          ],
+          "template_projection_fraction": 0.9341942309535494,
+          "template_remainder_fraction": 0.06580576904645064,
+          "descriptive_largest_template": "Tz",
+          "wavenumber_rad_m": 5197002.628338026,
+          "signed_power_w": 1.0
+        }
+      ],
+      "coefficients": [
+        {
+          "kind": "reflection",
+          "incident_root": 1940,
+          "outgoing_root": 1941,
+          "amplitude_real": -0.02060202813603618,
+          "amplitude_imag": 0.04992262951095805,
+          "power_fraction": 0.0029167125006064054
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1940,
+          "outgoing_root": 1878,
+          "amplitude_real": -2.094644754670707e-05,
+          "amplitude_imag": -9.135645135837072e-06,
+          "power_fraction": 5.222136768748941e-10
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1940,
+          "outgoing_root": 1868,
+          "amplitude_real": 5.47612255743304e-06,
+          "amplitude_imag": -5.3318912810850785e-05,
+          "power_fraction": 2.8728943815951347e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1940,
+          "outgoing_root": 1856,
+          "amplitude_real": 2.9314271594696823e-06,
+          "amplitude_imag": -5.95968504724753e-05,
+          "power_fraction": 3.560377851429856e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1940,
+          "outgoing_root": 1838,
+          "amplitude_real": 1.6159439145040033e-05,
+          "amplitude_imag": -2.547148066280913e-05,
+          "power_fraction": 9.099238006381116e-10
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1940,
+          "outgoing_root": 1940,
+          "amplitude_real": 0.9229745552171776,
+          "amplitude_imag": 0.3810528078862384,
+          "power_fraction": 0.9970832719763332
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1940,
+          "outgoing_root": 1877,
+          "amplitude_real": -4.778461388590825e-07,
+          "amplitude_imag": -5.484420144123067e-06,
+          "power_fraction": 3.03072012496854e-11
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1940,
+          "outgoing_root": 1867,
+          "amplitude_real": -6.571856590147921e-05,
+          "amplitude_imag": -2.94427291942405e-05,
+          "power_fraction": 5.185804206552446e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1940,
+          "outgoing_root": 1855,
+          "amplitude_real": 2.2119640433470365e-05,
+          "amplitude_imag": -3.638365489784193e-05,
+          "power_fraction": 1.813048836631274e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1940,
+          "outgoing_root": 1837,
+          "amplitude_real": 1.3048461239771097e-05,
+          "amplitude_imag": 2.140552752908426e-05,
+          "power_fraction": 6.284589495241928e-10
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1877,
+          "outgoing_root": 1941,
+          "amplitude_real": -2.0946448453512283e-05,
+          "amplitude_imag": -9.135648072557553e-06,
+          "power_fraction": 5.222137685212719e-10
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1877,
+          "outgoing_root": 1878,
+          "amplitude_real": -0.014231763149368712,
+          "amplitude_imag": 0.01052760651930217,
+          "power_fraction": 0.0003133735813649828
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1877,
+          "outgoing_root": 1868,
+          "amplitude_real": -2.2203238232094144e-05,
+          "amplitude_imag": 1.4144272515410847e-05,
+          "power_fraction": 6.930442329813338e-10
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1877,
+          "outgoing_root": 1856,
+          "amplitude_real": -5.219489246889873e-05,
+          "amplitude_imag": -7.549987291520276e-05,
+          "power_fraction": 8.424537610051668e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1877,
+          "outgoing_root": 1838,
+          "amplitude_real": 0.02607412443955871,
+          "amplitude_imag": 0.020022452861072508,
+          "power_fraction": 0.001080758583863464
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1877,
+          "outgoing_root": 1940,
+          "amplitude_real": -4.739449403067504e-06,
+          "amplitude_imag": -7.852935047632781e-07,
+          "power_fraction": 2.307906653286032e-11
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1877,
+          "outgoing_root": 1877,
+          "amplitude_real": -0.6042885585670932,
+          "amplitude_imag": -0.7958854889401981,
+          "power_fraction": 0.9985983735206734
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1877,
+          "outgoing_root": 1867,
+          "amplitude_real": -6.068952026119289e-05,
+          "amplitude_imag": 0.00017788036814240862,
+          "power_fraction": 3.5324643240012565e-08
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1877,
+          "outgoing_root": 1855,
+          "amplitude_real": -7.739238681062342e-05,
+          "amplitude_imag": 3.0032790865737116e-05,
+          "power_fraction": 6.891550063430262e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1877,
+          "outgoing_root": 1837,
+          "amplitude_real": -0.0014771069677371694,
+          "amplitude_imag": -0.002293597631493878,
+          "power_fraction": 7.442435089332024e-06
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1867,
+          "outgoing_root": 1941,
+          "amplitude_real": 5.476122475246024e-06,
+          "amplitude_imag": -5.331891274565112e-05,
+          "power_fraction": 2.872894373742252e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1867,
+          "outgoing_root": 1878,
+          "amplitude_real": -2.2203238122247232e-05,
+          "amplitude_imag": 1.4144272323902132e-05,
+          "power_fraction": 6.930442226859165e-10
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1867,
+          "outgoing_root": 1868,
+          "amplitude_real": 0.004255906127571549,
+          "amplitude_imag": 0.2109769790038309,
+          "power_fraction": 0.0445293984065496
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1867,
+          "outgoing_root": 1856,
+          "amplitude_real": 2.0064306414073845e-05,
+          "amplitude_imag": 5.198250768428144e-06,
+          "power_fraction": 4.295982029293086e-10
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1867,
+          "outgoing_root": 1838,
+          "amplitude_real": -2.954705769358378e-08,
+          "amplitude_imag": -4.477073705681616e-05,
+          "power_fraction": 2.00441976963919e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1867,
+          "outgoing_root": 1940,
+          "amplitude_real": 8.420910263322683e-05,
+          "amplitude_imag": -1.8947203391144634e-07,
+          "power_fraction": 7.0912088659449634e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1867,
+          "outgoing_root": 1877,
+          "amplitude_real": 0.00010569184938585293,
+          "amplitude_imag": -0.0001561225169446831,
+          "power_fraction": 3.554500732374467e-08
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1867,
+          "outgoing_root": 1867,
+          "amplitude_real": 0.9772874949182154,
+          "amplitude_imag": -0.019485968989480938,
+          "power_fraction": 0.9554705507109801
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1867,
+          "outgoing_root": 1855,
+          "amplitude_real": 1.3969528393559756e-05,
+          "amplitude_imag": 2.6820773508581914e-05,
+          "power_fraction": 9.145016151371215e-10
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1867,
+          "outgoing_root": 1837,
+          "amplitude_real": 3.610057622706805e-05,
+          "amplitude_imag": 5.341194209731608e-06,
+          "power_fraction": 1.3317799595124214e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1855,
+          "outgoing_root": 1941,
+          "amplitude_real": 2.9314269687201927e-06,
+          "amplitude_imag": -5.9596850301798986e-05,
+          "power_fraction": 3.560377829967978e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1855,
+          "outgoing_root": 1878,
+          "amplitude_real": -5.219489246347802e-05,
+          "amplitude_imag": -7.549987289495809e-05,
+          "power_fraction": 8.424537606428862e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1855,
+          "outgoing_root": 1868,
+          "amplitude_real": 2.006430675085514e-05,
+          "amplitude_imag": 5.198250294269069e-06,
+          "power_fraction": 4.295982115142797e-10
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1855,
+          "outgoing_root": 1856,
+          "amplitude_real": 0.012938478039822867,
+          "amplitude_imag": 0.08599076065334127,
+          "power_fraction": 0.0075618151317272024
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1855,
+          "outgoing_root": 1838,
+          "amplitude_real": -5.518522192942577e-05,
+          "amplitude_imag": 0.00012462604857933817,
+          "power_fraction": 1.8577060703899534e-08
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1855,
+          "outgoing_root": 1940,
+          "amplitude_real": 2.102914988135782e-05,
+          "amplitude_imag": 4.168657513802095e-05,
+          "power_fraction": 2.1799956914704777e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1855,
+          "outgoing_root": 1877,
+          "amplitude_real": 2.8647870105008225e-05,
+          "amplitude_imag": 7.153596663150102e-05,
+          "power_fraction": 5.938094983456653e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1855,
+          "outgoing_root": 1867,
+          "amplitude_real": 7.56742546421402e-06,
+          "amplitude_imag": -2.6709703969640398e-05,
+          "power_fraction": 7.706742143022588e-10
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1855,
+          "outgoing_root": 1855,
+          "amplitude_real": -0.9851771041073761,
+          "amplitude_imag": 0.1478654931776985,
+          "power_fraction": 0.99243813053008
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1855,
+          "outgoing_root": 1837,
+          "amplitude_real": -2.807303952425847e-06,
+          "amplitude_imag": 0.00012020813075234066,
+          "power_fraction": 1.445787565445314e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1837,
+          "outgoing_root": 1941,
+          "amplitude_real": 1.615944021798893e-05,
+          "amplitude_imag": -2.5471478898865002e-05,
+          "power_fraction": 9.099237454540832e-10
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1837,
+          "outgoing_root": 1878,
+          "amplitude_real": 0.026074124439298536,
+          "amplitude_imag": 0.020022452860766836,
+          "power_fraction": 0.001080758583837655
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1837,
+          "outgoing_root": 1868,
+          "amplitude_real": -2.9546926639311732e-08,
+          "amplitude_imag": -4.4770737210485407e-05,
+          "power_fraction": 2.0044197833912166e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1837,
+          "outgoing_root": 1856,
+          "amplitude_real": -5.518522166367757e-05,
+          "amplitude_imag": 0.00012462604842687579,
+          "power_fraction": 1.857706063656722e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1837,
+          "outgoing_root": 1838,
+          "amplitude_real": 0.015211162141310694,
+          "amplitude_imag": -0.03746304846132576,
+          "power_fraction": 0.0016348594537048864
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1837,
+          "outgoing_root": 1940,
+          "amplitude_real": -2.3534735677259958e-05,
+          "amplitude_imag": 7.219640185517027e-06,
+          "power_fraction": 6.060069878068252e-10
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1837,
+          "outgoing_root": 1877,
+          "amplitude_real": -0.0014428135921543603,
+          "amplitude_imag": -0.0023465725008465143,
+          "power_fraction": 7.58811356343443e-06
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1837,
+          "outgoing_root": 1867,
+          "amplitude_real": -2.8358163673762093e-05,
+          "amplitude_imag": -7.387320600486401e-06,
+          "power_fraction": 8.587579526022505e-10
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1837,
+          "outgoing_root": 1855,
+          "amplitude_real": 2.7837994438676283e-05,
+          "amplitude_imag": -0.00011062049558603301,
+          "power_fraction": 1.3011847978067323e-08
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1837,
+          "outgoing_root": 1837,
+          "amplitude_real": 0.9259252542519428,
+          "amplitude_imag": 0.3740844576018649,
+          "power_fraction": 0.9972767578808064
+        }
+      ],
+      "section": "z6"
+    }
+  },
+  "signed_matches": {
+    "incoming": {
+      "reference_roots": [
+        1348,
+        1311,
+        1292,
+        1284,
+        1274
+      ],
+      "candidate_roots": [
+        1940,
+        1877,
+        1867,
+        1855,
+        1837
+      ],
+      "mass_overlaps": [
+        0.9999999999997947,
+        0.9999999908428823,
+        0.9999999999725246,
+        0.9999999883300019,
+        0.9999999945384506
+      ],
+      "candidate_gauge_phase_rad": [
+        -3.141592653569249,
+        -8.615807023944254e-14,
+        3.1415926535893552,
+        -3.1415926535894307,
+        -3.2787557520267564e-13
+      ],
+      "reference_wavenumber_rad_m": [
+        1446668.9722198995,
+        1455967.0707150882,
+        2796959.945550218,
+        4103493.19443145,
+        5196894.30896118
+      ],
+      "candidate_wavenumber_rad_m": [
+        1446668.9734316254,
+        1456713.117747428,
+        2796959.950050019,
+        4103881.6497028815,
+        5197002.628338026
+      ],
+      "relative_wavenumber_change": [
+        8.375971954477299e-10,
+        0.0005124065285166892,
+        1.608818523151937e-09,
+        9.466453409948117e-05,
+        2.0843097897731985e-05
+      ]
+    },
+    "reflection": {
+      "reference_roots": [
+        1349,
+        1312,
+        1293,
+        1285,
+        1275
+      ],
+      "candidate_roots": [
+        1941,
+        1878,
+        1868,
+        1856,
+        1838
+      ],
+      "mass_overlaps": [
+        0.9999999999997947,
+        0.9999999908428823,
+        0.9999999999725246,
+        0.9999999883300019,
+        0.9999999945384506
+      ],
+      "candidate_gauge_phase_rad": [
+        3.141592653569249,
+        8.615807023944254e-14,
+        -3.1415926535893552,
+        3.1415926535894307,
+        3.2787557520267564e-13
+      ],
+      "reference_wavenumber_rad_m": [
+        -1446668.9722198995,
+        -1455967.0707150882,
+        -2796959.945550218,
+        -4103493.19443145,
+        -5196894.30896118
+      ],
+      "candidate_wavenumber_rad_m": [
+        -1446668.9734316254,
+        -1456713.117747428,
+        -2796959.950050019,
+        -4103881.6497028815,
+        -5197002.628338026
+      ],
+      "relative_wavenumber_change": [
+        8.375971954477299e-10,
+        0.0005124065285166892,
+        1.608818523151937e-09,
+        9.466453409948117e-05,
+        2.0843097897731985e-05
+      ]
+    }
+  },
+  "matched_rows": [
+    {
+      "z4_root": 1348,
+      "z6_root": 1940,
+      "mass_overlap": 0.9999999999997947,
+      "z6_minus_z4_component_fractions_xyz": [
+        -1.6196697316672726e-09,
+        -2.5414497381581747e-09,
+        4.161119420277408e-09
+      ],
+      "z6_minus_z4_template_scores_tx_ty_tz_rx": [
+        -1.1032840196989468e-09,
+        9.321889695780548e-26,
+        1.343408774104724e-23,
+        -7.755060463221334e-14
+      ],
+      "z6_minus_z4_template_projection_fraction": -1.1033616242883681e-09,
+      "z6_minus_z4_template_remainder_fraction": 1.1033616242883681e-09,
+      "z6_minus_z4_R": -3.6850702850909148e-06,
+      "z6_minus_z4_relative_R": -0.001261835168256015,
+      "z6_minus_z4_T": 3.6850702320734285e-06,
+      "z6_minus_z4_relative_T": 3.6958636523755747e-06,
+      "z6_minus_z4_converted_R": -5.399233915512207e-09,
+      "z6_minus_z4_relative_converted_R": -0.40703950047393245,
+      "z6_minus_z4_converted_T": -1.597017787259139e-09,
+      "z6_minus_z4_relative_converted_T": -0.1725640660460756
+    },
+    {
+      "z4_root": 1311,
+      "z6_root": 1877,
+      "mass_overlap": 0.999999990842882,
+      "z6_minus_z4_component_fractions_xyz": [
+        2.4069451286588654e-06,
+        -1.0813363418432642e-05,
+        8.406418290585194e-06
+      ],
+      "z6_minus_z4_template_scores_tx_ty_tz_rx": [
+        3.51679025395574e-22,
+        -8.668030948524926e-13,
+        4.994860939419501e-07,
+        4.362353492262141e-24
+      ],
+      "z6_minus_z4_template_projection_fraction": 4.994852271388473e-07,
+      "z6_minus_z4_template_remainder_fraction": -4.994852271789085e-07,
+      "z6_minus_z4_R": 2.3819750140611747e-05,
+      "z6_minus_z4_relative_R": 0.01738259269470617,
+      "z6_minus_z4_T": -2.381975003040715e-05,
+      "z6_minus_z4_relative_T": -2.3852435548903714e-05,
+      "z6_minus_z4_converted_R": -4.3414574639504466e-05,
+      "z6_minus_z4_relative_converted_R": -0.03861878575727297,
+      "z6_minus_z4_converted_T": -5.614876500559528e-07,
+      "z6_minus_z4_relative_converted_T": -0.06978328913032626
+    },
+    {
+      "z4_root": 1292,
+      "z6_root": 1867,
+      "mass_overlap": 0.9999999999725246,
+      "z6_minus_z4_component_fractions_xyz": [
+        1.2539419988466527e-07,
+        -1.3300553036721396e-07,
+        7.611329608681744e-09
+      ],
+      "z6_minus_z4_template_scores_tx_ty_tz_rx": [
+        4.82637990215006e-26,
+        -1.3722918490444158e-07,
+        -2.2649810648404568e-13,
+        1.7026819120032045e-24
+      ],
+      "z6_minus_z4_template_projection_fraction": -1.372294113899386e-07,
+      "z6_minus_z4_template_remainder_fraction": 1.372294113899386e-07,
+      "z6_minus_z4_R": 1.3806541468416866e-05,
+      "z6_minus_z4_relative_R": 0.000310150646752527,
+      "z6_minus_z4_T": -1.3806541452665577e-05,
+      "z6_minus_z4_relative_T": -1.4449782143817625e-05,
+      "z6_minus_z4_converted_R": -4.554198213328121e-09,
+      "z6_minus_z4_relative_converted_R": -0.43150762019855055,
+      "z6_minus_z4_converted_T": -4.4069903589626784e-08,
+      "z6_minus_z4_relative_converted_T": -0.49543242137174653
+    },
+    {
+      "z4_root": 1284,
+      "z6_root": 1855,
+      "mass_overlap": 0.9999999883300019,
+      "z6_minus_z4_component_fractions_xyz": [
+        1.7455530812032771e-06,
+        4.1215445127675e-06,
+        -5.8670975944252746e-06
+      ],
+      "z6_minus_z4_template_scores_tx_ty_tz_rx": [
+        -1.506177770468474e-12,
+        4.489183442733977e-26,
+        4.405458059519987e-24,
+        1.8021476790863744e-06
+      ],
+      "z6_minus_z4_template_projection_fraction": 1.802146172846797e-06,
+      "z6_minus_z4_template_remainder_fraction": -1.802146172846797e-06,
+      "z6_minus_z4_R": 6.47272965669625e-05,
+      "z6_minus_z4_relative_R": 0.008633622870714829,
+      "z6_minus_z4_T": -6.472729653372866e-05,
+      "z6_minus_z4_relative_T": -6.521623036218639e-05,
+      "z6_minus_z4_converted_R": -9.511747910973884e-09,
+      "z6_minus_z4_relative_converted_R": -0.23483870901408785,
+      "z6_minus_z4_converted_T": -1.3660342700533154e-08,
+      "z6_minus_z4_relative_converted_T": -0.36912878335383664
+    },
+    {
+      "z4_root": 1274,
+      "z6_root": 1837,
+      "mass_overlap": 0.9999999945384506,
+      "z6_minus_z4_component_fractions_xyz": [
+        -5.43732354642279e-06,
+        1.6480926930533555e-06,
+        3.7892308539788644e-06
+      ],
+      "z6_minus_z4_template_scores_tx_ty_tz_rx": [
+        2.3939506257560104e-28,
+        -1.7518017569329394e-12,
+        -2.0310964599090653e-07,
+        1.8554174195760013e-25
+      ],
+      "z6_minus_z4_template_projection_fraction": -2.0311139781181708e-07,
+      "z6_minus_z4_template_remainder_fraction": 2.0311139781181708e-07,
+      "z6_minus_z4_R": -3.231598001674808e-05,
+      "z6_minus_z4_relative_R": -0.011760008454044391,
+      "z6_minus_z4_T": 3.23159799265893e-05,
+      "z6_minus_z4_relative_T": 3.240502750042657e-05,
+      "z6_minus_z4_converted_R": -4.3415976968547935e-05,
+      "z6_minus_z4_relative_converted_R": -0.0386195778602713,
+      "z6_minus_z4_converted_T": -5.483838020696075e-07,
+      "z6_minus_z4_relative_converted_T": -0.06727831588240919
+    }
+  ],
+  "selected_conversion_pairs": {
+    "h80_z4": {
+      "forward_roots": [
+        1311,
+        1274
+      ],
+      "reverse_roots": [
+        1312,
+        1275
+      ],
+      "two_direction_power_sum": 0.002248336235233141,
+      "directions": [
+        {
+          "kind": "reflection",
+          "incident_root": 1311,
+          "outgoing_root": 1275,
+          "amplitude_real": 0.026869004689650075,
+          "amplitude_imag": 0.02005554049634885,
+          "power_fraction": 0.0011241681176131276
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1274,
+          "outgoing_root": 1312,
+          "amplitude_real": 0.02686900468970344,
+          "amplitude_imag": 0.020055540496449063,
+          "power_fraction": 0.0011241681176200138
+        }
+      ]
+    },
+    "h80_z6": {
+      "forward_roots": [
+        1877,
+        1837
+      ],
+      "reverse_roots": [
+        1878,
+        1838
+      ],
+      "two_direction_power_sum": 0.0021615171677011186,
+      "directions": [
+        {
+          "kind": "reflection",
+          "incident_root": 1877,
+          "outgoing_root": 1838,
+          "amplitude_real": 0.02607412443955871,
+          "amplitude_imag": 0.020022452861072508,
+          "power_fraction": 0.001080758583863464
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1837,
+          "outgoing_root": 1878,
+          "amplitude_real": 0.026074124439298536,
+          "amplitude_imag": 0.020022452860766836,
+          "power_fraction": 0.001080758583837655
+        }
+      ]
+    }
+  },
+  "aligned_coefficient_changes_for_selected_pair": [
+    {
+      "kind": "reflection",
+      "z4_incident_root": 1311,
+      "z6_incident_root": 1877,
+      "z4_outgoing_root": 1275,
+      "z6_outgoing_root": 1838,
+      "z4_amplitude": [
+        0.026869004689650075,
+        0.02005554049634885
+      ],
+      "z6_raw_amplitude": [
+        0.02607412443955871,
+        0.020022452861072508
+      ],
+      "z6_aligned_amplitude": [
+        0.02607412443955042,
+        0.020022452861083305
+      ],
+      "aligned_complex_delta": [
+        -0.0007948802500996541,
+        -3.308763526554612e-05
+      ],
+      "absolute_complex_change": 0.0007955686039594288,
+      "z4_power": 0.0011241681176131276,
+      "z6_power": 0.001080758583863464,
+      "z6_minus_z4_power": -4.340953374966372e-05
+    },
+    {
+      "kind": "reflection",
+      "z4_incident_root": 1274,
+      "z6_incident_root": 1837,
+      "z4_outgoing_root": 1312,
+      "z6_outgoing_root": 1878,
+      "z4_amplitude": [
+        0.02686900468970344,
+        0.020055540496449063
+      ],
+      "z6_raw_amplitude": [
+        0.026074124439298536,
+        0.020022452860766836
+      ],
+      "z6_aligned_amplitude": [
+        0.026074124439290247,
+        0.020022452860777633
+      ],
+      "aligned_complex_delta": [
+        -0.0007948802504131915,
+        -3.308763567142978e-05
+      ],
+      "absolute_complex_change": 0.0007955686042895755,
+      "z4_power": 0.0011241681176200138,
+      "z6_power": 0.001080758583837655,
+      "z6_minus_z4_power": -4.340953378235892e-05
+    }
+  ],
+  "maximum_absolute_z4_z6_component_change": 1.0813363418432642e-05,
+  "maximum_absolute_z4_z6_template_score_change": 1.8021476790863744e-06,
+  "interpretation": "The dominant converted pair includes z6 root 1837 with Tz score 0.934194230954 and root 1877 with Tz score 0.000274824472 and four-template remainder 0.999725175527. Both have large z kinetic content, but the latter is not represented by these rigid templates. Do not label both as simple z-flexural branches. Directed pair powers decrease about 3.86148% in this finite z4/z6 increment, without a mechanism or uncertainty claim.",
+  "preserved_scientific_status": {
+    "input_power_checks_passed": true,
+    "power_change_limit": 0.01,
+    "complex_change_limit": 0.01,
+    "maximum_power_change": 6.47272965669651e-05,
+    "maximum_complex_change": 0.01670625750875372,
+    "power_passed": true,
+    "complex_passed": false,
+    "mesh_pair_passed": false,
+    "maximum_same_channel_transmission_phase_change_rad": 0.016718071089440015,
+    "reference_planes_m": [
+      0.0,
+      1.665e-05
+    ]
+  },
+  "independent_verification": {
+    "author": "Athul Prem",
+    "file_tag": "_AP_pnc",
+    "status": "independently_verified_saved_conversion_families",
+    "method": "Frozen explicit P2 3x3 Gauss-Legendre/Duffy integration without saved mass or assemblers; independent signed CSV/coefficient joins.",
+    "implementation_agreement_tolerance": 1e-10,
+    "area_and_mass_relative_tolerance": 1e-12,
+    "maximum_dimensionless_metric_difference": 3.552713678800501e-15,
+    "section_rows_checked": 10,
+    "response_rows_checked": 10,
+    "complex_coefficients_checked_per_response": 50,
+    "aligned_complex_increments_checked": 50,
+    "signed_matches_checked_per_direction": 5,
+    "signed_gauge_phases_checked_modulo_2pi": true,
+    "maximum_power_change": 6.47272965669651e-05,
+    "maximum_complex_change": 0.01670625750875372,
+    "spatial_convergence_established": false,
+    "frequency_convergence_established": false,
+    "body_arrays_loaded": false,
+    "saved_mass_loaded": false,
+    "assembly_or_eigensolve_performed": false,
+    "scope": "Finite saved-mode conversion-family association only; no mechanism, continuous branch or uncertainty claim.",
+    "publication_csv_rows_checked": 10,
+    "diagnosis": {
+      "path": "results/runs/one_ghz_conversion_AP_pnc/diagnosis/conversion_families_AP_pnc.json",
+      "bytes": 123051,
+      "sha256": "6939e27d9aeb621c6c4acb5919291ba68f7057e1f316e2e22b85342a11d3ab55"
+    },
+    "verifier_sha256": "d575d02ad75309797c56420273a61aa8fd4c3a73e77e650cc3647aa37a8df40d",
+    "frozen_quadrature_sha256": "d5cdd47c7df2de902224de6f7c70299862187fa372a0eecaaa38e358e4693779"
+  },
+  "execution": [
+    {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-B",
+        "tools/diagnose_conversion_families_AP_pnc.py",
+        "--output",
+        "results/runs/one_ghz_conversion_AP_pnc/diagnosis"
+      ],
+      "script_sha256": "01d0ba73879138b5fcb1524dd393ac9138be2e0d1a16c83fa5364dd3e9552b99",
+      "exit_code": 0,
+      "guard": null,
+      "elapsed_seconds": 1.7969999999622814,
+      "available_memory_before_bytes": 3367669760,
+      "limits": {
+        "memory_bytes": 1073741824,
+        "available_reserve_bytes": 536870912,
+        "wall_seconds": 60,
+        "numerical_threads": 1
+      },
+      "runtime": {
+        "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2"
+        },
+        "thread_environment": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "BLIS_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1"
+        }
+      },
+      "peak_sampled_process_tree_rss_sum_bytes": 125059072,
+      "peak_sampled_process_tree_private_sum_bytes": 136675328,
+      "sample_seconds": 0.05,
+      "processes": {
+        "44780": {
+          "name": "python.exe",
+          "peak_rss_bytes": 5066752,
+          "peak_private_bytes": 913408,
+          "samples": 34
+        },
+        "42780": {
+          "name": "python.exe",
+          "peak_rss_bytes": 119992320,
+          "peak_private_bytes": 135761920,
+          "samples": 33
+        },
+        "29788": {
+          "name": "cmd.exe",
+          "peak_rss_bytes": 4907008,
+          "peak_private_bytes": 2859008,
+          "samples": 1
+        }
+      },
+      "measurement_scope": "Sampled launcher and all observed numerical descendants; not an exact high-water mark."
+    },
+    {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-B",
+        "tools/verify_conversion_families_AP_pnc.py",
+        "--diagnosis",
+        "results/runs/one_ghz_conversion_AP_pnc/diagnosis/conversion_families_AP_pnc.json",
+        "--output",
+        "results/runs/one_ghz_conversion_AP_pnc/independent_verification_AP_pnc.json"
+      ],
+      "script_sha256": "d575d02ad75309797c56420273a61aa8fd4c3a73e77e650cc3647aa37a8df40d",
+      "exit_code": 0,
+      "guard": null,
+      "elapsed_seconds": 0.9380000000237487,
+      "available_memory_before_bytes": 3337703424,
+      "limits": {
+        "memory_bytes": 1073741824,
+        "available_reserve_bytes": 536870912,
+        "wall_seconds": 60,
+        "numerical_threads": 1
+      },
+      "runtime": {
+        "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2"
+        },
+        "thread_environment": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "BLIS_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1"
+        }
+      },
+      "peak_sampled_process_tree_rss_sum_bytes": 73887744,
+      "peak_sampled_process_tree_private_sum_bytes": 92352512,
+      "sample_seconds": 0.05,
+      "processes": {
+        "43320": {
+          "name": "python.exe",
+          "peak_rss_bytes": 5115904,
+          "peak_private_bytes": 962560,
+          "samples": 18
+        },
+        "19764": {
+          "name": "python.exe",
+          "peak_rss_bytes": 68771840,
+          "peak_private_bytes": 91389952,
+          "samples": 17
+        }
+      },
+      "measurement_scope": "Sampled launcher and all observed numerical descendants; not an exact high-water mark."
+    }
+  ],
+  "validation": {
+    "focused_diagnostic_tests": {
+      "tests": 8,
+      "passed": 8,
+      "seconds": 0.031
+    },
+    "focused_verifier_tests": {
+      "tests": 6,
+      "passed": 6,
+      "seconds": 0.371
+    },
+    "integrated_local": {
+      "tests": 241,
+      "passed": 240,
+      "skipped": 1,
+      "unittest_seconds": 51.501,
+      "execution": {
+        "exit_code": 0,
+        "elapsed_seconds": 53.75,
+        "log": "results\\runs\\one_ghz_conversion_AP_pnc\\local_checks\\integrated_tests_AP_pnc.log"
+      },
+      "skip_reason_lines": [
+        "test_symlink_source_and_parent_are_rejected (test_archive_runtime_AP_pnc.ArchiveGuards.test_symlink_source_and_parent_are_rejected) ... skipped 'Windows account cannot create symbolic links; symlink guard untested'"
+      ]
+    },
+    "review": "Independent source cross-review passed; focused schema/gauge/role corrections cleared before actual verification. Small published-data interpretation and final report/ledger reviews passed: all displayed values, signed joins, six local links, seven source hashes and twelve artifact/log hashes/sizes checked without arrays or repeated tests.",
+    "ci": "Pending on reviewed PR head; final outcome will be recorded in handoff/local_checks."
+  },
+  "scope": {
+    "body_arrays_loaded": false,
+    "body_fields_loaded": false,
+    "matrix_assembly_performed": false,
+    "safe_eigensolve_performed": false,
+    "body_solve_performed": false,
+    "new_frequency_point_computed": false,
+    "phase_adjustment_applied": false,
+    "spatial_convergence_established": false,
+    "frequency_convergence_established": false,
+    "physical_branch_classification_established": false,
+    "conversion_mechanism_established": false,
+    "cross_frequency_branch_tracking_performed": false
+  },
+  "limits": [
+    "Finite-section descriptors and finite thickness-discretization increments are not a conversion mechanism or continuum classification.",
+    "All template scores and remainder are retained; the numerically largest template is only descriptive.",
+    "The accepted 1 GHz complex-response thickness comparison failed, as did the retained in-plane comparisons.",
+    "Nominal fixed Ge is not measured cryogenic sample data. Hole faceting and spatial/frequency convergence remain unresolved.",
+    "No 0.1 GHz analysis was repeated and no cross-frequency branch identity is asserted."
+  ],
+  "sources": [
+    {
+      "path": "tools/diagnose_conversion_families_AP_pnc.py",
+      "bytes": 29907,
+      "sha256": "01d0ba73879138b5fcb1524dd393ac9138be2e0d1a16c83fa5364dd3e9552b99"
+    },
+    {
+      "path": "tools/verify_conversion_families_AP_pnc.py",
+      "bytes": 31539,
+      "sha256": "d575d02ad75309797c56420273a61aa8fd4c3a73e77e650cc3647aa37a8df40d"
+    },
+    {
+      "path": "tests/test_conversion_families_AP_pnc.py",
+      "bytes": 15562,
+      "sha256": "c55f3caa118e17e05bc1b041ac1bbe793b579c6e8d1fc0753aa4cf21dba580e2"
+    },
+    {
+      "path": "tests/test_verify_conversion_families_AP_pnc.py",
+      "bytes": 9472,
+      "sha256": "ac5c0efbc0406ce609385538b86635b486fba75023e989282811e452987b518c"
+    },
+    {
+      "path": "tools/diagnose_port_polarization_AP_pnc.py",
+      "bytes": 29661,
+      "sha256": "367eb1fa5ed0296df548716cb8eb02e422dd639a23f8ad434dc0e357af5d1e79"
+    },
+    {
+      "path": "tools/verify_port_polarization_AP_pnc.py",
+      "bytes": 30715,
+      "sha256": "d5cdd47c7df2de902224de6f7c70299862187fa372a0eecaaa38e358e4693779"
+    },
+    {
+      "path": "tools/compare_scattering_AP_pnc.py",
+      "bytes": 44347,
+      "sha256": "148f7efa58ad668a7a57be9db68a3241ffb67ed94067499ce6dcd4a0f8c59313"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "results/runs/one_ghz_conversion_AP_pnc/diagnosis/conversion_families_AP_pnc.csv",
+      "bytes": 3446,
+      "sha256": "cb0120c5d21aee3b331f4bbb7f987a207f617611d727953ddf00babb292e5651"
+    },
+    {
+      "path": "results/runs/one_ghz_conversion_AP_pnc/diagnosis/conversion_families_AP_pnc.json",
+      "bytes": 123051,
+      "sha256": "6939e27d9aeb621c6c4acb5919291ba68f7057e1f316e2e22b85342a11d3ab55"
+    },
+    {
+      "path": "results/runs/one_ghz_conversion_AP_pnc/independent_verification_AP_pnc.json",
+      "bytes": 1629,
+      "sha256": "f2f855ac95a577df05be320f0950dc2a253a9903071efdcfbe014f4c0bbcfffb"
+    },
+    {
+      "path": "results/runs/one_ghz_conversion_AP_pnc/local_checks/diagnosis_execution_AP_pnc.json",
+      "bytes": 1867,
+      "sha256": "2d7f1f343db65a5b1b84cf0558036adae689e39e0ea4f8d4a7ea0658bf509316"
+    },
+    {
+      "path": "results/runs/one_ghz_conversion_AP_pnc/local_checks/diagnosis_stderr_AP_pnc.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/runs/one_ghz_conversion_AP_pnc/local_checks/diagnosis_stdout_AP_pnc.txt",
+      "bytes": 253,
+      "sha256": "9f0829f52e919ff3eae6b8c05e6d95bfc035d6312cb42b4a1e9376b3d283d379"
+    },
+    {
+      "path": "results/runs/one_ghz_conversion_AP_pnc/local_checks/integrated_execution_AP_pnc.json",
+      "bytes": 150,
+      "sha256": "7228f427edcd0fe349ab8fd6a7f4de4275c3d2176c84b086eae18666710e0b54"
+    },
+    {
+      "path": "results/runs/one_ghz_conversion_AP_pnc/local_checks/integrated_tests_AP_pnc.log",
+      "bytes": 46016,
+      "sha256": "f7ea17852b1b0945514478251594364a86f7133ed9321795d78ce1a90d092ce2"
+    },
+    {
+      "path": "results/runs/one_ghz_conversion_AP_pnc/local_checks/verification_execution_AP_pnc.json",
+      "bytes": 1855,
+      "sha256": "fae71fc9b962dfe60fddd0f1b8bb118b12248733a0f2219139b7c886f0bf73be"
+    },
+    {
+      "path": "results/runs/one_ghz_conversion_AP_pnc/local_checks/verification_stderr_AP_pnc.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/runs/one_ghz_conversion_AP_pnc/local_checks/verification_stdout_AP_pnc.txt",
+      "bytes": 280,
+      "sha256": "9321fbbdb5ebcf3cf5f0084c3eef9a5ee81ab0639aa74f976e9e4e11ddcc6a58"
+    },
+    {
+      "path": "results/runs/one_ghz_conversion_AP_pnc/report_AP_pnc.html",
+      "bytes": 8907,
+      "sha256": "20a5b7748e0b7b61c761fab9417bf75dc5150128f70c41a5bbbf6e40ee68c3b4"
+    }
+  ]
+}

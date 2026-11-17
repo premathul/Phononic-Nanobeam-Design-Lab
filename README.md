@@ -159,6 +159,15 @@ The archived 0.1 GHz mode-shape diagnostic identifies translation/rotation templ
 
 The raw section/device archive is not included in Git. The helpers reject changed inputs and existing output paths. Saved template associations do not establish a reflection mechanism, continuous branches or spatial convergence; reuse the completed publication for normal analysis.
 
+The separate [saved 1 GHz conversion-pair diagnosis](verification/one_ghz_conversion_AP_pnc.json) retains all five modes, exact converted-power joins and finite thickness sensitivity. With the same retained archive, its offline adapters use fresh paths:
+
+```powershell
+.\.venv\Scripts\python.exe -B tools/diagnose_conversion_families_AP_pnc.py --output path/to/fresh-conversion-diagnosis
+.\.venv\Scripts\python.exe -B tools/verify_conversion_families_AP_pnc.py --diagnosis path/to/fresh-conversion-diagnosis/conversion_families_AP_pnc.json --output path/to/fresh-conversion-verification.json
+```
+
+The four rigid templates leave one converted mode almost entirely unexplained; the helper preserves that result instead of assigning a simple flexural branch. Existing 1 GHz complex-response convergence failures remain unchanged.
+
 ## Verification and capabilities
 
 The Windows/Python 3.12 suite ran 176 tests in 52.224 s. Of those, 175 passed and one was skipped because the process lacked permission to create a symbolic link. The checks cover tensor rotation, uniform strain, consistent mass, rigid-body subspaces, independent dense and sparse solutions, Bloch phase and the long-wavelength rod limit. Port checks cover trace mapping, directional energy flux, the dispersion-derivative identity, exact symmetry degeneracy, an independent 3D Bloch comparison, and explicit rejection of unresolved cutoffs. Scattering checks exercise both incidence directions, independent boundary flux, and reconstruction from exported fields. Geometry and workflow checks cover exact tagged-mesh reuse, preflight budgets and scientific provenance. The suite includes Athul Prem's two-port coherent-drive test and focused Lawrence checks for exact equation reconstruction, accepted-drive recovery, archive reuse and refusal of corrupt data. [Test scope](tests/README.md)
