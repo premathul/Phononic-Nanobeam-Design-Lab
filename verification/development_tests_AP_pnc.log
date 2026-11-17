@@ -117,6 +117,10 @@ test_overlap_and_sidewall (test_nanobeam_AP_pnc.GeometryTests.test_overlap_and_s
 test_circle_resolution_is_independent_of_body_size (test_perforated_AP_pnc.PerforatedMeshTests.test_circle_resolution_is_independent_of_body_size) ... ok
 test_periodic_trace_matches_control_and_assembles (test_perforated_AP_pnc.PerforatedMeshTests.test_periodic_trace_matches_control_and_assembles) ... ok
 test_rejects_port_budget_and_invalid_circle_divisions (test_perforated_AP_pnc.PerforatedMeshTests.test_rejects_port_budget_and_invalid_circle_divisions) ... ok
+test_archive_rejects_changed_receipt_section_and_source_before_array_load (test_port_inventory_AP_pnc.PortInventoryTests.test_archive_rejects_changed_receipt_section_and_source_before_array_load) ... ok
+test_cutoff_failure_and_interrupted_point_preserve_accepted_results (test_port_inventory_AP_pnc.PortInventoryTests.test_cutoff_failure_and_interrupted_point_preserve_accepted_results) ... ok
+test_resume_refuses_changed_inputs_source_and_result (test_port_inventory_AP_pnc.PortInventoryTests.test_resume_refuses_changed_inputs_source_and_result) ... ok
+test_validation_rejects_wrong_original_equations_and_signed_basis (test_port_inventory_AP_pnc.PortInventoryTests.test_validation_rejects_wrong_original_equations_and_signed_basis) ... ok
 test_all_roots_flux_orthogonality_and_propagation_pairing (test_port_modes_AP_pnc.PortModeTests.test_all_roots_flux_orthogonality_and_propagation_pairing) ... ok
 test_cutoff_fails_explicitly_and_resolved_sides_change_channel_count (test_port_modes_AP_pnc.PortModeTests.test_cutoff_fails_explicitly_and_resolved_sides_change_channel_count) ... ok
 test_end_face_basis_and_integrated_mass_match_for_p1_and_p2 (test_port_modes_AP_pnc.PortModeTests.test_end_face_basis_and_integrated_mass_match_for_p1_and_p2) ... ok
@@ -187,7 +191,7 @@ test_failed_attempt_is_retained_and_bad_material_creates_no_output (test_workflo
 3D solid: 352 tetrahedra, 435 displacement DOFs
 test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks (test_workflow3d_AP_pnc.Workflow3D.test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks) ... ok
 test_historical_hole_pattern_uses_source_origin_and_exact_provenance (test_workflow3d_AP_pnc.Workflow3D.test_historical_hole_pattern_uses_source_origin_and_exact_provenance) ... ok
-Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{00b5f8d1-4efc-43ae-865c-c73c7034a186}\Temp\tmp9n333gvq\two_hole_pilot_200nm-0535d144c4a0
+Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{6b138851-2475-4eee-ab8e-d1d3c895ad56}\Temp\tmp6t7qgnet\two_hole_pilot_200nm-1c0b23d50d6e
 Max relative solve residual: 0
 Power balance check: True; max R=0
 Matched-guide power check: True
@@ -199,6 +203,6 @@ test_output_can_be_reconstructed_and_cache_checks_files (test_workflow3d_AP_pnc.
 test_scattering_exports_power_channels_and_reconstructible_responses (test_workflow3d_AP_pnc.Workflow3D.test_scattering_exports_power_channels_and_reconstructible_responses) ... ok
 
 ----------------------------------------------------------------------
-Ran 172 tests in 51.070s
+Ran 176 tests in 52.224s
 
 OK (skipped=1)
