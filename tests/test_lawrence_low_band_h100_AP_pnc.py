@@ -190,7 +190,9 @@ class LawrenceLowBandH100Tests(unittest.TestCase):
             maps_checked.append(True)
 
         with TemporaryDirectory() as directory:
-            root = Path(directory)
+            # Match the production stage's canonical path, including Windows
+            # temporary directories supplied through an 8.3 short-name alias.
+            root = Path(directory).resolve()
             for key, matrix in (("K", system.K), ("M", system.M)):
                 save_npz(root / f"{key}.npz", matrix)
             np.savez(root / "anchor.npz", left_dofs=left, right_dofs=right, **fields)

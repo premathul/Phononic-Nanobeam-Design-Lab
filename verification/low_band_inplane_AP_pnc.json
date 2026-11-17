@@ -557,13 +557,43 @@
       "small_artifact_hash_checks": 45,
       "report_links_checked": 5,
       "scope": "Independent 4x4 R/T and D reconstruction from original complex CSVs, signed/gauge-aligned differences, relative reflection, report/ledger identity and scientific limits. No body-array load, repeated solve, full replay or test run."
+    },
+    "initial_ci_failure": {
+      "run_id": 44152918192,
+      "job_id": 134285813774,
+      "head_sha": "9cdc9baf9e0e7e9dfe831407ea5b13cf0aae4ee8",
+      "tests_run": 210,
+      "errors": 1,
+      "unittest_seconds": 30.302,
+      "physical_benchmarks": "skipped after test failure",
+      "cause": "The synthetic restore fixture retained an unresolved Windows temporary-directory alias, while artifact links were canonical. Production read_inputs already resolves the directory.",
+      "correction": "Resolve only the fixture temporary root; production runner, replay code and all scientific outputs are unchanged.",
+      "log": {
+        "path": "results/runs/low_band_inplane_AP_pnc/local_checks/ci_initial_failure_AP_pnc.log",
+        "sha256": "ba9dbc4ddb8cb1a0666acfc3f0ee01d530af510ee6dde675a4758ece8899a096",
+        "bytes": 79343
+      }
+    },
+    "corrected_fixture_tests": {
+      "count": 7,
+      "passed": 7,
+      "seconds": 1.038,
+      "source_sha256": "1b6e0694cbe17c674e7a20eea90d96a892a2b8f445827d7a31887ff717af3dfc",
+      "scope": "Affected runner fixtures only; no repeated full local suite or production computation."
+    },
+    "fixture_delta_review": {
+      "reviewer": "point_verification",
+      "status": "passed",
+      "scope": "One canonical temporary-directory line and two explanatory comments; original mapping/mode/rejection assertions retained. Production runner/verifier hashes unchanged."
     }
   },
   "integration": {
     "branch": "codex/low-band-inplane-control",
-    "status": "reviewed_preparing_pull_request",
-    "ci_status": "pending",
-    "expected_final_test_count": 210
+    "status": "pull_request_open_corrected_fixture",
+    "ci_status": "awaiting_corrected_head",
+    "expected_final_test_count": 210,
+    "pull_request": 40,
+    "url": "https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/40"
   },
   "sources": {
     "tools/run_lawrence_low_band_h100_AP_pnc.py": {
@@ -575,8 +605,8 @@
       "bytes": 2091
     },
     "tests/test_lawrence_low_band_h100_AP_pnc.py": {
-      "sha256": "f56bb1c74202aaaa68c22d8ac0327b97c40069588bfd7302a3c2eb13bb2a5845",
-      "bytes": 21917
+      "sha256": "1b6e0694cbe17c674e7a20eea90d96a892a2b8f445827d7a31887ff717af3dfc",
+      "bytes": 22082
     },
     "tools/replay_lawrence_h100_control_AP_pnc.py": {
       "sha256": "3d658fa7a17771f836eae02df9b61e246f74292295c980d549dd12fd8f650b5e",
