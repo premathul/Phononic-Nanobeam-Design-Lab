@@ -166,6 +166,16 @@ The separate [saved 1 GHz conversion-pair diagnosis](verification/one_ghz_conver
 .\.venv\Scripts\python.exe -B tools/verify_conversion_families_AP_pnc.py --diagnosis path/to/fresh-conversion-diagnosis/conversion_families_AP_pnc.json --output path/to/fresh-conversion-verification.json
 ```
 
+The [saved mirror-sector follow-up](verification/one_ghz_mirror_AP_pnc.json) decomposes the eight actual signed conversion fields into polar-vector y/z reflection sectors. It retains all four mass-norm fractions and raw complex mid-thickness profiles. The two integration algorithms use a crossed-diagonal common refinement, without a new eigensolve or body solve. With the exact retained archive and fresh output paths:
+
+```powershell
+.\.venv\Scripts\python.exe -B tools/diagnose_mirror_sectors_AP_pnc.py --output path/to/fresh-mirror-diagnosis
+.\.venv\Scripts\python.exe -B tools/verify_mirror_sectors_AP_pnc.py --diagnosis path/to/fresh-mirror-diagnosis/mirror_sectors_AP_pnc.json --output path/to/fresh-mirror-verification.json
+.\.venv\Scripts\python.exe -B tools/plot_mirror_profiles_AP_pnc.py --diagnosis path/to/fresh-mirror-diagnosis/mirror_sectors_AP_pnc.json --verification path/to/fresh-mirror-verification.json --output path/to/fresh-mirror-profiles.png
+```
+
+The plot shows only the two six-layer forward fields' z displacement at z=0, scaled by each full-section displacement RMS with the archived complex phase retained. The sector fractions describe saved mode shapes; they are not scattering powers, physical purity thresholds or proof of discrete-operator symmetry. Reuse the accepted publication during ordinary development. All full-device spatial-convergence failures remain explicit.
+
 The four rigid templates leave one converted mode almost entirely unexplained; the helper preserves that result instead of assigning a simple flexural branch. Existing 1 GHz complex-response convergence failures remain unchanged.
 
 ## Verification and capabilities
