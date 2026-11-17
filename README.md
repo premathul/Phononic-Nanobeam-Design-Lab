@@ -98,6 +98,18 @@ Open `report_AP_pnc.html` in the map directory to view the five incident channel
 
 The separate [Lawrence port-inventory workflow](docs/LAWRENCE_HPC_AP_pnc.md#bounded-port-frequency-inventory) reuses the archived h80 six-layer SAFE operators and 1 GHz modes to inspect only four additional section frequencies. At 0.1/1/2.8/5.2/6 GHz it finds 4/5/8/12/13 propagating channels per direction on the fixed 975-DOF section. The four new samples took 69.40 s with 486172 KiB peak process RSS. Independent replay of all 9750 roots and 84 propagating rows passed; complete reuse preserved output bytes and modification times. The compact `port_inventory_AP_pnc.html`, JSON and CSV retain per-frequency residual, flux, cutoff/degeneracy and execution status. This inventory guides frequency selection without a body solve; it does not identify continuous branches, intervening cutoffs or a device gap. [Verified inventory and limits](verification/port_inventory_AP_pnc.json)
 
+The [finite count-interval follow-up](verification/port_count_interval_AP_pnc.json) reuses the accepted 0.1/1 GHz endpoints and exact archived section. It permits at most four new midpoint samples, keeping a four-channel lower endpoint and five-channel upper endpoint. Unexpected counts, unresolved modes or resource failures stop the study. Each frequency retains all 1950 roots, signed flux checks and an immutable accepted receipt; original Linux archive provenance and new local Windows provenance remain separate. This is a sampled count-transition interval, not a unique or monotonic cutoff determination or a new device response.
+
+The scoped controller requires external process-tree supervision enforcing the handoff's 90-second, 1-GiB and 512-MiB available-memory-reserve limits. With that supervision and fresh admission, attempt one new point per invocation:
+
+```powershell
+.\.venv\Scripts\python.exe -B tools/refine_port_count_interval_AP_pnc.py --output path/to/fresh-count-study --max-new-points 1
+.\.venv\Scripts\python.exe -B tools/refine_port_count_interval_AP_pnc.py --output path/to/fresh-count-study --resume --max-new-points 1
+.\.venv\Scripts\python.exe -B tools/verify_port_count_interval_AP_pnc.py path/to/fresh-count-study --output path/to/fresh-count-verification.json
+```
+
+Explicit resume computes only untouched points; stopped failures are retained and never automatically retried. Reuse the completed publication during ordinary development. The independent verifier reconstructs original equations, forces and directional flux for new roots only, while reusing the accepted endpoint evidence.
+
 For larger scattering cases, optional memory controls retain the same finite-element model:
 
 ```powershell
