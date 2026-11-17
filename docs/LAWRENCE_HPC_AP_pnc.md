@@ -152,6 +152,58 @@ Each sample retains its original 1950 finite roots, signed energy directions, re
 
 Completed job 1335406 took 69.40 s with 486172 KiB peak process RSS. Independent Windows replay passed all five samples; each direction has 4/5/8/12/13 open channels. Reuse job 1335407 took 5.29 s and changed no inventory bytes or modification times. Both jobs exited 0:0. Transfer all retained files with their manifests and verify hashes before independent replay. Sparse fixed-section samples do not establish continuous branches, cutoff locations between points, full-device convergence or a gap. [Inventory evidence](../verification/port_inventory_AP_pnc.json)
 
+## Bounded 0.1 GHz device point
+
+This point is complete: stage `1335473`, solve `1335475` and exact export `1335483` are accepted and retained. Read [the handoff](AI_HANDOFF_AP_pnc.md) and [portable evidence](../verification/low_band_device_AP_pnc.json); the commands below reproduce the workflow and are not a request to repeat it. Root's current-chat SSH/SFTP sessions are recorded in the handoff.
+
+The selected low-band comparison uses the archived h80 six-layer device, physical 200 nm thickness and original 0/16.65 micrometre end planes. Its observable is the per-incident transmission, reflection and outgoing-channel conversion at 0.1 GHz, presented separately from the accepted five-channel 1 GHz anchor. `tools/run_lawrence_low_band_AP_pnc.py` reuses the exact mesh, K/M, trace maps and accepted four-channel 0.1 GHz SAFE modes. It prepares only new frequency-specific equations. Do not run mesh generation, body assembly or a SAFE eigensolve for this point.
+
+Check the handoff for ownership and existing receipts first. Root alone transfers files and submits jobs. Refresh the queue, free storage and per-job/aggregate CPU and memory admission before submission. The stage/export ceiling is 16 GiB, two allocated CPUs, one numerical thread and ten minutes. The possible single solve ceiling is 128 GiB and sixty minutes, with a 3450-second worker budget. These ceilings are bounded requests, not statements that a phase has run or a memory guarantee. Retain a failed resource/numerical attempt and stop; no automatic retry or allocation escalation is authorized by this workflow.
+
+```bash
+project=/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc
+batch="$project/scripts/hpc/lawrence_low_band_AP_pnc.sbatch"
+sbatch --test-only "$batch" "$project" stage 550 \
+    "$project/runs/thickness-h80-stage-1335309" \
+    "$project/runs/thickness-h80-safe-1335308" "$project/runs/port-inventory-1335406"
+# Submit once after the source/input hashes, queue and live storage checks pass.
+sbatch --parsable "$batch" "$project" stage 550 \
+    "$project/runs/thickness-h80-stage-1335309" \
+    "$project/runs/thickness-h80-safe-1335308" "$project/runs/port-inventory-1335406"
+```
+
+Inspect `runs/h80-z6-low-band-stage-JOB_ID/stage_AP_pnc.json` before deciding on a solve. It must retain the original body/section identities, four signed incoming roots, the exact A/RHS hashes, the prepared CSC graph comparison, source/build identities and explicit factor-index exposure. SciPy 1.18.1 [casts SuperLU indices to C int](https://github.com/scipy/scipy/blob/v1.18.1/scipy/sparse/linalg/_dsolve/linsolve.py), and its [factor nonzero count uses a C-int sum](https://github.com/scipy/scipy/blob/v1.18.1/scipy/sparse/linalg/_dsolve/_superluobject.c). The historical 1 GHz factor count of 1,846,932,604 is a reference measurement, not a bound for changed-frequency pivoting or fill. Matching the input graph or using int64 input does not establish factor capacity. Preserve this uncertainty when admitting the one bounded trial.
+
+```bash
+# Replace these values only from the accepted prepared receipt.
+stage="$project/runs/h80-z6-low-band-stage-STAGE_JOB_ID"
+stage_sha=VERIFIED_STAGE_RECEIPT_SHA256
+sbatch --test-only --partition=himem --mem=128G --time=01:00:00 \
+    "$batch" "$project" solve 3450 "$stage" "$stage_sha"
+sbatch --parsable --partition=himem --mem=128G --time=01:00:00 \
+    "$batch" "$project" solve 3450 "$stage" "$stage_sha"
+```
+
+The solve performs fresh node/cgroup memory admission before factorization, retains the 1e-10 target and both original relative/backward 1e-9 residual gates, and saves each accepted drive separately. A prior stopped receipt can be passed explicitly to reuse accepted drives; it does not authorize repeating unchanged failed settings. Export requires all four accepted vectors and exact reconstructed equation hashes. Select the recorded stage node for export to preserve the same numerical backend when reconstructing the equations. Use its scheduler `NodeList` name from `scontrol`/`sacct` (for example, `node038`), rather than assuming the receipt's fully qualified hostname is a Slurm node name.
+
+```bash
+solve="$project/runs/h80-z6-low-band-solve-SOLVE_JOB_ID"
+solve_sha=VERIFIED_SOLVE_RECEIPT_SHA256
+stage_host=VERIFIED_STAGE_SLURM_NODE_NAME
+sbatch --test-only --nodelist="$stage_host" "$batch" "$project" export 550 \
+    "$stage" "$stage_sha" "$solve" "$solve_sha"
+sbatch --parsable --nodelist="$stage_host" "$batch" "$project" export 550 \
+    "$stage" "$stage_sha" "$solve" "$solve_sha"
+```
+
+Verify transfer hashes and independently replay the original equations and physical nodal-force flux. Keep the returned phase directories together under the local low-band archive so the replay can resolve their retained links. The independent tool loads A, K and M sequentially, validates all 32 outgoing complex coefficients and the full P2 field mapping. It also checks the complete signed propagating flux Gram, retains the original-basis left-incident defect R†R + T†T − I and its spectral norm, and independently checks one unequal complex superposition of displacement and recovered nodal-force columns. The 1e-7 W basis-entry gate is separate from the unchanged 0.01 physical-power/coherent gate. Results cover only the saved left-incident block, with measured basis accuracy stated; they do not establish full two-sided unitarity or reciprocity. The tool prints its evidence as JSON:
+
+```powershell
+.venv/Scripts/python.exe -B tools/replay_lawrence_device_point_AP_pnc.py --stage RETURNED_STAGE/stage_AP_pnc.json --solve RETURNED_SOLVE/solve_AP_pnc.json --export RETURNED_EXPORT/export_AP_pnc.json
+```
+
+Preserve every existing 0.01 power gate and link representative 3D fields to the accepted vectors. Neither algebraic success nor power balance resolves the existing failed spatial checks. The four-channel and five-channel points retain separate signed inventories; channel-by-channel frequency differences require independent signed correspondence. Select any next sample or refinement from the actual response and field evidence. No dense map, finer-mesh ladder, gap, resonance or Q claim follows from this single exploratory point.
+
 ## Open JupyterLab
 
 After the bootstrap succeeds, submit the optional notebook job from the same Lawrence project directory. It requests one CPU and 4 GiB for two hours. Use the node assigned to the running job. The server log is private and contains the token generated for this session.
