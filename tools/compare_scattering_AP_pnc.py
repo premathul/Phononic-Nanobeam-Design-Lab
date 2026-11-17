@@ -46,7 +46,9 @@ VERIFIED_LGMRES_SOURCES = {
 }
 LAWRENCE_UNIFORM_DIRECT = "lawrence_uniform_superlu_direct"
 LAWRENCE_UNIFORM_DIRECT_DRIVER_SHA256 = "1944ddfeb5c5ace7d2842086996aab658ce999803ab225ce61e4a44078db3013"
-LAWRENCE_UNIFORM_DIRECT_HELPER_SHA256 = "dd9e07d4955de6cf4cac97eec0485bfc34bd1d7f8173d4707718c2ea4ba89034"
+LAWRENCE_DEVICE_DIRECT = "lawrence_device_superlu_direct"
+LAWRENCE_DEVICE_DIRECT_DRIVER_SHA256 = "32efc149510d22744a0478ff9c171e770ba4cf9bf535b2ca5f2ceeb15c529730"
+LAWRENCE_DIRECT_HELPER_SHA256 = "dd9e07d4955de6cf4cac97eec0485bfc34bd1d7f8173d4707718c2ea4ba89034"
 
 
 @dataclass(frozen=True)
@@ -194,58 +196,87 @@ def is_sha256(value) -> bool:
     return isinstance(value, str) and len(value) == 64 and all(char in "0123456789abcdef" for char in value)
 
 
-def checked_lawrence_uniform_accuracy(summary: dict) -> dict | None:
+def checked_lawrence_direct_accuracy(summary: dict) -> dict | None:
     report = summary.get("linear_solver") or {}
     provenance = summary.get("checkpointed_scattering") or {}
     resources = summary["configuration"]["resources"]
     direct = resources.get("linear_solver") == "direct"
     linux = provenance.get("linux_assembly_and_solve")
-    if (LAWRENCE_UNIFORM_DIRECT not in (report.get("method"), provenance.get("method"))
+    method = report.get("method")
+    reviewed_methods = (LAWRENCE_UNIFORM_DIRECT, LAWRENCE_DEVICE_DIRECT)
+    if (method not in reviewed_methods and provenance.get("method") not in reviewed_methods
             and not (direct and linux is not None)):
         return None
-    require(direct and report.get("method") == provenance.get("method") == LAWRENCE_UNIFORM_DIRECT
-            and report.get("working_dtype") == "complex128" and summary.get("num_incident_channels") == 5
-            and summary.get("hole_count") == 0 and summary["configuration"]["mesh"]["kind"] == "layered",
-            "Expected the verified Lawrence uniform direct-solve method and five uniform-guide channels.")
+    require(direct and method == provenance.get("method") and method in reviewed_methods,
+            "Expected a reviewed Lawrence direct-solve method in both the solver report and provenance.")
+    device = method == LAWRENCE_DEVICE_DIRECT
+    if not device:
+        scope, hole_count = "uniform", 0
+        reviewed_source = LAWRENCE_UNIFORM_DIRECT_DRIVER_SHA256
+        relative_limit = 1e-9
+    else:
+        scope, hole_count = "device", 26
+        reviewed_source = LAWRENCE_DEVICE_DIRECT_DRIVER_SHA256
+        relative_limit = 1e-10
+        require(report.get("relative_target") == relative_limit,
+                "Lawrence device direct results require the original-equation relative target of 1e-10.")
+    require(report.get("working_dtype") == "complex128" and summary.get("num_incident_channels") == 5
+            and summary.get("hole_count") == hole_count and summary["configuration"]["mesh"]["kind"] == "layered",
+            f"Expected a complex128 layered Lawrence {scope} direct solve with {hole_count} holes and five channels.")
     implementation = summary["implementation"]
-    platform_name = implementation.get("platform")
-    require(isinstance(linux, dict) and linux.get("implementation") == implementation
-            and isinstance(platform_name, str) and platform_name.startswith("Linux-")
+    publication = provenance.get("linux_export") if device else linux
+    require(isinstance(linux, dict) and isinstance(publication, dict) and publication.get("implementation") == implementation
             and provenance.get("reused_preflight_mesh") is True and provenance.get("safe_eigensolve_performed") is False,
-            "Missing matching Linux assembly and solve provenance for the reused uniform mesh and SAFE section.")
-    driver = linux.get("driver")
-    source = driver.get("sha256") if isinstance(driver, dict) else None
-    require(source == LAWRENCE_UNIFORM_DIRECT_DRIVER_SHA256,
-            "Lawrence uniform direct results require a reviewed driver source hash.")
+            f"Missing matching Linux assembly and solve provenance for the reused {scope} mesh and SAFE section.")
+    if device:
+        require(provenance.get("phase_adjustment_applied") is False
+                and all(isinstance(provenance.get(key), dict) and is_sha256(provenance[key].get("sha256"))
+                        for key in ("assembly_stage", "solve_receipt", "preflight_receipt")),
+                "Lawrence device direct results require linked phase receipts and unchanged reference-plane phases.")
+    phases = (linux, linux.get("assembly"), publication) if device else (linux,)
+    for phase in phases:
+        environment = phase.get("implementation") if isinstance(phase, dict) else None
+        platform_name = environment.get("platform") if isinstance(environment, dict) else None
+        require(isinstance(platform_name, str) and platform_name.startswith("Linux-")
+                and (not device or all(environment.get(key) is not None and environment[key] == implementation.get(key)
+                                       for key in ("source_sha256", "packages", "python"))),
+                f"Missing matching Linux assembly, solve or export environment for the Lawrence {scope} direct solve.")
+        driver = phase.get("driver")
+        source = driver.get("sha256") if isinstance(driver, dict) else None
+        require(is_sha256(source) and source == reviewed_source,
+                f"Lawrence {scope} direct results require a reviewed driver source hash.")
+        job = phase.get("slurm_job_id")
+        require(isinstance(job, str) and job.isascii() and job.isdecimal(),
+                f"Missing Slurm job ID for the Lawrence {scope} direct solve.")
     helpers = provenance.get("direct_solver_helpers")
-    require(isinstance(helpers, dict) and helpers.get("sha256") == LAWRENCE_UNIFORM_DIRECT_HELPER_SHA256,
-            "Lawrence uniform direct results require the reviewed residual and memory helper source hash.")
-    job = linux.get("slurm_job_id")
-    require(isinstance(job, str) and job.isascii() and job.isdecimal(),
-            "Missing Slurm job ID for the Lawrence uniform direct solve.")
+    require(isinstance(helpers, dict) and helpers.get("sha256") == LAWRENCE_DIRECT_HELPER_SHA256,
+            f"Lawrence {scope} direct results require the reviewed residual and memory helper source hash.")
     require(all(is_sha256(report.get(key)) for key in ("operator_csc_sha256", "rhs_array_sha256")),
-            "Missing original operator or right-hand side hash for the Lawrence uniform direct solve.")
+            f"Missing original operator or right-hand side hash for the Lawrence {scope} direct solve.")
     require(report.get("relative_residual_limit") == report.get("backward_residual_limit") == 1e-9,
-            "Lawrence uniform direct results require both original-equation residual limits of 1e-9.")
+            f"Lawrence {scope} direct results require both original-equation residual limits of 1e-9.")
     channels = report.get("channels", [])
     require([row.get("column") for row in channels] == list(range(5))
             and [row.get("incident_port_root") for row in channels] == summary.get("incident_mode_indices"),
-            "Missing original-equation accuracy checks for the five Lawrence uniform channels.")
+            f"Missing original-equation accuracy checks for the five Lawrence {scope} channels.")
     relative, backward = [], []
     for column, row in enumerate(channels):
         require(type(row.get("info")) is int and row["info"] == 0 and type(row["column"]) is int,
-                "A Lawrence uniform direct channel did not finish successfully.")
+                f"A Lawrence {scope} direct channel did not finish successfully.")
         vector = row.get("accepted_vector")
         require(isinstance(vector, dict) and vector.get("file") == f"accepted-{column:03d}_AP_pnc.npy"
                 and type(vector.get("bytes")) is int and vector["bytes"] > 0 and is_sha256(vector.get("sha256")),
-                "Missing accepted vector identity for a Lawrence uniform direct channel.")
-        require("relative_true_residual" not in row, "A Lawrence uniform channel needs one unambiguous relative residual field.")
+                f"Missing accepted vector identity for a Lawrence {scope} direct channel.")
+        require("relative_true_residual" not in row,
+                f"A Lawrence {scope} channel needs one unambiguous relative residual field.")
         values = (row.get("relative_residual"), row.get("relative_backward_residual"))
-        require(all(type(value) in (int, float) and math.isfinite(value) and 0 <= value <= 1e-9 for value in values),
-                "Saved Lawrence uniform direct vectors did not meet both original-equation residual limits.")
+        require(all(type(value) in (int, float) and math.isfinite(value) and 0 <= value <= limit
+                    for value, limit in zip(values, (relative_limit, 1e-9), strict=True)),
+                f"Saved Lawrence {scope} direct vectors did not meet both original-equation residual limits "
+                f"(relative {relative_limit:g}, backward 1e-9).")
         relative.append(values[0])
         backward.append(values[1])
-    return {"method": LAWRENCE_UNIFORM_DIRECT, "slurm_job_id": job, "source_sha256": source,
+    return {"method": method, "slurm_job_id": linux["slurm_job_id"], "source_sha256": reviewed_source,
             "maximum_relative_residual": max(relative), "maximum_backward_residual": max(backward)}
 
 
@@ -257,16 +288,16 @@ def compatible_inputs(a: dict, b: dict, fixed: dict, other: dict) -> tuple[dict,
     precision_a = a["configuration"]["resources"].get("ilu_precision", "double")
     precision_b = b["configuration"]["resources"].get("ilu_precision", "double")
     direct_checks = {label: check for label, run in (("reference", a), ("candidate", b))
-                     if (check := checked_lawrence_uniform_accuracy(run)) is not None}
+                     if (check := checked_lawrence_direct_accuracy(run)) is not None}
     if direct_checks:
         packages = a["implementation"].get("packages")
         require(isinstance(packages, dict) and bool(packages) and packages == b["implementation"].get("packages"),
-                "Lawrence uniform direct comparisons require matching numerical package versions.")
+                "Lawrence direct comparisons require matching numerical package versions.")
         layered = "src/phononic/layered_AP_pnc.py"
         first[layered] = a["implementation"]["source_sha256"].get(layered)
         second[layered] = b["implementation"]["source_sha256"].get(layered)
         require(is_sha256(first[layered]) and first[layered] == second[layered],
-                "Lawrence uniform direct comparisons require matching layered mesh kernels.")
+                "Lawrence direct comparisons require matching layered mesh kernels.")
     compatibility = None
     if direct_checks or first.get(LGMRES_SOURCE) != second.get(LGMRES_SOURCE) or precision_a != precision_b:
         checks = {}

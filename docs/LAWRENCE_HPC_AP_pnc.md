@@ -80,6 +80,22 @@ $h80 = 'DOWNLOADED_H80_PUBLIC_RUN_DIRECTORY'
 .venv/Scripts/python.exe -B tools/compare_uniform_reference_AP_pnc.py --run $h80 --reference verification/full_device_port_resolution_AP_pnc.json --reference-case 20x6
 ```
 
+## Run the h60 full-device control
+
+Check the handoff for job ownership, approved receipt hashes, and current resource admission. Reuse completed phases and accepted drives. Both drivers use `.venv-lawrence-export` with one numerical thread. [Current handoff](AI_HANDOFF_AP_pnc.md)
+
+```bash
+sbatch --parsable scripts/hpc/lawrence_device_refinement_AP_pnc.sbatch PROJECT_ROOT H80_CONFIG H80_MESH_DIR PORTS_NPZ
+sbatch --parsable scripts/hpc/lawrence_device_compute_AP_pnc.sbatch PROJECT_ROOT PHASE WALL_SECONDS INPUT_DIR INPUT_SHA [PRIOR_OR_SOLVE_DIR RECEIPT_SHA]
+```
+
+1. The mesh-only preflight uses `tools/run_lawrence_device_refinement_AP_pnc.py` with the original h80 configuration, tagged mesh checkpoint, and saved port modes. The `mesh_ready` receipt `device_h60_preflight_AP_pnc.json` has SHA-256 `ceb60bb34585bf583776ffa010dd2e040da542f036d392b3c79229af8438a8a0`. It verifies the original 675-DOF traces and end planes, four thickness layers, and all 26 hole walls with 32 segments around each rim. The lead interiors are included in the global refinement. The measured 680,265-DOF case cap applies to this assembly. The standard reporting cap remains 60,000 DOFs.
+2. For `stage`, pass the preflight directory and the exact preflight receipt hash as `INPUT_DIR` and `INPUT_SHA`. The compute batch calls `tools/solve_lawrence_device_refinement_AP_pnc.py`. The stage uses 16 GiB, two CPUs, and a 550-second worker budget within a ten-minute Slurm allocation. It saves stiffness, mass, and the exact original complex equations in the stage directory with `stage_AP_pnc.json` before factorization.
+3. For `solve`, pass the stage directory and exact `stage_AP_pnc.json` hash. Choose the factor allocation from measured sparse operator storage and fresh resource evidence. The solver checks node and Slurm memory headroom before factorization and at factor and drive boundaries. The Slurm memory limit and the worker timeout bound the process. One complex128 factor serves all pending drives. To recover after interruption, append the stopped prior solve directory and exact `solve_AP_pnc.json` hash. The driver replays accepted drives against the original equations and solves the pending drives only.
+4. For `export`, pass the same stage directory/hash and append the completed solve directory and exact `solve_AP_pnc.json` hash. The export reconstructs the original equations, rechecks all five accepted vectors, and calculates channel power and independent traction flux at the original end planes. It identifies the public output in `export_AP_pnc.json`. Verify the returned files before comparing saved h80 and h60 results with `tools/compare_scattering_AP_pnc.py`.
+
+Athul Prem's two-port coherent-drive test verifies power consistency for a small uniform guide. The h60 comparison measures in-plane sensitivity at 1 GHz with fixed ports and hole faceting. Separate thickness, faceting, port, and frequency checks are required for broader full-device claims.
+
 ## Open JupyterLab
 
 After the bootstrap succeeds, submit the optional notebook job from the same Lawrence project directory. It requests one CPU and 4 GiB for two hours. Use the node assigned to the running job. The server log is private and contains the token generated for this session.
