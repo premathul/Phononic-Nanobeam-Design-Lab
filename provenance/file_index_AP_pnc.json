@@ -3,7 +3,7 @@
   "file_tag": "_AP_pnc",
   "index_version": 1,
   "date": "2026-11-12",
-  "file_count": 244,
+  "file_count": 245,
   "self_hash_policy": "Own SHA-256 is null to avoid recursive checksumming.",
   "files": [
     {
@@ -655,6 +655,14 @@
       "original_repository_path": null
     },
     {
+      "path": "docs/CONVERGENCE_AND_DIAGNOSIS_ROADMAP_AP_pnc.md",
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "role": "current_documentation_or_tooling",
+      "original_repository_path": null,
+      "sha256": "05825d98fa021a3393b988786199d5d09b520ee80f5e556b0ca39910128adb5c"
+    },
+    {
       "path": "docs/ENVIRONMENT_AP_pnc.md",
       "author": "Athul Prem",
       "file_tag": "_AP_pnc",
@@ -691,7 +699,7 @@
       "author": "Athul Prem",
       "file_tag": "_AP_pnc",
       "role": "current_documentation_or_tooling",
-      "sha256": "76bc45fe9f17092eada23f6539cbc71db4837badbb487c28956048a525f470dc",
+      "sha256": "c501b1dd75dbf7954fc66c4d59815bab2b4c5cbe4dd66e938f64c195f79c5341",
       "original_repository_path": null
     },
     {
