@@ -1,0 +1,211 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "status": "archive_anchor_verified_convergence_unresolved",
+  "scope": "Verified read-only import of the existing 1 GHz left-incident h80 six-layer 26-hole device response. One accepted frequency is available in the retained map.",
+  "repository_base_revision": "4a541589c24d29659a514d1b695f279cbe748266",
+  "import_source_sha256": {
+    "tools/import_lawrence_frequency_map_AP_pnc.py": "d958730e6fb5844957d8f1deff08f065484fb947891525ba9371d471a0a44b2b",
+    "tools/map_scattering_AP_pnc.py": "d3dfa9ac0dab687715717da40af318ccdb718059165a0ca395f13a97a7aa6e6e",
+    "tools/compare_scattering_AP_pnc.py": "e54afbc7254fb6a78ed0acde538296480d561edf91d16725c0fef0be2468430a"
+  },
+  "archive": {
+    "root": "results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc",
+    "source_verification": {
+      "thickness": {
+        "path": "verification/device_thickness_AP_pnc.json",
+        "sha256": "81f1e195956c1986d067fc397ea1836c284d9e645073e032d323772918532f05"
+      },
+      "in_plane": {
+        "path": "verification/device_h60_AP_pnc.json",
+        "sha256": "4fb8ed7e45fdc73aba6a2705e3232aa33f74a22f116063a488ba52eded0741e2"
+      },
+      "in_plane_h100_h80": {
+        "path": "verification/lawrence_hpc_AP_pnc.json",
+        "sha256": "aa5b0c48afcb7293417ec19f77c8da949f7d2895972a020576663efbe940cc38"
+      }
+    },
+    "jobs": {
+      "preflight": {
+        "slurm_job_id": "1335307",
+        "receipt_path_in_archive": "thickness-h80-preflight-1335307/thickness_h80_preflight_AP_pnc.json",
+        "receipt_sha256": "2e2250d90ca9f32ccce920372a5ec7d7f6a0dc547c80f768ad186202fcc867ce"
+      },
+      "safe": {
+        "slurm_job_id": "1335308",
+        "receipt_path_in_archive": "thickness-h80-safe-1335308/thickness_h80_safe_AP_pnc.json",
+        "receipt_sha256": "b5c0d73656e90aa5ba312939c0ef25633af5a775974f5fc778031584d55c78f3"
+      },
+      "stage": {
+        "slurm_job_id": "1335309",
+        "receipt_path_in_archive": "thickness-h80-stage-1335309/stage_AP_pnc.json",
+        "receipt_sha256": "95c1cfde8d51d77ab74fe9d2c424c1eda0822556a30664cbe581999f97e0ea5f"
+      },
+      "solve": {
+        "slurm_job_id": "1335321",
+        "receipt_path_in_archive": "thickness-h80-solve-1335321/solve_AP_pnc.json",
+        "receipt_sha256": "c7e71cbd25a6e0a6e843471bc73c89694bb6dfc8183c9db0f8a88b5343786c93"
+      },
+      "export": {
+        "slurm_job_id": "1335341",
+        "receipt_path_in_archive": "thickness-h80-export-1335341/export_AP_pnc.json",
+        "receipt_sha256": "d0da28923777b983155ed1a122515057cef44ae55067732dc068afb7cf5f796b"
+      }
+    },
+    "public_summary_sha256": "040a219f54446219b6a610cf08382ff7e93a6dcb01f31f3be810977651301c4e",
+    "referenced_artifact_count": 26,
+    "referenced_bytes_stream_hashed_per_invocation": 1969613618,
+    "saved_body_operator_files": [
+      "K_AP_pnc.npz",
+      "M_AP_pnc.npz"
+    ],
+    "saved_section_operators": [
+      "K0",
+      "M",
+      "Q",
+      "G"
+    ],
+    "archived_1ghz_equation_identities": {
+      "operator_csc_sha256": "762ee92fa2a6a58fd458b55eae2752317485555dcd160544b53519f91e351607",
+      "rhs_array_sha256": "a8044857aaaf445cf33808e57b44c7ca718abcc8155d36d96cf8e420fa90ce1d"
+    },
+    "original_linux_paths_retained": true,
+    "binary_arrays_copied": false,
+    "metadata_entries_checked": 59,
+    "metadata_unchanged": true,
+    "metadata_sha256_after_both_checks": "5e4344166a6a3844f96b1b1631a533e30c6be4816c984b6f79a27d0061f9984d"
+  },
+  "retained_map": {
+    "directory": "results/runs/imported_frequency_map_acceptance_AP_pnc/map",
+    "data_sha256": "ded2a54dc283be7a4daa64064e6a78eab353ae31e37ab7746268e1ed84da7cb5",
+    "files": {
+      "map_AP_pnc.json": {
+        "sha256": "221fa6fdd01f183765af408cbb52fa0a0020eeba8a139e68804d0951f156bd93",
+        "bytes": 46021
+      },
+      "scattering_map_AP_pnc.csv": {
+        "sha256": "5e11f6c8f2f630f3b172691754103284a233a9641409bf4bb61ed41b7ae92185",
+        "bytes": 7378
+      },
+      "report_AP_pnc.html": {
+        "sha256": "e3ef2dd094adefff91883a43cec03fe65a45eade4091452f7734aa47a29a3a1e",
+        "bytes": 2791
+      }
+    },
+    "publication_bytes": 56190,
+    "independent_review": {
+      "method": "Read the published map and compact source tables independently of the importer. Check the embedded manifest digest, publication and source checksums, archive link containment and sizes, signed modal order, original-plane phase and channel powers, and numerical evidence against the prior recorded replay.",
+      "raw_complex_and_power_rows_exact": 50,
+      "unchanged_complex_amplitudes_in_first_segment": true,
+      "recorded_numerical_evidence_matched": true,
+      "all_three_failed_complex_response_gates_preserved": true
+    },
+    "computation_enabled": false
+  },
+  "point": {
+    "frequency_hz": 1000000000.0,
+    "incident_side": "left",
+    "body_displacement_dofs": 616239,
+    "trace_displacement_dofs_per_end": 975,
+    "reference_planes_x_m": [
+      0,
+      1.665e-05
+    ],
+    "incident_and_transmitted_roots": [
+      1940,
+      1877,
+      1867,
+      1855,
+      1837
+    ],
+    "reflected_roots": [
+      1941,
+      1878,
+      1868,
+      1856,
+      1838
+    ],
+    "relative_l2_target": 1e-10,
+    "relative_l2_and_backward_residual_limit": 1e-09,
+    "maximum_independent_windows_relative_l2_residual": 4.819036916971941e-12,
+    "maximum_independent_windows_normwise_backward_residual": 8.890348180727453e-16,
+    "maximum_independent_windows_nodal_force_flux_imbalance": 2.398081733190338e-14,
+    "maximum_archived_linux_nodal_force_flux_imbalance": 2.3425705819590803e-14,
+    "cutoff_status": "No unresolved cutoff reported by the archived finite SAFE solve.",
+    "adjacent_sample_link": "segment_start",
+    "phase_adjustment_applied": false,
+    "mode_completeness_established": false,
+    "spatial_convergence_established": false,
+    "frequency_convergence_established": false
+  },
+  "mesh_pair_checks": {
+    "in_plane_h100_h80_z4": {
+      "maximum_power_change": 0.00017780889364368618,
+      "maximum_complex_change": 0.039927184867442976,
+      "maximum_same_channel_transmission_phase_change_rad": 0.03995716586262313,
+      "power_change_limit": 0.01,
+      "complex_change_limit": 0.01,
+      "power_passed": true,
+      "complex_passed": false,
+      "mesh_pair_passed": false
+    },
+    "in_plane_h80_h60_z4": {
+      "maximum_power_change": 0.0004552943544984256,
+      "maximum_complex_change": 0.026866990815575545,
+      "maximum_same_channel_transmission_phase_change_rad": 0.026886649325256768,
+      "power_change_limit": 0.01,
+      "complex_change_limit": 0.01,
+      "power_passed": true,
+      "complex_passed": false,
+      "mesh_pair_passed": false
+    },
+    "joint_body_port_thickness_h80_z4_z6": {
+      "maximum_power_change": 6.47272965669651e-05,
+      "maximum_complex_change": 0.01670625750875372,
+      "maximum_same_channel_transmission_phase_change_rad": 0.016718071089440015,
+      "power_change_limit": 0.01,
+      "complex_change_limit": 0.01,
+      "power_passed": true,
+      "complex_passed": false,
+      "mesh_pair_passed": false
+    }
+  },
+  "limits": "Archival integrity and the saved equation and physical-flux checks qualify this computed point on its fixed discretization. The three spatial comparisons retain their individual failed complex criteria. A single sample leaves intervals, cutoffs between samples and spectral features unresolved. New device points require a separately admitted workflow.",
+  "measured_pilot": {
+    "execution_record": "results/runs/imported_frequency_map_acceptance_AP_pnc/execution_AP_pnc.json",
+    "execution_record_sha256": "a0b5763b7de74b75aee52f658d79841f6024bb8d4c1e237db48dce425e2c3a2d",
+    "runs": [
+      {
+        "phase": "import",
+        "elapsed_seconds": 2.9778524999856018,
+        "sampled_peak_process_tree_rss_bytes": 96411648,
+        "sampled_peak_process_tree_private_bytes": 68280320,
+        "physical_available_before_bytes": 3406630912,
+        "wall_limit_seconds": 120,
+        "exit_code": 0
+      },
+      {
+        "phase": "reuse_verified",
+        "elapsed_seconds": 2.8863197999889962,
+        "wall_limit_seconds": 120,
+        "exit_code": 0
+      }
+    ],
+    "publication_bytes_and_mtimes_unchanged_on_reuse": true,
+    "reuse_memory_sampling": "The successful repeated reuse was timed without sampling process memory.",
+    "monitor_observation": "The monitor for the first reuse attempt encountered a process-exit race and did not capture an exit code. The importer completion text was retained. The repeated reuse supplied the successful exit code and publication comparison."
+  },
+  "integrated_windows_checks": {
+    "execution": "Local Windows suite on the frozen importer and native map sources.",
+    "tests": 168,
+    "passed": 167,
+    "skipped": 1,
+    "skip_reason": "The local Windows account could not create symbolic links for the archive guard test.",
+    "elapsed_seconds": 52.415,
+    "exit_code": 0,
+    "log": "verification/development_tests_AP_pnc.log",
+    "log_sha256": "62e4d0660c4abfb63f43eefd225326c1b4f0786364928f6a038be180e4d082d5",
+    "ci_status_at_recording": "Pending"
+  }
+}

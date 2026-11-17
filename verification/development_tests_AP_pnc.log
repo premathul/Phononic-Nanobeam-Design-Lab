@@ -54,6 +54,11 @@ test_straight_beam_si_volume_and_end_ports (test_geometry3d_AP_pnc.Geometry3DTes
 test_two_cylindrical_through_holes_remove_expected_volume (test_geometry3d_AP_pnc.Geometry3DTests.test_two_cylindrical_through_holes_remove_expected_volume) ... ok
 test_current_archive_and_corruption (test_historical_source_AP_pnc.HistoricalSourceTests.test_current_archive_and_corruption) ... ok
 test_unregistered_archive_is_rejected (test_historical_source_AP_pnc.HistoricalSourceTests.test_unregistered_archive_is_rejected) ... ok
+test_linked_mesh_safe_and_stage_must_have_the_same_physical_inputs (test_imported_frequency_map_AP_pnc.ArchivedInputTests.test_linked_mesh_safe_and_stage_must_have_the_same_physical_inputs) ... ok
+test_publication_provenance_must_match_the_linked_linux_source (test_imported_frequency_map_AP_pnc.ArchivedInputTests.test_publication_provenance_must_match_the_linked_linux_source) ... ok
+test_rebase_preserves_linux_identity_and_checks_exact_local_bytes (test_imported_frequency_map_AP_pnc.ArchivedInputTests.test_rebase_preserves_linux_identity_and_checks_exact_local_bytes) ... ok
+test_receipt_validation_rejects_different_equations_order_and_residuals (test_imported_frequency_map_AP_pnc.ArchivedInputTests.test_receipt_validation_rejects_different_equations_order_and_residuals) ... ok
+test_publication_preserves_signed_modes_gates_and_skips_unsampled_frequencies (test_imported_frequency_map_AP_pnc.ImportedMapTests.test_publication_preserves_signed_modes_gates_and_skips_unsampled_frequencies) ... ok
 test_fill_factor_is_validated_and_passed_to_preconditioner (test_iterative_scattering_AP_pnc.IterativeScatteringTests.test_fill_factor_is_validated_and_passed_to_preconditioner) ... ok
 test_rejects_failure_status_and_false_success (test_iterative_scattering_AP_pnc.IterativeScatteringTests.test_rejects_failure_status_and_false_success) ... ok
 test_rotated_germanium_both_incidence_sides (test_iterative_scattering_AP_pnc.IterativeScatteringTests.test_rotated_germanium_both_incidence_sides) ... ok
@@ -178,7 +183,7 @@ test_failed_attempt_is_retained_and_bad_material_creates_no_output (test_workflo
 3D solid: 352 tetrahedra, 435 displacement DOFs
 test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks (test_workflow3d_AP_pnc.Workflow3D.test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks) ... ok
 test_historical_hole_pattern_uses_source_origin_and_exact_provenance (test_workflow3d_AP_pnc.Workflow3D.test_historical_hole_pattern_uses_source_origin_and_exact_provenance) ... ok
-Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{2348c2a1-9723-42fb-bc74-7f1e090a0812}\Temp\tmptrqww0t6\two_hole_pilot_200nm-e9a3fd4be558
+Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{7a5bf2d4-3c7d-4931-9e46-ab63ec27d563}\Temp\tmp4ki9xcuw\two_hole_pilot_200nm-e7989614ebfa
 Max relative solve residual: 0
 Power balance check: True; max R=0
 Matched-guide power check: True
@@ -190,6 +195,6 @@ test_output_can_be_reconstructed_and_cache_checks_files (test_workflow3d_AP_pnc.
 test_scattering_exports_power_channels_and_reconstructible_responses (test_workflow3d_AP_pnc.Workflow3D.test_scattering_exports_power_channels_and_reconstructible_responses) ... ok
 
 ----------------------------------------------------------------------
-Ran 163 tests in 51.564s
+Ran 168 tests in 52.415s
 
 OK (skipped=1)
