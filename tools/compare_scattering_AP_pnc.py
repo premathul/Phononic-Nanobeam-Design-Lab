@@ -48,6 +48,9 @@ LAWRENCE_UNIFORM_DIRECT = "lawrence_uniform_superlu_direct"
 LAWRENCE_UNIFORM_DIRECT_DRIVER_SHA256 = "1944ddfeb5c5ace7d2842086996aab658ce999803ab225ce61e4a44078db3013"
 LAWRENCE_DEVICE_DIRECT = "lawrence_device_superlu_direct"
 LAWRENCE_DEVICE_DIRECT_DRIVER_SHA256 = "32efc149510d22744a0478ff9c171e770ba4cf9bf535b2ca5f2ceeb15c529730"
+LAWRENCE_THICKNESS_DIRECT = "lawrence_device_thickness_superlu_direct"
+LAWRENCE_THICKNESS_DIRECT_DRIVER_SHA256 = "741f6fb09127de7eb590686e9bca40951864c04b261d87da667e13861fc75490"
+LAWRENCE_THICKNESS_SAFE_DRIVER_SHA256 = "2149939222a8702fdc6c1a61441908dff5dede27859154e033f9142aaa403f18"
 LAWRENCE_DIRECT_HELPER_SHA256 = "dd9e07d4955de6cf4cac97eec0485bfc34bd1d7f8173d4707718c2ea4ba89034"
 
 
@@ -203,47 +206,60 @@ def checked_lawrence_direct_accuracy(summary: dict) -> dict | None:
     direct = resources.get("linear_solver") == "direct"
     linux = provenance.get("linux_assembly_and_solve")
     method = report.get("method")
-    reviewed_methods = (LAWRENCE_UNIFORM_DIRECT, LAWRENCE_DEVICE_DIRECT)
+    reviewed_methods = (LAWRENCE_UNIFORM_DIRECT, LAWRENCE_DEVICE_DIRECT, LAWRENCE_THICKNESS_DIRECT)
     if (method not in reviewed_methods and provenance.get("method") not in reviewed_methods
             and not (direct and linux is not None)):
         return None
     require(direct and method == provenance.get("method") and method in reviewed_methods,
             "Expected a reviewed Lawrence direct-solve method in both the solver report and provenance.")
-    device = method == LAWRENCE_DEVICE_DIRECT
+    device = method != LAWRENCE_UNIFORM_DIRECT
+    new_safe = method == LAWRENCE_THICKNESS_DIRECT
     if not device:
         scope, hole_count = "uniform", 0
         reviewed_source = LAWRENCE_UNIFORM_DIRECT_DRIVER_SHA256
         relative_limit = 1e-9
     else:
-        scope, hole_count = "device", 26
-        reviewed_source = LAWRENCE_DEVICE_DIRECT_DRIVER_SHA256
+        scope, hole_count = ("thickness" if new_safe else "device"), 26
+        reviewed_source = LAWRENCE_THICKNESS_DIRECT_DRIVER_SHA256 if new_safe else LAWRENCE_DEVICE_DIRECT_DRIVER_SHA256
         relative_limit = 1e-10
         require(report.get("relative_target") == relative_limit,
-                "Lawrence device direct results require the original-equation relative target of 1e-10.")
+                f"Lawrence {scope} direct results require the original-equation relative target of 1e-10.")
+    mesh = summary["configuration"]["mesh"]
     require(report.get("working_dtype") == "complex128" and summary.get("num_incident_channels") == 5
-            and summary.get("hole_count") == hole_count and summary["configuration"]["mesh"]["kind"] == "layered",
+            and summary.get("hole_count") == hole_count and mesh["kind"] == "layered",
             f"Expected a complex128 layered Lawrence {scope} direct solve with {hole_count} holes and five channels.")
+    if new_safe:
+        require(mesh.get("mesh_size_nm") == 80 and mesh.get("element_order") == 2
+                and mesh.get("thickness_layers") == 6 and mesh.get("circle_resolution") == 32
+                and summary.get("port_dofs") == 975,
+                "Lawrence thickness results require the h80 P2 mesh with six layers, 32 rim segments and 975 port DOFs.")
     implementation = summary["implementation"]
     publication = provenance.get("linux_export") if device else linux
     require(isinstance(linux, dict) and isinstance(publication, dict) and publication.get("implementation") == implementation
-            and provenance.get("reused_preflight_mesh") is True and provenance.get("safe_eigensolve_performed") is False,
-            f"Missing matching Linux assembly and solve provenance for the reused {scope} mesh and SAFE section.")
+            and provenance.get("reused_preflight_mesh") is True and provenance.get("safe_eigensolve_performed") is new_safe,
+            f"Missing matching Linux assembly and solve provenance for the {scope} mesh and SAFE section.")
     if device:
+        receipts = ("assembly_stage", "solve_receipt", "preflight_receipt")
+        if new_safe:
+            receipts += ("safe_receipt", "safe_modes")
         require(provenance.get("phase_adjustment_applied") is False
                 and all(isinstance(provenance.get(key), dict) and is_sha256(provenance[key].get("sha256"))
-                        for key in ("assembly_stage", "solve_receipt", "preflight_receipt")),
-                "Lawrence device direct results require linked phase receipts and unchanged reference-plane phases.")
+                        for key in receipts),
+                f"Lawrence {scope} direct results require linked phase receipts and unchanged reference-plane phases.")
     phases = (linux, linux.get("assembly"), publication) if device else (linux,)
-    for phase in phases:
+    executions = tuple((phase, reviewed_source) for phase in phases)
+    if new_safe:
+        executions += ((provenance.get("linux_safe"), LAWRENCE_THICKNESS_SAFE_DRIVER_SHA256),)
+    for phase, expected_source in executions:
         environment = phase.get("implementation") if isinstance(phase, dict) else None
         platform_name = environment.get("platform") if isinstance(environment, dict) else None
         require(isinstance(platform_name, str) and platform_name.startswith("Linux-")
                 and (not device or all(environment.get(key) is not None and environment[key] == implementation.get(key)
                                        for key in ("source_sha256", "packages", "python"))),
-                f"Missing matching Linux assembly, solve or export environment for the Lawrence {scope} direct solve.")
+                f"Missing matching Linux assembly, solve, export or SAFE environment for the Lawrence {scope} direct solve.")
         driver = phase.get("driver")
         source = driver.get("sha256") if isinstance(driver, dict) else None
-        require(is_sha256(source) and source == reviewed_source,
+        require(is_sha256(source) and source == expected_source,
                 f"Lawrence {scope} direct results require a reviewed driver source hash.")
         job = phase.get("slurm_job_id")
         require(isinstance(job, str) and job.isascii() and job.isdecimal(),

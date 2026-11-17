@@ -21,6 +21,7 @@ test_iterative_failure_preserves_diagnostics_and_rejects_invalid_options (test_b
 test_changed_physical_input_is_rejected_before_comparing (test_compare_scattering_AP_pnc.ScatteringComparisonTests.test_changed_physical_input_is_rejected_before_comparing) ... ok
 test_failed_input_power_balance_prevents_mesh_acceptance (test_compare_scattering_AP_pnc.ScatteringComparisonTests.test_failed_input_power_balance_prevents_mesh_acceptance) ... ok
 test_lawrence_device_direct_compatibility_with_saved_windows_assembly (test_compare_scattering_AP_pnc.ScatteringComparisonTests.test_lawrence_device_direct_compatibility_with_saved_windows_assembly) ... ok
+test_lawrence_thickness_direct_compatibility_with_new_safe_basis (test_compare_scattering_AP_pnc.ScatteringComparisonTests.test_lawrence_thickness_direct_compatibility_with_new_safe_basis) ... ok
 test_lawrence_uniform_direct_compatibility_checks_provenance_and_original_residuals (test_compare_scattering_AP_pnc.ScatteringComparisonTests.test_lawrence_uniform_direct_compatibility_checks_provenance_and_original_residuals) ... ok
 test_signed_channel_gauge_and_permutation_leave_comparison_invariant (test_compare_scattering_AP_pnc.ScatteringComparisonTests.test_signed_channel_gauge_and_permutation_leave_comparison_invariant) ... ok
 test_unequal_traces_compare_and_reuse_with_checksum (test_compare_scattering_AP_pnc.ScatteringComparisonTests.test_unequal_traces_compare_and_reuse_with_checksum) ... ok
@@ -59,6 +60,9 @@ test_failed_first_drive_stops_before_the_second (test_lawrence_solver_AP_pnc.Law
 test_job_ancestor_usage_can_block_an_otherwise_admissible_worker (test_lawrence_solver_AP_pnc.LawrenceSolverTests.test_job_ancestor_usage_can_block_an_otherwise_admissible_worker) ... ok
 test_original_residual_and_candidate_checks_reject_false_passes (test_lawrence_solver_AP_pnc.LawrenceSolverTests.test_original_residual_and_candidate_checks_reject_false_passes) ... ok
 test_supervised_smoke_and_existing_attempt_are_safe (test_lawrence_solver_AP_pnc.LawrenceSolverTests.test_supervised_smoke_and_existing_attempt_are_safe) ... ok
+test_direct_replay_resumes_the_incident_roots_from_the_approved_stage (test_lawrence_thickness_AP_pnc.LawrenceThicknessTests.test_direct_replay_resumes_the_incident_roots_from_the_approved_stage) ... ok
+test_footprint_retains_coordinates_and_diagonals_across_thickness_layers (test_lawrence_thickness_AP_pnc.LawrenceThicknessTests.test_footprint_retains_coordinates_and_diagonals_across_thickness_layers) ... ok
+test_p2_layout_supplies_a_safe_solve_without_body_matrices (test_lawrence_thickness_AP_pnc.LawrenceThicknessTests.test_p2_layout_supplies_a_safe_solve_without_body_matrices) ... ok
 test_five_direct_drives_match_dense_reference_and_save_checked_vectors (test_lawrence_uniform_AP_pnc.LawrenceUniformTests.test_five_direct_drives_match_dense_reference_and_save_checked_vectors) ... ok
 test_relative_residual_failure_retains_the_first_drive (test_lawrence_uniform_AP_pnc.LawrenceUniformTests.test_relative_residual_failure_retains_the_first_drive) ... ok
 test_unsafe_admission_precedes_factorization (test_lawrence_uniform_AP_pnc.LawrenceUniformTests.test_unsafe_admission_precedes_factorization) ... ok
@@ -169,7 +173,7 @@ test_failed_attempt_is_retained_and_bad_material_creates_no_output (test_workflo
 3D solid: 352 tetrahedra, 435 displacement DOFs
 test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks (test_workflow3d_AP_pnc.Workflow3D.test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks) ... ok
 test_historical_hole_pattern_uses_source_origin_and_exact_provenance (test_workflow3d_AP_pnc.Workflow3D.test_historical_hole_pattern_uses_source_origin_and_exact_provenance) ... ok
-Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{79f438b8-382d-4e10-beaf-72b8af6f2557}\Temp\tmpbudh5zq9\two_hole_pilot_200nm-36f75612a5b9
+Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{c23e8787-6491-42e5-bdd0-09f9a775fb4b}\Temp\tmpczwqy11w\two_hole_pilot_200nm-91116a2cc7fb
 Max relative solve residual: 0
 Power balance check: True; max R=0
 Matched-guide power check: True
@@ -181,6 +185,6 @@ test_output_can_be_reconstructed_and_cache_checks_files (test_workflow3d_AP_pnc.
 test_scattering_exports_power_channels_and_reconstructible_responses (test_workflow3d_AP_pnc.Workflow3D.test_scattering_exports_power_channels_and_reconstructible_responses) ... ok
 
 ----------------------------------------------------------------------
-Ran 157 tests in 51.078s
+Ran 161 tests in 51.193s
 
 OK (skipped=1)

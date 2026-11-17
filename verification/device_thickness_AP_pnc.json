@@ -1,0 +1,391 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "status": "scattering_verified_mesh_pair_failed_complex_gate",
+  "execution_and_provenance_review_passed": true,
+  "repository_base_revision": "7da645117a6e8afadb18d3cc1d55339197d5a035",
+  "scope": "One 1 GHz left-incidence thickness discretization control of the 26-hole device, using the saved h80 planar footprint and a compatible SAFE port for each thickness discretization.",
+  "previous_results": {
+    "h80_h60_device_record": {
+      "path": "verification/device_h60_AP_pnc.json",
+      "sha256": "4fb8ed7e45fdc73aba6a2705e3232aa33f74a22f116063a488ba52eded0741e2"
+    },
+    "port_section_study": {
+      "path": "verification/full_device_port_resolution_AP_pnc.json",
+      "sha256": "b7e91595acd0f2cfffa04af1468e6a0fa4a197ea610ee401aa114d2b2a3cfbbd"
+    },
+    "h80_h60_device_maximum_power_change": 0.0004552943544984256,
+    "h80_h60_device_maximum_complex_change": 0.026866990815575545,
+    "h80_h60_device_maximum_transmission_phase_change_rad": 0.026886649325256768,
+    "h80_h60_device_mesh_pair_passed": false,
+    "h100_h80_uniform_3um_maximum_complex_change": 0.004092290283926378,
+    "h80_uniform_3um_maximum_complex_error_against_20x6": 0.004567875397362948,
+    "port_phase_indicators_rad": {
+      "12x4_to_20x6_over_3um": 0.0071682871071717235,
+      "12x4_to_20x6_over_uniform_equivalent_16p65um": 0.03978399344480307,
+      "10x4_to_12x4_over_3um": 0.005437950626186561,
+      "12x3_to_12x4_over_3um": 0.0036202450704763177
+    }
+  },
+  "saved_end_field_diagnostic": {
+    "method": "Reconstruct the consistent transverse P2 mass matrix and the saved displacement trace order from each public field. Sum outgoing evanescent displacement columns coherently using the complete saved mode coefficients. Divide the mass norm of that sum by the mass norm of the corresponding incoming unit-power displacement. In the virtual continuation, multiply each outgoing mode by exp(i k delta_x), with signed delta_x measured outward from its original end plane.",
+    "inputs": {
+      "h80_device": {
+        "path": "results/runs/full_device_resource_profile/lawrence_h80_AP_pnc/h80-export-1335045/historical_26hole_layered_h80_ny12_z4-3385249d64d1/selected_fields_AP_pnc.npz",
+        "sha256": "2c6138705758d8a73e1487e5df6becc0107d308c3ca8f3ea5174ec0fc242fff4"
+      },
+      "h60_device": {
+        "path": "results/runs/full_device_resource_profile/lawrence_h60_AP_pnc/device-h60-export-1335301/historical_26hole_layered_h60_ny12_z4-2aeb7aac147a/selected_fields_AP_pnc.npz",
+        "sha256": "87574d29412f7b1c14561e5c6f12c053bb06bff440e5b6d266fb53bf2246c1d9"
+      },
+      "h80_uniform_3um": {
+        "path": "results/runs/full_device_uniform_diagnostic/h80_followup/uniform-h80-solve-direct-1335201/uniform_3um_layered_h80_ny12_z4-2a145c6a0645/selected_fields_AP_pnc.npz",
+        "sha256": "729927aa853de1817870bcb6b39ebfb863c428e442cb404711c4cada013ef0f4"
+      }
+    },
+    "end_ratio_order": ["left", "right"],
+    "root_1311": {
+      "reference_z_kinetic_fraction": 0.8729511725194118,
+      "h80_device": [0.00023958590491727363, 0.00023941203780270082],
+      "h60_device": [0.00027399819165216627, 0.0002706845923192047],
+      "h80_uniform_3um": [0.0002288718506257936, 0.00023166898295897128]
+    },
+    "root_1292": {
+      "reference_y_kinetic_fraction": 0.843958907318379,
+      "h80_device": [0.020166622312571353, 0.01654806530866626],
+      "h60_device": [0.020243301046703743, 0.016606869556259108],
+      "h60_device_after_virtual_1p5um_extension": [0.0022068925302126795, 0.0018104852547566267],
+      "slowest_outgoing_evanescent_decay_per_m": 1477536.0551896546
+    },
+    "interpretation": "The channel with the largest saved device phase change, root 1311, has small evanescent displacement at both ends and predominantly z-polarized kinetic motion. Root 1292 has larger end tails. This is a loading diagnostic for selecting the next control. Evanescent modes already enter the original traction operator. Lead-length sensitivity and scattering error require separate controlled comparisons."
+  },
+  "selected_control": {
+    "physical_thickness_nm": 200,
+    "h80_planar_target_nm": 80,
+    "in_plane_footprint_vertices": 4250,
+    "in_plane_footprint_edges": 11551,
+    "in_plane_footprint_triangles": 7276,
+    "baseline_thickness_layers": 4,
+    "candidate_thickness_layers": 6,
+    "fixed_width_cells": 12,
+    "fixed_rim_vertices_per_hole": 32,
+    "fixed_physical_end_planes_m": [0, 1.665e-5],
+    "candidate_p2_vector_dofs_topological_prediction": 616239,
+    "candidate_tetrahedra_topological_prediction": 130968,
+    "baseline_trace_dofs": 675,
+    "candidate_trace_dofs": 975,
+    "held_fixed": "Physical dimensions, material and crystal axes, placed hole pattern, x-y footprint triangulation including both lead interiors, circle32 lateral rim coordinates, incidence side, and original physical end planes.",
+    "interpretation": "Changing the number of z layers changes thickness discretization in the body and both compatible SAFE traces. The comparison measures their joint sensitivity on the fixed h80 footprint.",
+    "minimum_propagating_channel_overlap": 0.99,
+    "power_change_limit": 0.01,
+    "complex_change_limit": 0.01,
+    "completion_condition": "Verify the conserved footprint and the candidate thickness planes and traces. Admit one bounded solve using measured staged operator storage. Accept five original-equation drives and verify independent physical flux. Match channels and compare both gates at the common reference planes."
+  },
+  "mesh_preflight": {
+    "path": "results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc/thickness-h80-preflight-1335307",
+    "slurm_job_id": "1335307",
+    "node": "node003",
+    "slurm_state": "COMPLETED",
+    "slurm_exit_code": "0:0",
+    "slurm_elapsed_seconds": 5,
+    "gnu_time_elapsed_seconds": 5.3,
+    "gnu_time_maximum_rss_kib": 266456,
+    "verified_transfer_artifacts": 8,
+    "driver_sha256": "2149939222a8702fdc6c1a61441908dff5dede27859154e033f9142aaa403f18",
+    "batch_sha256": "7538b26a7ffecdc6d3fb1863d5144fe7cf6fb221757fb6fe97be20c708d0dd65",
+    "receipt_sha256": "2e2250d90ca9f32ccce920372a5ec7d7f6a0dc547c80f768ad186202fcc867ce",
+    "mesh_hash": "1bf38811f140f1c62e9b2cdbc71266dabd78a70c144aae519e77fd481ffccef2",
+    "mesh_file_sha256": "e9c17e3fe0e2effd1c898d29701f393572d32bfbe7331464b35604940a62a918",
+    "mesh_summary_sha256": "7c6a5415d69110490d653aa56716664a4493bdf5999863896ad2cc6befcf425a",
+    "source_map_sha256": "b4003df3dda37617a26658100dd562278a9e301ca514928ab815a0ec0438039f",
+    "configuration_differences": ["name", "mesh.thickness_layers", "resources.max_port_dofs"],
+    "standard_body_dof_cap": 60000,
+    "within_standard_body_dof_cap": false,
+    "assembly_performed": false,
+    "safe_eigensolve_performed": false,
+    "independent_tetrahedral_replay": {
+      "vertices": 29750,
+      "edges": 175663,
+      "tetrahedra": 130968,
+      "p2_vector_displacement_dofs": 616239,
+      "boundary_tags_cover_exterior_exactly": true,
+      "all_tetrahedra_positively_oriented": true,
+      "z_planes_m": [-1.0000000000000001e-7, -6.666666666666668e-8, -3.333333333333334e-8, -1.3234889800848443e-23, 3.333333333333333e-8, 6.666666666666667e-8, 1.0000000000000001e-7],
+      "physical_end_planes_m": [0, 1.665e-5],
+      "unchanged_end_width_coordinates": true,
+      "section_triangles_per_end": 144,
+      "section_p2_vector_dofs_per_end": 975,
+      "section_yz_triangle_sha256_both_ends": "9b210fa759e0fa874edf14d055764f97af7c81a4d48a9646430ad473c94ec3f6",
+      "xy_footprints_exact_across_each_level_and_both_meshes": true,
+      "canonical_xy_footprint_sha256": "487f5f8b153b5155b02ebc6180a8ebe0f9dd1ed8ff2c0a8f8e64f8fbda9072b5",
+      "physical_hole_rim_coordinates_exact_across_each_level_and_both_meshes": true,
+      "xy_wall_rim_sha256": "5974ba4e6c6ba3f3397f90cd093b91cbdc0969ebd7faf7e2456a80599e7323be",
+      "wall_slab_topology_exact_with_relative_layer_numbering": true,
+      "index_normalized_wall_slab_sha256": "97833f08017bfd97f9a38743d66543ec42445b9b4893550756d007737b375f5a",
+      "total_mesh_volume_m3": 3.0642479633496313e-18
+    }
+  },
+  "safe_section": {
+    "path": "results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc/thickness-h80-safe-1335308",
+    "slurm_job_id": "1335308",
+    "node": "node003",
+    "slurm_state": "COMPLETED",
+    "slurm_exit_code": "0:0",
+    "slurm_elapsed_seconds": 16,
+    "gnu_time_elapsed_seconds": 15.29,
+    "gnu_time_maximum_rss_kib": 471976,
+    "verified_transfer_artifacts": 7,
+    "receipt_sha256": "b5c0d73656e90aa5ba312939c0ef25633af5a775974f5fc778031584d55c78f3",
+    "ports_file_sha256": "a13a58e47dee91e4c7d75bb9ec77feb7656ae674392c2f1d7485129da76d0e6a",
+    "trace_sha256": "3329f7c51b36d61862ee44edecca35beddc73721e58a616b7685e58b383655be",
+    "frequency_hz": 1000000000,
+    "displacement_trace_dofs": 975,
+    "discrete_roots": 1950,
+    "positive_propagating_roots": [1940, 1877, 1867, 1855, 1837],
+    "negative_propagating_roots": [1941, 1878, 1868, 1856, 1838],
+    "reported_maximum_port_relative_residual": 3.6246419785995235e-15,
+    "body_assembly_performed": false,
+    "independent_port_replay": {
+      "method": "Check complete volume-DOF coverage and lab component mapping on both tagged traces. Recover the vector mass matrix from independent scalar transverse P2 integration on the saved section. Replay the quadratic wavenumber equation, axial-force relation and signed directional flux matrix for all saved roots.",
+      "complete_tagged_trace_component_coverage": true,
+      "maximum_volume_vs_section_trace_coordinate_difference_m": 0.0,
+      "maximum_mass_entry_difference_relative_to_peak_mass_entry": 3.073045224621988e-16,
+      "maximum_polynomial_relative_residual": 3.630939997774363e-15,
+      "maximum_axial_force_relative_difference": 3.3313731058864104e-15,
+      "maximum_signed_directional_power_gram_error_w": 6.318385934543373e-11
+    },
+    "phase_diagnostic_scope": "Each phase indicator is the absolute matched SAFE wavenumber difference multiplied by the stated uniform propagation distance. Use these indicators to describe section sensitivity. Patterned scattering is compared directly at the original planes.",
+    "12x4_to_12x6": {
+      "archived_positive_roots": [1348, 1311, 1292, 1284, 1274],
+      "minimum_mass_overlap_both_directions": 0.9999999883300019,
+      "phase_indicator_rad_over_3um": [3.635177621617913e-9, 0.002238141097019194, 1.3499402906745673e-8, 0.0011653658142937347, 0.00032495813053753226],
+      "maximum_phase_indicator_rad_over_3um": 0.002238141097019194,
+      "maximum_phase_indicator_rad_over_uniform_equivalent_16p65um": 0.012421683088456526
+    },
+    "12x6_to_20x6": {
+      "minimum_mass_overlap_both_directions": 0.9999999284474179,
+      "maximum_phase_indicator_rad_over_3um": 0.00493014601015253,
+      "maximum_phase_indicator_rad_over_uniform_equivalent_16p65um": 0.027362310356346543
+    }
+  },
+  "operator_stage": {
+    "path": "results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc/thickness-h80-stage-1335309",
+    "slurm_job_id": "1335309",
+    "node": "node038",
+    "slurm_state": "COMPLETED",
+    "slurm_exit_code": "0:0",
+    "slurm_elapsed_seconds": 155,
+    "gnu_time_elapsed_seconds": 154.35,
+    "gnu_time_maximum_rss_kib": 3952760,
+    "batched_assembly_elapsed_seconds": 136.29468428716063,
+    "batched_assembly_sampled_peak_rss_mib": 1984.87890625,
+    "assembly_batch_elements": 2048,
+    "allocation_memory_gib": 16,
+    "allocation_cpu_cores": 2,
+    "numerical_threads": 1,
+    "worker_wall_limit_seconds": 550,
+    "verified_transfer_artifacts": 10,
+    "receipt_sha256": "95c1cfde8d51d77ab74fe9d2c424c1eda0822556a30664cbe581999f97e0ea5f",
+    "compute_driver_sha256": "741f6fb09127de7eb590686e9bca40951864c04b261d87da667e13861fc75490",
+    "compute_batch_sha256": "c0efe32e06984b946a8d246daf3873f559f46b67a2c7bff5c28d71d7b9019d0c",
+    "operator_complex128_csc_nonzeros": 48826577,
+    "operator_csc_array_bytes": 978996500,
+    "stage_array_bytes": 1789773700,
+    "stiffness_file_sha256": "c22bdd553570409bb7b1c89cafae06dc85e471cbfe3481f10f62b50c1f477ca8",
+    "mass_file_sha256": "635035878dedbe30342337498e41cf87080809266cc1261803278091eea9adbc",
+    "operator_file_sha256": "be7265385ed8b63975d69dc4a5bf3e5ce400895552b7b5a60c15aa6fcfa8450d",
+    "operator_csc_sha256": "762ee92fa2a6a58fd458b55eae2752317485555dcd160544b53519f91e351607",
+    "rhs_file_sha256": "34b68c2c87014f0f217635923068926f18a6bb631f1bc58e3c4faa2a61da0a61",
+    "rhs_array_sha256": "a8044857aaaf445cf33808e57b44c7ca718abcc8155d36d96cf8e420fa90ce1d",
+    "independent_rhs_replay": {
+      "method": "Reconstruct the signed left outgoing traction map from the saved SAFE displacement and force arrays and apply it to each incoming root at the original left plane.",
+      "preflight_and_safe_provenance_match": true,
+      "active_left_trace_rows": 975,
+      "all_rhs_support_on_exact_left_trace": true,
+      "bit_exact_reconstructed_rhs": true,
+      "maximum_absolute_entry_difference": 0.0,
+      "maximum_relative_column_difference": 0.0
+    },
+    "factorization_performed": false
+  },
+  "direct_resource_admission": {
+    "basis": "Initial SuperLU buffer estimate from measured complex128 CSC entries and storage. The estimate describes initial allocation and live job and node admission requirements. Peak factor storage remains measured separately.",
+    "incremental_initial_estimate_bytes": 61086756312,
+    "job_required_headroom_bytes": 69676690904,
+    "node_required_available_bytes": 61506186712,
+    "requested_memory_gib": 128,
+    "requested_cpu_cores": 2,
+    "numerical_threads": 1,
+    "worker_wall_limit_seconds": 3450,
+    "allocation_wall_limit_seconds": 3600,
+    "slurm_job_id": "1335321",
+    "measured_allocation_quota_bytes": 137438953472,
+    "measured_job_headroom_before_factor_bytes": 135221936128,
+    "measured_node_available_before_factor_bytes": 1597411840000,
+    "measured_worker_rss_before_factor_bytes": 1143164928,
+    "admitted": true
+  },
+  "direct_solve": {
+    "path": "results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc/thickness-h80-solve-1335321",
+    "slurm_job_id": "1335321",
+    "node": "himem001",
+    "execution_platform": "Linux",
+    "slurm_state": "COMPLETED",
+    "slurm_exit_code": "0:0",
+    "slurm_elapsed_seconds": 2006,
+    "gnu_time_elapsed_seconds": 2005.88,
+    "gnu_time_maximum_rss_kib": 35349220,
+    "job_cgroup_peak_bytes": 37340082176,
+    "job_cgroup_memory_limit_events": 0,
+    "factorization": {
+      "method": "complex128 SuperLU with COLAMD ordering",
+      "elapsed_seconds": 1961.6157423108816,
+      "factor_nonzeros": 1846932604,
+      "factors_built": 1
+    },
+    "verified_transfer_artifacts": 11,
+    "receipt_sha256": "c7e71cbd25a6e0a6e843471bc73c89694bb6dfc8183c9db0f8a88b5343786c93",
+    "independent_original_equation_replay": {
+      "execution_platform": "Windows",
+      "method": "Check the exact CSC, RHS and accepted vector hashes. Evaluate each original equation and independently accumulate absolute row sums to normalize the backward residual.",
+      "accepted_drive_count": 5,
+      "relative_l2_target": 1e-10,
+      "relative_l2_residual_gate": 1e-9,
+      "normwise_backward_residual_gate": 1e-9,
+      "matrix_infinity_norm": 246662.91181999265,
+      "maximum_relative_l2_residual": 4.819036916971941e-12,
+      "maximum_normwise_backward_residual": 8.890348180727453e-16,
+      "channels": [
+        {
+          "incident_port_root": 1940,
+          "relative_l2_residual": 1.947163244506863e-12,
+          "normwise_backward_residual": 5.621622716928974e-16,
+          "accepted_vector_sha256": "5597c47a904711a90e3178d21a1dfdfb1185b94c649673179b2f53075a64bf7a"
+        },
+        {
+          "incident_port_root": 1877,
+          "relative_l2_residual": 4.819036916971941e-12,
+          "normwise_backward_residual": 7.106260603390996e-16,
+          "accepted_vector_sha256": "d013d5054dd61142ab72ae3b8f7f3150e09942aa5390c21c28b4f8538c0e5a17"
+        },
+        {
+          "incident_port_root": 1867,
+          "relative_l2_residual": 2.0179918853790926e-12,
+          "normwise_backward_residual": 5.880357118492714e-16,
+          "accepted_vector_sha256": "3f6c319e4931d85318b88718f6d8b7b1e0f1c5d3587b79735dbc894103e84356"
+        },
+        {
+          "incident_port_root": 1855,
+          "relative_l2_residual": 2.5077478023669087e-12,
+          "normwise_backward_residual": 7.837256926127444e-16,
+          "accepted_vector_sha256": "a2a2453259431376ed854afcd67e5221e102aa71795292b69356a1334dd4bad5"
+        },
+        {
+          "incident_port_root": 1837,
+          "relative_l2_residual": 2.094546878052873e-12,
+          "normwise_backward_residual": 8.890348180727453e-16,
+          "accepted_vector_sha256": "b59d0f9394ab9171e03e01cd763361c9702ea5a13492e764157323676fee480b"
+        }
+      ]
+    }
+  },
+  "scattering_export": {
+    "path": "results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc/thickness-h80-export-1335341",
+    "public_run_suffix": "585ccac1d4f2",
+    "slurm_job_id": "1335341",
+    "node": "node038",
+    "execution_platform": "Linux",
+    "slurm_state": "COMPLETED",
+    "slurm_exit_code": "0:0",
+    "slurm_elapsed_seconds": 26,
+    "gnu_time_elapsed_seconds": 25.56,
+    "gnu_time_maximum_rss_kib": 3902892,
+    "verified_transfer_artifacts": 15,
+    "verified_public_output_files": 8,
+    "receipt_sha256": "d0da28923777b983155ed1a122515057cef44ae55067732dc068afb7cf5f796b",
+    "public_summary_sha256": "040a219f54446219b6a610cf08382ff7e93a6dcb01f31f3be810977651301c4e",
+    "staged_operator_and_rhs_reconstructed_exactly": true,
+    "stage_and_export_share_host": true,
+    "public_fields_exactly_match_accepted_vectors": true,
+    "public_safe_wavenumber_displacement_and_force_arrays_match_saved_z6_section": true,
+    "phase_adjustment_applied": false,
+    "maximum_flux_imbalance_linux_export": 2.3425705819590803e-14,
+    "independent_nodal_force_flux_replay": {
+      "execution_platform": "Windows",
+      "method": "Evaluate the saved stiffness and mass matrix-vector products separately and use them to recover the original nodal forces. Remove the incident displacement and force from the left trace. Evaluate signed power from outgoing and total displacement-force traces.",
+      "maximum_flux_imbalance": 2.398081733190338e-14,
+      "maximum_net_outward_power_ratio": 2.2093438190040618e-14,
+      "maximum_reflection_flux_difference_from_linux_export": 5.559788740505667e-16,
+      "maximum_transmission_flux_difference_from_linux_export": 1.5543122344752192e-15
+    }
+  },
+  "h80_z4_z6_mesh_pair": {
+    "path": "results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc/comparisons/scattering-b06d34228c560e43",
+    "comparison_summary_sha256": "8a5aea4238d3f09bdd7e97f82cd73d2b74f6a64846ca946633aec08d0b6dede3",
+    "comparison_tool_sha256": "e54afbc7254fb6a78ed0acde538296480d561edf91d16725c0fef0be2468430a",
+    "input_power_checks_passed": true,
+    "power_change_limit": 0.01,
+    "complex_change_limit": 0.01,
+    "maximum_power_change": 6.47272965669651e-5,
+    "power_passed": true,
+    "maximum_complex_change": 0.01670625750875372,
+    "complex_passed": false,
+    "mesh_pair_passed": false,
+    "minimum_mass_overlap_across_incoming_reflected_and_transmitted_modes": 0.9999999883300019,
+    "maximum_reflection_complex_change": 0.00202891345851855,
+    "maximum_same_channel_transmission_phase_change_rad": 0.016718071089440015,
+    "largest_change_z4_to_z6_incident_root": [1311, 1877],
+    "same_channel_transmission_phase_changes_rad_by_z4_root": {
+      "1348": 0.0001923089425174281,
+      "1311": 0.016718071089440015,
+      "1292": 0.000933318443373481,
+      "1284": 0.015169561748456904,
+      "1274": 0.010195742616116273
+    },
+    "independent_mass_overlap_power_complex_and_phase_replay_passed": true
+  },
+  "saved_in_plane_channel_phase_trends": {
+    "owner_review_comment": "https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/31#issuecomment-6934254621",
+    "owner_review_comment_created_utc": "2026-11-17T00:53:12Z",
+    "scope": "One 1 GHz left-incidence comparison at the original 0 and 16.65 micrometre device planes with the same 675-DOF SAFE section. The uniform comparison retains its separate original 0 and 3 micrometre planes.",
+    "method": "For each incident channel, identify the outgoing transmission row of the same matched mode. Recompute the signed principal argument of the ratio of its candidate and reference complex amplitudes after the saved mode gauge alignment.",
+    "sources": {
+      "device_h100_to_h80": {
+        "path": "results/runs/comparisons/scattering-f6e75a9694c42a2c/summary_AP_pnc.json",
+        "sha256": "e7f66845ccdbf4aca57b6976fbc1320b07ead0d9e0007a768766a93b01f5056f"
+      },
+      "device_h80_to_h60": {
+        "path": "results/runs/full_device_resource_profile/lawrence_h60_AP_pnc/comparisons/scattering-192dc75596dc2458/summary_AP_pnc.json",
+        "sha256": "65bb9e0311f1ac7f95babc54fd7e2ef82fc80f14b26319cb8e90b5163c8f26f6"
+      },
+      "uniform_3um_h100_to_h80": {
+        "path": "results/runs/full_device_uniform_diagnostic/h80_followup/comparisons/scattering-84737661acf66ca8/summary_AP_pnc.json",
+        "sha256": "03b5e04970d6c63f4d5f9aecef9584382a62957a193eb4310102864a0e2aea8a"
+      }
+    },
+    "incident_root_order": [1348, 1311, 1292, 1284, 1274],
+    "signed_device_h100_to_h80_phase_rad": [0.0054150287511640395, 0.03995716586262313, 0.02076815948226131, 0.034447140882000946, 0.02606545652008876],
+    "signed_device_h80_to_h60_phase_rad": [0.003890704740181008, 0.02688664932525669, 0.014417530066472747, 0.02307710545775567, 0.016878485987459235],
+    "signed_uniform_3um_h100_to_h80_phase_rad": [4.543608915142228e-7, 0.0037397569400547614, 4.6998155193230865e-5, 0.004092293205384948, 0.003218429684367397],
+    "interpretation": "All five device increments are positive in both comparisons and decrease from the first pair to the second. Both device pairs fail the complex-response gate. The uniform and patterned responses use their own reference planes and jointly motivate separate sensitivity controls."
+  },
+  "conditional_lead_and_body_controls": {
+    "h60_uniform_3um": "A follow-up on the existing uniform 3 micrometre h80 guide would keep its matched ports and physical end planes and change the 3D body target to h60. It would measure further uniform-guide propagation and trace-transition sensitivity against the saved h80 result and finite 20-by-6 reference. Use the result as a separate phase diagnostic. The patterned device also contains interfaces and evanescent fields.",
+    "h60_uniform_resource_context": "The saved h80 uniform control used 102.72 seconds and 2724.26 MiB peak RSS. Its pre-factor admission required about 15.09 GiB of job headroom against about 15.48 GiB available inside 16 GiB, so measured RSS alone would understate admission. Consider a bounded 32-GiB, two-CPU, one-thread and ten-minute envelope after case-specific mesh and stage checks. These are prior h80 measurements and a conditional planning ceiling, not an h60 resource prediction.",
+    "patterned_only_with_frozen_leads": "A follow-up on the patterned h80 z4 baseline would keep the two original lead-interior meshes and port traces exactly, then refine only the perforated region through conforming interfaces. It would directly measure patterned-region spatial sensitivity with the lead discretization controlled. The current global layered mesher requires additional support for this controlled mesh. Verify unchanged physical interfaces, frozen lead elements and wall geometry before using that comparison.",
+    "patterned_only_resource_context": "The saved global h60 z4 device used 1273.73 seconds and 29.151 GiB peak RSS. A potential 128-GiB, two-CPU, one-thread and 60-minute allocation for a future frozen-lead comparison depends on its measured operator, factor-index feasibility and live admission. The h60 measurement applies to the saved global refinement.",
+    "selection": "Use the uniform control if the research question is the residual uniform propagation error. Use the frozen-lead comparison if the question is how much patterned-region refinement affects the device at fixed leads. Both are conditional on a specific mapping feature or numerical question. The completed review uses saved results."
+  },
+  "integrated_windows_checks": {
+    "tests": 161,
+    "passed": 160,
+    "skipped": 1,
+    "skip_reason": "Windows symlink permission",
+    "elapsed_seconds": 51.193,
+    "log": "verification/development_tests_AP_pnc.log",
+    "log_sha256": "9764768193d3258f33fc50599224eeb1fb8f2ae0728c47e25627db5f7330d37b"
+  },
+  "interpretation": "The thickness-control pair passes the 0.01 power criterion and fails the 0.01 complex-response criterion at 1 GHz. It establishes joint body and matched-section thickness-discretization sensitivity on an exactly fixed in-plane footprint, including both lead interiors. The previous h80/h60 pair independently fails the in-plane complex-response criterion at z4. Preserve both results as single-frequency sensitivity evidence. The two comparisons share a baseline and should be retained individually. Full-device spatial convergence and converged frequency mapping remain unresolved. The milestone ends with this control and the saved original-plane comparison.",
+  "mapping_followup": "The next milestone is a bounded resumable frequency-mapping workflow verified first on a small guide. Label preliminary full-device points as exploratory while anchor sensitivity remains unresolved. If a specific mapped feature warrants a larger anchor, the missing h60 z6 corner could complete a two-axis comparison at 1 GHz. Exact extrusion on the saved h60 footprint predicts 982605 displacement DOFs. The measured 1.847 billion h80 z6 factor entries make resource and factor-index feasibility important before selecting that solve. Port-width, lead-boundary, hole-faceting and frequency-sampling controls remain distinct."
+}
