@@ -63,6 +63,8 @@ COMSOL 6.4 provides a candidate independent 3D elastic comparison. Its Numeric P
 
 The 2026-11-16 h80 z4-to-z6 decision uses these methods as workflow guidance: compare the requested complex scattering observable, match modes across the changed section by field overlap, and update the compatible boundary modes when section discretization changes. The full device retains its original physical end planes and 200 nm thickness. The saved-field evanescent and polarization diagnostics select this control; they are not a proof that thickness error dominates. The QTCAD driven-Maxwell and COMSOL elastic-port pages were rechecked; their distinct electromagnetic and propagating-port formulations do not validate this full-discrete elastic radiation map.
 
+The matched h60 uniform-control decision reuses the above separate uniform/defect-resolution strategy. QTCAD's driven-Maxwell tutorial and COMSOL's mechanical multiport example were rechecked on 2026-11-17 UTC: their useful lessons here are testing the complex scattering observable against a reference and keeping mode-wise power normalization explicit. The new control therefore compares both the h80/h60 complex response and a common finer SAFE reference, with original phases retained. Neither the electromagnetic example nor COMSOL's aluminum propagating-port model validates this anisotropic Ge device.
+
 ## Memory use and iterative linear solves
 
 The opt-in batched assembler uses the same affine-element forms and quadrature with shared global DOF numbering, via the [scikit-fem CellBasis API](https://scikit-fem.readthedocs.io/en/stable/api.html#skfem.assembly.CellBasis). It releases evaluated cell fields after each batch; it does not reduce integration order or physical thickness resolution.

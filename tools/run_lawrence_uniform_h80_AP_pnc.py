@@ -1,4 +1,4 @@
-"""Preflight and solve the fixed-port h80 uniform control. Author: Athul Prem | _AP_pnc."""
+"""Preflight and solve the fixed-port h80 and h60 uniform controls. Author: Athul Prem | _AP_pnc."""
 
 from __future__ import annotations
 
@@ -8,12 +8,14 @@ import hashlib
 import json
 import os
 from pathlib import Path
+from shutil import disk_usage
 import socket
 import sys
 from time import monotonic
 from types import SimpleNamespace
 
 import numpy as np
+from scipy.sparse import save_npz
 from scipy.sparse.linalg import splu
 from skfem import Dofs, ElementTetP2, ElementVector, MeshTet
 
@@ -44,6 +46,7 @@ TRACE_DOFS = 675
 TARGET = 1e-10
 RESIDUAL_LIMIT = 1e-9
 RECEIPT = "uniform_h80_AP_pnc.json"
+CASE_RECEIPTS = {60: "uniform_h60_AP_pnc.json", 80: RECEIPT}
 THREAD_VARIABLES = ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "BLIS_NUM_THREADS",
                     "NUMEXPR_NUM_THREADS")
 
@@ -82,7 +85,9 @@ def check_channels(report, roots):
         raise ValueError("At least one drive failed the original-equation acceptance checks.")
 
 
-def read_reference(directory, ports, identity):
+def read_reference(directory, ports, identity, *, mesh_size_nm=80):
+    if mesh_size_nm not in CASE_RECEIPTS:
+        raise ValueError("The fixed-port uniform control uses a 60 or 80 nm in-plane mesh target.")
     inputs = {name: artifact(directory / name) for name in H100}
     saved_ports = artifact(ports)
     if any(inputs[name]["sha256"] != expected for name, expected in H100.items()) or saved_ports["sha256"] != PORTS_SHA:
@@ -122,8 +127,8 @@ def read_reference(directory, ports, identity):
             raise ValueError("The complete SAFE basis does not reproduce the saved five-channel order.")
         modes["frequency_hz"] = modes["frequency_hz"].item()
     config = summary["configuration"]
-    config["name"] = "uniform_3um_layered_h80_ny12_z4"
-    config["mesh"]["mesh_size_nm"] = 80
+    config["name"] = f"uniform_3um_layered_h{mesh_size_nm}_ny12_z4"
+    config["mesh"]["mesh_size_nm"] = mesh_size_nm
     config["resources"]["max_dofs"] = 60_000
     provenance = {"h100_inputs": inputs, "h100_implementation": summary["implementation"],
                   "original_h100_safe_source": summary["cached_port_provenance"]["source"]["modes"],
@@ -141,7 +146,7 @@ def map_trace(mesh, basis, reference):
     if (not np.array_equal(np.unique(mesh.p[2]), np.unique(old_mesh.p[2]))
             or mesh.p[0].min() != old_mesh.p[0].min() or mesh.p[0].max() != old_mesh.p[0].max()
             or any(end_triangles(mesh, side) != end_triangles(old_mesh, side) for side in ("xleft", "xright"))):
-        raise ValueError("The h80 end planes, tagged transverse triangulations or thickness planes differ from h100.")
+        raise ValueError("The control end planes, tagged transverse triangulations or thickness planes differ from h100.")
     _, left, right = _end_dof_pairs(SimpleNamespace(mesh=mesh, basis=basis))
     component = np.empty(basis.N, dtype=np.int8)
     for axis, indices in enumerate(basis.split_indices()):
@@ -150,7 +155,7 @@ def map_trace(mesh, basis, reference):
     for ids in (left, right):
         lookup = dict(zip(trace_keys(basis.doflocs.T, component, ids), ids))
         if len(ids) != TRACE_DOFS or lookup.keys() != set(reference.trace_order):
-            raise ValueError("The h80 port is missing an exact transverse-coordinate/component match.")
+            raise ValueError("The control port is missing an exact transverse-coordinate/component match.")
         mapped.append(np.asarray([lookup[key] for key in reference.trace_order]))
     return tuple(mapped)
 
@@ -163,7 +168,7 @@ def preflight(reference, output):
     layout = _DisplacementDofLayout(mesh, element, Dofs(mesh, element), 4)
     if (result["reused"] or layout.N != record["ndof"] or record["hole_count"] != 0
             or record["end_face_dofs"] != {"xleft": TRACE_DOFS, "xright": TRACE_DOFS}):
-        raise ValueError("Unexpected h80 preflight geometry, body DOF count or port DOF count.")
+        raise ValueError("Unexpected uniform preflight geometry, body DOF count or port DOF count.")
     left, right = map_trace(mesh, layout, reference)
     return {"status": "mesh_ready", "preflight": result, "mesh_summary": artifact(mesh_dir / "summary_AP_pnc.json"),
             "trace_sha256": workflow.digest([left.tolist(), right.tolist()]), "case_max_dofs": layout.N}
@@ -189,7 +194,27 @@ def direct_factor_admission(operator):
                                                        and snapshot["node_available_bytes"] >= node_required)}
 
 
-def solve_direct_original(operator, rhs, roots, output, report):
+def retain_original_equations(system, operator, rhs, output, report):
+    matrices = {"K": system.K, "M": system.M, "A": operator}
+    storage = {name: sum(array.nbytes for array in (matrix.data, matrix.indices, matrix.indptr))
+               for name, matrix in matrices.items()}
+    total_storage = sum(storage.values()) + rhs.nbytes
+    if disk_usage(output).free < total_storage + lawrence.GIB:
+        raise RuntimeError("The measured original equations and 1 GiB disk reserve do not fit.")
+    array_files = {}
+    for name, matrix in matrices.items():
+        path = output / f"{name}_AP_pnc.npz"
+        save_npz(path, matrix, compressed=False)
+        array_files[name] = artifact(path)
+    rhs_path = output / "rhs_AP_pnc.npy"
+    np.save(rhs_path, rhs, allow_pickle=False)
+    array_files["rhs"] = artifact(rhs_path)
+    report.update(array_files=array_files, operator_csc_bytes=storage["A"], stage_array_bytes=total_storage,
+                  stiffness_array_sha256=lawrence.array_sha(system.K.data, system.K.indices, system.K.indptr),
+                  mass_array_sha256=lawrence.array_sha(system.M.data, system.M.indices, system.M.indptr))
+
+
+def solve_direct_original(operator, rhs, roots, output, report, *, system=None):
     if (operator.format != "csc" or operator.dtype != np.complex128 or rhs.dtype != np.complex128
             or rhs.shape != (operator.shape[0], len(roots)) or operator.shape[0] != operator.shape[1]
             or not np.isfinite(operator.data).all() or not np.isfinite(rhs).all()):
@@ -202,6 +227,12 @@ def solve_direct_original(operator, rhs, roots, output, report):
     receipt_path = output / "direct_channels_AP_pnc.json"
     receipt = {**AUTHOR, "status": "admission", "solver_report": report}
     try:
+        if system is not None:
+            receipt["status"] = "staging"
+            workflow.write_json(receipt_path, receipt)
+            retain_original_equations(system, operator, rhs, output, report)
+            receipt["status"] = "operator_staged"
+            workflow.write_json(receipt_path, receipt)
         admission = direct_factor_admission(operator)
         report["factor_admission"] = admission
         if not admission["admitted"]:
@@ -239,26 +270,29 @@ def solve_direct_original(operator, rhs, roots, output, report):
 
 
 def solve(reference, output, preflight_dir, max_dofs, execution, *, direct=False):
-    preflight_path = preflight_dir / RECEIPT
+    mesh_size_nm = reference.config["mesh"]["mesh_size_nm"]
+    if mesh_size_nm == 60 and not direct:
+        raise ValueError("The h60 uniform control requires the direct solver.")
+    preflight_path = preflight_dir / CASE_RECEIPTS[mesh_size_nm]
     preflight_artifact = artifact(preflight_path)
     ready = read_json(preflight_path)
     same_driver = ready["driver"] == execution["driver"]
-    legacy_driver = (direct and ready["driver"]["sha256"] == LEGACY_PREFLIGHT_DRIVER_SHA
+    legacy_driver = (mesh_size_nm == 80 and direct and ready["driver"]["sha256"] == LEGACY_PREFLIGHT_DRIVER_SHA
                      and preflight_artifact["sha256"] == LEGACY_PREFLIGHT_RECEIPT_SHA)
     if (ready["status"] != "mesh_ready" or ready["configuration"] != reference.config
             or ready["cached_port_provenance"] != reference.provenance or not (same_driver or legacy_driver)
             or any(ready["implementation"][key] != execution["implementation"][key]
                    for key in ("source_sha256", "packages", "python"))):
-        raise ValueError("A matching independent h80 preflight is required before the solve.")
+        raise ValueError(f"A matching independent h{mesh_size_nm} preflight is required before the solve.")
     geometry, _, _ = workflow._resolve_geometry(reference.config)
     mesh_dir, mesh_hash, _ = workflow._mesh_location(preflight_dir, geometry, None, reference.config["mesh"],
                                                      ready["implementation"])
     if artifact(mesh_dir / "summary_AP_pnc.json") != ready["mesh_summary"]:
-        raise ValueError("The h80 mesh manifest changed after preflight.")
+        raise ValueError(f"The h{mesh_size_nm} mesh manifest changed after preflight.")
     mesh, record = workflow.load_checkpoint(mesh_dir, mesh_hash)
     if (record["mesh_sha256"] != ready["preflight"]["mesh_sha256"]
             or not record["ndof"] == ready["case_max_dofs"] == max_dofs):
-        raise ValueError("The requested solve cap or saved h80 mesh differs from measured preflight.")
+        raise ValueError(f"The requested solve cap or saved h{mesh_size_nm} mesh differs from measured preflight.")
     config = reference.config
     if direct:
         config["resources"] = {key: value for key, value in config["resources"].items()
@@ -280,7 +314,8 @@ def solve(reference, output, preflight_dir, max_dofs, execution, *, direct=False
 
     def solve_original(operator, rhs):
         if direct:
-            return solve_direct_original(operator, rhs, reference.incident_roots, output, report)
+            return solve_direct_original(operator, rhs, reference.incident_roots, output, report,
+                                         system=system if mesh_size_nm == 60 else None)
         result = solve_ilu_lgmres(operator, rhs, report=report, fill_factor=resources["ilu_fill_factor"],
                                   single_precision=resources["ilu_precision"] == "single", **workflow.lgmres_options(resources))
         check_channels(report, reference.incident_roots)
@@ -315,9 +350,12 @@ def main():
     parser.add_argument("--h100", type=Path, required=True)
     parser.add_argument("--ports", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--mesh-size-nm", type=int, choices=CASE_RECEIPTS, default=80)
     parser.add_argument("--preflight-dir", type=Path)
     parser.add_argument("--max-dofs", type=int)
     args = parser.parse_args()
+    if args.mesh_size_nm == 60 and args.mode == "solve":
+        parser.error("The h60 uniform control requires the solve-direct mode.")
     if args.mode != "preflight" and (args.preflight_dir is None or args.max_dofs is None or args.max_dofs <= 0):
         parser.error("The solve requires --preflight-dir and its measured --max-dofs.")
     if args.mode == "preflight" and (args.preflight_dir is not None or args.max_dofs is not None):
@@ -326,14 +364,14 @@ def main():
     execution = {"implementation": identity, "driver": artifact(Path(__file__)), "hostname": socket.gethostname(),
                  "slurm_job_id": os.environ.get("SLURM_JOB_ID"),
                  "numerical_thread_environment": {name: os.environ.get(name) for name in THREAD_VARIABLES}}
-    receipt = args.output / RECEIPT
+    receipt = args.output / CASE_RECEIPTS[args.mesh_size_nm]
     record = {**AUTHOR, **execution, "status": "running", "mode": args.mode}
     with receipt.open("x", encoding="utf-8") as stream:
         json.dump(record, stream, indent=2)
     try:
         if workflow.digest(identity["source_sha256"]) != SOURCE_MAP_SHA:
-            raise ValueError("The numerical source differs from the reviewed h80 implementation.")
-        reference = read_reference(args.h100, args.ports, identity)
+            raise ValueError("The numerical source differs from the reviewed uniform implementation.")
+        reference = read_reference(args.h100, args.ports, identity, mesh_size_nm=args.mesh_size_nm)
         record.update(configuration=reference.config, cached_port_provenance=reference.provenance)
         if args.mode == "preflight":
             record.update(preflight(reference, args.output))
