@@ -2,6 +2,7 @@
 
 import json
 from math import tau
+import os
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from types import SimpleNamespace
@@ -17,6 +18,46 @@ from phononic.port_modes_AP_pnc import PortModes
 
 
 class LawrenceLowBandTests(unittest.TestCase):
+    def test_phase_entry_admits_only_the_current_reviewed_helper(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            output = root / "stage"
+
+            def run_stage(args, record):
+                self.assertEqual(record["slurm_job_id"], "123")
+                self.assertEqual(record["numerical_thread_environment"], low_band.lawrence.THREADS)
+                record["status"] = "operator_staged"
+
+            command = ["low-band", "stage", "--body-stage-dir", str(root / "body"),
+                       "--safe-dir", str(root / "safe"), "--inventory-dir", str(root / "inventory"),
+                       "--output", str(output)]
+            artifact = low_band.artifact
+            uniform_path = Path(low_band.uniform.__file__).resolve()
+
+            def archived_uniform(path):
+                link = artifact(path)
+                if path.resolve() == uniform_path:
+                    link["sha256"] = low_band.prep.UNIFORM_HELPER_SHA256
+                return link
+
+            with (patch.object(low_band, "sys", SimpleNamespace(platform="linux")),
+                  patch.dict(os.environ, {**low_band.lawrence.THREADS, "SLURM_JOB_ID": "123"}),
+                  patch.object(low_band.lawrence, "solve_environment", return_value={"fixture": "Slurm backend"}),
+                  patch.object(low_band, "stage", side_effect=run_stage) as stage_call):
+                with patch("sys.argv", command):
+                    low_band.main()
+                rejected_output = root / "rejected"
+                with (patch("sys.argv", command[:-1] + [str(rejected_output)]),
+                      patch.object(low_band, "artifact", side_effect=archived_uniform)):
+                    with self.assertRaisesRegex(ValueError, "reviewed archive or prepared-equation helper changed"):
+                        low_band.main()
+                stage_call.assert_called_once()
+            receipt = json.loads((output / "stage_AP_pnc.json").read_bytes())
+            self.assertEqual(receipt["status"], "operator_staged")
+            self.assertEqual(receipt["reviewed_sources"][low_band.uniform.__name__], artifact(uniform_path))
+            self.assertEqual(receipt["reviewed_sources"][low_band.uniform.__name__]["sha256"], low_band.UNIFORM_HELPER_SHA)
+            self.assertFalse(rejected_output.exists())
+
     def test_preparation_keeps_archived_inputs_and_writes_only_frequency_equations(self):
         with TemporaryDirectory() as directory:
             root = Path(directory)

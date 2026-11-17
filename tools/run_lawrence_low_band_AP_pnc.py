@@ -8,6 +8,7 @@ import json
 import os
 from pathlib import Path
 from shutil import disk_usage
+import socket
 import sys
 
 import numpy as np
@@ -24,6 +25,7 @@ from phononic.scattering_AP_pnc import solve_scattering
 from tools import lawrence_solver_AP_pnc as lawrence
 from tools import run_lawrence_port_inventory_AP_pnc as inventory
 from tools import run_lawrence_thickness_AP_pnc as prep
+from tools import run_lawrence_uniform_h80_AP_pnc as uniform
 from tools import solve_lawrence_device_refinement_AP_pnc as equations
 from tools import solve_lawrence_thickness_AP_pnc as thickness
 from tools.run_lawrence_uniform_h80_AP_pnc import artifact, direct_factor_admission
@@ -38,6 +40,8 @@ INVENTORY_INPUTS_SHA = "4fb564051f508ecbba2970dd98733b7e65a7fdb0c1f3b2f7793c3256
 INVENTORY_POINT_SHA = "c7d81677fbe2d67649e943c609562a6407e24a97e6ebb4b878583e39d8806344"
 INVENTORY_DRIVER_SHA = "5bfb37a4c4320df4d8e9fd65421c3bf3595775c2dbe297916e06d196255de44c"
 THICKNESS_DRIVER_SHA = "741f6fb09127de7eb590686e9bca40951864c04b261d87da667e13861fc75490"
+# The accepted h60 extension leaves artifact and direct_factor_admission unchanged.
+UNIFORM_HELPER_SHA = "f20f11403fa1666a9fe0c5f9893c3fc0a32c83f6338f156f4d97ab12acb78bae"
 INDEX_MAX = int(np.iinfo(np.int32).max)
 ARCHIVED_FACTOR_NNZ = 1_846_932_604
 EXPLORATORY = {"spatial_convergence_established": False, "frequency_convergence_established": False}
@@ -45,11 +49,41 @@ EXPLORATORY = {"spatial_convergence_established": False, "frequency_convergence_
 
 def checked_sources():
     reviewed = {prep: thickness.PREP_DRIVER_SHA, equations: thickness.STAGED_HELPER_SHA,
-                thickness: THICKNESS_DRIVER_SHA, inventory: INVENTORY_DRIVER_SHA}
+                thickness: THICKNESS_DRIVER_SHA, inventory: INVENTORY_DRIVER_SHA,
+                prep.fixed_port: prep.FIXED_PORT_HELPER_SHA256, uniform: UNIFORM_HELPER_SHA,
+                lawrence: prep.SOLVE_HELPER_SHA256}
     links = {module.__name__: artifact(Path(module.__file__)) for module in reviewed}
     if any(links[module.__name__]["sha256"] != digest for module, digest in reviewed.items()):
         raise ValueError("A reviewed archive or prepared-equation helper changed.")
     return links
+
+
+def run_phase(args, operation):
+    identity = workflow.source_identity()
+    threads = {name: os.environ.get(name) for name in lawrence.THREADS}
+    job = os.environ.get("SLURM_JOB_ID")
+    if (sys.platform != "linux" or not job or threads != lawrence.THREADS
+            or workflow.digest(identity["source_sha256"]) != prep.fixed_port.SOURCE_MAP_SHA256
+            or identity["packages"] != prep.fixed_port.PACKAGES):
+        raise ValueError("Use the reviewed single-threaded Linux Slurm environment.")
+    sources = checked_sources()
+    record = {**prep.fixed_port.AUTHOR, "mode": args.mode, "status": "running", "implementation": identity,
+              "driver": artifact(Path(__file__)), "hostname": socket.gethostname(), "slurm_job_id": job,
+              "numerical_thread_environment": threads, "numerical_backend": lawrence.solve_environment(),
+              "reviewed_sources": sources, "superlu_library": artifact(Path(_superlu.__file__))}
+    args.output.mkdir(parents=True, exist_ok=True)
+    receipt = args.output / f"{args.mode}_AP_pnc.json"
+    with receipt.open("x", encoding="utf-8") as stream:
+        json.dump(record, stream, indent=2)
+    try:
+        operation(args, record)
+    except BaseException as error:
+        record.update(status="interrupted" if isinstance(error, KeyboardInterrupt) else "failed",
+                      error=f"{type(error).__name__}: {error}")
+        raise
+    finally:
+        workflow.write_json(receipt, record)
+    print(f"{record['status']}: {receipt.resolve()}", flush=True)
 
 
 def admit_workspace(output, disk_bytes, *, memory_bytes=6 * lawrence.GIB):
@@ -396,12 +430,7 @@ def main():
                                     for path in args.output.iterdir()):
         parser.error("Use a fresh output directory for each phase or explicit resume.")
 
-    def execute(options, record):
-        record["reviewed_sources"] = checked_sources()
-        record["superlu_library"] = artifact(Path(_superlu.__file__))
-        {"stage": stage, "solve": solve, "export": export}[options.mode](options, record)
-
-    prep.run_phase(args, Path(__file__), f"{args.mode}_AP_pnc.json", execute)
+    run_phase(args, {"stage": stage, "solve": solve, "export": export}[args.mode])
 
 
 if __name__ == "__main__":
