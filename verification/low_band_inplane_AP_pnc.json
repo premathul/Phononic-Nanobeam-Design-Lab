@@ -1,0 +1,2347 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "status": "point_and_finite_mesh_pair_verified",
+  "base_revision": "dcb93e71d260be05e4b443fec243ddc1f6b42e5e",
+  "question": "Do the stronger/weaker reflection groups persist under one archived h100/h80 z4 global in-plane increment at 0.1 GHz?",
+  "inputs": [
+    {
+      "path": "results/runs/full_device_resource_profile/full_h100_operator_qr_jt4fp/stages_AP_pnc.json",
+      "sha256": "48fab07dff1f8f79fa76b76ace8aac4246019c68666e03f4dd2fe755de8cbd9f",
+      "bytes": 13641
+    },
+    {
+      "path": "results/runs/full_device_resource_profile/full_h100_operator_qr_jt4fp/configuration_AP_pnc.json",
+      "sha256": "11107b0ee5fc30c95f55a452a48692dc3f3485389213047aa94714a4eb999f9e",
+      "bytes": 1336
+    },
+    {
+      "path": "results/runs/full_device_resource_profile/full_h100_operator_qr_jt4fp/ports_AP_pnc.npz",
+      "sha256": "ceb74741e6145a676b7f23631fb722f5c40404d76a1efc6a5900b497a6abecc1",
+      "bytes": 29223616
+    },
+    {
+      "path": "results/runs/full_device_resource_profile/full_h100_operator_qr_jt4fp/K_AP_pnc.npz",
+      "sha256": "cab41f37af5e29571beb328ddd51ec36e61318e3c7cae3318a944f4bff73d259",
+      "bytes": 272258749
+    },
+    {
+      "path": "results/runs/full_device_resource_profile/full_h100_operator_qr_jt4fp/M_AP_pnc.npz",
+      "sha256": "91f9ebabad82166058d8f2282db4543e55528b29fd55cae527001ed0a388d0d6",
+      "bytes": 94236877
+    },
+    {
+      "path": "results/runs/full_device_layered_preflight/_meshes/ea1d5904407158667949a2f62749bbf286239009d06810d164d2ee41622c1f2d/mesh_AP_pnc.npz",
+      "sha256": "61bfcc85733c2cf9c5354d6dd365ae3070b0e04c78ef4e9ab48ddf9a8890a9cd",
+      "bytes": 545014
+    },
+    {
+      "path": "results/runs/full_device_layered_preflight/_meshes/ea1d5904407158667949a2f62749bbf286239009d06810d164d2ee41622c1f2d/summary_AP_pnc.json",
+      "sha256": "b295d82921ffd21c58ee8824b4ccd7c24831e967f8881e87fd0c8dd41e79c9c6",
+      "bytes": 9558
+    },
+    {
+      "path": "results/runs/full_device_resource_profile/full_h100_operator_qr_jt4fp/A_AP_pnc.npz",
+      "sha256": "ff752c271bcfc9031cf22e63c05ce35569c24777b7c34d313bce5b3736a021c7",
+      "bytes": 470825885
+    }
+  ],
+  "physical_inputs": {
+    "frequency_hz": 100000000,
+    "reference_planes_m": [
+      0,
+      1.665e-05
+    ],
+    "thickness_m": 2e-07,
+    "hole_count": 26,
+    "circle_segments": 32,
+    "thickness_layers": 4,
+    "section_dofs": 675,
+    "new_body_dofs": 307611,
+    "reference_body_dofs": 426627,
+    "material": "Nominal fixed-property Ge; not measured mK/4 K material data"
+  },
+  "scope": {
+    "mesh_generated": false,
+    "body_assembly_performed": false,
+    "section_assembly_performed": false,
+    "safe_eigensolve_performed": false,
+    "accepted_h80_reused": true,
+    "global_in_plane_change_includes_lead_interiors": true,
+    "phase_adjustment_applied": false,
+    "spatial_convergence_established": false,
+    "frequency_convergence_established": false
+  },
+  "gates": {
+    "solver_target": 1e-10,
+    "original_relative_residual": 1e-09,
+    "original_backward_residual": 1e-09,
+    "physical_power": 0.01,
+    "power_change": 0.01,
+    "complex_response_change": 0.01,
+    "relative_reflection_denominator_floor": 1e-12,
+    "relative_reflection_gate": null
+  },
+  "resource_ceilings": {
+    "stage_and_export": {
+      "memory_gib": 16,
+      "allocated_cpus": 2,
+      "numerical_threads": 1,
+      "allocation_seconds": 600,
+      "worker_seconds": 550
+    },
+    "solve": {
+      "memory_gib": 64,
+      "allocated_cpus": 2,
+      "numerical_threads": 1,
+      "allocation_seconds": 1500,
+      "worker_seconds": 1400,
+      "conditional_on_prepared_operator_and_live_admission": true
+    },
+    "automatic_retry": false,
+    "automatic_allocation_escalation": false
+  },
+  "prior_direct_resource_evidence": {
+    "profile": "h80 z4 0.1 GHz, not h100",
+    "job_id": "1335505",
+    "factor_nonzeros": 803307165,
+    "gnu_elapsed_seconds": 524.47,
+    "job_cgroup_peak_bytes": 17120284672
+  },
+  "unresolved_1ghz_complex_response_changes": {
+    "h100_h80": 0.039927184867,
+    "h80_h60": 0.026866990816,
+    "z4_z6": 0.016706257509
+  },
+  "phases": {
+    "stage": {
+      "job_id": "1335519",
+      "status": "COMPLETED",
+      "exit_code": "0:0",
+      "hostname": "node013",
+      "allocation_seconds": 23,
+      "receipt": {
+        "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-stage-1335519/stage_AP_pnc.json",
+        "bytes": 27416,
+        "sha256": "bce863c01cc115a1a138b4bec5cd8f4b02bd790dcdff176fd33f802dcc9bb4bd"
+      },
+      "transfer": {
+        "files": 7,
+        "bytes": 490547246,
+        "all_hashes_verified": true,
+        "artifacts": [
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-stage-1335519/A_AP_pnc.npz",
+            "bytes": 470825885,
+            "sha256": "927a6c22eeb7d375034cb655f81ba7de21b4ba8499c4161f78dc5c1e4777b86a"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-stage-1335519/allocation_AP_pnc.txt",
+            "bytes": 4163,
+            "sha256": "a6837bcaa96b40f781080a93eeea29cb7bf9c22ee493ac3220216ae271cc7a99"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-stage-1335519/rhs_AP_pnc.npy",
+            "bytes": 19687232,
+            "sha256": "998ade2249b38b1b0eb07a942fd2ba1d930598b3daf3ccf4549c8e07a53a0ac8"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-stage-1335519/slurm_accounting_AP_pnc.txt",
+            "bytes": 205,
+            "sha256": "599a4ca90508796034ddd21c0acd8a223aeac9bf06a62bfef2ad6f5b3e912a9c"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-stage-1335519/slurm_output_AP_pnc.txt",
+            "bytes": 785,
+            "sha256": "6833cae4d1ead9a521940ecd2b58576d72c561e04119ea74ab49d1f6ecd8149d"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-stage-1335519/stage_AP_pnc.json",
+            "bytes": 27416,
+            "sha256": "bce863c01cc115a1a138b4bec5cd8f4b02bd790dcdff176fd33f802dcc9bb4bd"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-stage-1335519/time_AP_pnc.txt",
+            "bytes": 1560,
+            "sha256": "6e1d5488fa43f0fb52fdd01925affd24acc54cf2cc25d2f1ad81ea5cf387c176"
+          }
+        ]
+      },
+      "operator_nonzeros": 23479709,
+      "operator_csc_bytes": 470824628,
+      "stage_array_bytes": 490511732,
+      "factor_index_exposure": {
+        "csc_index_dtype": "int32",
+        "csc_pointer_dtype": "int32",
+        "signed_index_maximum": 2147483647,
+        "operator_nonzeros": 23479709,
+        "operator_graph_sha256": "0a6f3c06ed58f6e5c630d14d7f19730da4bdf80afe5db4a3866a13d190f34197",
+        "initial_factor_slots_per_store": 704391270,
+        "initial_factor_slots_headroom": 1443092377,
+        "estimated_initial_factor_incremental_bytes": 29654170968,
+        "required_job_headroom_at_factor_bytes": 38244105560,
+        "required_node_available_at_factor_bytes": 30073601368,
+        "matches_archived_1_ghz_csc_graph": true,
+        "archived_operator_nonzeros": 23479709,
+        "numeric_pivoting_may_change_fill": true,
+        "new_factor_index_capacity_established": false,
+        "interface_source": "https://github.com/scipy/scipy/blob/v1.18.1/scipy/sparse/linalg/_dsolve/linsolve.py#L394",
+        "archived_h100_direct_factor_available": false
+      },
+      "equation_preparation_resources": {
+        "peak_process_memory_mib": 1740.5546875,
+        "system_available_memory_mib_at_start": 91789.32421875,
+        "process_lifetime_peak_working_set_mib": 1314.22265625,
+        "elapsed_seconds": 7.287347922974732
+      },
+      "gnu_elapsed_seconds": 22.79,
+      "gnu_peak_rss_kib": 1936604
+    },
+    "solve": {
+      "job_id": "1335522",
+      "status": "COMPLETED",
+      "exit_code": "0:0",
+      "hostname": "himem001",
+      "allocation_seconds": 320,
+      "receipt": {
+        "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-solve-1335522/solve_AP_pnc.json",
+        "bytes": 22221,
+        "sha256": "0e4f45a3fa3b5f14714f4df90ecbe9c5f44c612312c30fa66610fac588f5e480"
+      },
+      "transfer": {
+        "files": 9,
+        "bytes": 19716055,
+        "all_hashes_verified": true,
+        "artifacts": [
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-solve-1335522/accepted-000_AP_pnc.npy",
+            "bytes": 4921904,
+            "sha256": "b15a1b3e9ed18f8277267359afdc34ad5a90cae2703256b40d8e4c26818c2e30"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-solve-1335522/accepted-001_AP_pnc.npy",
+            "bytes": 4921904,
+            "sha256": "03bd9f28b5fb46b1756c040fba7ed5efd5f50e38ceba42e426e60641bca9deae"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-solve-1335522/accepted-002_AP_pnc.npy",
+            "bytes": 4921904,
+            "sha256": "ffcb7c0e8eee1a2bfa7c1efcc9db2a6a5d5768534109a3af589bfd80d800d3c5"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-solve-1335522/accepted-003_AP_pnc.npy",
+            "bytes": 4921904,
+            "sha256": "8a3bb84d12d6c2eb92e99feea30c9fff271d0da9934289a9b74453e9bcd1fd61"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-solve-1335522/allocation_AP_pnc.txt",
+            "bytes": 3918,
+            "sha256": "0fb57420076034f18cf729ec029b83bd00d36fc3811a76921761c366dcb2f715"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-solve-1335522/slurm_accounting_AP_pnc.txt",
+            "bytes": 214,
+            "sha256": "fadb522c2511158396c9be45b3e1b2c627d7626266dcea654e6b73d03e8c0f66"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-solve-1335522/slurm_output_AP_pnc.txt",
+            "bytes": 785,
+            "sha256": "a27a4d192bc3b5daa696dbb7e47975eb180fb23f23c4acbb323dfede306e2ad1"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-solve-1335522/solve_AP_pnc.json",
+            "bytes": 22221,
+            "sha256": "0e4f45a3fa3b5f14714f4df90ecbe9c5f44c612312c30fa66610fac588f5e480"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-solve-1335522/time_AP_pnc.txt",
+            "bytes": 1301,
+            "sha256": "7598808ae7f781f3e98886a61366232f9746d50e2f20398979d0d45099664879"
+          }
+        ]
+      },
+      "linear_solver": {
+        "method": "lawrence_device_thickness_superlu_direct",
+        "working_dtype": "complex128",
+        "operator_csc_sha256": "e4f6391c360d4e2a0cf0a49cc533b271651e1f5da179966cb3f6d3003a8bc204",
+        "rhs_array_sha256": "da3f3cfe95b868ba761b3193f4097e8f78a65ee3bf8ac0cd1592736dbc04a448",
+        "operator_nonzeros": 23479709,
+        "relative_target": 1e-10,
+        "relative_residual_limit": 1e-09,
+        "backward_residual_limit": 1e-09,
+        "channels": [
+          {
+            "column": 0,
+            "update": 1,
+            "target_met": true,
+            "relative_residual": 9.958044213645849e-12,
+            "relative_backward_residual": 4.3757349096409846e-16,
+            "incident_port_root": 1348,
+            "info": 0,
+            "accepted_vector": {
+              "file": "accepted-000_AP_pnc.npy",
+              "bytes": 4921904,
+              "sha256": "b15a1b3e9ed18f8277267359afdc34ad5a90cae2703256b40d8e4c26818c2e30"
+            }
+          },
+          {
+            "column": 1,
+            "update": 1,
+            "target_met": true,
+            "relative_residual": 1.451646868043006e-11,
+            "relative_backward_residual": 5.233097793676464e-16,
+            "incident_port_root": 1346,
+            "info": 0,
+            "accepted_vector": {
+              "file": "accepted-001_AP_pnc.npy",
+              "bytes": 4921904,
+              "sha256": "03bd9f28b5fb46b1756c040fba7ed5efd5f50e38ceba42e426e60641bca9deae"
+            }
+          },
+          {
+            "column": 2,
+            "update": 1,
+            "target_met": true,
+            "relative_residual": 7.941887796416918e-12,
+            "relative_backward_residual": 5.332160693423814e-16,
+            "incident_port_root": 1344,
+            "info": 0,
+            "accepted_vector": {
+              "file": "accepted-002_AP_pnc.npy",
+              "bytes": 4921904,
+              "sha256": "ffcb7c0e8eee1a2bfa7c1efcc9db2a6a5d5768534109a3af589bfd80d800d3c5"
+            }
+          },
+          {
+            "column": 3,
+            "update": 1,
+            "target_met": true,
+            "relative_residual": 9.853606561351394e-12,
+            "relative_backward_residual": 6.440472881800309e-16,
+            "incident_port_root": 1294,
+            "info": 0,
+            "accepted_vector": {
+              "file": "accepted-003_AP_pnc.npy",
+              "bytes": 4921904,
+              "sha256": "8a3bb84d12d6c2eb92e99feea30c9fff271d0da9934289a9b74453e9bcd1fd61"
+            }
+          }
+        ],
+        "factor_admission": {
+          "slurm_node_quota_bytes": 68719476736,
+          "estimated_incremental_bytes": 29654170968,
+          "job_headroom_required_bytes": 38244105560,
+          "node_available_required_bytes": 30073601368,
+          "before_factor": {
+            "node_available_bytes": 1597946720256,
+            "job_headroom_bytes": 67596959744,
+            "worker_rss_bytes": 588378112,
+            "cgroups": [
+              {
+                "path": "/sys/fs/cgroup/memory/slurm/uid_735814150/job_1335522/step_batch/task_0",
+                "limit_bytes": null,
+                "effective_limit_bytes": 68719476736,
+                "current_bytes": 1121705984,
+                "peak": "1121722368",
+                "events": "0"
+              },
+              {
+                "path": "/sys/fs/cgroup/memory/slurm/uid_735814150/job_1335522/step_batch",
+                "limit_bytes": 68719476736,
+                "effective_limit_bytes": 68719476736,
+                "current_bytes": 1122054144,
+                "peak": "1122070528",
+                "events": "0"
+              },
+              {
+                "path": "/sys/fs/cgroup/memory/slurm/uid_735814150/job_1335522",
+                "limit_bytes": 68719476736,
+                "effective_limit_bytes": 68719476736,
+                "current_bytes": 1122516992,
+                "peak": "1122533376",
+                "events": "0"
+              }
+            ]
+          },
+          "admitted": true
+        },
+        "factor": {
+          "permc_spec": "COLAMD",
+          "factor_seconds": 305.321494333446,
+          "factor_nonzeros": 532924286
+        },
+        "last_memory_boundary": {
+          "node_available_bytes": 1588167008256,
+          "job_headroom_bytes": 57795776512,
+          "worker_rss_bytes": 10351001600,
+          "cgroups": [
+            {
+              "path": "/sys/fs/cgroup/memory/slurm/uid_735814150/job_1335522/step_batch/task_0",
+              "limit_bytes": null,
+              "effective_limit_bytes": 68719476736,
+              "current_bytes": 10922795008,
+              "peak": "11516092416",
+              "events": "0"
+            },
+            {
+              "path": "/sys/fs/cgroup/memory/slurm/uid_735814150/job_1335522/step_batch",
+              "limit_bytes": 68719476736,
+              "effective_limit_bytes": 68719476736,
+              "current_bytes": 10923220992,
+              "peak": "11516518400",
+              "events": "0"
+            },
+            {
+              "path": "/sys/fs/cgroup/memory/slurm/uid_735814150/job_1335522",
+              "limit_bytes": 68719476736,
+              "effective_limit_bytes": 68719476736,
+              "current_bytes": 10923700224,
+              "peak": "11516997632",
+              "events": "0"
+            }
+          ]
+        }
+      },
+      "gnu_elapsed_seconds": 320.39,
+      "gnu_peak_rss_kib": 10705996,
+      "job_cgroup_peak_bytes": 11516997632
+    },
+    "export": {
+      "job_id": "1335527",
+      "status": "COMPLETED",
+      "exit_code": "0:0",
+      "hostname": "node013",
+      "allocation_seconds": 12,
+      "receipt": {
+        "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-export-1335527/export_AP_pnc.json",
+        "bytes": 15395,
+        "sha256": "0345d1308fff3113b9463267463b6568b2d0fa0cf08850e1eaef187f0adc3efa"
+      },
+      "transfer": {
+        "files": 14,
+        "bytes": 45439427,
+        "all_hashes_verified": true,
+        "artifacts": [
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-export-1335527/allocation_AP_pnc.txt",
+            "bytes": 4082,
+            "sha256": "fbde660a3116292a6d03e625509f4b1f4ebe9b864351208ceee3999dbee9c23e"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-export-1335527/export_AP_pnc.json",
+            "bytes": 15395,
+            "sha256": "0345d1308fff3113b9463267463b6568b2d0fa0cf08850e1eaef187f0adc3efa"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-export-1335527/historical_26hole_layered_h100_ny12_z4-d80b611a700a/configuration_AP_pnc.json",
+            "bytes": 1211,
+            "sha256": "d60883deffe5b0a10fdc2f31b173ea31c89e6204d566f692c0271b20b229252e"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-export-1335527/historical_26hole_layered_h100_ny12_z4-d80b611a700a/hole_pattern_AP_pnc.json",
+            "bytes": 3247,
+            "sha256": "8bad9c22c1a4f5df9e31615f8107c89a3fb4f7daa70df8aecf3dd624d11eabe9"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-export-1335527/historical_26hole_layered_h100_ny12_z4-d80b611a700a/port_modes_AP_pnc.csv",
+            "bytes": 114168,
+            "sha256": "be1a960043fc767aae7af8b0c05ff79b09b0d9062959b3900aef9135e40eda66"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-export-1335527/historical_26hole_layered_h100_ny12_z4-d80b611a700a/report_AP_pnc.html",
+            "bytes": 3297744,
+            "sha256": "55931cb3f3d12f8062d5beb711c44179156e6bdcc5699fe8fb5176edef87145e"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-export-1335527/historical_26hole_layered_h100_ny12_z4-d80b611a700a/scattering_AP_pnc.csv",
+            "bytes": 764,
+            "sha256": "37da3d71f4e9c7e25be4c9423f50c381bccc28e19b854286d0bb9ed6f7d14a89"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-export-1335527/historical_26hole_layered_h100_ny12_z4-d80b611a700a/scattering_channels_AP_pnc.csv",
+            "bytes": 3037,
+            "sha256": "d539d02b2d36b5285822aa4189ae83744f983d517eabd5d349cc42f81bc798f6"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-export-1335527/historical_26hole_layered_h100_ny12_z4-d80b611a700a/selected_fields_AP_pnc.npz",
+            "bytes": 37061778,
+            "sha256": "d0e5710cf73e918e4b42ebe6c476082b62d0c1d126888c97dda1d856a6c41b52"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-export-1335527/historical_26hole_layered_h100_ny12_z4-d80b611a700a/selected_vertex_shapes_AP_pnc.vtu",
+            "bytes": 4880533,
+            "sha256": "c7aee695d992df4ed683c46fd7c650b28d8f0db364d0c0ab83b3676b5fb42755"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-export-1335527/historical_26hole_layered_h100_ny12_z4-d80b611a700a/summary_AP_pnc.json",
+            "bytes": 54928,
+            "sha256": "ff2380daa2aed1aa9d485a583a079fc58518220d2af00f025d1b88a9b49e5fc8"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-export-1335527/slurm_accounting_AP_pnc.txt",
+            "bytes": 205,
+            "sha256": "7d17a3f06cddcda028b5e7c5839f1891222480008458d7323c264ed76c794d6b"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-export-1335527/slurm_output_AP_pnc.txt",
+            "bytes": 847,
+            "sha256": "7541bfdc9dfd02b0a6f68f6aec59005990b1fc3da2e0a8857e34c8bff7a4560d"
+          },
+          {
+            "path": "results/runs/low_band_inplane_AP_pnc/h100-z4-low-band-export-1335527/time_AP_pnc.txt",
+            "bytes": 1488,
+            "sha256": "6577677fa9b49f72879dc9aaf6e0bdf2fd83c7639ea67eb649ea740879bb50a4"
+          }
+        ]
+      },
+      "gnu_elapsed_seconds": 11.64,
+      "gnu_peak_rss_kib": 1937892
+    }
+  },
+  "local_validation": {
+    "focused_runner_tests": {
+      "count": 7,
+      "passed": 7,
+      "seconds": 0.926,
+      "reported_by": "point_implementation"
+    },
+    "independent_source_review": {
+      "reviewer": "z4_runner_review",
+      "status": "passed",
+      "scope": "Exact historical/current source exceptions, original mesh/K/M/section/mode and trace identities, graph/index admission, cached export provenance; corrected original 2048-element assembly label. No numerical test repetition."
+    },
+    "focused_verifier_tests": {
+      "count": 5,
+      "passed": 5,
+      "seconds": 0.006,
+      "reported_by": "point_verification"
+    },
+    "verifier_cross_review": {
+      "reviewer": "point_implementation",
+      "status": "passed"
+    },
+    "integrated_suite": {
+      "command": [
+        "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test*_AP_pnc.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 56.00143990002107,
+      "log": "results\\runs\\low_band_inplane_AP_pnc\\local_checks\\integrated_suite_AP_pnc.log",
+      "tests": 210,
+      "passed": 209,
+      "skipped": 1,
+      "unittest_seconds": 53.404,
+      "skip_reason": "Windows symbolic-link privilege"
+    },
+    "unchanged_numerical_core": {
+      "files": 17,
+      "all_match_accepted_z4": true
+    },
+    "final_affected_data_review": {
+      "reviewer": "point_verification with independent small-matrix algebra check",
+      "status": "passed",
+      "raw_complex_rows_per_point": 32,
+      "matched_power_complex_rows": 8,
+      "relative_reflection_rows": 4,
+      "linked_artifact_size_checks": 59,
+      "small_artifact_hash_checks": 45,
+      "report_links_checked": 5,
+      "scope": "Independent 4x4 R/T and D reconstruction from original complex CSVs, signed/gauge-aligned differences, relative reflection, report/ledger identity and scientific limits. No body-array load, repeated solve, full replay or test run."
+    }
+  },
+  "integration": {
+    "branch": "codex/low-band-inplane-control",
+    "status": "reviewed_preparing_pull_request",
+    "ci_status": "pending",
+    "expected_final_test_count": 210
+  },
+  "sources": {
+    "tools/run_lawrence_low_band_h100_AP_pnc.py": {
+      "sha256": "cf8086c56176ca0719e9b38f04e89188021c09419ae2b770963a7742af7fc4c0",
+      "bytes": 24260
+    },
+    "scripts/hpc/lawrence_low_band_h100_AP_pnc.sbatch": {
+      "sha256": "790a1cdd7fff415cc824bbeeee1be4d96631bbaee7ec06a697dc7d2ded6ca407",
+      "bytes": 2091
+    },
+    "tests/test_lawrence_low_band_h100_AP_pnc.py": {
+      "sha256": "f56bb1c74202aaaa68c22d8ac0327b97c40069588bfd7302a3c2eb13bb2a5845",
+      "bytes": 21917
+    },
+    "tools/replay_lawrence_h100_control_AP_pnc.py": {
+      "sha256": "3d658fa7a17771f836eae02df9b61e246f74292295c980d549dd12fd8f650b5e",
+      "bytes": 21741
+    },
+    "tests/test_replay_lawrence_h100_control_AP_pnc.py": {
+      "sha256": "d47282f4aec9076cc4ae90052770b77c892c3227db6e8f79de966d4593d096d1",
+      "bytes": 10143
+    }
+  },
+  "original_input_transfer": {
+    "files": 8,
+    "bytes": 867114676,
+    "all_remote_hashes_match": true
+  },
+  "independent_replay": {
+    "author": "Athul Prem",
+    "file_tag": "_AP_pnc",
+    "status": "point_verified_within_saved_discretization",
+    "frequency_hz": 100000000,
+    "problem_dofs": 307611,
+    "port_dofs": 675,
+    "reference_planes_m": [
+      0.0,
+      1.665e-05
+    ],
+    "public_summary": {
+      "path": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\results\\runs\\low_band_inplane_AP_pnc\\h100-z4-low-band-export-1335527\\historical_26hole_layered_h100_ny12_z4-d80b611a700a\\summary_AP_pnc.json",
+      "sha256": "ff2380daa2aed1aa9d485a583a079fc58518220d2af00f025d1b88a9b49e5fc8",
+      "bytes": 54928
+    },
+    "phase_receipts": {
+      "stage": {
+        "path": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\results\\runs\\low_band_inplane_AP_pnc\\h100-z4-low-band-stage-1335519\\stage_AP_pnc.json",
+        "sha256": "bce863c01cc115a1a138b4bec5cd8f4b02bd790dcdff176fd33f802dcc9bb4bd",
+        "bytes": 27416
+      },
+      "solve": {
+        "path": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\results\\runs\\low_band_inplane_AP_pnc\\h100-z4-low-band-solve-1335522\\solve_AP_pnc.json",
+        "sha256": "0e4f45a3fa3b5f14714f4df90ecbe9c5f44c612312c30fa66610fac588f5e480",
+        "bytes": 22221
+      },
+      "export": {
+        "path": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\results\\runs\\low_band_inplane_AP_pnc\\h100-z4-low-band-export-1335527\\export_AP_pnc.json",
+        "sha256": "0345d1308fff3113b9463267463b6568b2d0fa0cf08850e1eaef187f0adc3efa",
+        "bytes": 15395
+      }
+    },
+    "accepted_shared_safe": {
+      "path": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\results\\runs\\low_band_thickness_AP_pnc\\h80-z4-low-band-safe-1335500\\safe_AP_pnc.json",
+      "sha256": "59907315426ecf8b240ca8c37a40fe6cb8b019f9b79a941ce7fc65065c771cbe",
+      "bytes": 28267
+    },
+    "accepted_h80_replay": {
+      "path": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\results\\runs\\low_band_thickness_AP_pnc\\local_checks\\independent_replay_comparison_AP_pnc.json",
+      "sha256": "05931896767037407fece43873906c6d469a00fe212cac8dd2dbb24d67c3ef77",
+      "bytes": 53573
+    },
+    "source_compatibility": {
+      "src/phononic/report_AP_pnc.py": {
+        "archived": "871fc6a358958c7908ad17f57521bdb51772ea82739d83cdbe5b4b536a5145c5",
+        "current": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71"
+      },
+      "src/phononic/workflow_AP_pnc.py": {
+        "archived": "2ecccace6feee9456ed9a86744f246db7df34ade75a21dd3f0512d5ec553cbfa",
+        "current": "0bdfc18674d68ae3f62947001f0a8aa0591f466e4d1ba895f0f962fb0bb3915d"
+      },
+      "src/phononic/resumable_scattering_AP_pnc.py": {
+        "archived": null,
+        "current": "dba6002d982647810f3fc714fdce73a0f34e306e06e8519df2d54778002205ec"
+      },
+      "src/phononic/linear_lgmres_AP_pnc.py": {
+        "archived": "459589f4e5de39c888966305e28dbd2b16f2947ec427ae9c131c69ae47c609df",
+        "current": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120"
+      }
+    },
+    "implementation": {
+      "verifier": {
+        "path": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\tools\\replay_lawrence_h100_control_AP_pnc.py",
+        "sha256": "3d658fa7a17771f836eae02df9b61e246f74292295c980d549dd12fd8f650b5e",
+        "bytes": 21741
+      },
+      "shared_replay": {
+        "path": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\tools\\replay_lawrence_device_point_AP_pnc.py",
+        "sha256": "83c98faae6f07071394fc472a1f44d96897258e09b6266db60402da63e06a6e0",
+        "bytes": 29228
+      },
+      "z4_replay": {
+        "path": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\tools\\replay_lawrence_z4_control_AP_pnc.py",
+        "sha256": "cf2c4f441d23f9b772c4595c118f3bc3d88de14ea930422441f89c7515fc8ce7",
+        "bytes": 24386
+      },
+      "comparison": {
+        "path": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\tools\\compare_scattering_AP_pnc.py",
+        "sha256": "148f7efa58ad668a7a57be9db68a3241ffb67ed94067499ce6dcd4a0f8c59313",
+        "bytes": 44347
+      }
+    },
+    "relative_target": 1e-10,
+    "relative_residual_limit": 1e-09,
+    "backward_residual_limit": 1e-09,
+    "power_limit": 0.01,
+    "matrix_infinity_norm": 300620.3662606314,
+    "maximum_relative_residual": 1.4516468680430006e-11,
+    "maximum_backward_residual": 6.440472881800311e-16,
+    "maximum_power_errors": {
+      "modal_balance": 7.699396675775461e-13,
+      "direct_balance": 2.248201624865942e-13,
+      "net_outward": 1.2945200467129325e-13,
+      "modal_vs_direct_reflection": 2.6277591214096674e-14,
+      "modal_vs_direct_transmission": 6.901146321069973e-13
+    },
+    "coherent_left_incidence": {
+      "scope": "Left-incident propagating reflection and transmission in the original SAFE basis",
+      "incident_roots": [
+        1348,
+        1346,
+        1344,
+        1294
+      ],
+      "reflected_roots": [
+        1349,
+        1347,
+        1345,
+        1295
+      ],
+      "transmitted_roots": [
+        1348,
+        1346,
+        1344,
+        1294
+      ],
+      "flux_gram_entry_limit_w": 1e-07,
+      "flux_gram_errors": {
+        "incident": {
+          "maximum_diagonal_error_w": 4.440892098500626e-16,
+          "maximum_off_diagonal_magnitude_w": 4.2140830803457386e-11
+        },
+        "reflected": {
+          "maximum_diagonal_error_w": 4.440892098500626e-16,
+          "maximum_off_diagonal_magnitude_w": 4.2140830803457386e-11
+        },
+        "transmitted": {
+          "maximum_diagonal_error_w": 4.440892098500626e-16,
+          "maximum_off_diagonal_magnitude_w": 4.2140830803457386e-11
+        }
+      },
+      "flux_gram_cross_direction_maximum_w": 1.0607311636079972e-11,
+      "defect_matrix_real": [
+        [
+          -6.94999613415348e-14,
+          -3.9572276617642264e-14,
+          -1.3234043466544551e-11,
+          -2.1512022546007087e-14
+        ],
+        [
+          -3.9572276617642264e-14,
+          -7.698286452750835e-13,
+          -8.284929507805839e-11,
+          -1.266886538508228e-11
+        ],
+        [
+          -1.3234043466544551e-11,
+          -8.284929507805839e-11,
+          2.566835632933362e-13,
+          -1.506788455287581e-11
+        ],
+        [
+          -2.1512022546007087e-14,
+          -1.266886538508228e-11,
+          -1.506788455287581e-11,
+          1.1146639167236572e-13
+        ]
+      ],
+      "defect_matrix_imag": [
+        [
+          0.0,
+          2.9317661580474947e-12,
+          -3.672873187080592e-12,
+          -6.87896523921621e-13
+        ],
+        [
+          -2.9317661580474947e-12,
+          0.0,
+          -1.3660945401001138e-11,
+          7.355862500085187e-12
+        ],
+        [
+          3.672873187080592e-12,
+          1.3660945401001138e-11,
+          0.0,
+          -3.269142683758572e-11
+        ],
+        [
+          6.87896523921621e-13,
+          -7.355862500085187e-12,
+          3.269142683758572e-11,
+          0.0
+        ]
+      ],
+      "defect_eigenvalues": [
+        -9.239257457596882e-11,
+        -5.065067619086449e-12,
+        2.3800026951905606e-12,
+        9.460646084821382e-11
+      ],
+      "coherent_coefficient_power_defect_spectral_norm": 9.460646084821382e-11,
+      "coherent_power_limit": 0.01,
+      "direct_superposition": {
+        "incident_coefficients_real": [
+          0.15811388300841897,
+          0.31622776601683794,
+          0.4743416490252569,
+          0.6324555320336759
+        ],
+        "incident_coefficients_imag": [
+          0.15811388300841897,
+          -0.31622776601683794,
+          0.15811388300841897,
+          -0.31622776601683794
+        ],
+        "incident_coefficient_norm_squared": 1.0,
+        "incident_power_w": 0.999999999979934,
+        "modal_reflection": 0.004239192484658487,
+        "modal_transmission": 0.9957608074686102,
+        "direct_reflection": 0.004239192484723869,
+        "direct_transmission": 0.9957608075146787,
+        "net_outward_power_ratio": -7.919220834810149e-13,
+        "power_errors": {
+          "modal_balance": 4.6731285507917164e-11,
+          "direct_balance": 5.975220318532593e-13,
+          "net_outward": 7.919220834810149e-13,
+          "modal_vs_direct_reflection": 6.538172780956586e-14,
+          "modal_vs_direct_transmission": 4.6068482362215946e-11
+        }
+      }
+    },
+    "channels": [
+      {
+        "incident_root": 1348,
+        "reverse_root": 1349,
+        "relative_residual": 9.958044213645182e-12,
+        "backward_residual": 4.3757349096409856e-16,
+        "rhs_relative_error": 3.809038474489597e-12,
+        "body_boundary_relative_residual": 1.0087200421846793e-11,
+        "reflection": 0.019808007564664054,
+        "transmission": 0.9801919924352663,
+        "reflection_flux": 0.01980800756466872,
+        "transmission_flux": 0.980191992435243,
+        "net_outward_power_ratio": -3.375077994860476e-14,
+        "converted_reflection": 2.948143465464348e-11,
+        "converted_transmission": 1.0271061778865942e-10
+      },
+      {
+        "incident_root": 1346,
+        "reverse_root": 1347,
+        "relative_residual": 1.4516468680430006e-11,
+        "backward_residual": 5.233097793676465e-16,
+        "rhs_relative_error": 2.0006444119968585e-12,
+        "body_boundary_relative_residual": 1.465148824516751e-11,
+        "reflection": 0.01564324891361186,
+        "transmission": 0.9843567510856182,
+        "reflection_flux": 0.015643248913585584,
+        "transmission_flux": 0.9843567510863083,
+        "net_outward_power_ratio": 5.551115123125783e-15,
+        "converted_reflection": 2.2161132304243658e-10,
+        "converted_transmission": 1.4173587858934411e-09
+      },
+      {
+        "incident_root": 1344,
+        "reverse_root": 1345,
+        "relative_residual": 7.941887796416207e-12,
+        "backward_residual": 5.332160693423815e-16,
+        "rhs_relative_error": 3.813895065082312e-12,
+        "body_boundary_relative_residual": 8.024209945885648e-12,
+        "reflection": 0.00018946328588843102,
+        "transmission": 0.9998105367143679,
+        "reflection_flux": 0.0001894632858895981,
+        "transmission_flux": 0.9998105367143352,
+        "net_outward_power_ratio": 1.2945200467129325e-13,
+        "converted_reflection": 1.5732139443708389e-10,
+        "converted_transmission": 2.0303714265423878e-10
+      },
+      {
+        "incident_root": 1294,
+        "reverse_root": 1295,
+        "relative_residual": 9.853606561351381e-12,
+        "backward_residual": 6.440472881800311e-16,
+        "rhs_relative_error": 1.3845477232704763e-12,
+        "body_boundary_relative_residual": 9.89306002789033e-12,
+        "reflection": 0.0001471198158156069,
+        "transmission": 0.999852880184296,
+        "reflection_flux": 0.0001471198158153244,
+        "transmission_flux": 0.9998528801840583,
+        "net_outward_power_ratio": -1.2512213487525512e-13,
+        "converted_reflection": 1.6286721412706387e-10,
+        "converted_transmission": 1.3079545224670142e-09
+      }
+    ],
+    "representative_field": {
+      "incident_root": 1348,
+      "column": 0,
+      "field": {
+        "path": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\results\\runs\\low_band_inplane_AP_pnc\\h100-z4-low-band-export-1335527\\historical_26hole_layered_h100_ny12_z4-d80b611a700a\\selected_fields_AP_pnc.npz",
+        "sha256": "d0e5710cf73e918e4b42ebe6c476082b62d0c1d126888c97dda1d856a6c41b52",
+        "bytes": 37061778
+      },
+      "accepted_vector": {
+        "file": "accepted-000_AP_pnc.npy",
+        "bytes": 4921904,
+        "sha256": "b15a1b3e9ed18f8277267359afdc34ad5a90cae2703256b40d8e4c26818c2e30"
+      },
+      "mesh": {
+        "path": "results/runs/full_device_layered_preflight/_meshes/ea1d5904407158667949a2f62749bbf286239009d06810d164d2ee41622c1f2d/mesh_AP_pnc.npz",
+        "sha256": "61bfcc85733c2cf9c5354d6dd365ae3070b0e04c78ef4e9ab48ddf9a8890a9cd",
+        "bytes": 545014
+      },
+      "units": "m per square root watt",
+      "basis_order": 2
+    },
+    "available_memory_bytes_before_equations": 3823009792,
+    "required_memory_bytes_before_equations": 1007696797,
+    "elapsed_seconds": 2.5469999999622814,
+    "spatial_convergence_established": false,
+    "frequency_convergence_established": false,
+    "in_plane_comparison": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "status": "compared",
+      "kind": "global_in_plane_mesh_sensitivity",
+      "reference": {
+        "directory": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\results\\runs\\low_band_inplane_AP_pnc\\h100-z4-low-band-export-1335527\\historical_26hole_layered_h100_ny12_z4-d80b611a700a",
+        "run_hash": "d80b611a700a15161b701a7410db0ae0d7a4a0a52669f43c02108fbcf8e50d55",
+        "summary_sha256": "ff2380daa2aed1aa9d485a583a079fc58518220d2af00f025d1b88a9b49e5fc8",
+        "output_sha256": {
+          "configuration_AP_pnc.json": "d60883deffe5b0a10fdc2f31b173ea31c89e6204d566f692c0271b20b229252e",
+          "report_AP_pnc.html": "55931cb3f3d12f8062d5beb711c44179156e6bdcc5699fe8fb5176edef87145e",
+          "scattering_channels_AP_pnc.csv": "d539d02b2d36b5285822aa4189ae83744f983d517eabd5d349cc42f81bc798f6",
+          "port_modes_AP_pnc.csv": "be1a960043fc767aae7af8b0c05ff79b09b0d9062959b3900aef9135e40eda66",
+          "hole_pattern_AP_pnc.json": "8bad9c22c1a4f5df9e31615f8107c89a3fb4f7daa70df8aecf3dd624d11eabe9",
+          "selected_vertex_shapes_AP_pnc.vtu": "c7aee695d992df4ed683c46fd7c650b28d8f0db364d0c0ab83b3676b5fb42755",
+          "selected_fields_AP_pnc.npz": "d0e5710cf73e918e4b42ebe6c476082b62d0c1d126888c97dda1d856a6c41b52",
+          "scattering_AP_pnc.csv": "37da3d71f4e9c7e25be4c9423f50c381bccc28e19b854286d0bb9ed6f7d14a89"
+        },
+        "configuration": {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "schema_version": 1,
+          "name": "historical_26hole_layered_h100_ny12_z4",
+          "geometry": {
+            "length_nm": 16650,
+            "width_nm": 1000,
+            "thickness_nm": 200,
+            "pattern": {
+              "csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+              "x_offset_nm": 8325
+            }
+          },
+          "mesh": {
+            "kind": "layered",
+            "element_order": 2,
+            "mesh_size_nm": 100,
+            "port_size_nm": 83.33333333333333,
+            "circle_resolution": 32,
+            "thickness_layers": 4
+          },
+          "material": {
+            "name": "nominal_cubic_ge",
+            "C11_Pa": 128500000000.0,
+            "C12_Pa": 48300000000.0,
+            "C44_Pa": 66800000000.0,
+            "density_kg_m3": 5323,
+            "crystal_rotation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ],
+            "temperature_policy": "fixed_property_control",
+            "temperature_K": 4
+          },
+          "analysis": {
+            "kind": "scattering",
+            "boundary": "matched_ports",
+            "frequency_GHz": 0.1,
+            "incident_side": "left"
+          },
+          "resources": {
+            "max_dofs": 307611,
+            "max_port_dofs": 675,
+            "linear_solver": "direct",
+            "assembly_batch_elements": 2048
+          }
+        },
+        "hole_pattern_provenance": {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "source_csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+          "source_sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+          "x_offset_m": 8.325e-06,
+          "holes": [
+            {
+              "x_m": 1.6250000000000005e-06,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 2.1750000000000004e-06,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 2.725e-06,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 3.275000000000001e-06,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 3.825000000000001e-06,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 4.3750000000000005e-06,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 4.925000000000001e-06,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 5.475000000000001e-06,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 6.015000000000001e-06,
+              "diameter_m": 2.55e-07,
+              "region": "Taper"
+            },
+            {
+              "x_m": 6.545000000000001e-06,
+              "diameter_m": 2.6e-07,
+              "region": "Taper"
+            },
+            {
+              "x_m": 7.065000000000001e-06,
+              "diameter_m": 2.65e-07,
+              "region": "Taper"
+            },
+            {
+              "x_m": 7.575000000000001e-06,
+              "diameter_m": 2.7e-07,
+              "region": "Taper"
+            },
+            {
+              "x_m": 8.075000000000001e-06,
+              "diameter_m": 2.75e-07,
+              "region": "Central cavity"
+            },
+            {
+              "x_m": 8.575e-06,
+              "diameter_m": 2.75e-07,
+              "region": "Central cavity"
+            },
+            {
+              "x_m": 9.075e-06,
+              "diameter_m": 2.7e-07,
+              "region": "Taper"
+            },
+            {
+              "x_m": 9.585e-06,
+              "diameter_m": 2.65e-07,
+              "region": "Taper"
+            },
+            {
+              "x_m": 1.0105e-05,
+              "diameter_m": 2.6e-07,
+              "region": "Taper"
+            },
+            {
+              "x_m": 1.0635e-05,
+              "diameter_m": 2.55e-07,
+              "region": "Taper"
+            },
+            {
+              "x_m": 1.1175e-05,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror transition"
+            },
+            {
+              "x_m": 1.1725e-05,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 1.2275e-05,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 1.2825e-05,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 1.3375e-05,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 1.3925000000000001e-05,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 1.4475000000000001e-05,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 1.5025000000000001e-05,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            }
+          ],
+          "clearances": {
+            "min_side_ligament_m": 3.625000000000001e-07,
+            "min_end_ligament_m": 1.5000000000000005e-06,
+            "min_interhole_gap_m": 2.249999999999986e-07
+          }
+        },
+        "implementation": {
+          "git_commit": null,
+          "source_sha256": {
+            "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+            "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+            "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+            "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+            "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+            "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+            "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+            "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+            "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+            "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+            "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+            "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+            "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+            "src/phononic/resumable_scattering_AP_pnc.py": "dba6002d982647810f3fc714fdce73a0f34e306e06e8519df2d54778002205ec",
+            "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+            "src/phononic/workflow_AP_pnc.py": "0bdfc18674d68ae3f62947001f0a8aa0591f466e4d1ba895f0f962fb0bb3915d",
+            "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+          },
+          "packages": {
+            "numpy": "2.5.4",
+            "scipy": "1.18.1",
+            "scikit-fem": "12.0.2",
+            "meshio": "5.3.5",
+            "gmsh": "4.15.2",
+            "matplotlib": "3.11.2",
+            "psutil": "7.2.2"
+          },
+          "python": "3.12.12",
+          "platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28"
+        },
+        "ndof": 307611,
+        "port_dofs": 675,
+        "power_balance_passed": true
+      },
+      "candidate": {
+        "directory": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\results\\runs\\low_band_thickness_AP_pnc\\h80-z4-low-band-export-1335512\\historical_26hole_layered_h80_ny12_z4-a80dd9c4d431",
+        "run_hash": "a80dd9c4d431ef8f88afb22c3a246970f16e41f992bc875a4688ddb8372a84e1",
+        "summary_sha256": "b71854daee471bfe0388f7fe7fbb188e46b4a50f6e9806f92f4d4d1b13d360ca",
+        "output_sha256": {
+          "hole_pattern_AP_pnc.json": "8bad9c22c1a4f5df9e31615f8107c89a3fb4f7daa70df8aecf3dd624d11eabe9",
+          "configuration_AP_pnc.json": "687b8b5a002017a5496da18bd31f74850b59c1785a78880069852984b3806ccf",
+          "scattering_AP_pnc.csv": "359d1b10d9f35ed74ba8fcf1af710e283f779fbd9f47f2b23c3b44b9f34eaef2",
+          "scattering_channels_AP_pnc.csv": "2e67c25bbb0e3811f95e4df898ccd23ec57312c5c24282bec382e47ee17ba6bf",
+          "selected_vertex_shapes_AP_pnc.vtu": "f8ab234b683fe094b63d6b25fa1d3dfc976a2397997015a03de76cd5d7a5a415",
+          "report_AP_pnc.html": "0f6a2a62cd9b424d61b2ea465b9ca2ac771bc05e375fe624bbc6d52b72933938",
+          "selected_fields_AP_pnc.npz": "41e1d3ddd1a20933663300a3b961e7217d930a907343447a39be498dff57b980",
+          "port_modes_AP_pnc.csv": "be1a960043fc767aae7af8b0c05ff79b09b0d9062959b3900aef9135e40eda66"
+        },
+        "configuration": {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "schema_version": 1,
+          "name": "historical_26hole_layered_h80_ny12_z4",
+          "geometry": {
+            "length_nm": 16650,
+            "width_nm": 1000,
+            "thickness_nm": 200,
+            "pattern": {
+              "csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+              "x_offset_nm": 8325
+            }
+          },
+          "mesh": {
+            "kind": "layered",
+            "element_order": 2,
+            "mesh_size_nm": 80,
+            "port_size_nm": 83.33333333333333,
+            "circle_resolution": 32,
+            "thickness_layers": 4
+          },
+          "material": {
+            "name": "nominal_cubic_ge",
+            "C11_Pa": 128500000000.0,
+            "C12_Pa": 48300000000.0,
+            "C44_Pa": 66800000000.0,
+            "density_kg_m3": 5323,
+            "crystal_rotation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ],
+            "temperature_policy": "fixed_property_control",
+            "temperature_K": 4
+          },
+          "analysis": {
+            "kind": "scattering",
+            "boundary": "matched_ports",
+            "frequency_GHz": 0.1,
+            "incident_side": "left"
+          },
+          "resources": {
+            "max_dofs": 426627,
+            "max_port_dofs": 675,
+            "linear_solver": "direct"
+          }
+        },
+        "hole_pattern_provenance": {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "source_csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+          "source_sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+          "x_offset_m": 8.325e-06,
+          "holes": [
+            {
+              "x_m": 1.6250000000000005e-06,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 2.1750000000000004e-06,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 2.725e-06,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 3.275000000000001e-06,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 3.825000000000001e-06,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 4.3750000000000005e-06,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 4.925000000000001e-06,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 5.475000000000001e-06,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 6.015000000000001e-06,
+              "diameter_m": 2.55e-07,
+              "region": "Taper"
+            },
+            {
+              "x_m": 6.545000000000001e-06,
+              "diameter_m": 2.6e-07,
+              "region": "Taper"
+            },
+            {
+              "x_m": 7.065000000000001e-06,
+              "diameter_m": 2.65e-07,
+              "region": "Taper"
+            },
+            {
+              "x_m": 7.575000000000001e-06,
+              "diameter_m": 2.7e-07,
+              "region": "Taper"
+            },
+            {
+              "x_m": 8.075000000000001e-06,
+              "diameter_m": 2.75e-07,
+              "region": "Central cavity"
+            },
+            {
+              "x_m": 8.575e-06,
+              "diameter_m": 2.75e-07,
+              "region": "Central cavity"
+            },
+            {
+              "x_m": 9.075e-06,
+              "diameter_m": 2.7e-07,
+              "region": "Taper"
+            },
+            {
+              "x_m": 9.585e-06,
+              "diameter_m": 2.65e-07,
+              "region": "Taper"
+            },
+            {
+              "x_m": 1.0105e-05,
+              "diameter_m": 2.6e-07,
+              "region": "Taper"
+            },
+            {
+              "x_m": 1.0635e-05,
+              "diameter_m": 2.55e-07,
+              "region": "Taper"
+            },
+            {
+              "x_m": 1.1175e-05,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror transition"
+            },
+            {
+              "x_m": 1.1725e-05,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 1.2275e-05,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 1.2825e-05,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 1.3375e-05,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 1.3925000000000001e-05,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 1.4475000000000001e-05,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            },
+            {
+              "x_m": 1.5025000000000001e-05,
+              "diameter_m": 2.5000000000000004e-07,
+              "region": "Mirror"
+            }
+          ],
+          "clearances": {
+            "min_side_ligament_m": 3.625000000000001e-07,
+            "min_end_ligament_m": 1.5000000000000005e-06,
+            "min_interhole_gap_m": 2.249999999999986e-07
+          }
+        },
+        "implementation": {
+          "git_commit": null,
+          "source_sha256": {
+            "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+            "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+            "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+            "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+            "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+            "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+            "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+            "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+            "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+            "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+            "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+            "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+            "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+            "src/phononic/resumable_scattering_AP_pnc.py": "dba6002d982647810f3fc714fdce73a0f34e306e06e8519df2d54778002205ec",
+            "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+            "src/phononic/workflow_AP_pnc.py": "0bdfc18674d68ae3f62947001f0a8aa0591f466e4d1ba895f0f962fb0bb3915d",
+            "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+          },
+          "packages": {
+            "numpy": "2.5.4",
+            "scipy": "1.18.1",
+            "scikit-fem": "12.0.2",
+            "meshio": "5.3.5",
+            "gmsh": "4.15.2",
+            "matplotlib": "3.11.2",
+            "psutil": "7.2.2"
+          },
+          "python": "3.12.12",
+          "platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28"
+        },
+        "ndof": 426627,
+        "port_dofs": 675,
+        "power_balance_passed": true
+      },
+      "physical_inputs": {
+        "dimensions_nm": {
+          "length_nm": 16650,
+          "width_nm": 1000,
+          "thickness_nm": 200
+        },
+        "placed_holes_m": [
+          [
+            1.6250000000000005e-06,
+            2.5000000000000004e-07
+          ],
+          [
+            2.1750000000000004e-06,
+            2.5000000000000004e-07
+          ],
+          [
+            2.725e-06,
+            2.5000000000000004e-07
+          ],
+          [
+            3.275000000000001e-06,
+            2.5000000000000004e-07
+          ],
+          [
+            3.825000000000001e-06,
+            2.5000000000000004e-07
+          ],
+          [
+            4.3750000000000005e-06,
+            2.5000000000000004e-07
+          ],
+          [
+            4.925000000000001e-06,
+            2.5000000000000004e-07
+          ],
+          [
+            5.475000000000001e-06,
+            2.5000000000000004e-07
+          ],
+          [
+            6.015000000000001e-06,
+            2.55e-07
+          ],
+          [
+            6.545000000000001e-06,
+            2.6e-07
+          ],
+          [
+            7.065000000000001e-06,
+            2.65e-07
+          ],
+          [
+            7.575000000000001e-06,
+            2.7e-07
+          ],
+          [
+            8.075000000000001e-06,
+            2.75e-07
+          ],
+          [
+            8.575e-06,
+            2.75e-07
+          ],
+          [
+            9.075e-06,
+            2.7e-07
+          ],
+          [
+            9.585e-06,
+            2.65e-07
+          ],
+          [
+            1.0105e-05,
+            2.6e-07
+          ],
+          [
+            1.0635e-05,
+            2.55e-07
+          ],
+          [
+            1.1175e-05,
+            2.5000000000000004e-07
+          ],
+          [
+            1.1725e-05,
+            2.5000000000000004e-07
+          ],
+          [
+            1.2275e-05,
+            2.5000000000000004e-07
+          ],
+          [
+            1.2825e-05,
+            2.5000000000000004e-07
+          ],
+          [
+            1.3375e-05,
+            2.5000000000000004e-07
+          ],
+          [
+            1.3925000000000001e-05,
+            2.5000000000000004e-07
+          ],
+          [
+            1.4475000000000001e-05,
+            2.5000000000000004e-07
+          ],
+          [
+            1.5025000000000001e-05,
+            2.5000000000000004e-07
+          ]
+        ],
+        "material": {
+          "C11_Pa": 128500000000.0,
+          "C12_Pa": 48300000000.0,
+          "C44_Pa": 66800000000.0,
+          "density_kg_m3": 5323,
+          "crystal_rotation": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "temperature_policy": "fixed_property_control"
+        },
+        "frequency_hz": 100000000.0,
+        "incident_side": "left",
+        "numerical_source_sha256": {
+          "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+          "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+          "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+          "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+          "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+          "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+          "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+          "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+          "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a"
+        }
+      },
+      "accepted_h80_replay": {
+        "path": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\results\\runs\\low_band_thickness_AP_pnc\\local_checks\\independent_replay_comparison_AP_pnc.json",
+        "sha256": "05931896767037407fece43873906c6d469a00fe212cac8dd2dbb24d67c3ef77",
+        "bytes": 53573
+      },
+      "matched_channels": {
+        "incoming": {
+          "reference_roots": [
+            1348,
+            1346,
+            1344,
+            1294
+          ],
+          "candidate_roots": [
+            1348,
+            1346,
+            1344,
+            1294
+          ],
+          "mass_overlaps": [
+            1.0,
+            0.9999999999999998,
+            1.0,
+            0.9999999999999999
+          ],
+          "candidate_gauge_phase_rad": [
+            -1.13346653748922e-29,
+            1.3725978206249144e-29,
+            2.422559708846284e-29,
+            2.7302608611701243e-30
+          ],
+          "reference_wavenumber_rad_m": [
+            143467.41224097754,
+            482017.1917971944,
+            724588.4561241396,
+            1577993.5692639728
+          ],
+          "candidate_wavenumber_rad_m": [
+            143467.41224097754,
+            482017.1917971944,
+            724588.4561241396,
+            1577993.5692639728
+          ],
+          "relative_wavenumber_change": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "reflection": {
+          "reference_roots": [
+            1349,
+            1347,
+            1345,
+            1295
+          ],
+          "candidate_roots": [
+            1349,
+            1347,
+            1345,
+            1295
+          ],
+          "mass_overlaps": [
+            1.0,
+            0.9999999999999998,
+            1.0,
+            0.9999999999999999
+          ],
+          "candidate_gauge_phase_rad": [
+            1.13346653748922e-29,
+            -1.3725978206249144e-29,
+            -2.422559708846284e-29,
+            -2.7302608611701243e-30
+          ],
+          "reference_wavenumber_rad_m": [
+            -143467.41224097754,
+            -482017.1917971944,
+            -724588.4561241396,
+            -1577993.5692639728
+          ],
+          "candidate_wavenumber_rad_m": [
+            -143467.41224097754,
+            -482017.1917971944,
+            -724588.4561241396,
+            -1577993.5692639728
+          ],
+          "relative_wavenumber_change": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "transmission": {
+          "reference_roots": [
+            1348,
+            1346,
+            1344,
+            1294
+          ],
+          "candidate_roots": [
+            1348,
+            1346,
+            1344,
+            1294
+          ],
+          "mass_overlaps": [
+            1.0,
+            0.9999999999999998,
+            1.0,
+            0.9999999999999999
+          ],
+          "candidate_gauge_phase_rad": [
+            -1.13346653748922e-29,
+            1.3725978206249144e-29,
+            2.422559708846284e-29,
+            2.7302608611701243e-30
+          ],
+          "reference_wavenumber_rad_m": [
+            143467.41224097754,
+            482017.1917971944,
+            724588.4561241396,
+            1577993.5692639728
+          ],
+          "candidate_wavenumber_rad_m": [
+            143467.41224097754,
+            482017.1917971944,
+            724588.4561241396,
+            1577993.5692639728
+          ],
+          "relative_wavenumber_change": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "blocks": {
+        "reflection": {
+          "reference": [
+            [
+              [
+                0.08471998272866647,
+                0.11238563992626938
+              ],
+              [
+                -1.7023856958339733e-06,
+                3.3025425955316904e-06
+              ],
+              [
+                -4.775935825380614e-07,
+                2.337003353010045e-06
+              ],
+              [
+                -3.133808581857385e-06,
+                -4.0751757516985687e-07
+              ]
+            ],
+            [
+              [
+                -1.7023776450828548e-06,
+                3.302552441982816e-06
+              ],
+              [
+                0.07325569436741577,
+                0.10137480917243845
+              ],
+              [
+                -6.859316924459714e-06,
+                -7.4985901030664284e-06
+              ],
+              [
+                -1.0028066430165088e-05,
+                1.99139120605156e-06
+              ]
+            ],
+            [
+              [
+                -4.775864588066761e-07,
+                2.3370018384363184e-06
+              ],
+              [
+                -6.859302149053444e-06,
+                -7.498591813222541e-06
+              ],
+              [
+                0.007343614747553387,
+                0.01164192643021562
+              ],
+              [
+                4.2828253569939e-06,
+                -5.478141932719625e-06
+              ]
+            ],
+            [
+              [
+                -3.133808112520167e-06,
+                -4.075164231425905e-07
+              ],
+              [
+                -1.0028057134450186e-05,
+                1.9913765593466104e-06
+              ],
+              [
+                4.282830472330296e-06,
+                -5.47813792095731e-06
+              ],
+              [
+                -0.01212796768610782,
+                -0.00017903282692663256
+              ]
+            ]
+          ],
+          "candidate_aligned": [
+            [
+              [
+                0.08475424698309363,
+                0.11251953281705926
+              ],
+              [
+                -4.146573512314008e-06,
+                5.319101495582497e-06
+              ],
+              [
+                -1.6527492137984137e-07,
+                -1.3520270933556368e-06
+              ],
+              [
+                -1.9922903478738663e-06,
+                1.866429422430098e-06
+              ]
+            ],
+            [
+              [
+                -4.146565781353489e-06,
+                5.3191112783587075e-06
+              ],
+              [
+                0.07322115095921786,
+                0.10259600213188401
+              ],
+              [
+                3.3528815244001154e-07,
+                -3.5707871630242695e-06
+              ],
+              [
+                3.388024435787569e-05,
+                -4.604563725718658e-06
+              ]
+            ],
+            [
+              [
+                -1.652676107133708e-07,
+                -1.352028608062987e-06
+              ],
+              [
+                3.353027118069937e-07,
+                -3.570789018139286e-06
+              ],
+              [
+                0.007376357848405362,
+                0.011693117117697046
+              ],
+              [
+                2.4918042642183823e-06,
+                1.304540937187091e-06
+              ]
+            ],
+            [
+              [
+                -1.9922900833113216e-06,
+                1.8664304690209396e-06
+              ],
+              [
+                3.388025408355313e-05,
+                -4.604578258145981e-06
+              ],
+              [
+                2.4918095813193746e-06,
+                1.304544658584977e-06
+              ],
+              [
+                -0.012236582535190863,
+                -0.00016586418244237522
+              ]
+            ]
+          ],
+          "reference_power": [
+            0.019808007564664054,
+            0.01564324891361186,
+            0.00018946328588843102,
+            0.0001471198158156069
+          ],
+          "candidate_power": [
+            0.01984392770183553,
+            0.015887277828661752,
+            0.00019113966566509499,
+            0.00014976264750421537
+          ],
+          "power_change": [
+            3.592013717147735e-05,
+            0.00024402891504989033,
+            1.676379776663963e-06,
+            2.6428316886084645e-06
+          ],
+          "maximum_power_change": 0.00024402891504989033,
+          "maximum_complex_change": 0.0012216814197037356
+        },
+        "transmission": {
+          "reference": [
+            [
+              [
+                -0.7906111043026008,
+                0.5959245540217133
+              ],
+              [
+                7.494473411052927e-06,
+                -1.7418133511671296e-06
+              ],
+              [
+                -2.7582767958397897e-06,
+                6.345095444904827e-06
+              ],
+              [
+                -1.3055449547607966e-06,
+                1.3954077214319286e-07
+              ]
+            ],
+            [
+              [
+                -3.5398327372359123e-06,
+                6.330768289747661e-06
+              ],
+              [
+                -0.8040215685179037,
+                0.5812968837231706
+              ],
+              [
+                2.32710211286037e-06,
+                1.1681271190984739e-05
+              ],
+              [
+                3.5381376627335946e-05,
+                6.3334102544326775e-06
+              ]
+            ],
+            [
+              [
+                -6.928295163152157e-06,
+                6.551023399302268e-07
+              ],
+              [
+                -8.646883552461782e-06,
+                -7.105940689084894e-06
+              ],
+              [
+                0.8455507909014807,
+                -0.533717525023501
+              ],
+              [
+                3.70010096996656e-06,
+                -7.654713583987464e-07
+              ]
+            ],
+            [
+              [
+                -9.704178500732313e-07,
+                -8.540497023061111e-07
+              ],
+              [
+                2.416175522367256e-05,
+                2.5477525051209863e-05
+              ],
+              [
+                -1.1274407135725743e-06,
+                -3.4684625219108524e-06
+              ],
+              [
+                -0.012269545956195794,
+                0.9998511574821375
+              ]
+            ]
+          ],
+          "candidate_aligned": [
+            [
+              [
+                -0.7907917558566965,
+                0.5956546575440972
+              ],
+              [
+                9.281184840967586e-06,
+                -4.312464639499764e-06
+              ],
+              [
+                -2.0648284096277676e-06,
+                3.601374707201855e-06
+              ],
+              [
+                1.3227107300530408e-06,
+                1.7379202550032291e-06
+              ]
+            ],
+            [
+              [
+                -6.544960201359723e-06,
+                7.172503789063959e-06
+              ],
+              [
+                -0.8072173788779075,
+                0.5766392504880443
+              ],
+              [
+                -1.4246585695730462e-06,
+                -2.4730622632193833e-06
+              ],
+              [
+                -6.321487869352151e-06,
+                -1.2220287358235405e-05
+              ]
+            ],
+            [
+              [
+                -3.9512769997320955e-06,
+                4.7283339794351833e-07
+              ],
+              [
+                1.916588174143311e-06,
+                1.8094787304020397e-06
+              ],
+              [
+                0.8460136263086439,
+                -0.5329819925566815
+              ],
+              [
+                1.694746661878201e-06,
+                -4.059935645211572e-06
+              ]
+            ],
+            [
+              [
+                1.7574461603282916e-06,
+                -2.790896814290568e-08
+              ],
+              [
+                -9.639441111883913e-06,
+                2.0506074605739566e-07
+              ],
+              [
+                2.5891322505835115e-06,
+                -3.562565581524025e-06
+              ],
+              [
+                -0.014970420074115988,
+                0.9998130443548626
+              ]
+            ]
+          ],
+          "reference_power": [
+            0.9801919924352663,
+            0.9843567510856182,
+            0.9998105367143679,
+            0.999852880184296
+          ],
+          "candidate_power": [
+            0.9801560722980995,
+            0.9841127221705791,
+            0.999808860334367,
+            0.9998502373527561
+          ],
+          "power_change": [
+            -3.5920137166800536e-05,
+            -0.00024402891503905177,
+            -1.6763800009256258e-06,
+            -2.642831539834134e-06
+          ],
+          "maximum_power_change": 0.00024402891503905177,
+          "maximum_complex_change": 0.0056486061298394365,
+          "same_channel_phase_reference_rad": [
+            2.4956947048455476,
+            2.51560539396051,
+            -0.5630502848477766,
+            1.583067083340703
+          ],
+          "same_channel_phase_candidate_rad": [
+            2.4960222363289897,
+            2.521297717425604,
+            -0.5621811659165996,
+            1.5857684273622885
+          ],
+          "same_channel_phase_change_rad": [
+            0.00032753148344206995,
+            0.005692323465094035,
+            0.0008691189311769911,
+            0.002701344021585631
+          ]
+        }
+      },
+      "rows": [
+        {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "quantity": "reflection",
+          "incident_channel": 1,
+          "reference_incident_root": 1348,
+          "candidate_incident_root": 1348,
+          "reference_power": 0.019808007564664054,
+          "candidate_power": 0.01984392770183553,
+          "power_change": 3.592013717147735e-05,
+          "maximum_complex_change": 0.00013820761677823734,
+          "reference_same_channel_transmission_phase_rad": null,
+          "candidate_same_channel_transmission_phase_rad": null,
+          "same_channel_transmission_phase_change_rad": null
+        },
+        {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "quantity": "reflection",
+          "incident_channel": 2,
+          "reference_incident_root": 1346,
+          "candidate_incident_root": 1346,
+          "reference_power": 0.01564324891361186,
+          "candidate_power": 0.015887277828661752,
+          "power_change": 0.00024402891504989033,
+          "maximum_complex_change": 0.0012216814197037356,
+          "reference_same_channel_transmission_phase_rad": null,
+          "candidate_same_channel_transmission_phase_rad": null,
+          "same_channel_transmission_phase_change_rad": null
+        },
+        {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "quantity": "reflection",
+          "incident_channel": 3,
+          "reference_incident_root": 1344,
+          "candidate_incident_root": 1344,
+          "reference_power": 0.00018946328588843102,
+          "candidate_power": 0.00019113966566509499,
+          "power_change": 1.676379776663963e-06,
+          "maximum_complex_change": 6.076674368619352e-05,
+          "reference_same_channel_transmission_phase_rad": null,
+          "candidate_same_channel_transmission_phase_rad": null,
+          "same_channel_transmission_phase_change_rad": null
+        },
+        {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "quantity": "reflection",
+          "incident_channel": 4,
+          "reference_incident_root": 1294,
+          "candidate_incident_root": 1294,
+          "reference_power": 0.0001471198158156069,
+          "candidate_power": 0.00014976264750421537,
+          "power_change": 2.6428316886084645e-06,
+          "maximum_complex_change": 0.00010941023096075181,
+          "reference_same_channel_transmission_phase_rad": null,
+          "candidate_same_channel_transmission_phase_rad": null,
+          "same_channel_transmission_phase_change_rad": null
+        },
+        {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "quantity": "transmission",
+          "incident_channel": 1,
+          "reference_incident_root": 1348,
+          "candidate_incident_root": 1348,
+          "reference_power": 0.9801919924352663,
+          "candidate_power": 0.9801560722980995,
+          "power_change": -3.5920137166800536e-05,
+          "maximum_complex_change": 0.00032477544954437153,
+          "reference_same_channel_transmission_phase_rad": 2.4956947048455476,
+          "candidate_same_channel_transmission_phase_rad": 2.4960222363289897,
+          "same_channel_transmission_phase_change_rad": 0.00032753148344206995
+        },
+        {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "quantity": "transmission",
+          "incident_channel": 2,
+          "reference_incident_root": 1346,
+          "candidate_incident_root": 1346,
+          "reference_power": 0.9843567510856182,
+          "candidate_power": 0.9841127221705791,
+          "power_change": -0.00024402891503905177,
+          "maximum_complex_change": 0.0056486061298394365,
+          "reference_same_channel_transmission_phase_rad": 2.51560539396051,
+          "candidate_same_channel_transmission_phase_rad": 2.521297717425604,
+          "same_channel_transmission_phase_change_rad": 0.005692323465094035
+        },
+        {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "quantity": "transmission",
+          "incident_channel": 3,
+          "reference_incident_root": 1344,
+          "candidate_incident_root": 1344,
+          "reference_power": 0.9998105367143679,
+          "candidate_power": 0.999808860334367,
+          "power_change": -1.6763800009256258e-06,
+          "maximum_complex_change": 0.0008690366067487755,
+          "reference_same_channel_transmission_phase_rad": -0.5630502848477766,
+          "candidate_same_channel_transmission_phase_rad": -0.5621811659165996,
+          "same_channel_transmission_phase_change_rad": 0.0008691189311769911
+        },
+        {
+          "author": "Athul Prem",
+          "file_tag": "_AP_pnc",
+          "quantity": "transmission",
+          "incident_channel": 4,
+          "reference_incident_root": 1294,
+          "candidate_incident_root": 1294,
+          "reference_power": 0.999852880184296,
+          "candidate_power": 0.9998502373527561,
+          "power_change": -2.642831539834134e-06,
+          "maximum_complex_change": 0.0027011430194126807,
+          "reference_same_channel_transmission_phase_rad": 1.583067083340703,
+          "candidate_same_channel_transmission_phase_rad": 1.5857684273622885,
+          "same_channel_transmission_phase_change_rad": 0.002701344021585631
+        }
+      ],
+      "maximum_power_change": 0.00024402891504989033,
+      "maximum_complex_change": 0.0056486061298394365,
+      "power_change_limit": 0.01,
+      "complex_change_limit": 0.01,
+      "power_passed": true,
+      "complex_passed": true,
+      "mesh_pair_passed": true,
+      "reference_reflection_order_descending": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "candidate_reflection_order_in_reference_basis_descending": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "two_stronger_channels_preserved": true,
+      "reference_stronger_weaker_reflection_separation": 0.01545378562772343,
+      "candidate_separation_of_reference_groups": 0.015696138162996656,
+      "weak_reflection_diagnostic": {
+        "reference": "h100",
+        "denominator_floor": 1e-12,
+        "formula": "(R_h80-R_h100)/max(abs(R_h100),1e-12)",
+        "relative_acceptance_gate": null,
+        "floor_interpretation": "Reporting guard only; no numerical noise bound or relative-accuracy gate.",
+        "channels": [
+          {
+            "reference_incident_root": 1348,
+            "candidate_incident_root": 1348,
+            "reflection_h100": 0.019808007564664054,
+            "reflection_h80": 0.01984392770183553,
+            "signed_absolute_change": 3.592013717147735e-05,
+            "signed_relative_change": 0.001813414956260219,
+            "maximum_complex_reflection_change": 0.00013820761677823734
+          },
+          {
+            "reference_incident_root": 1346,
+            "candidate_incident_root": 1346,
+            "reflection_h100": 0.01564324891361186,
+            "reflection_h80": 0.015887277828661752,
+            "signed_absolute_change": 0.00024402891504989033,
+            "signed_relative_change": 0.015599631278483992,
+            "maximum_complex_reflection_change": 0.0012216814197037356
+          },
+          {
+            "reference_incident_root": 1344,
+            "candidate_incident_root": 1344,
+            "reflection_h100": 0.00018946328588843102,
+            "reflection_h80": 0.00019113966566509499,
+            "signed_absolute_change": 1.676379776663963e-06,
+            "signed_relative_change": 0.008848045513425384,
+            "maximum_complex_reflection_change": 6.076674368619352e-05
+          },
+          {
+            "reference_incident_root": 1294,
+            "candidate_incident_root": 1294,
+            "reflection_h100": 0.0001471198158156069,
+            "reflection_h80": 0.00014976264750421537,
+            "signed_absolute_change": 2.6428316886084645e-06,
+            "signed_relative_change": 0.017963805038478747,
+            "maximum_complex_reflection_change": 0.00010941023096075181
+          }
+        ]
+      },
+      "phase_adjustment_applied": false,
+      "spatial_convergence_established": false,
+      "frequency_convergence_established": false,
+      "scope": "One h100/h80 global in-plane increment at 0.1 GHz changes both lead interiors and the patterned region. Original end-plane phases are retained. Finite pair checks do not establish continuum or weak-reflection error bounds.",
+      "comparison_kind": "mesh_pair"
+    }
+  },
+  "independent_replay_artifact": {
+    "path": "results/runs/low_band_inplane_AP_pnc/local_checks/independent_replay_comparison_AP_pnc.json",
+    "bytes": 56516,
+    "sha256": "4b2ec0e8ffca4fc9d7ac7866f838412f8838e0fc0331af92b5de817526c0be5e"
+  },
+  "independent_replay_execution": {
+    "author": "Athul Prem",
+    "file_tag": "_AP_pnc",
+    "command": [
+      "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\.venv\\Scripts\\python.exe",
+      "-B",
+      "tools/replay_lawrence_h100_control_AP_pnc.py",
+      "--stage",
+      "results\\runs\\low_band_inplane_AP_pnc\\h100-z4-low-band-stage-1335519\\stage_AP_pnc.json",
+      "--solve",
+      "results\\runs\\low_band_inplane_AP_pnc\\h100-z4-low-band-solve-1335522\\solve_AP_pnc.json",
+      "--export",
+      "results\\runs\\low_band_inplane_AP_pnc\\h100-z4-low-band-export-1335527\\export_AP_pnc.json",
+      "--compare-h80"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 4.653192099998705,
+    "available_memory_before_bytes": 3969638400,
+    "sample_seconds": 0.05,
+    "peak_sampled_process_tree_rss_sum_bytes": 832548864,
+    "peak_sampled_process_tree_private_sum_bytes": 790593536,
+    "processes": {
+      "44384": {
+        "name": "python.exe",
+        "peak_rss_bytes": 5128192,
+        "peak_private_bytes": 983040,
+        "samples": 91
+      },
+      "5972": {
+        "name": "python.exe",
+        "peak_rss_bytes": 827420672,
+        "peak_private_bytes": 789610496,
+        "samples": 90
+      }
+    },
+    "sampling_errors": [],
+    "measurement_scope": "Observed launcher and numerical descendants; sampled peak, not an exact operating-system high-water mark."
+  },
+  "comparison_report": {
+    "summary_AP_pnc.json": {
+      "path": "results/runs/low_band_inplane_AP_pnc/comparison/summary_AP_pnc.json",
+      "bytes": 40479,
+      "sha256": "c8512b0e55c7d0ead6aeab891f93633c6735c3114e6994106f96cd812c1161df"
+    },
+    "report_AP_pnc.html": {
+      "path": "results/runs/low_band_inplane_AP_pnc/comparison/report_AP_pnc.html",
+      "bytes": 4835,
+      "sha256": "7025c0440c4a56310eca17e9a42affe58a6bd8dd3bf8aff10b4a00b830198516"
+    },
+    "comparison_AP_pnc.csv": {
+      "path": "results/runs/low_band_inplane_AP_pnc/comparison/comparison_AP_pnc.csv",
+      "bytes": 1582,
+      "sha256": "03b3b2ffccbf4aac7fa150c588082ce129c1f8f5ea5b481e4472d889d964a2c6"
+    },
+    "relative_reflection_AP_pnc.csv": {
+      "path": "results/runs/low_band_inplane_AP_pnc/comparison/relative_reflection_AP_pnc.csv",
+      "bytes": 641,
+      "sha256": "7833914053b711c3b01a1669373197191ab441427cf903cabacacc59e87681f7"
+    }
+  },
+  "transfer_totals": {
+    "files": 30,
+    "bytes": 555702728,
+    "scope": "All returned stage, solve and export artifacts; transfer manifests excluded; original input upload separate."
+  },
+  "next_step": {
+    "new_job_queued": false,
+    "scope": "Bounded question complete. Select the next claim-specific frequency or independent spatial check from the saved evidence and Athul roadmap before admitting resources; no automatic finer ladder or campaign."
+  },
+  "athul_review": {
+    "coherent_comment_url": "https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/37#issuecomment-6952952018",
+    "coherent_request": "Implemented in accepted z6 and retained in z4/h100 independent replay without additional body solves.",
+    "draft_roadmap_url": "https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/38",
+    "draft_status": "read_only_unmerged",
+    "applied": "Report absolute and relative reflection increments with a declared reporting floor; finite pair checks are not weak-signal uncertainty bounds."
+  }
+}

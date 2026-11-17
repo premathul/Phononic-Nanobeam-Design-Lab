@@ -220,6 +220,20 @@ Retrieve each immutable phase and verify every transferred file. Independently r
 
 The comparison binds the separately accepted z6 replay, establishes signed incoming/reflected/transmitted mass-overlap and gauge correspondence, and retains original-plane complex amplitudes. Power and complex changes each use 0.01. A passing pair is a finite joint body/port thickness-discretization result, not full spatial or frequency convergence. The old failed 1 GHz comparisons remain independent evidence. See the current handoff and `verification/low_band_thickness_AP_pnc.json` for actual state and retained jobs; never rerun a phase merely to follow this recipe.
 
+## Archived h100/h80 control at 0.1 GHz
+
+`tools/run_lawrence_low_band_h100_AP_pnc.py` uses the original h100 four-layer mesh, K/M and global trace maps together with the accepted h80 z4 0.1 GHz modes from job 1335500. The original 1 GHz operator is a hash-verified graph reference only. There is no SAFE phase, eigensolve, mesh generation or matrix assembly. Exact historical source exceptions are recorded separately from current Linux preparation/solve/export; the original batched assembly control remains in the exported configuration.
+
+The three batch phases are `stage BODY_STAGE_DIR MESH_DIR ACCEPTED_SAFE_DIR`, `solve STAGE_DIR STAGE_SHA`, and `export STAGE_DIR STAGE_SHA SOLVE_DIR SOLVE_SHA`. Prefix each with `PROJECT_ROOT PHASE WORKER_WALL_SECONDS` when invoking `scripts/hpc/lawrence_low_band_h100_AP_pnc.sbatch`. Preparation/export use 16 GiB and ten minutes (550-second worker); the bounded direct allocation uses 64 GiB and 25 minutes (1400-second worker). Each allocates two CPUs and runs one numerical thread. These ceilings require actual prepared-operator/index/storage checks and live memory admission, not extrapolation from the historical iterative h100 solve. Select the preparation node for exact cached export. Preserve each phase and failure; no automatic retry or next point follows.
+
+After all transfer hashes agree, replay the new point once and compare against the exact independently accepted h80 result:
+
+```powershell
+.venv/Scripts/python.exe -B tools/replay_lawrence_h100_control_AP_pnc.py --stage RETURNED_STAGE/stage_AP_pnc.json --solve RETURNED_SOLVE/solve_AP_pnc.json --export RETURNED_EXPORT/export_AP_pnc.json --compare-h80
+```
+
+The replay checks original equations, physical nodal-force flux, coherent left-incident power and full P2 fields. The pair retains signed mode/gauge matching and original reference planes. Absolute power and complex increments use 0.01; relative reflection divides by max(abs(R_h100),1e-12) only for reporting. The global in-plane change affects lead interiors and the patterned region together. A finite pair pass is neither continuum convergence nor a weak-reflection error bound. Read the current handoff and `verification/low_band_inplane_AP_pnc.json` before acting; completed phases must be reused.
+
 ## Open JupyterLab
 
 After the bootstrap succeeds, submit the optional notebook job from the same Lawrence project directory. It requests one CPU and 4 GiB for two hours. Use the node assigned to the running job. The server log is private and contains the token generated for this session.
