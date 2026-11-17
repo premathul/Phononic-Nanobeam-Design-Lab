@@ -1,0 +1,837 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "status": "point_and_coherent_left_block_verified_spatial_frequency_unresolved",
+  "scope": "One four-left-incident 0.1 GHz response of the archived 26-hole h80 six-layer 3D device. No new mesh, body assembly or SAFE eigensolve. Separate original-plane comparison with the saved five-channel 1 GHz anchor.",
+  "repository_base_revision": "dba6f150c78d00f3776b8e8943c16a833f4cc57e",
+  "executed_runner_revision": "460746780d29624040495db4e6fabb0d88a20443",
+  "source_files": [
+    {
+      "path": "tools/run_lawrence_low_band_AP_pnc.py",
+      "sha256": "b4272e2c107ccee6c463f7a84b77785dbce1e9f0d541fa4d44039af40476f932",
+      "bytes": 28113
+    },
+    {
+      "path": "scripts/hpc/lawrence_low_band_AP_pnc.sbatch",
+      "sha256": "a5489248796aa9ea9f98bbcbd544b75d8ee4be0ee2c1769210a59655f55f6bea",
+      "bytes": 2085
+    },
+    {
+      "path": "tools/replay_lawrence_device_point_AP_pnc.py",
+      "sha256": "fa5d6d3277ba7418d5d7725e296cfcfebaaec1579761a23a295d148baeb09461",
+      "bytes": 27756
+    },
+    {
+      "path": "tests/test_lawrence_low_band_AP_pnc.py",
+      "sha256": "018fd8dda0b3fef37fa1ecc77a7d70563faa4921b56efbe9e0d1bb6e293c2c42",
+      "bytes": 21356
+    },
+    {
+      "path": "tests/test_replay_lawrence_device_point_AP_pnc.py",
+      "sha256": "2043168feeb9657cc78b9a8f09af316f6aca7ece1e36a090d45869390f8f6f9a",
+      "bytes": 5550
+    }
+  ],
+  "original_evidence": {
+    "body": {
+      "path": "verification/device_thickness_AP_pnc.json",
+      "sha256": "81f1e195956c1986d067fc397ea1836c284d9e645073e032d323772918532f05",
+      "bytes": 26150
+    },
+    "ports": {
+      "path": "verification/port_inventory_AP_pnc.json",
+      "sha256": "d49f6a54848fc05a2bffdeda1141954a567e449ccbf2983b06c69533eae89a56",
+      "bytes": 20549
+    },
+    "anchor": {
+      "path": "verification/imported_frequency_map_AP_pnc.json",
+      "sha256": "26bc92da6451e1af170a75a009cb4e57026be7bac6b93868d6297d0131b7a90b",
+      "bytes": 9224
+    }
+  },
+  "scientific_inputs": {
+    "frequency_hz": 100000000,
+    "displacement_dofs": 616239,
+    "mesh_hash": "1bf38811f140f1c62e9b2cdbc71266dabd78a70c144aae519e77fd481ffccef2",
+    "trace_sha256": "3329f7c51b36d61862ee44edecca35beddc73721e58a616b7685e58b383655be",
+    "body_stage": {
+      "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/runs/thickness-h80-stage-1335309/stage_AP_pnc.json",
+      "sha256": "95c1cfde8d51d77ab74fe9d2c424c1eda0822556a30664cbe581999f97e0ea5f",
+      "bytes": 24617
+    },
+    "accepted_safe_modes": {
+      "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/runs/port-inventory-1335406/modes-100000000_AP_pnc.npz",
+      "sha256": "8e5f8bb414b96b73cbaf82910d78e26a3cfc6d64b166fdc8164a55374638ea84",
+      "bytes": 26939240
+    },
+    "incident_roots": [
+      1948,
+      1916,
+      1940,
+      1873
+    ],
+    "backward_roots": [
+      1949,
+      1917,
+      1941,
+      1874
+    ],
+    "reference_planes_m": [
+      0.0,
+      1.665e-05
+    ],
+    "geometry": {
+      "length_nm": 16650,
+      "width_nm": 1000,
+      "thickness_nm": 200,
+      "pattern": {
+        "csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+        "x_offset_nm": 8325
+      }
+    },
+    "mesh": {
+      "kind": "layered",
+      "element_order": 2,
+      "mesh_size_nm": 80,
+      "port_size_nm": 83.33333333333333,
+      "circle_resolution": 32,
+      "thickness_layers": 6
+    },
+    "material": {
+      "name": "nominal_cubic_ge",
+      "C11_Pa": 128500000000.0,
+      "C12_Pa": 48300000000.0,
+      "C44_Pa": 66800000000.0,
+      "density_kg_m3": 5323,
+      "crystal_rotation": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "temperature_policy": "fixed_property_control",
+      "temperature_K": 4
+    },
+    "original_K_M": {
+      "K": {
+        "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/runs/thickness-h80-stage-1335309/K_AP_pnc.npz",
+        "sha256": "c22bdd553570409bb7b1c89cafae06dc85e471cbfe3481f10f62b50c1f477ca8",
+        "bytes": 565785421
+      },
+      "M": {
+        "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/runs/thickness-h80-stage-1335309/M_AP_pnc.npz",
+        "sha256": "635035878dedbe30342337498e41cf87080809266cc1261803278091eea9adbc",
+        "bytes": 195695173
+      }
+    }
+  },
+  "preparation": {
+    "job_id": 1335473,
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "hostname": "node071.lawrence",
+    "receipt": {
+      "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-stage-1335473/stage_AP_pnc.json",
+      "sha256": "441a6422fee3c9cbab54f458dba6d35b7f8d7af28192c983f95f87cfac7676b3",
+      "bytes": 23290
+    },
+    "gnu_elapsed_seconds": 74.02,
+    "gnu_peak_rss_kib": 3947164,
+    "transfer_manifest": {
+      "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-stage-1335473/SHA256SUMS_AP_pnc.txt",
+      "sha256": "e977e343adbff482e1bb13402b872053608a6f126a0b4ef35769163568113b96",
+      "bytes": 601
+    },
+    "returned_artifacts_verified": [
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-stage-1335473/A_AP_pnc.npz",
+        "sha256": "003ae9555d837fedae44187e7dd2284411239d1717da2452c56d573f986f5d8e",
+        "bytes": 978997757
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-stage-1335473/accounting_AP_pnc.txt",
+        "sha256": "ce34c9b32ee4885b6c6a24ffeb87ed4903f89d448b21ee8e12b31be038261c5e",
+        "bytes": 190
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-stage-1335473/allocation_AP_pnc.txt",
+        "sha256": "941900dac7f9071e83c6ee4ed8ee13f20c29300077bb78d4ee98c84ad3348be9",
+        "bytes": 4015
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-stage-1335473/job_log_AP_pnc.txt",
+        "sha256": "8490360183acab39febd1eada650a9497bc0790ab5450bf84afe17d534454a8d",
+        "bytes": 783
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-stage-1335473/rhs_AP_pnc.npy",
+        "sha256": "837e384301bab7455da84ce706f869b0698c6a9e77ef8d3e110f2cbd7781513e",
+        "bytes": 39439424
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-stage-1335473/stage_AP_pnc.json",
+        "sha256": "441a6422fee3c9cbab54f458dba6d35b7f8d7af28192c983f95f87cfac7676b3",
+        "bytes": 23290
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-stage-1335473/time_AP_pnc.txt",
+        "sha256": "6d570b11eb2699197d9e23a993225b226c619a77589e00372aa9c6dcbef1ffcf",
+        "bytes": 1432
+      }
+    ],
+    "returned_artifact_count": 7,
+    "returned_artifact_bytes": 1018466891
+  },
+  "solve": {
+    "job_id": 1335475,
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "hostname": "himem001.lawrence",
+    "receipt": {
+      "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-solve-1335475/solve_AP_pnc.json",
+      "sha256": "0ec27ae4d52a656ba85029bd2d603ec7ca314e6d70634f69ed0d1e0c5a415b7a",
+      "bytes": 21572
+    },
+    "gnu_elapsed_seconds": 2028.21,
+    "gnu_peak_rss_kib": 35340632,
+    "transfer_manifest": {
+      "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-solve-1335475/SHA256SUMS_AP_pnc.txt",
+      "sha256": "72f1eff16c7c8c1e5fa8c640d1f6b1a79050da20e1817beb4b762d4e76e58f8b",
+      "bytes": 805
+    },
+    "returned_artifacts_verified": [
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-solve-1335475/accepted-000_AP_pnc.npy",
+        "sha256": "f2d85fed5175bba9a4cfc4274fae831ee62052b47d1388a08f7e93d06e1b787f",
+        "bytes": 9859952
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-solve-1335475/accepted-001_AP_pnc.npy",
+        "sha256": "a2e9d36bd63d0bcdd5891ab79db164195040ab027aa1bf9b61330b95fdfe5a4e",
+        "bytes": 9859952
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-solve-1335475/accepted-002_AP_pnc.npy",
+        "sha256": "27d6d0a94814ef5a6786abd12a12795dbf59cc38eaac446c9304cfeb58546083",
+        "bytes": 9859952
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-solve-1335475/accepted-003_AP_pnc.npy",
+        "sha256": "7de3b258820100d84ff0889af67b4b7793bad322c1f84283326c6bf7cc6438ca",
+        "bytes": 9859952
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-solve-1335475/accounting_AP_pnc.txt",
+        "sha256": "93c120fef785d4463c159cad682d6c965bc26d3a63e801d6e8996ed3e8ab9fb0",
+        "bytes": 194
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-solve-1335475/allocation_AP_pnc.txt",
+        "sha256": "9f964702af25983accd2e0820c6d2c17172e25713ffb7d175a0d96444b843cc9",
+        "bytes": 3894
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-solve-1335475/job_log_AP_pnc.txt",
+        "sha256": "90c42c83e9eea5b44c544f47beca3f1f7a53d15b318b87aee23fd8f36c821914",
+        "bytes": 783
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-solve-1335475/solve_AP_pnc.json",
+        "sha256": "0ec27ae4d52a656ba85029bd2d603ec7ca314e6d70634f69ed0d1e0c5a415b7a",
+        "bytes": 21572
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-solve-1335475/time_AP_pnc.txt",
+        "sha256": "948878f85fec23ad3dc3594b41e3ca3d7b9efab9f8e53ee6897cef344fe5a1a5",
+        "bytes": 1298
+      }
+    ],
+    "returned_artifact_count": 9,
+    "returned_artifact_bytes": 39467549
+  },
+  "export": {
+    "job_id": 1335483,
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "hostname": "node071.lawrence",
+    "receipt": {
+      "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-export-1335483/export_AP_pnc.json",
+      "sha256": "f1899ee6918b5af8407849dff3b8cffe6021ed939a9fea658f1011195b297630",
+      "bytes": 14544
+    },
+    "gnu_elapsed_seconds": 39.24,
+    "gnu_peak_rss_kib": 3961708,
+    "transfer_manifest": {
+      "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-export-1335483/SHA256SUMS_AP_pnc.txt",
+      "sha256": "0d975446ee0b37dba0f6fbd50fc53cdde7cd16e883b64fdb74d6cb59f141a4dc",
+      "bytes": 1735
+    },
+    "returned_artifacts_verified": [
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-export-1335483/accounting_AP_pnc.txt",
+        "sha256": "065d7c86e0d75ecd9743ad5ade64ad470ee8a17b8ebc8323d5dd34c96cbc8395",
+        "bytes": 190
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-export-1335483/allocation_AP_pnc.txt",
+        "sha256": "7dc5611ea5f61fda518f747290afdd9eb0e752eb90b3d0cebd919dbe935ed196",
+        "bytes": 4055
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-export-1335483/export_AP_pnc.json",
+        "sha256": "f1899ee6918b5af8407849dff3b8cffe6021ed939a9fea658f1011195b297630",
+        "bytes": 14544
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-export-1335483/historical_26hole_layered_h80_ny12_z6-bb55473510a2/configuration_AP_pnc.json",
+        "sha256": "aa748b5e2021b6959da2dfa269b989ab78562d2659ed3b39508cc8e5b0a7d7db",
+        "bytes": 1209
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-export-1335483/historical_26hole_layered_h80_ny12_z6-bb55473510a2/hole_pattern_AP_pnc.json",
+        "sha256": "8bad9c22c1a4f5df9e31615f8107c89a3fb4f7daa70df8aecf3dd624d11eabe9",
+        "bytes": 3247
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-export-1335483/historical_26hole_layered_h80_ny12_z6-bb55473510a2/port_modes_AP_pnc.csv",
+        "sha256": "2e553f5cdfd5c5e385df4cf4634c4e11b448eae269903d53f424bad755436686",
+        "bytes": 165728
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-export-1335483/historical_26hole_layered_h80_ny12_z6-bb55473510a2/report_AP_pnc.html",
+        "sha256": "5710f3bb6c18454287c65a16e69db27c7dffca67ce1944d1f0e8c2c4e1910d62",
+        "bytes": 5027427
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-export-1335483/historical_26hole_layered_h80_ny12_z6-bb55473510a2/scattering_AP_pnc.csv",
+        "sha256": "6a9bd6465247c6e39d1c3ee2abb801a1e1c9c1047ca7dce3cb7afe25bcbc14e5",
+        "bytes": 766
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-export-1335483/historical_26hole_layered_h80_ny12_z6-bb55473510a2/scattering_channels_AP_pnc.csv",
+        "sha256": "bbad124d7221ba92f4b1a5c58c2d183477fed41410e222e0b4c7c2a36081bc48",
+        "bytes": 3036
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-export-1335483/historical_26hole_layered_h80_ny12_z6-bb55473510a2/selected_fields_AP_pnc.npz",
+        "sha256": "8a42afc0332fa87f5aa5fa9fdf447a50150305068286b5d21d66be48afa0dce1",
+        "bytes": 76249636
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-export-1335483/historical_26hole_layered_h80_ny12_z6-bb55473510a2/selected_vertex_shapes_AP_pnc.vtu",
+        "sha256": "31dcb4e54bbe25eaa2482f8912a3541532118b1cdc99a923f18432cf8232ea6d",
+        "bytes": 9519866
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-export-1335483/historical_26hole_layered_h80_ny12_z6-bb55473510a2/summary_AP_pnc.json",
+        "sha256": "6f972ea9640984e71bb5a54d2eb49350192b6db482e0f9997ffd1c6a4fe02ba5",
+        "bytes": 51080
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-export-1335483/job_log_AP_pnc.txt",
+        "sha256": "58c92127cff844da38da4628f1500d7cceb43ff59afb09cf2c6434a41176afbb",
+        "bytes": 846
+      },
+      {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-export-1335483/time_AP_pnc.txt",
+        "sha256": "bb051dada3870aa158ec9b3d967f2b057f7ecc85f810e58a7cca255ef8da30f6",
+        "bytes": 1486
+      }
+    ],
+    "returned_artifact_count": 14,
+    "returned_artifact_bytes": 91043116
+  },
+  "factor_index_exposure": {
+    "csc_index_dtype": "int32",
+    "csc_pointer_dtype": "int32",
+    "signed_index_maximum": 2147483647,
+    "operator_nonzeros": 48826577,
+    "operator_graph_sha256": "945f7770dcc3c649ed3ab6465e47781e7b9519e908684a87841c60d6d4d6d558",
+    "initial_factor_slots_per_store": 1464797310,
+    "initial_factor_slots_headroom": 682686337,
+    "estimated_initial_factor_incremental_bytes": 61086756312,
+    "required_job_headroom_at_factor_bytes": 69676690904,
+    "required_node_available_at_factor_bytes": 61506186712,
+    "matches_archived_1_ghz_csc_graph": true,
+    "archived_operator_nonzeros": 48826577,
+    "archived_factor_job_id": "1335321",
+    "archived_aggregate_factor_nonzeros": 1846932604,
+    "archived_aggregate_report_headroom": 300551043,
+    "archived_aggregate_report_headroom_fraction": 0.13995498565023531,
+    "numeric_pivoting_may_change_fill": true,
+    "new_factor_index_capacity_established": false,
+    "interface_source": "https://github.com/scipy/scipy/blob/v1.18.1/scipy/sparse/linalg/_dsolve/linsolve.py#L394"
+  },
+  "actual_factor": {
+    "permc_spec": "COLAMD",
+    "factor_seconds": 1978.0047768875957,
+    "factor_nonzeros": 1846932665
+  },
+  "factor_admission": {
+    "slurm_node_quota_bytes": 137438953472,
+    "estimated_incremental_bytes": 61086756312,
+    "job_headroom_required_bytes": 69676690904,
+    "node_available_required_bytes": 61506186712,
+    "before_factor": {
+      "node_available_bytes": 1597403881472,
+      "job_headroom_bytes": 135240110080,
+      "worker_rss_bytes": 1134399488,
+      "cgroups": [
+        {
+          "path": "/sys/fs/cgroup/memory/slurm/uid_735814150/job_1335475/step_batch/task_0",
+          "limit_bytes": null,
+          "effective_limit_bytes": 137438953472,
+          "current_bytes": 2198020096,
+          "peak": "2207911936",
+          "events": "0"
+        },
+        {
+          "path": "/sys/fs/cgroup/memory/slurm/uid_735814150/job_1335475/step_batch",
+          "limit_bytes": 137438953472,
+          "effective_limit_bytes": 137438953472,
+          "current_bytes": 2198372352,
+          "peak": "2208264192",
+          "events": "0"
+        },
+        {
+          "path": "/sys/fs/cgroup/memory/slurm/uid_735814150/job_1335475",
+          "limit_bytes": 137438953472,
+          "effective_limit_bytes": 137438953472,
+          "current_bytes": 2198843392,
+          "peak": "2208735232",
+          "events": "0"
+        }
+      ]
+    },
+    "admitted": true
+  },
+  "job_cgroup_peak_bytes": 37321834496,
+  "initial_startup_failure": {
+    "job_id": 1335471,
+    "state": "FAILED",
+    "exit_code": "1:0",
+    "numerical_work_performed": false,
+    "reason": "The inherited thickness entrypoint pinned the historical uniform helper; the accepted h60 extension had a different source identity. The new runner now owns a strictly pinned current execution record without changing archived helpers, receipts, numerical kernels or acceptance gates.",
+    "retained_manifest": {
+      "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-stage-1335471/SHA256SUMS_AP_pnc.txt",
+      "sha256": "d06cbab071a4cb772bd05a0eabe24908c4e553a3335234f58197f8a34296e536",
+      "bytes": 542
+    },
+    "retained_error": {
+      "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-stage-1335471/job_log_AP_pnc.txt",
+      "sha256": "172ef3d9674152f6d0b6d3d6a5ea8ab24d96b80d04e7f1db88cdcf7ee1686dbc",
+      "bytes": 1073
+    }
+  },
+  "independent_replay": {
+    "record": {
+      "path": "results/runs/low_band_device_AP_pnc/local_checks/independent_replay_coherent_1335483_AP_pnc.json",
+      "sha256": "cb030385298fdbacd8ee84be40527a4a443d6060a3bbee191da39ce395131a2c",
+      "bytes": 9046
+    },
+    "source": {
+      "path": "tools/replay_lawrence_device_point_AP_pnc.py",
+      "sha256": "fa5d6d3277ba7418d5d7725e296cfcfebaaec1579761a23a295d148baeb09461",
+      "bytes": 27756
+    },
+    "initial_per_drive_record_preserved": {
+      "path": "results/runs/low_band_device_AP_pnc/local_checks/independent_replay_1335483_AP_pnc.json",
+      "sha256": "2e80fb13489f3d76945513132b45ab751955e9ecec36a5d0b822189df9a214ed",
+      "bytes": 5537
+    },
+    "actual_worker_sampled_peak_working_set_bytes": 1541320704,
+    "actual_worker_sampled_peak_private_commit_bytes": 1487314944,
+    "result": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "frequency_hz": 100000000,
+      "status": "point_verified_within_saved_discretization",
+      "reference_planes_m": [
+        0.0,
+        1.665e-05
+      ],
+      "problem_dofs": 616239,
+      "incident_roots": [
+        1948,
+        1916,
+        1940,
+        1873
+      ],
+      "left_outgoing_roots": [
+        1949,
+        1917,
+        1941,
+        1874
+      ],
+      "stage_receipt_sha256": "441a6422fee3c9cbab54f458dba6d35b7f8d7af28192c983f95f87cfac7676b3",
+      "solve_receipt_sha256": "0ec27ae4d52a656ba85029bd2d603ec7ca314e6d70634f69ed0d1e0c5a415b7a",
+      "export_receipt_sha256": "f1899ee6918b5af8407849dff3b8cffe6021ed939a9fea658f1011195b297630",
+      "public_summary_sha256": "6f972ea9640984e71bb5a54d2eb49350192b6db482e0f9997ffd1c6a4fe02ba5",
+      "factor_nonzeros_reported": 1846932665,
+      "matrix_infinity_norm": 246663.8997613725,
+      "linux_superlu_library_sha256": "3312d4b53c769c7ab911a2fce4a74a8f8c1ec7eff1d96199ae87deda3f4006ef",
+      "relative_l2_target": 1e-10,
+      "relative_l2_limit": 1e-09,
+      "backward_limit": 1e-09,
+      "power_limit": 0.01,
+      "maximum_power_errors": {
+        "modal_balance": 3.0753177782116836e-13,
+        "direct_balance": 1.2578826869003024e-13,
+        "net_outward": 9.892087149410145e-14,
+        "modal_vs_direct_reflection": 4.057865155004947e-14,
+        "modal_vs_direct_transmission": 3.3728575488112256e-13
+      },
+      "coherent_left_incidence": {
+        "scope": "Left-incident propagating reflection and transmission in the original SAFE basis",
+        "incident_roots": [
+          1948,
+          1916,
+          1940,
+          1873
+        ],
+        "reflected_roots": [
+          1949,
+          1917,
+          1941,
+          1874
+        ],
+        "transmitted_roots": [
+          1948,
+          1916,
+          1940,
+          1873
+        ],
+        "flux_gram_entry_limit_w": 1e-07,
+        "flux_gram_errors": {
+          "incident": {
+            "maximum_diagonal_error_w": 2.220446049250313e-16,
+            "maximum_off_diagonal_magnitude_w": 6.609607544489927e-11
+          },
+          "reflected": {
+            "maximum_diagonal_error_w": 2.220446049250313e-16,
+            "maximum_off_diagonal_magnitude_w": 6.609607544489927e-11
+          },
+          "transmitted": {
+            "maximum_diagonal_error_w": 2.220446049250313e-16,
+            "maximum_off_diagonal_magnitude_w": 6.609607544489927e-11
+          }
+        },
+        "flux_gram_cross_direction_maximum_w": 3.517001343349797e-11,
+        "defect_matrix_real": [
+          [
+            -4.463096558993129e-14,
+            -9.51101424739631e-14,
+            -4.750272725046617e-13,
+            -4.755878646893965e-12
+          ],
+          [
+            -9.51101424739631e-14,
+            -1.8463008899516353e-13,
+            8.175097282483754e-11,
+            4.9517626421891335e-11
+          ],
+          [
+            -4.750272725046617e-13,
+            8.175097282483754e-11,
+            2.184918912462308e-13,
+            -4.3176822908786155e-12
+          ],
+          [
+            -4.755878646893965e-12,
+            4.9517626421891335e-11,
+            -4.3176822908786155e-12,
+            -3.0753177782116836e-13
+          ]
+        ],
+        "defect_matrix_imag": [
+          [
+            0.0,
+            7.845438681939478e-14,
+            2.1405668640222375e-12,
+            1.3756635170767885e-12
+          ],
+          [
+            -7.845438681939478e-14,
+            0.0,
+            -9.961243431527315e-13,
+            -2.839625525135288e-11
+          ],
+          [
+            -2.1405668640222375e-12,
+            9.961243431527315e-13,
+            0.0,
+            -4.179043121797565e-12
+          ],
+          [
+            -1.3756635170767885e-12,
+            2.839625525135288e-11,
+            4.179043121797565e-12,
+            0.0
+          ]
+        ],
+        "defect_eigenvalues": [
+          -1.0082498134558968e-10,
+          -3.6017869380529117e-12,
+          5.052977940035596e-12,
+          9.905548940244701e-11
+        ],
+        "coherent_coefficient_power_defect_spectral_norm": 1.0082498134558968e-10,
+        "coherent_power_limit": 0.01,
+        "direct_superposition": {
+          "incident_coefficients_real": [
+            0.15811388300841897,
+            0.31622776601683794,
+            0.4743416490252569,
+            0.6324555320336759
+          ],
+          "incident_coefficients_imag": [
+            0.15811388300841897,
+            -0.31622776601683794,
+            0.15811388300841897,
+            -0.31622776601683794
+          ],
+          "incident_coefficient_norm_squared": 1.0,
+          "incident_power_w": 1.0000000000216733,
+          "modal_reflection": 0.00430879398020589,
+          "modal_transmission": 0.9956912060676177,
+          "direct_reflection": 0.004308793980126004,
+          "direct_transmission": 0.9956912060191973,
+          "net_outward_power_ratio": 4.236611061877776e-13,
+          "power_errors": {
+            "modal_balance": 4.7823633941845856e-11,
+            "direct_balance": 6.767919558114954e-13,
+            "net_outward": 4.236611061877776e-13,
+            "modal_vs_direct_reflection": 7.988661815394593e-14,
+            "modal_vs_direct_transmission": 4.842048983988434e-11
+          }
+        }
+      },
+      "channels": [
+        {
+          "incident_root": 1948,
+          "reverse_root": 1949,
+          "relative_residual": 1.889476366443404e-11,
+          "backward_residual": 7.887354170670782e-16,
+          "independent_rhs_relative_error": 4.9161707203641394e-12,
+          "independent_body_boundary_relative_residual": 1.935380300996055e-11,
+          "reflection": 0.01984481225812624,
+          "transmission": 0.9801551877418292,
+          "reflection_flux": 0.019844812258141487,
+          "transmission_flux": 0.9801551877418787,
+          "net_outward_power_ratio": 3.885780586188048e-15,
+          "converted_reflection": 2.63820632007139e-11,
+          "converted_transmission": 6.843026145730846e-11
+        },
+        {
+          "incident_root": 1916,
+          "reverse_root": 1917,
+          "relative_residual": 2.8822702936817244e-11,
+          "backward_residual": 9.01931139932749e-16,
+          "independent_rhs_relative_error": 3.582908172047032e-12,
+          "independent_body_boundary_relative_residual": 2.897517117075403e-11,
+          "reflection": 0.01596042758938111,
+          "transmission": 0.9840395724104344,
+          "reflection_flux": 0.015960427589421688,
+          "transmission_flux": 0.9840395724104525,
+          "net_outward_power_ratio": -9.892087149410145e-14,
+          "converted_reflection": 6.979469710510777e-10,
+          "converted_transmission": 1.847074715399799e-10
+        },
+        {
+          "incident_root": 1940,
+          "reverse_root": 1941,
+          "relative_residual": 1.5083123035466032e-11,
+          "backward_residual": 6.736519353834502e-16,
+          "independent_rhs_relative_error": 6.996632878879747e-12,
+          "independent_body_boundary_relative_residual": 1.5240446402120807e-11,
+          "reflection": 0.00019121316319560793,
+          "transmission": 0.9998087868370228,
+          "reflection_flux": 0.0001912131631995041,
+          "transmission_flux": 0.999808786836827,
+          "net_outward_power_ratio": 1.7097434579227414e-14,
+          "converted_reflection": 1.2912902653617123e-11,
+          "converted_transmission": 3.350941746305125e-11
+        },
+        {
+          "incident_root": 1873,
+          "reverse_root": 1874,
+          "relative_residual": 1.9561958509826054e-11,
+          "backward_residual": 1.034516381965501e-15,
+          "independent_rhs_relative_error": 2.503567908904548e-12,
+          "independent_body_boundary_relative_residual": 1.9609497756222505e-11,
+          "reflection": 0.00015078332426663693,
+          "transmission": 0.9998492166754258,
+          "reflection_flux": 0.00015078332426584495,
+          "transmission_flux": 0.9998492166757631,
+          "net_outward_power_ratio": 1.7763568394002505e-14,
+          "converted_reflection": 6.754649434454005e-10,
+          "converted_transmission": 2.21457630011912e-10
+        }
+      ],
+      "representative_field": {
+        "selection": "largest reflected power in this point",
+        "column": 0,
+        "incident_root": 1948,
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-export-1335483/historical_26hole_layered_h80_ny12_z6-bb55473510a2/selected_fields_AP_pnc.npz",
+        "field_sha256": "8a42afc0332fa87f5aa5fa9fdf447a50150305068286b5d21d66be48afa0dce1",
+        "mesh_sha256": "e9c17e3fe0e2effd1c898d29701f393572d32bfbe7331464b35604940a62a918",
+        "accepted_vector_sha256": "f2d85fed5175bba9a4cfc4274fae831ee62052b47d1388a08f7e93d06e1b787f",
+        "units": "m per square root watt",
+        "basis_order": 2,
+        "visualization_vtu": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-export-1335483/historical_26hole_layered_h80_ny12_z6-bb55473510a2/selected_vertex_shapes_AP_pnc.vtu"
+      },
+      "platform": "Windows-11-10.0.26200-SP0",
+      "python": "3.12.14",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "BLIS_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1"
+      },
+      "available_memory_bytes_before_replay": 2454429696,
+      "required_memory_bytes_before_replay": 1515868669,
+      "elapsed_seconds": 5.719000000040978,
+      "spatial_convergence_established": false,
+      "frequency_convergence_established": false
+    }
+  },
+  "review_response": {
+    "url": "https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/37#issuecomment-6952952018",
+    "author": "premathul",
+    "created_at": "2026-11-17T15:44:30Z",
+    "implemented": [
+      "Full signed propagating Gram normalization, same-direction and cross-direction checks in the retained basis.",
+      "Original-basis D = R^H R + T^H T - I, complete complex matrix, eigenvalues and spectral norm at the unchanged 0.01 power limit.",
+      "Unequal complex superposition of saved displacement and independently reconstructed nodal-force columns, with actual incoming power and all five physical power checks.",
+      "Two-channel counterexample whose unit-norm but nonorthogonal columns pass diagonal powers and fail D at spectral norm 1.0; valid complex mixing, bad-force and bad-cross-Gram fixtures."
+    ],
+    "limits": "Only four saved left-incident columns. The approximately 1e-10 modal defect is comparable to measured basis departures; no whitening, extra physical precision, full two-sided unitarity, reciprocity or spatial-convergence claim."
+  },
+  "validation": {
+    "focused_runner_tests": 5,
+    "focused_independent_replay_tests": 5,
+    "independent_scoped_source_review": "passed",
+    "integrated_windows": {
+      "total": 186,
+      "passed": 185,
+      "skipped": 1,
+      "skip_reason": "Windows symlink privilege",
+      "elapsed_seconds": 53.818,
+      "log": {
+        "path": "results/runs/low_band_device_AP_pnc/local_checks/coherent_tests_AP_pnc.log",
+        "sha256": "7bdbec61dd93ac2c6f94fd174bf1f8d5abacacf50a7426cbf10331fa0d15f0a3",
+        "bytes": 34712
+      }
+    },
+    "prior_corrected_runner_ci": {
+      "run_id": 44113426128,
+      "status": "success",
+      "suite_total": 184,
+      "suite_elapsed_seconds": 33.273,
+      "scope": "Source suite, physical benchmarks and preserved-result checks on 4607467; final integrated head remains the merge gate."
+    }
+  },
+  "unresolved_limits": {
+    "spatial_convergence_established": false,
+    "frequency_convergence_established": false,
+    "cross_frequency_mode_correspondence_established": false,
+    "full_two_sided_scattering_checked": false,
+    "reciprocity_checked": false,
+    "experimental_validation": false,
+    "material": "Nominal fixed-property Ge; not specimen-calibrated mK/4 K data.",
+    "retained_1ghz_complex_changes": {
+      "h100_h80": 0.039927184867,
+      "h80_h60": 0.026866990816,
+      "h80_z4_z6": 0.016706257509
+    },
+    "complex_change_limit": 0.01,
+    "statement": "All three 1 GHz spatial comparisons remain failed; none certifies 0.1 GHz. Tiny converted powers remain numerical diagnostics without a resolved physical floor. Two isolated frequencies do not establish an interval, cutoff, continuous branch, gap, resonance or Q."
+  },
+  "active_hpc_jobs": [],
+  "response_summary": {
+    "path": "results/runs/low_band_device_AP_pnc/response_summary_AP_pnc.md",
+    "sha256": "9481863533176c1fee4646ab8972dbcd92d46e0f5a6e76fc5191025477f5a85d",
+    "bytes": 7429
+  },
+  "saved_1ghz_anchor": {
+    "frequency_hz": 1000000000,
+    "summary": {
+      "path": "results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc/thickness-h80-export-1335341/historical_26hole_layered_h80_ny12_z6-585ccac1d4f2/summary_AP_pnc.json",
+      "sha256": "040a219f54446219b6a610cf08382ff7e93a6dcb01f31f3be810977651301c4e",
+      "bytes": 59069
+    },
+    "complex_coefficients": {
+      "path": "results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc/thickness-h80-export-1335341/historical_26hole_layered_h80_ny12_z6-585ccac1d4f2/scattering_channels_AP_pnc.csv",
+      "sha256": "bca65a396d45a15c0f3b8ba58a5d85e9add2b1a7b24b3ec111bbebb0310d6014",
+      "bytes": 4670
+    },
+    "channels": [
+      {
+        "incident_root": 1940,
+        "reverse_root": 1941,
+        "reflection": 0.002916720366016116,
+        "converted_reflection": 7.865409710537996e-09,
+        "transmission": 0.9970832796339524,
+        "converted_transmission": 7.657619193957599e-09
+      },
+      {
+        "incident_root": 1877,
+        "reverse_root": 1878,
+        "reflection": 0.0013941418050240583,
+        "converted_reflection": 0.0010807682236590754,
+        "transmission": 0.9986058581950351,
+        "converted_transmission": 7.484674361702e-06
+      },
+      {
+        "incident_root": 1867,
+        "reverse_root": 1868,
+        "reflection": 0.044529404406506164,
+        "converted_reflection": 5.999956568996667e-09,
+        "transmission": 0.9554705955934778,
+        "converted_transmission": 4.488249776433918e-08
+      },
+      {
+        "incident_root": 1855,
+        "reverse_root": 1856,
+        "reflection": 0.007561846123301554,
+        "converted_reflection": 3.0991574351810655e-08,
+        "transmission": 0.9924381538767205,
+        "converted_transmission": 2.334664054368253e-08
+      },
+      {
+        "incident_root": 1837,
+        "reverse_root": 1838,
+        "reflection": 0.002715639528946707,
+        "converted_reflection": 0.0010807800752418203,
+        "transmission": 0.9972843604709828,
+        "converted_transmission": 7.602590176352907e-06
+      }
+    ],
+    "comparison": "Separate frequency-local inventories; no cross-frequency channel matching or coefficient difference is claimed."
+  },
+  "next_bounded_question": {
+    "question": "Does the separation of the two stronger and two weaker 0.1 GHz reflected powers persist under the archived h80 four/six-layer discretization control?",
+    "observable": "Signed-channel-matched per-drive reflection/transmission and original-plane complex coefficients at 0.1 GHz.",
+    "held_fixed": "Physical 200 nm thickness, original h80 planar footprint/hole polygons, nominal Ge, 0/16.65 micrometre end planes and 0.1 GHz.",
+    "reuse": "Accepted z6 response; saved z4 body mesh/K/M and its frequency-independent SAFE section. A separately accepted compatible 0.1 GHz z4 port basis is needed.",
+    "acceptance": "Preserve all original residual and physical-power gates and the 0.01 power/complex comparison criteria. Report rank/separation and any ambiguous matching explicitly. This joint body/port z control cannot establish continuum convergence.",
+    "admission": "Review saved z4 inputs and exact prepared operator before selecting a single bounded resource allocation from measured prior z4 work and live per-job/aggregate resources.",
+    "stop_condition": "One independently verified finite control or one retained resource/numerical failure; no automatic retry or sweep.",
+    "new_job_submitted": false
+  }
+}

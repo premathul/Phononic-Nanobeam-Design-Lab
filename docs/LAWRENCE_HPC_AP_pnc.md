@@ -154,6 +154,8 @@ Completed job 1335406 took 69.40 s with 486172 KiB peak process RSS. Independent
 
 ## Bounded 0.1 GHz device point
 
+This point is complete: stage `1335473`, solve `1335475` and exact export `1335483` are accepted and retained. Read [the handoff](AI_HANDOFF_AP_pnc.md) and [portable evidence](../verification/low_band_device_AP_pnc.json); the commands below reproduce the workflow and are not a request to repeat it. Root's current-chat SSH/SFTP sessions are recorded in the handoff.
+
 The selected low-band comparison uses the archived h80 six-layer device, physical 200 nm thickness and original 0/16.65 micrometre end planes. Its observable is the per-incident transmission, reflection and outgoing-channel conversion at 0.1 GHz, presented separately from the accepted five-channel 1 GHz anchor. `tools/run_lawrence_low_band_AP_pnc.py` reuses the exact mesh, K/M, trace maps and accepted four-channel 0.1 GHz SAFE modes. It prepares only new frequency-specific equations. Do not run mesh generation, body assembly or a SAFE eigensolve for this point.
 
 Check the handoff for ownership and existing receipts first. Root alone transfers files and submits jobs. Refresh the queue, free storage and per-job/aggregate CPU and memory admission before submission. The stage/export ceiling is 16 GiB, two allocated CPUs, one numerical thread and ten minutes. The possible single solve ceiling is 128 GiB and sixty minutes, with a 3450-second worker budget. These ceilings are bounded requests, not statements that a phase has run or a memory guarantee. Retain a failed resource/numerical attempt and stop; no automatic retry or allocation escalation is authorized by this workflow.
@@ -194,7 +196,7 @@ sbatch --parsable --nodelist="$stage_host" "$batch" "$project" export 550 \
     "$stage" "$stage_sha" "$solve" "$solve_sha"
 ```
 
-Verify transfer hashes and independently replay the original equations and physical nodal-force flux. Keep the returned phase directories together under the local low-band archive so the replay can resolve their retained links. The independent tool loads A, K and M sequentially, validates all 32 outgoing complex coefficients and the full P2 field mapping, and prints its evidence as JSON:
+Verify transfer hashes and independently replay the original equations and physical nodal-force flux. Keep the returned phase directories together under the local low-band archive so the replay can resolve their retained links. The independent tool loads A, K and M sequentially, validates all 32 outgoing complex coefficients and the full P2 field mapping. It also checks the complete signed propagating flux Gram, retains the original-basis left-incident defect R†R + T†T − I and its spectral norm, and independently checks one unequal complex superposition of displacement and recovered nodal-force columns. The 1e-7 W basis-entry gate is separate from the unchanged 0.01 physical-power/coherent gate. Results cover only the saved left-incident block, with measured basis accuracy stated; they do not establish full two-sided unitarity or reciprocity. The tool prints its evidence as JSON:
 
 ```powershell
 .venv/Scripts/python.exe -B tools/replay_lawrence_device_point_AP_pnc.py --stage RETURNED_STAGE/stage_AP_pnc.json --solve RETURNED_SOLVE/solve_AP_pnc.json --export RETURNED_EXPORT/export_AP_pnc.json

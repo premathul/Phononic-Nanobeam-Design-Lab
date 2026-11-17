@@ -50,6 +50,45 @@ class DevicePointReplayTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "physical-power checks failed"):
             replay.check_power(*powers)
 
+    def test_unit_column_powers_can_hide_a_coherent_defect(self):
+        identity = np.eye(2)
+        reflection = np.zeros((2, 2))
+        transmission = np.array([[1, 1], [0, 0]])
+        modal_t = np.sum(abs(transmission) ** 2, axis=0)
+        zeros, ones = np.zeros(2), np.ones(2)
+        np.testing.assert_array_equal(replay.check_power(ones, zeros, modal_t, zeros, modal_t, zeros), np.zeros(5))
+        incident = identity, -1j * identity
+        reflected_basis = identity, 1j * identity
+        with patch.multiple(replay, INCIDENT=(0, 1), RETURNING=(2, 3), OMEGA=2.0):
+            with self.assertRaisesRegex(ValueError, r"coherent power defect exceeds.*1\.0"):
+                replay.check_coherent_power(reflection, transmission, incident, reflected_basis,
+                                            incident, (transmission, 1j * transmission))
+
+    def test_complex_superposition_replays_nodal_flux_and_gram(self):
+        identity = np.eye(2)
+        reflection = np.zeros((2, 2))
+        transmission = np.array([[1.0, 1j], [1j, 1.0]]) / np.sqrt(2)
+        incident = identity, -1j * identity
+        reflected_basis = identity, 1j * identity
+        transmitted_field = transmission, 1j * transmission
+        with patch.multiple(replay, INCIDENT=(0, 1), RETURNING=(2, 3), OMEGA=2.0):
+            result = replay.check_coherent_power(reflection, transmission, incident, reflected_basis,
+                                                incident, transmitted_field)
+            self.assertLess(result["coherent_coefficient_power_defect_spectral_norm"], 1e-15)
+            self.assertEqual(result["flux_gram_cross_direction_maximum_w"], 0.0)
+            superposition = result["direct_superposition"]
+            self.assertNotEqual(*superposition["incident_coefficients_real"])
+            self.assertNotEqual(*superposition["incident_coefficients_imag"])
+            for key in ("incident_coefficient_norm_squared", "incident_power_w", "modal_transmission", "direct_transmission"):
+                self.assertAlmostEqual(superposition[key], 1.0)
+            self.assertLess(max(superposition["power_errors"].values()), 1e-15)
+            with self.assertRaisesRegex(ValueError, "cross-direction block"):
+                replay.check_coherent_power(reflection, transmission, incident, (identity, (1j + 0.01) * identity),
+                                            incident, transmitted_field)
+            with self.assertRaisesRegex(ValueError, "physical-power checks failed"):
+                replay.check_coherent_power(reflection, transmission, incident, reflected_basis,
+                                            incident, (transmission, 0.9j * transmission))
+
 
 if __name__ == "__main__":
     unittest.main()

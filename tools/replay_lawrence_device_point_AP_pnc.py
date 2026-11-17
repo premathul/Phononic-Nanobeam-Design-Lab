@@ -35,6 +35,9 @@ PLANES = (0.0, 16.65e-6)
 INCIDENT = (1948, 1916, 1940, 1873)
 RETURNING = (1949, 1917, 1941, 1874)
 TARGET, RESIDUAL, POWER = 1e-10, 1e-9, 0.01
+FLUX_GRAM_LIMIT_W = 1e-7
+POWER_CHECKS = ("modal_balance", "direct_balance", "net_outward",
+                "modal_vs_direct_reflection", "modal_vs_direct_transmission")
 
 
 def require(condition, message):
@@ -96,11 +99,76 @@ def work_power(displacement, outward_force, omega):
 
 
 def check_power(incident_power, modal_r, modal_t, direct_r, direct_t, net):
-    require(np.allclose(incident_power, 1.0, rtol=0, atol=1e-7), "Incident normalization is not +1 W inward.")
+    require(np.allclose(incident_power, 1.0, rtol=0, atol=FLUX_GRAM_LIMIT_W), "Incident normalization is not +1 W inward.")
     discrepancies = np.stack((1 - modal_r - modal_t, 1 - direct_r - direct_t, net,
                               modal_r - direct_r, modal_t - direct_t))
     require(np.all(abs(discrepancies) < POWER), "At least one of the five physical-power checks failed.")
     return np.max(abs(discrepancies), axis=1)
+
+
+def work_gram(displacement, force):
+    """Hermitian flux form for forces with a common normal and exp(-i omega t)."""
+    velocity = -1j * OMEGA * displacement
+    work = velocity.conj().T @ force
+    return -0.25 * (work + work.conj().T)
+
+
+def check_coherent_power(reflection, transmission, incident, reflected_basis, left_total, right_total):
+    """Check left-incident columns in their archived propagating basis."""
+    u_in, f_in = incident
+    size = reflection.shape[1]
+    identity = np.eye(size)
+    u_reflected, f_reflected = reflected_basis
+    # Both supplied left-side force blocks use the -x normal. Use +x for the
+    # signed Gram to retain the cross terms of both propagating directions.
+    signed_gram = work_gram(np.column_stack((u_in, u_reflected)), -np.column_stack((f_in, f_reflected)))
+    incoming_gram = signed_gram[:size, :size]
+    grams = {"incident": incoming_gram, "reflected": -signed_gram[size:, size:], "transmitted": incoming_gram}
+    gram_errors = {}
+    for name, gram in grams.items():
+        error = gram - identity
+        diagonal = np.diag(error)
+        diagonal_error = float(np.max(abs(diagonal)))
+        off_diagonal_error = float(np.max(abs(error - np.diag(diagonal))))
+        require(max(diagonal_error, off_diagonal_error) <= FLUX_GRAM_LIMIT_W,
+                f"The {name} propagating flux Gram differs from the unit-power basis.")
+        gram_errors[name] = {"maximum_diagonal_error_w": diagonal_error,
+                             "maximum_off_diagonal_magnitude_w": off_diagonal_error}
+    cross_error = float(np.max(abs(signed_gram[:size, size:])))
+    require(cross_error <= FLUX_GRAM_LIMIT_W, "The signed propagating flux Gram has a nonzero cross-direction block.")
+
+    defect = reflection.conj().T @ reflection + transmission.conj().T @ transmission - identity
+    eigenvalues = np.linalg.eigvalsh(defect)
+    spectral_norm = float(np.max(abs(eigenvalues)))
+    require(spectral_norm < POWER, f"The left-incident coherent power defect exceeds the {POWER} gate: {spectral_norm}.")
+
+    order = np.arange(1, size + 1)
+    weights = order + 1j * np.where(order % 2, 1, -2)
+    weights /= np.linalg.norm(weights)
+    u_incident, f_incident = u_in @ weights, f_in @ weights
+    u_left, f_left = (columns @ weights for columns in left_total)
+    u_right, f_right = (columns @ weights for columns in right_total)
+    incident_power = -work_power(u_incident, f_incident, OMEGA)
+    require(abs(incident_power - 1.0) <= FLUX_GRAM_LIMIT_W, "Coherent incident normalization is not +1 W inward.")
+    direct_r = work_power(u_left - u_incident, f_left - f_incident, OMEGA) / incident_power
+    direct_t = work_power(u_right, f_right, OMEGA) / incident_power
+    net = (work_power(u_left, f_left, OMEGA) + work_power(u_right, f_right, OMEGA)) / incident_power
+    modal_r, modal_t = (np.linalg.norm(block @ weights) ** 2 for block in (reflection, transmission))
+    values = (incident_power, modal_r, modal_t, direct_r, direct_t, net)
+    errors = check_power(*(np.atleast_1d(value) for value in values))
+    return {"scope": "Left-incident propagating reflection and transmission in the original SAFE basis",
+            "incident_roots": INCIDENT, "reflected_roots": RETURNING, "transmitted_roots": INCIDENT,
+            "flux_gram_entry_limit_w": FLUX_GRAM_LIMIT_W, "flux_gram_errors": gram_errors,
+            "flux_gram_cross_direction_maximum_w": cross_error,
+            "defect_matrix_real": defect.real.tolist(), "defect_matrix_imag": defect.imag.tolist(),
+            "defect_eigenvalues": eigenvalues.tolist(), "coherent_coefficient_power_defect_spectral_norm": spectral_norm,
+            "coherent_power_limit": POWER,
+            "direct_superposition": {"incident_coefficients_real": weights.real.tolist(),
+                "incident_coefficients_imag": weights.imag.tolist(), "incident_coefficient_norm_squared": float(np.vdot(weights, weights).real),
+                "incident_power_w": float(incident_power), "modal_reflection": float(modal_r),
+                "modal_transmission": float(modal_t), "direct_reflection": float(direct_r),
+                "direct_transmission": float(direct_t), "net_outward_power_ratio": float(net),
+                "power_errors": dict(zip(POWER_CHECKS, errors.tolist(), strict=True))}}
 
 
 def body_action(path, vectors):
@@ -190,7 +258,7 @@ def replay_ports(modes, fields, left, right, vectors, nodal_force, rhs, rhs_norm
         open_rows = propagating[direction]
         signed_power = work_power(u[:, direction[open_rows]], normal * f[:, direction[open_rows]], OMEGA)
         open_coeff = coefficients[open_rows]
-        require(np.allclose(signed_power, 1.0, rtol=0, atol=1e-7)
+        require(np.allclose(signed_power, 1.0, rtol=0, atol=FLUX_GRAM_LIMIT_W)
                 and np.array_equal(fields[f"{label}_all_mode_indices"], direction)
                 and np.allclose(fields[f"{label}_amplitudes_full"], coefficients, rtol=1e-8, atol=1e-10)
                 and np.allclose(fields[f"{label}_amplitudes"], open_coeff, rtol=1e-8, atol=1e-10),
@@ -199,7 +267,10 @@ def replay_ports(modes, fields, left, right, vectors, nodal_force, rhs, rhs_norm
     require(np.allclose(fields["incident_powers_w"], incident_p, rtol=0, atol=1e-12), "Exported incident power differs.")
     modal_r, modal_t = (result[label][1].sum(axis=0) for label in ("reflection", "transmission"))
     power_maxima = check_power(incident_p, modal_r, modal_t, direct_r, direct_t, net)
-    return result, (modal_r, modal_t, direct_r, direct_t, net), power_maxima, rhs_error, physical_residual
+    coherent = check_coherent_power(result["reflection"][0], result["transmission"][0], (u_in, f_in),
+                                    (u[:, RETURNING], -f[:, RETURNING]),
+                                    (vectors[left], nodal_force[left]), (u_trn, f_trn))
+    return result, (modal_r, modal_t, direct_r, direct_t, net), power_maxima, rhs_error, physical_residual, coherent
 
 
 def compare_public_tables(public, blocks, totals):
@@ -317,7 +388,7 @@ def replay(stage_path, solve_path, export_path):
         replay_fields(fields, mesh_path, section, modes, vectors)
         left, right = section["left_dofs"], section["right_dofs"]
         port_result = replay_ports(modes, fields, left, right, vectors, nodal_force, rhs, rhs_norm)
-    blocks, totals, power_maxima, rhs_error, physical_residual = port_result
+    blocks, totals, power_maxima, rhs_error, physical_residual, coherent = port_result
     compare_public_tables(public, blocks, totals)
     r, t, r_direct, t_direct, net = totals
     same_r, same_t = (np.diag(blocks[key][1]) for key in ("reflection", "transmission"))
@@ -330,8 +401,8 @@ def replay(stage_path, solve_path, export_path):
             "factor_nonzeros_reported": reported_nnz, "matrix_infinity_norm": matrix_norm,
             "linux_superlu_library_sha256": solve["superlu_library"]["sha256"],
             "relative_l2_target": TARGET, "relative_l2_limit": RESIDUAL, "backward_limit": RESIDUAL,
-            "power_limit": POWER, "maximum_power_errors": dict(zip(("modal_balance", "direct_balance", "net_outward",
-                "modal_vs_direct_reflection", "modal_vs_direct_transmission"), power_maxima.tolist(), strict=True)),
+            "power_limit": POWER, "maximum_power_errors": dict(zip(POWER_CHECKS, power_maxima.tolist(), strict=True)),
+            "coherent_left_incidence": coherent,
             "channels": [{"incident_root": root, "reverse_root": RETURNING[column],
                           "relative_residual": relative[column], "backward_residual": backward[column],
                           "independent_rhs_relative_error": rhs_error[column],
