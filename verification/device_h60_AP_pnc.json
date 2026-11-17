@@ -1,0 +1,300 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "status": "scattering_verified_mesh_pair_failed_complex_gate",
+  "execution_and_provenance_review_passed": true,
+  "repository_base_revision": "86df8d4e0b50cd07b69135dbd8ce37509313f68f",
+  "scope": "One 1 GHz, left-incidence full 26-hole comparison using global in-plane layered mesh refinement and the original SAFE ports and end planes.",
+  "research_scope": {
+    "owner_comment": "https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/28#issuecomment-6932933761",
+    "coherent_scattering_regression_revision": "1ecabde8ae8b16cb36e6c663bdb458003be56262",
+    "coherent_regression_scope": "Small uniform guide with incidence from both ends. The regression checks the unit-power scattering matrix and independently recovers the outgoing nodal-force flux for one coherent drive.",
+    "coherent_regression_passed": true
+  },
+  "integrated_windows_checks": {
+    "tests": 157,
+    "passed": 156,
+    "skipped": 1,
+    "skip_reason": "Windows symlink permission",
+    "elapsed_seconds": 51.078,
+    "log": "verification/development_tests_AP_pnc.log",
+    "log_sha256": "20f1619844578441809a964639dea203c4e16909571501d7170f8f6ffa17fdfc"
+  },
+  "reference": {
+    "h80_completed_device": "verification/lawrence_hpc_AP_pnc.json",
+    "h80_3um_uniform_control": "verification/uniform_h80_AP_pnc.json",
+    "h80_mesh_hash": "89cfa12d6b14109eb95dc873b3682aa5650045ccf5fe3a0d723e8d45b176ba33",
+    "h80_mesh_sha256": "1bf8ad7aea98d1800b8bb8892954d5810b0907b7a7d4fd42979ae22dc75456de",
+    "h80_ports_sha256": "18c0ad4c8b28e597503a28bd5157c867bb09744c94e1eb1aff23f024cc879c8b",
+    "h80_preflight_configuration_sha256": "f0dd7ad1cebb573d25e3e665335b894bdba440ee19befc62236630110f7839e0",
+    "h100_h80_device_maximum_power_change": 0.00017780889364368618,
+    "h100_h80_device_maximum_complex_change": 0.039927184867442976,
+    "h100_h80_device_mesh_pair_passed": false,
+    "h100_h80_uniform_maximum_complex_change": 0.004092290283926378
+  },
+  "mesh_preflight": {
+    "path": "results/runs/full_device_resource_profile/lawrence_h60_AP_pnc/device-h60-preflight-1335256",
+    "slurm_job_id": "1335256",
+    "node": "node007",
+    "slurm_state": "COMPLETED",
+    "slurm_exit_code": "0:0",
+    "slurm_elapsed_seconds": 13,
+    "gnu_time_elapsed_seconds": 12.6,
+    "gnu_time_maximum_rss_kib": 436232,
+    "allocation_memory_gib": 4,
+    "allocation_cpu_cores": 2,
+    "numerical_threads": 1,
+    "worker_wall_limit_seconds": 270,
+    "verified_transfer_artifacts": 8,
+    "driver_sha256": "50bb2bb36319b9a1d4af67ef1105a702381488d41df71a3ebfbc5ed1d5376535",
+    "submitted_batch_sha256": "11a95fc59f1288e002159959eec8b08f1bbb512205f3fd31bf76452cbe1277eb",
+    "receipt_sha256": "ceb60bb34585bf583776ffa010dd2e040da542f036d392b3c79229af8438a8a0",
+    "mesh_hash": "02946e631752b4ca8cfc945daff5981c77cb5d96243f506f07226b2c9c36c597",
+    "mesh_sha256": "e03db2dfb293cfbe41888fee9fef83521920c650e037c906b9570afb53d7dc1c",
+    "mesh_summary_sha256": "2df472dc6d004185d0d68fa689072f46b172a4229b61b4d80d63cd112a8d1c0f",
+    "source_map_sha256": "b4003df3dda37617a26658100dd562278a9e301ca514928ab815a0ec0438039f",
+    "configuration_differences_from_h80": [
+      "name",
+      "mesh.mesh_size_nm"
+    ],
+    "mesh_identity_input_differences_from_h80": [
+      "settings.mesh_size_nm",
+      "python",
+      "platform"
+    ],
+    "standard_body_dof_cap": 60000,
+    "within_standard_body_dof_cap": false,
+    "measured_case_dofs": 680265,
+    "assembly_performed": false,
+    "safe_eigensolve_performed": false,
+    "body_solve_performed": false
+  },
+  "independent_mesh_replay": {
+    "method": "Reconstruct exterior faces and P2 edge DOFs directly from tetrahedral incidence. Compare canonically ordered end triangles, hole-wall triangles by layer and rim index, physical wall coordinates and layer planes. Reconstruct each candidate port map by matching coordinates and displacement component against the saved h80 public SAFE trace.",
+    "h80_body": {
+      "vertices": 21250,
+      "edges": 120959,
+      "tetrahedra": 87312,
+      "p2_vector_dofs": 426627,
+      "exterior_faces": 24744
+    },
+    "h60_body": {
+      "vertices": 33165,
+      "edges": 193590,
+      "tetrahedra": 142848,
+      "p2_vector_dofs": 680265,
+      "exterior_faces": 35104
+    },
+    "all_tetrahedra_positively_oriented": true,
+    "boundary_tags_cover_exterior_exactly": true,
+    "ports": {
+      "physical_end_planes_m": [0.0, 1.665e-5],
+      "triangles_per_face": 96,
+      "p2_vector_dofs_per_face": 675,
+      "exact_h80_triangulation_match": true,
+      "matching_yz_triangle_sha256": "9bda6aa25956cc71582ab701df5a16555996f3216929fb49efb29fd8c2ff83d4",
+      "h60_safe_trace_map_sha256": "4aaedb802ffebbddc476ca11cd6f96d96644bd6ab95774e82164ad38f24b8411",
+      "h80_public_safe_wavenumber_displacement_traction_arrays_match_cache": true,
+      "left_incident_root_order": [1348, 1311, 1292, 1284, 1274]
+    },
+    "thickness_layers": {
+      "planes_m": [-1.0000000000000001e-7, -5.0000000000000004e-8, 0.0, 5.000000000000001e-8, 1.0000000000000001e-7],
+      "exact_h80_plane_match": true
+    },
+    "hole_walls": {
+      "hole_count": 26,
+      "vertices_per_rim": 32,
+      "facets_per_wall": 256,
+      "maximum_h80_h60_wall_vertex_change_m": 0.0,
+      "matching_wall_topology_sha256": "85ea90d0c061d965fddcf827a1951ef27064786e372dde1ed13a45b15a019f48",
+      "matching_wall_coordinates_sha256": "3e7e12d3893e487dab9138ed9a8420180adca73404bc734962b4df30b16b05d1"
+    },
+    "lead_interiors": {
+      "vertex_region": "Strictly between each original end plane and the nearest hole rim along x.",
+      "h80_left_vertices": 1495,
+      "h60_left_vertices": 2545,
+      "h80_right_vertices": 1500,
+      "h60_right_vertices": 2555
+    }
+  },
+  "operator_stage": {
+    "path": "results/runs/full_device_resource_profile/lawrence_h60_AP_pnc/device-h60-stage-1335265",
+    "slurm_job_id": "1335265",
+    "node": "node017",
+    "slurm_state": "COMPLETED",
+    "slurm_exit_code": "0:0",
+    "slurm_elapsed_seconds": 192,
+    "gnu_time_elapsed_seconds": 192.05,
+    "gnu_time_maximum_rss_kib": 4179172,
+    "batched_assembly_elapsed_seconds": 171.02263402898097,
+    "batched_assembly_sampled_peak_rss_mib": 2200.00390625,
+    "batch_elements": 2048,
+    "allocation_memory_gib": 16,
+    "allocation_cpu_cores": 2,
+    "numerical_threads": 1,
+    "worker_wall_limit_seconds": 550,
+    "verified_transfer_artifacts": 10,
+    "stage_receipt_sha256": "0f8caa88919d2695035c92c64c02941393088442dc2a0a14a0f64d21e6e9d282",
+    "compute_driver_sha256": "32efc149510d22744a0478ff9c171e770ba4cf9bf535b2ca5f2ceeb15c529730",
+    "submitted_batch_sha256": "7e87e4d35589926704332b04d079f8b72db3e0837f90aff5366e1d93a3d7f196",
+    "operator_complex128_csc_nonzeros": 52405911,
+    "operator_csc_array_bytes": 1050839284,
+    "stage_array_bytes": 1940379444,
+    "stiffness_file_sha256": "268b9249175199d2295277bd621ce85a378fdeb8a9f12ae6ed28f1103c5cf48f",
+    "mass_file_sha256": "5e80d59a605c59e5b17636e20c8548c7b025a6212b7c8e0760af65f4740681ed",
+    "operator_file_sha256": "8390e66372b82cd520b9c2bbe75527cebcea00fef16b2ccd97e17dcf6645cbd1",
+    "operator_csc_sha256": "fa83266fe4b6609bb2132ab85320b2072e06a451788f518f7c19778a6e771202",
+    "rhs_file_sha256": "206d965279fe28230dd9af6fcb3f59216dc1098b5947fad69e25976c2e6c7ddb",
+    "rhs_array_sha256": "2ff1e5a607e6f252354c5492fe26cf48698978015066b12f77b9001c2c7c8450",
+    "independent_rhs_replay": {
+      "geometry_and_source_provenance_match_preflight": true,
+      "ordered_left_trace_dofs": 675,
+      "all_nonzero_rows_on_exact_left_trace": true,
+      "exact_h80_physical_drive_values_in_trace_order": true,
+      "maximum_h80_h60_drive_array_absolute_difference": 0.0,
+      "maximum_h80_h60_drive_array_relative_difference": 0.0
+    },
+    "safe_eigensolve_performed": false,
+    "factorization_performed": false,
+    "body_solve_performed": false
+  },
+  "direct_resource_admission": {
+    "basis": "The initial SuperLU buffer estimate uses the measured complex128 CSC nonzero and array byte counts. Live node and job cgroup headroom are checked immediately before factorization. The estimate does not bound peak factor storage.",
+    "solver_helper_sha256": "dd9e07d4955de6cf4cac97eec0485bfc34bd1d7f8173d4707718c2ea4ba89034",
+    "admission_helper_sha256": "1944ddfeb5c5ace7d2842086996aab658ce999803ab225ce61e4a44078db3013",
+    "estimated_incremental_bytes": 65525642680,
+    "job_required_headroom_bytes": 74115577272,
+    "node_required_available_bytes": 65945073080,
+    "requested_memory_gib": 128,
+    "requested_cpu_cores": 2,
+    "numerical_threads": 1,
+    "worker_wall_limit_seconds": 2850,
+    "allocation_wall_limit_seconds": 3000,
+    "measured_job_headroom_before_factor_bytes": 135061397504,
+    "measured_node_available_before_factor_bytes": 1597331812352,
+    "admitted": true
+  },
+  "direct_solve": {
+    "path": "results/runs/full_device_resource_profile/lawrence_h60_AP_pnc/device-h60-solve-1335273",
+    "slurm_job_id": "1335273",
+    "node": "himem001",
+    "execution_platform": "Linux",
+    "slurm_state": "COMPLETED",
+    "slurm_exit_code": "0:0",
+    "slurm_elapsed_seconds": 1274,
+    "gnu_time_elapsed_seconds": 1273.73,
+    "gnu_time_maximum_rss_kib": 30567308,
+    "job_cgroup_peak_bytes": 32514060288,
+    "job_cgroup_memory_limit_events": 0,
+    "factorization": {
+      "method": "complex128 SuperLU with COLAMD ordering",
+      "elapsed_seconds": 1231.0580177940428,
+      "factor_nonzeros": 1566794760,
+      "factors_built": 1
+    },
+    "verified_transfer_artifacts": 11,
+    "receipt_sha256": "dd0fef04be45b86a8507b3d4a7d56372b9cb11594c01107f355b345155b4baa9",
+    "independent_original_equation_replay": {
+      "execution_platform": "Windows",
+      "method": "Verify the original CSC, RHS and accepted vector digests. Replay A x against the saved RHS and independently accumulate the absolute matrix row sums for the normwise backward residual.",
+      "accepted_drive_count": 5,
+      "relative_l2_target": 1e-10,
+      "relative_l2_residual_gate": 1e-9,
+      "normwise_backward_residual_gate": 1e-9,
+      "matrix_infinity_norm": 148929.4031601491,
+      "maximum_relative_l2_residual": 2.289402570499191e-12,
+      "maximum_normwise_backward_residual": 7.485527757691591e-16,
+      "channels": [
+        {
+          "incident_port_root": 1348,
+          "relative_l2_residual": 1.1355032750819226e-12,
+          "normwise_backward_residual": 6.508183786202122e-16,
+          "accepted_vector_sha256": "a415d2b076feec6bbafb0407771697a2740659e887eb84a6cade5ddfed0ed60f"
+        },
+        {
+          "incident_port_root": 1311,
+          "relative_l2_residual": 2.289402570499191e-12,
+          "normwise_backward_residual": 4.88213932330184e-16,
+          "accepted_vector_sha256": "4d994ba5170f193e242fca67f483c25e4b92147773169ec237ebd6e1483cfd48"
+        },
+        {
+          "incident_port_root": 1292,
+          "relative_l2_residual": 1.2262391481392047e-12,
+          "normwise_backward_residual": 7.385810975064882e-16,
+          "accepted_vector_sha256": "967a6365add0a9cd3449d22e8edcb84ef554f8a2e0b805d6c3412162de7f1556"
+        },
+        {
+          "incident_port_root": 1284,
+          "relative_l2_residual": 1.1333204106006387e-12,
+          "normwise_backward_residual": 7.485527757691591e-16,
+          "accepted_vector_sha256": "d90028246b7e8d4da398f7d256a60543385cc57036ff4a1932433be5bed7d1bd"
+        },
+        {
+          "incident_port_root": 1274,
+          "relative_l2_residual": 9.680044630939313e-13,
+          "normwise_backward_residual": 6.306302122175868e-16,
+          "accepted_vector_sha256": "c1af1fbd2d1e3b296b584cfded749c8354e899cf8fa8eee768f5b6f0823e5587"
+        }
+      ]
+    }
+  },
+  "scattering_export": {
+    "path": "results/runs/full_device_resource_profile/lawrence_h60_AP_pnc/device-h60-export-1335301",
+    "public_run_suffix": "2aeb7aac147a",
+    "slurm_job_id": "1335301",
+    "node": "node017",
+    "execution_platform": "Linux",
+    "slurm_state": "COMPLETED",
+    "slurm_exit_code": "0:0",
+    "slurm_elapsed_seconds": 28,
+    "gnu_time_elapsed_seconds": 27.91,
+    "gnu_time_maximum_rss_kib": 4111524,
+    "verified_transfer_artifacts": 15,
+    "verified_public_output_files": 8,
+    "receipt_sha256": "a04138e43eef5943d63dc629f46a1cb081595d37b54caedbcfc4c60fcc659b98",
+    "public_summary_sha256": "1e3e72e71e843803dbd60433590a018aa761e21056c8e66f11004ab97287d1d7",
+    "exact_staged_operator_and_rhs_reconstructed": true,
+    "frozen_numerical_sources_packages_and_python_match_all_linux_phases": true,
+    "stage_and_export_share_host_and_cpu_model": true,
+    "public_fields_exactly_match_accepted_vectors": true,
+    "public_safe_wavenumber_displacement_traction_arrays_match_h80_exactly": true,
+    "public_trace_coordinates_and_components_match_h80_exactly": true,
+    "phase_adjustment_applied": false,
+    "maximum_flux_imbalance_linux_export": 1.5765166949677223e-14,
+    "independent_nodal_force_flux_replay": {
+      "execution_platform": "Windows",
+      "method": "Use the saved stiffness and mass matrix products separately to recover finite-domain force. Remove the incident displacement and force from the left trace for reflected power. Evaluate signed power from displacement and nodal force on the original end planes.",
+      "maximum_flux_imbalance": 1.887379141862766e-14,
+      "maximum_net_outward_power_ratio": 1.3988810110276988e-14,
+      "maximum_reflection_flux_difference_from_linux_export": 2.706168622523819e-16,
+      "maximum_transmission_flux_difference_from_linux_export": 3.1086244689504383e-15
+    }
+  },
+  "h80_h60_mesh_pair": {
+    "path": "results/runs/full_device_resource_profile/lawrence_h60_AP_pnc/comparisons/scattering-192dc75596dc2458",
+    "comparison_summary_sha256": "65bb9e0311f1ac7f95babc54fd7e2ef82fc80f14b26319cb8e90b5163c8f26f6",
+    "comparison_tool_sha256": "8a3f5d227dc56811fc0396023266f34e81a68ca070f8ca92f1fcdd83a462cdcc",
+    "verified_actual_device_results": true,
+    "input_power_checks_passed": true,
+    "power_change_limit": 0.01,
+    "complex_change_limit": 0.01,
+    "maximum_power_change": 0.0004552943544984256,
+    "power_passed": true,
+    "maximum_complex_change": 0.026866990815575545,
+    "complex_passed": false,
+    "mesh_pair_passed": false,
+    "maximum_reflection_complex_change": 0.0031996605586013054,
+    "maximum_same_channel_transmission_phase_change_rad": 0.026886649325256768,
+    "maximum_transmission_change_incident_and_outgoing_root": 1311,
+    "same_channel_transmission_phase_changes_rad": {
+      "1348": 0.003890704740181008,
+      "1311": 0.026886649325256768,
+      "1292": 0.014417530066472747,
+      "1284": 0.023077105457755664,
+      "1274": 0.016878485987459235
+    },
+    "independent_fixed_port_comparison_reproduced_power_complex_and_phase": true
+  },
+  "interpretation": "The 1 GHz h80/h60 device pair passes the power-change check and fails the complex-response check. Full-device spatial convergence remains unresolved. The 3 micrometre uniform control is a separate phase diagnostic. The h60 global refinement changes both the patterned region and the lead interiors, and the comparison retains the device phase at the original end planes. The milestone ends with the verified h60 result and mesh-pair comparison. A subsequent control should distinguish patterned-body and lead-interior sensitivity and address the remaining thickness, hole-faceting, port-resolution and frequency-sampling limits."
+}
