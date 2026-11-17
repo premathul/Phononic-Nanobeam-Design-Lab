@@ -41,6 +41,11 @@ test_comparator_accepts_original_coordinate_proof_and_checks_staged_sources (tes
 test_linux_replay_is_explicit_and_preserves_source_and_package_checks (test_export_lawrence_scattering_AP_pnc.LawrenceExportTests.test_linux_replay_is_explicit_and_preserves_source_and_package_checks) ... ok
 test_receipt_requires_linked_process_status_and_vector_order (test_export_lawrence_scattering_AP_pnc.LawrenceExportTests.test_receipt_requires_linked_process_status_and_vector_order) ... ok
 test_replay_recomputes_complex_residuals_against_each_original_column (test_export_lawrence_scattering_AP_pnc.LawrenceExportTests.test_replay_recomputes_complex_residuals_against_each_original_column) ... ok
+test_adjacent_matching_respects_direction_permutation_and_complex_gauge (test_frequency_map_AP_pnc.FrequencyMapTests.test_adjacent_matching_respects_direction_permutation_and_complex_gauge) ... ok
+3D solid: 48 tetrahedra, 405 displacement DOFs
+3D solid: 48 tetrahedra, 405 displacement DOFs
+3D solid: 48 tetrahedra, 405 displacement DOFs
+test_interrupted_three_frequency_map_reuses_shared_and_accepted_work (test_frequency_map_AP_pnc.FrequencyMapTests.test_interrupted_three_frequency_map_reuses_shared_and_accepted_work) ... ok
 test_historical_bridge_and_independent_axis_qualification (test_full_device_port_resolution_AP_pnc.FullDevicePortResolutionEvidenceTests.test_historical_bridge_and_independent_axis_qualification) ... ok
 test_saved_channels_and_phase_indicators_reproduce_from_fields (test_full_device_port_resolution_AP_pnc.FullDevicePortResolutionEvidenceTests.test_saved_channels_and_phase_indicators_reproduce_from_fields) ... ok
 test_historical_csv_and_example (test_geometry3d_AP_pnc.Geometry3DTests.test_historical_csv_and_example) ... ok
@@ -173,7 +178,7 @@ test_failed_attempt_is_retained_and_bad_material_creates_no_output (test_workflo
 3D solid: 352 tetrahedra, 435 displacement DOFs
 test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks (test_workflow3d_AP_pnc.Workflow3D.test_gmsh_perforated_scattering_separates_power_and_uniform_reference_checks) ... ok
 test_historical_hole_pattern_uses_source_origin_and_exact_provenance (test_workflow3d_AP_pnc.Workflow3D.test_historical_hole_pattern_uses_source_origin_and_exact_provenance) ... ok
-Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{c23e8787-6491-42e5-bdd0-09f9a775fb4b}\Temp\tmpczwqy11w\two_hole_pilot_200nm-91116a2cc7fb
+Completed: C:\Users\kunmi\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\AC\#!sandbox.{2348c2a1-9723-42fb-bc74-7f1e090a0812}\Temp\tmptrqww0t6\two_hole_pilot_200nm-e9a3fd4be558
 Max relative solve residual: 0
 Power balance check: True; max R=0
 Matched-guide power check: True
@@ -185,6 +190,6 @@ test_output_can_be_reconstructed_and_cache_checks_files (test_workflow3d_AP_pnc.
 test_scattering_exports_power_channels_and_reconstructible_responses (test_workflow3d_AP_pnc.Workflow3D.test_scattering_exports_power_channels_and_reconstructible_responses) ... ok
 
 ----------------------------------------------------------------------
-Ran 161 tests in 51.193s
+Ran 163 tests in 51.564s
 
 OK (skipped=1)

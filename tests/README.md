@@ -10,3 +10,5 @@ The Lawrence h60 workflow tests use small systems to verify exact reconstruction
 
 
 [Thickness-control tests](test_lawrence_thickness_AP_pnc.py) verify exact in-plane footprint preservation, a SAFE section built without body matrices, variable incident-root identities, interrupted accepted-prefix recovery, and refusal of altered staged equations. The new z4/z6 comparator profile keeps source/SAFE provenance and physical mode matching separate from its scientific acceptance result.
+
+[Frequency-map tests](test_frequency_map_AP_pnc.py) use a 405-DOF right-incident guide at 0.25/0.30/0.35 GHz. They compare each response against an independently assembled single-frequency direct solve, replay original equations and nodal-force flux, interrupt and resume without repeating accepted work, and preserve a sampled cutoff failure while breaking the mode track across the gap. Synthetic signed-mode permutations and complex gauges check cumulative channel alignment, while changed inputs and saved scientific artifacts are rejected. These small workflow checks do not establish full-device spatial or frequency convergence.
