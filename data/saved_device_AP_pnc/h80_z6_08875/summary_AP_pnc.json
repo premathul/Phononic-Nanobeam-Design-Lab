@@ -1,0 +1,1011 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "run_hash": "efd3e2e6cc33a682b7baf6af2c2bbef63983a042013592b93037e9fbf5495461",
+  "mechanical_operator_hash": "17528f377a80c04f7572bb7ba9d8e514bf15448e10fcad665b6ac5b39b2465c6",
+  "status": "completed_unverified",
+  "configuration": {
+    "author": "Athul Prem",
+    "file_tag": "_AP_pnc",
+    "schema_version": 1,
+    "name": "historical_26hole_layered_h80_ny12_z6",
+    "geometry": {
+      "length_nm": 16650,
+      "width_nm": 1000,
+      "thickness_nm": 200,
+      "pattern": {
+        "csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+        "x_offset_nm": 8325
+      }
+    },
+    "mesh": {
+      "kind": "layered",
+      "element_order": 2,
+      "mesh_size_nm": 80,
+      "port_size_nm": 83.33333333333333,
+      "circle_resolution": 32,
+      "thickness_layers": 6
+    },
+    "material": {
+      "name": "nominal_cubic_ge",
+      "C11_Pa": 128500000000.0,
+      "C12_Pa": 48300000000.0,
+      "C44_Pa": 66800000000.0,
+      "density_kg_m3": 5323,
+      "crystal_rotation": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "temperature_policy": "fixed_property_control",
+      "temperature_K": 4
+    },
+    "analysis": {
+      "kind": "scattering",
+      "boundary": "matched_ports",
+      "frequency_GHz": 0.8875,
+      "incident_side": "left"
+    },
+    "resources": {
+      "max_dofs": 616239,
+      "max_port_dofs": 975,
+      "linear_solver": "direct",
+      "assembly_batch_elements": 2048
+    }
+  },
+  "implementation": {
+    "git_commit": null,
+    "source_sha256": {
+      "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+      "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+      "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+      "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+      "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+      "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+      "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+      "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+      "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+      "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+      "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+      "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+      "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+      "src/phononic/resumable_scattering_AP_pnc.py": "dba6002d982647810f3fc714fdce73a0f34e306e06e8519df2d54778002205ec",
+      "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+      "src/phononic/workflow_AP_pnc.py": "0bdfc18674d68ae3f62947001f0a8aa0591f466e4d1ba895f0f962fb0bb3915d",
+      "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+    },
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "scikit-fem": "12.0.2",
+      "meshio": "5.3.5",
+      "gmsh": "4.15.2",
+      "matplotlib": "3.11.2",
+      "psutil": "7.2.2"
+    },
+    "python": "3.12.12",
+    "platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28"
+  },
+  "analysis_kind": "scattering",
+  "geometry_nm": {
+    "length_nm": 16650,
+    "width_nm": 1000,
+    "thickness_nm": 200
+  },
+  "mesh_kind": "layered",
+  "hole_count": 26,
+  "hole_pattern_provenance": {
+    "author": "Athul Prem",
+    "file_tag": "_AP_pnc",
+    "source_csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+    "source_sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+    "x_offset_m": 8.325e-06,
+    "holes": [
+      {
+        "x_m": 1.6250000000000005e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 2.1750000000000004e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 2.725e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 3.275000000000001e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 3.825000000000001e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 4.3750000000000005e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 4.925000000000001e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 5.475000000000001e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 6.015000000000001e-06,
+        "diameter_m": 2.55e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 6.545000000000001e-06,
+        "diameter_m": 2.6e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 7.065000000000001e-06,
+        "diameter_m": 2.65e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 7.575000000000001e-06,
+        "diameter_m": 2.7e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 8.075000000000001e-06,
+        "diameter_m": 2.75e-07,
+        "region": "Central cavity"
+      },
+      {
+        "x_m": 8.575e-06,
+        "diameter_m": 2.75e-07,
+        "region": "Central cavity"
+      },
+      {
+        "x_m": 9.075e-06,
+        "diameter_m": 2.7e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 9.585e-06,
+        "diameter_m": 2.65e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 1.0105e-05,
+        "diameter_m": 2.6e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 1.0635e-05,
+        "diameter_m": 2.55e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 1.1175e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror transition"
+      },
+      {
+        "x_m": 1.1725e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.2275e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.2825e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.3375e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.3925000000000001e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.4475000000000001e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.5025000000000001e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      }
+    ],
+    "clearances": {
+      "min_side_ligament_m": 3.625000000000001e-07,
+      "min_end_ligament_m": 1.5000000000000005e-06,
+      "min_interhole_gap_m": 2.249999999999986e-07
+    }
+  },
+  "boundary": "matched_ports",
+  "material_status": "nominal fixed-property control; no temperature calibration",
+  "calibrated_scattering_available": false,
+  "experimental_validation": false,
+  "mode_completeness_established": false,
+  "spatial_convergence_established": false,
+  "output_directory": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/runs/h80-z6-frequency-887500000-export-1335632/historical_26hole_layered_h80_ny12_z6-efd3e2e6cc33",
+  "checkpointed_scattering": {
+    "spatial_convergence_established": false,
+    "frequency_convergence_established": false,
+    "frequency_difference_is_spatial_convergence_check": false,
+    "method": "lawrence_device_thickness_superlu_direct",
+    "frequency_equation_preparation": {
+      "implementation": {
+        "git_commit": null,
+        "source_sha256": {
+          "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+          "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+          "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+          "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+          "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+          "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+          "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+          "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+          "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+          "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+          "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+          "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+          "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+          "src/phononic/resumable_scattering_AP_pnc.py": "dba6002d982647810f3fc714fdce73a0f34e306e06e8519df2d54778002205ec",
+          "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+          "src/phononic/workflow_AP_pnc.py": "0bdfc18674d68ae3f62947001f0a8aa0591f466e4d1ba895f0f962fb0bb3915d",
+          "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+        },
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2",
+          "meshio": "5.3.5",
+          "gmsh": "4.15.2",
+          "matplotlib": "3.11.2",
+          "psutil": "7.2.2"
+        },
+        "python": "3.12.12",
+        "platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28"
+      },
+      "driver": {
+        "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/tools/run_lawrence_frequency_point_AP_pnc.py",
+        "sha256": "9b1a74fc50ec3e2fe1282ec05f5d21783be27b2a86cb81201f122426ff148045",
+        "bytes": 27523
+      },
+      "hostname": "node050.lawrence",
+      "slurm_job_id": "1335628",
+      "numerical_thread_environment": {
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "BLIS_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1"
+      },
+      "numerical_backend": {
+        "python": "3.12.12",
+        "platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28",
+        "machine": "x86_64",
+        "node": "node050.lawrence",
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "build_configs": {
+          "numpy": "{\n  \"Compilers\": {\n    \"c\": {\n      \"name\": \"gcc\",\n      \"linker\": \"ld.bfd\",\n      \"version\": \"14.2.1\",\n      \"commands\": \"cc\"\n    },\n    \"cython\": {\n      \"name\": \"cython\",\n      \"linker\": \"cython\",\n      \"version\": \"3.3.0\",\n      \"commands\": \"cython\"\n    },\n    \"c++\": {\n      \"name\": \"gcc\",\n      \"linker\": \"ld.bfd\",\n      \"version\": \"14.2.1\",\n      \"commands\": \"c++\"\n    }\n  },\n  \"Machine Information\": {\n    \"host\": {\n      \"cpu\": \"x86_64\",\n      \"family\": \"x86_64\",\n      \"endian\": \"little\",\n      \"system\": \"linux\"\n    },\n    \"build\": {\n      \"cpu\": \"x86_64\",\n      \"family\": \"x86_64\",\n      \"endian\": \"little\",\n      \"system\": \"linux\"\n    }\n  },\n  \"Build Dependencies\": {\n    \"blas\": {\n      \"name\": \"scipy-openblas\",\n      \"found\": true,\n      \"version\": \"0.3.34.106.0\",\n      \"detection method\": \"pkgconfig\",\n      \"include directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas64/include\",\n      \"lib directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas64/lib\",\n      \"openblas configuration\": \"OpenBLAS 0.3.34.106.0  USE64BITINT DYNAMIC_ARCH NO_AFFINITY SkylakeX MAX_THREADS=64\",\n      \"pc file directory\": \"/project/.openblas\"\n    },\n    \"lapack\": {\n      \"name\": \"scipy-openblas\",\n      \"found\": true,\n      \"version\": \"0.3.34.106.0\",\n      \"detection method\": \"pkgconfig\",\n      \"include directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas64/include\",\n      \"lib directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas64/lib\",\n      \"openblas configuration\": \"OpenBLAS 0.3.34.106.0  USE64BITINT DYNAMIC_ARCH NO_AFFINITY SkylakeX MAX_THREADS=64\",\n      \"pc file directory\": \"/project/.openblas\"\n    }\n  },\n  \"Python Information\": {\n    \"path\": \"/tmp/build-env-ptu49_tp/bin/python\",\n    \"version\": \"3.12\"\n  },\n  \"SIMD Extensions\": {\n    \"baseline\": [\n      \"X86_V2\"\n    ],\n    \"found\": [\n      \"X86_V3\",\n      \"X86_V4\"\n    ],\n    \"not found\": [\n      \"AVX512_ICL\",\n      \"AVX512_SPR\"\n    ]\n  }\n}\n",
+          "scipy": "{\n  \"Compilers\": {\n    \"c\": {\n      \"name\": \"gcc\",\n      \"linker\": \"ld.bfd\",\n      \"version\": \"14.2.1\",\n      \"commands\": \"cc\"\n    },\n    \"cython\": {\n      \"name\": \"cython\",\n      \"linker\": \"cython\",\n      \"version\": \"3.2.9\",\n      \"commands\": \"cython\"\n    },\n    \"c++\": {\n      \"name\": \"gcc\",\n      \"linker\": \"ld.bfd\",\n      \"version\": \"14.2.1\",\n      \"commands\": \"c++\"\n    },\n    \"fortran\": {\n      \"name\": \"gcc\",\n      \"linker\": \"ld.bfd\",\n      \"version\": \"14.2.1\",\n      \"commands\": \"gfortran\"\n    },\n    \"pythran\": {\n      \"version\": \"0.19.0\",\n      \"include directory\": \"../../../tmp/build-env-3zxzwx9o/lib/python3.12/site-packages/pythran\"\n    }\n  },\n  \"Machine Information\": {\n    \"host\": {\n      \"cpu\": \"x86_64\",\n      \"family\": \"x86_64\",\n      \"endian\": \"little\",\n      \"system\": \"linux\"\n    },\n    \"build\": {\n      \"cpu\": \"x86_64\",\n      \"family\": \"x86_64\",\n      \"endian\": \"little\",\n      \"system\": \"linux\"\n    },\n    \"cross-compiled\": false\n  },\n  \"Build Dependencies\": {\n    \"blas\": {\n      \"name\": \"scipy-openblas\",\n      \"found\": true,\n      \"version\": \"0.3.31.dev\",\n      \"detection method\": \"pkgconfig\",\n      \"include directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas32/include\",\n      \"lib directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas32/lib\",\n      \"openblas configuration\": \"OpenBLAS 0.3.31.dev DYNAMIC_ARCH NO_AFFINITY Haswell MAX_THREADS=64\",\n      \"pc file directory\": \"/project/.openblas\",\n      \"has ilp64\": false,\n      \"cython blas ilp64\": false\n    },\n    \"lapack\": {\n      \"name\": \"scipy-openblas\",\n      \"found\": true,\n      \"version\": \"0.3.31.dev\",\n      \"detection method\": \"pkgconfig\",\n      \"include directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas32/include\",\n      \"lib directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas32/lib\",\n      \"openblas configuration\": \"OpenBLAS 0.3.31.dev DYNAMIC_ARCH NO_AFFINITY Haswell MAX_THREADS=64\",\n      \"pc file directory\": \"/project/.openblas\",\n      \"has ilp64\": false\n    },\n    \"pybind11\": {\n      \"name\": \"pybind11\",\n      \"version\": \"3.0.4\",\n      \"detection method\": \"config-tool\",\n      \"include directory\": \"unknown\"\n    }\n  },\n  \"Python Information\": {\n    \"path\": \"/tmp/build-env-3zxzwx9o/bin/python\",\n    \"version\": \"3.12\"\n  }\n}\n"
+        },
+        "threadpools": [
+          {
+            "user_api": "blas",
+            "internal_api": "openblas",
+            "num_threads": 1,
+            "prefix": "libscipy_openblas",
+            "filepath": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/.venv-lawrence-export/lib/python3.12/site-packages/scipy.libs/libscipy_openblas-5f890258.so",
+            "version": "0.3.31.dev",
+            "threading_layer": "pthreads",
+            "architecture": "SkylakeX"
+          },
+          {
+            "user_api": "blas",
+            "internal_api": "openblas",
+            "num_threads": 1,
+            "prefix": "libscipy_openblas",
+            "filepath": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/.venv-lawrence-export/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so",
+            "version": "0.3.34.106.0",
+            "threading_layer": "pthreads",
+            "architecture": "SkylakeX"
+          }
+        ],
+        "thread_limits": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "BLIS_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1"
+        },
+        "runner_sha256": "dd9e07d4955de6cf4cac97eec0485bfc34bd1d7f8173d4707718c2ea4ba89034",
+        "cpu_model": "Intel(R) Xeon(R) Gold 5118 CPU @ 2.30GHz",
+        "available_cpus": 2
+      }
+    },
+    "linux_solve": {
+      "implementation": {
+        "git_commit": null,
+        "source_sha256": {
+          "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+          "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+          "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+          "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+          "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+          "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+          "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+          "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+          "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+          "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+          "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+          "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+          "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+          "src/phononic/resumable_scattering_AP_pnc.py": "dba6002d982647810f3fc714fdce73a0f34e306e06e8519df2d54778002205ec",
+          "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+          "src/phononic/workflow_AP_pnc.py": "0bdfc18674d68ae3f62947001f0a8aa0591f466e4d1ba895f0f962fb0bb3915d",
+          "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+        },
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2",
+          "meshio": "5.3.5",
+          "gmsh": "4.15.2",
+          "matplotlib": "3.11.2",
+          "psutil": "7.2.2"
+        },
+        "python": "3.12.12",
+        "platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28"
+      },
+      "driver": {
+        "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/tools/run_lawrence_frequency_point_AP_pnc.py",
+        "sha256": "9b1a74fc50ec3e2fe1282ec05f5d21783be27b2a86cb81201f122426ff148045",
+        "bytes": 27523
+      },
+      "hostname": "himem001.lawrence",
+      "slurm_job_id": "1335630",
+      "numerical_thread_environment": {
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "BLIS_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1"
+      },
+      "numerical_backend": {
+        "python": "3.12.12",
+        "platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28",
+        "machine": "x86_64",
+        "node": "himem001.lawrence",
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "build_configs": {
+          "numpy": "{\n  \"Compilers\": {\n    \"c\": {\n      \"name\": \"gcc\",\n      \"linker\": \"ld.bfd\",\n      \"version\": \"14.2.1\",\n      \"commands\": \"cc\"\n    },\n    \"cython\": {\n      \"name\": \"cython\",\n      \"linker\": \"cython\",\n      \"version\": \"3.3.0\",\n      \"commands\": \"cython\"\n    },\n    \"c++\": {\n      \"name\": \"gcc\",\n      \"linker\": \"ld.bfd\",\n      \"version\": \"14.2.1\",\n      \"commands\": \"c++\"\n    }\n  },\n  \"Machine Information\": {\n    \"host\": {\n      \"cpu\": \"x86_64\",\n      \"family\": \"x86_64\",\n      \"endian\": \"little\",\n      \"system\": \"linux\"\n    },\n    \"build\": {\n      \"cpu\": \"x86_64\",\n      \"family\": \"x86_64\",\n      \"endian\": \"little\",\n      \"system\": \"linux\"\n    }\n  },\n  \"Build Dependencies\": {\n    \"blas\": {\n      \"name\": \"scipy-openblas\",\n      \"found\": true,\n      \"version\": \"0.3.34.106.0\",\n      \"detection method\": \"pkgconfig\",\n      \"include directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas64/include\",\n      \"lib directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas64/lib\",\n      \"openblas configuration\": \"OpenBLAS 0.3.34.106.0  USE64BITINT DYNAMIC_ARCH NO_AFFINITY SkylakeX MAX_THREADS=64\",\n      \"pc file directory\": \"/project/.openblas\"\n    },\n    \"lapack\": {\n      \"name\": \"scipy-openblas\",\n      \"found\": true,\n      \"version\": \"0.3.34.106.0\",\n      \"detection method\": \"pkgconfig\",\n      \"include directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas64/include\",\n      \"lib directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas64/lib\",\n      \"openblas configuration\": \"OpenBLAS 0.3.34.106.0  USE64BITINT DYNAMIC_ARCH NO_AFFINITY SkylakeX MAX_THREADS=64\",\n      \"pc file directory\": \"/project/.openblas\"\n    }\n  },\n  \"Python Information\": {\n    \"path\": \"/tmp/build-env-ptu49_tp/bin/python\",\n    \"version\": \"3.12\"\n  },\n  \"SIMD Extensions\": {\n    \"baseline\": [\n      \"X86_V2\"\n    ],\n    \"found\": [\n      \"X86_V3\",\n      \"X86_V4\"\n    ],\n    \"not found\": [\n      \"AVX512_ICL\",\n      \"AVX512_SPR\"\n    ]\n  }\n}\n",
+          "scipy": "{\n  \"Compilers\": {\n    \"c\": {\n      \"name\": \"gcc\",\n      \"linker\": \"ld.bfd\",\n      \"version\": \"14.2.1\",\n      \"commands\": \"cc\"\n    },\n    \"cython\": {\n      \"name\": \"cython\",\n      \"linker\": \"cython\",\n      \"version\": \"3.2.9\",\n      \"commands\": \"cython\"\n    },\n    \"c++\": {\n      \"name\": \"gcc\",\n      \"linker\": \"ld.bfd\",\n      \"version\": \"14.2.1\",\n      \"commands\": \"c++\"\n    },\n    \"fortran\": {\n      \"name\": \"gcc\",\n      \"linker\": \"ld.bfd\",\n      \"version\": \"14.2.1\",\n      \"commands\": \"gfortran\"\n    },\n    \"pythran\": {\n      \"version\": \"0.19.0\",\n      \"include directory\": \"../../../tmp/build-env-3zxzwx9o/lib/python3.12/site-packages/pythran\"\n    }\n  },\n  \"Machine Information\": {\n    \"host\": {\n      \"cpu\": \"x86_64\",\n      \"family\": \"x86_64\",\n      \"endian\": \"little\",\n      \"system\": \"linux\"\n    },\n    \"build\": {\n      \"cpu\": \"x86_64\",\n      \"family\": \"x86_64\",\n      \"endian\": \"little\",\n      \"system\": \"linux\"\n    },\n    \"cross-compiled\": false\n  },\n  \"Build Dependencies\": {\n    \"blas\": {\n      \"name\": \"scipy-openblas\",\n      \"found\": true,\n      \"version\": \"0.3.31.dev\",\n      \"detection method\": \"pkgconfig\",\n      \"include directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas32/include\",\n      \"lib directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas32/lib\",\n      \"openblas configuration\": \"OpenBLAS 0.3.31.dev DYNAMIC_ARCH NO_AFFINITY Haswell MAX_THREADS=64\",\n      \"pc file directory\": \"/project/.openblas\",\n      \"has ilp64\": false,\n      \"cython blas ilp64\": false\n    },\n    \"lapack\": {\n      \"name\": \"scipy-openblas\",\n      \"found\": true,\n      \"version\": \"0.3.31.dev\",\n      \"detection method\": \"pkgconfig\",\n      \"include directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas32/include\",\n      \"lib directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas32/lib\",\n      \"openblas configuration\": \"OpenBLAS 0.3.31.dev DYNAMIC_ARCH NO_AFFINITY Haswell MAX_THREADS=64\",\n      \"pc file directory\": \"/project/.openblas\",\n      \"has ilp64\": false\n    },\n    \"pybind11\": {\n      \"name\": \"pybind11\",\n      \"version\": \"3.0.4\",\n      \"detection method\": \"config-tool\",\n      \"include directory\": \"unknown\"\n    }\n  },\n  \"Python Information\": {\n    \"path\": \"/tmp/build-env-3zxzwx9o/bin/python\",\n    \"version\": \"3.12\"\n  }\n}\n"
+        },
+        "threadpools": [
+          {
+            "user_api": "blas",
+            "internal_api": "openblas",
+            "num_threads": 1,
+            "prefix": "libscipy_openblas",
+            "filepath": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/.venv-lawrence-export/lib/python3.12/site-packages/scipy.libs/libscipy_openblas-5f890258.so",
+            "version": "0.3.31.dev",
+            "threading_layer": "pthreads",
+            "architecture": "SkylakeX"
+          },
+          {
+            "user_api": "blas",
+            "internal_api": "openblas",
+            "num_threads": 1,
+            "prefix": "libscipy_openblas",
+            "filepath": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/.venv-lawrence-export/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so",
+            "version": "0.3.34.106.0",
+            "threading_layer": "pthreads",
+            "architecture": "SkylakeX"
+          }
+        ],
+        "thread_limits": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "BLIS_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1"
+        },
+        "runner_sha256": "dd9e07d4955de6cf4cac97eec0485bfc34bd1d7f8173d4707718c2ea4ba89034",
+        "cpu_model": "Intel(R) Xeon(R) Gold 5118 CPU @ 2.30GHz",
+        "available_cpus": 2
+      }
+    },
+    "linux_export": {
+      "implementation": {
+        "git_commit": null,
+        "source_sha256": {
+          "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+          "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+          "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+          "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+          "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+          "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+          "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+          "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+          "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+          "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+          "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+          "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+          "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+          "src/phononic/resumable_scattering_AP_pnc.py": "dba6002d982647810f3fc714fdce73a0f34e306e06e8519df2d54778002205ec",
+          "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+          "src/phononic/workflow_AP_pnc.py": "0bdfc18674d68ae3f62947001f0a8aa0591f466e4d1ba895f0f962fb0bb3915d",
+          "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+        },
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2",
+          "meshio": "5.3.5",
+          "gmsh": "4.15.2",
+          "matplotlib": "3.11.2",
+          "psutil": "7.2.2"
+        },
+        "python": "3.12.12",
+        "platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28"
+      },
+      "driver": {
+        "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/tools/run_lawrence_frequency_point_AP_pnc.py",
+        "sha256": "9b1a74fc50ec3e2fe1282ec05f5d21783be27b2a86cb81201f122426ff148045",
+        "bytes": 27523
+      },
+      "hostname": "node050.lawrence",
+      "slurm_job_id": "1335632",
+      "numerical_thread_environment": {
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "BLIS_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1"
+      },
+      "numerical_backend": {
+        "python": "3.12.12",
+        "platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28",
+        "machine": "x86_64",
+        "node": "node050.lawrence",
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "build_configs": {
+          "numpy": "{\n  \"Compilers\": {\n    \"c\": {\n      \"name\": \"gcc\",\n      \"linker\": \"ld.bfd\",\n      \"version\": \"14.2.1\",\n      \"commands\": \"cc\"\n    },\n    \"cython\": {\n      \"name\": \"cython\",\n      \"linker\": \"cython\",\n      \"version\": \"3.3.0\",\n      \"commands\": \"cython\"\n    },\n    \"c++\": {\n      \"name\": \"gcc\",\n      \"linker\": \"ld.bfd\",\n      \"version\": \"14.2.1\",\n      \"commands\": \"c++\"\n    }\n  },\n  \"Machine Information\": {\n    \"host\": {\n      \"cpu\": \"x86_64\",\n      \"family\": \"x86_64\",\n      \"endian\": \"little\",\n      \"system\": \"linux\"\n    },\n    \"build\": {\n      \"cpu\": \"x86_64\",\n      \"family\": \"x86_64\",\n      \"endian\": \"little\",\n      \"system\": \"linux\"\n    }\n  },\n  \"Build Dependencies\": {\n    \"blas\": {\n      \"name\": \"scipy-openblas\",\n      \"found\": true,\n      \"version\": \"0.3.34.106.0\",\n      \"detection method\": \"pkgconfig\",\n      \"include directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas64/include\",\n      \"lib directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas64/lib\",\n      \"openblas configuration\": \"OpenBLAS 0.3.34.106.0  USE64BITINT DYNAMIC_ARCH NO_AFFINITY SkylakeX MAX_THREADS=64\",\n      \"pc file directory\": \"/project/.openblas\"\n    },\n    \"lapack\": {\n      \"name\": \"scipy-openblas\",\n      \"found\": true,\n      \"version\": \"0.3.34.106.0\",\n      \"detection method\": \"pkgconfig\",\n      \"include directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas64/include\",\n      \"lib directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas64/lib\",\n      \"openblas configuration\": \"OpenBLAS 0.3.34.106.0  USE64BITINT DYNAMIC_ARCH NO_AFFINITY SkylakeX MAX_THREADS=64\",\n      \"pc file directory\": \"/project/.openblas\"\n    }\n  },\n  \"Python Information\": {\n    \"path\": \"/tmp/build-env-ptu49_tp/bin/python\",\n    \"version\": \"3.12\"\n  },\n  \"SIMD Extensions\": {\n    \"baseline\": [\n      \"X86_V2\"\n    ],\n    \"found\": [\n      \"X86_V3\",\n      \"X86_V4\"\n    ],\n    \"not found\": [\n      \"AVX512_ICL\",\n      \"AVX512_SPR\"\n    ]\n  }\n}\n",
+          "scipy": "{\n  \"Compilers\": {\n    \"c\": {\n      \"name\": \"gcc\",\n      \"linker\": \"ld.bfd\",\n      \"version\": \"14.2.1\",\n      \"commands\": \"cc\"\n    },\n    \"cython\": {\n      \"name\": \"cython\",\n      \"linker\": \"cython\",\n      \"version\": \"3.2.9\",\n      \"commands\": \"cython\"\n    },\n    \"c++\": {\n      \"name\": \"gcc\",\n      \"linker\": \"ld.bfd\",\n      \"version\": \"14.2.1\",\n      \"commands\": \"c++\"\n    },\n    \"fortran\": {\n      \"name\": \"gcc\",\n      \"linker\": \"ld.bfd\",\n      \"version\": \"14.2.1\",\n      \"commands\": \"gfortran\"\n    },\n    \"pythran\": {\n      \"version\": \"0.19.0\",\n      \"include directory\": \"../../../tmp/build-env-3zxzwx9o/lib/python3.12/site-packages/pythran\"\n    }\n  },\n  \"Machine Information\": {\n    \"host\": {\n      \"cpu\": \"x86_64\",\n      \"family\": \"x86_64\",\n      \"endian\": \"little\",\n      \"system\": \"linux\"\n    },\n    \"build\": {\n      \"cpu\": \"x86_64\",\n      \"family\": \"x86_64\",\n      \"endian\": \"little\",\n      \"system\": \"linux\"\n    },\n    \"cross-compiled\": false\n  },\n  \"Build Dependencies\": {\n    \"blas\": {\n      \"name\": \"scipy-openblas\",\n      \"found\": true,\n      \"version\": \"0.3.31.dev\",\n      \"detection method\": \"pkgconfig\",\n      \"include directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas32/include\",\n      \"lib directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas32/lib\",\n      \"openblas configuration\": \"OpenBLAS 0.3.31.dev DYNAMIC_ARCH NO_AFFINITY Haswell MAX_THREADS=64\",\n      \"pc file directory\": \"/project/.openblas\",\n      \"has ilp64\": false,\n      \"cython blas ilp64\": false\n    },\n    \"lapack\": {\n      \"name\": \"scipy-openblas\",\n      \"found\": true,\n      \"version\": \"0.3.31.dev\",\n      \"detection method\": \"pkgconfig\",\n      \"include directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas32/include\",\n      \"lib directory\": \"/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas32/lib\",\n      \"openblas configuration\": \"OpenBLAS 0.3.31.dev DYNAMIC_ARCH NO_AFFINITY Haswell MAX_THREADS=64\",\n      \"pc file directory\": \"/project/.openblas\",\n      \"has ilp64\": false\n    },\n    \"pybind11\": {\n      \"name\": \"pybind11\",\n      \"version\": \"3.0.4\",\n      \"detection method\": \"config-tool\",\n      \"include directory\": \"unknown\"\n    }\n  },\n  \"Python Information\": {\n    \"path\": \"/tmp/build-env-3zxzwx9o/bin/python\",\n    \"version\": \"3.12\"\n  }\n}\n"
+        },
+        "threadpools": [
+          {
+            "user_api": "blas",
+            "internal_api": "openblas",
+            "num_threads": 1,
+            "prefix": "libscipy_openblas",
+            "filepath": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/.venv-lawrence-export/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so",
+            "version": "0.3.34.106.0",
+            "threading_layer": "pthreads",
+            "architecture": "SkylakeX"
+          },
+          {
+            "user_api": "blas",
+            "internal_api": "openblas",
+            "num_threads": 1,
+            "prefix": "libscipy_openblas",
+            "filepath": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/.venv-lawrence-export/lib/python3.12/site-packages/scipy.libs/libscipy_openblas-5f890258.so",
+            "version": "0.3.31.dev",
+            "threading_layer": "pthreads",
+            "architecture": "SkylakeX"
+          }
+        ],
+        "thread_limits": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "BLIS_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1"
+        },
+        "runner_sha256": "dd9e07d4955de6cf4cac97eec0485bfc34bd1d7f8173d4707718c2ea4ba89034",
+        "cpu_model": "Intel(R) Xeon(R) Gold 5118 CPU @ 2.30GHz",
+        "available_cpus": 2
+      }
+    },
+    "prepared_frequency_stage": {
+      "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/runs/h80-z6-frequency-887500000-stage-1335628/stage_AP_pnc.json",
+      "sha256": "898aab687d27ec0df05fa509bc576fc4bf68930e12568c849e640e2cbe73db19",
+      "bytes": 28976
+    },
+    "solve_receipt": {
+      "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/runs/h80-z6-frequency-887500000-solve-1335630/solve_AP_pnc.json",
+      "sha256": "ba30a75839f9e7ef3d29ae246cbfc89211f834474f8c40e5bdafb2fab44fa00b",
+      "bytes": 22903
+    },
+    "mesh_generated": false,
+    "body_assembly_performed": false,
+    "safe_eigensolve_performed": false,
+    "phase_adjustment_applied": false,
+    "body_stage": {
+      "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/runs/thickness-h80-stage-1335309/stage_AP_pnc.json",
+      "sha256": "95c1cfde8d51d77ab74fe9d2c424c1eda0822556a30664cbe581999f97e0ea5f",
+      "bytes": 24617
+    },
+    "interval_inputs": {
+      "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/inputs/device_frequency_8875_AP_pnc/inputs_AP_pnc.json",
+      "sha256": "e14c59270fcf53d0b26ec41fe46db25ec0d208936101e1f456c50ecf9b05ed26",
+      "bytes": 9329
+    },
+    "interval_point": {
+      "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/inputs/device_frequency_8875_AP_pnc/point-887500000_AP_pnc.json",
+      "sha256": "a53557ae5365570a39046b68f12eb0fd0e9e620d7df7d080561ec998e552e6e8",
+      "bytes": 5035
+    },
+    "interval_ledger": {
+      "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/verification/port_count_interval_AP_pnc.json",
+      "sha256": "ada05174f12e937bc709b124de6ff97956381ceceb9f2f8595c863b91bdd517f",
+      "bytes": 69754
+    },
+    "open_channels": [
+      {
+        "root_id": 1877,
+        "direction": "positive",
+        "k_real_rad_m": 745901.1601195382,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": 1.0000000000000007,
+        "eigen_backward_residual": 2.861115330410197e-15,
+        "root_degeneracy": "none_detected"
+      },
+      {
+        "root_id": 1881,
+        "direction": "positive",
+        "k_real_rad_m": 1281182.429477816,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": 0.9999999999999993,
+        "eigen_backward_residual": 2.4120668624820463e-15,
+        "root_degeneracy": "none_detected"
+      },
+      {
+        "root_id": 1870,
+        "direction": "positive",
+        "k_real_rad_m": 2579218.718426352,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": 1.0000000000000013,
+        "eigen_backward_residual": 2.077369986613891e-15,
+        "root_degeneracy": "none_detected"
+      },
+      {
+        "root_id": 1858,
+        "direction": "positive",
+        "k_real_rad_m": 3727529.103146778,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": 0.9999999999999993,
+        "eigen_backward_residual": 3.14519473644895e-15,
+        "root_degeneracy": "none_detected"
+      },
+      {
+        "root_id": 1851,
+        "direction": "positive",
+        "k_real_rad_m": 4869237.711712134,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": 0.9999999999999989,
+        "eigen_backward_residual": 3.4639412680957385e-15,
+        "root_degeneracy": "none_detected"
+      },
+      {
+        "root_id": 1878,
+        "direction": "negative",
+        "k_real_rad_m": -745901.1601195382,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": -1.0000000000000007,
+        "eigen_backward_residual": 2.861115330410197e-15,
+        "root_degeneracy": "none_detected"
+      },
+      {
+        "root_id": 1882,
+        "direction": "negative",
+        "k_real_rad_m": -1281182.429477816,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": -0.9999999999999993,
+        "eigen_backward_residual": 2.4120668624820463e-15,
+        "root_degeneracy": "none_detected"
+      },
+      {
+        "root_id": 1871,
+        "direction": "negative",
+        "k_real_rad_m": -2579218.718426352,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": -1.0000000000000013,
+        "eigen_backward_residual": 2.077369986613891e-15,
+        "root_degeneracy": "none_detected"
+      },
+      {
+        "root_id": 1859,
+        "direction": "negative",
+        "k_real_rad_m": -3727529.103146778,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": -0.9999999999999993,
+        "eigen_backward_residual": 3.14519473644895e-15,
+        "root_degeneracy": "none_detected"
+      },
+      {
+        "root_id": 1852,
+        "direction": "negative",
+        "k_real_rad_m": -4869237.711712134,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": -0.9999999999999989,
+        "eigen_backward_residual": 3.4639412680957385e-15,
+        "root_degeneracy": "none_detected"
+      }
+    ],
+    "original_section_implementation": {
+      "git_commit": null,
+      "source_sha256": {
+        "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+        "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+        "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+        "src/phononic/resumable_scattering_AP_pnc.py": "dba6002d982647810f3fc714fdce73a0f34e306e06e8519df2d54778002205ec",
+        "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+        "src/phononic/workflow_AP_pnc.py": "0bdfc18674d68ae3f62947001f0a8aa0591f466e4d1ba895f0f962fb0bb3915d",
+        "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+      },
+      "packages": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "scikit-fem": "12.0.2",
+        "meshio": "5.3.5",
+        "gmsh": "4.15.2",
+        "matplotlib": "3.11.2",
+        "psutil": "7.2.2"
+      },
+      "python": "3.12.12",
+      "platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28"
+    },
+    "section_mode_implementation": {
+      "source_sha256": {
+        "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+        "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+        "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/mesh_checkpoint_AP_pnc.py": "a735b75f1883c59df5fe93fab20b494c037d186dcba96b30bd9c3c7dd9420af6",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+        "src/phononic/resumable_scattering_AP_pnc.py": "dba6002d982647810f3fc714fdce73a0f34e306e06e8519df2d54778002205ec",
+        "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+        "src/phononic/workflow_AP_pnc.py": "0bdfc18674d68ae3f62947001f0a8aa0591f466e4d1ba895f0f962fb0bb3915d",
+        "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+      },
+      "packages": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "scikit-fem": "12.0.2",
+        "meshio": "5.3.5",
+        "gmsh": "4.15.2",
+        "matplotlib": "3.11.2",
+        "psutil": "7.2.2"
+      },
+      "python": "3.12.14",
+      "platform": "Windows-11-10.0.26200-SP0"
+    },
+    "section_mode_execution_provenance": {
+      "git_commit": "764eb01c5189c270038323bb042e5c2a5aebdc9b"
+    },
+    "cross_frequency_branch_identity": "unresolved",
+    "safe_section": {
+      "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/runs/thickness-h80-safe-1335308/ports_AP_pnc.npz",
+      "sha256": "a13a58e47dee91e4c7d75bb9ec77feb7656ae674392c2f1d7485129da76d0e6a",
+      "bytes": 27241396
+    },
+    "safe_modes": {
+      "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/inputs/device_frequency_8875_AP_pnc/modes-887500000_AP_pnc.npz",
+      "sha256": "93e4e089e6b329244b204ca10e3612653824b1e569476a51ea1924654a83b81c",
+      "bytes": 27210194
+    },
+    "safe_receipt": {
+      "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/runs/thickness-h80-safe-1335308/thickness_h80_safe_AP_pnc.json",
+      "sha256": "b5c0d73656e90aa5ba312939c0ef25633af5a775974f5fc778031584d55c78f3",
+      "bytes": 12992
+    },
+    "trace_sha256": "3329f7c51b36d61862ee44edecca35beddc73721e58a616b7685e58b383655be",
+    "reference_planes_m": [
+      0.0,
+      1.665e-05
+    ],
+    "cutoff_status": "solver_resolved_at_sample",
+    "degeneracy_status": "none_detected"
+  },
+  "mesh_checkpoint": {
+    "mesh_hash": "1bf38811f140f1c62e9b2cdbc71266dabd78a70c144aae519e77fd481ffccef2",
+    "mesh_sha256": "e9c17e3fe0e2effd1c898d29701f393572d32bfbe7331464b35604940a62a918",
+    "directory": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/runs/thickness-h80-preflight-1335307/_meshes/1bf38811f140f1c62e9b2cdbc71266dabd78a70c144aae519e77fd481ffccef2"
+  },
+  "ndof": 616239,
+  "mesh_vertices": 29750,
+  "mesh_tetrahedra": 130968,
+  "end_face_dofs": {
+    "xleft": 975,
+    "xright": 975
+  },
+  "boundary_facet_counts": {
+    "xleft": 144,
+    "xright": 144,
+    "free": 29552
+  },
+  "geometry_diagnostics": {
+    "analytic_solid_volume_m3": 3.062532655455e-18,
+    "meshed_solid_volume_m3": 3.064247963349631e-18,
+    "analytic_removed_volume_m3": 2.674673445450011e-19,
+    "meshed_removed_volume_m3": 2.657520366503703e-19,
+    "relative_solid_volume_error": 0.0005600945647307897,
+    "relative_removed_volume_error": 0.006413148855793134,
+    "rim_segments_min": 32,
+    "rim_segments_max": 32,
+    "max_radial_sagitta_m": 6.621000825729834e-10
+  },
+  "assembly_method": "batched",
+  "assembly_resources": {
+    "peak_process_memory_mib": 1984.87890625,
+    "system_available_memory_mib_at_start": 88118.359375,
+    "process_lifetime_peak_working_set_mib": 950.40625,
+    "elapsed_seconds": 136.29468428716063
+  },
+  "linear_solver": {
+    "method": "lawrence_device_thickness_superlu_direct",
+    "working_dtype": "complex128",
+    "operator_csc_sha256": "3b9b459c3e54740daa17298e6da2a7909ce6304ab8b7594a35e3636d4f9d300b",
+    "rhs_array_sha256": "23787febab6235b6cd63694b7975269b5e5cf4f3ad159d23e03f75caff783740",
+    "operator_nonzeros": 48826577,
+    "relative_target": 1e-10,
+    "relative_residual_limit": 1e-09,
+    "backward_residual_limit": 1e-09,
+    "channels": [
+      {
+        "column": 0,
+        "update": 1,
+        "target_met": true,
+        "relative_residual": 8.481472981823717e-12,
+        "relative_backward_residual": 5.314261907036317e-16,
+        "incident_port_root": 1877,
+        "info": 0,
+        "accepted_vector": {
+          "file": "accepted-000_AP_pnc.npy",
+          "bytes": 9859952,
+          "sha256": "5be480b04116adbbad69084f76b6fafd591dc75b974e9e0816ee625999e20b2c"
+        }
+      },
+      {
+        "column": 1,
+        "update": 1,
+        "target_met": true,
+        "relative_residual": 2.1655259983500147e-12,
+        "relative_backward_residual": 7.055582306463802e-16,
+        "incident_port_root": 1881,
+        "info": 0,
+        "accepted_vector": {
+          "file": "accepted-001_AP_pnc.npy",
+          "bytes": 9859952,
+          "sha256": "5cbe4a51e8f420f265c0f6154ecd4e46d708b3a8abbcb70b538775f33ca49111"
+        }
+      },
+      {
+        "column": 2,
+        "update": 1,
+        "target_met": true,
+        "relative_residual": 2.221608178431005e-12,
+        "relative_backward_residual": 6.697894096054556e-16,
+        "incident_port_root": 1870,
+        "info": 0,
+        "accepted_vector": {
+          "file": "accepted-002_AP_pnc.npy",
+          "bytes": 9859952,
+          "sha256": "e8f52d3ba3395e759e1b8e2912c79e39af8a5c6c92341db0fefdbe4bad609499"
+        }
+      },
+      {
+        "column": 3,
+        "update": 1,
+        "target_met": true,
+        "relative_residual": 2.859573769222777e-12,
+        "relative_backward_residual": 1.2087426258338604e-15,
+        "incident_port_root": 1858,
+        "info": 0,
+        "accepted_vector": {
+          "file": "accepted-003_AP_pnc.npy",
+          "bytes": 9859952,
+          "sha256": "8288d8ee766737b2692a24180a4e573c3142dbf3f3c88e2bbfe00e5620e6d9aa"
+        }
+      },
+      {
+        "column": 4,
+        "update": 1,
+        "target_met": true,
+        "relative_residual": 2.330920882855038e-12,
+        "relative_backward_residual": 8.799995986000069e-16,
+        "incident_port_root": 1851,
+        "info": 0,
+        "accepted_vector": {
+          "file": "accepted-004_AP_pnc.npy",
+          "bytes": 9859952,
+          "sha256": "92caa211629f5811e2e0c16a98ff4fda42566ba0b84adf9580fcd9385963ca7c"
+        }
+      }
+    ],
+    "factor_admission": {
+      "slurm_node_quota_bytes": 137438953472,
+      "estimated_incremental_bytes": 61086756312,
+      "job_headroom_required_bytes": 69676690904,
+      "node_available_required_bytes": 61506186712,
+      "before_factor": {
+        "node_available_bytes": 1597380460544,
+        "job_headroom_bytes": 135220428800,
+        "worker_rss_bytes": 1144524800,
+        "cgroups": [
+          {
+            "path": "/sys/fs/cgroup/memory/slurm/uid_735814150/job_1335630/step_batch/task_0",
+            "limit_bytes": null,
+            "effective_limit_bytes": 137438953472,
+            "current_bytes": 2217709568,
+            "peak": "2227601408",
+            "events": "0"
+          },
+          {
+            "path": "/sys/fs/cgroup/memory/slurm/uid_735814150/job_1335630/step_batch",
+            "limit_bytes": 137438953472,
+            "effective_limit_bytes": 137438953472,
+            "current_bytes": 2218057728,
+            "peak": "2227949568",
+            "events": "0"
+          },
+          {
+            "path": "/sys/fs/cgroup/memory/slurm/uid_735814150/job_1335630",
+            "limit_bytes": 137438953472,
+            "effective_limit_bytes": 137438953472,
+            "current_bytes": 2218524672,
+            "peak": "2228416512",
+            "events": "0"
+          }
+        ]
+      },
+      "admitted": true
+    },
+    "factor": {
+      "permc_spec": "COLAMD",
+      "factor_seconds": 1964.850838828832,
+      "factor_nonzeros": 1846932631
+    },
+    "last_memory_boundary": {
+      "node_available_bytes": 1563523067904,
+      "job_headroom_bytes": 101331189760,
+      "worker_rss_bytes": 34915680256,
+      "cgroups": [
+        {
+          "path": "/sys/fs/cgroup/memory/slurm/uid_735814150/job_1335630/step_batch/task_0",
+          "limit_bytes": null,
+          "effective_limit_bytes": 137438953472,
+          "current_bytes": 36106825728,
+          "peak": "37340143616",
+          "events": "0"
+        },
+        {
+          "path": "/sys/fs/cgroup/memory/slurm/uid_735814150/job_1335630/step_batch",
+          "limit_bytes": 137438953472,
+          "effective_limit_bytes": 137438953472,
+          "current_bytes": 36107251712,
+          "peak": "37340565504",
+          "events": "0"
+        },
+        {
+          "path": "/sys/fs/cgroup/memory/slurm/uid_735814150/job_1335630",
+          "limit_bytes": 137438953472,
+          "effective_limit_bytes": 137438953472,
+          "current_bytes": 36107763712,
+          "peak": "37341077504",
+          "events": "0"
+        }
+      ]
+    }
+  },
+  "scattering_resources": {
+    "peak_process_memory_mib": 3787.96875,
+    "system_available_memory_mib_at_start": 87835.9765625,
+    "process_lifetime_peak_working_set_mib": 1031.703125,
+    "elapsed_seconds": 9.513220626860857
+  },
+  "frequency_hz": 887500000.0,
+  "incident_side": "left",
+  "incident_mode_indices": [
+    1877,
+    1881,
+    1870,
+    1858,
+    1851
+  ],
+  "num_incident_channels": 5,
+  "port_dofs": 975,
+  "discrete_port_roots": 1950,
+  "maximum_relative_port_residual": 4.175197456634949e-15,
+  "port_basis_condition": [
+    71.37966143025035,
+    71.37966143025139
+  ],
+  "maximum_reflection": 0.023063267048504785,
+  "max_power_imbalance": 4.618527782440651e-14,
+  "maximum_flux_power_imbalance": 1.3988810110276972e-14,
+  "maximum_net_outward_power_ratio": 1.4988010832439623e-14,
+  "maximum_modal_flux_difference": 6.006306563222097e-14,
+  "power_balance_passed": true,
+  "matched_reference_passed": null,
+  "scattering_power_normalization_available": true,
+  "matched_reference_scope": "The unit-transmission reference applies to uniform guides",
+  "field_normalization": "Response per square root of incident watt; visualization has arbitrary amplitude; VTU samples vertices",
+  "maximum_relative_solver_residual": 1.2087426258338604e-15,
+  "solved_frequency_rows": 5,
+  "selected_frequencies_hz": [
+    887500000.0,
+    887500000.0,
+    887500000.0,
+    887500000.0,
+    887500000.0
+  ],
+  "peak_process_memory_mib": 3787.96875,
+  "system_available_memory_mib_at_start": 87835.9765625,
+  "process_lifetime_peak_working_set_mib": 1084.9140625,
+  "elapsed_seconds": 15.878018103539944,
+  "numerical_interpretation": "Solved 3D model; convergence and physical adequacy require separate evidence",
+  "output_sha256": {
+    "configuration_AP_pnc.json": "c14ebeace277c5f6cfabd7b5f1e9f352b9e8a0f5eb788f5240109288c923420e",
+    "selected_vertex_shapes_AP_pnc.vtu": "f712d04ff081a2533ed78630e6af4ef2ae43675aa8299676cb1454303338d22d",
+    "scattering_channels_AP_pnc.csv": "205edc42f31f3dab09336f8ec934f70844d6c6046baf3d0937c11ff7e0331b82",
+    "port_modes_AP_pnc.csv": "f762ea51e71fd80da1f38902ba80467e03dc48833255aa28e47a3348f151b362",
+    "selected_fields_AP_pnc.npz": "4b84db98c7f80f244cc89726128e1ccd7b3a000bc00a33e786e8f6e53c654ce1",
+    "scattering_AP_pnc.csv": "2c17e9a91b72cf477ebd9bedbd1ba42aa16dda92b227f0a9f6d45371d5b7a35f",
+    "report_AP_pnc.html": "6c784be75828bb5de0846b76325aa06808fc1cbfd8d27da9cba6921b76885905",
+    "hole_pattern_AP_pnc.json": "8bad9c22c1a4f5df9e31615f8107c89a3fb4f7daa70df8aecf3dd624d11eabe9"
+  },
+  "output_bytes": 101947829
+}

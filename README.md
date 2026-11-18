@@ -27,15 +27,17 @@ You can also double-click `Launch_Workbench_AP_pnc.cmd`. Choose a preset, edit i
 
 The current delivery joins the accepted h80 six-layer device responses at **0.1, 0.8875 and 1 GHz** through **Open device results** in the workbench. The view selects a frequency and incident channel, shows T/R and native complex conversion coefficients, exports CSVs, and links the original configuration, fields and numerical controls. It uses retained small summaries/CSVs, without starting a solve.
 
-The same read-only entry point is available from the command line:
+The same read-only entry point works from a clean clone using Python's standard library; the numerical environment and workspace archive are not required:
 
 ```powershell
-.\.venv\Scripts\python.exe -B tools/browse_device_results_AP_pnc.py --open
+python -B tools/browse_device_results_AP_pnc.py --open
 ```
 
 There are **14 incident-drive rows and 132 complex coefficients** across the three sparse samples. Root numbers are local to each frequency; the four/five-channel transition is explicit. The saved 0.8875/1 GHz endpoint correspondence is linked, not recomputed. Missing frequencies are not interpolated into a spectrum.
 
-The archived arrays are not included in a fresh Git clone. The browser uses the retained workspace archive and reports missing inputs clearly. The portable scientific records below remain available in Git. Existing original fields stay in place; an exported table or generated report is not a self-contained copy of all arrays.
+The compact bundle in [data/saved_device_AP_pnc](data/saved_device_AP_pnc) contains exact saved summaries, configurations, modal/response tables and finite-control records (26 files, 1,335,747 bytes). The single [dataset manifest](configs/saved_device_dataset_AP_pnc.json) pins their original hashes and reuses the already tracked 1 GHz acceptance record and hole-geometry CSV. It reproduces the accepted three-frequency tables without simulation. The browser links each exact configuration and its hole table, and retains failed sensitivity criteria and unresolved convergence.
+
+Full quadratic fields, vertex visualization, original 3D reports and comparison reports are **archive-only**. They are labeled accordingly and linked only when present in the original workspace; a clean clone does not download or rebuild them. Historical paths inside the unchanged summaries are provenance, not bundled files. This is a portable data-review bundle, not a self-contained numerical replay of the original equations or a full-field archive.
 
 ## Configure a study
 

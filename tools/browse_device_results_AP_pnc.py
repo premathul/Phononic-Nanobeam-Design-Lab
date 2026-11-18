@@ -74,7 +74,7 @@ def _table(directory, name, hashes, sources):
 
 
 def load_dataset(manifest: Path = DEFAULT_MANIFEST, *, root: Path = ROOT) -> dict:
-    """Read pinned compact sources; fields and original reports are linked by existence only."""
+    """Read pinned compact sources; archive-only fields/reports are checked for existence."""
     root = Path(root).resolve()
     manifest = Path(manifest).resolve()
     text, manifest_record = _read_small(manifest)
@@ -102,6 +102,8 @@ def load_dataset(manifest: Path = DEFAULT_MANIFEST, *, root: Path = ROOT) -> dic
             accepted_summary = evidence["public_summary_sha256"]
         _require(accepted_summary == entry["summary"]["sha256"], "Recorded acceptance refers to another public summary.")
         directory, hashes = summary_path.parent, summary["output_sha256"]
+        archive_directory = (root / entry.get("archive_directory", directory)).resolve()
+        _require(archive_directory.is_relative_to(root), "An original run directory escapes the workspace.")
         config_text, config_record = _read_small(directory / "configuration_AP_pnc.json", hashes["configuration_AP_pnc.json"])
         sources.append(config_record)
         configuration = json.loads(config_text)
@@ -164,15 +166,29 @@ def load_dataset(manifest: Path = DEFAULT_MANIFEST, *, root: Path = ROOT) -> dic
              "Shape-normalized real/imaginary vertex samples for at most the first four drives; not the complete quadratic field."),
             ("configuration_AP_pnc.json", "Resolved configuration", "Exact saved inputs for this accepted computation."),
         ):
-            path = directory / filename
+            archive_only = filename != "configuration_AP_pnc.json" and "archive_directory" in entry
+            path = (archive_directory if archive_only else directory) / filename
+            available = path.is_file()
             artifacts.append({"label": label, "description": description, "path": str(path),
-                              "available": path.is_file(), "recorded_sha256": hashes.get(filename),
+                              "available": available, "archive_only": archive_only,
+                              "missing_in_clone": archive_only and not available,
+                              "recorded_sha256": hashes.get(filename),
+                              "full_field_bytes_reverified": False})
+        hole_pattern = summary.get("hole_pattern_provenance")
+        if hole_pattern is not None:
+            path, _ = _source(root, {"path": hole_pattern["source_csv"],
+                                    "sha256": hole_pattern["source_sha256"]}, sources)
+            artifacts.append({"label": "Exact hole geometry table (CSV)",
+                              "description": "Pinned source table used for the saved hole pattern and placement.",
+                              "path": str(path), "available": True, "archive_only": False,
+                              "missing_in_clone": False, "recorded_sha256": hole_pattern["source_sha256"],
                               "full_field_bytes_reverified": False})
         points.append({"id": entry["id"], "frequency_hz": frequency, "configuration": configuration,
                        "incident_roots": roots, "reflected_roots": backward,
                        "reference_planes_m": evidence.get("reference_planes_m", [0.0, configuration["geometry"]["length_nm"] * 1e-9]),
                        "recorded_evidence_status": evidence["status"], "point_status": "accepted_within_saved_discretization",
                        "source_summary": str(summary_path), "source_evidence": str(evidence_path),
+                       "archive_directory": str(archive_directory),
                        "spatial_convergence_established": False, "frequency_convergence_established": False,
                        "drives": drives, "coefficients": coefficients, "artifacts": artifacts})
     _require(len({point["id"] for point in points}) == len(points), "Saved point IDs must be distinct.")
@@ -183,7 +199,8 @@ def load_dataset(manifest: Path = DEFAULT_MANIFEST, *, root: Path = ROOT) -> dic
         _require(report.is_relative_to(root), "A comparison report escapes the workspace.")
         controls.append({"label": entry["label"], "interpretation": entry["interpretation"],
                          "recorded_status": json.loads(text).get("status", "recorded_finite_control"), "source": str(source),
-                         "report": str(report), "available": report.is_file()})
+                         "report": str(report), "available": report.is_file(), "archive_only": True,
+                         "missing_in_clone": not report.is_file()})
     return {"author": "Athul Prem", "file_tag": "_AP_pnc", "schema_version": 1,
             "artifact_kind": "saved_device_results_browser", "title": selection["title"], "scope": SCOPE,
             "computation_enabled": False, "spatial_convergence_established": False,
@@ -210,18 +227,22 @@ def _report(dataset, output):
     view = json.loads(json.dumps(dataset))
     for point in view["points"]:
         for artifact in point["artifacts"]:
-            artifact["href"] = _href(artifact["path"], output)
+            if artifact["available"]:
+                artifact["href"] = _href(artifact["path"], output)
         point["evidence_href"] = _href(point["source_evidence"], output)
         point["summary_href"] = _href(point["source_summary"], output)
     sample_rows = "".join(
         f'<tr><td>{point["frequency_hz"] / 1e9:g} GHz</td><td>{len(point["incident_roots"])}</td><td>'
-        + " · ".join(f'<a href="{escape(artifact["href"], quote=True)}">{escape(artifact["label"])}</a>'
-                     for artifact in point["artifacts"]
-                     if artifact["available"] and Path(artifact["path"]).suffix in (".html", ".json"))
+        + " · ".join(
+            (f'<a href="{escape(artifact["href"], quote=True)}">{escape(artifact["label"])}</a>'
+             + (" (archive-only)" if artifact["archive_only"] else "")) if artifact["available"] else
+            escape(artifact["label"]) + (" — archive-only; missing from this clone" if artifact["missing_in_clone"]
+                                         else " — unavailable")
+            for artifact in point["artifacts"] if Path(artifact["path"]).suffix in (".html", ".json", ".csv"))
         + '</td></tr>' for point in view["points"])
     controls = "".join(f'<tr><td>{escape(row["label"])}</td><td>{escape(row["interpretation"])}</td><td>'
-                       + (f'<a href="{escape(_href(row["report"], output), quote=True)}">Saved report</a> · '
-                          if row["available"] else "Report unavailable · ")
+                       + (f'<a href="{escape(_href(row["report"], output), quote=True)}">Saved report (archive-only)</a> · '
+                          if row["available"] else "Report archive-only; missing from this clone · ")
                        + f'<a href="{escape(_href(row["source"], output), quote=True)}">Recorded evidence</a></td></tr>'
                        for row in view["controls"])
     payload = json.dumps(view, ensure_ascii=False, allow_nan=False).replace("<", "\\u003c").replace("&", "\\u0026")
@@ -233,7 +254,7 @@ label{display:inline-block;margin:0 1.5rem .8rem 0}select{font:inherit;padding:.
 th,td{text-align:left;padding:.6rem;border-bottom:1px solid #e3e9ed}pre{white-space:pre-wrap;overflow-wrap:anywhere}
 .summary{font-size:1.2rem;font-weight:600}.muted{color:#465c6d}a{color:#075ba4}#coeffwrap{overflow-x:auto}
 </style><h1>''' + escape(dataset["title"]) + '''</h1><p>Athul Prem | athul_simulation_pnc_saved_device_results</p><p>'''
-            + escape(SCOPE) + '''</p><table><thead><tr><th>Saved sample</th><th>Incident channels</th><th>Original files</th></tr></thead><tbody>'''
+            + escape(SCOPE) + '''</p><table><thead><tr><th>Saved sample</th><th>Incident channels</th><th>Saved files</th></tr></thead><tbody>'''
             + sample_rows + '''</tbody></table><p><a href="''' + DRIVES + '''">Export per-drive powers (CSV)</a> ·
 <a href="''' + COEFFICIENTS + '''">Export native complex coefficients (CSV)</a> · <a href="''' + DATA + '''">Inputs, status and sources (JSON)</a></p>
 <section><label>Frequency <select id="frequency" aria-label="Frequency"></select></label>
@@ -247,9 +268,11 @@ Changing frequency does not associate roots or interpolate a spectrum.</p></sect
 <details><summary>Resolved configuration and reproduction guidance</summary><pre id="configuration"></pre>
 <p>The linked configuration records the original geometry, nominal material, mesh, frequency and resource inputs.
 Recomputing a device point requires measured resource admission and the archived numerical environment;
-this browser only reads compact saved data. Existing NPZ, VTU and field reports are linked by file availability;
-their large contents are not loaded or reverified here.</p>
-<p>Rebuild this browser from the project directory with <code>.venv/Scripts/python.exe -B tools/browse_device_results_AP_pnc.py</code>,
+this browser only reads compact saved data. The compact review bundle includes exact saved tables, configurations,
+hole geometry and acceptance/control records; it is not an executable reproduction bundle. Original paths inside
+these records retain archival provenance. NPZ, VTU and field/control reports remain archive-only and are linked
+only when present in this workspace; their large contents are not loaded or reverified here.</p>
+<p>Rebuild this browser from the project directory using standard-library Python with <code>python -B tools/browse_device_results_AP_pnc.py</code>,
 or use <strong>Open device results</strong> in the workbench. The JSON export retains the exact compact source identities.</p>
 </details></section><section><h2>Accepted endpoint relation and finite controls</h2>
 <p>The 0.1 GHz inventory has four channels per direction; the other points have five. Its roots remain separate.
@@ -276,9 +299,10 @@ function showPoint(){
  document.getElementById('planes').textContent='Reference planes x = '+p.reference_planes_m.map(x=>fmt(x*1e6)).join(' and ')+' µm; left incidence.';
  document.getElementById('configuration').textContent=JSON.stringify(p.configuration,null,2);
  const list=document.getElementById('artifacts');list.replaceChildren();
- for(const a of p.artifacts){const li=document.createElement('li');if(a.available)li.append(link(a.label,a.href));else li.textContent=a.label+' — unavailable';
+ for(const a of p.artifacts){const li=document.createElement('li');if(a.available){li.append(link(a.label,a.href));if(a.archive_only)li.append(document.createTextNode(' — archive-only'));}
+  else li.textContent=a.label+(a.missing_in_clone?' — archive-only; missing from this clone':' — unavailable');
   li.append(document.createTextNode(': '+a.description));list.append(li);}
- const proof=document.getElementById('evidence');proof.replaceChildren(link('Original summary',p.summary_href),document.createTextNode(' · '),link('Recorded independent acceptance',p.evidence_href));
+ const proof=document.getElementById('evidence');proof.replaceChildren(link('Exact saved summary',p.summary_href),document.createTextNode(' · '),link('Recorded independent acceptance',p.evidence_href));
  showDrive();
 }
 data.points.forEach((p,i)=>{const o=document.createElement('option');o.value=i;o.textContent=(p.frequency_hz/1e9)+' GHz';frequency.append(o);});
@@ -291,6 +315,8 @@ def publish_dataset(dataset: dict, output: Path) -> dict:
     output = Path(output).resolve()
     for point in dataset["points"]:
         _require(not output.is_relative_to(Path(point["source_summary"]).parent),
+                 "The browser output must be outside each compact source directory.")
+        _require(not output.is_relative_to(Path(point.get("archive_directory", Path(point["source_summary"]).parent))),
                  "The browser output must be outside each original run directory.")
     drives = [row for point in dataset["points"] for row in point["drives"]]
     coefficients = [row for point in dataset["points"] for row in point["coefficients"]]

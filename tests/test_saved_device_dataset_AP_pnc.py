@@ -7,6 +7,9 @@ from html.parser import HTMLParser
 import json
 import math
 from pathlib import Path
+import shutil
+import subprocess
+import sys
 from tempfile import TemporaryDirectory
 import unittest
 from unittest.mock import patch
@@ -17,6 +20,41 @@ from tools import browse_device_results_AP_pnc as browser
 
 FREQUENCIES = (100000000, 887500000, 1000000000)
 ROOTS = ((41, 7, 29, 3), (29, 41, 7, 3, 11), (11, 7, 41, 29, 3))
+REPOSITORY = Path(__file__).resolve().parents[1]
+# The accepted archive publication was captured before portable packaging.
+ACCEPTED_EXPORT_SHA256 = {
+    "device_drives_AP_pnc.csv": "997d6ccb1f97445347aab662cf4d6480959f5b9b77738bd3114050fad860f3d3",
+    "device_coefficients_AP_pnc.csv": "c7dde89c518493bb0de07395df4e5ed34d3fd67640cbf9b28cdc133b96c5c949",
+}
+
+# Isolated Python has neither site packages nor a copied solver. Refuse imports,
+# array reads and worker launches explicitly as well, so absence is not a skip.
+PORTABLE_CLI = r'''
+import importlib.abc
+from pathlib import Path
+import runpy
+import sys
+
+class NoNumericalDependencies(importlib.abc.MetaPathFinder):
+    def find_spec(self, fullname, path=None, target=None):
+        if fullname.split(".")[0] in {
+            "phononic", "simulate_AP_pnc", "numpy", "scipy", "gmsh", "skfem", "meshio", "PySide6"
+        }:
+            raise AssertionError("Saved-data browser imported a numerical dependency: " + fullname)
+
+def refuse_computation(event, args):
+    if event in {"subprocess.Popen", "os.system", "os.spawn", "os.posix_spawn"}:
+        raise AssertionError("Saved-data browser launched a worker")
+    if event == "open" and isinstance(args[0], (str, bytes)):
+        filename = args[0].decode() if isinstance(args[0], bytes) else args[0]
+        if Path(filename).suffix.lower() in {".npz", ".npy", ".vtu", ".msh"}:
+            raise AssertionError("Saved-data browser opened scientific arrays: " + filename)
+
+sys.meta_path.insert(0, NoNumericalDependencies())
+sys.addaudithook(refuse_computation)
+sys.argv = sys.argv[1:]
+runpy.run_path(sys.argv[0], run_name="__main__")
+'''
 
 
 def write_json(path, value):
@@ -154,10 +192,22 @@ class LinkParser(HTMLParser):
     def __init__(self):
         super().__init__()
         self.links = []
+        self.dataset_parts = []
+        self.in_dataset = False
 
     def handle_starttag(self, tag, attrs):
         if tag == "a":
             self.links.extend(value for name, value in attrs if name == "href")
+        if tag == "script" and dict(attrs).get("id") == "dataset":
+            self.in_dataset = True
+
+    def handle_data(self, data):
+        if self.in_dataset:
+            self.dataset_parts.append(data)
+
+    def handle_endtag(self, tag):
+        if tag == "script":
+            self.in_dataset = False
 
 
 class SavedDeviceDatasetTests(unittest.TestCase):
@@ -267,6 +317,125 @@ class SavedDeviceDatasetTests(unittest.TestCase):
         source.write_bytes(source.read_bytes().replace(b"0.0", b"0.1", 1))
         with self.assertRaises((ValueError, OSError)):
             self.load()
+
+
+class PortableAcceptedDeviceTests(unittest.TestCase):
+    """Reproduce the accepted tables from the shipped clone inputs alone."""
+
+    def setUp(self):
+        temporary = TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name).resolve() / "clean clone with spaces"
+        self.root.mkdir()
+        for relative in (
+            "tools/browse_device_results_AP_pnc.py",
+            "configs/saved_device_dataset_AP_pnc.json",
+            "data/geometry/hole_geometry_derived_AP_pnc.csv",
+            "verification/device_thickness_AP_pnc.json",
+        ):
+            target = self.root / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(REPOSITORY / relative, target)
+        shutil.copytree(REPOSITORY / "data/saved_device_AP_pnc", self.root / "data/saved_device_AP_pnc")
+        self.manifest = json.loads((self.root / "configs/saved_device_dataset_AP_pnc.json").read_bytes())
+        self.assertFalse((self.root / "results").exists())
+        self.assertFalse((self.root / "src").exists())
+        self.inputs = snapshot(self.root)
+        self.output = self.root / "results/runs/saved_device_results_AP_pnc"
+
+    def publish(self):
+        return subprocess.run(
+            [sys.executable, "-I", "-S", "-B", "-c", PORTABLE_CLI,
+             str(self.root / "tools/browse_device_results_AP_pnc.py")],
+            cwd=self.root, capture_output=True, text=True, timeout=30,
+        )
+
+    def assert_inputs_unchanged(self):
+        after = snapshot(self.root)
+        for name, contents_and_mtime in self.inputs.items():
+            self.assertEqual(after[name], contents_and_mtime, f"Browser changed input: {name}")
+
+    def assert_resolves(self, href):
+        parsed = urlparse(href)
+        self.assertFalse(parsed.scheme, f"Portable link must be relative: {href}")
+        self.assertTrue(parsed.path)
+        target = (self.output / unquote(parsed.path)).resolve()
+        self.assertTrue(target.is_relative_to(self.root), f"Link escapes clone: {href}")
+        self.assertTrue(target.is_file(), f"Missing portable link target: {href}")
+        return target
+
+    def test_clean_clone_reproduces_all_accepted_rows_and_available_links(self):
+        result = self.publish()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn("3 saved points, 14 drives and 132 native coefficients", result.stdout)
+        for filename, expected in ACCEPTED_EXPORT_SHA256.items():
+            self.assertEqual(digest(self.output / filename), expected, filename)
+        for filename, expected_count in ((browser.DRIVES, 14), (browser.COEFFICIENTS, 132)):
+            with (self.output / filename).open(encoding="utf-8", newline="") as stream:
+                self.assertEqual(len(list(csv.DictReader(stream))), expected_count)
+
+        parser = LinkParser()
+        html = (self.output / browser.REPORT).read_text(encoding="utf-8")
+        parser.feed(html)
+        for href in parser.links:
+            self.assert_resolves(href)
+        view = json.loads("".join(parser.dataset_parts))
+        self.assertFalse(view["computation_enabled"])
+        self.assertFalse(view["spatial_convergence_established"])
+        self.assertFalse(view["frequency_convergence_established"])
+        self.assertEqual([point["frequency_hz"] for point in view["points"]], list(FREQUENCIES))
+        self.assertEqual([len(point["drives"]) for point in view["points"]], [4, 5, 5])
+        self.assertEqual([len(point["coefficients"]) for point in view["points"]], [32, 50, 50])
+
+        for point in view["points"]:
+            self.assert_resolves(point["summary_href"])
+            self.assert_resolves(point["evidence_href"])
+            available = []
+            archive = []
+            for artifact in point["artifacts"]:
+                if artifact["available"]:
+                    available.append(self.assert_resolves(artifact["href"]))
+                    self.assertFalse(artifact["archive_only"])
+                    self.assertFalse(artifact["missing_in_clone"])
+                else:
+                    archive.append(Path(artifact["path"]).name)
+                    self.assertTrue(artifact["archive_only"])
+                    self.assertTrue(artifact["missing_in_clone"])
+                    self.assertNotIn("href", artifact)
+                    self.assertFalse(Path(artifact["path"]).exists())
+            self.assertEqual({path.name for path in available},
+                             {"configuration_AP_pnc.json", "hole_geometry_derived_AP_pnc.csv"})
+            self.assertEqual(set(archive), {"report_AP_pnc.html", "selected_fields_AP_pnc.npz",
+                                           "selected_vertex_shapes_AP_pnc.vtu"})
+
+        self.assertEqual(len(view["controls"]), 9)
+        self.assertEqual([control["interpretation"] for control in view["controls"]],
+                         [control["interpretation"] for control in self.manifest["controls"]])
+        for control in view["controls"]:
+            self.assertTrue(Path(control["source"]).is_file())
+            self.assertFalse(control["available"])
+            self.assertTrue(control["archive_only"])
+            self.assertTrue(control["missing_in_clone"])
+        self.assertIn("archive-only", html.lower())
+        self.assert_inputs_unchanged()
+
+    def test_repeat_publication_preserves_accepted_inputs_and_publication_bytes_and_mtimes(self):
+        first = self.publish()
+        self.assertEqual(first.returncode, 0, first.stdout + first.stderr)
+        before = snapshot(self.output)
+        second = self.publish()
+        self.assertEqual(second.returncode, 0, second.stdout + second.stderr)
+        self.assertEqual(snapshot(self.output), before)
+        self.assert_inputs_unchanged()
+
+    def test_changed_pinned_resolved_input_is_refused_before_publication(self):
+        summary = self.root / self.manifest["points"][0]["summary"]["path"]
+        configuration = summary.parent / "configuration_AP_pnc.json"
+        configuration.write_bytes(configuration.read_bytes() + b" ")
+        result = self.publish()
+        self.assertEqual(result.returncode, 2, result.stdout + result.stderr)
+        self.assertIn("Saved source identity changed", result.stderr)
+        self.assertFalse(self.output.exists())
 
 
 if __name__ == "__main__":

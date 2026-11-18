@@ -1,0 +1,4097 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "phase": "device_inplane_comparison",
+  "status": "compared_finite_inplane_increment",
+  "frequency_hz": 887500000,
+  "reference_resolution": "h100_z4",
+  "candidate_resolution": "h80_z4",
+  "inputs": {
+    "accepted_safe": {
+      "path": "results/runs/device_frequency_thickness_8875_AP_pnc/h80-z4-frequency-887500000-safe-1335641/safe_AP_pnc.json",
+      "sha256": "7d3dda2761e3f25d2f6470259cd18306688e2e9ce7afc5f2d9c9ee92ea5eae20",
+      "bytes": 29493
+    },
+    "accepted_prebody": {
+      "path": "results/runs/device_frequency_thickness_8875_AP_pnc/independent_prebody_AP_pnc.json",
+      "sha256": "f45245144be6035c72ffee5ced2d96aa349b939bde89f9bb36f6ca82550bdca4",
+      "bytes": 8251
+    },
+    "accepted_point": {
+      "path": "results/runs/device_frequency_thickness_8875_AP_pnc/independent_point_AP_pnc.json",
+      "sha256": "17bcad69b7d567331489d32a798f6755df292272473df78e9338ba259683fd34",
+      "bytes": 13617
+    },
+    "accepted_relation": {
+      "path": "results/runs/device_frequency_thickness_8875_AP_pnc/relation/mode_relation_AP_pnc.json",
+      "sha256": "5ee5c8006803ee34ae7ef554588fdfa1f887c065c032c924cb79a6cc0558b9b4",
+      "bytes": 50099
+    },
+    "accepted_thickness_comparison": {
+      "path": "results/runs/device_frequency_thickness_8875_AP_pnc/comparison/frequency_thickness_comparison_AP_pnc.json",
+      "sha256": "3549b1fe80b7fb283b66ef8e93701c88dcc9bd6b80f9a20d992b9b695724860e",
+      "bytes": 136726
+    },
+    "accepted_anchor_relation": {
+      "path": "results/runs/comparisons/scattering-f6e75a9694c42a2c/summary_AP_pnc.json",
+      "sha256": "e7f66845ccdbf4aca57b6976fbc1320b07ead0d9e0007a768766a93b01f5056f",
+      "bytes": 40101
+    },
+    "h100_anchor_summary": {
+      "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h100_ny12_z4-2d4bb91449a7/summary_AP_pnc.json",
+      "sha256": "1a873882e9f16fd1604081a48319c80c92af34cac5f15a1a849fb1a3faabe0e8",
+      "bytes": 31455
+    },
+    "h80_anchor_summary": {
+      "path": "results/runs/full_device_resource_profile/lawrence_h80_AP_pnc/h80-export-1335045/historical_26hole_layered_h80_ny12_z4-3385249d64d1/summary_AP_pnc.json",
+      "sha256": "f65f61eaf62d69fa0574fe8566ba088fd7e090a019685bdac3db95261b61619f",
+      "bytes": 33286
+    },
+    "response_reader_source": {
+      "path": "tools/compare_device_frequency_AP_pnc.py",
+      "sha256": "36bb5effcd52ca7fde7da7f876acf8fb34bdaaf897bb4a6e8e7e28bb364ef623",
+      "bytes": 36821
+    },
+    "accepted_point_source": {
+      "path": "tools/replay_lawrence_frequency_z4_AP_pnc.py",
+      "sha256": "6eb0599a919eb3d1de7f99bed9a7e9cc452e6d2c6becf8b45379ae173e6afdbf",
+      "bytes": 44131
+    },
+    "accepted_prebody_source": {
+      "path": "results/runs/device_frequency_thickness_8875_AP_pnc/local_checks/replay_lawrence_frequency_z4_prebody_AP_pnc.py",
+      "sha256": "34e2307663a9ea2c3cb864562a58559a6b94c8710219ea17fd305013e0110572",
+      "bytes": 40611
+    },
+    "accepted_relation_source": {
+      "path": "results/runs/device_frequency_thickness_8875_AP_pnc/local_checks/compare_frequency_thickness_relation_AP_pnc.py",
+      "sha256": "1fb709dfacb1c9e2a45d2ac4d43fce7ab5a5c471021f6026bb85406936ecb08b",
+      "bytes": 40466
+    },
+    "point_replay": {
+      "path": "results/runs/device_frequency_inplane_8875_AP_pnc/independent_point_AP_pnc.json",
+      "sha256": "ac9d1ccd9d5346102d97d03b2dac7e47fc3cb319f99d67d8a1d33bba087fc2b9",
+      "bytes": 14945
+    },
+    "point_replay_source": {
+      "path": "tools/replay_lawrence_frequency_h100_AP_pnc.py",
+      "sha256": "e912ff4e944222519eaeb98bedc210face0ab562b6517e7c9b4550d460d1138c",
+      "bytes": 27583
+    },
+    "h100_8875_summary": {
+      "path": "results/runs/device_frequency_inplane_8875_AP_pnc/h100-z4-frequency-887500000-export-1335656/historical_26hole_layered_h100_ny12_z4-de3840e0af1e/summary_AP_pnc.json",
+      "sha256": "0c9f83062c66c4e4bae4ac721609f4a85c16c0fe1d3a6ca22afa631f99019b9c",
+      "bytes": 58272
+    },
+    "h100_8875_totals": {
+      "path": "results/runs/device_frequency_inplane_8875_AP_pnc/h100-z4-frequency-887500000-export-1335656/historical_26hole_layered_h100_ny12_z4-de3840e0af1e/scattering_AP_pnc.csv",
+      "sha256": "0c326b00a8f6bfcd4e8cd0c85f2225f69f364716d7d79e420160cabd5d156cce",
+      "bytes": 929
+    },
+    "h100_8875_coefficients": {
+      "path": "results/runs/device_frequency_inplane_8875_AP_pnc/h100-z4-frequency-887500000-export-1335656/historical_26hole_layered_h100_ny12_z4-de3840e0af1e/scattering_channels_AP_pnc.csv",
+      "sha256": "855ff18a7daae4dab12e77451e017e5c206db7dbc558560ee50d48cdd2673a1b",
+      "bytes": 4676
+    },
+    "h80_8875_summary": {
+      "path": "results/runs/device_frequency_thickness_8875_AP_pnc/h80-z4-frequency-887500000-export-1335647/historical_26hole_layered_h80_ny12_z4-b88d0b9e1cc2/summary_AP_pnc.json",
+      "sha256": "6a8fe8e2a2f8b81a73c8e11a6905bf37bede44d4769b583a78e707dab75a4cbb",
+      "bytes": 55492
+    },
+    "h80_8875_totals": {
+      "path": "results/runs/device_frequency_thickness_8875_AP_pnc/h80-z4-frequency-887500000-export-1335647/historical_26hole_layered_h80_ny12_z4-b88d0b9e1cc2/scattering_AP_pnc.csv",
+      "sha256": "7fe958b5edb1ed3032e91bf70f43e6e0c2b3810131d3ce73d4ef68718498de3f",
+      "bytes": 933
+    },
+    "h80_8875_coefficients": {
+      "path": "results/runs/device_frequency_thickness_8875_AP_pnc/h80-z4-frequency-887500000-export-1335647/historical_26hole_layered_h80_ny12_z4-b88d0b9e1cc2/scattering_channels_AP_pnc.csv",
+      "sha256": "e77ea5d9521c4c031314d5f0fb8ddabd2f090068929631b8ee3df0dbc3a3824d",
+      "bytes": 4664
+    },
+    "h100_one_ghz_summary": {
+      "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h100_ny12_z4-2d4bb91449a7/summary_AP_pnc.json",
+      "sha256": "1a873882e9f16fd1604081a48319c80c92af34cac5f15a1a849fb1a3faabe0e8",
+      "bytes": 31455
+    },
+    "h100_one_ghz_totals": {
+      "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h100_ny12_z4-2d4bb91449a7/scattering_AP_pnc.csv",
+      "sha256": "e465c74f3da723b1968cddc688b2dae8c83ffacba847fe49d290461c16b620c0",
+      "bytes": 921
+    },
+    "h100_one_ghz_coefficients": {
+      "path": "results/runs/full_device_layered_preflight/historical_26hole_layered_h100_ny12_z4-2d4bb91449a7/scattering_channels_AP_pnc.csv",
+      "sha256": "956fec40d5edb3aded6423370f50ee09d50ac045ee2813c42e2c2f367dfe119a",
+      "bytes": 4689
+    },
+    "h80_one_ghz_summary": {
+      "path": "results/runs/full_device_resource_profile/lawrence_h80_AP_pnc/h80-export-1335045/historical_26hole_layered_h80_ny12_z4-3385249d64d1/summary_AP_pnc.json",
+      "sha256": "f65f61eaf62d69fa0574fe8566ba088fd7e090a019685bdac3db95261b61619f",
+      "bytes": 33286
+    },
+    "h80_one_ghz_totals": {
+      "path": "results/runs/full_device_resource_profile/lawrence_h80_AP_pnc/h80-export-1335045/historical_26hole_layered_h80_ny12_z4-3385249d64d1/scattering_AP_pnc.csv",
+      "sha256": "5b718ef9bbdf526540f027af433342209bed3dd8f26b9258ee2bb42158074fc0",
+      "bytes": 918
+    },
+    "h80_one_ghz_coefficients": {
+      "path": "results/runs/full_device_resource_profile/lawrence_h80_AP_pnc/h80-export-1335045/historical_26hole_layered_h80_ny12_z4-3385249d64d1/scattering_channels_AP_pnc.csv",
+      "sha256": "3f8094e029e3abd3c705eb72f0e9f5c360f6e12a00e77fe48f17ce5fb01c9978",
+      "bytes": 4677
+    }
+  },
+  "shared_basis": {
+    "status": "identical_saved_basis",
+    "safe_receipt": {
+      "path": "results/runs/device_frequency_thickness_8875_AP_pnc/h80-z4-frequency-887500000-safe-1335641/safe_AP_pnc.json",
+      "sha256": "7d3dda2761e3f25d2f6470259cd18306688e2e9ce7afc5f2d9c9ee92ea5eae20",
+      "bytes": 29493
+    },
+    "safe_modes": {
+      "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/runs/h80-z4-frequency-887500000-safe-1335641/modes-887500000_AP_pnc.npz",
+      "sha256": "a2cf1204490983c766d84292bfc85a0182da9997e56fbf2e7281251e11864b32",
+      "bytes": 12908238
+    },
+    "safe_section": {
+      "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/results/runs/full_device_port_resolution/12x4/attempt_lpnbd9kr/arrays_AP_pnc.npz",
+      "sha256": "2a2aa9347921ac6940f851f2eb53bc06480a28a6cf67c27a000faa357b1404e8",
+      "bytes": 12973330
+    },
+    "incoming_roots": [
+      1302,
+      1346,
+      1292,
+      1286,
+      1282
+    ],
+    "reflected_roots": [
+      1303,
+      1347,
+      1293,
+      1287,
+      1283
+    ],
+    "transmitted_roots": [
+      1302,
+      1346,
+      1292,
+      1286,
+      1282
+    ],
+    "candidate_gauge_complex": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0
+      ]
+    ],
+    "candidate_gauge_phase_rad": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "basis_evidence": "Exact hash-identical saved SAFE displacement/traction columns, independently replayed for both points; root labels alone are not used.",
+    "field_matching_recomputed": false
+  },
+  "per_drive": [
+    {
+      "incident_root": 1302,
+      "quantity": "R",
+      "reference_power": 0.021564343172809204,
+      "candidate_power": 0.01678879627756434,
+      "power_change": -0.004775546895244863,
+      "absolute_power_change": 0.004775546895244863,
+      "relative_power_change": -0.22145570848021098,
+      "relative_denominator": 0.021564343172809204,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1302,
+      "quantity": "T",
+      "reference_power": 0.9784356568271971,
+      "candidate_power": 0.9832112037224467,
+      "power_change": 0.004775546895249616,
+      "absolute_power_change": 0.004775546895249616,
+      "relative_power_change": 0.004880798100444772,
+      "relative_denominator": 0.9784356568271971,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1302,
+      "quantity": "converted_R",
+      "reference_power": 1.7632270370538055e-06,
+      "candidate_power": 1.9185734822477026e-07,
+      "power_change": -1.5713696888290352e-06,
+      "absolute_power_change": 1.5713696888290352e-06,
+      "relative_power_change": -0.8911896515916936,
+      "relative_denominator": 1.7632270370538055e-06,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1302,
+      "quantity": "converted_T",
+      "reference_power": 7.015674189019085e-06,
+      "candidate_power": 7.4605257046183536e-06,
+      "power_change": 4.4485151559926835e-07,
+      "absolute_power_change": 4.4485151559926835e-07,
+      "relative_power_change": 0.06340823470615964,
+      "relative_denominator": 7.015674189019085e-06,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1302,
+      "quantity": "total_converted_power",
+      "reference_power": 8.778901226072891e-06,
+      "candidate_power": 7.652383052843124e-06,
+      "power_change": -1.1265181732297669e-06,
+      "absolute_power_change": 1.1265181732297669e-06,
+      "relative_power_change": -0.1283210898744441,
+      "relative_denominator": 8.778901226072891e-06,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1346,
+      "quantity": "R",
+      "reference_power": 0.0034896833250353926,
+      "candidate_power": 0.0035748678128251885,
+      "power_change": 8.518448778979584e-05,
+      "absolute_power_change": 8.518448778979584e-05,
+      "relative_power_change": 0.02441037763474767,
+      "relative_denominator": 0.0034896833250353926,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1346,
+      "quantity": "T",
+      "reference_power": 0.996510316674975,
+      "candidate_power": 0.9964251321871873,
+      "power_change": -8.518448778771504e-05,
+      "absolute_power_change": 8.518448778771504e-05,
+      "relative_power_change": -8.548279567435635e-05,
+      "relative_denominator": 0.996510316674975,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1346,
+      "quantity": "converted_R",
+      "reference_power": 1.4087896907786773e-08,
+      "candidate_power": 6.390689356514128e-09,
+      "power_change": -7.697207551272646e-09,
+      "absolute_power_change": 7.697207551272646e-09,
+      "relative_power_change": -0.5463702355046469,
+      "relative_denominator": 1.4087896907786773e-08,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1346,
+      "quantity": "converted_T",
+      "reference_power": 4.673598323097109e-09,
+      "candidate_power": 1.6499676767766186e-08,
+      "power_change": 1.1826078444669078e-08,
+      "absolute_power_change": 1.1826078444669078e-08,
+      "relative_power_change": 2.5304011228830103,
+      "relative_denominator": 4.673598323097109e-09,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1346,
+      "quantity": "total_converted_power",
+      "reference_power": 1.876149523088388e-08,
+      "candidate_power": 2.2890366124280313e-08,
+      "power_change": 4.128870893396432e-09,
+      "absolute_power_change": 4.128870893396432e-09,
+      "relative_power_change": 0.2200715264207604,
+      "relative_denominator": 1.876149523088388e-08,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1292,
+      "quantity": "R",
+      "reference_power": 0.02257346631376227,
+      "candidate_power": 0.023033982254069683,
+      "power_change": 0.0004605159403074134,
+      "absolute_power_change": 0.0004605159403074134,
+      "relative_power_change": 0.020400763175066852,
+      "relative_denominator": 0.02257346631376227,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1292,
+      "quantity": "T",
+      "reference_power": 0.9774265336862111,
+      "candidate_power": 0.976966017745892,
+      "power_change": -0.00046051594031915055,
+      "absolute_power_change": 0.00046051594031915055,
+      "relative_power_change": -0.00047115146197472947,
+      "relative_denominator": 0.9774265336862111,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1292,
+      "quantity": "converted_R",
+      "reference_power": 4.559124286938475e-08,
+      "candidate_power": 1.2070386538173364e-08,
+      "power_change": -3.352085633121138e-08,
+      "absolute_power_change": 3.352085633121138e-08,
+      "relative_power_change": -0.7352476971782924,
+      "relative_denominator": 4.559124286938475e-08,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1292,
+      "quantity": "converted_T",
+      "reference_power": 6.307513463199605e-08,
+      "candidate_power": 3.599073636533036e-08,
+      "power_change": -2.7084398266665692e-08,
+      "absolute_power_change": 2.7084398266665692e-08,
+      "relative_power_change": -0.42939897670748084,
+      "relative_denominator": 6.307513463199605e-08,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1292,
+      "quantity": "total_converted_power",
+      "reference_power": 1.086663775013808e-07,
+      "candidate_power": 4.806112290350372e-08,
+      "power_change": -6.060525459787708e-08,
+      "absolute_power_change": 6.060525459787708e-08,
+      "relative_power_change": -0.557718550957558,
+      "relative_denominator": 1.086663775013808e-07,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1286,
+      "quantity": "R",
+      "reference_power": 0.004800812956962978,
+      "candidate_power": 0.004596998045393098,
+      "power_change": -0.00020381491156988042,
+      "absolute_power_change": 0.00020381491156988042,
+      "relative_power_change": -0.042454249602512095,
+      "relative_denominator": 0.004800812956962978,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1286,
+      "quantity": "T",
+      "reference_power": 0.9951991870430346,
+      "candidate_power": 0.9954030019546224,
+      "power_change": 0.0002038149115878296,
+      "absolute_power_change": 0.0002038149115878296,
+      "relative_power_change": 0.00020479810900309367,
+      "relative_denominator": 0.9951991870430346,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1286,
+      "quantity": "converted_R",
+      "reference_power": 1.2533844308935086e-07,
+      "candidate_power": 1.0943935120648467e-07,
+      "power_change": -1.5899091882866188e-08,
+      "absolute_power_change": 1.5899091882866188e-08,
+      "relative_power_change": -0.126849284951881,
+      "relative_denominator": 1.2533844308935086e-07,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1286,
+      "quantity": "converted_T",
+      "reference_power": 3.768185690740058e-07,
+      "candidate_power": 3.338745813133395e-08,
+      "power_change": -3.4343111094267186e-07,
+      "absolute_power_change": 3.4343111094267186e-07,
+      "relative_power_change": -0.9113964627237445,
+      "relative_denominator": 3.768185690740058e-07,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1286,
+      "quantity": "total_converted_power",
+      "reference_power": 5.021570121633566e-07,
+      "candidate_power": 1.428268093378186e-07,
+      "power_change": -3.5933020282553797e-07,
+      "absolute_power_change": 3.5933020282553797e-07,
+      "relative_power_change": -0.7155734045761852,
+      "relative_denominator": 5.021570121633566e-07,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1282,
+      "quantity": "R",
+      "reference_power": 8.985009374506962e-06,
+      "candidate_power": 6.112825592370232e-06,
+      "power_change": -2.87218378213673e-06,
+      "absolute_power_change": 2.87218378213673e-06,
+      "relative_power_change": -0.3196639716688483,
+      "relative_denominator": 8.985009374506962e-06,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1282,
+      "quantity": "T",
+      "reference_power": 0.9999910149906925,
+      "candidate_power": 0.9999938871744846,
+      "power_change": 2.872183792024252e-06,
+      "absolute_power_change": 2.872183792024252e-06,
+      "relative_power_change": 2.8722095988542307e-06,
+      "relative_denominator": 0.9999910149906925,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1282,
+      "quantity": "converted_R",
+      "reference_power": 1.6876581728199258e-06,
+      "candidate_power": 1.1132183795097981e-07,
+      "power_change": -1.576336334868946e-06,
+      "absolute_power_change": 1.576336334868946e-06,
+      "relative_power_change": -0.9340376862187851,
+      "relative_denominator": 1.6876581728199258e-06,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1282,
+      "quantity": "converted_T",
+      "reference_power": 6.750409980594456e-06,
+      "candidate_power": 7.438198899203965e-06,
+      "power_change": 6.877889186095091e-07,
+      "absolute_power_change": 6.877889186095091e-07,
+      "relative_power_change": 0.10188846612082972,
+      "relative_denominator": 6.750409980594456e-06,
+      "denominator_floor_applied": false
+    },
+    {
+      "incident_root": 1282,
+      "quantity": "total_converted_power",
+      "reference_power": 8.438068153414383e-06,
+      "candidate_power": 7.549520737154945e-06,
+      "power_change": -8.885474162594378e-07,
+      "absolute_power_change": 8.885474162594378e-07,
+      "relative_power_change": -0.10530223270357157,
+      "relative_denominator": 8.438068153414383e-06,
+      "denominator_floor_applied": false
+    }
+  ],
+  "coefficients": [
+    {
+      "kind": "reflection",
+      "incident_root": 1302,
+      "outgoing_root": 1303,
+      "reference_raw_amplitude": [
+        0.14621538894047784,
+        0.013551383056977813
+      ],
+      "candidate_raw_amplitude": [
+        0.1283402482467774,
+        0.017815305222523448
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        0.1283402482467774,
+        0.017815305222523448
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -0.017875140693700442,
+          0.004263922165545634
+        ],
+        "absolute_complex_change": 0.01837666147735809,
+        "relative_denominator_amplitude": 0.14684202377307443,
+        "relative_absolute_complex_change": 0.12514579277221669,
+        "phase_change_rad": 0.04551469599930018
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -0.017875140693700442,
+          0.004263922165545634
+        ],
+        "absolute_complex_change": 0.01837666147735809,
+        "relative_denominator_amplitude": 0.14684202377307443,
+        "relative_absolute_complex_change": 0.12514579277221669,
+        "phase_change_rad": 0.04551469599930018
+      },
+      "reference_power": 0.02156257994577215,
+      "candidate_power": 0.016788604420216117,
+      "power_change": -0.0047739755255560325,
+      "absolute_power_change": 0.0047739755255560325,
+      "relative_power_change": -0.22140094263126814,
+      "relative_denominator": 0.02156257994577215,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1302,
+      "outgoing_root": 1347,
+      "reference_raw_amplitude": [
+        -2.4805290722962614e-05,
+        1.6634224121177075e-05
+      ],
+      "candidate_raw_amplitude": [
+        1.7372752230231778e-05,
+        3.51183986356227e-06
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        1.7372752230231778e-05,
+        3.51183986356227e-06
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          4.217804295319439e-05,
+          -1.3122384257614806e-05
+        ],
+        "absolute_complex_change": 4.417221158110614e-05,
+        "relative_denominator_amplitude": 2.9866366701764116e-05,
+        "relative_absolute_complex_change": 1.4789951527146092,
+        "phase_change_rad": -2.3514190011935288
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          4.217804295319439e-05,
+          -1.3122384257614806e-05
+        ],
+        "absolute_complex_change": 4.417221158110614e-05,
+        "relative_denominator_amplitude": 2.9866366701764116e-05,
+        "relative_absolute_complex_change": 1.4789951527146092,
+        "phase_change_rad": -2.3514190011935288
+      },
+      "reference_power": 8.919998599642444e-10,
+      "candidate_power": 3.141455392803283e-10,
+      "power_change": -5.778543206839161e-10,
+      "absolute_power_change": 5.778543206839161e-10,
+      "relative_power_change": -0.6478188468629124,
+      "relative_denominator": 8.919998599642444e-10,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1302,
+      "outgoing_root": 1293,
+      "reference_raw_amplitude": [
+        0.00010041896632247158,
+        2.7675386931233305e-05
+      ],
+      "candidate_raw_amplitude": [
+        1.545985181098249e-05,
+        -4.4892546917048714e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        1.545985181098249e-05,
+        -4.4892546917048714e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -8.495911451148909e-05,
+          -7.256793384828201e-05
+        ],
+        "absolute_complex_change": 0.00011173252060875093,
+        "relative_denominator_amplitude": 0.00010416283329032079,
+        "relative_absolute_complex_change": 1.0726716726044887,
+        "phase_change_rad": -1.5080649829504482
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -8.495911451148909e-05,
+          -7.256793384828201e-05
+        ],
+        "absolute_complex_change": 0.00011173252060875093,
+        "relative_denominator_amplitude": 0.00010416283329032079,
+        "relative_absolute_complex_change": 1.0726716726044887,
+        "phase_change_rad": -1.5080649829504482
+      },
+      "reference_power": 1.084989583906716e-08,
+      "candidate_power": 2.2543477867169583e-09,
+      "power_change": -8.595548052350202e-09,
+      "absolute_power_change": 8.595548052350202e-09,
+      "relative_power_change": -0.792224015773521,
+      "relative_denominator": 1.084989583906716e-08,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1302,
+      "outgoing_root": 1287,
+      "reference_raw_amplitude": [
+        0.00019836740885733115,
+        0.00023868992070861074
+      ],
+      "candidate_raw_amplitude": [
+        0.00029652811514462463,
+        4.6850470025305366e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        0.00029652811514462463,
+        4.6850470025305366e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          9.816070628729348e-05,
+          -0.00019183945068330536
+        ],
+        "absolute_complex_change": 0.0002154945454003248,
+        "relative_denominator_amplitude": 0.0003103586749950039,
+        "relative_absolute_complex_change": 0.6943403318879158,
+        "phase_change_rad": -0.7206954417869836
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          9.816070628729348e-05,
+          -0.00019183945068330536
+        ],
+        "absolute_complex_change": 0.0002154945454003248,
+        "relative_denominator_amplitude": 0.0003103586749950039,
+        "relative_absolute_complex_change": 0.6943403318879158,
+        "phase_change_rad": -0.7206954417869836
+      },
+      "reference_power": 9.632250714465448e-08,
+      "candidate_power": 9.012388961281579e-08,
+      "power_change": -6.198617531838688e-09,
+      "absolute_power_change": 6.198617531838688e-09,
+      "relative_power_change": -0.06435274283849128,
+      "relative_denominator": 9.632250714465448e-08,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1302,
+      "outgoing_root": 1283,
+      "reference_raw_amplitude": [
+        -0.00022283816363236623,
+        -0.0012670855484295741
+      ],
+      "candidate_raw_amplitude": [
+        0.0002411133582693984,
+        0.0002025569395256798
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        0.0002411133582693984,
+        0.0002025569395256798
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          0.00046395152190176463,
+          0.001469642487955254
+        ],
+        "absolute_complex_change": 0.0015411359632032057,
+        "relative_denominator_amplitude": 0.0012865312410548452,
+        "relative_absolute_complex_change": 1.1979001473291908,
+        "phase_change_rad": 2.4435954571156215
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          0.00046395152190176463,
+          0.001469642487955254
+        ],
+        "absolute_complex_change": 0.0015411359632032057,
+        "relative_denominator_amplitude": 0.0012865312410548452,
+        "relative_absolute_complex_change": 1.1979001473291908,
+        "phase_change_rad": 2.4435954571156215
+      },
+      "reference_power": 1.6551626342101197e-06,
+      "candidate_power": 9.916496528595719e-08,
+      "power_change": -1.5559976689241625e-06,
+      "absolute_power_change": 1.5559976689241625e-06,
+      "relative_power_change": -0.9400874794800568,
+      "relative_denominator": 1.6551626342101197e-06,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1346,
+      "outgoing_root": 1303,
+      "reference_raw_amplitude": [
+        -2.4805291047253898e-05,
+        1.6634224567082605e-05
+      ],
+      "candidate_raw_amplitude": [
+        1.7372751890022705e-05,
+        3.511840253514205e-06
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        1.7372751890022705e-05,
+        3.511840253514205e-06
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          4.2178042937276606e-05,
+          -1.31223843135684e-05
+        ],
+        "absolute_complex_change": 4.417221158252929e-05,
+        "relative_denominator_amplitude": 2.9866367219451192e-05,
+        "relative_absolute_complex_change": 1.4789951271261768,
+        "phase_change_rad": -2.3514189694727965
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          4.2178042937276606e-05,
+          -1.31223843135684e-05
+        ],
+        "absolute_complex_change": 4.417221158252929e-05,
+        "relative_denominator_amplitude": 2.9866367219451192e-05,
+        "relative_absolute_complex_change": 1.4789951271261768,
+        "phase_change_rad": -2.3514189694727965
+      },
+      "reference_power": 8.91999890887109e-10,
+      "candidate_power": 3.141455301984902e-10,
+      "power_change": -5.778543606886188e-10,
+      "absolute_power_change": 5.778543606886188e-10,
+      "relative_power_change": -0.6478188692533727,
+      "relative_denominator": 8.91999890887109e-10,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1346,
+      "outgoing_root": 1347,
+      "reference_raw_amplitude": [
+        0.030021201374471507,
+        -0.05087628824090761
+      ],
+      "candidate_raw_amplitude": [
+        0.030642321205476206,
+        -0.05134110997316142
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        0.030642321205476206,
+        -0.05134110997316142
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          0.0006211198310046989,
+          -0.00046482173225381035
+        ],
+        "absolute_complex_change": 0.0007757893317407366,
+        "relative_denominator_amplitude": 0.05907342242615104,
+        "relative_absolute_complex_change": 0.013132628852011538,
+        "phase_change_rad": 0.004995978410721603
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          0.0006211198310046989,
+          -0.00046482173225381035
+        ],
+        "absolute_complex_change": 0.0007757893317407366,
+        "relative_denominator_amplitude": 0.05907342242615104,
+        "relative_absolute_complex_change": 0.013132628852011538,
+        "phase_change_rad": 0.004995978410721603
+      },
+      "reference_power": 0.003489669237138485,
+      "candidate_power": 0.003574861422135832,
+      "power_change": 8.519218499734686e-05,
+      "absolute_power_change": 8.519218499734686e-05,
+      "relative_power_change": 0.024412681892798563,
+      "relative_denominator": 0.003489669237138485,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1346,
+      "outgoing_root": 1293,
+      "reference_raw_amplitude": [
+        2.814174855264062e-05,
+        7.292113762459987e-05
+      ],
+      "candidate_raw_amplitude": [
+        -3.9073484008768325e-06,
+        -5.039613862843515e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        -3.9073484008768325e-06,
+        -5.039613862843515e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -3.204909695351745e-05,
+          -0.00012331727625303503
+        ],
+        "absolute_complex_change": 0.0001274138738050269,
+        "relative_denominator_amplitude": 7.816297284562483e-05,
+        "relative_absolute_complex_change": 1.6301052680874186,
+        "phase_change_rad": -2.850660440166693
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -3.204909695351745e-05,
+          -0.00012331727625303503
+        ],
+        "absolute_complex_change": 0.0001274138738050269,
+        "relative_denominator_amplitude": 7.816297284562483e-05,
+        "relative_absolute_complex_change": 1.6301052680874186,
+        "phase_change_rad": -2.850660440166693
+      },
+      "reference_power": 6.109450324065886e-09,
+      "candidate_power": 2.5550381601822882e-09,
+      "power_change": -3.5544121638835977e-09,
+      "absolute_power_change": 3.5544121638835977e-09,
+      "relative_power_change": -0.5817891913912984,
+      "relative_denominator": 6.109450324065886e-09,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1346,
+      "outgoing_root": 1287,
+      "reference_raw_amplitude": [
+        -6.338832459429728e-05,
+        4.582068198892246e-05
+      ],
+      "candidate_raw_amplitude": [
+        5.127187510344451e-05,
+        2.3749873452855043e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        5.127187510344451e-05,
+        2.3749873452855043e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          0.00011466019969774179,
+          -2.2070808536067417e-05
+        ],
+        "absolute_complex_change": 0.00011676507176446976,
+        "relative_denominator_amplitude": 7.821518134481283e-05,
+        "relative_absolute_complex_change": 1.4928696674589188,
+        "phase_change_rad": -2.0819021254469217
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          0.00011466019969774179,
+          -2.2070808536067417e-05
+        ],
+        "absolute_complex_change": 0.00011676507176446976,
+        "relative_denominator_amplitude": 7.821518134481283e-05,
+        "relative_absolute_complex_change": 1.4928696674589188,
+        "phase_change_rad": -2.0819021254469217
+      },
+      "reference_power": 6.117614592801957e-09,
+      "candidate_power": 3.192861665649842e-09,
+      "power_change": -2.924752927152115e-09,
+      "absolute_power_change": 2.924752927152115e-09,
+      "relative_power_change": -0.47808715027478305,
+      "relative_denominator": 6.117614592801957e-09,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1346,
+      "outgoing_root": 1283,
+      "reference_raw_amplitude": [
+        1.4667270145093163e-05,
+        2.7453657070100494e-05
+      ],
+      "candidate_raw_amplitude": [
+        7.092898650368109e-06,
+        1.668336864122811e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        7.092898650368109e-06,
+        1.668336864122811e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -7.574371494725054e-06,
+          -1.0770288428872383e-05
+        ],
+        "absolute_complex_change": 1.3167012431877088e-05,
+        "relative_denominator_amplitude": 3.112606785367885e-05,
+        "relative_absolute_complex_change": 0.423022030722742,
+        "phase_change_rad": 0.08867919379985502
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -7.574371494725054e-06,
+          -1.0770288428872383e-05
+        ],
+        "absolute_complex_change": 1.3167012431877088e-05,
+        "relative_denominator_amplitude": 3.112606785367885e-05,
+        "relative_absolute_complex_change": 0.423022030722742,
+        "phase_change_rad": 0.08867919379985502
+      },
+      "reference_power": 9.688321000318203e-10,
+      "candidate_power": 3.2864400048350733e-10,
+      "power_change": -6.401880995483129e-10,
+      "absolute_power_change": 6.401880995483129e-10,
+      "relative_power_change": -0.6607833282230084,
+      "relative_denominator": 9.688321000318203e-10,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1292,
+      "outgoing_root": 1303,
+      "reference_raw_amplitude": [
+        0.0001004189662327043,
+        2.7675387390102844e-05
+      ],
+      "candidate_raw_amplitude": [
+        1.545985167391685e-05,
+        -4.489254643795274e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        1.545985167391685e-05,
+        -4.489254643795274e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -8.495911455878743e-05,
+          -7.256793382805558e-05
+        ],
+        "absolute_complex_change": 0.00011173252063157898,
+        "relative_denominator_amplitude": 0.0001041628333256986,
+        "relative_absolute_complex_change": 1.0726716724593244,
+        "phase_change_rad": -1.5080649868703455
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -8.495911455878743e-05,
+          -7.256793382805558e-05
+        ],
+        "absolute_complex_change": 0.00011173252063157898,
+        "relative_denominator_amplitude": 0.0001041628333256986,
+        "relative_absolute_complex_change": 1.0726716724593244,
+        "phase_change_rad": -1.5080649868703455
+      },
+      "reference_power": 1.0849895846437266e-08,
+      "candidate_power": 2.2543477394632525e-09,
+      "power_change": -8.595548106974012e-09,
+      "absolute_power_change": 8.595548106974012e-09,
+      "relative_power_change": -0.7922240202698808,
+      "relative_denominator": 1.0849895846437266e-08,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1292,
+      "outgoing_root": 1347,
+      "reference_raw_amplitude": [
+        2.8141748569865125e-05,
+        7.292113758163917e-05
+      ],
+      "candidate_raw_amplitude": [
+        -3.907348374657883e-06,
+        -5.0396138697569505e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        -3.907348374657883e-06,
+        -5.0396138697569505e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -3.204909694452301e-05,
+          -0.00012331727627920867
+        ],
+        "absolute_complex_change": 0.0001274138738280966,
+        "relative_denominator_amplitude": 7.81629728117467e-05,
+        "relative_absolute_complex_change": 1.6301052690891031,
+        "phase_change_rad": -2.8506604391403427
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -3.204909694452301e-05,
+          -0.00012331727627920867
+        ],
+        "absolute_complex_change": 0.0001274138738280966,
+        "relative_denominator_amplitude": 7.81629728117467e-05,
+        "relative_absolute_complex_change": 1.6301052690891031,
+        "phase_change_rad": -2.8506604391403427
+      },
+      "reference_power": 6.109450318769854e-09,
+      "candidate_power": 2.5550381669456048e-09,
+      "power_change": -3.554412151824249e-09,
+      "absolute_power_change": 3.554412151824249e-09,
+      "relative_power_change": -0.5817891899217432,
+      "relative_denominator": 6.109450318769854e-09,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1292,
+      "outgoing_root": 1293,
+      "reference_raw_amplitude": [
+        -0.13570637734113744,
+        -0.06447635125737357
+      ],
+      "candidate_raw_amplitude": [
+        -0.1358283812456413,
+        -0.06770982965472491
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        -0.1358283812456413,
+        -0.06770982965472491
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -0.00012200390450387011,
+          -0.0032334783973513442
+        ],
+        "absolute_complex_change": 0.0032357792722699746,
+        "relative_denominator_amplitude": 0.15024453641487068,
+        "relative_absolute_complex_change": 0.021536751681505463,
+        "phase_change_rad": 0.018899783368323514
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -0.00012200390450387011,
+          -0.0032334783973513442
+        ],
+        "absolute_complex_change": 0.0032357792722699746,
+        "relative_denominator_amplitude": 0.15024453641487068,
+        "relative_absolute_complex_change": 0.021536751681505463,
+        "phase_change_rad": 0.018899783368323514
+      },
+      "reference_power": 0.022573420722519402,
+      "candidate_power": 0.023033970183683146,
+      "power_change": 0.0004605494611637437,
+      "absolute_power_change": 0.0004605494611637437,
+      "relative_power_change": 0.02040228934838823,
+      "relative_denominator": 0.022573420722519402,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1292,
+      "outgoing_root": 1287,
+      "reference_raw_amplitude": [
+        5.183279353125735e-05,
+        8.552846369354401e-05
+      ],
+      "candidate_raw_amplitude": [
+        -6.40987977080084e-05,
+        4.085376117442905e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        -6.40987977080084e-05,
+        4.085376117442905e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -0.00011593159123926574,
+          -4.4674702519114956e-05
+        ],
+        "absolute_complex_change": 0.00012424155058771445,
+        "relative_denominator_amplitude": 0.00010000878254949327,
+        "relative_absolute_complex_change": 1.2423063997027326,
+        "phase_change_rad": 1.5482023587641265
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -0.00011593159123926574,
+          -4.4674702519114956e-05
+        ],
+        "absolute_complex_change": 0.00012424155058771445,
+        "relative_denominator_amplitude": 0.00010000878254949327,
+        "relative_absolute_complex_change": 1.2423063997027326,
+        "phase_change_rad": 1.5482023587641265
+      },
+      "reference_power": 1.0001756587031829e-08,
+      "candidate_power": 5.777685669709467e-09,
+      "power_change": -4.224070917322362e-09,
+      "absolute_power_change": 4.224070917322362e-09,
+      "relative_power_change": -0.4223329052817829,
+      "relative_denominator": 1.0001756587031829e-08,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1292,
+      "outgoing_root": 1283,
+      "reference_raw_amplitude": [
+        0.00010671650014995873,
+        -8.5098347298227e-05
+      ],
+      "candidate_raw_amplitude": [
+        4.487008466967577e-07,
+        3.851121433563494e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        4.487008466967577e-07,
+        3.851121433563494e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -0.00010626779930326198,
+          0.00012360956163386195
+        ],
+        "absolute_complex_change": 0.00016300972025027797,
+        "relative_denominator_amplitude": 0.00013649227127257354,
+        "relative_absolute_complex_change": 1.194278025638165,
+        "phase_change_rad": 2.2323141958699875
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -0.00010626779930326198,
+          0.00012360956163386195
+        ],
+        "absolute_complex_change": 0.00016300972025027797,
+        "relative_denominator_amplitude": 0.00013649227127257354,
+        "relative_absolute_complex_change": 1.194278025638165,
+        "phase_change_rad": 2.2323141958699875
+      },
+      "reference_power": 1.86301401171458e-08,
+      "candidate_power": 1.48331496205504e-09,
+      "power_change": -1.7146825155090758e-08,
+      "absolute_power_change": 1.7146825155090758e-08,
+      "relative_power_change": -0.9203809014463661,
+      "relative_denominator": 1.86301401171458e-08,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1286,
+      "outgoing_root": 1303,
+      "reference_raw_amplitude": [
+        0.00019836740933814844,
+        0.00023868992020055843
+      ],
+      "candidate_raw_amplitude": [
+        0.0002965281156368538,
+        4.685046958882581e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        0.0002965281156368538,
+        4.685046958882581e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          9.816070629870534e-05,
+          -0.00019183945061173262
+        ],
+        "absolute_complex_change": 0.00021549454534180694,
+        "relative_denominator_amplitude": 0.0003103586749115892,
+        "relative_absolute_complex_change": 0.6943403318859837,
+        "phase_change_rad": -0.7206954412412173
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          9.816070629870534e-05,
+          -0.00019183945061173262
+        ],
+        "absolute_complex_change": 0.00021549454534180694,
+        "relative_denominator_amplitude": 0.0003103586749115892,
+        "relative_absolute_complex_change": 0.6943403318859837,
+        "phase_change_rad": -0.7206954412412173
+      },
+      "reference_power": 9.632250709287751e-08,
+      "candidate_power": 9.012388986383684e-08,
+      "power_change": -6.198617229040675e-09,
+      "absolute_power_change": 6.198617229040675e-09,
+      "relative_power_change": -0.06435273972949804,
+      "relative_denominator": 9.632250709287751e-08,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1286,
+      "outgoing_root": 1347,
+      "reference_raw_amplitude": [
+        -6.33883245897717e-05,
+        4.582068198799892e-05
+      ],
+      "candidate_raw_amplitude": [
+        5.1271875080141004e-05,
+        2.374987343836405e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        5.1271875080141004e-05,
+        2.374987343836405e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          0.0001146601996699127,
+          -2.2070808549634872e-05
+        ],
+        "absolute_complex_change": 0.00011676507173970684,
+        "relative_denominator_amplitude": 7.821518134060411e-05,
+        "relative_absolute_complex_change": 1.4928696672226494,
+        "phase_change_rad": -2.081902125481953
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          0.0001146601996699127,
+          -2.2070808549634872e-05
+        ],
+        "absolute_complex_change": 0.00011676507173970684,
+        "relative_denominator_amplitude": 7.821518134060411e-05,
+        "relative_absolute_complex_change": 1.4928696672226494,
+        "phase_change_rad": -2.081902125481953
+      },
+      "reference_power": 6.117614592143585e-09,
+      "candidate_power": 3.192861662571895e-09,
+      "power_change": -2.9247529295716903e-09,
+      "absolute_power_change": 2.9247529295716903e-09,
+      "relative_power_change": -0.47808715072174396,
+      "relative_denominator": 6.117614592143585e-09,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1286,
+      "outgoing_root": 1293,
+      "reference_raw_amplitude": [
+        5.1832793616210415e-05,
+        8.552846380669634e-05
+      ],
+      "candidate_raw_amplitude": [
+        -6.409879761306179e-05,
+        4.085376124689882e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        -6.409879761306179e-05,
+        4.085376124689882e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -0.0001159315912292722,
+          -4.4674702559797515e-05
+        ],
+        "absolute_complex_change": 0.00012424155059301796,
+        "relative_denominator_amplitude": 0.0001000087826902919,
+        "relative_absolute_complex_change": 1.2423063980067661,
+        "phase_change_rad": 1.548202357428835
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -0.0001159315912292722,
+          -4.4674702559797515e-05
+        ],
+        "absolute_complex_change": 0.00012424155059301796,
+        "relative_denominator_amplitude": 0.0001000087826902919,
+        "relative_absolute_complex_change": 1.2423063980067661,
+        "phase_change_rad": 1.548202357428835
+      },
+      "reference_power": 1.000175661519403e-08,
+      "candidate_power": 5.777685663458868e-09,
+      "power_change": -4.224070951735162e-09,
+      "absolute_power_change": 4.224070951735162e-09,
+      "relative_power_change": -0.422332907533285,
+      "relative_denominator": 1.000175661519403e-08,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1286,
+      "outgoing_root": 1287,
+      "reference_raw_amplitude": [
+        0.01595983438130921,
+        0.0674238185290708
+      ],
+      "candidate_raw_amplitude": [
+        0.01334320562251494,
+        0.06647441214299812
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        0.01334320562251494,
+        0.06647441214299812
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -0.00261662875879427,
+          -0.0009494063860726737
+        ],
+        "absolute_complex_change": 0.0027835442420167883,
+        "relative_denominator_amplitude": 0.06928699458426445,
+        "relative_absolute_complex_change": 0.040174122989727,
+        "phase_change_rad": 0.0343365922408133
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -0.00261662875879427,
+          -0.0009494063860726737
+        ],
+        "absolute_complex_change": 0.0027835442420167883,
+        "relative_denominator_amplitude": 0.06928699458426445,
+        "relative_absolute_complex_change": 0.040174122989727,
+        "phase_change_rad": 0.0343365922408133
+      },
+      "reference_power": 0.004800687618519889,
+      "candidate_power": 0.0045968886060418915,
+      "power_change": -0.0002037990124779971,
+      "absolute_power_change": 0.0002037990124779971,
+      "relative_power_change": -0.04245204618017426,
+      "relative_denominator": 0.004800687618519889,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1286,
+      "outgoing_root": 1283,
+      "reference_raw_amplitude": [
+        0.00011148471592006275,
+        -2.1626902352363067e-05
+      ],
+      "candidate_raw_amplitude": [
+        7.855723744117912e-05,
+        6.46039817830703e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        7.855723744117912e-05,
+        6.46039817830703e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -3.2927478478883635e-05,
+          8.623088413543337e-05
+        ],
+        "absolute_complex_change": 9.230376058295718e-05,
+        "relative_denominator_amplitude": 0.00011356304323650252,
+        "relative_absolute_complex_change": 0.812797525958586,
+        "phase_change_rad": 0.8798496471709266
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -3.2927478478883635e-05,
+          8.623088413543337e-05
+        ],
+        "absolute_complex_change": 9.230376058295718e-05,
+        "relative_denominator_amplitude": 0.00011356304323650252,
+        "relative_absolute_complex_change": 0.812797525958586,
+        "phase_change_rad": 0.8798496471709266
+      },
+      "reference_power": 1.2896564789135742e-08,
+      "candidate_power": 1.0344914016617074e-08,
+      "power_change": -2.5516507725186677e-09,
+      "absolute_power_change": 2.5516507725186677e-09,
+      "relative_power_change": -0.19785507336560013,
+      "relative_denominator": 1.2896564789135742e-08,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1282,
+      "outgoing_root": 1303,
+      "reference_raw_amplitude": [
+        -0.0002228381638213197,
+        -0.0012670855490434457
+      ],
+      "candidate_raw_amplitude": [
+        0.00024111335810898894,
+        0.00020255693892084754
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        0.00024111335810898894,
+        0.00020255693892084754
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          0.00046395152193030864,
+          0.0014696424879642933
+        ],
+        "absolute_complex_change": 0.0015411359632204187,
+        "relative_denominator_amplitude": 0.0012865312416921665,
+        "relative_absolute_complex_change": 1.1979001467491548,
+        "phase_change_rad": 2.44359545603467
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          0.00046395152193030864,
+          0.0014696424879642933
+        ],
+        "absolute_complex_change": 0.0015411359632204187,
+        "relative_denominator_amplitude": 0.0012865312416921665,
+        "relative_absolute_complex_change": 1.1979001467491548,
+        "phase_change_rad": 2.44359545603467
+      },
+      "reference_power": 1.6551626358499875e-06,
+      "candidate_power": 9.91649649635775e-08,
+      "power_change": -1.55599767088641e-06,
+      "absolute_power_change": 1.55599767088641e-06,
+      "relative_power_change": -0.9400874797341878,
+      "relative_denominator": 1.6551626358499875e-06,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1282,
+      "outgoing_root": 1347,
+      "reference_raw_amplitude": [
+        1.4667270230441863e-05,
+        2.7453657137048054e-05
+      ],
+      "candidate_raw_amplitude": [
+        7.092898702255859e-06,
+        1.6683368708753303e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        7.092898702255859e-06,
+        1.6683368708753303e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -7.574371528186004e-06,
+          -1.077028842829475e-05
+        ],
+        "absolute_complex_change": 1.3167012450653131e-05,
+        "relative_denominator_amplitude": 3.112606795294574e-05,
+        "relative_absolute_complex_change": 0.42302202997687083,
+        "phase_change_rad": 0.08867919402814842
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -7.574371528186004e-06,
+          -1.077028842829475e-05
+        ],
+        "absolute_complex_change": 1.3167012450653131e-05,
+        "relative_denominator_amplitude": 3.112606795294574e-05,
+        "relative_absolute_complex_change": 0.42302202997687083,
+        "phase_change_rad": 0.08867919402814842
+      },
+      "reference_power": 9.688321062113961e-10,
+      "candidate_power": 3.286440034726717e-10,
+      "power_change": -6.401881027387243e-10,
+      "absolute_power_change": 6.401881027387243e-10,
+      "relative_power_change": -0.6607833273013326,
+      "relative_denominator": 9.688321062113961e-10,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1282,
+      "outgoing_root": 1293,
+      "reference_raw_amplitude": [
+        0.00010671649997048583,
+        -8.509834735989882e-05
+      ],
+      "candidate_raw_amplitude": [
+        4.4870075101073144e-07,
+        3.851121432316398e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        4.4870075101073144e-07,
+        3.851121432316398e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -0.0001062677992194751,
+          0.0001236095616830628
+        ],
+        "absolute_complex_change": 0.00016300972023296518,
+        "relative_denominator_amplitude": 0.00013649227117070294,
+        "relative_absolute_complex_change": 1.1942780264026702,
+        "phase_change_rad": 2.232314199523564
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -0.0001062677992194751,
+          0.0001236095616830628
+        ],
+        "absolute_complex_change": 0.00016300972023296518,
+        "relative_denominator_amplitude": 0.00013649227117070294,
+        "relative_absolute_complex_change": 1.1942780264026702,
+        "phase_change_rad": 2.232314199523564
+      },
+      "reference_power": 1.86301400893367e-08,
+      "candidate_power": 1.4833149610086281e-09,
+      "power_change": -1.7146825128328074e-08,
+      "absolute_power_change": 1.7146825128328074e-08,
+      "relative_power_change": -0.9203809013836869,
+      "relative_denominator": 1.86301400893367e-08,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1282,
+      "outgoing_root": 1287,
+      "reference_raw_amplitude": [
+        0.0001114847158741406,
+        -2.1626902248180647e-05
+      ],
+      "candidate_raw_amplitude": [
+        7.85572374011093e-05,
+        6.460398188058354e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        7.85572374011093e-05,
+        6.460398188058354e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -3.29274784730313e-05,
+          8.62308841287642e-05
+        ],
+        "absolute_complex_change": 9.230376057463909e-05,
+        "relative_denominator_amplitude": 0.00011356304317158032,
+        "relative_absolute_complex_change": 0.812797526350003,
+        "phase_change_rad": 0.8798496473380601
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -3.29274784730313e-05,
+          8.62308841287642e-05
+        ],
+        "absolute_complex_change": 9.230376057463909e-05,
+        "relative_denominator_amplitude": 0.00011356304317158032,
+        "relative_absolute_complex_change": 0.812797526350003,
+        "phase_change_rad": 0.8798496473380601
+      },
+      "reference_power": 1.2896564774390217e-08,
+      "candidate_power": 1.0344914022921013e-08,
+      "power_change": -2.551650751469204e-09,
+      "absolute_power_change": 2.551650751469204e-09,
+      "relative_power_change": -0.19785507195964538,
+      "relative_denominator": 1.2896564774390217e-08,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1282,
+      "outgoing_root": 1283,
+      "reference_raw_amplitude": [
+        0.002231061950124025,
+        -0.0015230606607735027
+      ],
+      "candidate_raw_amplitude": [
+        0.002060048381437455,
+        -0.0013257844547874943
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        0.002060048381437455,
+        -0.0013257844547874943
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -0.00017101356868656986,
+          0.00019727620598600833
+        ],
+        "absolute_complex_change": 0.0002610814856000903,
+        "relative_denominator_amplitude": 0.002701360990628064,
+        "relative_absolute_complex_change": 0.0966481290378703,
+        "phase_change_rad": 0.0271531144345036
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -0.00017101356868656986,
+          0.00019727620598600833
+        ],
+        "absolute_complex_change": 0.0002610814856000903,
+        "relative_denominator_amplitude": 0.002701360990628064,
+        "relative_absolute_complex_change": 0.0966481290378703,
+        "phase_change_rad": 0.0271531144345036
+      },
+      "reference_power": 7.297351201687036e-06,
+      "candidate_power": 6.001503754419252e-06,
+      "power_change": -1.2958474472677838e-06,
+      "absolute_power_change": 1.2958474472677838e-06,
+      "relative_power_change": -0.17757778287664208,
+      "relative_denominator": 7.297351201687036e-06,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1302,
+      "outgoing_root": 1302,
+      "reference_raw_amplitude": [
+        -0.09305976375292736,
+        0.9847682577760403
+      ],
+      "candidate_raw_amplitude": [
+        -0.1355899267663506,
+        0.9822520628414265
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        -0.1355899267663506,
+        0.9822520628414265
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -0.04253016301342323,
+          -0.002516194934613747
+        ],
+        "absolute_complex_change": 0.04260453030954958,
+        "relative_denominator_amplitude": 0.9891555191945341,
+        "relative_absolute_complex_change": 0.043071619662237035,
+        "phase_change_rad": 0.042953603230520714
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -0.04253016301342323,
+          -0.002516194934613747
+        ],
+        "absolute_complex_change": 0.04260453030954958,
+        "relative_denominator_amplitude": 0.9891555191945341,
+        "relative_absolute_complex_change": 0.043071619662237035,
+        "phase_change_rad": 0.042953603230520714
+      },
+      "reference_power": 0.9784286411530081,
+      "candidate_power": 0.9832037431967421,
+      "power_change": 0.004775102043733992,
+      "absolute_power_change": 0.004775102043733992,
+      "relative_power_change": 0.00488037843833647,
+      "relative_denominator": 0.9784286411530081,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1302,
+      "outgoing_root": 1346,
+      "reference_raw_amplitude": [
+        -7.440497195573458e-06,
+        2.0889294865715384e-05
+      ],
+      "candidate_raw_amplitude": [
+        -8.257111224876168e-05,
+        1.208379730799632e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        -8.257111224876168e-05,
+        1.208379730799632e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -7.513061505318822e-05,
+          -8.805497557719063e-06
+        ],
+        "absolute_complex_change": 7.564486833559399e-05,
+        "relative_denominator_amplitude": 2.2174842468530405e-05,
+        "relative_absolute_complex_change": 3.4112922535051142,
+        "phase_change_rad": 1.0833076716025045
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -7.513061505318822e-05,
+          -8.805497557719063e-06
+        ],
+        "absolute_complex_change": 7.564486833559399e-05,
+        "relative_denominator_amplitude": 2.2174842468530405e-05,
+        "relative_absolute_complex_change": 3.4112922535051142,
+        "phase_change_rad": 1.0833076716025045
+      },
+      "reference_power": 4.917236385041396e-10,
+      "candidate_power": 6.9640067353783394e-09,
+      "power_change": 6.4722830968741995e-09,
+      "absolute_power_change": 6.4722830968741995e-09,
+      "relative_power_change": 13.162440423981593,
+      "relative_denominator": 4.917236385041396e-10,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1302,
+      "outgoing_root": 1292,
+      "reference_raw_amplitude": [
+        0.00013547333022902736,
+        -0.00017175078222833189
+      ],
+      "candidate_raw_amplitude": [
+        1.1503765113185817e-05,
+        -0.00010545128671940671
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        1.1503765113185817e-05,
+        -0.00010545128671940671
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -0.00012396956511584155,
+          6.629949550892517e-05
+        ],
+        "absolute_complex_change": 0.0001405847651054298,
+        "relative_denominator_amplitude": 0.00021874952434093882,
+        "relative_absolute_complex_change": 0.642674609368828,
+        "phase_change_rad": -0.5591999261154723
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -0.00012396956511584155,
+          6.629949550892517e-05
+        ],
+        "absolute_complex_change": 0.0001405847651054298,
+        "relative_denominator_amplitude": 0.00021874952434093882,
+        "relative_absolute_complex_change": 0.642674609368828,
+        "phase_change_rad": -0.5591999261154723
+      },
+      "reference_power": 4.7851354399386976e-08,
+      "candidate_power": 1.1252310482557875e-08,
+      "power_change": -3.6599043916829104e-08,
+      "absolute_power_change": 3.6599043916829104e-08,
+      "relative_power_change": -0.7648486521689337,
+      "relative_denominator": 4.7851354399386976e-08,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1302,
+      "outgoing_root": 1286,
+      "reference_raw_amplitude": [
+        0.0001159292708222711,
+        0.0005206068489422679
+      ],
+      "candidate_raw_amplitude": [
+        8.603707607633134e-05,
+        3.281307133176615e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        8.603707607633134e-05,
+        3.281307133176615e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -2.9892194745939757e-05,
+          -0.00048779377761050174
+        ],
+        "absolute_complex_change": 0.000488708822083511,
+        "relative_denominator_amplitude": 0.0005333583101433603,
+        "relative_absolute_complex_change": 0.9162861303354437,
+        "phase_change_rad": -0.9873353252701781
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -2.9892194745939757e-05,
+          -0.00048779377761050174
+        ],
+        "absolute_complex_change": 0.000488708822083511,
+        "relative_denominator_amplitude": 0.0005333583101433603,
+        "relative_absolute_complex_change": 0.9162861303354437,
+        "phase_change_rad": -0.9873353252701781
+      },
+      "reference_power": 2.8447108699898084e-07,
+      "candidate_power": 8.479076109988e-09,
+      "power_change": -2.7599201088899285e-07,
+      "absolute_power_change": 2.7599201088899285e-07,
+      "relative_power_change": -0.9701935398797897,
+      "relative_denominator": 2.8447108699898084e-07,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1302,
+      "outgoing_root": 1282,
+      "reference_raw_amplitude": [
+        -0.00037133522717302647,
+        -0.0025583139316828515
+      ],
+      "candidate_raw_amplitude": [
+        -0.0005228844814734219,
+        -0.0026758965096439547
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        -0.0005228844814734219,
+        -0.0026758965096439547
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -0.00015154925430039547,
+          -0.00011758257796110321
+        ],
+        "absolute_complex_change": 0.00019181459568808849,
+        "relative_denominator_amplitude": 0.002585122825705234,
+        "relative_absolute_complex_change": 0.07419941280188903,
+        "phase_change_rad": -0.04883196119335091
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -0.00015154925430039547,
+          -0.00011758257796110321
+        ],
+        "absolute_complex_change": 0.00019181459568808849,
+        "relative_denominator_amplitude": 0.002585122825705234,
+        "relative_absolute_complex_change": 0.07419941280188903,
+        "phase_change_rad": -0.04883196119335091
+      },
+      "reference_power": 6.682860023982213e-06,
+      "candidate_power": 7.433830311290429e-06,
+      "power_change": 7.509702873082162e-07,
+      "absolute_power_change": 7.509702873082162e-07,
+      "relative_power_change": 0.11237258967167842,
+      "relative_denominator": 6.682860023982213e-06,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1346,
+      "outgoing_root": 1302,
+      "reference_raw_amplitude": [
+        2.456813298188617e-05,
+        1.1587820355970112e-05
+      ],
+      "candidate_raw_amplitude": [
+        6.106150131439641e-05,
+        -5.9976812452220046e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        6.106150131439641e-05,
+        -5.9976812452220046e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          3.649336833251024e-05,
+          -7.156463280819016e-05
+        ],
+        "absolute_complex_change": 8.033220152107964e-05,
+        "relative_denominator_amplitude": 2.7163776225294565e-05,
+        "relative_absolute_complex_change": 2.9573282026331564,
+        "phase_change_rad": -1.2171570322162018
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          3.649336833251024e-05,
+          -7.156463280819016e-05
+        ],
+        "absolute_complex_change": 8.033220152107964e-05,
+        "relative_denominator_amplitude": 2.7163776225294565e-05,
+        "relative_absolute_complex_change": 2.9573282026331564,
+        "phase_change_rad": -1.2171570322162018
+      },
+      "reference_power": 7.378707388178781e-10,
+      "candidate_power": 7.325724974696812e-09,
+      "power_change": 6.587854235878934e-09,
+      "absolute_power_change": 6.587854235878934e-09,
+      "relative_power_change": 8.928195535214135,
+      "relative_denominator": 7.378707388178781e-10,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1346,
+      "outgoing_root": 1346,
+      "reference_raw_amplitude": [
+        -0.8591723012508222,
+        -0.5082649592139349
+      ],
+      "candidate_raw_amplitude": [
+        -0.8569849706836381,
+        -0.5118611879307461
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        -0.8569849706836381,
+        -0.5118611879307461
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          0.0021873305671841203,
+          -0.0035962287168112006
+        ],
+        "absolute_complex_change": 0.00420918946992833,
+        "relative_denominator_amplitude": 0.9982536310985183,
+        "relative_absolute_complex_change": 0.004216553127181085,
+        "phase_change_rad": 0.004216429673299925
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          0.0021873305671841203,
+          -0.0035962287168112006
+        ],
+        "absolute_complex_change": 0.00420918946992833,
+        "relative_denominator_amplitude": 0.9982536310985183,
+        "relative_absolute_complex_change": 0.004216553127181085,
+        "phase_change_rad": 0.004216429673299925
+      },
+      "reference_power": 0.9965103120013767,
+      "candidate_power": 0.9964251156875106,
+      "power_change": -8.519631386616489e-05,
+      "absolute_power_change": 8.519631386616489e-05,
+      "relative_power_change": -8.549466356756295e-05,
+      "relative_denominator": 0.9965103120013767,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1346,
+      "outgoing_root": 1292,
+      "reference_raw_amplitude": [
+        2.511778733008164e-05,
+        -8.285313941357212e-06
+      ],
+      "candidate_raw_amplitude": [
+        -5.932978578705916e-06,
+        -8.058595611072751e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        -5.932978578705916e-06,
+        -8.058595611072751e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -3.105076590878756e-05,
+          -7.23006421693703e-05
+        ],
+        "absolute_complex_change": 7.868629436964007e-05,
+        "relative_denominator_amplitude": 2.6449001256494695e-05,
+        "relative_absolute_complex_change": 2.9750194953133904,
+        "phase_change_rad": -1.3256668316797668
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -3.105076590878756e-05,
+          -7.23006421693703e-05
+        ],
+        "absolute_complex_change": 7.868629436964007e-05,
+        "relative_denominator_amplitude": 2.6449001256494695e-05,
+        "relative_absolute_complex_change": 2.9750194953133904,
+        "phase_change_rad": -1.3256668316797668
+      },
+      "reference_power": 6.99549667466058e-10,
+      "candidate_power": 6.529296557095487e-09,
+      "power_change": 5.8297468896294285e-09,
+      "absolute_power_change": 5.8297468896294285e-09,
+      "relative_power_change": 8.333571096883247,
+      "relative_denominator": 6.99549667466058e-10,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1346,
+      "outgoing_root": 1286,
+      "reference_raw_amplitude": [
+        -4.657746080439092e-06,
+        3.689703006835818e-05
+      ],
+      "candidate_raw_amplitude": [
+        3.2090375058636356e-05,
+        -1.3696444027615219e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        3.2090375058636356e-05,
+        -1.3696444027615219e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          3.674812113907545e-05,
+          -5.05934740959734e-05
+        ],
+        "absolute_complex_change": 6.25309845464798e-05,
+        "relative_denominator_amplitude": 3.7189856498986026e-05,
+        "relative_absolute_complex_change": 1.6813989198421535,
+        "phase_change_rad": -2.099769900118136
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          3.674812113907545e-05,
+          -5.05934740959734e-05
+        ],
+        "absolute_complex_change": 6.25309845464798e-05,
+        "relative_denominator_amplitude": 3.7189856498986026e-05,
+        "relative_absolute_complex_change": 1.6813989198421535,
+        "phase_change_rad": -2.099769900118136
+      },
+      "reference_power": 1.383085426415173e-09,
+      "candidate_power": 1.2173847504055469e-09,
+      "power_change": -1.6570067600962622e-10,
+      "absolute_power_change": 1.6570067600962622e-10,
+      "relative_power_change": -0.1198050914606965,
+      "relative_denominator": 1.383085426415173e-09,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1346,
+      "outgoing_root": 1282,
+      "reference_raw_amplitude": [
+        -2.1458133219687523e-05,
+        -3.731810564758268e-05
+      ],
+      "candidate_raw_amplitude": [
+        3.3580302358136406e-05,
+        1.73099329607159e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        3.3580302358136406e-05,
+        1.73099329607159e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          5.503843557782393e-05,
+          5.4628038608298585e-05
+        ],
+        "absolute_complex_change": 7.754645055090552e-05,
+        "relative_denominator_amplitude": 4.304756079498581e-05,
+        "relative_absolute_complex_change": 1.8014133465127287,
+        "phase_change_rad": 2.5685888929203453
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          5.503843557782393e-05,
+          5.4628038608298585e-05
+        ],
+        "absolute_complex_change": 7.754645055090552e-05,
+        "relative_denominator_amplitude": 4.304756079498581e-05,
+        "relative_absolute_complex_change": 1.8014133465127287,
+        "phase_change_rad": 2.5685888929203453
+      },
+      "reference_power": 1.8530924903979996e-09,
+      "candidate_power": 1.42727048556834e-09,
+      "power_change": -4.2582200482965955e-10,
+      "absolute_power_change": 4.2582200482965955e-10,
+      "relative_power_change": -0.22978993603185086,
+      "relative_denominator": 1.8530924903979996e-09,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1292,
+      "outgoing_root": 1302,
+      "reference_raw_amplitude": [
+        2.838788609797887e-05,
+        0.00021699027959631503
+      ],
+      "candidate_raw_amplitude": [
+        -6.248857858750147e-05,
+        8.94121216495383e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        -6.248857858750147e-05,
+        8.94121216495383e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -9.087646468548034e-05,
+          -0.00012757815794677674
+        ],
+        "absolute_complex_change": 0.00015663562244529203,
+        "relative_denominator_amplitude": 0.0002188393326538874,
+        "relative_absolute_complex_change": 0.7157562607496354,
+        "phase_change_rad": 0.7400624659255768
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -9.087646468548034e-05,
+          -0.00012757815794677674
+        ],
+        "absolute_complex_change": 0.00015663562244529203,
+        "relative_denominator_amplitude": 0.0002188393326538874,
+        "relative_absolute_complex_change": 0.7157562607496354,
+        "phase_change_rad": 0.7400624659255768
+      },
+      "reference_power": 4.789065351639879e-08,
+      "candidate_power": 1.1899349951758182e-08,
+      "power_change": -3.599130356464061e-08,
+      "absolute_power_change": 3.599130356464061e-08,
+      "relative_power_change": -0.7515308504260944,
+      "relative_denominator": 4.789065351639879e-08,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1292,
+      "outgoing_root": 1346,
+      "reference_raw_amplitude": [
+        -4.098841736293498e-05,
+        1.1374585837798391e-05
+      ],
+      "candidate_raw_amplitude": [
+        -2.8394162347612973e-05,
+        -7.418049775715506e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        -2.8394162347612973e-05,
+        -7.418049775715506e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          1.2594255015322005e-05,
+          -8.555508359495345e-05
+        ],
+        "absolute_complex_change": 8.647709285313907e-05,
+        "relative_denominator_amplitude": 4.253741366020733e-05,
+        "relative_absolute_complex_change": 2.0329654629199094,
+        "phase_change_rad": 1.4759257158642252
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          1.2594255015322005e-05,
+          -8.555508359495345e-05
+        ],
+        "absolute_complex_change": 8.647709285313907e-05,
+        "relative_denominator_amplitude": 4.253741366020733e-05,
+        "relative_absolute_complex_change": 2.0329654629199094,
+        "phase_change_rad": 1.4759257158642252
+      },
+      "reference_power": 1.809431560899593e-09,
+      "candidate_power": 6.30897470292189e-09,
+      "power_change": 4.499543142022297e-09,
+      "absolute_power_change": 4.499543142022297e-09,
+      "relative_power_change": 2.486716402683539,
+      "relative_denominator": 1.809431560899593e-09,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1292,
+      "outgoing_root": 1292,
+      "reference_raw_amplitude": [
+        -0.42421080173452486,
+        0.8930126910088279
+      ],
+      "candidate_raw_amplitude": [
+        -0.44012481950326093,
+        0.8850175845780566
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        -0.44012481950326093,
+        0.8850175845780566
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -0.015914017768736077,
+          -0.007995106430771282
+        ],
+        "absolute_complex_change": 0.017809483102634055,
+        "relative_denominator_amplitude": 0.988648810554626,
+        "relative_absolute_complex_change": 0.018013963009415896,
+        "phase_change_rad": 0.018014788146498876
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -0.015914017768736077,
+          -0.007995106430771282
+        ],
+        "absolute_complex_change": 0.017809483102634055,
+        "relative_denominator_amplitude": 0.988648810554626,
+        "relative_absolute_complex_change": 0.018013963009415896,
+        "phase_change_rad": 0.018014788146498876
+      },
+      "reference_power": 0.9774264706110765,
+      "candidate_power": 0.9769659817551556,
+      "power_change": -0.00046048885592087085,
+      "absolute_power_change": 0.00046048885592087085,
+      "relative_power_change": -0.00047112378247028463,
+      "relative_denominator": 0.9774264706110765,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1292,
+      "outgoing_root": 1286,
+      "reference_raw_amplitude": [
+        2.673875074300637e-05,
+        0.000106130772388319
+      ],
+      "candidate_raw_amplitude": [
+        0.00012177718684940087,
+        2.3963659531094025e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        0.00012177718684940087,
+        2.3963659531094025e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          9.50384361063945e-05,
+          -8.216711285722496e-05
+        ],
+        "absolute_complex_change": 0.00012563335055963912,
+        "relative_denominator_amplitude": 0.00010944725505483359,
+        "relative_absolute_complex_change": 1.1478894605140735,
+        "phase_change_rad": -1.129690941280811
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          9.50384361063945e-05,
+          -8.216711285722496e-05
+        ],
+        "absolute_complex_change": 0.00012563335055963912,
+        "relative_denominator_amplitude": 0.00010944725505483359,
+        "relative_absolute_complex_change": 1.1478894605140735,
+        "phase_change_rad": -1.129690941280811
+      },
+      "reference_power": 1.1978701639037795e-08,
+      "candidate_power": 1.5403940215076082e-08,
+      "power_change": 3.4252385760382875e-09,
+      "absolute_power_change": 3.4252385760382875e-09,
+      "relative_power_change": 0.28594405965298125,
+      "relative_denominator": 1.1978701639037795e-08,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1292,
+      "outgoing_root": 1282,
+      "reference_raw_amplitude": [
+        -3.525735543091458e-05,
+        1.2380097078699922e-05
+      ],
+      "candidate_raw_amplitude": [
+        4.860469718434439e-05,
+        4.006857520849941e-06
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        4.860469718434439e-05,
+        4.006857520849941e-06
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          8.386205261525897e-05,
+          -8.373239557849981e-06
+        ],
+        "absolute_complex_change": 8.42790306632534e-05,
+        "relative_denominator_amplitude": 3.736773896906094e-05,
+        "relative_absolute_complex_change": 2.2553955092930087,
+        "phase_change_rad": -2.7216552452052727
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          8.386205261525897e-05,
+          -8.373239557849981e-06
+        ],
+        "absolute_complex_change": 8.42790306632534e-05,
+        "relative_denominator_amplitude": 3.736773896906094e-05,
+        "relative_absolute_complex_change": 2.2553955092930087,
+        "phase_change_rad": -2.7216552452052727
+      },
+      "reference_power": 1.3963479156598756e-09,
+      "candidate_power": 2.3784714955742074e-09,
+      "power_change": 9.821235799143317e-10,
+      "absolute_power_change": 9.821235799143317e-10,
+      "relative_power_change": 0.7033516281293026,
+      "relative_denominator": 1.3963479156598756e-09,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1286,
+      "outgoing_root": 1302,
+      "reference_raw_amplitude": [
+        0.000583007213830206,
+        -3.3466990609387434e-06
+      ],
+      "candidate_raw_amplitude": [
+        6.428534929134411e-05,
+        4.139277760608596e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        6.428534929134411e-05,
+        4.139277760608596e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -0.0005187218645388619,
+          4.4739476667024706e-05
+        ],
+        "absolute_complex_change": 0.0005206476673558739,
+        "relative_denominator_amplitude": 0.0005830168194594939,
+        "relative_absolute_complex_change": 0.893023408550303,
+        "phase_change_rad": 0.5778092356819522
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -0.0005187218645388619,
+          4.4739476667024706e-05
+        ],
+        "absolute_complex_change": 0.0005206476673558739,
+        "relative_denominator_amplitude": 0.0005830168194594939,
+        "relative_absolute_complex_change": 0.893023408550303,
+        "phase_change_rad": 0.5778092356819522
+      },
+      "reference_power": 3.3990861177266406e-07,
+      "candidate_power": 5.845968171457009e-09,
+      "power_change": -3.3406264360120707e-07,
+      "absolute_power_change": 3.3406264360120707e-07,
+      "relative_power_change": -0.98280135316087,
+      "relative_denominator": 3.3990861177266406e-07,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1286,
+      "outgoing_root": 1346,
+      "reference_raw_amplitude": [
+        -4.8960763367249485e-06,
+        2.9561159538787323e-05
+      ],
+      "candidate_raw_amplitude": [
+        -2.676789943168459e-05,
+        -1.6678727865211573e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        -2.676789943168459e-05,
+        -1.6678727865211573e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -2.1871823094959643e-05,
+          -4.623988740399889e-05
+        ],
+        "absolute_complex_change": 5.115177252678255e-05,
+        "relative_denominator_amplitude": 2.9963873527511004e-05,
+        "relative_absolute_complex_change": 1.7071148187772887,
+        "phase_change_rad": 1.9638834584001408
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -2.1871823094959643e-05,
+          -4.623988740399889e-05
+        ],
+        "absolute_complex_change": 5.115177252678255e-05,
+        "relative_denominator_amplitude": 2.9963873527511004e-05,
+        "relative_absolute_complex_change": 1.7071148187772887,
+        "phase_change_rad": 1.9638834584001408
+      },
+      "reference_power": 8.978337167726751e-10,
+      "candidate_power": 9.947004031865655e-10,
+      "power_change": 9.686668641389032e-11,
+      "absolute_power_change": 9.686668641389032e-11,
+      "relative_power_change": 0.10788933919978443,
+      "relative_denominator": 8.978337167726751e-10,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1286,
+      "outgoing_root": 1292,
+      "reference_raw_amplitude": [
+        9.074540611791107e-05,
+        5.16206463929362e-05
+      ],
+      "candidate_raw_amplitude": [
+        -1.825688654720229e-05,
+        0.00011130556356636014
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        -1.825688654720229e-05,
+        0.00011130556356636014
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -0.00010900229266511336,
+          5.968491717342394e-05
+        ],
+        "absolute_complex_change": 0.0001242730427093885,
+        "relative_denominator_amplitude": 0.00010440028671191075,
+        "relative_absolute_complex_change": 1.1903515461822054,
+        "phase_change_rad": 1.2161724378311802
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -0.00010900229266511336,
+          5.968491717342394e-05
+        ],
+        "absolute_complex_change": 0.0001242730427093885,
+        "relative_denominator_amplitude": 0.00010440028671191075,
+        "relative_absolute_complex_change": 1.1903515461822054,
+        "phase_change_rad": 1.2161724378311802
+      },
+      "reference_power": 1.0899419865529174e-08,
+      "candidate_power": 1.2722242387222456e-08,
+      "power_change": 1.822822521693282e-09,
+      "absolute_power_change": 1.822822521693282e-09,
+      "relative_power_change": 0.16724032509823702,
+      "relative_denominator": 1.0899419865529174e-08,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1286,
+      "outgoing_root": 1286,
+      "reference_raw_amplitude": [
+        -0.9710650108746904,
+        0.22854223872055376
+      ],
+      "candidate_raw_amplitude": [
+        -0.9779029742446071,
+        0.19775930200806066
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        -0.9779029742446071,
+        0.19775930200806066
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -0.006837963369916711,
+          -0.030782936712493103
+        ],
+        "absolute_complex_change": 0.031533267126856335,
+        "relative_denominator_amplitude": 0.9975965167463573,
+        "relative_absolute_complex_change": 0.031609239404425254,
+        "phase_change_rad": 0.03160876795871785
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -0.006837963369916711,
+          -0.030782936712493103
+        ],
+        "absolute_complex_change": 0.031533267126856335,
+        "relative_denominator_amplitude": 0.9975965167463573,
+        "relative_absolute_complex_change": 0.031609239404425254,
+        "phase_change_rad": 0.03160876795871785
+      },
+      "reference_power": 0.9951988102244654,
+      "candidate_power": 0.9954029685671643,
+      "power_change": 0.0002041583426988236,
+      "absolute_power_change": 0.0002041583426988236,
+      "relative_power_change": 0.00020514327449082864,
+      "relative_denominator": 0.9951988102244654,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1286,
+      "outgoing_root": 1282,
+      "reference_raw_amplitude": [
+        -4.645730899660824e-05,
+        0.00015150716867473146
+      ],
+      "candidate_raw_amplitude": [
+        -3.843003057689684e-05,
+        0.00011112011482772455
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        -3.843003057689684e-05,
+        0.00011112011482772455
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          8.027278419711402e-06,
+          -4.038705384700691e-05
+        ],
+        "absolute_complex_change": 4.117707271369105e-05,
+        "relative_denominator_amplitude": 0.0001584698826876573,
+        "relative_absolute_complex_change": 0.25984163056932835,
+        "phase_change_rad": 0.03543379288084939
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          8.027278419711402e-06,
+          -4.038705384700691e-05
+        ],
+        "absolute_complex_change": 4.117707271369105e-05,
+        "relative_denominator_amplitude": 0.0001584698826876573,
+        "relative_absolute_complex_change": 0.25984163056932835,
+        "phase_change_rad": 0.03543379288084939
+      },
+      "reference_power": 2.511270371903988e-08,
+      "candidate_power": 1.3824547169467918e-08,
+      "power_change": -1.1288156549571962e-08,
+      "absolute_power_change": 1.1288156549571962e-08,
+      "relative_power_change": -0.44949984979170277,
+      "relative_denominator": 2.511270371903988e-08,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1282,
+      "outgoing_root": 1302,
+      "reference_raw_amplitude": [
+        0.0006303948210952499,
+        0.002514643592914991
+      ],
+      "candidate_raw_amplitude": [
+        0.0005813451091051745,
+        0.002661077735820523
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        0.0005813451091051745,
+        0.002661077735820523
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -4.9049711990075415e-05,
+          0.000146434142905532
+        ],
+        "absolute_complex_change": 0.00015443067200134535,
+        "relative_denominator_amplitude": 0.0025924563699032867,
+        "relative_absolute_complex_change": 0.059569246292506164,
+        "phase_change_rad": 0.03054442520450651
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -4.9049711990075415e-05,
+          0.000146434142905532
+        ],
+        "absolute_complex_change": 0.00015443067200134535,
+        "relative_denominator_amplitude": 0.0025924563699032867,
+        "relative_absolute_complex_change": 0.059569246292506164,
+        "phase_change_rad": 0.03054442520450651
+      },
+      "reference_power": 6.720830029852128e-06,
+      "candidate_power": 7.41929685196019e-06,
+      "power_change": 6.984668221080614e-07,
+      "absolute_power_change": 6.984668221080614e-07,
+      "relative_power_change": 0.10392567867445816,
+      "relative_denominator": 6.720830029852128e-06,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1282,
+      "outgoing_root": 1346,
+      "reference_raw_amplitude": [
+        -3.9453734874607865e-05,
+        -1.983057978395455e-05
+      ],
+      "candidate_raw_amplitude": [
+        1.5995382206291723e-05,
+        3.4222825113556634e-05
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        1.5995382206291723e-05,
+        3.4222825113556634e-05
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          5.5449117080899585e-05,
+          5.405340489751118e-05
+        ],
+        "absolute_complex_change": 7.743626518670432e-05,
+        "relative_denominator_amplitude": 4.4157095580706345e-05,
+        "relative_absolute_complex_change": 1.7536539522888983,
+        "phase_change_rad": -2.4737650872847237
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          5.5449117080899585e-05,
+          5.405340489751118e-05
+        ],
+        "absolute_complex_change": 7.743626518670432e-05,
+        "relative_denominator_amplitude": 4.4157095580706345e-05,
+        "relative_absolute_complex_change": 1.7536539522888983,
+        "phase_change_rad": -2.4737650872847237
+      },
+      "reference_power": 1.9498490901236367e-09,
+      "candidate_power": 1.4270540106784372e-09,
+      "power_change": -5.227950794451995e-10,
+      "absolute_power_change": 5.227950794451995e-10,
+      "relative_power_change": -0.26812079052335785,
+      "relative_denominator": 1.9498490901236367e-09,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1282,
+      "outgoing_root": 1292,
+      "reference_raw_amplitude": [
+        -2.3694184906850452e-05,
+        6.893491675706713e-06
+      ],
+      "candidate_raw_amplitude": [
+        4.2629049766733874e-05,
+        -7.780744247094046e-06
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        4.2629049766733874e-05,
+        -7.780744247094046e-06
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          6.632323467358433e-05,
+          -1.467423592280076e-05
+        ],
+        "absolute_complex_change": 6.792720116039932e-05,
+        "relative_denominator_amplitude": 2.467660077650602e-05,
+        "relative_absolute_complex_change": 2.752696847333654,
+        "phase_change_rad": -3.0390068683097655
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          6.632323467358433e-05,
+          -1.467423592280076e-05
+        ],
+        "absolute_complex_change": 6.792720116039932e-05,
+        "relative_denominator_amplitude": 2.467660077650602e-05,
+        "relative_absolute_complex_change": 2.752696847333654,
+        "phase_change_rad": -3.0390068683097655
+      },
+      "reference_power": 6.089346258830574e-10,
+      "candidate_power": 1.8777758650533608e-09,
+      "power_change": 1.2688412391703034e-09,
+      "absolute_power_change": 1.2688412391703034e-09,
+      "relative_power_change": 2.083706830319052,
+      "relative_denominator": 6.089346258830574e-10,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1282,
+      "outgoing_root": 1286,
+      "reference_raw_amplitude": [
+        7.331782272793999e-05,
+        -0.0001471246542791355
+      ],
+      "candidate_raw_amplitude": [
+        6.165555604273782e-05,
+        -0.0001086085161352676
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        6.165555604273782e-05,
+        -0.0001086085161352676
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -1.1662266685202172e-05,
+          3.851613814386791e-05
+        ],
+        "absolute_complex_change": 4.02430287348541e-05,
+        "relative_denominator_amplitude": 0.00016438116384282227,
+        "relative_absolute_complex_change": 0.24481532916589896,
+        "phase_change_rad": 0.054003179156808995
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -1.1662266685202172e-05,
+          3.851613814386791e-05
+        ],
+        "absolute_complex_change": 4.02430287348541e-05,
+        "relative_denominator_amplitude": 0.00016438116384282227,
+        "relative_absolute_complex_change": 0.24481532916589896,
+        "phase_change_rad": 0.054003179156808995
+      },
+      "reference_power": 2.7021167026320782e-08,
+      "candidate_power": 1.5597217368043866e-08,
+      "power_change": -1.1423949658276916e-08,
+      "absolute_power_change": 1.1423949658276916e-08,
+      "relative_power_change": -0.4227778040507678,
+      "relative_denominator": 2.7021167026320782e-08,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "transmission",
+      "incident_root": 1282,
+      "outgoing_root": 1282,
+      "reference_raw_amplitude": [
+        0.527479430135681,
+        0.8495585414581205
+      ],
+      "candidate_raw_amplitude": [
+        0.5086377322618595,
+        0.8609727674526635
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        0.5086377322618595,
+        0.8609727674526635
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          -0.018841697873821506,
+          0.011414225994543004
+        ],
+        "absolute_complex_change": 0.02202939249781689,
+        "relative_denominator_amplitude": 0.9999921322594052,
+        "relative_absolute_complex_change": 0.022029565820726182,
+        "phase_change_rad": 0.02202999924455438
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          -0.018841697873821506,
+          0.011414225994543004
+        ],
+        "absolute_complex_change": 0.02202939249781689,
+        "relative_denominator_amplitude": 0.9999921322594052,
+        "relative_absolute_complex_change": 0.022029565820726182,
+        "phase_change_rad": 0.02202999924455438
+      },
+      "reference_power": 0.999984264580712,
+      "candidate_power": 0.9999864489755853,
+      "power_change": 2.184394873316897e-06,
+      "absolute_power_change": 2.184394873316897e-06,
+      "relative_power_change": 2.1844292462269915e-06,
+      "relative_denominator": 0.999984264580712,
+      "denominator_floor_applied": false
+    }
+  ],
+  "selected_pair": [
+    {
+      "kind": "reflection",
+      "incident_root": 1302,
+      "outgoing_root": 1283,
+      "reference_raw_amplitude": [
+        -0.00022283816363236623,
+        -0.0012670855484295741
+      ],
+      "candidate_raw_amplitude": [
+        0.0002411133582693984,
+        0.0002025569395256798
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        0.0002411133582693984,
+        0.0002025569395256798
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          0.00046395152190176463,
+          0.001469642487955254
+        ],
+        "absolute_complex_change": 0.0015411359632032057,
+        "relative_denominator_amplitude": 0.0012865312410548452,
+        "relative_absolute_complex_change": 1.1979001473291908,
+        "phase_change_rad": 2.4435954571156215
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          0.00046395152190176463,
+          0.001469642487955254
+        ],
+        "absolute_complex_change": 0.0015411359632032057,
+        "relative_denominator_amplitude": 0.0012865312410548452,
+        "relative_absolute_complex_change": 1.1979001473291908,
+        "phase_change_rad": 2.4435954571156215
+      },
+      "reference_power": 1.6551626342101197e-06,
+      "candidate_power": 9.916496528595719e-08,
+      "power_change": -1.5559976689241625e-06,
+      "absolute_power_change": 1.5559976689241625e-06,
+      "relative_power_change": -0.9400874794800568,
+      "relative_denominator": 1.6551626342101197e-06,
+      "denominator_floor_applied": false
+    },
+    {
+      "kind": "reflection",
+      "incident_root": 1282,
+      "outgoing_root": 1303,
+      "reference_raw_amplitude": [
+        -0.0002228381638213197,
+        -0.0012670855490434457
+      ],
+      "candidate_raw_amplitude": [
+        0.00024111335810898894,
+        0.00020255693892084754
+      ],
+      "candidate_gauge_aligned_amplitude": [
+        0.00024111335810898894,
+        0.00020255693892084754
+      ],
+      "raw_complex_change": {
+        "complex_delta": [
+          0.00046395152193030864,
+          0.0014696424879642933
+        ],
+        "absolute_complex_change": 0.0015411359632204187,
+        "relative_denominator_amplitude": 0.0012865312416921665,
+        "relative_absolute_complex_change": 1.1979001467491548,
+        "phase_change_rad": 2.44359545603467
+      },
+      "gauge_aligned_complex_change": {
+        "complex_delta": [
+          0.00046395152193030864,
+          0.0014696424879642933
+        ],
+        "absolute_complex_change": 0.0015411359632204187,
+        "relative_denominator_amplitude": 0.0012865312416921665,
+        "relative_absolute_complex_change": 1.1979001467491548,
+        "phase_change_rad": 2.44359545603467
+      },
+      "reference_power": 1.6551626358499875e-06,
+      "candidate_power": 9.91649649635775e-08,
+      "power_change": -1.55599767088641e-06,
+      "absolute_power_change": 1.55599767088641e-06,
+      "relative_power_change": -0.9400874797341878,
+      "relative_denominator": 1.6551626358499875e-06,
+      "denominator_floor_applied": false
+    }
+  ],
+  "raw_responses": {
+    "reference_h100": {
+      "run_hash": "de3840e0af1e4460d52f5348577d13fc846e583f298956b5c8b212b5452f8c92",
+      "frequency_hz": 887500000,
+      "rows": [
+        {
+          "root": 1302,
+          "reverse_root": 1303,
+          "R": 0.021564343172809204,
+          "converted_R": 1.7632270370538055e-06,
+          "T": 0.9784356568271971,
+          "converted_T": 7.015674189019085e-06,
+          "total_converted_power": 8.778901226072891e-06
+        },
+        {
+          "root": 1346,
+          "reverse_root": 1347,
+          "R": 0.0034896833250353926,
+          "converted_R": 1.4087896907786773e-08,
+          "T": 0.996510316674975,
+          "converted_T": 4.673598323097109e-09,
+          "total_converted_power": 1.876149523088388e-08
+        },
+        {
+          "root": 1292,
+          "reverse_root": 1293,
+          "R": 0.02257346631376227,
+          "converted_R": 4.559124286938475e-08,
+          "T": 0.9774265336862111,
+          "converted_T": 6.307513463199605e-08,
+          "total_converted_power": 1.086663775013808e-07
+        },
+        {
+          "root": 1286,
+          "reverse_root": 1287,
+          "R": 0.004800812956962978,
+          "converted_R": 1.2533844308935086e-07,
+          "T": 0.9951991870430346,
+          "converted_T": 3.768185690740058e-07,
+          "total_converted_power": 5.021570121633566e-07
+        },
+        {
+          "root": 1282,
+          "reverse_root": 1283,
+          "R": 8.985009374506962e-06,
+          "converted_R": 1.6876581728199258e-06,
+          "T": 0.9999910149906925,
+          "converted_T": 6.750409980594456e-06,
+          "total_converted_power": 8.438068153414383e-06
+        }
+      ],
+      "coefficients": [
+        {
+          "kind": "reflection",
+          "incident_root": 1302,
+          "outgoing_root": 1303,
+          "amplitude": [
+            0.14621538894047784,
+            0.013551383056977813
+          ],
+          "power": 0.02156257994577215
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1346,
+          "outgoing_root": 1303,
+          "amplitude": [
+            -2.4805291047253898e-05,
+            1.6634224567082605e-05
+          ],
+          "power": 8.91999890887109e-10
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1292,
+          "outgoing_root": 1303,
+          "amplitude": [
+            0.0001004189662327043,
+            2.7675387390102844e-05
+          ],
+          "power": 1.0849895846437266e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1286,
+          "outgoing_root": 1303,
+          "amplitude": [
+            0.00019836740933814844,
+            0.00023868992020055843
+          ],
+          "power": 9.632250709287751e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1282,
+          "outgoing_root": 1303,
+          "amplitude": [
+            -0.0002228381638213197,
+            -0.0012670855490434457
+          ],
+          "power": 1.6551626358499875e-06
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1302,
+          "outgoing_root": 1347,
+          "amplitude": [
+            -2.4805290722962614e-05,
+            1.6634224121177075e-05
+          ],
+          "power": 8.919998599642444e-10
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1346,
+          "outgoing_root": 1347,
+          "amplitude": [
+            0.030021201374471507,
+            -0.05087628824090761
+          ],
+          "power": 0.003489669237138485
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1292,
+          "outgoing_root": 1347,
+          "amplitude": [
+            2.8141748569865125e-05,
+            7.292113758163917e-05
+          ],
+          "power": 6.109450318769854e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1286,
+          "outgoing_root": 1347,
+          "amplitude": [
+            -6.33883245897717e-05,
+            4.582068198799892e-05
+          ],
+          "power": 6.117614592143585e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1282,
+          "outgoing_root": 1347,
+          "amplitude": [
+            1.4667270230441863e-05,
+            2.7453657137048054e-05
+          ],
+          "power": 9.688321062113961e-10
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1302,
+          "outgoing_root": 1293,
+          "amplitude": [
+            0.00010041896632247158,
+            2.7675386931233305e-05
+          ],
+          "power": 1.084989583906716e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1346,
+          "outgoing_root": 1293,
+          "amplitude": [
+            2.814174855264062e-05,
+            7.292113762459987e-05
+          ],
+          "power": 6.109450324065886e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1292,
+          "outgoing_root": 1293,
+          "amplitude": [
+            -0.13570637734113744,
+            -0.06447635125737357
+          ],
+          "power": 0.022573420722519402
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1286,
+          "outgoing_root": 1293,
+          "amplitude": [
+            5.1832793616210415e-05,
+            8.552846380669634e-05
+          ],
+          "power": 1.000175661519403e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1282,
+          "outgoing_root": 1293,
+          "amplitude": [
+            0.00010671649997048583,
+            -8.509834735989882e-05
+          ],
+          "power": 1.86301400893367e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1302,
+          "outgoing_root": 1287,
+          "amplitude": [
+            0.00019836740885733115,
+            0.00023868992070861074
+          ],
+          "power": 9.632250714465448e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1346,
+          "outgoing_root": 1287,
+          "amplitude": [
+            -6.338832459429728e-05,
+            4.582068198892246e-05
+          ],
+          "power": 6.117614592801957e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1292,
+          "outgoing_root": 1287,
+          "amplitude": [
+            5.183279353125735e-05,
+            8.552846369354401e-05
+          ],
+          "power": 1.0001756587031829e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1286,
+          "outgoing_root": 1287,
+          "amplitude": [
+            0.01595983438130921,
+            0.0674238185290708
+          ],
+          "power": 0.004800687618519889
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1282,
+          "outgoing_root": 1287,
+          "amplitude": [
+            0.0001114847158741406,
+            -2.1626902248180647e-05
+          ],
+          "power": 1.2896564774390217e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1302,
+          "outgoing_root": 1283,
+          "amplitude": [
+            -0.00022283816363236623,
+            -0.0012670855484295741
+          ],
+          "power": 1.6551626342101197e-06
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1346,
+          "outgoing_root": 1283,
+          "amplitude": [
+            1.4667270145093163e-05,
+            2.7453657070100494e-05
+          ],
+          "power": 9.688321000318203e-10
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1292,
+          "outgoing_root": 1283,
+          "amplitude": [
+            0.00010671650014995873,
+            -8.5098347298227e-05
+          ],
+          "power": 1.86301401171458e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1286,
+          "outgoing_root": 1283,
+          "amplitude": [
+            0.00011148471592006275,
+            -2.1626902352363067e-05
+          ],
+          "power": 1.2896564789135742e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1282,
+          "outgoing_root": 1283,
+          "amplitude": [
+            0.002231061950124025,
+            -0.0015230606607735027
+          ],
+          "power": 7.297351201687036e-06
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1302,
+          "outgoing_root": 1302,
+          "amplitude": [
+            -0.09305976375292736,
+            0.9847682577760403
+          ],
+          "power": 0.9784286411530081
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1346,
+          "outgoing_root": 1302,
+          "amplitude": [
+            2.456813298188617e-05,
+            1.1587820355970112e-05
+          ],
+          "power": 7.378707388178781e-10
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1292,
+          "outgoing_root": 1302,
+          "amplitude": [
+            2.838788609797887e-05,
+            0.00021699027959631503
+          ],
+          "power": 4.789065351639879e-08
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1286,
+          "outgoing_root": 1302,
+          "amplitude": [
+            0.000583007213830206,
+            -3.3466990609387434e-06
+          ],
+          "power": 3.3990861177266406e-07
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1282,
+          "outgoing_root": 1302,
+          "amplitude": [
+            0.0006303948210952499,
+            0.002514643592914991
+          ],
+          "power": 6.720830029852128e-06
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1302,
+          "outgoing_root": 1346,
+          "amplitude": [
+            -7.440497195573458e-06,
+            2.0889294865715384e-05
+          ],
+          "power": 4.917236385041396e-10
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1346,
+          "outgoing_root": 1346,
+          "amplitude": [
+            -0.8591723012508222,
+            -0.5082649592139349
+          ],
+          "power": 0.9965103120013767
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1292,
+          "outgoing_root": 1346,
+          "amplitude": [
+            -4.098841736293498e-05,
+            1.1374585837798391e-05
+          ],
+          "power": 1.809431560899593e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1286,
+          "outgoing_root": 1346,
+          "amplitude": [
+            -4.8960763367249485e-06,
+            2.9561159538787323e-05
+          ],
+          "power": 8.978337167726751e-10
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1282,
+          "outgoing_root": 1346,
+          "amplitude": [
+            -3.9453734874607865e-05,
+            -1.983057978395455e-05
+          ],
+          "power": 1.9498490901236367e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1302,
+          "outgoing_root": 1292,
+          "amplitude": [
+            0.00013547333022902736,
+            -0.00017175078222833189
+          ],
+          "power": 4.7851354399386976e-08
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1346,
+          "outgoing_root": 1292,
+          "amplitude": [
+            2.511778733008164e-05,
+            -8.285313941357212e-06
+          ],
+          "power": 6.99549667466058e-10
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1292,
+          "outgoing_root": 1292,
+          "amplitude": [
+            -0.42421080173452486,
+            0.8930126910088279
+          ],
+          "power": 0.9774264706110765
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1286,
+          "outgoing_root": 1292,
+          "amplitude": [
+            9.074540611791107e-05,
+            5.16206463929362e-05
+          ],
+          "power": 1.0899419865529174e-08
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1282,
+          "outgoing_root": 1292,
+          "amplitude": [
+            -2.3694184906850452e-05,
+            6.893491675706713e-06
+          ],
+          "power": 6.089346258830574e-10
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1302,
+          "outgoing_root": 1286,
+          "amplitude": [
+            0.0001159292708222711,
+            0.0005206068489422679
+          ],
+          "power": 2.8447108699898084e-07
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1346,
+          "outgoing_root": 1286,
+          "amplitude": [
+            -4.657746080439092e-06,
+            3.689703006835818e-05
+          ],
+          "power": 1.383085426415173e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1292,
+          "outgoing_root": 1286,
+          "amplitude": [
+            2.673875074300637e-05,
+            0.000106130772388319
+          ],
+          "power": 1.1978701639037795e-08
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1286,
+          "outgoing_root": 1286,
+          "amplitude": [
+            -0.9710650108746904,
+            0.22854223872055376
+          ],
+          "power": 0.9951988102244654
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1282,
+          "outgoing_root": 1286,
+          "amplitude": [
+            7.331782272793999e-05,
+            -0.0001471246542791355
+          ],
+          "power": 2.7021167026320782e-08
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1302,
+          "outgoing_root": 1282,
+          "amplitude": [
+            -0.00037133522717302647,
+            -0.0025583139316828515
+          ],
+          "power": 6.682860023982213e-06
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1346,
+          "outgoing_root": 1282,
+          "amplitude": [
+            -2.1458133219687523e-05,
+            -3.731810564758268e-05
+          ],
+          "power": 1.8530924903979996e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1292,
+          "outgoing_root": 1282,
+          "amplitude": [
+            -3.525735543091458e-05,
+            1.2380097078699922e-05
+          ],
+          "power": 1.3963479156598756e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1286,
+          "outgoing_root": 1282,
+          "amplitude": [
+            -4.645730899660824e-05,
+            0.00015150716867473146
+          ],
+          "power": 2.511270371903988e-08
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1282,
+          "outgoing_root": 1282,
+          "amplitude": [
+            0.527479430135681,
+            0.8495585414581205
+          ],
+          "power": 0.999984264580712
+        }
+      ]
+    },
+    "candidate_h80": {
+      "run_hash": "b88d0b9e1cc22f07b787743f9c41fda73fd2adc54ac588109fdb15d35e5bd395",
+      "frequency_hz": 887500000,
+      "rows": [
+        {
+          "root": 1302,
+          "reverse_root": 1303,
+          "R": 0.01678879627756434,
+          "converted_R": 1.9185734822477026e-07,
+          "T": 0.9832112037224467,
+          "converted_T": 7.4605257046183536e-06,
+          "total_converted_power": 7.652383052843124e-06
+        },
+        {
+          "root": 1346,
+          "reverse_root": 1347,
+          "R": 0.0035748678128251885,
+          "converted_R": 6.390689356514128e-09,
+          "T": 0.9964251321871873,
+          "converted_T": 1.6499676767766186e-08,
+          "total_converted_power": 2.2890366124280313e-08
+        },
+        {
+          "root": 1292,
+          "reverse_root": 1293,
+          "R": 0.023033982254069683,
+          "converted_R": 1.2070386538173364e-08,
+          "T": 0.976966017745892,
+          "converted_T": 3.599073636533036e-08,
+          "total_converted_power": 4.806112290350372e-08
+        },
+        {
+          "root": 1286,
+          "reverse_root": 1287,
+          "R": 0.004596998045393098,
+          "converted_R": 1.0943935120648467e-07,
+          "T": 0.9954030019546224,
+          "converted_T": 3.338745813133395e-08,
+          "total_converted_power": 1.428268093378186e-07
+        },
+        {
+          "root": 1282,
+          "reverse_root": 1283,
+          "R": 6.112825592370232e-06,
+          "converted_R": 1.1132183795097981e-07,
+          "T": 0.9999938871744846,
+          "converted_T": 7.438198899203965e-06,
+          "total_converted_power": 7.549520737154945e-06
+        }
+      ],
+      "coefficients": [
+        {
+          "kind": "reflection",
+          "incident_root": 1302,
+          "outgoing_root": 1303,
+          "amplitude": [
+            0.1283402482467774,
+            0.017815305222523448
+          ],
+          "power": 0.016788604420216117
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1346,
+          "outgoing_root": 1303,
+          "amplitude": [
+            1.7372751890022705e-05,
+            3.511840253514205e-06
+          ],
+          "power": 3.141455301984902e-10
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1292,
+          "outgoing_root": 1303,
+          "amplitude": [
+            1.545985167391685e-05,
+            -4.489254643795274e-05
+          ],
+          "power": 2.2543477394632525e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1286,
+          "outgoing_root": 1303,
+          "amplitude": [
+            0.0002965281156368538,
+            4.685046958882581e-05
+          ],
+          "power": 9.012388986383684e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1282,
+          "outgoing_root": 1303,
+          "amplitude": [
+            0.00024111335810898894,
+            0.00020255693892084754
+          ],
+          "power": 9.91649649635775e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1302,
+          "outgoing_root": 1347,
+          "amplitude": [
+            1.7372752230231778e-05,
+            3.51183986356227e-06
+          ],
+          "power": 3.141455392803283e-10
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1346,
+          "outgoing_root": 1347,
+          "amplitude": [
+            0.030642321205476206,
+            -0.05134110997316142
+          ],
+          "power": 0.003574861422135832
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1292,
+          "outgoing_root": 1347,
+          "amplitude": [
+            -3.907348374657883e-06,
+            -5.0396138697569505e-05
+          ],
+          "power": 2.5550381669456048e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1286,
+          "outgoing_root": 1347,
+          "amplitude": [
+            5.1271875080141004e-05,
+            2.374987343836405e-05
+          ],
+          "power": 3.192861662571895e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1282,
+          "outgoing_root": 1347,
+          "amplitude": [
+            7.092898702255859e-06,
+            1.6683368708753303e-05
+          ],
+          "power": 3.286440034726717e-10
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1302,
+          "outgoing_root": 1293,
+          "amplitude": [
+            1.545985181098249e-05,
+            -4.4892546917048714e-05
+          ],
+          "power": 2.2543477867169583e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1346,
+          "outgoing_root": 1293,
+          "amplitude": [
+            -3.9073484008768325e-06,
+            -5.039613862843515e-05
+          ],
+          "power": 2.5550381601822882e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1292,
+          "outgoing_root": 1293,
+          "amplitude": [
+            -0.1358283812456413,
+            -0.06770982965472491
+          ],
+          "power": 0.023033970183683146
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1286,
+          "outgoing_root": 1293,
+          "amplitude": [
+            -6.409879761306179e-05,
+            4.085376124689882e-05
+          ],
+          "power": 5.777685663458868e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1282,
+          "outgoing_root": 1293,
+          "amplitude": [
+            4.4870075101073144e-07,
+            3.851121432316398e-05
+          ],
+          "power": 1.4833149610086281e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1302,
+          "outgoing_root": 1287,
+          "amplitude": [
+            0.00029652811514462463,
+            4.6850470025305366e-05
+          ],
+          "power": 9.012388961281579e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1346,
+          "outgoing_root": 1287,
+          "amplitude": [
+            5.127187510344451e-05,
+            2.3749873452855043e-05
+          ],
+          "power": 3.192861665649842e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1292,
+          "outgoing_root": 1287,
+          "amplitude": [
+            -6.40987977080084e-05,
+            4.085376117442905e-05
+          ],
+          "power": 5.777685669709467e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1286,
+          "outgoing_root": 1287,
+          "amplitude": [
+            0.01334320562251494,
+            0.06647441214299812
+          ],
+          "power": 0.0045968886060418915
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1282,
+          "outgoing_root": 1287,
+          "amplitude": [
+            7.85572374011093e-05,
+            6.460398188058354e-05
+          ],
+          "power": 1.0344914022921013e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1302,
+          "outgoing_root": 1283,
+          "amplitude": [
+            0.0002411133582693984,
+            0.0002025569395256798
+          ],
+          "power": 9.916496528595719e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1346,
+          "outgoing_root": 1283,
+          "amplitude": [
+            7.092898650368109e-06,
+            1.668336864122811e-05
+          ],
+          "power": 3.2864400048350733e-10
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1292,
+          "outgoing_root": 1283,
+          "amplitude": [
+            4.487008466967577e-07,
+            3.851121433563494e-05
+          ],
+          "power": 1.48331496205504e-09
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1286,
+          "outgoing_root": 1283,
+          "amplitude": [
+            7.855723744117912e-05,
+            6.46039817830703e-05
+          ],
+          "power": 1.0344914016617074e-08
+        },
+        {
+          "kind": "reflection",
+          "incident_root": 1282,
+          "outgoing_root": 1283,
+          "amplitude": [
+            0.002060048381437455,
+            -0.0013257844547874943
+          ],
+          "power": 6.001503754419252e-06
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1302,
+          "outgoing_root": 1302,
+          "amplitude": [
+            -0.1355899267663506,
+            0.9822520628414265
+          ],
+          "power": 0.9832037431967421
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1346,
+          "outgoing_root": 1302,
+          "amplitude": [
+            6.106150131439641e-05,
+            -5.9976812452220046e-05
+          ],
+          "power": 7.325724974696812e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1292,
+          "outgoing_root": 1302,
+          "amplitude": [
+            -6.248857858750147e-05,
+            8.94121216495383e-05
+          ],
+          "power": 1.1899349951758182e-08
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1286,
+          "outgoing_root": 1302,
+          "amplitude": [
+            6.428534929134411e-05,
+            4.139277760608596e-05
+          ],
+          "power": 5.845968171457009e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1282,
+          "outgoing_root": 1302,
+          "amplitude": [
+            0.0005813451091051745,
+            0.002661077735820523
+          ],
+          "power": 7.41929685196019e-06
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1302,
+          "outgoing_root": 1346,
+          "amplitude": [
+            -8.257111224876168e-05,
+            1.208379730799632e-05
+          ],
+          "power": 6.9640067353783394e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1346,
+          "outgoing_root": 1346,
+          "amplitude": [
+            -0.8569849706836381,
+            -0.5118611879307461
+          ],
+          "power": 0.9964251156875106
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1292,
+          "outgoing_root": 1346,
+          "amplitude": [
+            -2.8394162347612973e-05,
+            -7.418049775715506e-05
+          ],
+          "power": 6.30897470292189e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1286,
+          "outgoing_root": 1346,
+          "amplitude": [
+            -2.676789943168459e-05,
+            -1.6678727865211573e-05
+          ],
+          "power": 9.947004031865655e-10
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1282,
+          "outgoing_root": 1346,
+          "amplitude": [
+            1.5995382206291723e-05,
+            3.4222825113556634e-05
+          ],
+          "power": 1.4270540106784372e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1302,
+          "outgoing_root": 1292,
+          "amplitude": [
+            1.1503765113185817e-05,
+            -0.00010545128671940671
+          ],
+          "power": 1.1252310482557875e-08
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1346,
+          "outgoing_root": 1292,
+          "amplitude": [
+            -5.932978578705916e-06,
+            -8.058595611072751e-05
+          ],
+          "power": 6.529296557095487e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1292,
+          "outgoing_root": 1292,
+          "amplitude": [
+            -0.44012481950326093,
+            0.8850175845780566
+          ],
+          "power": 0.9769659817551556
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1286,
+          "outgoing_root": 1292,
+          "amplitude": [
+            -1.825688654720229e-05,
+            0.00011130556356636014
+          ],
+          "power": 1.2722242387222456e-08
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1282,
+          "outgoing_root": 1292,
+          "amplitude": [
+            4.2629049766733874e-05,
+            -7.780744247094046e-06
+          ],
+          "power": 1.8777758650533608e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1302,
+          "outgoing_root": 1286,
+          "amplitude": [
+            8.603707607633134e-05,
+            3.281307133176615e-05
+          ],
+          "power": 8.479076109988e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1346,
+          "outgoing_root": 1286,
+          "amplitude": [
+            3.2090375058636356e-05,
+            -1.3696444027615219e-05
+          ],
+          "power": 1.2173847504055469e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1292,
+          "outgoing_root": 1286,
+          "amplitude": [
+            0.00012177718684940087,
+            2.3963659531094025e-05
+          ],
+          "power": 1.5403940215076082e-08
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1286,
+          "outgoing_root": 1286,
+          "amplitude": [
+            -0.9779029742446071,
+            0.19775930200806066
+          ],
+          "power": 0.9954029685671643
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1282,
+          "outgoing_root": 1286,
+          "amplitude": [
+            6.165555604273782e-05,
+            -0.0001086085161352676
+          ],
+          "power": 1.5597217368043866e-08
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1302,
+          "outgoing_root": 1282,
+          "amplitude": [
+            -0.0005228844814734219,
+            -0.0026758965096439547
+          ],
+          "power": 7.433830311290429e-06
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1346,
+          "outgoing_root": 1282,
+          "amplitude": [
+            3.3580302358136406e-05,
+            1.73099329607159e-05
+          ],
+          "power": 1.42727048556834e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1292,
+          "outgoing_root": 1282,
+          "amplitude": [
+            4.860469718434439e-05,
+            4.006857520849941e-06
+          ],
+          "power": 2.3784714955742074e-09
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1286,
+          "outgoing_root": 1282,
+          "amplitude": [
+            -3.843003057689684e-05,
+            0.00011112011482772455
+          ],
+          "power": 1.3824547169467918e-08
+        },
+        {
+          "kind": "transmission",
+          "incident_root": 1282,
+          "outgoing_root": 1282,
+          "amplitude": [
+            0.5086377322618595,
+            0.8609727674526635
+          ],
+          "power": 0.9999864489755853
+        }
+      ]
+    }
+  },
+  "same_channel_transmission_phase_changes": [
+    {
+      "incident_root": 1302,
+      "phase_change_rad": 0.042953603230520714
+    },
+    {
+      "incident_root": 1346,
+      "phase_change_rad": 0.004216429673299925
+    },
+    {
+      "incident_root": 1292,
+      "phase_change_rad": 0.018014788146498876
+    },
+    {
+      "incident_root": 1286,
+      "phase_change_rad": 0.03160876795871785
+    },
+    {
+      "incident_root": 1282,
+      "phase_change_rad": 0.02202999924455438
+    }
+  ],
+  "maximum_power_change": 0.004775546895249616,
+  "maximum_complex_change": 0.04260453030954958,
+  "pair_specific_targets": {
+    "directed_increment_rows": [
+      {
+        "direction": 1,
+        "h100_power": 1.6551626342101197e-06,
+        "accepted_h80_power": 9.916496528595719e-08,
+        "signed_h100_minus_h80_power": 1.5559976689241625e-06,
+        "absolute_power_change": 1.5559976689241625e-06,
+        "relative_absolute_power_change": 15.691002002947387,
+        "exact_denominator": 9.916496528595719e-08,
+        "limit": 0.1,
+        "passed": false
+      },
+      {
+        "direction": 2,
+        "h100_power": 1.6551626358499875e-06,
+        "accepted_h80_power": 9.91649649635775e-08,
+        "signed_h100_minus_h80_power": 1.55599767088641e-06,
+        "absolute_power_change": 1.55599767088641e-06,
+        "relative_absolute_power_change": 15.691002073745658,
+        "exact_denominator": 9.91649649635775e-08,
+        "limit": 0.1,
+        "passed": false
+      }
+    ],
+    "directed_increment_passed": false,
+    "suppression_retention_rows": [
+      {
+        "direction": 1,
+        "resolution": "h100",
+        "power_8875": 1.6551626342101197e-06,
+        "power_one_ghz": 0.001232799344468317,
+        "ratio": 0.001342605057049215,
+        "decrease_fraction": 0.9986573949429508,
+        "limit": 0.01,
+        "passed": true
+      },
+      {
+        "direction": 1,
+        "resolution": "h80",
+        "power_8875": 9.916496528595719e-08,
+        "power_one_ghz": 0.0011241681176131276,
+        "ratio": 8.821186416183698e-05,
+        "decrease_fraction": 0.9999117881358381,
+        "limit": 0.01,
+        "passed": true
+      },
+      {
+        "direction": 2,
+        "resolution": "h100",
+        "power_8875": 1.6551626358499875e-06,
+        "power_one_ghz": 0.001232799342515478,
+        "ratio": 0.0013426050605061925,
+        "decrease_fraction": 0.9986573949394938,
+        "limit": 0.01,
+        "passed": true
+      },
+      {
+        "direction": 2,
+        "resolution": "h80",
+        "power_8875": 9.91649649635775e-08,
+        "power_one_ghz": 0.0011241681176200138,
+        "ratio": 8.821186387452485e-05,
+        "decrease_fraction": 0.9999117881361255,
+        "limit": 0.01,
+        "passed": true
+      }
+    ],
+    "suppression_retention_passed": true,
+    "denominator_floor_applied": false,
+    "two_separate_unit_power_drives": true,
+    "interpretation": "Finite observational targets only; no accuracy, numerical-floor or uncertainty claim."
+  },
+  "input_power_checks_passed": true,
+  "power_change_limit": 0.01,
+  "complex_change_limit": 0.01,
+  "power_passed": true,
+  "complex_passed": false,
+  "mesh_pair_passed": false,
+  "power_units": "Dimensionless power fraction for each separate 1 W incident drive.",
+  "signed_increment": "h80 minus h100 in response rows; target A explicitly uses abs(h100-h80)/h80.",
+  "pair_complex_phase_gate_applied": false,
+  "denominator_floor_applied": false,
+  "preserved_8875_thickness_control": {
+    "proof": {
+      "path": "results/runs/device_frequency_thickness_8875_AP_pnc/comparison/frequency_thickness_comparison_AP_pnc.json",
+      "sha256": "3549b1fe80b7fb283b66ef8e93701c88dcc9bd6b80f9a20d992b9b695724860e",
+      "bytes": 136726
+    },
+    "pair_specific_targets": {
+      "directed_increment_rows": [
+        {
+          "direction": 1,
+          "z4_power": 9.916496528595719e-08,
+          "accepted_z6_power": 7.969107643009675e-07,
+          "signed_z4_minus_z6_power": -6.977457990150103e-07,
+          "absolute_power_change": 6.977457990150103e-07,
+          "relative_absolute_power_change": 0.8755632754277796,
+          "exact_denominator": 7.969107643009675e-07,
+          "limit": 0.1,
+          "passed": false
+        },
+        {
+          "direction": 2,
+          "z4_power": 9.91649649635775e-08,
+          "accepted_z6_power": 7.969107666696145e-07,
+          "signed_z4_minus_z6_power": -6.97745801706037e-07,
+          "absolute_power_change": 6.97745801706037e-07,
+          "relative_absolute_power_change": 0.8755632762021779,
+          "exact_denominator": 7.969107666696145e-07,
+          "limit": 0.1,
+          "passed": false
+        }
+      ],
+      "directed_increment_passed": false,
+      "suppression_retention_rows": [
+        {
+          "direction": 1,
+          "resolution": "z4",
+          "power_8875": 9.916496528595719e-08,
+          "power_one_ghz": 0.0011241681176131276,
+          "ratio": 8.821186416183698e-05,
+          "decrease_fraction": 0.9999117881358381,
+          "limit": 0.01,
+          "passed": true
+        },
+        {
+          "direction": 1,
+          "resolution": "z6",
+          "power_8875": 7.969107643009675e-07,
+          "power_one_ghz": 0.001080758583863464,
+          "ratio": 0.0007373624195074115,
+          "decrease_fraction": 0.9992626375804926,
+          "limit": 0.01,
+          "passed": true
+        },
+        {
+          "direction": 2,
+          "resolution": "z4",
+          "power_8875": 9.91649649635775e-08,
+          "power_one_ghz": 0.0011241681176200138,
+          "ratio": 8.821186387452485e-05,
+          "decrease_fraction": 0.9999117881361255,
+          "limit": 0.01,
+          "passed": true
+        },
+        {
+          "direction": 2,
+          "resolution": "z6",
+          "power_8875": 7.969107666696145e-07,
+          "power_one_ghz": 0.001080758583837655,
+          "ratio": 0.0007373624217166724,
+          "decrease_fraction": 0.9992626375782834,
+          "limit": 0.01,
+          "passed": true
+        }
+      ],
+      "suppression_retention_passed": true,
+      "denominator_floor_applied": false,
+      "interpretation": "Finite observational targets only; no accuracy or uncertainty bound."
+    },
+    "maximum_complex_change": 0.01753014198383296,
+    "complex_passed": false
+  },
+  "preserved_one_ghz_inplane_failure": {
+    "path": "results/runs/comparisons/scattering-f6e75a9694c42a2c/summary_AP_pnc.json",
+    "sha256": "e7f66845ccdbf4aca57b6976fbc1320b07ead0d9e0007a768766a93b01f5056f",
+    "bytes": 40101
+  },
+  "old_and_new_execution_provenance_distinct": true,
+  "spatial_convergence_established": false,
+  "frequency_convergence_established": false,
+  "continuous_branch_identity_established": false,
+  "numerical_floor_established": false,
+  "phase_adjustment_applied": false,
+  "field_matching_recomputed": false,
+  "other_prior_failed_spatial_comparisons_remain_unresolved": true,
+  "scope": "One global h100/h80 in-plane discretization increment at 887.5 MHz, including lead interiors, with exact shared 675-DOF SAFE columns and original 0/16.65 micrometre planes. The directed 10% increment and 99% suppression-retention targets are separate finite observations, not accuracy estimates, a numerical floor, an uncertainty bound or convergence. All previous failed spatial comparisons remain unresolved. Endpoint relations do not establish continuous branches.",
+  "producer": {
+    "path": "tools/compare_frequency_inplane_AP_pnc.py",
+    "sha256": "fde07f60b36a5b8f9afc669807c87e191d7baa54443646c4cc129a3085bfd8ca",
+    "bytes": 32615
+  },
+  "content_sha256": "c57a2399199c8fbd67bb02d153cdf2d8d842f2ea78d96ed9d93435b43722a58f"
+}
