@@ -424,13 +424,13 @@ def read_saved_map(directory: Path) -> dict:
 
 def map_scattering(config: dict, frequencies_GHz: Sequence[float], output: Path, *, max_new_points: int | None = None,
                    should_cancel=None, progress_callback=None, mesh_cache_root: Path | None = None) -> dict:
-    """Calculate or resume one fixed-geometry list, retaining accepted points and failed attempts."""
+    """Calculate or resume one fixed-geometry list. A zero point limit saves shared preparation only."""
     frequencies = list(frequencies_GHz)
     if (not frequencies or any(not workflow._finite_number(f) or f <= 0 or not math.isfinite(f * 1e9) for f in frequencies)
             or any(b * 1e9 <= a * 1e9 for a, b in zip(frequencies, frequencies[1:]))):
         raise ValueError("Supply a nonempty, strictly increasing list of positive frequencies in GHz.")
-    if max_new_points is not None and (type(max_new_points) is not int or max_new_points < 1):
-        raise ValueError("max_new_points must be a positive integer.")
+    if max_new_points is not None and (type(max_new_points) is not int or max_new_points < 0):
+        raise ValueError("max_new_points must be a nonnegative integer.")
     if config.get("analysis", {}).get("kind") != "scattering":
         raise ValueError("Frequency mapping requires a matched-port scattering configuration.")
     settings = workflow.resolve_config(_point_config(config, config["analysis"].get("frequency_GHz", frequencies[0])))
@@ -553,10 +553,13 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--frequencies-ghz", required=True, type=float, nargs="+",
                         help="Strictly increasing frequency samples in GHz.")
     parser.add_argument("--output", required=True, type=Path, help="New or existing map directory.")
-    parser.add_argument("--max-new-points", type=int, help="Stop after this many point attempts in this invocation.")
+    parser.add_argument("--max-new-points", type=int,
+                        help="Stop after this many point attempts. Use 0 to save shared preparation only.")
+    parser.add_argument("--mesh-cache-root", type=Path, help="Reuse a matching mesh from this preflight output root.")
     args = parser.parse_args(argv)
     try:
-        result = map_scattering(_read(args.config), args.frequencies_ghz, args.output, max_new_points=args.max_new_points)
+        result = map_scattering(_read(args.config), args.frequencies_ghz, args.output,
+                                max_new_points=args.max_new_points, mesh_cache_root=args.mesh_cache_root)
     except KeyboardInterrupt:
         print("Frequency map interrupted. Reuse the same inputs and output directory to resume.", file=sys.stderr)
         return 130

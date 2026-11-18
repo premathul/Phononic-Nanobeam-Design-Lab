@@ -56,6 +56,47 @@ def independent_scattering(frequency_hz):
 
 
 class FrequencyMapTests(unittest.TestCase):
+    def test_cli_prepare_only_reuses_checked_mesh_and_resumes(self):
+        workflow = mapper.workflow
+        with TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            config = small_guide()
+            config_path = root / "config_AP_pnc.json"
+            workflow.write_json(config_path, config)
+            mesh_cache = root / "mesh-check"
+            cached_mesh = workflow.preflight_mesh(config, mesh_cache)
+            output = root / "map"
+            with (
+                patch.object(workflow, "build_mesh", side_effect=AssertionError("recreated a checked mesh")),
+                patch.object(workflow, "_assemble_system", wraps=workflow._assemble_system) as assemble,
+                patch.object(workflow, "assemble_port", wraps=workflow.assemble_port) as section,
+                patch.object(mapper, "_run_point", wraps=mapper._run_point) as solve,
+                patch("builtins.print"),
+            ):
+                args = ["--config", str(config_path), "--frequencies-ghz", "0.25", "--output", str(output)]
+                self.assertEqual(mapper.main([*args, "--max-new-points", "0", "--mesh-cache-root", str(mesh_cache)]), 0)
+                prepared = mapper.read_saved_map(output)
+                self.assertEqual(prepared["status"], "partial")
+                self.assertFalse(prepared["stop_requested"])
+                self.assertEqual([(p["status"], p["attempts"]) for p in prepared["points"]], [("pending", [])])
+                self.assertFalse((output / "point-001").exists())
+                solve.assert_not_called()
+                shared = prepared["shared"]
+                self.assertEqual(shared["mesh_hash"], cached_mesh["mesh_hash"])
+                self.assertEqual(shared["artifacts"]["mesh"]["sha256"], cached_mesh["mesh_sha256"])
+                self.assertEqual(set(shared["artifacts"]), set(mapper.SHARED_FILES))
+                for artifact in shared["artifacts"].values():
+                    self.assertTrue((output / artifact["path"]).is_file())
+
+                self.assertEqual(mapper.main([*args, "--max-new-points", "1"]), 0)
+                completed = mapper.read_saved_map(output)
+                self.assertEqual(completed["status"], "complete")
+                self.assertEqual(completed["shared"], shared)
+                self.assertEqual([p["status"] for p in completed["points"][0]["attempts"]], ["accepted"])
+                assemble.assert_called_once()
+                section.assert_called_once()
+                solve.assert_called_once()
+
     def test_adjacent_matching_respects_direction_permutation_and_complex_gauge(self):
         mass = np.diag([2.0, 3.0, 5.0])
         reference, candidate, expected = {}, {}, {}
