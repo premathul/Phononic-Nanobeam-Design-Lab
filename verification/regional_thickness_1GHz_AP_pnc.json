@@ -1,0 +1,181 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "frequency_GHz": 1,
+  "incident_side": "left",
+  "git_source": "b6d788f202dfebdbe9c5b52561a0e0eb8bfee48d",
+  "preset": {
+    "path": "configs/historical_26hole_regional_AP_pnc.json",
+    "sha256": "dfcecd534ccf359bd672a44577b22fe18356001cbd26a0c9440140a824c4afa5"
+  },
+  "baseline_overrides": {
+    "mesh.lead_mesh_size_nm": 150
+  },
+  "candidate_additional_overrides": {
+    "mesh.thickness_layers": 2,
+    "resources.max_dofs": 69435
+  },
+  "physical_thickness_nm": 200,
+  "identical_footprint": {
+    "vertices": 1374,
+    "triangles": 1856,
+    "holes": 26
+  },
+  "body_dofs": [
+    41661,
+    69435
+  ],
+  "per_port_dofs": [
+    81,
+    135
+  ],
+  "reference_planes_x_m": [
+    0.0,
+    1.665e-05
+  ],
+  "minimum_mode_mass_overlap": 0.9999787500299789,
+  "matched_per_drive_powers": [
+    {
+      "drive": 1,
+      "one_layer_root": 158,
+      "two_layer_root": 265,
+      "reflection": {
+        "one_layer": 0.01400724040927272,
+        "two_layers": 0.011854605750740788,
+        "change_percentage_points": -0.21526346585319325,
+        "relative_change_percent": -15.368013938754842
+      },
+      "transmission": {
+        "one_layer": 0.9859927595907219,
+        "two_layers": 0.9881453942492454,
+        "change_percentage_points": 0.21526346585235556,
+        "relative_change_percent": 0.21832154826543534
+      }
+    },
+    {
+      "drive": 2,
+      "one_layer_root": 160,
+      "two_layer_root": 268,
+      "reflection": {
+        "one_layer": 0.005121367824134685,
+        "two_layers": 0.005164688731283988,
+        "change_percentage_points": 0.004332090714930306,
+        "relative_change_percent": 0.8458854867863868
+      },
+      "transmission": {
+        "one_layer": 0.994878632175873,
+        "two_layers": 0.9948353112687249,
+        "change_percentage_points": -0.0043320907148092225,
+        "relative_change_percent": -0.004354391153556711
+      }
+    },
+    {
+      "drive": 3,
+      "one_layer_root": 152,
+      "two_layer_root": 258,
+      "reflection": {
+        "one_layer": 0.03553905149000129,
+        "two_layers": 0.035782836756509805,
+        "change_percentage_points": 0.0243785266508513,
+        "relative_change_percent": 0.6859644708781848
+      },
+      "transmission": {
+        "one_layer": 0.9644609485099878,
+        "two_layers": 0.9642171632434925,
+        "change_percentage_points": -0.024378526649526666,
+        "relative_change_percent": -0.025276841625562412
+      }
+    },
+    {
+      "drive": 4,
+      "one_layer_root": 143,
+      "two_layer_root": 246,
+      "reflection": {
+        "one_layer": 0.004513117800645438,
+        "two_layers": 0.0005139183152910499,
+        "change_percentage_points": -0.3999199485354388,
+        "relative_change_percent": -88.61278747881227
+      },
+      "transmission": {
+        "one_layer": 0.9954868821993625,
+        "two_layers": 0.9994860816847253,
+        "change_percentage_points": 0.3999199485362759,
+        "relative_change_percent": 0.4017330169662501
+      }
+    },
+    {
+      "drive": 5,
+      "one_layer_root": 137,
+      "two_layer_root": 242,
+      "reflection": {
+        "one_layer": 0.0019097790459849037,
+        "two_layers": 0.008841416717357872,
+        "change_percentage_points": 0.6931637671372969,
+        "relative_change_percent": 362.95495470776893
+      },
+      "transmission": {
+        "one_layer": 0.998090220954014,
+        "two_layers": 0.9911585832826394,
+        "change_percentage_points": -0.6931637671374613,
+        "relative_change_percent": -0.6944900897585271
+      }
+    }
+  ],
+  "maximum_complex_pair": {
+    "block": "transmission",
+    "incident_channel": 1,
+    "outgoing_channel": 1,
+    "one_layer_roots": [
+      158,
+      158
+    ],
+    "two_layer_roots": [
+      265,
+      265
+    ],
+    "one_layer_magnitude": 0.9928708765593396,
+    "two_layer_magnitude": 0.9940006507214504,
+    "absolute_magnitude_only_mismatch": 0.001129774162110797,
+    "wrapped_phase_change_rad": 0.8685461560446787
+  },
+  "comparison": {
+    "power_change_limit": 0.01,
+    "complex_change_limit": 0.01,
+    "maximum_power_change": 0.006931637671374613,
+    "maximum_complex_change": 0.8359789420073765,
+    "power_passed": true,
+    "complex_passed": false,
+    "mesh_pair_passed": false
+  },
+  "candidate_checks": {
+    "map_residual_limit": 1e-09,
+    "maximum_relative_residual": 7.808381076007182e-13,
+    "maximum_physical_boundary_residual": 7.843080411348692e-13,
+    "coherent_defect_spectral_norm": 6.805354194257629e-12,
+    "coherent_limit": 0.01
+  },
+  "archive": {
+    "point": {
+      "path": "results/runs/regional_mesh_AP_pnc/lead150_z2_1GHz/point-001/attempt-wqrmb02x/historical_26hole_regional_pilot_200nm-35c4e1129841/summary_AP_pnc.json",
+      "sha256": "83d581eb6c10c1bb9c132e6aa9be96af64d032056b581fde86cb858ecd228027"
+    },
+    "comparison": {
+      "path": "results/runs/regional_mesh_AP_pnc/comparison/scattering-60b36ddcad06b79e/summary_AP_pnc.json",
+      "sha256": "c106b1ee77e255215d1f00500529eebcd94bb128ccfb919c5bc4ddb9757932ab"
+    },
+    "physical_coherent_replay": {
+      "path": "results/runs/regional_mesh_AP_pnc/local_checks/lead150_z2_flux_AP_pnc.json",
+      "sha256": "1e3183819a3765a7744a8439be8bfeaf8a3e15fcfcf8559b88e71660eccfa2cc"
+    },
+    "preparation": {
+      "path": "results/runs/regional_mesh_AP_pnc/local_checks/lead150_z2_preparation_execution_AP_pnc.json",
+      "sha256": "9b7ea69557f6e896a20b9a6782c5af188ccadb9f5ab8bd9d40232c9b8623711c"
+    },
+    "solve": {
+      "path": "results/runs/regional_mesh_AP_pnc/local_checks/lead150_z2_response_execution_AP_pnc.json",
+      "sha256": "a8500ee7d658afa70f5a9f879974de9ef6a39c9a73e27ee1e21dff94f2431ade"
+    },
+    "fields_sha256": "c21bf1d6b9940fb11c4b840555dd88c56c1ea7050364766c42b4570b0413c6bd"
+  },
+  "scope": "One joint thickness-layer and compatible port-discretization increment at fixed physical thickness. Full spatial and frequency convergence remain unresolved."
+}

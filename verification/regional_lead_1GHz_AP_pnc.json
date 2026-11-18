@@ -204,6 +204,8 @@
     }
   ],
   "comparison": {
+    "reference_lead_target_nm": 200,
+    "candidate_lead_target_nm": 150,
     "input_power_checks_passed": true,
     "maximum_power_change": 0.0021139101306344443,
     "power_change_limit": 0.01,
@@ -211,7 +213,44 @@
     "maximum_complex_change": 0.04239030308719074,
     "complex_change_limit": 0.01,
     "complex_passed": false,
-    "mesh_pair_passed": false
+    "mesh_pair_passed": false,
+    "maximum_complex_change_pair": {
+      "block": "transmission",
+      "incident": {
+        "side": "left",
+        "direction": "+x",
+        "channel": 5,
+        "port_index": 137
+      },
+      "outgoing": {
+        "side": "right",
+        "direction": "+x",
+        "channel": 5,
+        "port_index": 137
+      },
+      "k_rad_m": 5175396.031444971,
+      "reference_amplitude": {
+        "real": -0.5200981225646887,
+        "imag": -0.8527712650653304,
+        "magnitude": 0.9988597937730991
+      },
+      "candidate_aligned_amplitude": {
+        "real": -0.4834116658081191,
+        "imag": -0.8740090070939041,
+        "magnitude": 0.998788557764181
+      },
+      "absolute_magnitude_change": 7.123600891811854e-05,
+      "wrapped_phase_change_rad": 0.04244333112840816,
+      "convention": "One-based display channels and zero-based native port indices agree across the two runs. Unit-power coefficients use the original reference planes. Magnitude change is abs(abs(candidate) - abs(reference)). Phase change is the principal argument of candidate / reference."
+    },
+    "drive_1_total_reflection": {
+      "incident_channel": 1,
+      "incident_port_index": 158,
+      "reference_percent": 1.1893330278653005,
+      "candidate_percent": 1.400724040927272,
+      "increase_percentage_points": 0.21139101306197167,
+      "relative_increase_percent": 17.773912613979224
+    }
   },
   "artifacts": {
     "comparison": {
