@@ -283,6 +283,24 @@ After exact export, the same replay helper's `point` command requires `--safe`, 
 
 For each of the two distinct unit-power drives, target A is `abs(P_z4_8875-P_z6_8875)/P_z6_8875 <= 0.10`; target B is `P_z_8875/P_z_1GHz <= 0.01` separately at both resolutions. Use exact positive accepted per-direction denominators without floors. A is finite sensitivity, not 10% accuracy; B tests at least 99% suppression. Preserve both outcomes independently, all raw/aligned complex and phase changes, and the separate whole-response 0.01 gates. No passing finite increment establishes continuum convergence or a numerical floor.
 
+## Archived 0.8875 GHz in-plane control
+
+Completed outcome: stage 1335652, solve 1335654 and export 1335656 exited 0:0; the initial input-check failure 1335650 is retained. The sole solve took 322.31 seconds with 10710668 KiB GNU peak RSS. The independent replay passes; the pair-specific 10% sensitivity and whole complex gates fail, while both resolutions retain over 99% suppression versus 1 GHz. Reuse verification/device_frequency_inplane_8875_AP_pnc.json. The following recipe documents completed work, not a queued rerun.
+
+The selected control adds only the archived h100 z4 point at 887500000 Hz and compares it with accepted h80 z4. Read the current handoff before executing: root owns all connections, transfers and jobs. The exact 307611-DOF mesh, K/M, 675-DOF section and accepted frequency-specific SAFE are reused; no mesh, matrix assembly or eigensolve is needed. The body traces differ, so shared section fields must be checked against each body's original coordinates and component maps.
+
+After `PROJECT_ROOT PHASE WORKER_WALL_SECONDS`, `scripts/hpc/lawrence_frequency_h100_AP_pnc.sbatch` accepts:
+
+- `stage BODY_STAGE_DIR MESH_DIR SAFE_DIR ORIGINAL_1GHZ_A SAFE_VERIFICATION REFERENCE_POINT`
+- `solve STAGE_DIR STAGE_SHA [PRIOR_SOLVE_DIR PRIOR_SOLVE_SHA]`
+- `export STAGE_DIR STAGE_SHA SOLVE_DIR SOLVE_SHA`
+
+The original h100 1 GHz A resides in the same `full_h100_operator_qr_jt4fp` directory as K/M and ports. Preparation/export are bounded to 16 GiB / 600 seconds (550-second worker); the sole solve is bounded to 48 GiB / 900 seconds (850-second worker), using --partition=himem when selecting himem001. All allocate two CPUs and use one numerical thread. The adapter binds the frozen h100 execution helper and accepted full-SAFE/reference-point receipts, while keeping original Windows assembly and new Linux execution provenance separate. The prepared CSC graph, int32 factor exposure, fresh node/job memory and disk admission must pass before factorization. Historical fill and runtime are not guarantees. No automatic retry, larger allocation or next point is queued.
+
+After transfer hash verification, `tools/replay_lawrence_frequency_h100_AP_pnc.py` independently checks all five original equations, nodal-force and coherent power, 50 propagating / 6750 directional coefficients and full P2 fields. Its explicit local paths bind accepted SAFE/prebody/reference/relation receipts, retained producer sources, the reviewed new runner SHA and new phase/public artifacts. Accepted SAFE and signed matching are not numerically repeated. The original target is 1e-10 and both residual limits remain 1e-9.
+
+For each separate unit-power directed pair, A is `abs(P100_8875-P80_8875)/P80_8875 <=0.10`, using exact positive h80 denominators without floors. B is `P_h_8875/P_h_1GHz <=0.01`, independently at both resolutions and directions. Keep generic whole-response power/complex 0.01 gates separate. These finite sensitivity and suppression observations do not establish accuracy, convergence or a numerical floor. This global increment changes lead interiors together with the patterned region; do not subtract uniform-guide phase or combine this increment with thickness sensitivity as an error estimate.
+
 ## Open JupyterLab
 
 After the bootstrap succeeds, submit the optional notebook job from the same Lawrence project directory. It requests one CPU and 4 GiB for two hours. Use the node assigned to the running job. The server log is private and contains the token generated for this session.
