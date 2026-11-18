@@ -61,6 +61,16 @@ Resume requires matching saved inputs/source identities. An interrupted run is n
 
 `tools/map_scattering_AP_pnc.py` provides bounded point-resumable frequency work; its `--max-new-points` option limits attempts. The small guide pilot is complete. The separate `tools/import_lawrence_frequency_map_AP_pnc.py` retains the older read-only 1 GHz anchor view. Neither starts a full-device campaign automatically.
 
+## Compute a bounded frequency map
+
+For a scattering preset, including **Historical 26-hole device · pilot**, use **Check mesh** first. In **Frequency map**, enter explicit increasing GHz samples separated by commas or spaces and choose **New point limit** (default **1**). **Run frequency map** reuses a matching checked mesh, keeps the existing body/port resource caps, and attempts at most that many unfinished points. Failed attempts count toward the limit.
+
+**Stop** during a map requests a stop after the current point finishes. It does not interrupt a running factorization. The workbench stays busy until the worker exits and preserves accepted points. **Resume map…** reads the saved configuration and frequency list; it ignores unsaved study edits and reuses accepted points and shared preparation. A forcibly interrupted unfinished point may need another attempt. Resume requires the original native input/source/environment identities; imported read-only views cannot resume.
+
+**Open saved map…** opens its existing table/report without loading scientific arrays or solving. Viewing an older publication does not require the current solver version. A complete map means all requested finite computations passed their point gates; it does not establish spatial or frequency convergence. Failed and pending points remain explicit.
+
+The UI uses the existing `tools/map_scattering_AP_pnc.py` engine and its outputs. Its small end-to-end workflow is tested; that does not certify arbitrary 26-hole settings or authorize a large frequency campaign. Accepted device results already available through **Open device results** should be reused.
+
 ## What the results establish
 
 | Evidence | Supported result | Limit |

@@ -11,8 +11,9 @@ from tempfile import NamedTemporaryFile
 
 
 ROOT = Path(__file__).resolve().parents[1]
-THREAD_VARIABLES = ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS")
+THREAD_VARIABLES = ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "BLIS_NUM_THREADS")
 RESUMABLE_ACTIONS = ("run-resumable", "resume")
+MAP_ACTIONS = ("map", "map-resume")
 
 
 def write_response(path: Path, response: dict, *, replace: bool = False) -> None:
@@ -46,7 +47,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--candidate", type=Path)
     parser.add_argument("--resume-from", type=Path)
     parser.add_argument("--wall-seconds", type=float)
-    parser.add_argument("--action", choices=("mesh", "run", "compare", *RESUMABLE_ACTIONS), required=True)
+    parser.add_argument("--map-directory", type=Path)
+    parser.add_argument("--frequencies-ghz", type=float, nargs="+")
+    parser.add_argument("--max-new-points", type=int)
+    parser.add_argument("--action", choices=("mesh", "run", "compare", *RESUMABLE_ACTIONS, *MAP_ACTIONS), required=True)
     parser.add_argument("--output-root", type=Path, required=True)
     parser.add_argument("--response", type=Path, required=True)
     args = parser.parse_args(argv)
@@ -61,12 +65,58 @@ def main(argv: list[str] | None = None) -> int:
     for variable in THREAD_VARIABLES:
         os.environ[variable] = "1"
     sys.path.insert(0, str(ROOT / "src"))
+    sys.path.insert(0, str(ROOT))
     response = {"action": args.action}
     try:
         resumable = args.action in RESUMABLE_ACTIONS
+        mapping = args.action in MAP_ACTIONS
         if not resumable and (args.resume_from is not None or args.wall_seconds is not None):
             raise ValueError("--resume-from and --wall-seconds apply to resumable scattering.")
-        if args.action == "compare":
+        if not mapping and any(value is not None for value in (args.map_directory, args.frequencies_ghz, args.max_new_points)):
+            raise ValueError("Frequency-map options apply only to map and map-resume.")
+        if mapping:
+            from tools import map_scattering_AP_pnc as mapper
+
+            if args.map_directory is None or args.max_new_points is None or args.max_new_points < 1:
+                raise ValueError("Frequency maps require --map-directory and a positive --max-new-points bound.")
+            if args.reference is not None or args.candidate is not None:
+                raise ValueError("Frequency maps do not use --reference or --candidate.")
+            if args.action == "map-resume":
+                if args.config is not None or args.frequencies_ghz is not None:
+                    raise ValueError("Resume uses saved map inputs. Omit --config and --frequencies-ghz.")
+                saved = mapper.read_map_checkpoint(args.map_directory)
+                config = saved["inputs"]["configuration"]
+                frequencies = saved["inputs"]["frequencies_GHz"]
+            else:
+                if args.config is None or args.frequencies_ghz is None:
+                    raise ValueError("A new map requires --config and --frequencies-ghz.")
+                if (args.map_directory / mapper.CHECKPOINT).exists():
+                    raise ValueError("Use map-resume for an existing frequency-map checkpoint.")
+                config = json.loads(args.config.read_text(encoding="utf-8-sig"))
+                if not isinstance(config, dict):
+                    raise ValueError("The configuration must be a JSON object.")
+                frequencies = args.frequencies_ghz
+
+            def publish_map_progress(progress: dict) -> None:
+                try:
+                    write_response(args.response.with_suffix(".progress.json"),
+                                   {"action": args.action, "status": "running", "summary": progress}, replace=True)
+                except OSError as exc:
+                    print(f"Could not publish worker progress: {exc}", file=sys.stderr)
+
+            result = mapper.map_scattering(config, frequencies, args.map_directory,
+                                          max_new_points=args.max_new_points, progress_callback=publish_map_progress,
+                                          should_cancel=args.response.with_suffix(".cancel").exists,
+                                          mesh_cache_root=args.output_root if args.action == "map" else None)
+            directory = args.map_directory.resolve()
+            accepted = sum(point["status"] == "accepted" for point in result["points"])
+            summary = {**result, "output_directory": str(directory), "map_directory": str(directory),
+                       "accepted_points": accepted, "total_points": len(result["points"]),
+                       "failed_points": sum(point["status"] == "failed" for point in result["points"]),
+                       "can_resume": result["status"] != "complete"}
+            if "output_sha256" in result:
+                summary["report_path"] = str(directory / mapper.REPORT)
+        elif args.action == "compare":
             if args.reference is None or args.candidate is None or args.config is not None:
                 raise ValueError("Comparison requires --reference and --candidate. Omit --config.")
             from compare_scattering_AP_pnc import compare_runs
@@ -131,7 +181,8 @@ def main(argv: list[str] | None = None) -> int:
     except OSError as exc:
         print(f"Could not write the job response: {exc}", file=sys.stderr)
         return 1
-    return 1 if response["status"] in ("blocked", "failed") else 0
+    return 1 if (response["status"] in ("blocked", "failed")
+                 or response.get("summary", {}).get("failed_points", 0)) else 0
 
 
 if __name__ == "__main__":
