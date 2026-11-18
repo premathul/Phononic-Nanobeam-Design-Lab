@@ -95,7 +95,9 @@ The UI uses the existing `tools/map_scattering_AP_pnc.py` engine and its outputs
 
 Passing original equations and physical flux qualifies a finite numerical response. It does not establish spatial convergence, a complete band gap, a resonance linewidth/Q or experimental accuracy. Sparse samples establish no continuous branch or converged spectrum. Driven fields use displacement per square root of incident watt; displacement ratios are not transmitted power.
 
-The [regional 1 GHz device pair](verification/regional_lead_1GHz_AP_pnc.json) contains five matched left-incident power responses for 200 and 150 nm lead targets. The largest power change is 0.002114 and the largest complex-amplitude change is 0.04239. The power increment passes 0.01 and the complex increment fails 0.01. Both cases use one quadratic layer through 200 nm physical thickness.
+For the [regional lead comparison](verification/regional_lead_1GHz_AP_pnc.json), drive 1 reflection increases from 1.1893% to 1.4007% (+0.2114 percentage points, +17.77% relative). The largest aligned complex increment is 0.04239 on transmission from channel 5 into channel 5. The magnitude-only mismatch is 0.00007124 and the wrapped phase shift is +2.432 degrees. To inspect any saved mesh comparison, run `.venv/Scripts/python.exe tools/inspect_scattering_comparison_AP_pnc.py <comparison-directory>`. It reads the saved aligned coefficients and reports power changes relative to each drive's baseline.
+
+The [regional thickness comparison](verification/regional_thickness_1GHz_AP_pnc.json) holds the physical thickness at 200 nm and increases the quadratic thickness layers from one to two. The largest per-drive power change is 0.006932 (passes 0.01), with a +363% relative increase in drive 5 reflection from a small baseline. The largest complex-amplitude change is 0.83598 (fails 0.01).
 
 ## Tests and development
 
