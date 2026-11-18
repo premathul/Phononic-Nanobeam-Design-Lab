@@ -89,6 +89,87 @@ class LayeredMeshTests(unittest.TestCase):
         force = system.K @ displacement
         self.assertLess(np.linalg.norm(force[interior]) / np.linalg.norm(force), 1e-12)
 
+    def test_regional_lead_sizes_preserve_central_elements_and_local_operators(self):
+        interval = (150e-9, 850e-9)
+        meshes = [make_layered_mesh(self.geometry, self.holes, 150e-9,
+                                   port_mesh_size_m=200e-9, thickness_layers=2,
+                                   circle_points=16, lead_mesh_size_m=lead_size,
+                                   patterned_x_interval_m=interval)
+                  for lead_size in (150e-9, 75e-9)]
+        self.assertGreater(meshes[1].nelements, meshes[0].nelements)
+        central = []
+        for mesh in meshes:
+            x = mesh.p[0, mesh.t]
+            elements = np.flatnonzero((x.min(axis=0) >= interval[0])
+                                      & (x.max(axis=0) <= interval[1]))
+            self.assertGreater(len(elements), 0)
+            # Local meshes contain only central element contributions; global
+            # interface rows also receive lead contributions and may change.
+            central.append(mesh.restrict(elements))
+            for plane in interval:
+                facets = np.flatnonzero(np.all(mesh.p[0, mesh.facets] == plane, axis=0))
+                self.assertEqual(len(facets), 12)
+                self.assertTrue(np.all(mesh.f2t[:, facets] >= 0))
+            self.assertTrue(np.all(mesh.mapping().detA > 0))
+            diagnostics = volume_diagnostics(mesh, self.geometry, self.holes)
+            self.assertEqual(diagnostics["rim_segments_min"], 16)
+            self.assertEqual(diagnostics["rim_segments_max"], 16)
+            self.assertAlmostEqual(diagnostics["relative_removed_volume_error"],
+                                   1 - 16 * sin(2 * pi / 16) / (2 * pi), places=12)
+        np.testing.assert_array_equal(central[0].p, central[1].p)
+        np.testing.assert_array_equal(central[0].t, central[1].t)
+        systems = [assemble_elasticity(mesh, CubicMaterial(), max_dofs=10_000) for mesh in central]
+        np.testing.assert_array_equal(systems[0].basis.doflocs, systems[1].basis.doflocs)
+        for name in ("K", "M"):
+            left, right = (getattr(system, name) for system in systems)
+            np.testing.assert_array_equal(left.indptr, right.indptr)
+            np.testing.assert_array_equal(left.indices, right.indices)
+            np.testing.assert_array_equal(left.data, right.data)
+
+        reference = self.mesh(150, 2)
+        for mesh in meshes:
+            np.testing.assert_array_equal(np.unique(mesh.p[2]), np.unique(reference.p[2]))
+            for side in ("xleft", "xright"):
+                self.assertEqual(face_coordinates(mesh, mesh.boundaries[side], [1, 2]),
+                                 face_coordinates(reference, reference.boundaries[side], [1, 2]))
+
+    def test_regional_uniform_mesh_affine_patch_and_port_assembly(self):
+        mesh = make_layered_mesh(self.geometry, (), 180e-9, port_mesh_size_m=200e-9,
+                                 thickness_layers=1, lead_mesh_size_m=90e-9,
+                                 patterned_x_interval_m=(300e-9, 700e-9))
+        material = CubicMaterial()
+        system = assemble_elasticity(mesh, material, max_dofs=10_000)
+        port = assemble_port(system, material, max_dofs=63)
+        self.assertEqual(port.basis.N, 63)
+        np.testing.assert_allclose(system.basis.doflocs[1:, port.left_dofs],
+                                   system.basis.doflocs[1:, port.right_dofs], atol=1e-20, rtol=0)
+        displacement = np.zeros(system.basis.N)
+        x_dofs = system.basis.split_indices()[0]
+        displacement[x_dofs] = system.basis.doflocs[0, x_dofs]
+        volume = self.geometry.length_m * self.geometry.width_m * self.geometry.thickness_m
+        self.assertAlmostEqual((displacement @ (system.K @ displacement)) / (material.C11 * volume),
+                               1, places=11)
+        interior = system.basis.complement_dofs(system.basis.get_dofs())
+        force = system.K @ displacement
+        self.assertLess(np.linalg.norm(force[interior]) / np.linalg.norm(force), 1e-12)
+
+    def test_rejects_invalid_regional_mesh_inputs(self):
+        valid = {"lead_mesh_size_m": 100e-9, "patterned_x_interval_m": (150e-9, 850e-9)}
+        invalid = [({"lead_mesh_size_m": 100e-9}, "provided together"),
+                   ({"patterned_x_interval_m": valid["patterned_x_interval_m"]}, "provided together")]
+        invalid += [({**valid, "lead_mesh_size_m": value}, "positive and finite")
+                    for value in (0, -1e-9, float("nan"), float("inf"), True)]
+        invalid += [({**valid, "patterned_x_interval_m": value}, "patterned_x_interval_m")
+                    for value in ((), (150e-9,), (150e-9, 850e-9, 900e-9), 5,
+                                  (float("nan"), 850e-9), (True, 850e-9),
+                                  (0, 850e-9), (150e-9, self.geometry.length_m),
+                                  (850e-9, 150e-9), (300e-9, 850e-9),
+                                  (self.holes[0].x_m - self.holes[0].diameter_m / 2, 850e-9))]
+        for options, message in invalid:
+            with self.subTest(options=options), self.assertRaisesRegex(ValueError, message):
+                make_layered_mesh(self.geometry, self.holes, 150e-9,
+                                  port_mesh_size_m=200e-9, thickness_layers=1, **options)
+
     def test_rejects_invalid_layers_and_port_budget(self):
         with self.assertRaisesRegex(ValueError, "thickness_layers"):
             self.mesh(150, 0)

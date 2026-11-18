@@ -48,6 +48,9 @@ def build_mesh(geometry, holes, settings: dict, max_port_dofs: int | None) -> tu
         if kind == "layered":
             from .layered_AP_pnc import make_layered_mesh
 
+            if "lead_mesh_size_nm" in settings:
+                options["lead_mesh_size_m"] = settings["lead_mesh_size_nm"] * 1e-9
+                options["patterned_x_interval_m"] = tuple(value * 1e-9 for value in settings["patterned_x_interval_nm"])
             mesh = make_layered_mesh(geometry, holes, mesh_size_m, thickness_layers=settings["thickness_layers"], **options)
         else:
             mesh = make_perforated_mesh(geometry, holes, mesh_size_m, **options)

@@ -24,6 +24,7 @@ CHANNEL_COUNT = 4
 CHECK_TOL = 1e-10
 ARCHIVED_SOURCE_HASHES = {
     "src/phononic/scattering_AP_pnc.py": "f61de2048e1946b3d77a24a5951744c3ab65738b0e14ceb173a843df99b072ac",
+    "src/phononic/layered_AP_pnc.py": "954ce31756410b3767b40e412bcbf299000b4e3e63569eeb7685ca17f6fc5b1a",
 }
 CHANNEL_FIELDS = (
     "reflection", "transmission", "reflection_flux", "transmission_flux", "reflection_gram", "transmission_gram",

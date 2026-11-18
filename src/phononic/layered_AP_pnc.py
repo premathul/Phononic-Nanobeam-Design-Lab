@@ -82,6 +82,49 @@ def _footprint(model, geometry: BeamGeometry, holes: Sequence[Hole], mesh_size_m
     return xy[order], np.sort(np.argsort(order)[triangles].reshape(-1, 3), axis=1)
 
 
+def _regional_footprint(gmsh, geometry: BeamGeometry, holes: Sequence[Hole], mesh_size_m: float,
+                        lead_mesh_size_m: float, interval: tuple[float, float],
+                        port_cells: int, circle_points: int) -> tuple[np.ndarray, np.ndarray]:
+    """Mesh three independent regions and join their identical uniform traces."""
+    start, stop = interval
+    regions = ((0., start, lead_mesh_size_m, ()),
+               (start, stop, mesh_size_m,
+                tuple(Hole(h.x_m - start, h.diameter_m, h.region) for h in holes)),
+               (stop, geometry.length_m, lead_mesh_size_m, ()))
+    footprints, connectivity = [], []
+    offset = 0
+    for index, (left, right, size, local_holes) in enumerate(regions):
+        local_geometry = BeamGeometry(right - left, geometry.width_m, geometry.thickness_m)
+        gmsh.option.setNumber("Mesh.MeshSizeMax", size / _METERS_PER_CAD_UNIT)
+        gmsh.model.add(f"layered_region_{index}_AP_pnc")
+        xy, triangles = _footprint(gmsh.model, local_geometry, local_holes, size,
+                                   port_cells, circle_points)
+        left_edge = xy[:, 0] == 0
+        right_edge = xy[:, 0] == local_geometry.length_m
+        xy[:, 0] += left
+        # Avoid addition/subtraction roundoff separating the two copies of a
+        # prescribed interface. Uniform y coordinates already match exactly.
+        xy[left_edge, 0], xy[right_edge, 0] = left, right
+        footprints.append(xy)
+        connectivity.append(triangles + offset)
+        offset += len(xy)
+
+    xy = np.concatenate(footprints)
+    triangles = np.concatenate(connectivity)
+    unique, inverse, counts = np.unique(xy, axis=0, return_inverse=True, return_counts=True)
+    repeated = unique[counts > 1]
+    expected_y = np.linspace(-geometry.width_m / 2, geometry.width_m / 2, port_cells + 1)
+    expected = np.concatenate([np.column_stack((np.full(len(expected_y), x), expected_y))
+                               for x in interval])
+    if (not np.array_equal(repeated, expected)
+            or not np.all(counts[counts > 1] == 2)):
+        raise RuntimeError("Regional footprint interfaces do not have identical uniform traces")
+    # Only exact copies of the prescribed interface nodes may be merged. The
+    # final ordering preserves the shared lateral-quad diagonal on every edge.
+    order = np.lexsort((unique[:, 0], unique[:, 1]))
+    return unique[order], np.sort(np.argsort(order)[inverse[triangles]], axis=1)
+
+
 def make_layered_mesh(
     geometry: BeamGeometry,
     holes: HolePattern | Sequence[Hole],
@@ -92,6 +135,8 @@ def make_layered_mesh(
     circle_points: int = 24,
     max_port_dofs: int = 200,
     element_order: int = 2,
+    lead_mesh_size_m: float | None = None,
+    patterned_x_interval_m: tuple[float, float] | None = None,
 ) -> MeshTet:
     """Return a straight affine mesh extruded from an independently meshed footprint.
 
@@ -102,6 +147,15 @@ def make_layered_mesh(
     Exact circular arcs in CAD are sampled at ``circle_points`` vertices per
     rim. Use an empty hole sequence for a uniform control. The port budget
     includes all three displacement components at the requested element order.
+
+    Set both ``lead_mesh_size_m`` and ``patterned_x_interval_m=(a, b)`` to
+    mesh the leads [0, a] and [b, length] independently of the central region
+    [a, b], whose target remains ``mesh_size_m``. All hole rims must lie
+    strictly inside [a, b]. Both interfaces use the same uniform width trace
+    as the ports. Changing only the lead target preserves the central local
+    tetrahedra, physical hole faceting, z planes and port traces. This opt-in
+    construction is a new discretization; it does not preserve the central
+    cells of an earlier mesh made without these regional interfaces.
     """
     for name, size in (("mesh_size_m", mesh_size_m), ("port_mesh_size_m", port_mesh_size_m)):
         if not _finite_real(size) or size <= 0:
@@ -117,6 +171,24 @@ def make_layered_mesh(
     placed = holes.holes if isinstance(holes, HolePattern) else tuple(holes)
     if placed:
         validate_hole_clearances(geometry, placed)
+    if (lead_mesh_size_m is None) != (patterned_x_interval_m is None):
+        raise ValueError("lead_mesh_size_m and patterned_x_interval_m must be provided together")
+    if lead_mesh_size_m is not None:
+        if not _finite_real(lead_mesh_size_m) or lead_mesh_size_m <= 0:
+            raise ValueError("lead_mesh_size_m must be positive and finite")
+        try:
+            interval = tuple(patterned_x_interval_m)
+        except TypeError as error:
+            raise ValueError("patterned_x_interval_m must contain two finite coordinates") from error
+        if len(interval) != 2 or not all(_finite_real(value) for value in interval):
+            raise ValueError("patterned_x_interval_m must contain two finite coordinates")
+        start, stop = interval
+        if not 0 < start < stop < geometry.length_m:
+            raise ValueError("patterned_x_interval_m must satisfy 0 < start < stop < beam length")
+        if any(h.x_m - h.diameter_m / 2 <= start or h.x_m + h.diameter_m / 2 >= stop
+               for h in placed):
+            raise ValueError("Every hole rim must lie strictly inside patterned_x_interval_m")
+        patterned_x_interval_m = interval
     port_cells = ceil(geometry.width_m / port_mesh_size_m / (1 + 1e-12))
     port_dofs = 3 * (element_order * port_cells + 1) * (element_order * thickness_layers + 1)
     if port_dofs > max_port_dofs:
@@ -135,8 +207,13 @@ def make_layered_mesh(
             gmsh.option.setNumber("Mesh.MeshSizeFromCurvature", 0)
             gmsh.option.setNumber("Mesh.MeshSizeExtendFromBoundary", 0)
             gmsh.option.setNumber("Mesh.MeshSizeMax", mesh_size_m / _METERS_PER_CAD_UNIT)
-            gmsh.model.add("layered_beam_AP_pnc")
-            xy, triangles = _footprint(gmsh.model, geometry, placed, mesh_size_m, port_cells, circle_points)
+            if lead_mesh_size_m is None:
+                gmsh.model.add("layered_beam_AP_pnc")
+                xy, triangles = _footprint(gmsh.model, geometry, placed, mesh_size_m, port_cells, circle_points)
+            else:
+                xy, triangles = _regional_footprint(gmsh, geometry, placed, mesh_size_m,
+                                                    lead_mesh_size_m, patterned_x_interval_m,
+                                                    port_cells, circle_points)
         finally:
             gmsh.finalize()
 

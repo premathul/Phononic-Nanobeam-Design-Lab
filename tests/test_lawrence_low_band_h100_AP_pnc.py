@@ -66,11 +66,14 @@ def matched_fixture():
 
 class LawrenceLowBandH100Tests(unittest.TestCase):
     def test_actual_entry_checks_current_frozen_helpers(self):
+        implementation = json.loads((h100.ROOT / "data/saved_device_AP_pnc/h80_z6_08875/summary_AP_pnc.json").read_bytes())["implementation"]
+        self.assertEqual(h100.workflow.digest(implementation["source_sha256"]), h100.z4.fixed_port.SOURCE_MAP_SHA256)
         with TemporaryDirectory() as directory:
             root = Path(directory)
             command = ["h100", "stage", "--body-stage-dir", str(root / "body"), "--mesh-dir", str(root / "mesh"),
                        "--safe-dir", str(root / "safe"), "--output", str(root / "stage")]
             with (patch.object(h100, "sys", SimpleNamespace(platform="linux")),
+                  patch.object(h100.workflow, "source_identity", return_value=implementation),
                   patch.dict(os.environ, {**h100.lawrence.THREADS, "SLURM_JOB_ID": "123"}),
                   patch.object(h100.lawrence, "solve_environment", return_value={"single_thread": True}),
                   patch.object(h100, "stage", side_effect=lambda _, record: record.update(status="operator_staged")) as operation,
@@ -103,8 +106,8 @@ class LawrenceLowBandH100Tests(unittest.TestCase):
             h100.verify_body_sources(original, wrong)
 
     def test_input_reader_retains_the_saved_batched_assembly_method(self):
-        current = h100.workflow.source_identity()
-        current["platform"] = "Linux"
+        current = json.loads((h100.ROOT / "data/saved_device_AP_pnc/h80_z6_08875/summary_AP_pnc.json").read_bytes())["implementation"]
+        self.assertEqual(h100.workflow.digest(current["source_sha256"]), h100.z4.fixed_port.SOURCE_MAP_SHA256)
         original = deepcopy(current)
         original["platform"] = "Windows"
         for path, (first, _) in h100.SOURCE_PAIRS.items():
