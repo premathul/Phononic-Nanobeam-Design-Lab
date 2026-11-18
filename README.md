@@ -110,6 +110,8 @@ The scoped controller requires external process-tree supervision enforcing the h
 
 Explicit resume computes only untouched points; stopped failures are retained and never automatically retried. Reuse the completed publication during ordinary development. The independent verifier reconstructs original equations, forces and directional flux for new roots only, while reusing the accepted endpoint evidence.
 
+The [archived 0.8875 GHz workflow](docs/LAWRENCE_HPC_AP_pnc.md#archived-08875-ghz-device-point) has completed all five left-incident drives on the saved h80 z6 device, with exact mesh/K/M and frequency-specific mode reuse. Independent original equations, nodal-force power, coherent left incidence, all coefficients and full P2 fields pass. The selected field-matched reflected-conversion power falls from about 0.00108076 at 1 GHz to 7.96911e-7 at 0.8875 GHz (99.9263%). Reuse [portable evidence](verification/device_frequency_8875_AP_pnc.json) and the [workspace comparison](results/runs/device_frequency_8875_AP_pnc/comparison/report_AP_pnc.html). This is finite-frequency variation in the saved discretization, not a mechanism, uncertainty bound or convergence result; all previous failed spatial checks remain failed.
+
 For larger scattering cases, optional memory controls retain the same finite-element model:
 
 ```powershell
