@@ -1,0 +1,1022 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "status": "saved_field_energy_verified_finite_increment",
+  "updated_utc": "2026-11-18T03:19:09.225997+00:00",
+  "baseline_git_commit": "1cbe191bd9f5b9d64757e667ac56b64899f60338",
+  "research_question": "Are the saved total-field regional energy fractions stable under the h100/h80 in-plane increment at 887.5 MHz?",
+  "scope": {
+    "frequency_hz": 887500000,
+    "incident_root": 1302,
+    "incident_column": 0,
+    "region_cuts_m": [
+      0.0,
+      1.5e-06,
+      1.515e-05,
+      1.665e-05
+    ],
+    "native_incident_gauge_preserved": true,
+    "new_solve_performed": false,
+    "new_assembly_performed": false,
+    "field_fitting_performed": false,
+    "cross_mesh_interpolation_performed": false,
+    "spatial_convergence_established": false,
+    "frequency_convergence_established": false
+  },
+  "predeclared_target": {
+    "max_absolute_fraction_increment": 0.02,
+    "comparison": "strict_less_than"
+  },
+  "physical_inputs": {
+    "material": "Nominal fixed-property cubic Ge; C11=128.5 GPa, C12=48.3 GPa, C44=66.8 GPa, rho=5323 kg/m^3; identity crystal-to-laboratory rotation. Not measured 4 K properties.",
+    "thickness_m": 2e-07,
+    "width_m": 1e-06,
+    "length_m": 1.665e-05,
+    "thickness_layers": 4,
+    "hole_rim_segments": 32,
+    "ports_dofs": 675,
+    "integration_region_edges_m": [
+      0.0,
+      1.5e-06,
+      1.515e-05,
+      1.665e-05
+    ]
+  },
+  "units_and_conventions": {
+    "phasor": "exp(-i omega t), peak complex displacement",
+    "displacement": "m/sqrt(W)",
+    "energy_per_incident_power": "J/W = s; not independently measured delay or Q",
+    "kinetic": "rho*omega^2*integral(|u|^2)/4",
+    "elastic": "integral(epsilon*:C:epsilon)/4",
+    "second_normalization_applied": false,
+    "equipartition_imposed": false
+  },
+  "accepted_inputs": {
+    "accepted_comparison": {
+      "path": "results/runs/device_frequency_inplane_8875_AP_pnc/comparison/frequency_inplane_comparison_AP_pnc.json",
+      "bytes": 137386,
+      "sha256": "107d1c62817349d0a6900650d10dd3826ee492ca4bc36abc8195ee3c3e7911c7"
+    },
+    "h100_replay": {
+      "path": "results/runs/device_frequency_inplane_8875_AP_pnc/independent_point_AP_pnc.json",
+      "bytes": 14945,
+      "sha256": "ac9d1ccd9d5346102d97d03b2dac7e47fc3cb319f99d67d8a1d33bba087fc2b9"
+    },
+    "h100_summary": {
+      "path": "results/runs/device_frequency_inplane_8875_AP_pnc/h100-z4-frequency-887500000-export-1335656/historical_26hole_layered_h100_ny12_z4-de3840e0af1e/summary_AP_pnc.json",
+      "bytes": 58272,
+      "sha256": "0c9f83062c66c4e4bae4ac721609f4a85c16c0fe1d3a6ca22afa631f99019b9c"
+    },
+    "h100_fields": {
+      "path": "results/runs/device_frequency_inplane_8875_AP_pnc/h100-z4-frequency-887500000-export-1335656/historical_26hole_layered_h100_ny12_z4-de3840e0af1e/selected_fields_AP_pnc.npz",
+      "bytes": 41909274,
+      "sha256": "b4b4e7363c488d83515df75a5eba1ffb053f0c01940829d8d270e3c76c7b22c7"
+    },
+    "h80_replay": {
+      "path": "results/runs/device_frequency_thickness_8875_AP_pnc/independent_point_AP_pnc.json",
+      "bytes": 13617,
+      "sha256": "17bcad69b7d567331489d32a798f6755df292272473df78e9338ba259683fd34"
+    },
+    "h80_summary": {
+      "path": "results/runs/device_frequency_thickness_8875_AP_pnc/h80-z4-frequency-887500000-export-1335647/historical_26hole_layered_h80_ny12_z4-b88d0b9e1cc2/summary_AP_pnc.json",
+      "bytes": 55492,
+      "sha256": "6a8fe8e2a2f8b81a73c8e11a6905bf37bede44d4769b583a78e707dab75a4cbb"
+    },
+    "h80_fields": {
+      "path": "results/runs/device_frequency_thickness_8875_AP_pnc/h80-z4-frequency-887500000-export-1335647/historical_26hole_layered_h80_ny12_z4-b88d0b9e1cc2/selected_fields_AP_pnc.npz",
+      "bytes": 53539165,
+      "sha256": "4006732336aac65989207fbf3c0572ca931d6919bbbd80827725137abdf854de"
+    }
+  },
+  "material_source": {
+    "path": "src/phononic/material_AP_pnc.py",
+    "bytes": 3310,
+    "sha256": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2"
+  },
+  "current_sources": {
+    "tools/analyze_saved_field_energy_AP_pnc.py": {
+      "path": "tools/analyze_saved_field_energy_AP_pnc.py",
+      "bytes": 29874,
+      "sha256": "f55a9ebaa9db3b1c9d27af78adb227c1041c6fccf7fc4abd3b7f96925735c5e4"
+    },
+    "tools/verify_saved_field_energy_AP_pnc.py": {
+      "path": "tools/verify_saved_field_energy_AP_pnc.py",
+      "bytes": 32687,
+      "sha256": "3f6a142ff4f1f21c65273eb97920521e5c3799cd9a64f80c4f87478343afb587"
+    },
+    "tests/test_saved_field_energy_AP_pnc.py": {
+      "path": "tests/test_saved_field_energy_AP_pnc.py",
+      "bytes": 17897,
+      "sha256": "65a61194822ad50d219db49a7ec3cacbb3ee98bf51a121772363901a870c9bfb"
+    },
+    "tests/test_verify_saved_field_energy_AP_pnc.py": {
+      "path": "tests/test_verify_saved_field_energy_AP_pnc.py",
+      "bytes": 14182,
+      "sha256": "6d1bfbff80efa3f0f92e0036a25198b0addeccbd3b83fd388f3fe11f961e29cd"
+    }
+  },
+  "producer": {
+    "author": "Athul Prem",
+    "file_tag": "_AP_pnc",
+    "schema_version": 1,
+    "status": "saved_field_energy_compared_finite_increment",
+    "workspace": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab",
+    "research_question": "Are the saved total-field regional energy fractions stable under the h100/h80 in-plane increment at 887.5 MHz?",
+    "scope": {
+      "frequency_hz": 887500000,
+      "incident_root": 1302,
+      "incident_column": 0,
+      "region_cuts_m": [
+        0.0,
+        1.5e-06,
+        1.515e-05,
+        1.665e-05
+      ],
+      "native_incident_gauge_preserved": true,
+      "new_solve_performed": false,
+      "new_assembly_performed": false,
+      "field_fitting_performed": false,
+      "cross_mesh_interpolation_performed": false,
+      "spatial_convergence_established": false,
+      "frequency_convergence_established": false
+    },
+    "inputs": {
+      "accepted_comparison": {
+        "path": "results/runs/device_frequency_inplane_8875_AP_pnc/comparison/frequency_inplane_comparison_AP_pnc.json",
+        "bytes": 137386,
+        "sha256": "107d1c62817349d0a6900650d10dd3826ee492ca4bc36abc8195ee3c3e7911c7"
+      },
+      "h100_replay": {
+        "path": "results/runs/device_frequency_inplane_8875_AP_pnc/independent_point_AP_pnc.json",
+        "bytes": 14945,
+        "sha256": "ac9d1ccd9d5346102d97d03b2dac7e47fc3cb319f99d67d8a1d33bba087fc2b9"
+      },
+      "h100_summary": {
+        "path": "results/runs/device_frequency_inplane_8875_AP_pnc/h100-z4-frequency-887500000-export-1335656/historical_26hole_layered_h100_ny12_z4-de3840e0af1e/summary_AP_pnc.json",
+        "bytes": 58272,
+        "sha256": "0c9f83062c66c4e4bae4ac721609f4a85c16c0fe1d3a6ca22afa631f99019b9c"
+      },
+      "h100_fields": {
+        "path": "results/runs/device_frequency_inplane_8875_AP_pnc/h100-z4-frequency-887500000-export-1335656/historical_26hole_layered_h100_ny12_z4-de3840e0af1e/selected_fields_AP_pnc.npz",
+        "bytes": 41909274,
+        "sha256": "b4b4e7363c488d83515df75a5eba1ffb053f0c01940829d8d270e3c76c7b22c7"
+      },
+      "h80_replay": {
+        "path": "results/runs/device_frequency_thickness_8875_AP_pnc/independent_point_AP_pnc.json",
+        "bytes": 13617,
+        "sha256": "17bcad69b7d567331489d32a798f6755df292272473df78e9338ba259683fd34"
+      },
+      "h80_summary": {
+        "path": "results/runs/device_frequency_thickness_8875_AP_pnc/h80-z4-frequency-887500000-export-1335647/historical_26hole_layered_h80_ny12_z4-b88d0b9e1cc2/summary_AP_pnc.json",
+        "bytes": 55492,
+        "sha256": "6a8fe8e2a2f8b81a73c8e11a6905bf37bede44d4769b583a78e707dab75a4cbb"
+      },
+      "h80_fields": {
+        "path": "results/runs/device_frequency_thickness_8875_AP_pnc/h80-z4-frequency-887500000-export-1335647/historical_26hole_layered_h80_ny12_z4-b88d0b9e1cc2/selected_fields_AP_pnc.npz",
+        "bytes": 53539165,
+        "sha256": "4006732336aac65989207fbf3c0572ca931d6919bbbd80827725137abdf854de"
+      }
+    },
+    "producer": {
+      "path": "tools/analyze_saved_field_energy_AP_pnc.py",
+      "bytes": 29874,
+      "sha256": "f55a9ebaa9db3b1c9d27af78adb227c1041c6fccf7fc4abd3b7f96925735c5e4"
+    },
+    "material_source": {
+      "path": "src/phononic/material_AP_pnc.py",
+      "bytes": 3310,
+      "sha256": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2"
+    },
+    "numerical_environment": {
+      "python": "3.12.14",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "scikit-fem": "12.0.2",
+      "meshio": "5.3.5",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "BLIS_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1"
+      }
+    },
+    "predeclared_target": {
+      "max_absolute_fraction_increment": 0.02,
+      "comparison": "strict_less_than"
+    },
+    "meshes": {
+      "h100": {
+        "regions": [
+          {
+            "name": "left_lead",
+            "x_interval_m": [
+              0.0,
+              1.5e-06
+            ],
+            "volume_m3": 3.0000000000000014e-19,
+            "kinetic_energy_J_per_W": 1.203392062813501e-09,
+            "elastic_energy_J_per_W": 1.1789543819702274e-09,
+            "total_energy_J_per_W": 2.3823464447837286e-09,
+            "total_energy_fraction": 0.15350404779005283
+          },
+          {
+            "name": "patterned_region",
+            "x_interval_m": [
+              1.5e-06,
+              1.515e-05
+            ],
+            "volume_m3": 2.4642479633496352e-18,
+            "kinetic_energy_J_per_W": 5.528452091445177e-09,
+            "elastic_energy_J_per_W": 5.551865747408551e-09,
+            "total_energy_J_per_W": 1.1080317838853728e-08,
+            "total_energy_fraction": 0.713948906460909
+          },
+          {
+            "name": "right_lead",
+            "x_interval_m": [
+              1.515e-05,
+              1.665e-05
+            ],
+            "volume_m3": 3.0000000000000033e-19,
+            "kinetic_energy_J_per_W": 1.0292201659705977e-09,
+            "elastic_energy_J_per_W": 1.0278785734625663e-09,
+            "total_energy_J_per_W": 2.0570987394331638e-09,
+            "total_energy_fraction": 0.13254704574903753
+          }
+        ],
+        "totals": {
+          "volume_m3": 3.0642479633496328e-18,
+          "kinetic_energy_J_per_W": 7.761064320229274e-09,
+          "elastic_energy_J_per_W": 7.758698702841356e-09,
+          "total_energy_J_per_W": 1.551976302307063e-08,
+          "energy_per_incident_power_s": 1.551976302307063e-08
+        },
+        "integration_checks": {
+          "quadrature_degree": 4,
+          "original_parent_P2_evaluated": true,
+          "centroid_region_assignment": false,
+          "geometry_perturbation_applied": false,
+          "invertible_hull_conditioning": "centered SVD axes/scales; original barycentric vertices retained",
+          "cut_tetrahedra": 792,
+          "degree_four_monomials_per_cut_tetrahedron": 35,
+          "maximum_cut_moment_relative_closure": 1.275021754842954e-15,
+          "kinetic_elastic_absolute_partition_difference_over_total_energy": [
+            1.0659706740668617e-16,
+            7.461794718468032e-16
+          ],
+          "volume_kinetic_elastic_relative_partition_closure": [
+            1.005626159461031e-15,
+            2.131616434093904e-16,
+            1.4925864528675947e-15
+          ],
+          "analytic_rectangular_lead_relative_volume_errors": [
+            1.6049416203226961e-16,
+            3.209883240645391e-16
+          ]
+        },
+        "frequency_hz": 887500000,
+        "incident_root": 1302,
+        "incident_column": 0,
+        "incident_power_w": 1.0,
+        "selected_field_vtu": {
+          "path": "results/runs/field_energy_8875_AP_pnc/diagnostic/h100_root1302_P2_AP_pnc.vtu",
+          "bytes": 9797634,
+          "sha256": "e15c8878b941c6f23888aeb3ea010e0e801dc45b072258424106c1cf1fdbf544"
+        },
+        "selected_field_export": {
+          "scalar_P2_nodes": 102537,
+          "tetra10_cells": 61368,
+          "edge_order": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "native_complex_gauge_preserved": true,
+          "visualization_amplitude_rescaled": false,
+          "displacement_units": "m/sqrt(W)"
+        }
+      },
+      "h80": {
+        "regions": [
+          {
+            "name": "left_lead",
+            "x_interval_m": [
+              0.0,
+              1.5e-06
+            ],
+            "volume_m3": 3.0000000000000057e-19,
+            "kinetic_energy_J_per_W": 1.190763425331999e-09,
+            "elastic_energy_J_per_W": 1.1675479825158019e-09,
+            "total_energy_J_per_W": 2.358311407847801e-09,
+            "total_energy_fraction": 0.15158305488172186
+          },
+          {
+            "name": "patterned_region",
+            "x_interval_m": [
+              1.5e-06,
+              1.515e-05
+            ],
+            "volume_m3": 2.464247963349634e-18,
+            "kinetic_energy_J_per_W": 5.55604422204964e-09,
+            "elastic_energy_J_per_W": 5.577583816048439e-09,
+            "total_energy_J_per_W": 1.1133628038098079e-08,
+            "total_energy_fraction": 0.7156261655333584
+          },
+          {
+            "name": "right_lead",
+            "x_interval_m": [
+              1.515e-05,
+              1.665e-05
+            ],
+            "volume_m3": 3.0000000000000057e-19,
+            "kinetic_energy_J_per_W": 1.0336874058256606e-09,
+            "elastic_energy_J_per_W": 1.0322559847233312e-09,
+            "total_energy_J_per_W": 2.065943390548992e-09,
+            "total_energy_fraction": 0.13279077958491942
+          }
+        ],
+        "totals": {
+          "volume_m3": 3.0642479633496347e-18,
+          "kinetic_energy_J_per_W": 7.780495053207306e-09,
+          "elastic_energy_J_per_W": 7.77738778328757e-09,
+          "total_energy_J_per_W": 1.5557882836494876e-08,
+          "energy_per_incident_power_s": 1.5557882836494876e-08
+        },
+        "integration_checks": {
+          "quadrature_degree": 4,
+          "original_parent_P2_evaluated": true,
+          "centroid_region_assignment": false,
+          "geometry_perturbation_applied": false,
+          "invertible_hull_conditioning": "centered SVD axes/scales; original barycentric vertices retained",
+          "cut_tetrahedra": 840,
+          "degree_four_monomials_per_cut_tetrahedron": 35,
+          "maximum_cut_moment_relative_closure": 9.107298248878243e-16,
+          "kinetic_elastic_absolute_partition_difference_over_total_energy": [
+            4.253435361334231e-16,
+            1.0633588403335578e-16
+          ],
+          "volume_kinetic_elastic_relative_partition_closure": [
+            2.514065398652576e-16,
+            8.505172042614888e-16,
+            2.127142520347291e-16
+          ],
+          "analytic_rectangular_lead_relative_volume_errors": [
+            1.604941620322696e-15,
+            1.1234591342258867e-15
+          ]
+        },
+        "frequency_hz": 887500000,
+        "incident_root": 1302,
+        "incident_column": 0,
+        "incident_power_w": 1.0,
+        "selected_field_vtu": {
+          "path": "results/runs/field_energy_8875_AP_pnc/diagnostic/h80_root1302_P2_AP_pnc.vtu",
+          "bytes": 13759942,
+          "sha256": "43a5ed0ca08fe5d2107ccdfa35fbf44b176b3e4cbf3aa5b2ee0029900e899c66"
+        },
+        "selected_field_export": {
+          "scalar_P2_nodes": 142209,
+          "tetra10_cells": 87312,
+          "edge_order": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "native_complex_gauge_preserved": true,
+          "visualization_amplitude_rescaled": false,
+          "displacement_units": "m/sqrt(W)"
+        }
+      }
+    },
+    "limitations": [
+      "One finite global h100/h80 in-plane increment, including lead interiors; no spatial or frequency convergence is established.",
+      "Regional energy fractions describe the total driven field, not the location or cause of weak-conversion error.",
+      "No kinetic/elastic equipartition is imposed. Energy per incident power is not a measured delay, lifetime or Q.",
+      "Previous failed scattering criteria, numerical-floor limits, fixed-property material assumptions and unvalidated experimental adequacy remain unresolved."
+    ],
+    "comparison": {
+      "regional_fraction_increments": [
+        -0.0019209929083309762,
+        0.0016772590724494219,
+        0.00024373383588188746
+      ],
+      "max_absolute_fraction_increment": 0.0019209929083309762,
+      "finite_fraction_target_passed": true,
+      "relative_total_energy_change": 0.002456211049587562
+    },
+    "resources": {
+      "elapsed_s": 9.046999999962281,
+      "sampled_peak_rss_bytes": 115671040,
+      "rss_limit_bytes": 1073741824,
+      "wall_limit_s": 90,
+      "available_memory_reserve_bytes": 536870912,
+      "output_limit_bytes": 209715200,
+      "batch_elements": 256
+    }
+  },
+  "independent_verification": {
+    "author": "Athul Prem",
+    "file_tag": "_AP_pnc",
+    "schema_version": 1,
+    "status": "saved_field_energy_independently_verified",
+    "receipt": {
+      "path": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\results\\runs\\field_energy_8875_AP_pnc\\diagnostic\\field_energy_AP_pnc.json",
+      "bytes": 12238,
+      "sha256": "7d66af1817d49a84bd1436b8d3f6041009e8d379e911ef54a097b406702d9c7f"
+    },
+    "executed_producer_sha256": "f55a9ebaa9db3b1c9d27af78adb227c1041c6fccf7fc4abd3b7f96925735c5e4",
+    "verifier_sha256": "3f6a142ff4f1f21c65273eb97920521e5c3799cd9a64f80c4f87478343afb587",
+    "material_source": {
+      "path": "src/phononic/material_AP_pnc.py",
+      "bytes": 3310,
+      "sha256": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2"
+    },
+    "numerical_environment": {
+      "python": "3.12.14",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "packages": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "meshio": "5.3.5",
+        "psutil": "7.2.2"
+      },
+      "thread_environment": {
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "BLIS_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1"
+      }
+    },
+    "method": "Explicit P2 with 64-point Gauss-Duffy quadrature; case-based two-plane tetrahedron splitting; sequential saved real K/M quadratic forms; exact meshio tetra10 readback.",
+    "regional_energy_relative_tolerance": 1e-09,
+    "volume_relative_tolerance": 1e-10,
+    "checks": {
+      "h100": {
+        "regional_differences": {
+          "left_lead": {
+            "volume_relative_difference": 3.209883240645393e-16,
+            "kinetic_relative_difference": 6.873741635116815e-16,
+            "elastic_relative_difference": 0.0
+          },
+          "patterned_region": {
+            "volume_relative_difference": 3.126195046977875e-16,
+            "kinetic_relative_difference": 2.992449238487645e-16,
+            "elastic_relative_difference": 1.0429402567189105e-15
+          },
+          "right_lead": {
+            "volume_relative_difference": 1.7654357823549611e-15,
+            "kinetic_relative_difference": 4.0184823417881703e-16,
+            "elastic_relative_difference": 1.6094909144113041e-15
+          }
+        },
+        "independent_cut_tetrahedra": 792,
+        "independent_maximum_degree_four_moment_relative_error": 2.7321894746634708e-15,
+        "saved_matrix_energies_J_per_W": {
+          "kinetic": 7.761064320229261e-09,
+          "elastic": 7.758698702841362e-09
+        },
+        "tetra10_readback": {
+          "points": 102537,
+          "tetra10_cells": 61368,
+          "exact_complex_field_readback": true
+        }
+      },
+      "h80": {
+        "regional_differences": {
+          "left_lead": {
+            "volume_relative_difference": 1.6049416203226937e-16,
+            "kinetic_relative_difference": 1.736660269697145e-15,
+            "elastic_relative_difference": 1.4169535212944985e-15
+          },
+          "patterned_region": {
+            "volume_relative_difference": 9.378585140933619e-16,
+            "kinetic_relative_difference": 8.93276488985049e-16,
+            "elastic_relative_difference": 4.449134104482511e-16
+          },
+          "right_lead": {
+            "volume_relative_difference": 3.209883240645388e-16,
+            "kinetic_relative_difference": 4.0011158493912155e-16,
+            "elastic_relative_difference": 8.013328329355554e-16
+          }
+        },
+        "independent_cut_tetrahedra": 840,
+        "independent_maximum_degree_four_moment_relative_error": 2.9143354396410355e-15,
+        "saved_matrix_energies_J_per_W": {
+          "kinetic": 7.780495053207278e-09,
+          "elastic": 7.777387783287564e-09
+        },
+        "tetra10_readback": {
+          "points": 142209,
+          "tetra10_cells": 87312,
+          "exact_complex_field_readback": true
+        }
+      }
+    },
+    "matrix_inputs": {
+      "h100": {
+        "K": {
+          "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/results/runs/full_device_resource_profile/full_h100_operator_qr_jt4fp/K_AP_pnc.npz",
+          "sha256": "cab41f37af5e29571beb328ddd51ec36e61318e3c7cae3318a944f4bff73d259",
+          "bytes": 272258749
+        },
+        "M": {
+          "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/results/runs/full_device_resource_profile/full_h100_operator_qr_jt4fp/M_AP_pnc.npz",
+          "sha256": "91f9ebabad82166058d8f2282db4543e55528b29fd55cae527001ed0a388d0d6",
+          "bytes": 94236877
+        }
+      },
+      "h80": {
+        "K": {
+          "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/K_AP_pnc.npz",
+          "sha256": "bc8502e57383f556ae0cb9329246e90c53fd413e22c139ab09379b922c0e726b",
+          "bytes": 383387941
+        },
+        "M": {
+          "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/results/runs/full_device_resource_profile/full_h80_operator_1r5fdlft/M_AP_pnc.npz",
+          "sha256": "1fba2f5be3de1162b3778d3153dba5447058cd8c7d337b4c2eccd4acc43d670a",
+          "bytes": 132596101
+        }
+      }
+    },
+    "measurements": {
+      "h100": {
+        "fractions": [
+          0.15350404779005297,
+          0.7139489064609092,
+          0.13254704574903778
+        ],
+        "total_energy_J_per_W": 1.551976302307062e-08
+      },
+      "h80": {
+        "fractions": [
+          0.15158305488172208,
+          0.7156261655333584,
+          0.13279077958491933
+        ],
+        "total_energy_J_per_W": 1.5557882836494873e-08
+      }
+    },
+    "regional_fraction_increments": [
+      -0.001920992908330893,
+      0.0016772590724491998,
+      0.0002437338358815544
+    ],
+    "max_absolute_fraction_increment": 0.001920992908330893,
+    "finite_fraction_target_passed": true,
+    "elapsed_seconds": 18.07799999997951,
+    "peak_sampled_rss_bytes": 106647552,
+    "body_solve_performed": false,
+    "body_assembly_performed": false,
+    "spatial_convergence_established": false,
+    "frequency_convergence_established": false,
+    "conversion_error_cause_established": false
+  },
+  "execution_records": {
+    "integrated": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "command": [
+        "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test*_AP_pnc.py",
+        "-v"
+      ],
+      "script_sha256": "f55a9ebaa9db3b1c9d27af78adb227c1041c6fccf7fc4abd3b7f96925735c5e4",
+      "exit_code": 0,
+      "guard": null,
+      "elapsed_seconds": 60.61000000004424,
+      "available_memory_before_bytes": 4513632256,
+      "limits": {
+        "memory_bytes": 2147483648,
+        "available_reserve_bytes": 536870912,
+        "wall_seconds": 180,
+        "numerical_threads": 1
+      },
+      "runtime": {
+        "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2"
+        },
+        "thread_environment": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "BLIS_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1"
+        }
+      },
+      "peak_sampled_process_tree_rss_sum_bytes": 423673856,
+      "peak_sampled_process_tree_private_sum_bytes": 778092544,
+      "sample_seconds": 0.05,
+      "measurement_scope": "Sampled launcher and all observed numerical descendants; not an exact high-water mark.",
+      "full_record": {
+        "path": "results/runs/field_energy_8875_AP_pnc/local_checks/integrated_execution_AP_pnc.json",
+        "bytes": 33176,
+        "sha256": "3bf6f2c72b1472fc7af0e654f0dd9f7e322073d3b31e2504c7a333d3f6618e66"
+      }
+    },
+    "producer": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "command": [
+        "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\.venv\\Scripts\\python.exe",
+        "-B",
+        "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\tools\\analyze_saved_field_energy_AP_pnc.py",
+        "--output",
+        "results/runs/field_energy_8875_AP_pnc/diagnostic"
+      ],
+      "script_sha256": "f55a9ebaa9db3b1c9d27af78adb227c1041c6fccf7fc4abd3b7f96925735c5e4",
+      "exit_code": 0,
+      "guard": null,
+      "elapsed_seconds": 10.344000000040978,
+      "available_memory_before_bytes": 4486303744,
+      "limits": {
+        "memory_bytes": 1073741824,
+        "available_reserve_bytes": 536870912,
+        "wall_seconds": 90,
+        "numerical_threads": 1
+      },
+      "runtime": {
+        "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2"
+        },
+        "thread_environment": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "BLIS_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1"
+        }
+      },
+      "peak_sampled_process_tree_rss_sum_bytes": 153178112,
+      "peak_sampled_process_tree_private_sum_bytes": 163729408,
+      "sample_seconds": 0.05,
+      "measurement_scope": "Sampled launcher and all observed numerical descendants; not an exact high-water mark.",
+      "full_record": {
+        "path": "results/runs/field_energy_8875_AP_pnc/local_checks/producer_execution_AP_pnc.json",
+        "bytes": 1724,
+        "sha256": "e638f0636812846dd82d5b03b1c4c47cfa8699ead1d8169fd7c76c4ab8e46ad4"
+      }
+    },
+    "verifier": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "command": [
+        "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\.venv\\Scripts\\python.exe",
+        "-B",
+        "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\tools\\verify_saved_field_energy_AP_pnc.py",
+        "--receipt",
+        "results/runs/field_energy_8875_AP_pnc/diagnostic/field_energy_AP_pnc.json",
+        "--producer-sha256",
+        "f55a9ebaa9db3b1c9d27af78adb227c1041c6fccf7fc4abd3b7f96925735c5e4",
+        "--output",
+        "results/runs/field_energy_8875_AP_pnc/independent_verification_AP_pnc.json"
+      ],
+      "script_sha256": "3f6a142ff4f1f21c65273eb97920521e5c3799cd9a64f80c4f87478343afb587",
+      "exit_code": 0,
+      "guard": null,
+      "elapsed_seconds": 18.65600000001723,
+      "available_memory_before_bytes": 4585431040,
+      "limits": {
+        "memory_bytes": 2147483648,
+        "available_reserve_bytes": 536870912,
+        "wall_seconds": 120,
+        "numerical_threads": 1
+      },
+      "runtime": {
+        "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2"
+        },
+        "thread_environment": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "BLIS_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1"
+        }
+      },
+      "peak_sampled_process_tree_rss_sum_bytes": 993005568,
+      "peak_sampled_process_tree_private_sum_bytes": 1008812032,
+      "sample_seconds": 0.05,
+      "measurement_scope": "Sampled launcher and all observed numerical descendants; not an exact high-water mark.",
+      "full_record": {
+        "path": "results/runs/field_energy_8875_AP_pnc/local_checks/verifier_execution_AP_pnc.json",
+        "bytes": 2092,
+        "sha256": "2e9daf6a94ffae016edd4f9446fa75036b061403dda2371ba871fdfe525d6dd3"
+      }
+    }
+  },
+  "validation": {
+    "source_review": "Independent cross-review passes the producer and verifier. Final verifier environment-only receipt addition was narrowly reviewed with unchanged numerical code and tests.",
+    "focused": {
+      "producer_tests": 16,
+      "producer_seconds": 0.883,
+      "verifier_tests": 12,
+      "verifier_seconds": 0.515,
+      "skipped": 0
+    },
+    "integrated_local": {
+      "tests": 399,
+      "passed": 398,
+      "skipped": 1,
+      "seconds": 57.912,
+      "skip_reason": "Windows account lacks symbolic-link privilege; that guard test was not exercised locally.",
+      "startup_verifier_sha256": "c8a48dd1b68233e5c3327423a9405c103f127dea9f240e24269a126a4b07f53e",
+      "scope": "Final additive verifier environment metadata was reviewed after suite launch; numerical code and tests unchanged.",
+      "stdout": {
+        "path": "results/runs/field_energy_8875_AP_pnc/local_checks/integrated_tests_AP_pnc.log",
+        "bytes": 3308,
+        "sha256": "0da038cf7a42603f0cfabe41447ba7088d7d8b9b0560c0ac9a6f0a5b7fac78c3"
+      },
+      "stderr": {
+        "path": "results/runs/field_energy_8875_AP_pnc/local_checks/integrated_stderr_AP_pnc.txt",
+        "bytes": 75127,
+        "sha256": "9bd0eee7e3d9a4e0da600f004b9d5fb9c00bdb72d743d0c6f74f6903a3e8a1f4"
+      }
+    },
+    "actual_archive_passes": {
+      "producer_count": 1,
+      "verifier_count": 1,
+      "numerical_threads": 1,
+      "guard_triggered": false,
+      "new_remote_jobs": 0,
+      "new_eigensolves": 0,
+      "new_body_solves": 0
+    },
+    "ci": "pending exact final-head required checks",
+    "actual_publication_review": {
+      "artifact": {
+        "path": "results/runs/field_energy_8875_AP_pnc/local_checks/actual_publication_review_AP_pnc.json",
+        "bytes": 4704,
+        "sha256": "2f39b6060e76130d3bd8a2a8e3de02c45dc1c5064ba6a11627d025d6818e72be"
+      },
+      "status": "independent_small_publication_review_passed"
+    },
+    "artifact_review": {
+      "status": "artifact_and_document_review_passed",
+      "artifact": {
+        "path": "results/runs/field_energy_8875_AP_pnc/local_checks/artifact_review_AP_pnc.json",
+        "bytes": 13527,
+        "sha256": "99d52d4238efa4206abf35fe09c168d54e346457e49b4bc28a994396be03a1be"
+      },
+      "scope": "Pre-CI artifact/source snapshot, including the initial test hash. Only the test fixture path canonicalization is superseded by the independently reviewed correction below; scientific sources and result bytes are unchanged."
+    },
+    "ci_fixture_correction": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "scope": "Test-only Windows temporary-path canonicalization correction; no production, verifier or scientific-result changes.",
+      "command": [
+        "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_saved_field_energy_AP_pnc",
+        "-v"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds_including_launch": 2.2989929000032134,
+      "stdout": {
+        "path": "results/runs/field_energy_8875_AP_pnc/local_checks/corrected_focused_tests_AP_pnc.stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "results/runs/field_energy_8875_AP_pnc/local_checks/corrected_focused_tests_AP_pnc.stderr.txt",
+        "bytes": 3094,
+        "sha256": "d9ea86cabce142c90bda4b36812db4fe59e9b2850de538a6df312b059eabc972"
+      },
+      "corrected_test_source": {
+        "path": "tests/test_saved_field_energy_AP_pnc.py",
+        "bytes": 17897,
+        "sha256": "65a61194822ad50d219db49a7ec3cacbb3ee98bf51a121772363901a870c9bfb"
+      },
+      "production_source": {
+        "path": "tools/analyze_saved_field_energy_AP_pnc.py",
+        "bytes": 29874,
+        "sha256": "f55a9ebaa9db3b1c9d27af78adb227c1041c6fccf7fc4abd3b7f96925735c5e4"
+      },
+      "verifier_source": {
+        "path": "tools/verify_saved_field_energy_AP_pnc.py",
+        "bytes": 32687,
+        "sha256": "3f6a142ff4f1f21c65273eb97920521e5c3799cd9a64f80c4f87478343afb587"
+      },
+      "tests": 16,
+      "skipped": 0,
+      "full_suite_repeated": false,
+      "archive_passes_repeated": false,
+      "test_seconds": 0.82,
+      "prior_test_source": {
+        "path": "tests/test_saved_field_energy_AP_pnc.py",
+        "bytes": 17808,
+        "sha256": "fd81771866828c412cd62fbdeb5f995f3342ee56532844ffc1933c99bd540f03"
+      },
+      "independent_review": "Passed: sole fixture Path(td).resolve() change matches production canonicalization; exact equality, corrupted hash/content and outside-workspace rejection remain intact. Producer, verifier and scientific inputs/results unchanged."
+    },
+    "initial_ci": {
+      "run_id": 44229980896,
+      "job_id": 134552347499,
+      "head_sha": "08f19d894eac43b4b6d0fdce58ea3c28f649d593",
+      "tests": 399,
+      "passed": 398,
+      "failed": 1,
+      "skipped": 0,
+      "seconds": 40.944,
+      "failure": "Test fixture compared the same Windows temporary directory using 8.3 and full path spellings.",
+      "physical_benchmark_steps": "skipped after test failure",
+      "full_log": {
+        "path": "results/runs/field_energy_8875_AP_pnc/local_checks/ci_windows_initial_AP_pnc.log",
+        "bytes": 123377,
+        "sha256": "cffe16c45d83e7fea6cecfe1ed086aa233834003d7c43633a77fa5ff3c370727"
+      }
+    }
+  },
+  "output_bytes": 23575576,
+  "artifacts": [
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/diagnostic/field_energy_AP_pnc.json",
+      "bytes": 12238,
+      "sha256": "7d66af1817d49a84bd1436b8d3f6041009e8d379e911ef54a097b406702d9c7f"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/diagnostic/regional_energy_AP_pnc.csv",
+      "bytes": 998,
+      "sha256": "5976bc4fff914c431c3d8f5546596f6ba1bfbd66ec943590aad96f32d16b7cb6"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/diagnostic/report_AP_pnc.html",
+      "bytes": 4764,
+      "sha256": "f5df615033715130e792972c4f71c10e071e565118b7ab197afbef58b89e6712"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/independent_verification_AP_pnc.json",
+      "bytes": 6076,
+      "sha256": "e8bf2b5bf321862593fb12dc606fa659096ad2555255f5db3cb59ecbca55c6de"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/local_checks/integrated_execution_AP_pnc.json",
+      "bytes": 33176,
+      "sha256": "3bf6f2c72b1472fc7af0e654f0dd9f7e322073d3b31e2504c7a333d3f6618e66"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/local_checks/integrated_stderr_AP_pnc.txt",
+      "bytes": 75127,
+      "sha256": "9bd0eee7e3d9a4e0da600f004b9d5fb9c00bdb72d743d0c6f74f6903a3e8a1f4"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/local_checks/integrated_tests_AP_pnc.log",
+      "bytes": 3308,
+      "sha256": "0da038cf7a42603f0cfabe41447ba7088d7d8b9b0560c0ac9a6f0a5b7fac78c3"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/local_checks/producer_execution_AP_pnc.json",
+      "bytes": 1724,
+      "sha256": "e638f0636812846dd82d5b03b1c4c47cfa8699ead1d8169fd7c76c4ab8e46ad4"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/local_checks/producer_stderr_AP_pnc.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/local_checks/producer_stdout_AP_pnc.txt",
+      "bytes": 316,
+      "sha256": "9e5f2eb16381b31ec7e473e5423bfb3739ff9775bd0869f1d90e6376765c8175"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/local_checks/verifier_execution_AP_pnc.json",
+      "bytes": 2092,
+      "sha256": "2e9daf6a94ffae016edd4f9446fa75036b061403dda2371ba871fdfe525d6dd3"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/local_checks/verifier_stderr_AP_pnc.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/local_checks/verifier_stdout_AP_pnc.txt",
+      "bytes": 186,
+      "sha256": "3cef9870cc72aa9b01ea88238b99142545cf11a026bfe107731bb3f6e72ec2d5"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/diagnostic/h100_root1302_P2_AP_pnc.vtu",
+      "bytes": 9797634,
+      "sha256": "e15c8878b941c6f23888aeb3ea010e0e801dc45b072258424106c1cf1fdbf544"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/diagnostic/h80_root1302_P2_AP_pnc.vtu",
+      "bytes": 13759942,
+      "sha256": "43a5ed0ca08fe5d2107ccdfa35fbf44b176b3e4cbf3aa5b2ee0029900e899c66"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/local_checks/actual_publication_review_AP_pnc.json",
+      "bytes": 4704,
+      "sha256": "2f39b6060e76130d3bd8a2a8e3de02c45dc1c5064ba6a11627d025d6818e72be"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/local_checks/artifact_review_AP_pnc.json",
+      "bytes": 13527,
+      "sha256": "99d52d4238efa4206abf35fe09c168d54e346457e49b4bc28a994396be03a1be"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/local_checks/corrected_focused_tests_AP_pnc.json",
+      "bytes": 1620,
+      "sha256": "5dfc150fbd93ece9d3ad0feb41fd408aa5cc3b6e56fd572eb9cbaff8770dfa27"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/local_checks/corrected_focused_tests_AP_pnc.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/local_checks/corrected_focused_tests_AP_pnc.stderr.txt",
+      "bytes": 3094,
+      "sha256": "d9ea86cabce142c90bda4b36812db4fe59e9b2850de538a6df312b059eabc972"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/local_checks/ci_windows_initial_AP_pnc.log",
+      "bytes": 123377,
+      "sha256": "cffe16c45d83e7fea6cecfe1ed086aa233834003d7c43633a77fa5ff3c370727"
+    }
+  ],
+  "limitations": [
+    "One finite global h100/h80 in-plane increment, including lead interiors; no spatial or frequency convergence is established.",
+    "Regional energy fractions describe the total driven field, not the location or cause of weak-conversion error.",
+    "No kinetic/elastic equipartition is imposed. Energy per incident power is not a measured delay, lifetime or Q.",
+    "Previous failed scattering criteria, numerical-floor limits, fixed-property material assumptions and unvalidated experimental adequacy remain unresolved."
+  ],
+  "latest_athul_comment": {
+    "url": "https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/37#issuecomment-6952952018",
+    "status": "Previously implemented coherent-left-block request remains latest; repository issue/inline comment checks since 2026-11-18T02:33:00Z returned no new entries."
+  },
+  "next_boundary": "Stop after this one-drive/two-mesh/three-region control and its integration. Select a new research question before any further simulation or expanded diagnostic; no automatic follow-on is queued.",
+  "final_ownership": {
+    "coordinator_chat": "01a1e7dd-949e-7ce0-b90f-9fad42ea564e",
+    "root_model": "gpt-6-astra",
+    "root_effort": "ultra",
+    "worker_model": "gpt-6.1-sol",
+    "worker_effort": "ultra",
+    "authentication": "Existing SSH master reused successfully; no Duo required or sent.",
+    "scheduler_queue_last_observed": "empty at 2026-11-18T03:14:31Z",
+    "reset_used": false
+  }
+}
