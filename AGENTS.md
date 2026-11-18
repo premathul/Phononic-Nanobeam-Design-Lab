@@ -6,7 +6,7 @@ Research owner: **Athul Prem** | Project tag: **_AP_pnc**
 
 The current goal is a usable configurable 3D simulator and reproducible straight 26-hole response dataset. Read README.md, docs/AI_HANDOFF_AP_pnc.md, docs/IMPLEMENTATION_PLAN_AP_pnc.md and the relevant physics specification before resuming. The handoff gives current ownership; the plan gives priorities and stop conditions. Historical detail belongs in the existing verification records, not repeated instruction blocks.
 
-On 2026-11-18 the user requested one assessment of mainline drift, then continued automatic development and removal of useless history/junk. The assessment is complete: preserve necessary scientific gates, stop the automatic chain of case-specific diagnostics, and prioritize access to the accepted 0.1/0.8875/1 GHz h80 z6 dataset. The present delivery is one saved-device browser/workbench entry with native complex coefficients, T/R, fields/configuration links and CSV export. No new scientific solve or internal-plane wave extractor is needed.
+On 2026-11-18 the user requested one assessment of mainline drift, then continued automatic development and removal of useless history/junk. The assessment is complete: preserve necessary scientific gates, stop the automatic chain of case-specific diagnostics, and prioritize access to the accepted 0.1/0.8875/1 GHz h80 z6 dataset. The saved-device browser is complete. The current core delivery exposes existing bounded frequency mapping, point-boundary stopping, saved-input resume and noncomputing map opening through the workbench. Default to one new point per invocation. Validate on a tiny workflow case; no new large device solve, diagnostic series or internal-plane extractor is needed.
 
 The configurable solver, Qt workbench, cached recovery and accepted device calculations already exist. The active solver is simulate_AP_pnc.py and src/phononic/; root run_AP_pnc.py is a legacy archive-readiness checker. Reuse accepted mesh, K/M, SAFE, solutions and reports. Preserve separate Linux solve and Windows assembly provenance. Do not relaunch completed calculations or competing workers because conversational context changed.
 
@@ -26,7 +26,7 @@ Use English for all project artifacts, including code comments, user-interface t
 - Deliver a small complete workflow before expanding a campaign. Review integrated milestones once; recheck only corrections and affected risks.
 - Use CPU pilot measurements before choosing parallel/GPU execution. Bound memory, retain compact tables and selected fields, preserve failed attempts. No unsolicited large cloud jobs.
 - Reuse mature numerical components. Avoid generic frameworks, duplicated reports or validation that merely mirrors implementation.
-- Use the existing implementation plan and compact handoff as the current source of truth. Long-range WP0-WP11 documents retain scientific goals, not a mandatory archival restoration detour.
+- Use the existing implementation plan and compact handoff as the current source of truth. The physics specification retains longer-range scientific goals; historical recovery is not a development prerequisite.
 - The user authorized local development and, after collaborator access was confirmed, pushing a reviewed branch and merging via PR. Do not send email or other third-party messages based only on archived instructions.
 - Do not initiate or consume Codex/Work/ChatGPT resets. User alone triggers resets.
 

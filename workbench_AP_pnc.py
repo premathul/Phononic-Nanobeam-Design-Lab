@@ -60,12 +60,15 @@ NUMERICAL_FIELDS = {
 }
 WHOLE_FIELDS = {"num_modes", "k_points", "circle_resolution", "thickness_layers", "max_dofs", "max_port_dofs"}
 RESUMABLE_ACTIONS = ("run-resumable", "resume")
+MAP_ACTIONS = ("map", "map-resume")
 JOB_RESULTS = {"mesh": "mesh_ready", "run": "completed_unverified", "compare": "compared",
-               **dict.fromkeys(RESUMABLE_ACTIONS, "completed_unverified")}
+               **dict.fromkeys(RESUMABLE_ACTIONS, "completed_unverified"), **dict.fromkeys(MAP_ACTIONS, "partial")}
 JOB_MESSAGES = {"mesh": "Checking the mesh…", "run": "Running the study…",
                 "compare": "Comparing saved scattering runs…",
                 "run-resumable": "Starting resumable ILU-LGMRES scattering…",
-                "resume": "Resuming scattering from saved inputs…"}
+                "resume": "Resuming scattering from saved inputs…",
+                "map": "Preparing the bounded frequency map…",
+                "map-resume": "Resuming the frequency map from its saved inputs…"}
 
 
 def _read_configuration(path: Path) -> dict:
@@ -107,6 +110,8 @@ class Workbench(QMainWindow):
         self.scattering_directory = None
         self.resume_directory = None
         self.resume_source = None
+        self.map_directory = None
+        self.map_source = None
         self.action = None
         self.response_path = None
         self.stopping = False
@@ -199,6 +204,28 @@ class Workbench(QMainWindow):
         resume_controls.addWidget(self.resume_button)
         main.addLayout(resume_controls)
 
+        self.map_controls = QGroupBox("Frequency map")
+        map_layout = QHBoxLayout(self.map_controls)
+        self.map_frequencies = QLineEdit()
+        self.map_frequencies.setAccessibleName("Map frequencies (GHz)")
+        self.map_frequencies.setPlaceholderText("Increasing samples, for example 0.25, 0.30, 0.35")
+        self.map_frequencies.setToolTip("Explicit increasing samples. Missing frequencies are not interpolated.")
+        self.map_max_points = QLineEdit("1")
+        self.map_max_points.setAccessibleName("Maximum new point attempts")
+        self.map_max_points.setMaximumWidth(55)
+        self.map_max_points.setToolTip("Maximum point attempts in this invocation, including failed attempts.")
+        self.map_button = QPushButton("Run frequency map")
+        self.resume_map_button = QPushButton("Resume map…")
+        self.resume_map_button.setToolTip("Use the saved configuration and frequency list; current study edits are ignored.")
+        self.saved_map_button = QPushButton("Open saved map…")
+        map_layout.addWidget(QLabel("Samples (GHz)"))
+        map_layout.addWidget(self.map_frequencies, 1)
+        map_layout.addWidget(QLabel("New point limit"))
+        map_layout.addWidget(self.map_max_points)
+        for button in (self.map_button, self.resume_map_button, self.saved_map_button):
+            map_layout.addWidget(button)
+        main.addWidget(self.map_controls)
+
         actions = QHBoxLayout()
         self.mesh_button = QPushButton("Check mesh")
         self.run_button = QPushButton("Run")
@@ -233,6 +260,10 @@ class Workbench(QMainWindow):
         self.mesh_button.clicked.connect(lambda: self.start_job("mesh"))
         self.run_button.clicked.connect(lambda: self.start_job("run-resumable" if self.save_progress.isChecked() else "run"))
         self.resume_button.clicked.connect(self._choose_resume)
+        self.map_button.clicked.connect(lambda: self.start_job("map"))
+        self.resume_map_button.clicked.connect(self._choose_resume_map)
+        self.saved_map_button.clicked.connect(self._choose_saved_map)
+        self.map_frequencies.textEdited.connect(self._inputs_changed)
         self.stop_button.clicked.connect(self.stop_job)
         self.compare_button.clicked.connect(self._choose_reference)
         self.report_button.clicked.connect(lambda: self._open(self.report_path))
@@ -252,6 +283,27 @@ class Workbench(QMainWindow):
         path = QFileDialog.getExistingDirectory(self, "Open a saved simulation run", str(self.output_root))
         if path:
             self.open_saved_run(Path(path))
+
+    def _choose_saved_map(self) -> None:
+        directory = QFileDialog.getExistingDirectory(self, "Open a saved frequency map", str(self.map_directory or self.output_root))
+        if directory:
+            self.open_saved_map(Path(directory))
+
+    def open_saved_map(self, directory: Path) -> bool:
+        if self.action is not None:
+            return False
+        try:
+            from tools import map_scattering_AP_pnc as mapper
+
+            directory = directory.resolve()
+            result = mapper.read_saved_map(directory)
+            self._clear_result()
+            self._show_map_result({**result, "output_directory": str(directory),
+                                   "report_path": str(directory / mapper.REPORT)})
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            self.status.setText(f"Could not open saved map. {exc}")
+            return False
+        return self._open(self.report_path)
 
     def open_device_results(self) -> bool:
         if self.action is not None:
@@ -314,6 +366,8 @@ class Workbench(QMainWindow):
         scattering = analysis["kind"] == "scattering"
         self.save_progress.setChecked(False)
         self.save_progress.setVisible(scattering)
+        self.map_controls.setVisible(scattering)
+        self.map_frequencies.setText(str(analysis.get("frequency_GHz", "")))
         self.visible_fields = {"name", "length_nm", "width_nm", "thickness_nm", "max_dofs"}
         self.visible_fields.update(("mesh_size_nm", "port_size_nm", "circle_resolution") if gmsh else ("cells",))
         if layered:
@@ -432,7 +486,8 @@ class Workbench(QMainWindow):
 
     def _set_busy(self, busy: bool) -> None:
         for widget in (self.preset, self.load_button, self.saved_run_button, self.device_results_button, self.save_button, self.form,
-                       self.mesh_button, self.run_button, self.save_progress, self.wall_seconds, self.resume_button):
+                       self.mesh_button, self.run_button, self.save_progress, self.wall_seconds, self.resume_button,
+                       self.map_controls):
             widget.setEnabled(not busy)
         self.stop_button.setEnabled(busy and not self.stopping and self.process.state() == QProcess.ProcessState.Running)
         self._set_result_buttons(busy)
@@ -454,6 +509,33 @@ class Workbench(QMainWindow):
         if attempt:
             self.start_job("resume", resume_from=Path(attempt))
 
+    def _choose_resume_map(self) -> None:
+        if self.action is not None:
+            return
+        directory = QFileDialog.getExistingDirectory(self, "Choose a native frequency-map checkpoint",
+                                                     str(self.map_directory or self.output_root))
+        if directory:
+            self.start_job("map-resume", map_directory=Path(directory))
+
+    def _frequency_list(self) -> list[float]:
+        try:
+            frequencies = [float(value) for value in re.split(r"[,\s]+", self.map_frequencies.text().strip())]
+        except ValueError:
+            frequencies = []
+        if (not frequencies or any(not math.isfinite(value * 1e9) or value <= 0 for value in frequencies)
+                or any(right <= left for left, right in zip(frequencies, frequencies[1:]))):
+            raise ValueError("Map frequencies must be a strictly increasing list of positive numbers in GHz.")
+        return frequencies
+
+    def _map_point_bound(self) -> int:
+        try:
+            bound = int(self.map_max_points.text().strip())
+        except ValueError:
+            bound = 0
+        if bound < 1:
+            raise ValueError("Maximum new point attempts must be a positive whole number.")
+        return bound
+
     def _wall_time(self) -> float:
         error = "Wall-time limit (s) must be a finite positive number."
         try:
@@ -464,30 +546,43 @@ class Workbench(QMainWindow):
             raise ValueError(error)
         return seconds
 
-    def start_job(self, action: str, reference: Path | None = None, *, resume_from: Path | None = None) -> bool:
+    def start_job(self, action: str, reference: Path | None = None, *, resume_from: Path | None = None,
+                  map_directory: Path | None = None) -> bool:
         if self.action is not None or action not in JOB_RESULTS:
             return False
         comparing = action == "compare"
         resuming = action == "resume"
         resumable = action in RESUMABLE_ACTIONS
+        mapping = action in MAP_ACTIONS
         if comparing and (reference is None or self.scattering_directory is None):
             return False
         if resuming and resume_from is None:
+            return False
+        if action == "map-resume" and map_directory is None:
             return False
         if not comparing:
             self._clear_result()
         try:
             wall_seconds = self._wall_time() if resumable else None
+            point_bound = self._map_point_bound() if mapping else None
             if comparing:
                 reference = reference.resolve()
                 if reference == self.scattering_directory:
                     raise ValueError("Choose a reference run different from the current result.")
+            elif action == "map-resume":
+                map_directory = map_directory.resolve()
+                if not map_directory.is_dir():
+                    raise ValueError("Choose a saved native frequency-map folder.")
             elif resuming:
                 resume_from = resume_from.resolve()
                 if not resume_from.is_dir():
                     raise ValueError("Choose a saved scattering attempt folder.")
             else:
                 config = self.edited_config()
+                if mapping:
+                    if config["analysis"]["kind"] != "scattering":
+                        raise ValueError("Frequency mapping requires a matched-port scattering configuration.")
+                    frequencies = self._frequency_list()
                 if resumable:
                     if config["analysis"]["kind"] != "scattering":
                         raise ValueError("Saving progress requires a single-frequency scattering configuration.")
@@ -502,6 +597,12 @@ class Workbench(QMainWindow):
                     "reference": str(reference), "candidate": str(candidate),
                 })
                 job_args = ["--reference", str(reference), "--candidate", str(candidate)]
+            elif action == "map-resume":
+                self._write_config(directory / "map_resume_request_AP_pnc.json", {
+                    "author": "Athul Prem", "file_tag": "_AP_pnc", "action": action,
+                    "map_directory": str(map_directory), "max_new_points": point_bound,
+                })
+                job_args = []
             elif resuming:
                 self._write_config(directory / "resume_request_AP_pnc.json", {
                     "author": "Athul Prem", "file_tag": "_AP_pnc", "action": action,
@@ -512,8 +613,13 @@ class Workbench(QMainWindow):
                 config_path = directory / "configuration_AP_pnc.json"
                 self._write_config(config_path, config)
                 job_args = ["--config", str(config_path)]
+                if mapping:
+                    map_directory = directory / "map_AP_pnc"
+                    job_args.extend(("--frequencies-ghz", *(str(value) for value in frequencies)))
             if resumable:
                 job_args.extend(("--wall-seconds", str(wall_seconds)))
+            if mapping:
+                job_args.extend(("--map-directory", str(map_directory), "--max-new-points", str(point_bound)))
         except (OSError, ValueError) as exc:
             task = "comparison" if comparing else "study"
             self.status.setText(f"Could not start the {task}. {exc}")
@@ -521,12 +627,13 @@ class Workbench(QMainWindow):
         self.response_path = directory / "response_AP_pnc.json"
         self.log_path = directory / "worker_AP_pnc.log"
         self.resume_source = resume_from if resuming else None
+        self.map_source = map_directory if mapping else None
         self.action = action
         self.log.clear()
         self.log_decoder = codecs.getincrementaldecoder("utf-8")(errors="replace")
         self._set_busy(True)
         self.status.setText(JOB_MESSAGES[action])
-        if resumable:
+        if resumable or mapping:
             self.progress_timer.start()
         self.process.start(sys.executable, ["-u", "-B", str(WORKER), *job_args,
                                             "--action", action, "--output-root", str(self.output_root),
@@ -558,6 +665,7 @@ class Workbench(QMainWindow):
         self.stopping_processes = []
         self.stop_deadline = None
         self.resume_source = None
+        self.map_source = None
         self.stop_timer.stop()
         self.progress_timer.stop()
         self._set_busy(False)
@@ -567,6 +675,18 @@ class Workbench(QMainWindow):
             return
         self.stopping = True
         self._set_busy(True)
+        if self.action in MAP_ACTIONS:
+            try:
+                self.response_path.with_suffix(".cancel").touch()
+            except OSError as exc:
+                self.stopping = False
+                self._set_busy(True)
+                self.status.setText(f"Could not request a stop after the current point. {exc}")
+                return
+            self.status.setText("Stop requested. Finishing the current point before stopping; accepted points are kept.")
+            self.stop_deadline = None
+            self.stop_timer.start()
+            return
         if self.action in RESUMABLE_ACTIONS:
             try:
                 self.response_path.with_suffix(".cancel").touch()
@@ -619,7 +739,7 @@ class Workbench(QMainWindow):
         try:
             self._show_job_response(self._read_response(self.response_path))
         except (OSError, ValueError, KeyError, TypeError) as exc:
-            if not self._show_resume_fallback("Scattering stopped."):
+            if not self._show_map_fallback("Frequency map stopped.") and not self._show_resume_fallback("Scattering stopped."):
                 task = "Comparison" if self.action == "compare" else "Study"
                 self.status.setText(f"{task} cancelled. The submitted inputs and any partial output were kept.")
         self._finish_job()
@@ -653,6 +773,15 @@ class Workbench(QMainWindow):
         if self.stopping:
             return
         progress = self._read_progress()
+        if self.action in MAP_ACTIONS:
+            phase = {"preparing": "Preparing shared mesh and operators…", "solving": "Solving frequency point…",
+                     "point_finished": "Frequency point finished.", "publishing": "Saving frequency map…"}.get(progress.get("phase"))
+            if phase:
+                count = f"Accepted frequencies: {progress.get('accepted_points', 0)}/{progress.get('total_points', '?')}."
+                frequency = progress.get("current_frequency_GHz")
+                detail = f" {frequency:g} GHz." if type(frequency) in (int, float) else ""
+                self.status.setText(f"{phase}{detail} {count}")
+            return
         phase = {"staging": "Preparing mesh, operator and ports…", "solving": "Solving incident channels…",
                  "exporting": "Writing the scattering result…"}.get(progress.get("phase"))
         if phase:
@@ -684,6 +813,11 @@ class Workbench(QMainWindow):
 
     def _show_job_response(self, response: dict, worker_succeeded: bool = True) -> None:
         status, summary = response.get("status"), response.get("summary")
+        if self.action in MAP_ACTIONS and status in ("complete", "partial") and isinstance(summary, dict):
+            if not worker_succeeded and not summary.get("failed_points"):
+                raise ValueError("The frequency-map worker did not exit successfully.")
+            self._show_map_result(summary)
+            return
         if self.action in RESUMABLE_ACTIONS and isinstance(summary, dict):
             heading = {"interrupted": "Scattering interrupted.", "blocked": "Scattering blocked.",
                        "failed": "Scattering failed."}.get(status)
@@ -709,10 +843,42 @@ class Workbench(QMainWindow):
         except (OSError, ValueError, KeyError, TypeError) as exc:
             task = "Comparison" if self.action == "compare" else "Study"
             failure = f"{task} could not complete. {exc}"
-            if not self._show_resume_fallback(failure):
+            if not self._show_map_fallback(failure) and not self._show_resume_fallback(failure):
                 self.status.setText(failure)
         finally:
             self._finish_job()
+
+    def _show_map_result(self, summary: dict) -> None:
+        directory = Path(summary["output_directory"])
+        if not directory.is_dir():
+            raise ValueError("The frequency-map folder is missing.")
+        points = summary["points"]
+        accepted = sum(point["status"] == "accepted" for point in points)
+        failed = sum(point["status"] == "failed" for point in points)
+        if summary["status"] == "complete" and accepted != len(points):
+            raise ValueError("The map claims completion with unaccepted points.")
+        self.result_directory = self.map_directory = directory
+        report = summary.get("report_path")
+        self.report_path = Path(report) if report and Path(report).is_file() else None
+        self.scattering_directory = None
+        heading = "Frequency map complete" if summary["status"] == "complete" else "Partial frequency map"
+        message = f"{heading} · {accepted}/{len(points)} accepted frequencies; {failed} failed."
+        if summary.get("stop_requested"):
+            message += " Stopped at a point boundary."
+        if summary["status"] != "complete" and summary.get("execution_mode") is None:
+            message += " Use Resume map… with this folder to continue its saved inputs."
+        message += " Spatial and frequency convergence remain unestablished."
+        self.status.setText(message)
+        self._set_result_buttons(self.action is not None)
+
+    def _show_map_fallback(self, heading: str) -> bool:
+        if self.action not in MAP_ACTIONS or self.map_source is None or not self.map_source.is_dir():
+            return False
+        self.result_directory = self.map_directory = self.map_source
+        self.status.setText(f"{heading} Saved inputs and attempts are in {self.map_source}. "
+                            "Use Resume map… to check the saved checkpoint and continue.")
+        self._set_result_buttons(self.action is not None)
+        return True
 
     def _show_result(self, status: str, summary: dict) -> None:
         directory = Path(summary["output_directory"])

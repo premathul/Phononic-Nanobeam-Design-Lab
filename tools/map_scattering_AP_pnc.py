@@ -11,6 +11,7 @@ import json
 import math
 import os
 from pathlib import Path
+from shutil import copy2
 import sys
 from tempfile import mkdtemp
 from urllib.parse import quote
@@ -77,9 +78,18 @@ def _write_checkpoint(path: Path, state: dict) -> None:
     workflow.write_json(path, {**state, "checkpoint_data_sha256": workflow.digest(state)})
 
 
-def _prepare_shared(config, geometry, holes, pattern, identity, output) -> SharedInputs:
+def _prepare_shared(config, geometry, holes, pattern, identity, output, *, mesh_cache_root=None) -> SharedInputs:
     stage = Path(mkdtemp(prefix="shared-", dir=output))
     workflow.write_json(stage / "configuration_AP_pnc.json", config)
+    if mesh_cache_root is not None:
+        cached, mesh_hash, _ = workflow._mesh_location(Path(mesh_cache_root), geometry, pattern, config["mesh"], identity)
+        if cached.exists():
+            # Validate and retain a contained exact copy; the map stays resumable if the UI cache moves.
+            workflow.load_checkpoint(cached, mesh_hash)
+            internal, _, _ = workflow._mesh_location(stage, geometry, pattern, config["mesh"], identity)
+            internal.mkdir(parents=True)
+            for filename in (RUN_SUMMARY, "mesh_AP_pnc.npz"):
+                copy2(cached / filename, internal / filename)
     mesh_check = workflow._prepare_mesh_checkpoint(config, geometry, holes, pattern, identity, stage)
     if not mesh_check["within_body_budget"]:
         raise ValueError(f"Mesh has {mesh_check['ndof']} DOFs, exceeding the configured body cap.")
@@ -303,9 +313,10 @@ The point provenance records SAFE section-mode time separately.</p>
 """
 
 
-def _publish(state, shared, accepted, output):
+def _publish(state, shared, accepted, output, *, stop_requested=False):
     result = {**state, "points": [point.copy() for point in state["points"]], "scope": SCOPE,
               "status": "complete" if len(accepted) == len(state["points"]) else "partial",
+              "stop_requested": stop_requested,
               "matching_method": {"minimum_mass_overlap": comparison.MIN_OVERLAP,
                                   "relative_wavenumber_gap": comparison.K_GAP_TOL,
                                   "gauge": "Cumulative adjacent mass-overlap phases within each segment."}}
@@ -364,7 +375,55 @@ def _publish(state, shared, accepted, output):
     return result
 
 
-def map_scattering(config: dict, frequencies_GHz: Sequence[float], output: Path, *, max_new_points: int | None = None) -> dict:
+def read_map_checkpoint(directory: Path) -> dict:
+    """Read native resumable inputs without loading mesh, operator, or field arrays."""
+    checkpoint = Path(directory) / CHECKPOINT
+    if not checkpoint.is_file():
+        raise ValueError("Choose a native frequency-map checkpoint directory. Imported maps are read-only.")
+    state = _read(checkpoint)
+    if not isinstance(state, dict):
+        raise ValueError("Choose a native frequency-map checkpoint directory.")
+    saved_hash = state.get("checkpoint_data_sha256")
+    payload = {key: value for key, value in state.items() if key != "checkpoint_data_sha256"}
+    inputs = state.get("inputs", {})
+    frequencies = inputs.get("frequencies_GHz", []) if isinstance(inputs, dict) else []
+    if (workflow.digest(payload) != saved_hash or state.get("schema_version") != 1
+            or state.get("execution_mode") is not None or not isinstance(inputs, dict)
+            or not isinstance(inputs.get("configuration"), dict)
+            or inputs["configuration"].get("analysis", {}).get("kind") != "scattering"
+            or not frequencies or workflow.digest(inputs) != state.get("inputs_sha256")
+            or not isinstance(state.get("points"), list) or len(state["points"]) != len(frequencies)
+            or any(not isinstance(point, dict) for point in state["points"])
+            or [(p.get("index"), p.get("frequency_GHz")) for p in state["points"]]
+            != list(enumerate(frequencies, 1))):
+        raise ValueError("Invalid native frequency-map checkpoint. Imported maps are read-only.")
+    return state
+
+
+def read_saved_map(directory: Path) -> dict:
+    """Verify only the published small map, table, and report for read-only viewing."""
+    directory = Path(directory).resolve()
+    result = _read(directory / MAP)
+    if not isinstance(result, dict):
+        raise ValueError("Choose a published frequency-map directory.")
+    payload = {key: value for key, value in result.items() if key != "map_data_sha256"}
+    if (workflow.digest(payload) != result.get("map_data_sha256")
+            or result.get("schema_version") != 1 or result.get("status") not in ("complete", "partial")
+            or not isinstance(result.get("points"), list) or not result["points"]
+            or any(not isinstance(point, dict) or point.get("status") not in
+                   ("accepted", "pending", "running", "failed", "interrupted") for point in result["points"])):
+        raise ValueError("Published frequency-map data changed or is invalid.")
+    if result["status"] == "complete" and any(point["status"] != "accepted" for point in result["points"]):
+        raise ValueError("Published map claims completion with unaccepted points.")
+    hashes = result.get("output_sha256", {})
+    if not isinstance(hashes, dict):
+        raise ValueError("Published frequency-map output checksums are invalid.")
+    comparison.check_outputs(directory, {name: hashes.get(name) for name in (TABLE, REPORT)}, (TABLE, REPORT))
+    return result
+
+
+def map_scattering(config: dict, frequencies_GHz: Sequence[float], output: Path, *, max_new_points: int | None = None,
+                   should_cancel=None, progress_callback=None, mesh_cache_root: Path | None = None) -> dict:
     """Calculate or resume one fixed-geometry list, retaining accepted points and failed attempts."""
     frequencies = list(frequencies_GHz)
     if (not frequencies or any(not workflow._finite_number(f) or f <= 0 or not math.isfinite(f * 1e9) for f in frequencies)
@@ -389,12 +448,9 @@ def map_scattering(config: dict, frequencies_GHz: Sequence[float], output: Path,
     checkpoint = output / CHECKPOINT
     with _exclusive(output / ".frequency_map.lock"):
         if checkpoint.exists():
-            state = _read(checkpoint)
-            saved_hash = state.pop("checkpoint_data_sha256")
-            if (workflow.digest(state) != saved_hash
-                    or state["schema_version"] != 1 or state["inputs_sha256"] != inputs_sha
-                    or workflow.digest(state["inputs"]) != inputs_sha
-                    or [(p["index"], p["frequency_GHz"]) for p in state["points"]] != list(enumerate(frequencies, 1))):
+            state = read_map_checkpoint(output)
+            state.pop("checkpoint_data_sha256")
+            if state["inputs_sha256"] != inputs_sha:
                 raise ValueError("Frequency-map checkpoint differs from the requested inputs, source or environment.")
         else:
             if any(path.name != ".frequency_map.lock" for path in output.iterdir()):
@@ -404,8 +460,28 @@ def map_scattering(config: dict, frequencies_GHz: Sequence[float], output: Path,
                      "points": [{"index": i, "frequency_GHz": f, "status": "pending", "attempts": [], **CONVERGENCE}
                                 for i, f in enumerate(frequencies, 1)]}
             _write_checkpoint(checkpoint, state)
+        def progress(phase, frequency=None):
+            if progress_callback is not None:
+                summary = {"status": "running", "phase": phase, "map_directory": str(output),
+                           "accepted_points": sum(p["status"] == "accepted" for p in state["points"]),
+                           "total_points": len(frequencies)}
+                if frequency is not None:
+                    summary["current_frequency_GHz"] = frequency
+                progress_callback(summary)
+
+        progress("preparing")
+        if should_cancel is not None and should_cancel():
+            # No assembly or accepted field replay is needed for an untouched map.
+            if state["shared"] is None:
+                return _publish(state, None, {}, output, stop_requested=True)
+            if (output / MAP).is_file():
+                result = read_saved_map(output)
+                if result.get("checkpoint_sha256") == _sha(checkpoint):
+                    return {**result, "stop_requested": True}
+            status = "complete" if all(p["status"] == "accepted" for p in state["points"]) else "partial"
+            return {**state, "status": status, "stop_requested": True}
         if state["shared"] is None:
-            shared = _prepare_shared(settings, geometry, holes, pattern, identity, output)
+            shared = _prepare_shared(settings, geometry, holes, pattern, identity, output, mesh_cache_root=mesh_cache_root)
             state["shared"] = shared.record
             _write_checkpoint(checkpoint, state)
         else:
@@ -423,9 +499,13 @@ def map_scattering(config: dict, frequencies_GHz: Sequence[float], output: Path,
                 if len(accepted) == len(frequencies):
                     return {**result, "map_data_sha256": published_hash}
         attempted = 0
+        stopped = False
         for point in state["points"]:
             if point["index"] in accepted:
                 continue
+            if should_cancel is not None and should_cancel():
+                stopped = True
+                break
             if max_new_points is not None and attempted >= max_new_points:
                 break
             if point["status"] == "running":
@@ -439,6 +519,7 @@ def map_scattering(config: dict, frequencies_GHz: Sequence[float], output: Path,
             _write_checkpoint(checkpoint, state)
             attempted += 1
             config_at_frequency = _point_config(settings, point["frequency_GHz"])
+            progress("solving", point["frequency_GHz"])
             try:
                 summary = _run_point(config_at_frequency, shared, attempt)
                 summary_path = Path(summary["output_directory"]) / RUN_SUMMARY
@@ -461,7 +542,9 @@ def map_scattering(config: dict, frequencies_GHz: Sequence[float], output: Path,
                 point["status"] = "accepted"
                 record["status"] = "accepted"
             _write_checkpoint(checkpoint, state)
-        return _publish(state, shared, accepted, output)
+            progress("point_finished", point["frequency_GHz"])
+        progress("publishing")
+        return _publish(state, shared, accepted, output, stop_requested=stopped)
 
 
 def main(argv: list[str] | None = None) -> int:
