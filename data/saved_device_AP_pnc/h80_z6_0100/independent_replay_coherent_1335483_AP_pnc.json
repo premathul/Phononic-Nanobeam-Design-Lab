@@ -1,0 +1,256 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "frequency_hz": 100000000,
+  "status": "point_verified_within_saved_discretization",
+  "reference_planes_m": [
+    0.0,
+    1.665e-05
+  ],
+  "problem_dofs": 616239,
+  "incident_roots": [
+    1948,
+    1916,
+    1940,
+    1873
+  ],
+  "left_outgoing_roots": [
+    1949,
+    1917,
+    1941,
+    1874
+  ],
+  "stage_receipt_sha256": "441a6422fee3c9cbab54f458dba6d35b7f8d7af28192c983f95f87cfac7676b3",
+  "solve_receipt_sha256": "0ec27ae4d52a656ba85029bd2d603ec7ca314e6d70634f69ed0d1e0c5a415b7a",
+  "export_receipt_sha256": "f1899ee6918b5af8407849dff3b8cffe6021ed939a9fea658f1011195b297630",
+  "public_summary_sha256": "6f972ea9640984e71bb5a54d2eb49350192b6db482e0f9997ffd1c6a4fe02ba5",
+  "factor_nonzeros_reported": 1846932665,
+  "matrix_infinity_norm": 246663.8997613725,
+  "linux_superlu_library_sha256": "3312d4b53c769c7ab911a2fce4a74a8f8c1ec7eff1d96199ae87deda3f4006ef",
+  "relative_l2_target": 1e-10,
+  "relative_l2_limit": 1e-09,
+  "backward_limit": 1e-09,
+  "power_limit": 0.01,
+  "maximum_power_errors": {
+    "modal_balance": 3.0753177782116836e-13,
+    "direct_balance": 1.2578826869003024e-13,
+    "net_outward": 9.892087149410145e-14,
+    "modal_vs_direct_reflection": 4.057865155004947e-14,
+    "modal_vs_direct_transmission": 3.3728575488112256e-13
+  },
+  "coherent_left_incidence": {
+    "scope": "Left-incident propagating reflection and transmission in the original SAFE basis",
+    "incident_roots": [
+      1948,
+      1916,
+      1940,
+      1873
+    ],
+    "reflected_roots": [
+      1949,
+      1917,
+      1941,
+      1874
+    ],
+    "transmitted_roots": [
+      1948,
+      1916,
+      1940,
+      1873
+    ],
+    "flux_gram_entry_limit_w": 1e-07,
+    "flux_gram_errors": {
+      "incident": {
+        "maximum_diagonal_error_w": 2.220446049250313e-16,
+        "maximum_off_diagonal_magnitude_w": 6.609607544489927e-11
+      },
+      "reflected": {
+        "maximum_diagonal_error_w": 2.220446049250313e-16,
+        "maximum_off_diagonal_magnitude_w": 6.609607544489927e-11
+      },
+      "transmitted": {
+        "maximum_diagonal_error_w": 2.220446049250313e-16,
+        "maximum_off_diagonal_magnitude_w": 6.609607544489927e-11
+      }
+    },
+    "flux_gram_cross_direction_maximum_w": 3.517001343349797e-11,
+    "defect_matrix_real": [
+      [
+        -4.463096558993129e-14,
+        -9.51101424739631e-14,
+        -4.750272725046617e-13,
+        -4.755878646893965e-12
+      ],
+      [
+        -9.51101424739631e-14,
+        -1.8463008899516353e-13,
+        8.175097282483754e-11,
+        4.9517626421891335e-11
+      ],
+      [
+        -4.750272725046617e-13,
+        8.175097282483754e-11,
+        2.184918912462308e-13,
+        -4.3176822908786155e-12
+      ],
+      [
+        -4.755878646893965e-12,
+        4.9517626421891335e-11,
+        -4.3176822908786155e-12,
+        -3.0753177782116836e-13
+      ]
+    ],
+    "defect_matrix_imag": [
+      [
+        0.0,
+        7.845438681939478e-14,
+        2.1405668640222375e-12,
+        1.3756635170767885e-12
+      ],
+      [
+        -7.845438681939478e-14,
+        0.0,
+        -9.961243431527315e-13,
+        -2.839625525135288e-11
+      ],
+      [
+        -2.1405668640222375e-12,
+        9.961243431527315e-13,
+        0.0,
+        -4.179043121797565e-12
+      ],
+      [
+        -1.3756635170767885e-12,
+        2.839625525135288e-11,
+        4.179043121797565e-12,
+        0.0
+      ]
+    ],
+    "defect_eigenvalues": [
+      -1.0082498134558968e-10,
+      -3.6017869380529117e-12,
+      5.052977940035596e-12,
+      9.905548940244701e-11
+    ],
+    "coherent_coefficient_power_defect_spectral_norm": 1.0082498134558968e-10,
+    "coherent_power_limit": 0.01,
+    "direct_superposition": {
+      "incident_coefficients_real": [
+        0.15811388300841897,
+        0.31622776601683794,
+        0.4743416490252569,
+        0.6324555320336759
+      ],
+      "incident_coefficients_imag": [
+        0.15811388300841897,
+        -0.31622776601683794,
+        0.15811388300841897,
+        -0.31622776601683794
+      ],
+      "incident_coefficient_norm_squared": 1.0,
+      "incident_power_w": 1.0000000000216733,
+      "modal_reflection": 0.00430879398020589,
+      "modal_transmission": 0.9956912060676177,
+      "direct_reflection": 0.004308793980126004,
+      "direct_transmission": 0.9956912060191973,
+      "net_outward_power_ratio": 4.236611061877776e-13,
+      "power_errors": {
+        "modal_balance": 4.7823633941845856e-11,
+        "direct_balance": 6.767919558114954e-13,
+        "net_outward": 4.236611061877776e-13,
+        "modal_vs_direct_reflection": 7.988661815394593e-14,
+        "modal_vs_direct_transmission": 4.842048983988434e-11
+      }
+    }
+  },
+  "channels": [
+    {
+      "incident_root": 1948,
+      "reverse_root": 1949,
+      "relative_residual": 1.889476366443404e-11,
+      "backward_residual": 7.887354170670782e-16,
+      "independent_rhs_relative_error": 4.9161707203641394e-12,
+      "independent_body_boundary_relative_residual": 1.935380300996055e-11,
+      "reflection": 0.01984481225812624,
+      "transmission": 0.9801551877418292,
+      "reflection_flux": 0.019844812258141487,
+      "transmission_flux": 0.9801551877418787,
+      "net_outward_power_ratio": 3.885780586188048e-15,
+      "converted_reflection": 2.63820632007139e-11,
+      "converted_transmission": 6.843026145730846e-11
+    },
+    {
+      "incident_root": 1916,
+      "reverse_root": 1917,
+      "relative_residual": 2.8822702936817244e-11,
+      "backward_residual": 9.01931139932749e-16,
+      "independent_rhs_relative_error": 3.582908172047032e-12,
+      "independent_body_boundary_relative_residual": 2.897517117075403e-11,
+      "reflection": 0.01596042758938111,
+      "transmission": 0.9840395724104344,
+      "reflection_flux": 0.015960427589421688,
+      "transmission_flux": 0.9840395724104525,
+      "net_outward_power_ratio": -9.892087149410145e-14,
+      "converted_reflection": 6.979469710510777e-10,
+      "converted_transmission": 1.847074715399799e-10
+    },
+    {
+      "incident_root": 1940,
+      "reverse_root": 1941,
+      "relative_residual": 1.5083123035466032e-11,
+      "backward_residual": 6.736519353834502e-16,
+      "independent_rhs_relative_error": 6.996632878879747e-12,
+      "independent_body_boundary_relative_residual": 1.5240446402120807e-11,
+      "reflection": 0.00019121316319560793,
+      "transmission": 0.9998087868370228,
+      "reflection_flux": 0.0001912131631995041,
+      "transmission_flux": 0.999808786836827,
+      "net_outward_power_ratio": 1.7097434579227414e-14,
+      "converted_reflection": 1.2912902653617123e-11,
+      "converted_transmission": 3.350941746305125e-11
+    },
+    {
+      "incident_root": 1873,
+      "reverse_root": 1874,
+      "relative_residual": 1.9561958509826054e-11,
+      "backward_residual": 1.034516381965501e-15,
+      "independent_rhs_relative_error": 2.503567908904548e-12,
+      "independent_body_boundary_relative_residual": 1.9609497756222505e-11,
+      "reflection": 0.00015078332426663693,
+      "transmission": 0.9998492166754258,
+      "reflection_flux": 0.00015078332426584495,
+      "transmission_flux": 0.9998492166757631,
+      "net_outward_power_ratio": 1.7763568394002505e-14,
+      "converted_reflection": 6.754649434454005e-10,
+      "converted_transmission": 2.21457630011912e-10
+    }
+  ],
+  "representative_field": {
+    "selection": "largest reflected power in this point",
+    "column": 0,
+    "incident_root": 1948,
+    "path": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\results\\runs\\low_band_device_AP_pnc\\h80-z6-low-band-export-1335483\\historical_26hole_layered_h80_ny12_z6-bb55473510a2\\selected_fields_AP_pnc.npz",
+    "field_sha256": "8a42afc0332fa87f5aa5fa9fdf447a50150305068286b5d21d66be48afa0dce1",
+    "mesh_sha256": "e9c17e3fe0e2effd1c898d29701f393572d32bfbe7331464b35604940a62a918",
+    "accepted_vector_sha256": "f2d85fed5175bba9a4cfc4274fae831ee62052b47d1388a08f7e93d06e1b787f",
+    "units": "m per square root watt",
+    "basis_order": 2,
+    "visualization_vtu": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\results\\runs\\low_band_device_AP_pnc\\h80-z6-low-band-export-1335483\\historical_26hole_layered_h80_ny12_z6-bb55473510a2\\selected_vertex_shapes_AP_pnc.vtu"
+  },
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.14",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "thread_environment": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "BLIS_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1"
+  },
+  "available_memory_bytes_before_replay": 2454429696,
+  "required_memory_bytes_before_replay": 1515868669,
+  "elapsed_seconds": 5.719000000040978,
+  "spatial_convergence_established": false,
+  "frequency_convergence_established": false
+}
