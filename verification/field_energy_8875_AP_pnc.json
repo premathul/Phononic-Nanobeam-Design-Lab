@@ -107,8 +107,8 @@
     },
     "tests/test_saved_field_energy_AP_pnc.py": {
       "path": "tests/test_saved_field_energy_AP_pnc.py",
-      "bytes": 17808,
-      "sha256": "fd81771866828c412cd62fbdeb5f995f3342ee56532844ffc1933c99bd540f03"
+      "bytes": 17897,
+      "sha256": "65a61194822ad50d219db49a7ec3cacbb3ee98bf51a121772363901a870c9bfb"
     },
     "tests/test_verify_saved_field_energy_AP_pnc.py": {
       "path": "tests/test_verify_saved_field_energy_AP_pnc.py",
@@ -818,6 +818,75 @@
         "path": "results/runs/field_energy_8875_AP_pnc/local_checks/artifact_review_AP_pnc.json",
         "bytes": 13527,
         "sha256": "99d52d4238efa4206abf35fe09c168d54e346457e49b4bc28a994396be03a1be"
+      },
+      "scope": "Pre-CI artifact/source snapshot, including the initial test hash. Only the test fixture path canonicalization is superseded by the independently reviewed correction below; scientific sources and result bytes are unchanged."
+    },
+    "ci_fixture_correction": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "scope": "Test-only Windows temporary-path canonicalization correction; no production, verifier or scientific-result changes.",
+      "command": [
+        "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_saved_field_energy_AP_pnc",
+        "-v"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds_including_launch": 2.2989929000032134,
+      "stdout": {
+        "path": "results/runs/field_energy_8875_AP_pnc/local_checks/corrected_focused_tests_AP_pnc.stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "results/runs/field_energy_8875_AP_pnc/local_checks/corrected_focused_tests_AP_pnc.stderr.txt",
+        "bytes": 3094,
+        "sha256": "d9ea86cabce142c90bda4b36812db4fe59e9b2850de538a6df312b059eabc972"
+      },
+      "corrected_test_source": {
+        "path": "tests/test_saved_field_energy_AP_pnc.py",
+        "bytes": 17897,
+        "sha256": "65a61194822ad50d219db49a7ec3cacbb3ee98bf51a121772363901a870c9bfb"
+      },
+      "production_source": {
+        "path": "tools/analyze_saved_field_energy_AP_pnc.py",
+        "bytes": 29874,
+        "sha256": "f55a9ebaa9db3b1c9d27af78adb227c1041c6fccf7fc4abd3b7f96925735c5e4"
+      },
+      "verifier_source": {
+        "path": "tools/verify_saved_field_energy_AP_pnc.py",
+        "bytes": 32687,
+        "sha256": "3f6a142ff4f1f21c65273eb97920521e5c3799cd9a64f80c4f87478343afb587"
+      },
+      "tests": 16,
+      "skipped": 0,
+      "full_suite_repeated": false,
+      "archive_passes_repeated": false,
+      "test_seconds": 0.82,
+      "prior_test_source": {
+        "path": "tests/test_saved_field_energy_AP_pnc.py",
+        "bytes": 17808,
+        "sha256": "fd81771866828c412cd62fbdeb5f995f3342ee56532844ffc1933c99bd540f03"
+      },
+      "independent_review": "Passed: sole fixture Path(td).resolve() change matches production canonicalization; exact equality, corrupted hash/content and outside-workspace rejection remain intact. Producer, verifier and scientific inputs/results unchanged."
+    },
+    "initial_ci": {
+      "run_id": 44229980896,
+      "job_id": 134552347499,
+      "head_sha": "08f19d894eac43b4b6d0fdce58ea3c28f649d593",
+      "tests": 399,
+      "passed": 398,
+      "failed": 1,
+      "skipped": 0,
+      "seconds": 40.944,
+      "failure": "Test fixture compared the same Windows temporary directory using 8.3 and full path spellings.",
+      "physical_benchmark_steps": "skipped after test failure",
+      "full_log": {
+        "path": "results/runs/field_energy_8875_AP_pnc/local_checks/ci_windows_initial_AP_pnc.log",
+        "bytes": 123377,
+        "sha256": "cffe16c45d83e7fea6cecfe1ed086aa233834003d7c43633a77fa5ff3c370727"
       }
     }
   },
@@ -907,6 +976,26 @@
       "path": "results/runs/field_energy_8875_AP_pnc/local_checks/artifact_review_AP_pnc.json",
       "bytes": 13527,
       "sha256": "99d52d4238efa4206abf35fe09c168d54e346457e49b4bc28a994396be03a1be"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/local_checks/corrected_focused_tests_AP_pnc.json",
+      "bytes": 1620,
+      "sha256": "5dfc150fbd93ece9d3ad0feb41fd408aa5cc3b6e56fd572eb9cbaff8770dfa27"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/local_checks/corrected_focused_tests_AP_pnc.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/local_checks/corrected_focused_tests_AP_pnc.stderr.txt",
+      "bytes": 3094,
+      "sha256": "d9ea86cabce142c90bda4b36812db4fe59e9b2850de538a6df312b059eabc972"
+    },
+    {
+      "path": "results/runs/field_energy_8875_AP_pnc/local_checks/ci_windows_initial_AP_pnc.log",
+      "bytes": 123377,
+      "sha256": "cffe16c45d83e7fea6cecfe1ed086aa233834003d7c43633a77fa5ff3c370727"
     }
   ],
   "limitations": [

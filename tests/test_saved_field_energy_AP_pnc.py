@@ -249,7 +249,8 @@ class EvidenceTests(unittest.TestCase):
 
     def test_hash_binding_and_workspace_boundary(self):
         with tempfile.TemporaryDirectory() as td:
-            root = Path(td)
+            # Match production canonicalization of Windows short temp aliases.
+            root = Path(td).resolve()
             path = root/"input_AP_pnc.json"
             path.write_text("{}", encoding="utf-8")
             link = energy.artifact(path, root)
