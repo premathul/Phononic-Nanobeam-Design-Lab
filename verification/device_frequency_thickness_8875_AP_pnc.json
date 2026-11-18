@@ -2669,8 +2669,8 @@
     },
     {
       "path": "tests/test_compare_frequency_thickness_AP_pnc.py",
-      "bytes": 30737,
-      "sha256": "8cb2573dc5160e07af63972555427e185a4121ae0d7d7f503a1682a4dfeb7b3c"
+      "bytes": 30745,
+      "sha256": "0237c5fead724c5eaa2b1d8d1c3a0c651562c653dffb3d70d443dac56668270d"
     }
   ],
   "executed_prebody_sources": [
@@ -2767,6 +2767,29 @@
         "bytes": 62644,
         "sha256": "dc25433600940276a9e2aa9be26fc82eeed84ba8fb16671a208791a9b8372088"
       }
+    },
+    "initial_ci": {
+      "head_sha": "2ee3ba7a4ec28d109d99a2fdf26a5d468b3cd0b7",
+      "run_id": 44218490762,
+      "job_id": 134514198387,
+      "tests": 337,
+      "passed": 336,
+      "failures": 1,
+      "skipped": 0,
+      "seconds": 34.577,
+      "log": {
+        "path": "results/runs/device_frequency_thickness_8875_AP_pnc/local_checks/ci_initial_44218490762_AP_pnc.log",
+        "bytes": 108477,
+        "sha256": "ad49188faf119be1b1c1462b650a1a11de29e30c13b266e14b753fe3989d8013"
+      },
+      "failure": "Synthetic test compared long and Windows 8.3 short spellings of the same temporary file. Production returned the correct resolved artifact.",
+      "correction": "Use samefile identity in that assertion; no production source or scientific result changed.",
+      "targeted_recheck": {
+        "tests": 13,
+        "passed": 13,
+        "seconds": 0.145
+      },
+      "physical_benchmarks": "Skipped after test-step failure; final-head CI still required."
     }
   },
   "unchanged_scientific_limits": {
@@ -10705,6 +10728,11 @@
       "path": "results/runs/device_frequency_thickness_8875_AP_pnc/local_checks/final_scheduler_AP_pnc.txt",
       "bytes": 654,
       "sha256": "4d46ac7909ebb13d76d97de8b0510a905a5a0038139e7716bd7f18944c71c627"
+    },
+    {
+      "path": "results/runs/device_frequency_thickness_8875_AP_pnc/local_checks/ci_initial_44218490762_AP_pnc.log",
+      "bytes": 108477,
+      "sha256": "ad49188faf119be1b1c1462b650a1a11de29e30c13b266e14b753fe3989d8013"
     }
   ],
   "final_ownership": {

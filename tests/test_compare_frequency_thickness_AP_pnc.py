@@ -184,7 +184,7 @@ class FrequencyThicknessTests(TestCase):
             path.write_text(json.dumps(record), encoding="utf-8")
             actual, actual_modes, _ = comparison.checked_safe(path, comparison.sha(path), comparison.sha(runner), root)
             self.assertEqual(actual["status"], "safe_ready")
-            self.assertEqual(actual_modes, modes)
+            self.assertTrue(actual_modes.samefile(modes))
             record["safe_section"]["sha256"] = "0" * 64
             path.write_text(json.dumps(record), encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "provenance"):
