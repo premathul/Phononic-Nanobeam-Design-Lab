@@ -1,28 +1,13 @@
-# Execution environment and dependencies
+# Execution environment
 
-Author: **Athul Prem** | Project/file tag: **`_AP_pnc`**
+Author: Athul Prem | _AP_pnc
 
-## Current lightweight checks
+The active 3D solver uses Python 3.12, NumPy, SciPy, scikit-fem, Gmsh, Matplotlib and meshio. Install `requirements_3d_AP_pnc.txt` in a dedicated virtual environment; `requirements_ui_AP_pnc.txt` adds the optional PySide6 Essentials workbench. Follow the current README for launch and test commands. On this Windows workspace use `.venv/Scripts/python.exe`.
 
-The active source and tests use Python's standard library and NumPy. The current `requirements.txt` deliberately describes that scope. Use a virtual environment appropriate to the host and run commands from the repository root. Python 3.11 or newer is the documented target.
+Each scientific result retains its original Python/platform/package and source identities. A working current environment does not authorize rewriting an old result's provenance. Linux solve/export and original Windows assembly records stay separate. The app-update virtual-environment base-path repair is recorded in the current handoff; do not reinstall packages or repeat accepted simulations merely because an application was updated.
 
-```bash
-python -m pip install -r requirements.txt
-python tools/audit_repository_AP_pnc.py
-python verify_AP_pnc.py --fields --safety
-python -m unittest discover -s tests -p 'test*_AP_pnc.py' -v
-```
+The saved-device browser uses only the Python standard library. It reads compact pinned JSON/CSV sources, links retained field arrays, and never launches a solver. A fresh Git clone contains portable evidence but not the large workspace archive.
 
-The audit can run without a FEM installation. NPZ field checks and the analytic utility require NumPy. No archived script should be executed directly from its renamed location: its internal imports and historical paths are retained unchanged for evidence. The active `run_AP_pnc.py` performs a read-only readiness check and deliberately blocks real execution, including after recovery until the adapter has been reviewed/enabled.
+Memory-heavy work follows the Lawrence runbook and current handoff. Measure actual resources, use bounded allocations/checkpoints, and keep large results and environments out of Git. No automatic GPU/cloud campaign or environment reset is part of setup.
 
-## Historical FEM environment
-
-The archived environment document reports Python 3.13.11 on x86_64 macOS, NumPy 2.2.6, SciPy 1.15.2, Gmsh 4.15.0, Matplotlib 3.10.8 and an openpyxl 3.1.2 workbook reader. These are historical reports, not a lock file tested on every platform. The full expected original dependency file is missing; installing these packages does not restore missing numerical code.
-
-Once sources are recovered, make a separate environment, check native Gmsh/shared-library compatibility and record Python/OS/architecture/BLAS plus all installed versions. Do not mix incompatible architecture binaries. Follow the selected solver's official installation guidance. Preserve an exact source revision and package lock/export with each newly verified run. See the unchanged [historical environment note](../archive/documentation/ENVIRONMENT_AP_pnc.md) for its original context.
-
-## The planned 3D implementation
-
-No FEM backend has been selected or installed by the folder reorganization. Choose a backend based on 3D anisotropy, eigenproblems, port modes, sparse solves, energy flux and available hardware. Document the choice and validate small benchmarks before scaling. Solver scratch, temporary meshes and virtual environments should not be committed.
-
-Large campaigns need a measured pilot and explicit RAM/disk/time limits. The template leaves those budgets unresolved and execution disabled. Report memory per factorization, per-mode solve time, field size and expected total storage. Checkpoint and stop cleanly if a limit is approached. A frequency-count cap alone is not a memory budget.
+`requirements.txt`, `run_AP_pnc.py` and `verify_AP_pnc.py` serve the historical lightweight archive audit, not the active 3D environment. The unchanged [historical environment note](../archive/documentation/ENVIRONMENT_AP_pnc.md) describes the old macOS/2D context; its missing sources are not repaired by installing packages.

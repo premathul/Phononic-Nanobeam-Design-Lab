@@ -1,5 +1,5 @@
-# Final report and delivery
+# Research reporting
 
-Author: **Athul Prem** | Project/file tag: **`_AP_pnc`**
+Author: Athul Prem | _AP_pnc
 
-The future executing AI must follow [REPORT_REQUIREMENTS_AP_pnc.md](REPORT_REQUIREMENTS_AP_pnc.md) and complete [FINAL_REPORT_TEMPLATE_AP_pnc.md](FINAL_REPORT_TEMPLATE_AP_pnc.md). The final detailed report is addressed to **athul.prem@coyotes.usd.edu**. [final_report_email_template_AP_pnc.eml](final_report_email_template_AP_pnc.eml) is an unsent template, and [delivery_status_AP_pnc.json](delivery_status_AP_pnc.json) truthfully begins as not prepared/not sent. No final research report or email delivery is claimed by this reorganization.
+[REPORT_REQUIREMENTS_AP_pnc.md](REPORT_REQUIREMENTS_AP_pnc.md) defines the scientific report contract. Current results and limitations are available through the saved-device browser and existing verification records. There is no completed final research report or email delivery. Create a report or delivery receipt when it is actually needed; empty report/email templates and stale placeholder status files have been removed. Sending to a collaborator requires current user authorization.

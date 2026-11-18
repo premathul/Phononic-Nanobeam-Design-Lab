@@ -3,7 +3,7 @@
   "file_tag": "_AP_pnc",
   "index_version": 1,
   "date": "2026-11-12",
-  "file_count": 244,
+  "file_count": 240,
   "self_hash_policy": "Own SHA-256 is null to avoid recursive checksumming.",
   "files": [
     {
@@ -671,14 +671,6 @@
       "original_repository_path": null
     },
     {
-      "path": "docs/NEXT_STEPS_AP_pnc.md",
-      "author": "Athul Prem",
-      "file_tag": "_AP_pnc",
-      "role": "current_documentation_or_tooling",
-      "sha256": "e754ccbc50f1d8e48d8d0f3ebd3ce80f6cb78b39bb0cc7be795a3e88101a7d8c",
-      "original_repository_path": null
-    },
-    {
       "path": "docs/PHYSICS_SPECIFICATION_AP_pnc.md",
       "author": "Athul Prem",
       "file_tag": "_AP_pnc",
@@ -959,14 +951,6 @@
       "original_repository_path": null
     },
     {
-      "path": "reports/FINAL_REPORT_TEMPLATE_AP_pnc.md",
-      "author": "Athul Prem",
-      "file_tag": "_AP_pnc",
-      "role": "current_documentation_or_tooling",
-      "sha256": "4942866948ef44954cb13dd4044bd0c63e72e55dbc6dc7805c95fc61e5e96da1",
-      "original_repository_path": null
-    },
-    {
       "path": "reports/README.md",
       "author": "Athul Prem",
       "file_tag": "_AP_pnc",
@@ -980,22 +964,6 @@
       "file_tag": "_AP_pnc",
       "role": "current_documentation_or_tooling",
       "sha256": "202806856245feac6e0a5e1e6afbb87626463b2f607557ae3645f0cb32656c16",
-      "original_repository_path": null
-    },
-    {
-      "path": "reports/delivery_status_AP_pnc.json",
-      "author": "Athul Prem",
-      "file_tag": "_AP_pnc",
-      "role": "current_documentation_or_tooling",
-      "sha256": "0cdd8d27fe4593404ec60ec5e930d6fdb1561608796ff8e009002e526be94207",
-      "original_repository_path": null
-    },
-    {
-      "path": "reports/final_report_email_template_AP_pnc.eml",
-      "author": "Athul Prem",
-      "file_tag": "_AP_pnc",
-      "role": "current_documentation_or_tooling",
-      "sha256": "57b5040d25bf8a82cbf2c359418eca77e905688575d5bd982f35943c5bd1d845",
       "original_repository_path": null
     },
     {
@@ -1958,5 +1926,6 @@
       "sha256": "dd293b043360bc2ce8c49cb387e4171a106f42929e31f56bf97a06fa53098bb3",
       "original_repository_path": null
     }
-  ]
+  ],
+  "scope_note": "Dated reorganization inventory, not a live source manifest. Superseded generated planning/template entries removed on 2026-11-18; original archive entries and hashes are unchanged."
 }

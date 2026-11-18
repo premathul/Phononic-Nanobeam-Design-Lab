@@ -2,13 +2,11 @@
 
 **Research owner: Athul Prem | `_AP_pnc`**
 
-A configurable three-dimensional anisotropic elastic-wave simulator for high-purity germanium nanobeams. It provides 3D beam eigenmodes, periodic guided-wave dispersion, power-normalized matched-port scattering, CSV-defined circular through-holes and offline interactive reports. The solver runs on a CPU using Python, scikit-fem, SciPy and Gmsh. All project documentation, software text and generated reports use English.
+A configurable 3D anisotropic elastic-wave simulator for germanium nanobeams. It supports finite-body modes, periodic guided waves, power-normalized matched-port scattering, CSV-defined through-holes, saved results and an optional English desktop workbench. It uses Python, scikit-fem, SciPy, Gmsh and meshio on CPUs.
 
-The Lawrence runbook covers the saved h80 solve, staged h60 and thickness controls, and optional remote notebook. Check the handoff for job ownership and saved results before submitting a job. [Lawrence HPC runbook](docs/LAWRENCE_HPC_AP_pnc.md) · [Current handoff](docs/AI_HANDOFF_AP_pnc.md)
+## Start the simulator
 
-## Quick start
-
-Use Python 3.12 in a dedicated virtual environment. Run these commands from the project directory.
+Use Python 3.12 in a dedicated environment:
 
 ```powershell
 python -m venv .venv
@@ -16,339 +14,73 @@ python -m venv .venv
 .\.venv\Scripts\python.exe simulate_AP_pnc.py --open
 ```
 
-Once the environment is set up, you can double-click `Launch_AP_pnc.cmd`. The default case is a homogeneous 3D cantilever benchmark measuring 2000 nm long, 1000 nm wide and 200 nm thick. Its left end is clamped and the other surfaces are traction free.
-
-For the optional English desktop workbench, install its separate interface dependencies and launch it:
+The default is a small homogeneous cantilever. `Launch_AP_pnc.cmd` runs the same entry point. To use the desktop interface:
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements_ui_AP_pnc.txt
 .\.venv\Scripts\python.exe workbench_AP_pnc.py
 ```
 
-On Windows, `Launch_Workbench_AP_pnc.cmd` opens the same interface. Choose a preset or load a JSON configuration, edit the displayed parameters, then use **Check mesh** or **Run**. The interface uses the existing solver and its saved meshes/results. Material properties, crystal orientation and hole placement retain the loaded configuration's provenance. Hole coordinates do not scale or recenter when beam dimensions change. **Open report** becomes available after a completed solve. The core command-line workflow does not require the Qt interface dependencies.
+You can also double-click `Launch_Workbench_AP_pnc.cmd`. Choose a preset, edit its parameters, check the mesh, then run. **Open saved run** reopens a completed result; **Compare saved run** compares compatible same-frequency runs without solving. A mesh-ready status is not a solved or converged result.
 
-The workbench runs one background job at a time. **Stop** ends its process tree and preserves submitted inputs, logs and any partial scientific output. A mesh-ready message means only that meshing completed; a computed result remains unverified until the relevant convergence checks are established. The initial interface edits the main numerical inputs and retains the loaded analysis and boundary selection; broader material and geometry editors are future work. Windows offscreen interaction tests and a readable preview were checked. Native interaction on other operating systems has not been tested.
+## Inspect the saved full-device dataset
 
-Use **Open saved run** to reopen a completed result folder, including runs made from the command line. For scattering, **Compare saved run** selects a reference folder and compares it with the currently loaded result without solving again. The English report lists per-channel reflection/transmission powers, complex-coefficient changes and same-channel transmission phases. It matches signed-power modes by their field overlap before comparing amplitudes. Both input power-balance checks and the two 0.01 change criteria must pass for a mesh-pair acceptance; identical stored discretizations are labeled repeatability checks. A passing pair does not establish continuum convergence or certify other frequencies.
+The current delivery joins the accepted h80 six-layer device responses at **0.1, 0.8875 and 1 GHz** through **Open device results** in the workbench. The view selects a frequency and incident channel, shows T/R and native complex conversion coefficients, exports CSVs, and links the original configuration, fields and numerical controls. It uses retained small summaries/CSVs, without starting a solve.
 
-The comparison is also available without Qt:
+The same read-only entry point is available from the command line:
 
 ```powershell
-.\.venv\Scripts\python.exe tools/compare_scattering_AP_pnc.py --reference path/to/coarser-run --candidate path/to/finer-run
+.\.venv\Scripts\python.exe -B tools/browse_device_results_AP_pnc.py --open
 ```
 
-Select two completed scattering run directories with the same physical geometry, material, frequency, incident end and numerical-core version. The tool verifies saved file checksums and retains the original reference-plane phase. It writes a separate HTML report, CSV and provenance summary under `results/runs/comparisons/`; source runs are preserved. Changed channel counts or unresolved mode matching require a separate analysis. Exit code 0 means the comparison completed, including a comparison whose scientific criteria failed; the report and JSON state those outcomes separately.
+There are **14 incident-drive rows and 132 complex coefficients** across the three sparse samples. Root numbers are local to each frequency; the four/five-channel transition is explicit. The saved 0.8875/1 GHz endpoint correspondence is linked, not recomputed. Missing frequencies are not interpolated into a spectrum.
 
-Edit [straight_beam_AP_pnc.json](configs/straight_beam_AP_pnc.json) to configure a run, or use the following command-line options.
+The archived arrays are not included in a fresh Git clone. The browser uses the retained workspace archive and reports missing inputs clearly. The portable scientific records below remain available in Git. Existing original fields stay in place; an exported table or generated report is not a self-contained copy of all arrays.
+
+## Configure a study
 
 ```powershell
-# Change the physical thickness while keeping the in-plane geometry fixed.
-.\.venv\Scripts\python.exe simulate_AP_pnc.py --thickness-nm 100 --open
-
-# Model an infinite uniform guide with one Bloch-periodic cell and free sidewalls.
-.\.venv\Scripts\python.exe simulate_AP_pnc.py --analysis bloch --cells 4 3 2 --k-points 9 --open
-
-# Include the six rigid-body zero modes when requesting modes of a free beam.
-.\.venv\Scripts\python.exe simulate_AP_pnc.py --boundary free --modes 10
-
-# Drive each propagating channel of a uniform guide at 0.3 GHz.
 .\.venv\Scripts\python.exe simulate_AP_pnc.py --config configs/straight_scattering_AP_pnc.json --open
-
-# Select the opposite incident end and a different frequency.
-.\.venv\Scripts\python.exe simulate_AP_pnc.py --config configs/straight_scattering_AP_pnc.json --incident-side right --frequency-ghz 0.5
-
-# Run a small two-hole device, then its no-hole control with the same mesh settings.
-.\.venv\Scripts\python.exe simulate_AP_pnc.py --config configs/perforated_beam_AP_pnc.json --open
-.\.venv\Scripts\python.exe simulate_AP_pnc.py --config configs/perforated_beam_AP_pnc.json --uniform --open
-
-# Reproduce the finer two-hole reference settings (about 2 GiB in the measured case).
-.\.venv\Scripts\python.exe simulate_AP_pnc.py --config configs/perforated_phase_reference_AP_pnc.json --open
-
-# Run the original 26-hole geometry as a single-frequency pilot.
-.\.venv\Scripts\python.exe simulate_AP_pnc.py --config configs/historical_26hole_AP_pnc.json --open
-
-# Inspect and save a finer device mesh before mechanical assembly.
-.\.venv\Scripts\python.exe simulate_AP_pnc.py --config configs/historical_26hole_AP_pnc.json --mesh-size-nm 160 --mesh-only
+.\.venv\Scripts\python.exe simulate_AP_pnc.py --config configs/perforated_layered_reference_AP_pnc.json --mesh-only
 ```
 
-Each case writes an interactive `report_AP_pnc.html`, a mode CSV, the resolved configuration, a summary with source and environment details, an NPZ with the full quadratic-element degree-of-freedom mapping, and a VTU for ParaView under `results/runs/`. The VTU samples normalized mode shapes at vertices. Physical displacement amplitudes would require a specified excitation. Bloch rows are sorted by frequency independently at each wavenumber. Branch tracking across wavenumbers remains pending.
+The refined layered preset is a tested **two-hole** case, not full-device acceptance. `configs/historical_26hole_AP_pnc.json` is a coarse exploratory full-device preset. Inspect actual body/port DOFs and available resources before a large run; a DOF cap does not bound mesh-generation memory.
 
-Scattering runs instead write `scattering_AP_pnc.csv` with per-input-channel power ratios, `scattering_channels_AP_pnc.csv` with complex amplitudes and power in each propagating output channel, and `port_modes_AP_pnc.csv` with the complete discrete port root inventory. Their NPZ retains full driven responses, propagating and evanescent amplitudes, port fields and mappings. Displacements are responses per square root of incident watt; 1 W is a mathematical normalization. The report supports channel selection and phase adjustment. A successful matched-guide power check does not by itself establish phase accuracy or mesh convergence.
+Configuration records geometry in nm and resolves it to SI; it includes the crystal-to-laboratory rotation, material provenance, physical thickness, hole placement, mesh and port resolution, solver and resource limits. The historical 26-hole table is placed with an 8325 nm offset in a 16650 nm beam, leaving 1500 nm leads. Nominal Ge C11/C12/C44 = 128.5/48.3/66.8 GPa and density 5323 kg/m³ are fixed-property controls, not measured cryogenic sample constants.
 
-The accepted 0.8875 GHz h100/h80 comparison also provides full quadratic tetra10 fields for left-incident root 1302, with unscaled real/imaginary displacement in m/sqrt(W). Open the [saved regional-energy report](results/runs/field_energy_8875_AP_pnc/diagnostic/report_AP_pnc.html) for the two ParaView files, original all-drive NPZs and six regional-energy rows. Left/patterned/right energy fractions change by at most 0.00192099290833, passing the predeclared 0.02 finite target; independent clipped integration, saved K/M totals and exact field readback pass. This does not resolve the failed weak-conversion or complex-response scattering checks. [Portable evidence](verification/field_energy_8875_AP_pnc.json)
+Layered meshes independently control in-plane size and thickness layers, while z layers also change the port discretization. Hole faceting is a separate control. Original scattering phases stay at the physical end planes; do not subtract a uniform-guide phase from the patterned response.
 
-`tools/analyze_saved_field_energy_AP_pnc.py` and `tools/verify_saved_field_energy_AP_pnc.py` implement this bounded offline control. They preserve the native incident phase and physical region cuts without a new solve, assembly or cross-mesh interpolation. The accepted outputs must be reused; the handoff records exact input/source identities and the completed one-drive scope.
-
-The subsequent [phase-only compatibility report](results/runs/lead_phase_8875_AP_pnc/diagnostic/report_AP_pnc.html) tests whether changes in independent channel phases could explain the saved h100/h80 discrepancy. All 50 original complex coefficients give a maximum magnitude-mismatch bound of 0.01727117666534, above the unchanged 0.01 complex-response tolerance. Independent raw-CSV reconstruction passes. Thus reflectionless, unmixed lead phase alone is insufficient; numerical lead reflection/mixing and patterned-region error remain possible. No phase fit, correction, field/matrix processing or new solve is performed. Reuse [portable evidence](verification/lead_phase_8875_AP_pnc.json); the [implementation plan](docs/IMPLEMENTATION_PLAN_AP_pnc.md) separates this completed result from the unexecuted lead-interior-only proposal requested by Athul.
-
-The runner checks completed outputs before reusing results with the same configuration, source and numerical environment. It preserves failed or interrupted attempts and retries in new directories.
-
-For a bounded list of scattering frequencies, the map tool shares a verified mesh, stiffness/mass matrices and frequency-independent SAFE section operators. It solves new port modes and equations at each frequency, preserves the original reference planes, and links the existing 3D field reports:
+For long iterative runs, the opt-in checkpoint workflow preserves accepted channels and verifies original residuals on resume:
 
 ```powershell
-.venv/Scripts/python.exe -B tools/map_scattering_AP_pnc.py --config configs/straight_scattering_AP_pnc.json --frequencies-ghz 0.25 0.30 0.35 --output results/runs/frequency_map_AP_pnc --max-new-points 1
-.venv/Scripts/python.exe -B tools/map_scattering_AP_pnc.py --config configs/straight_scattering_AP_pnc.json --frequencies-ghz 0.25 0.30 0.35 --output results/runs/frequency_map_AP_pnc
+.\.venv\Scripts\python.exe simulate_AP_pnc.py --config configs/straight_scattering_AP_pnc.json --checkpoint --wall-seconds 1800
+.\.venv\Scripts\python.exe simulate_AP_pnc.py --resume PATH_TO_SAVED_ATTEMPT --wall-seconds 1800
 ```
 
-The first command attempts at most one new frequency. After success, the second verifies and reuses that result before computing the remaining points. The map retains completed and interrupted attempts with source/input/output identities. Its compact table and report distinguish completed computations, power checks and unresolved convergence. Adjacent mode links use signed field-mass overlap and modal gauge alignment. Channel-count changes, ambiguous matches and cutoffs break the relevant tracks. Spatial convergence, band gaps, resonance linewidths and calibrated material behavior require further checks. Large device campaigns require measured resource admission and separate scientific controls. The retained 2625-DOF guide pilot completed four channels at each of 0.25/0.30/0.35 GHz, with independently replayed equations, flux and mode alignment. [Frequency-map evidence](verification/frequency_map_AP_pnc.json)
+Resume requires matching saved inputs/source identities. An interrupted run is not an accepted response. The [Lawrence runbook](docs/LAWRENCE_HPC_AP_pnc.md) covers memory-heavy execution and cached export; read the [current handoff](docs/AI_HANDOFF_AP_pnc.md) before any submission.
 
-The completed Lawrence h80 six-layer 1 GHz result can also seed a read-only map without a new solve:
+`tools/map_scattering_AP_pnc.py` provides bounded point-resumable frequency work; its `--max-new-points` option limits attempts. The small guide pilot is complete. The separate `tools/import_lawrence_frequency_map_AP_pnc.py` retains the older read-only 1 GHz anchor view. Neither starts a full-device campaign automatically.
+
+## What the results establish
+
+| Evidence | Supported result | Limit |
+| --- | --- | --- |
+| [Mechanics](verification/straight_beam_validation_AP_pnc.json), [uniform guide](verification/straight_scattering_acceptance_AP_pnc.json), [two-hole phase check](verification/two_hole_phase_refinement_AP_pnc.json) | Small reference problems and stated finite refinement checks pass | Other geometry/frequency cases need their own evidence |
+| [0.1 GHz device](verification/low_band_device_AP_pnc.json), [thickness](verification/low_band_thickness_AP_pnc.json), [in-plane](verification/low_band_inplane_AP_pnc.json) | Four accepted drives; both tested finite complex-response increments pass 0.01 | Full spatial/frequency convergence remains unestablished |
+| [0.8875 GHz device](verification/device_frequency_8875_AP_pnc.json) | Five accepted drives; selected conversion is much smaller than at 1 GHz in the finite model | [Thickness](verification/device_frequency_thickness_8875_AP_pnc.json) and [in-plane](verification/device_frequency_inplane_8875_AP_pnc.json) sensitivity fail |
+| [1 GHz full device](verification/device_thickness_AP_pnc.json) | Five accepted drives and saved 3D fields | Three full-device complex-response comparisons fail |
+| [Regional energy](verification/field_energy_8875_AP_pnc.json), [phase-only bound](verification/lead_phase_8875_AP_pnc.json) | Small regional-energy change; phase-only model excluded at the existing tolerance | Error location and weak-conversion accuracy remain unresolved |
+
+Passing original equations and physical flux qualifies a finite numerical response. It does not establish spatial convergence, a complete band gap, a resonance linewidth/Q or experimental accuracy. Sparse samples establish no continuous branch or converged spectrum. Driven fields use displacement per square root of incident watt; displacement ratios are not transmitted power.
+
+## Tests and development
 
 ```powershell
-.venv/Scripts/python.exe -B tools/import_lawrence_frequency_map_AP_pnc.py --archive-root results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc --output results/runs/imported_device_frequency_map_AP_pnc
+.\.venv\Scripts\python.exe -B -m unittest discover -s tests -p "test*_AP_pnc.py" -v
 ```
 
-The importer verifies the original Lawrence receipts and streams SHA-256 checks for 26 artifacts totaling 1,969,613,618 bytes. The 56,190-byte map view references the original mesh, stiffness and mass matrices, SAFE section, 1 GHz equations and accepted results in place. It preserves the Linux execution provenance, Windows residual and flux verification, and all three failed complex-response mesh comparisons. The measured import took 2.978 s with 91.95 MiB peak sampled process-tree RSS. Verified reuse took 2.886 s and preserved the publication bytes and modification times. [Archived map evidence](verification/imported_frequency_map_AP_pnc.json)
+The optional Qt environment enables offscreen desktop tests. Windows symbolic-link privilege may cause one explicit skip. CI also runs the existing mechanics, matched-port, two-hole and saved-evidence benchmarks. See [test scope](tests/README.md); current run counts and integration status belong in the handoff rather than a duplicated historical timeline here.
 
-Open `report_AP_pnc.html` in the map directory to view the five incident channels and their original-plane response. Keep the source archive available for artifact and field-report links. The read-only map accepts the archived 1 GHz point, and any additional requested frequencies remain pending. Spatial and frequency convergence remain unresolved.
+Use the [implementation plan](docs/IMPLEMENTATION_PLAN_AP_pnc.md) for priorities and stop conditions, the [physics specification](docs/PHYSICS_SPECIFICATION_AP_pnc.md) for equations and limits, and [references](docs/REFERENCES_AP_pnc.md) for source boundaries. Final research reporting follows [report requirements](reports/REPORT_REQUIREMENTS_AP_pnc.md). No email or public release is implied.
 
-The separate [Lawrence port-inventory workflow](docs/LAWRENCE_HPC_AP_pnc.md#bounded-port-frequency-inventory) reuses the archived h80 six-layer SAFE operators and 1 GHz modes to inspect only four additional section frequencies. At 0.1/1/2.8/5.2/6 GHz it finds 4/5/8/12/13 propagating channels per direction on the fixed 975-DOF section. The four new samples took 69.40 s with 486172 KiB peak process RSS. Independent replay of all 9750 roots and 84 propagating rows passed; complete reuse preserved output bytes and modification times. The compact `port_inventory_AP_pnc.html`, JSON and CSV retain per-frequency residual, flux, cutoff/degeneracy and execution status. This inventory guides frequency selection without a body solve; it does not identify continuous branches, intervening cutoffs or a device gap. [Verified inventory and limits](verification/port_inventory_AP_pnc.json)
-
-The [finite count-interval follow-up](verification/port_count_interval_AP_pnc.json) reuses the accepted 0.1/1 GHz endpoints and exact archived section. It permits at most four new midpoint samples, keeping a four-channel lower endpoint and five-channel upper endpoint. Unexpected counts, unresolved modes or resource failures stop the study. Each frequency retains all 1950 roots, signed flux checks and an immutable accepted receipt; original Linux archive provenance and new local Windows provenance remain separate. This is a sampled count-transition interval, not a unique or monotonic cutoff determination or a new device response.
-
-The scoped controller requires external process-tree supervision enforcing the handoff's 90-second, 1-GiB and 512-MiB available-memory-reserve limits. With that supervision and fresh admission, attempt one new point per invocation:
-
-```powershell
-.\.venv\Scripts\python.exe -B tools/refine_port_count_interval_AP_pnc.py --output path/to/fresh-count-study --max-new-points 1
-.\.venv\Scripts\python.exe -B tools/refine_port_count_interval_AP_pnc.py --output path/to/fresh-count-study --resume --max-new-points 1
-.\.venv\Scripts\python.exe -B tools/verify_port_count_interval_AP_pnc.py path/to/fresh-count-study --output path/to/fresh-count-verification.json
-```
-
-Explicit resume computes only untouched points; stopped failures are retained and never automatically retried. Reuse the completed publication during ordinary development. The independent verifier reconstructs original equations, forces and directional flux for new roots only, while reusing the accepted endpoint evidence.
-
-The [archived 0.8875 GHz workflow](docs/LAWRENCE_HPC_AP_pnc.md#archived-08875-ghz-device-point) has completed all five left-incident drives on the saved h80 z6 device, with exact mesh/K/M and frequency-specific mode reuse. Independent original equations, nodal-force power, coherent left incidence, all coefficients and full P2 fields pass. The selected field-matched reflected-conversion power falls from about 0.00108076 at 1 GHz to 7.96911e-7 at 0.8875 GHz (99.9263%). Reuse [portable evidence](verification/device_frequency_8875_AP_pnc.json) and the [workspace comparison](results/runs/device_frequency_8875_AP_pnc/comparison/report_AP_pnc.html). This is finite-frequency variation in the saved discretization, not a mechanism, uncertainty bound or convergence result; all previous failed spatial checks remain failed.
-
-The matched 0.8875 GHz z4/z6 control retains over 99% suppression of the selected directed reflection-conversion pair versus 1 GHz at both resolutions, but the small powers differ by 87.56% relative to z6 and fail the declared 10% sensitivity target. Whole complex-response change 0.0175301 also fails 0.01. The low-conversion trend persists within these finite discretizations; its value is not converged. All five new z4 drives pass independent original equations, physical/coherent power and complete fields. Reuse [control evidence](verification/device_frequency_thickness_8875_AP_pnc.json) and the [workspace comparison](results/runs/device_frequency_thickness_8875_AP_pnc/comparison/report_AP_pnc.html); no further solve is queued.
-
-The independent 0.8875 GHz h100/h80 z4 control also finds strong sensitivity of the small directed conversion: about 1.65516e-6 versus 9.91650e-8, a 16.691-fold ratio. Both separate directions fail the declared 10% relative-increment target, although both resolutions still show over 99% suppression versus 1 GHz. Whole complex-response change 0.0426045 fails 0.01. All five h100 drives pass independent original-equation, physical/coherent power and full-field checks, reusing archived body matrices and exact accepted SAFE fields. Reuse [in-plane evidence](verification/device_frequency_inplane_8875_AP_pnc.json) and the [workspace comparison](results/runs/device_frequency_inplane_8875_AP_pnc/comparison/report_AP_pnc.html). These finite increments do not establish a numerical floor or continuum accuracy, and the earlier thickness failure remains unresolved.
-
-For larger scattering cases, optional memory controls retain the same finite-element model:
-
-```powershell
-.\.venv\Scripts\python.exe simulate_AP_pnc.py --config path/to/configuration.json --assembly-batch-elements 2048 --linear-solver ilu_gmres
-```
-
-`assembly_batch_elements` in `resources` limits the number of tetrahedra integrated together, with unchanged P2 degree-4 quadrature and global DOF numbering. `linear_solver: "ilu_gmres"` selects an incomplete-LU preconditioner and GMRES iterations on the original complex operator. Both residual measures must pass 1e-9, and the existing power/flux checks remain. The default direct solver is unchanged. Optional `--ilu-fill-factor` (or `resources.ilu_fill_factor`) controls preconditioner storage; its default is 10. A smaller value can fail to converge, and failed iteration histories are retained. These controls do not bound all process memory or establish spatial convergence.
-
-`--linear-solver ilu_lgmres` (or the same value in `resources.linear_solver`) retains three augmentation directions between restart cycles by default. It uses the same ILU preconditioner and original-equation residual gates, with true residual histories in the saved summary. Optional JSON resource keys `lgmres_inner_m`, `lgmres_outer_k` and `lgmres_maxiter` control the inner iteration size, retained directions and maximum outer updates; defaults are 50, 3 and 30. The saved h100 recovery used 100, 10 and 60. Larger iteration spaces require additional memory. If SciPy reaches tolerance only on its final update, the backend records the raw exhausted status and requires a successful unchanged-vector convergence confirmation.
-
-To select single-precision incomplete-LU factors, add `--ilu-precision single` to an `ilu_lgmres` run, or set `resources.ilu_precision` to `"single"`. The original operator and incident drives, Krylov iteration, solution and residual checks use complex128. The preconditioner factors and their application use complex64. Double precision is the default for the preconditioner. Choose `--ilu-fill-factor` using measured memory and residuals for the case.
-
-Saved comparisons include the selected assembly and iterative solver source hashes. The comparator checks exact physical numerical sources and accepts the verified LGMRES precision variants when every saved channel passes the original-equation residual limits. Historical records verify the original retained source bytes when a source file has evolved, without replacing old data or relaxing live cache checks.
-
-For an opt-in resumable single-frequency scattering run:
-
-```powershell
-.\.venv\Scripts\python.exe simulate_AP_pnc.py --config configs/straight_scattering_AP_pnc.json --linear-solver ilu_lgmres --ilu-precision single --checkpoint --wall-seconds 600
-
-# Use the attempt directory printed by an interrupted run.
-.\.venv\Scripts\python.exe simulate_AP_pnc.py --resume path/to/attempt --wall-seconds 600
-```
-
-In the workbench, select **Save progress for resume (ILU-LGMRES)** for a scattering run. This explicitly selects ILU-LGMRES for the submitted configuration. **Resume scattering…** uses the preserved attempt's inputs and its original output location. The wall-time limit can change for a new attempt. Scientific inputs, numerical settings and source/environment identities are checked before reuse.
-
-Checkpointed runs stage the mesh, matrices, physical incident drives and complete port modes in a separate process. After staging, the bounded solver saves each accepted channel and the latest active iterate. Resume rechecks saved original-equation residuals and continues only unfinished channels. Accepted channels retain their physical identities and reference planes. Incomplete staging restarts from the saved inputs and reuses a valid mesh checkpoint; a completed stage skips assembly and port eigensolves. ILU factors are rebuilt only when unfinished channels remain. After all channels pass their original-equation residual checks, the normal scattering report records power-balance and independent flux results. An interrupted run reports its saved attempt, with an accepted-channel count once the ports are staged; it is not a completed scattering result.
-
-The wall limit spans the whole attempt. Memory admission uses operator storage, factor precision/fill, both Krylov vector sets and previous measured peaks. Windows monitoring records available RAM and system commit headroom, with 400/512 MiB runtime reserves. These estimates do not guarantee capacity for every geometry. Report time and memory are labeled as cached export; complete phase measurements are in each checkpoint attempt's `execution_AP_pnc.json`. Independent worker lifetime checks preserve the last committed checkpoint if the supervisor disappears. Resume accepts attempt folders created by this checkpoint mode; completed historical runs can still be opened normally. Single-frequency recovery does not provide frequency-sweep restart or establish spatial convergence.
-
-`--mesh-only` saves the exact tagged mesh under `results/runs/_meshes/` and reports body and end-face degrees of freedom without assembling or solving. It can report a body mesh above the current `max_dofs`; the port-generation cap still applies. The measured unstructured 160 nm full-device mesh in the command above has 82056 body DOFs, above its preset cap of 60000. To run it after choosing a resource budget, omit `--mesh-only` and add `--max-dofs 90000` to the same command. The runner checks and reuses that saved mesh. Changing frequency, material or the body budget does not require a new mesh; changing geometry, meshing settings or the mesh implementation does. A mesh-ready status does not mean a simulation or convergence check has passed. The measured 1888 MiB full-device run is an example, not a memory guarantee.
-
-For holes, `geometry.pattern.csv` is relative to the repository root and `x_offset_nm` explicitly places the CSV origin in the beam's 0-to-length coordinates. The original array uses an 8325 nm shift in a 16650 nm-long beam, leaving 1500 nm beyond each outer hole rim. Results retain the raw CSV checksum, placed SI coordinates, clearances and geometry diagnostics. CSV content changes invalidate cached results. Gmsh settings independently control body size, port size, and hole-circle segments (multiples of four). The affine mesh uses regular inscribed prisms to approximate exact CAD circles. `max_dofs` limits finite-element assembly after mesh generation; it does not bound Gmsh's mesh-generation memory. The 26-hole pilot explicitly allows up to 60000 DOFs; the finer two-hole reference allows 55000. Other examples keep smaller caps.
-
-The optional `layered` mesh separates in-plane resolution from thickness subdivision. It meshes the perforated footprint once, copies it onto equally spaced thickness planes and splits each triangular prism into conforming tetrahedra. The model retains three-dimensional elasticity and all three displacement components. `mesh_size_nm` controls the x-y footprint, `thickness_layers` controls the number of z intervals, and `port_size_nm` controls the width subdivision of each end. Changing thickness layers also changes the port's thickness resolution; its SAFE wavenumbers therefore need a separate check. Changing in-plane size at fixed layer count preserves the port triangles and fixed circle polygon.
-
-Select **Two-hole beam · layered mesh** in the workbench, or use:
-
-```powershell
-# Inspect the two-hole layered mesh: 105 nm in-plane size and two thickness layers.
-.\.venv\Scripts\python.exe simulate_AP_pnc.py --config configs/perforated_layered_AP_pnc.json --mesh-only
-
-# Refine only the footprint; physical thickness and layer count stay fixed.
-.\.venv\Scripts\python.exe simulate_AP_pnc.py --config configs/perforated_layered_AP_pnc.json --mesh-size-nm 80 --mesh-only
-
-# Refine thickness subdivision while preserving the same footprint.
-.\.venv\Scripts\python.exe simulate_AP_pnc.py --config configs/perforated_layered_AP_pnc.json --thickness-layers 3 --mesh-only
-```
-
-Omit `--mesh-only` to solve after selecting a resource budget. The default layered preset has 13485 body DOFs and 135 DOFs per port in the measured mesh. The new backend is an additional resolution control; it does not certify full-device phase accuracy. Saved results remain available through **Open saved run** and the comparator. This workflow update changes the cache identities of future requests; it does not alter or repeat existing saved results.
-
-For the refined two-hole case described below, select **Two-hole refined layers · scattering**, or use `--config configs/perforated_layered_reference_AP_pnc.json`. It uses an 80 nm in-plane target, four thickness layers and a 100 nm port-width target. The measured case has 31887 body DOFs and 351 per port, with about 1255 MiB peak process-tree memory. Its settings and checks apply to the stated two-hole case at 1 GHz; arbitrary geometry/frequency changes require new checks.
-
-The archived 0.1 GHz mode-shape diagnostic identifies translation/rotation template content and joins it to the accepted reflection rows without a new solve. [Portable result and limits](verification/low_band_polarization_AP_pnc.json). With the exact retained workspace archive, fresh publications can be reproduced using:
-
-```powershell
-.\.venv\Scripts\python.exe -B tools/diagnose_port_polarization_AP_pnc.py --output path/to/fresh-diagnosis
-.\.venv\Scripts\python.exe -B tools/verify_port_polarization_AP_pnc.py --diagnosis path/to/fresh-diagnosis/port_polarization_AP_pnc.json --output path/to/fresh-verification.json
-```
-
-The raw section/device archive is not included in Git. The helpers reject changed inputs and existing output paths. Saved template associations do not establish a reflection mechanism, continuous branches or spatial convergence; reuse the completed publication for normal analysis.
-
-The separate [saved 1 GHz conversion-pair diagnosis](verification/one_ghz_conversion_AP_pnc.json) retains all five modes, exact converted-power joins and finite thickness sensitivity. With the same retained archive, its offline adapters use fresh paths:
-
-```powershell
-.\.venv\Scripts\python.exe -B tools/diagnose_conversion_families_AP_pnc.py --output path/to/fresh-conversion-diagnosis
-.\.venv\Scripts\python.exe -B tools/verify_conversion_families_AP_pnc.py --diagnosis path/to/fresh-conversion-diagnosis/conversion_families_AP_pnc.json --output path/to/fresh-conversion-verification.json
-```
-
-The [saved mirror-sector follow-up](verification/one_ghz_mirror_AP_pnc.json) decomposes the eight actual signed conversion fields into polar-vector y/z reflection sectors. It retains all four mass-norm fractions and raw complex mid-thickness profiles. The two integration algorithms use a crossed-diagonal common refinement, without a new eigensolve or body solve. With the exact retained archive and fresh output paths:
-
-```powershell
-.\.venv\Scripts\python.exe -B tools/diagnose_mirror_sectors_AP_pnc.py --output path/to/fresh-mirror-diagnosis
-.\.venv\Scripts\python.exe -B tools/verify_mirror_sectors_AP_pnc.py --diagnosis path/to/fresh-mirror-diagnosis/mirror_sectors_AP_pnc.json --output path/to/fresh-mirror-verification.json
-.\.venv\Scripts\python.exe -B tools/plot_mirror_profiles_AP_pnc.py --diagnosis path/to/fresh-mirror-diagnosis/mirror_sectors_AP_pnc.json --verification path/to/fresh-mirror-verification.json --output path/to/fresh-mirror-profiles.png
-```
-
-The plot shows only the two six-layer forward fields' z displacement at z=0, scaled by each full-section displacement RMS with the archived complex phase retained. The sector fractions describe saved mode shapes; they are not scattering powers, physical purity thresholds or proof of discrete-operator symmetry. Reuse the accepted publication during ordinary development. All full-device spatial-convergence failures remain explicit.
-
-The four rigid templates leave one converted mode almost entirely unexplained; the helper preserves that result instead of assigning a simple flexural branch. Existing 1 GHz complex-response convergence failures remain unchanged.
-
-## Verification and capabilities
-
-The Windows/Python 3.12 suite ran 176 tests in 52.224 s. Of those, 175 passed and one was skipped because the process lacked permission to create a symbolic link. The checks cover tensor rotation, uniform strain, consistent mass, rigid-body subspaces, independent dense and sparse solutions, Bloch phase and the long-wavelength rod limit. Port checks cover trace mapping, directional energy flux, the dispersion-derivative identity, exact symmetry degeneracy, an independent 3D Bloch comparison, and explicit rejection of unresolved cutoffs. Scattering checks exercise both incidence directions, independent boundary flux, and reconstruction from exported fields. Geometry and workflow checks cover exact tagged-mesh reuse, preflight budgets and scientific provenance. The suite includes Athul Prem's two-port coherent-drive test and focused Lawrence checks for exact equation reconstruction, accepted-drive recovery, archive reuse and refusal of corrupt data. [Test scope](tests/README.md)
-
-The [three-mesh convergence record](verification/straight_beam_validation_AP_pnc.json) covers the first four cantilever modes of the default geometry with 1755, 5187 and 11475 degrees of freedom. The maximum frequency change between the two finest meshes was about 0.468%, and the minimum mass-weighted mode overlap was about 0.999992. Independent fixed-property assemblies and solves labeled 20 mK and 4 K yielded identical matrices and frequencies. Convergence for other geometries, thicknesses and frequency bands requires its own checks.
-
-The [straight-guide scattering acceptance](verification/straight_scattering_acceptance_AP_pnc.json) covers nominal Ge at 1 GHz, a 600 × 200 nm cross-section, lengths of 1 and 1.5 µm, and four incident channels from each end. Complex transmission errors against a common finer SAFE reference were at most 0.00454 and 0.00683, below the 0.01 criterion. The final section refinement changed accumulated phase by at most 0.00534 rad over 1.5 µm. The 14553-DOF long-guide case had maximum reflection about 1.20 × 10⁻⁷ and direct power imbalance below 5.2 × 10⁻¹⁵. These checks establish this numerical benchmark, with a finite-element reference rather than an exact continuum error bound. Earlier coarse-mesh failures and refinement evidence remain saved and linked by checksums. The 0.3 GHz quick-start case has its own power check and does not inherit this mesh acceptance.
-
-The [two-hole power study](verification/two_hole_scattering_validation_AP_pnc.json) uses a 1800 × 600 × 200 nm beam, two 250 nm holes 550 nm apart, and 1 GHz excitation. The largest T/R change between the final two main body meshes was 0.00366. Curvature, lead-length and port refinements changed T/R by at most 0.00054, 0.00153 and 0.00135. Power budgets and reciprocity passed. An additional 105 to 80 nm body refinement changed a complex scattering coefficient by 0.03162, exceeding the 0.01 criterion. That original evidence retains all 64 directional channel records and the failed gate.
-
-The subsequent [two-hole phase refinement](verification/two_hole_phase_refinement_AP_pnc.json) holds the 48-segment holes and ports fixed and extends the body meshes to 60 and 50 nm. Complex changes decrease from 0.03162 to 0.01367 to 0.00337; the final pair's maximum T/R change is 0.000425. Both final changes meet the unchanged 0.01 criterion. The 45123-DOF finest solve took 58.75 s; its monitored process tree peaked at about 2064 MiB. This is a bounded mesh-pair acceptance for this two-hole case at 1 GHz, not a rigorous continuum error bound or validation of other frequencies, resonances or the full device. The [offline checker](tools/check_phase_refinement_AP_pnc.py) verifies the saved matrices, power budgets, reciprocity, source hashes and comparisons without new solves.
-
-![Two-hole mesh refinement](figures/verification/two_hole_phase_refinement_AP_pnc.png)
-
-The [original 26-hole pilot](verification/historical_26hole_pilot_AP_pnc.json) ran at 1 GHz with 56220 DOFs and five propagating incident channels in the discretized lead. Transmission ranged from 0.96006 to 0.99974; direct power imbalance was below 2.3 × 10⁻¹³. The run used 14.76 s and approximately 1089 MiB sampled process memory. This is a single-mesh, single-frequency execution result, with no device-convergence or band-gap claim. The 32-segment holes have a 0.6413% removed-volume error relative to circular cylinders.
-
-A subsequent [26-hole mesh comparison](verification/historical_26hole_refinement_AP_pnc.json) reused that pilot and solved one finer, 82056-DOF mesh at the same 1 GHz frequency. The five left-incident channels changed T/R by up to 0.01136 and complex scattering coefficients by up to 0.42286; both exceed 0.01. The largest same-channel transmission phase change was 0.429 rad despite matching port modes and wavenumbers. The solve completed in 22.09 s with 1888 MiB monitored process-tree memory. Body refinement also changed hole-wall thickness partitioning from one to two layers, so this comparison does not isolate one source of discretization error. Full-device convergence remains failed, and the power balance alone cannot validate its phase or spectrum.
-
-The [device and port follow-up](verification/device_convergence_followup_AP_pnc.json) adds a 130 nm body mesh with 96903 DOFs, the same 32-segment holes and 99-DOF ports, and the same two hole-wall thickness layers as the 160 nm mesh. Its power change is 0.002339 (passes 0.01), while its complex-coefficient change is 0.137744 (fails 0.01). It took 31.41 s end to end with 2229 MiB peak process-tree memory. Independent SAFE-only port refinements from 99 to 195 to 315 trace DOFs retain five propagating channels each way. The last pair's wavenumber change corresponds to 0.05638 rad over the combined 3 micrometres of uniform leads. This is a phase-sensitivity indicator, not a bound on patterned-device scattering error or a phase correction to subtract. Port accuracy remains unresolved. The [offline follow-up checker](tools/check_device_followup_AP_pnc.py) reproduces these comparisons from compact saved evidence without new solves.
-
-The [directional-resolution diagnostic](verification/wave_resolution_diagnostic_AP_pnc.json) uses four small structured 1.2 micrometre uniform guides at 1 GHz, with a 1000 by 200 nm section. At fixed SAFE ports, reducing axial spacing from 200 to 100 nm reduces maximum phase error relative to `exp(i*k*L)` from 0.07201 to 0.02451 rad with one thickness layer, and from 0.04531 to 0.01234 rad with two layers. The largest case has 4125 body DOFs and took 1.18 s with 163 MiB sampled process memory. All power budgets close below 7.4e-15, while the finest phase/complex errors still exceed 0.01. Thickness refinement also changes the discrete reference phase by up to 0.05782 rad over the guide. These controls isolate useful refinement directions; their errors are not corrections to apply to a perforated device. The integrated test suite verifies the portable matrices and channel CSV without rerunning these cases.
-
-The [layered-mesh pilot](verification/layered_mesh_acceptance_AP_pnc.json) retains three two-hole meshes at 105/80/60 nm in-plane targets, two thickness layers, 48-segment holes and 135-DOF ports. Successive power changes are 0.001525/0.001113 and complex changes 0.010391/0.006834: only the final pair passes both 0.01 change criteria. The finest 26025-DOF run took 10.14 s end to end and about 746 MiB peak process-tree memory. Independent uniform controls at 105/60 nm differ from their fixed discrete SAFE transmission reference by 0.019773/0.028144 in complex amplitude; both fail 0.01. The interior transverse mesh also changes with in-plane refinement, while the end trace stays coarse. That initial study established in-plane sensitivity only; thickness and port resolution were still unresolved. All original failures are retained.
-
-An offline comparison with the previously saved unstructured 50 nm two-hole reference gives complex differences 0.020265/0.013431 for the two-layer 80/60 nm cases. Both still exceed 0.01, despite passing power-change checks. That reference is itself a bounded numerical benchmark, not an exact continuum solution. These original failures remain saved.
-
-The subsequent [thickness and port follow-up](verification/layered_resolution_followup_AP_pnc.json) holds the 80 nm in-plane target and 48-segment holes fixed. Thickness changes preserve the exact footprint; port-width changes require a new conforming footprint, so the latter measure combined port/remesh sensitivity.
-
-| Comparison at 1 GHz | Maximum power change | Maximum complex change | Both below 0.01 |
-| --- | ---: | ---: | --- |
-| Two to three layers, 150 nm port width target | 0.001082 | 0.014503 | No |
-| Three to four layers, same width target | 0.000349 | 0.004367 | Yes |
-| 150 to 100 nm port width target, four layers | 0.000250 | 0.000708 | Yes |
-| Refined four-layer case versus saved unstructured h50 reference | 0.000662 | 0.001857 | Yes |
-
-The selected four-layer/100 nm-port case took 19.06 s end to end. These are bounded checks at one geometry and frequency, not a continuum error bound, band-gap result or validation of the full 26-hole device.
-
-The separate [SAFE-only section study](verification/layered_port_resolution_AP_pnc.json) reuses the original 4-by-2 width/thickness section and adds six small refinements. A common 8-by-4 section has 459 trace DOFs and four propagating modes each way. Its final width and thickness comparisons give phase indicators 0.004447/0.009469 rad over 1.8 micrometres. Comparing the already saved uniform h105/h60 runs against this same finite reference gives complex errors 0.015807/0.007435: the finer run passes 0.01. No simulation was repeated. Their earlier native coarse-port discrepancies remain valid diagnostics but cannot rank accuracy against the continuum; the common-reference comparison resolves that misleading trend.
-
-Use the offline tool with a completed uniform scattering run:
-
-```powershell
-.\.venv\Scripts\python.exe tools/compare_uniform_reference_AP_pnc.py --run path/to/completed-uniform-run
-```
-
-It uses the checked-in 8-by-4 reference by default, verifies matching section/material/frequency, and writes JSON and channel CSV without solving. The supplied reference covers the 600 by 200 nm section at 1 GHz; a different section needs its own reference. It reports response and reference-refinement checks separately, retains phase at the original end planes, and rejects patterned devices. No uniform phase is subtracted from a device scattering matrix. Exit code 0 means the comparison completed, including scientific checks that failed.
-
-The [full-device port study](verification/full_device_port_resolution_AP_pnc.json) now supplies the separate 1000 by 200 nm reference at 1 GHz. It reuses the old 99/195/315-DOF ports and adds ten small SAFE-only sections, retaining five propagating channels each way. Width and thickness are varied independently and channels are matched by displacement fields, including the branch-order exchange seen in the older meshes.
-
-| Port comparison | Phase change over both 3 µm leads | Over 16.65 µm uniform-equivalent length |
-| --- | ---: | ---: |
-| Width 16 → 20 cells at six layers | 0.001242 rad | 0.006895 rad |
-| Thickness four → six layers at 20 width cells | 0.001307 rad | 0.007256 rad |
-| Economical 12-by-4 section versus 20-by-6 reference | 0.007168 rad | 0.039784 rad |
-
-The final independent reference increments meet 0.01 rad at both distances. The economical section meets that comparison only for the shorter leads. These are finite uniform-guide phase diagnostics, not a continuum error bound or proof of patterned-device convergence. The largest section used 1599 trace DOFs, 41.42 s and 995 MiB peak working set. The h200/12-by-4 candidate has 157005 body DOFs and 675 per port; its exact saved mesh was reused for the resource study below.
-
-The solver resource study measured assembly and factorization separately. On a 28863-DOF mesh prefix, 2048-element batches reduced peak assembly working set from 424 to 224 MiB, with relative K/M differences below 7e-17. Full-device h200 batch assembly completed in 28.59 s with 512 MiB peak working set. Its matrices, ports, two-port operator and five physical incident drives are checkpointed. A separately loaded ILU-GMRES attempt used 2038 MiB sampled resident memory and 5057 MiB peak private commit. Its first physical drive failed after 500 iterations with an original relative residual of 1.09e-5 against the 1e-9 limit. The ledger retains this failed attempt. [Solver resource evidence](verification/solver_resources_AP_pnc.json)
-
-The subsequent ILU-LGMRES continuation solved all five physical drives on that exact saved operator in 890.64 s. The maximum true relative residual is 9.90e-11, backward residual 9.04e-14, and independent flux imbalance 1.29e-10. Transmission ranges from 0.959707 to 0.996515. Peak sampled resident memory was 2185 MiB and peak private commit 5162 MiB; minimum available physical memory and commit headroom were 577/569 MiB. The full solve used an isolated checkpointed worker; public scattering fields and HTML were then exported from the saved K/M, ports and displacement matrix, without new assembly or iteration. Small public-workflow tests exercise the same LGMRES settings through `--linear-solver ilu_lgmres`. The earlier failed iterations remain in the ledger. This establishes a solved 1 GHz left-incidence baseline, not mesh convergence or a spectrum.
-
-The layered h160 mesh has 187623 body DOFs. Mixed-precision ILU-LGMRES with fill factor 12 solved all five drives in 75.34 s, reusing the saved first-drive iterate from the failed double-precision fill-factor-8 attempt. Peak sampled resident memory was 1722 MiB and peak private commit 4520 MiB. The cached export passed independent flux balance at 1.19e-12. At 1 GHz with left incidence, h200 and h160 share the same 675-DOF ports, four thickness layers and 32-segment hole boundaries. The maximum power change of 0.00261746 passed the 0.01 limit. The maximum complex coefficient change of 0.21728723 failed the same limit, with a maximum same-channel transmission phase change of 0.218312 rad at the physical end planes. Spatial convergence remains unresolved.
-
-The layered h130 mesh has 225747 body DOFs and retains the same ports, thickness layers and hole boundaries. The five 1 GHz left-incident drives solved in 219.875 s, with 2200.20 MiB peak process-tree resident memory and 5427.42 MiB peak process-tree private commit. The maximum original relative residual was 3.34577e-11 and the independent direct-flux imbalance was 1.15263e-12. From h160 to h130, the maximum power change of 0.000848104 passes 0.01, while the maximum complex change of 0.107043201 fails. The largest same-channel transmission phase shift is 0.107182853 rad. [Solver resource and comparison evidence](verification/solver_resources_AP_pnc.json)
-
-The 3 µm uniform h160/h130 controls reused the same 675-DOF port modes without a new port eigensolve. The maximum complex transmission error relative to `exp(i*k*L)` fell from 0.03054 to 0.01497. The pair changed power by at most 1.10e-6 and same-channel transmission phase by up to 0.01836 rad. Channels 2, 4 and 5 dominated the phase differences in both the uniform and patterned pairs. This points to in-plane propagation error in the body. The fixed discrete reference and end effects limit what the short guide can establish. Patterned-device comparisons retain their original phase at the end planes. [Uniform control evidence](verification/solver_resources_AP_pnc.json)
-
-To use the finer reference with a compatible completed **uniform** run, add `--reference verification/full_device_port_resolution_AP_pnc.json --reference-case 20x6` to the same offline command. No tool change or new solve is required.
-
-| Capability | Status |
-| --- | --- |
-| Three-dimensional homogeneous beam with P1/P2 vector tetrahedra | Available |
-| Nominal cubic elasticity with crystal-to-lab rotation | Available with fixed properties. Low-temperature specimen calibration remains pending. |
-| Finite-beam eigenmodes with free, one-end-clamped or two-end-clamped boundaries | Available |
-| Bloch dispersion for guides with free sidewalls | Available for a finite branch sample. Channel completeness remains unverified. |
-| 26-hole inputs and clearance checks | Verified with the original `position_nm` and example `x_nm` column formats |
-| Gmsh three-dimensional through-holes | Configurable from CSV; fixed hole faceting and matching end traces. Two-hole checks and one full 26-hole pilot completed. |
-| Port power transmission, reflection and mode conversion | Available for uniform and perforated beams. Bounded two-hole power/complex-response checks pass at 1 GHz; full-device mesh convergence remains unresolved. |
-| Temperature-dependent properties, physical loss, bent beams and rings | Planned |
-| GPU solver | CPU measurements will inform whether GPU development is warranted. |
-
-The unstressed linear-elastic model requires additional physics and validation to address intrinsic loss, radiative quality factor, experimental performance or single-phonon quantum states. A successful solve establishes execution. Mesh convergence and experimental validation require separate evidence. Offline report script interactions were checked. Browser file-access rules prevented screenshot verification.
-
-## Run verification
-
-```powershell
-$env:OPENBLAS_NUM_THREADS='1'
-$env:OMP_NUM_THREADS='1'
-.\.venv\Scripts\python.exe -B -m unittest discover -s tests -p 'test*_AP_pnc.py' -v
-.\.venv\Scripts\python.exe -B tools/validate_3d_AP_pnc.py
-.\.venv\Scripts\python.exe -B tools/validate_scattering_AP_pnc.py --acceptance --output-dir results/runs/scattering-verification
-.\.venv\Scripts\python.exe -B tools/validate_perforated_AP_pnc.py
-.\.venv\Scripts\python.exe -B tools/check_phase_refinement_AP_pnc.py
-.\.venv\Scripts\python.exe -B tools/check_device_refinement_AP_pnc.py
-.\.venv\Scripts\python.exe -B tools/check_device_followup_AP_pnc.py
-```
-
-The validation tool uses three independent mesh solves, mass-weighted mode matching and a fixed-property temperature control. It reports failed checks with a nonzero exit code and retains the computed values and original material inputs. The `--quick` option exercises the workflow on coarser meshes, which may fail the 0.5% frequency-change threshold.
-
-The scattering acceptance command checks the saved reference/source hashes, reuses the unchanged short-guide evidence, and computes a new long-guide solution and finer SAFE reference. The largest local case took 19.64 s and reached approximately 605 MiB sampled process memory. Use a fresh output directory to retain results from each independent run. The baseline and `--refine` modes reproduce the earlier coarse stages; their expected phase failures are retained as evidence.
-
-The perforated validator defaults to the empty guide and three main two-hole meshes. It stores reusable per-case mesh and solve checkpoints under `results/perforated_validation/`. Use repeated `--case` options to select controls such as `curvature_fine`, `long_leads`, `port_fine` and `body_phase_fine`; include both members of a comparison. The saved all-case study includes a failed phase gate and returns exit code 2. `--mesh-only --case original_26` measures the original mesh without attempting the validator's 30000-DOF-limited solve. The separate public 26-hole configuration has its own explicit 60000-DOF pilot budget.
-
-The device-refinement checker verifies preserved data without solving. Its default exit code 0 means the evidence is intact, and it explicitly prints the failed scientific acceptance. Add `--require-converged` to return exit code 2 for the current failed 26-hole mesh pair. CI checks evidence integrity; it does not declare that device converged.
-
-## Development plan and references
-
-- [Implementation plan and reuse decisions](docs/IMPLEMENTATION_PLAN_AP_pnc.md)
-- [Current development handoff](docs/AI_HANDOFF_AP_pnc.md)
-- [Physics specification](docs/PHYSICS_SPECIFICATION_AP_pnc.md)
-- [Long-term research work packages](docs/NEXT_STEPS_AP_pnc.md)
-- [Material references and validity limits](docs/REFERENCES_AP_pnc.md)
-
-The 3 µm uniform h100 control is complete with the same 675-DOF ports and four thickness layers. Its maximum complex transmission error is 0.006355 against the native port reference and 0.008635 against the saved finer 20-by-6 SAFE reference. Both meet 0.01 for this finite guide. The h130/h100 complex change of 0.010495 exceeds the successive-mesh criterion, while its power change of 7.96e-7 passes. The 42579-DOF control completed in 111.859 s after a preserved timeout attempt. [Uniform control and resource evidence](verification/solver_resources_AP_pnc.json)
-
-The full-device h100 result is now complete with 307611 DOFs, the same ports, four thickness layers and circle32. All five left-incident drives at 1 GHz pass the original-equation residual checks, and independent flux imbalance is 1.76e-10. A failed first attempt and an interrupted second attempt were recovered from saved iterates and accepted channels. The final continuation took 3195.875 s and peaked at 8245 MiB private commit. Its comparison with saved h130 passes the power-change gate at 0.000933731 but fails the complex-change gate at 0.0815184; maximum transmission phase change is 0.0815989 rad. Full-device phase convergence remains unresolved. [Full-device results and recovery evidence](verification/solver_resources_AP_pnc.json)
-
-The CLI/workbench checkpoint and resume workflow reproduces an uninterrupted 1 GHz uniform-guide response within 1e-8 by recovering the accepted first channel and saved second-channel iterate. The original residual, matched-guide power and independent flux checks pass.
-
-The local full-device h80 stage preserved the 426627-DOF mesh, matrices, incident drives and SAFE port modes. The local iterative attempts accepted zero channels. The best unscaled correction reached a relative residual of 1.126e-8 against the 1e-9 gate. The factor-scaling probe stopped after 96.359 s when available physical memory fell to 396.113 MiB, below the 400 MiB reserve. Its final saved relative residual was 1.14754305685e-8 versus 1.14502932754e-8 at the same unscaled callback. The incomplete probe leaves full-budget effectiveness unresolved. [Solver resource evidence](verification/solver_resources_AP_pnc.json)
-
-The matrix-free scaled-coordinate check reconstructed the small complex dense reference with 3.217e-16 relative solution error and rejected false passes based on transformed residuals. Factor-only and scaled-coordinate correction both passed the original acceptance tests on the same synthetic 256-equation system with the same seed and factors. At h80 vector length, traced temporaries peaked at 13.02 MiB for the mapped matrix-vector product and 19.53 MiB for the sequential preconditioner and map surrogate, versus 13.02 MiB for the factor-only surrogate. Both retain 6.51 MiB of scales. The map avoids an extra 625.46 MiB retained scaled sparse matrix relative to storing an explicit scaled operator during iteration. These measurements used synthetic arrays. No h80 arrays were loaded and no full solve was run. See the [verification record](verification/scaled_coordinate_correction_AP_pnc.json).
-
-The completed Lawrence h80 solve reused the staged equations and accepted all five left-incident drives at 1 GHz. Its independent residual replay and scattering export passed. The h100/h80 power change was 0.000177809, within 0.01. The complex change of 0.0399272 exceeded 0.01 at the original end planes. Reuse the accepted vectors and saved comparison. [Lawrence h80 evidence](verification/lawrence_hpc_AP_pnc.json)
-
-The Lawrence h60 workflow separates mesh preflight, operator assembly, direct solve and scattering export. Preflight verifies the fixed 675-DOF SAFE traces, end planes, four thickness layers and 32-segment hole rims. Each phase checks the saved receipt and reuses the approved mesh or equations. A resumed solve replays accepted drives against the original equations and computes the unfinished drives. The h80/h60 comparison is designed to measure global in-plane sensitivity at 1 GHz, including refinement of the lead interiors. Thickness, faceting, port and frequency convergence require separate checks. [Lawrence h60 runbook](docs/LAWRENCE_HPC_AP_pnc.md#run-the-h60-full-device-control)
-
-The completed h60 device has 680265 DOFs. All five original-equation residual checks and independent nodal-force flux replay pass. Compared with h80, the maximum power change is 0.000455294 (passes 0.01), but complex change 0.0268670 and transmission-phase change 0.0268866 rad still exceed 0.01. Full-device convergence remains unresolved. The single direct solve took 1273.73 s with 29.151 GiB peak RSS; saved equations and accepted vectors are reusable. [h60 verification and limits](verification/device_h60_AP_pnc.json)
-
-The matched h60 uniform control is complete at 1 GHz with 109539 DOFs and unchanged 675-DOF ports. The h80/h60 pair passes both 0.01 gates: power change 3.87538e-9 and complex change 0.00281635. Against the same finite 20-by-6 SAFE reference, maximum complex error decreases from h80 0.00456788 to h60 0.00211164, although the native-port error increases. All five saved original equations and independent nodal-force flux checks pass. The single 32-GiB Lawrence job took 282.32 s with 5.222 GiB peak process RSS; exact K/M/A/RHS and vectors remain available. This is a finite 3 micrometre propagation control; the patterned h80/h60 result above still fails its complex gate. [Uniform h60 evidence](verification/uniform_h60_AP_pnc.json)
-
-The independent h80 four/six-layer control preserves the entire planar mesh and physical 200 nm thickness. All five channels of the 616239-DOF six-layer device pass original-equation and independent flux checks. At 1 GHz, the power change of 0.0000647273 passes the 0.01 criterion, while the complex change of 0.0167063 exceeds it. The maximum transmission phase change is 0.0167181 rad. The completed read-only map retains this result and its numerical limits. The next bounded step is a frequency-specific SAFE port inventory to choose informative device-map samples; no new full-device sweep is queued. [Thickness-control evidence](verification/device_thickness_AP_pnc.json) · [Mapping plan](docs/IMPLEMENTATION_PLAN_AP_pnc.md#next-bounded-mapping-deliverable)
-
-Hole faceting and frequency coverage require their own checks. Temperature-dependent properties, bends and larger sweeps follow when the corresponding inputs and checks are established. QTCAD served as a workflow reference. The phonon solver uses the libraries listed above.
-
-## Historical two-dimensional evidence
-
-The historical files are retained in `archive/`, `results/archive_*`, `figures/archive_*` and `provenance/`. The Git download is about 32 MB, and the active solver runs independently of the archive.
-
-All 199 files from the original upload are preserved byte for byte. The older inventory has 223 unresolved entries, including 222 missing entries and one dependency file whose content differs from the expected bytes. The missing files prevent exact reproduction of the latest 2D workflow. The new 3D solver has independent provenance. The historical gap near 3 GHz applies to a 2D in-plane model, and approximately −42.25 dB refers to a probe displacement ratio. Both require independent 3D power calculations before drawing conclusions about transmission. [Evidence and missing files](docs/EVIDENCE_AND_RECOVERY_AP_pnc.md)
-
-Use these legacy entry points to inspect the saved evidence.
-
-```powershell
-.\.venv\Scripts\python.exe tools/audit_repository_AP_pnc.py
-.\.venv\Scripts\python.exe verify_AP_pnc.py --fields --safety
-.\.venv\Scripts\python.exe run_AP_pnc.py --name hpge_reference --dry-run
-```
-
-New figures and project files retain the attribution `Athul Prem | _AP_pnc`. Final research-report requirements are in `reports/`. External delivery requires current user authorization.
+The active solver is `simulate_AP_pnc.py` with `src/phononic/`. Root `run_AP_pnc.py` is only a legacy archive-readiness checker. Original historical 2D evidence remains under `archive/`, `provenance/` and the saved result directories; [recovery status](docs/EVIDENCE_AND_RECOVERY_AP_pnc.md) explains its limitations. Archive recovery is not a prerequisite for current 3D development.
