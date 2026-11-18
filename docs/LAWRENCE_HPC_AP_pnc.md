@@ -262,6 +262,27 @@ Save its JSON stdout as a new receipt, retain its SHA-256, then use `tools/compa
 
 On the current Windows host, Git OpenSSH's normal multiplex session request failed even while the master reported running. Its documented `-O proxy` mode successfully reused the authenticated master for actual commands and SFTP without another authentication. The live control location and ownership belong in the handoff; test an actual read-only remote command before assuming a connection works. SFTP can use a temporary SSH wrapper that passes `-O proxy` and the owned control path. Never write passwords or Duo responses into project files. [OpenSSH multiplex control](https://man.openbsd.org/ssh.1)
 
+## Archived 0.8875 GHz thickness control
+
+Completed outcome: jobs 1335641/1335643/1335645/1335647 exited 0:0. The sole five-drive solve took 522.76 seconds with 15984996 KiB GNU peak RSS and 17133563904 bytes job-cgroup peak inside 64 GiB. Independent point replay passes; the declared weak-pair 10% increment and whole complex gate fail while both resolutions retain over 99% suppression versus 1 GHz. Reuse verification/device_frequency_thickness_8875_AP_pnc.json; these commands document the completed workflow, not a queued rerun.
+
+`tools/run_lawrence_frequency_z4_AP_pnc.py` adds one four-layer point to the accepted six-layer frequency response. It reuses the exact 426627-DOF h80 body mesh/K/M, physical 200 nm thickness, original end planes and 675-DOF section operators. One new full SAFE eigensystem is required at 887500000 Hz; accepted z6 and 1 GHz computations are not repeated. Read the handoff for current ownership and completed phases before using this recipe.
+
+After `PROJECT_ROOT PHASE WORKER_WALL_SECONDS`, `scripts/hpc/lawrence_frequency_z4_AP_pnc.sbatch` accepts:
+
+- `safe BODY_STAGE_DIR MESH_DIR SECTION_DIR`
+- `stage SAFE_DIR SAFE_SHA ORIGINAL_1GHZ_A SAFE_VERIFICATION SAFE_VERIFICATION_SHA RELATION RELATION_SHA`
+- `solve STAGE_DIR STAGE_SHA [PRIOR_SOLVE_DIR PRIOR_SOLVE_SHA]`
+- `export STAGE_DIR STAGE_SHA SOLVE_DIR SOLVE_SHA`
+
+The original graph-reference operator is retained under `inputs/full_h80_operator_1r5fdlft/A_AP_pnc.npz`; the body K/M and ports remain under the archived results stage. Do not assume those paths are interchangeable. SAFE uses 4 GiB / 180 seconds with a 150-second worker; preparation/export use 16 GiB / 600 seconds with a 550-second worker; the sole admitted solve uses 64 GiB / 1500 seconds with a 1400-second worker. Every phase allocates two CPUs and uses one numerical thread. The prepared CSC graph and int32 exposure, fresh node/job headroom and disk reserve must pass before factorization. Numeric pivot fill is checked after factorization; historical fill is not a guarantee. No automatic retry or allocation increase is authorized by this recipe.
+
+First run `tools/compare_frequency_thickness_AP_pnc.py relation --safe SAFE_RECEIPT --safe-sha256 SAFE_SHA --runner-sha256 REVIEWED_RUNNER_SHA --output NEW_RELATION_DIRECTORY`. Then capture JSON stdout from `tools/replay_lawrence_frequency_z4_AP_pnc.py relation --safe SAFE_RECEIPT --safe-sha256 SAFE_SHA --relation RELATION_RECEIPT --relation-sha256 RELATION_SHA --runner-sha256 REVIEWED_RUNNER_SHA --comparison-sha256 REVIEWED_COMPARATOR_SHA`. This single independent pass checks all 1350 roots, both new signed relations and their root-permutation square through the accepted anchors. It does not require phase-gauge closure around the square. Stage admission binds both exact receipts.
+
+After exact export, the same replay helper's `point` command requires `--safe`, `--stage`, `--solve`, `--export`, `--export-sha256`, `--runner-sha256` and an explicit local `--prebody-replay` path. Capture its JSON stdout once under the declared local memory/wall guards. The actual export stores phase_adjustment_applied: false inside its hash-bound public provenance; the verifier requires that explicit value plus the stage flag and exact execution links. Accepted pre-body and relation receipts retain their original producers. Exact source snapshots are preserved in local_checks/, and only the reviewed receipt/producer/snapshot combinations cross the narrow consumer-schema correction. The comparator's `compare` command binds `--relation`, `--prebody-replay` and `--point-replay` with each corresponding `-sha256`, plus `--replay-source-sha256`, `--candidate PUBLIC_RUN_DIRECTORY` and `--output NEW_COMPARISON_DIRECTORY`.
+
+For each of the two distinct unit-power drives, target A is `abs(P_z4_8875-P_z6_8875)/P_z6_8875 <= 0.10`; target B is `P_z_8875/P_z_1GHz <= 0.01` separately at both resolutions. Use exact positive accepted per-direction denominators without floors. A is finite sensitivity, not 10% accuracy; B tests at least 99% suppression. Preserve both outcomes independently, all raw/aligned complex and phase changes, and the separate whole-response 0.01 gates. No passing finite increment establishes continuum convergence or a numerical floor.
+
 ## Open JupyterLab
 
 After the bootstrap succeeds, submit the optional notebook job from the same Lawrence project directory. It requests one CPU and 4 GiB for two hours. Use the node assigned to the running job. The server log is private and contains the token generated for this session.

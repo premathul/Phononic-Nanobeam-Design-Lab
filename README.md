@@ -112,6 +112,8 @@ Explicit resume computes only untouched points; stopped failures are retained an
 
 The [archived 0.8875 GHz workflow](docs/LAWRENCE_HPC_AP_pnc.md#archived-08875-ghz-device-point) has completed all five left-incident drives on the saved h80 z6 device, with exact mesh/K/M and frequency-specific mode reuse. Independent original equations, nodal-force power, coherent left incidence, all coefficients and full P2 fields pass. The selected field-matched reflected-conversion power falls from about 0.00108076 at 1 GHz to 7.96911e-7 at 0.8875 GHz (99.9263%). Reuse [portable evidence](verification/device_frequency_8875_AP_pnc.json) and the [workspace comparison](results/runs/device_frequency_8875_AP_pnc/comparison/report_AP_pnc.html). This is finite-frequency variation in the saved discretization, not a mechanism, uncertainty bound or convergence result; all previous failed spatial checks remain failed.
 
+The matched 0.8875 GHz z4/z6 control retains over 99% suppression of the selected directed reflection-conversion pair versus 1 GHz at both resolutions, but the small powers differ by 87.56% relative to z6 and fail the declared 10% sensitivity target. Whole complex-response change 0.0175301 also fails 0.01. The low-conversion trend persists within these finite discretizations; its value is not converged. All five new z4 drives pass independent original equations, physical/coherent power and complete fields. Reuse [control evidence](verification/device_frequency_thickness_8875_AP_pnc.json) and the [workspace comparison](results/runs/device_frequency_thickness_8875_AP_pnc/comparison/report_AP_pnc.html); no further solve is queued.
+
 For larger scattering cases, optional memory controls retain the same finite-element model:
 
 ```powershell
