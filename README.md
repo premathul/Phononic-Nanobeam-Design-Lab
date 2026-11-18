@@ -69,6 +69,12 @@ Resume requires matching saved inputs/source identities. An interrupted run is n
 
 ## Compute a bounded frequency map
 
+To stage a regional device point from an existing preflight, run the command below. A zero point limit saves the stiffness, mass and port matrices. Repeat with `--max-new-points 1` and the same inputs, environment and output directory to compute the response.
+
+```powershell
+.\.venv\Scripts\python.exe tools/map_scattering_AP_pnc.py --config configs/historical_26hole_regional_AP_pnc.json --frequencies-ghz 1 --mesh-cache-root results/runs/regional_mesh_AP_pnc --output results/runs/regional_mesh_AP_pnc/lead200_1GHz --max-new-points 0
+```
+
 For a scattering preset, including **Historical 26-hole device · pilot**, use **Check mesh** first. In **Frequency map**, enter explicit increasing GHz samples separated by commas or spaces and choose **New point limit** (default **1**). **Run frequency map** reuses a matching checked mesh, keeps the existing body/port resource caps, and attempts at most that many unfinished points. Failed attempts count toward the limit.
 
 **Stop** during a map requests a stop after the current point finishes. It does not interrupt a running factorization. The workbench stays busy until the worker exits and preserves accepted points. **Resume map…** reads the saved configuration and frequency list; it ignores unsaved study edits and reuses accepted points and shared preparation. A forcibly interrupted unfinished point may need another attempt. Resume requires the original native input/source/environment identities; imported read-only views cannot resume.
@@ -88,6 +94,8 @@ The UI uses the existing `tools/map_scattering_AP_pnc.py` engine and its outputs
 | [Regional energy](verification/field_energy_8875_AP_pnc.json), [phase-only bound](verification/lead_phase_8875_AP_pnc.json) | Small regional-energy change; phase-only model excluded at the existing tolerance | Error location and weak-conversion accuracy remain unresolved |
 
 Passing original equations and physical flux qualifies a finite numerical response. It does not establish spatial convergence, a complete band gap, a resonance linewidth/Q or experimental accuracy. Sparse samples establish no continuous branch or converged spectrum. Driven fields use displacement per square root of incident watt; displacement ratios are not transmitted power.
+
+The [regional 1 GHz device pair](verification/regional_lead_1GHz_AP_pnc.json) contains five matched left-incident power responses for 200 and 150 nm lead targets. The largest power change is 0.002114 and the largest complex-amplitude change is 0.04239. The power increment passes 0.01 and the complex increment fails 0.01. Both cases use one quadratic layer through 200 nm physical thickness.
 
 ## Tests and development
 

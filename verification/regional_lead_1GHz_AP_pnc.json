@@ -1,0 +1,232 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "frequency_GHz": 1,
+  "incidence": "left",
+  "preset": {
+    "path": "configs/historical_26hole_regional_AP_pnc.json",
+    "sha256": "dfcecd534ccf359bd672a44577b22fe18356001cbd26a0c9440140a824c4afa5"
+  },
+  "candidate_override": {
+    "mesh.lead_mesh_size_nm": 150
+  },
+  "numerical_git_base": "66507f16d75dfbeecf63ccba522f8f700fcd7630",
+  "map_source": {
+    "path": "tools/map_scattering_AP_pnc.py",
+    "sha256": "11b1dfe118606271a5c2710eae30b4081fb448a660b87eee58283550f7e1acce"
+  },
+  "reference_planes_x_m": [
+    0,
+    1.665e-05
+  ],
+  "geometry_control": {
+    "lead_targets_nm": [
+      200,
+      150
+    ],
+    "hole_count": 26,
+    "thickness_layers": 1,
+    "exact_shared_central_tetrahedra": 4968,
+    "exact_shared_faces": {
+      "left_port": 8,
+      "left_cut": 8,
+      "right_cut": 8,
+      "right_port": 8,
+      "central_exterior": 5124,
+      "hole_walls": 1664
+    },
+    "leads": {
+      "left": {
+        "baseline_tetrahedra": 174,
+        "candidate_tetrahedra": 300,
+        "baseline_only_tetrahedra": 174,
+        "candidate_only_tetrahedra": 300,
+        "outer_edge_segments": [
+          5,
+          7
+        ]
+      },
+      "right": {
+        "baseline_tetrahedra": 174,
+        "candidate_tetrahedra": 300,
+        "baseline_only_tetrahedra": 174,
+        "candidate_only_tetrahedra": 300,
+        "outer_edge_segments": [
+          5,
+          7
+        ]
+      }
+    }
+  },
+  "runs": [
+    {
+      "lead_target_nm": 200,
+      "body_dofs": 40077,
+      "port_dofs": 81,
+      "mesh_sha256": "21355ed014bf471e44382dcb4417ca5eef6390099d34448ef73630c1d7540967",
+      "summary": {
+        "path": "results/runs/regional_mesh_AP_pnc/lead200_1GHz/point-001/attempt-e9yg_60a/historical_26hole_regional_pilot_200nm-9972e72fb982/summary_AP_pnc.json",
+        "sha256": "6059fe7852b39368d7da7318b6f9c15c18e70a7aec5a27a8b3d0ca4382a7d8f7"
+      },
+      "selected_fields_sha256": "42b7099df557bfc39ba28f9af0eac91f6d262ece246df5b084727d93dab4e74e",
+      "scattering_table_sha256": "4d76440b674aaf5418cbe8154dd4097a14379c98b4644d3ae65285a09b473ae7",
+      "native_complex_table_sha256": "736296966381bfae21cddfdadd2e9120186d722f93d8cd009b8372e71a1ee205",
+      "attempt_status": [
+        "interrupted",
+        "accepted"
+      ],
+      "incoming_channels": [
+        {
+          "channel": 1,
+          "port_index": 158,
+          "k_rad_m": 1333238.4208372633,
+          "reflection": 0.011893330278653007,
+          "transmission": 0.9881066697213565
+        },
+        {
+          "channel": 2,
+          "port_index": 160,
+          "k_rad_m": 1446665.4978428965,
+          "reflection": 0.005121360053176609,
+          "transmission": 0.9948786399468323
+        },
+        {
+          "channel": 3,
+          "port_index": 152,
+          "k_rad_m": 2796651.3266256,
+          "reflection": 0.035530058410608176,
+          "transmission": 0.9644699415893889
+        },
+        {
+          "channel": 4,
+          "port_index": 143,
+          "k_rad_m": 4045146.1412365036,
+          "reflection": 0.004975971861068418,
+          "transmission": 0.9950240281389292
+        },
+        {
+          "channel": 5,
+          "port_index": 137,
+          "k_rad_m": 5175396.031444971,
+          "reflection": 0.001762110753584674,
+          "transmission": 0.9982378892464071
+        }
+      ],
+      "saved_equation_limit": 1e-09,
+      "maximum_relative_residual": 3.981256827888652e-13,
+      "maximum_relative_backward_residual": 1.8458761302052052e-16,
+      "maximum_independent_boundary_force_residual": 4.010481582180341e-13,
+      "maximum_flux_defect": 5.450318479588465e-13,
+      "flux_replay": {
+        "path": "results/runs/regional_mesh_AP_pnc/local_checks/lead200_flux_AP_pnc.json",
+        "sha256": "6e6427ac540d940461eef15a03bf1aa0cc4fda228a14813ad2188dc639e41393"
+      },
+      "runtime": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "scikit-fem": "12.0.2",
+        "meshio": "5.3.5",
+        "gmsh": "4.15.2",
+        "matplotlib": "3.11.2",
+        "psutil": "7.2.2"
+      }
+    },
+    {
+      "lead_target_nm": 150,
+      "body_dofs": 41661,
+      "port_dofs": 81,
+      "mesh_sha256": "84faeb2f448b99843e7e9e5ddc035e470e9a090087c7709fdf668c2d22da8cc2",
+      "summary": {
+        "path": "results/runs/regional_mesh_AP_pnc/lead150_1GHz/point-001/attempt-gafu1hh4/historical_26hole_regional_pilot_200nm-0bf450a036b8/summary_AP_pnc.json",
+        "sha256": "aefab6763831f7bd12a0bc8e5197938027fdad86a205974db32e64785d5e937d"
+      },
+      "selected_fields_sha256": "2eed301bde09931cefb4fdde03ce5a10e7a78df6725998df1df73d84df52aeb5",
+      "scattering_table_sha256": "5dffeb69ca1939bddb3f4706a2d432fcff9403fce49b7c7b77e34f6cb62ccf14",
+      "native_complex_table_sha256": "9f5950a9034b605fa272e58c3fd0a04eb27c257d892ff0142db6f183e5d0987e",
+      "attempt_status": [
+        "accepted"
+      ],
+      "incoming_channels": [
+        {
+          "channel": 1,
+          "port_index": 158,
+          "k_rad_m": 1333238.4208372633,
+          "reflection": 0.014007240409272722,
+          "transmission": 0.9859927595907221
+        },
+        {
+          "channel": 2,
+          "port_index": 160,
+          "k_rad_m": 1446665.4978428965,
+          "reflection": 0.005121367824134684,
+          "transmission": 0.9948786321758729
+        },
+        {
+          "channel": 3,
+          "port_index": 152,
+          "k_rad_m": 2796651.3266256,
+          "reflection": 0.035539051490001285,
+          "transmission": 0.9644609485099876
+        },
+        {
+          "channel": 4,
+          "port_index": 143,
+          "k_rad_m": 4045146.1412365036,
+          "reflection": 0.004513117800645437,
+          "transmission": 0.9954868821993623
+        },
+        {
+          "channel": 5,
+          "port_index": 137,
+          "k_rad_m": 5175396.031444971,
+          "reflection": 0.0019097790459849037,
+          "transmission": 0.998090220954014
+        }
+      ],
+      "saved_equation_limit": 1e-09,
+      "maximum_relative_residual": 3.9596512136996447e-13,
+      "maximum_relative_backward_residual": 1.8006421431480463e-16,
+      "maximum_independent_boundary_force_residual": 3.977681815139915e-13,
+      "maximum_flux_defect": 5.546559414536088e-13,
+      "flux_replay": {
+        "path": "results/runs/regional_mesh_AP_pnc/local_checks/lead150_flux_AP_pnc.json",
+        "sha256": "bf2907df411f5236b689ccbfce57f2e7347c3163b5a3a5b446d393d0028a5cdc"
+      },
+      "runtime": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "scikit-fem": "12.0.2",
+        "meshio": "5.3.5",
+        "gmsh": "4.15.2",
+        "matplotlib": "3.11.2",
+        "psutil": "7.2.2"
+      }
+    }
+  ],
+  "comparison": {
+    "input_power_checks_passed": true,
+    "maximum_power_change": 0.0021139101306344443,
+    "power_change_limit": 0.01,
+    "power_passed": true,
+    "maximum_complex_change": 0.04239030308719074,
+    "complex_change_limit": 0.01,
+    "complex_passed": false,
+    "mesh_pair_passed": false
+  },
+  "artifacts": {
+    "comparison": {
+      "path": "results/runs/regional_mesh_AP_pnc/comparison/scattering-2a59c5890ac2b508/summary_AP_pnc.json",
+      "sha256": "23b4be11750732bc93fc65861a451485ab8f21b74690e83e143ffdeef1072a4e"
+    },
+    "mesh_control": {
+      "path": "results/runs/regional_mesh_AP_pnc/local_checks/regional_lead_geometry_AP_pnc.json",
+      "sha256": "c41bf66eb3d51068946dfec176502ece84f5b80275d51ff76d77849186bd1bd6"
+    },
+    "interrupted_attempt": {
+      "path": "results/runs/regional_mesh_AP_pnc/local_checks/lead200_response_execution_AP_pnc.json",
+      "sha256": "3dfeb292f32a7529932084c15d1c8dca687df9c6f176211f9b937f6fd1b14596"
+    }
+  },
+  "interpretation": "The five discrete left-incident channels conserve power on both meshes. The tested lead refinement passes the per-drive power increment and fails the complex-amplitude increment. Physical thickness is 200 nm with one quadratic element layer. Full spatial and frequency convergence remain unresolved.",
+  "artifact_scope": "Run-relative artifacts are retained in the workspace archive. The tracked preset, single candidate override and map source identify the numerical inputs for a fresh calculation."
+}
