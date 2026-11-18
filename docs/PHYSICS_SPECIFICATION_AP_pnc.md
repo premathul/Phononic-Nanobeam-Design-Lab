@@ -114,4 +114,4 @@ Each case stores author/tag, run ID, parent/operator hashes, source commit, exac
 
 Use explicit values for `planned`, `running`, `completed_unverified`, `verified_within_model`, `failed` and `blocked`; reserve experimental validation for its own evidence field. Absent physical channels, failed computations and uncomputed points are different states. Save completed tasks atomically and resume only matching input/source identities. Full fields are required for representative passband, gap, resonance, conversion and failure cases, not for every point by default.
 
-Required tables and figure families are listed in [the ordered task plan](NEXT_STEPS_AP_pnc.md) and [final report contract](../reports/REPORT_REQUIREMENTS_AP_pnc.md). Every new plot carries Athul Prem and its `athul_simulation_pnc_` identity at the top.
+Required tables and figure families are listed in [the implementation plan](IMPLEMENTATION_PLAN_AP_pnc.md) and [final report contract](../reports/REPORT_REQUIREMENTS_AP_pnc.md). Every new plot carries Athul Prem and its `athul_simulation_pnc_` identity at the top.

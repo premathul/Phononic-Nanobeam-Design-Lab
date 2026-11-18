@@ -1,5 +1,9 @@
 # Verification records
 
-Author: **Athul Prem** | Project/file tag: **`_AP_pnc`**
+Author: Athul Prem | _AP_pnc
 
-`archive/` preserves historical logs and reports with their original bytes. Their old PASS labels are not new checks. [REORGANIZATION_VERIFICATION_AP_pnc.md](REORGANIZATION_VERIFICATION_AP_pnc.md) and [reorganization_checks_AP_pnc.json](reorganization_checks_AP_pnc.json) record checks actually performed for the folder migration. Available artifact consistency is distinct from full-archive completeness and from physical validation. No new FEM simulation is run as part of this reorganization.
+These files retain numerical results, input/source identities, failed attempts and the limits of each accepted comparison. Start with the evidence links in the [current plan](../docs/IMPLEMENTATION_PLAN_AP_pnc.md); do not treat every record as an active task or rerun it after a new chat.
+
+Original-equation and physical-flux success, finite refinement acceptance, full convergence and experimental validation are separate. The full-device failed scattering checks remain evidence, even though software tests pass.
+
+`archive/` preserves original historical logs and reports. The reorganization records and dated provenance inventory document the old folder migration; their old PASS labels are not fresh scientific checks. The current handoff records the latest integrated test/CI status instead of duplicating it here.

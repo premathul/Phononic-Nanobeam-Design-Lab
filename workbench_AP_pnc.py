@@ -16,6 +16,8 @@ import time
 
 import psutil
 
+from tools import browse_device_results_AP_pnc as device_results
+
 try:
     from PySide6.QtCore import QProcess, QProcessEnvironment, Qt, QTimer, QUrl
     from PySide6.QtGui import QDesktopServices, QFont, QFontDatabase, QTextCursor
@@ -145,12 +147,15 @@ class Workbench(QMainWindow):
         self.preset.addItem("Loaded configuration")
         self.load_button = QPushButton("Load JSON…")
         self.saved_run_button = QPushButton("Open saved run…")
+        self.device_results_button = QPushButton("Open device results")
+        self.device_results_button.setToolTip("Browse the accepted saved device samples and export their native responses.")
         self.save_button = QPushButton("Save JSON…")
         choices.addWidget(QLabel("Preset"))
         choices.addWidget(self.preset, 1)
         choices.addWidget(self.load_button)
         choices.addWidget(self.save_button)
         choices.addWidget(self.saved_run_button)
+        choices.addWidget(self.device_results_button)
         main.addLayout(choices)
 
         columns = QHBoxLayout()
@@ -223,6 +228,7 @@ class Workbench(QMainWindow):
         self.preset.currentIndexChanged.connect(self._select_preset)
         self.load_button.clicked.connect(self._choose_load)
         self.saved_run_button.clicked.connect(self._choose_saved_run)
+        self.device_results_button.clicked.connect(self.open_device_results)
         self.save_button.clicked.connect(self._choose_save)
         self.mesh_button.clicked.connect(lambda: self.start_job("mesh"))
         self.run_button.clicked.connect(lambda: self.start_job("run-resumable" if self.save_progress.isChecked() else "run"))
@@ -246,6 +252,20 @@ class Workbench(QMainWindow):
         path = QFileDialog.getExistingDirectory(self, "Open a saved simulation run", str(self.output_root))
         if path:
             self.open_saved_run(Path(path))
+
+    def open_device_results(self) -> bool:
+        if self.action is not None:
+            return False
+        try:
+            dataset = device_results.load_dataset()
+            publication = device_results.publish_dataset(dataset, self.output_root / "saved_device_results_AP_pnc")
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            self.status.setText(f"Could not open saved device results. {exc}")
+            return False
+        if not self._open(Path(publication["report_path"])):
+            return False
+        self.status.setText("Opened saved device samples and CSV exports. Spatial and frequency convergence remain unresolved.")
+        return True
 
     def load_configuration(self, path: Path, index: int = len(PRESETS)) -> bool:
         if self.action is not None:
@@ -411,7 +431,7 @@ class Workbench(QMainWindow):
         self.status.setText("Inputs changed. Check the mesh or run the study.")
 
     def _set_busy(self, busy: bool) -> None:
-        for widget in (self.preset, self.load_button, self.saved_run_button, self.save_button, self.form,
+        for widget in (self.preset, self.load_button, self.saved_run_button, self.device_results_button, self.save_button, self.form,
                        self.mesh_button, self.run_button, self.save_progress, self.wall_seconds, self.resume_button):
             widget.setEnabled(not busy)
         self.stop_button.setEnabled(busy and not self.stopping and self.process.state() == QProcess.ProcessState.Running)
@@ -739,9 +759,13 @@ class Workbench(QMainWindow):
         self._set_result_buttons(self.action is not None)
         self.status.setText(message)
 
-    def _open(self, path: Path | None) -> None:
-        if path is not None and (not path.exists() or not QDesktopServices.openUrl(QUrl.fromLocalFile(str(path)))):
+    def _open(self, path: Path | None) -> bool:
+        if path is None:
+            return False
+        if not path.exists() or not QDesktopServices.openUrl(QUrl.fromLocalFile(str(path))):
             self.status.setText(f"Could not open {path}")
+            return False
+        return True
 
     def closeEvent(self, event) -> None:
         if self.action is not None:

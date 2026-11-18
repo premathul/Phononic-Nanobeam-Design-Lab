@@ -1,0 +1,127 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "title": "Saved 26-hole device results: h80, six layers",
+  "points": [
+    {
+      "id": "h80-z6-0.1GHz",
+      "frequency_hz": 100000000,
+      "summary": {
+        "path": "results/runs/low_band_device_AP_pnc/h80-z6-low-band-export-1335483/historical_26hole_layered_h80_ny12_z6-bb55473510a2/summary_AP_pnc.json",
+        "sha256": "6f972ea9640984e71bb5a54d2eb49350192b6db482e0f9997ffd1c6a4fe02ba5"
+      },
+      "evidence": {
+        "path": "results/runs/low_band_device_AP_pnc/local_checks/independent_replay_coherent_1335483_AP_pnc.json",
+        "sha256": "cb030385298fdbacd8ee84be40527a4a443d6060a3bbee191da39ce395131a2c"
+      }
+    },
+    {
+      "id": "h80-z6-0.8875GHz",
+      "frequency_hz": 887500000,
+      "summary": {
+        "path": "results/runs/device_frequency_8875_AP_pnc/h80-z6-frequency-887500000-export-1335632/historical_26hole_layered_h80_ny12_z6-efd3e2e6cc33/summary_AP_pnc.json",
+        "sha256": "0b96edd97dedfa0c9ce190f8e9f697059c4b71d387a62501aeba1bc955c43b69"
+      },
+      "evidence": {
+        "path": "results/runs/device_frequency_8875_AP_pnc/independent_point_AP_pnc.json",
+        "sha256": "7ca962aa197087aa167e1dfb3a74fdaee1b822b2d3c7d2a6e4cf5f3c936a27d7"
+      }
+    },
+    {
+      "id": "h80-z6-1GHz",
+      "frequency_hz": 1000000000,
+      "summary": {
+        "path": "results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc/thickness-h80-export-1335341/historical_26hole_layered_h80_ny12_z6-585ccac1d4f2/summary_AP_pnc.json",
+        "sha256": "040a219f54446219b6a610cf08382ff7e93a6dcb01f31f3be810977651301c4e"
+      },
+      "evidence": {
+        "path": "verification/device_thickness_AP_pnc.json",
+        "sha256": "81f1e195956c1986d067fc397ea1836c284d9e645073e032d323772918532f05"
+      }
+    }
+  ],
+  "controls": [
+    {
+      "label": "0.8875/1 GHz signed endpoint relation",
+      "source": {
+        "path": "results/runs/device_frequency_8875_AP_pnc/relation/mode_relation_AP_pnc.json",
+        "sha256": "6792e815654f5cc882310ab51a70f80ff5a0280e7f5db62df2ec1a30feaf8e65"
+      },
+      "report_path": "results/runs/device_frequency_8875_AP_pnc/relation/report_AP_pnc.html",
+      "interpretation": "All ten signed endpoint channels match. This is not continuous branch identity."
+    },
+    {
+      "label": "0.8875/1 GHz finite response comparison",
+      "source": {
+        "path": "results/runs/device_frequency_8875_AP_pnc/comparison/device_frequency_comparison_AP_pnc.json",
+        "sha256": "b69aa76de99a01f60fad8f1640170d4fa266ccec312061050894aa823eaa4813"
+      },
+      "report_path": "results/runs/device_frequency_8875_AP_pnc/comparison/report_AP_pnc.html",
+      "interpretation": "Selected reflected-conversion powers decrease about 99.9263% in the saved z6 model. This is finite-frequency variation, not a convergence result."
+    },
+    {
+      "label": "0.1 GHz h100/h80 z4 control",
+      "source": {
+        "path": "results/runs/low_band_inplane_AP_pnc/comparison/summary_AP_pnc.json",
+        "sha256": "c8512b0e55c7d0ead6aeab891f93633c6735c3114e6994106f96cd812c1161df"
+      },
+      "report_path": "results/runs/low_band_inplane_AP_pnc/comparison/report_AP_pnc.html",
+      "interpretation": "Power and complex-response increments pass 0.01 for this finite pair; global convergence remains unresolved."
+    },
+    {
+      "label": "0.1 GHz h80 z4/z6 control",
+      "source": {
+        "path": "results/runs/low_band_thickness_AP_pnc/comparison/summary_AP_pnc.json",
+        "sha256": "0e93087580b622b0a587c94e4a072f405603129ec00bbf91daf329a4784c1591"
+      },
+      "report_path": "results/runs/low_band_thickness_AP_pnc/comparison/report_AP_pnc.html",
+      "interpretation": "Power and complex-response increments pass 0.01 for this finite pair; global convergence remains unresolved."
+    },
+    {
+      "label": "0.8875 GHz h100/h80 z4 control",
+      "source": {
+        "path": "results/runs/device_frequency_inplane_8875_AP_pnc/comparison/frequency_inplane_comparison_AP_pnc.json",
+        "sha256": "107d1c62817349d0a6900650d10dd3826ee492ca4bc36abc8195ee3c3e7911c7"
+      },
+      "report_path": "results/runs/device_frequency_inplane_8875_AP_pnc/comparison/report_AP_pnc.html",
+      "interpretation": "Whole-response complex change fails 0.01. Both selected directed weak-conversion changes fail the 10% sensitivity target."
+    },
+    {
+      "label": "0.8875 GHz h80 z4/z6 control",
+      "source": {
+        "path": "results/runs/device_frequency_thickness_8875_AP_pnc/comparison/frequency_thickness_comparison_AP_pnc.json",
+        "sha256": "3549b1fe80b7fb283b66ef8e93701c88dcc9bd6b80f9a20d992b9b695724860e"
+      },
+      "report_path": "results/runs/device_frequency_thickness_8875_AP_pnc/comparison/report_AP_pnc.html",
+      "interpretation": "Whole-response complex change fails 0.01. Both selected directed weak-conversion changes fail the 10% sensitivity target."
+    },
+    {
+      "label": "1 GHz h100/h80 z4 control",
+      "source": {
+        "path": "results/runs/comparisons/scattering-f6e75a9694c42a2c/summary_AP_pnc.json",
+        "sha256": "e7f66845ccdbf4aca57b6976fbc1320b07ead0d9e0007a768766a93b01f5056f"
+      },
+      "report_path": "results/runs/comparisons/scattering-f6e75a9694c42a2c/report_AP_pnc.html",
+      "interpretation": "Power change passes 0.01; complex-response change fails 0.01."
+    },
+    {
+      "label": "1 GHz h80/h60 z4 control",
+      "source": {
+        "path": "results/runs/full_device_resource_profile/lawrence_h60_AP_pnc/comparisons/scattering-192dc75596dc2458/summary_AP_pnc.json",
+        "sha256": "65bb9e0311f1ac7f95babc54fd7e2ef82fc80f14b26319cb8e90b5163c8f26f6"
+      },
+      "report_path": "results/runs/full_device_resource_profile/lawrence_h60_AP_pnc/comparisons/scattering-192dc75596dc2458/report_AP_pnc.html",
+      "interpretation": "Power change passes 0.01; complex-response change fails 0.01."
+    },
+    {
+      "label": "1 GHz h80 z4/z6 control",
+      "source": {
+        "path": "results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc/comparisons/scattering-b06d34228c560e43/summary_AP_pnc.json",
+        "sha256": "8a5aea4238d3f09bdd7e97f82cd73d2b74f6a64846ca946633aec08d0b6dede3"
+      },
+      "report_path": "results/runs/full_device_resource_profile/lawrence_thickness_AP_pnc/comparisons/scattering-b06d34228c560e43/report_AP_pnc.html",
+      "interpretation": "Power change passes 0.01; complex-response change fails 0.01."
+    }
+  ]
+}

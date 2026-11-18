@@ -60,6 +60,6 @@ Conclude only within the validated model/regime. State which thicknesses support
 3. Prepare a concise email addressed exactly to **athul.prem@coyotes.usd.edu**, subject **HPGe phonon propagation research report | Athul Prem | _AP_pnc**.
 4. Summarize the strongest supported findings, the main unresolved limitations and whether the study is complete, partial or blocked; attach the report and link compact supporting data.
 5. Send through the executing environment's authenticated email connector when available. Athul explicitly requested this final delivery; do not substitute a GitHub upload for a claimed email send.
-6. Record the real send timestamp and provider message/receipt reference in `delivery_status_AP_pnc.json`. A queued draft is not a sent message.
+6. Create a delivery receipt only after authorized delivery, recording the actual send timestamp and provider message reference. A queued draft is not a sent message.
 
 If sending is unavailable, retain the complete report and delivery-ready draft, set the status to `pending_email_capability`, and tell Athul what is ready and that sending is pending. Do not create a fictional delivery receipt, embed credentials, install unsolicited recurring email jobs or label a missing report as sent.
