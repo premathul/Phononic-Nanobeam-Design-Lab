@@ -366,6 +366,8 @@ class LawrenceFrequencyH100Tests(unittest.TestCase):
                 np.testing.assert_allclose(fields["transmission_amplitudes"], 1j * np.eye(count), atol=1e-15)
 
     def test_entry_checks_resource_ceilings_and_bounded_job_cgroup(self):
+        implementation = json.loads((runner.ROOT / "data/saved_device_AP_pnc/h80_z6_08875/summary_AP_pnc.json").read_bytes())["implementation"]
+        self.assertEqual(runner.workflow.digest(implementation["source_sha256"]), runner.z4.fixed_port.SOURCE_MAP_SHA256)
         with TemporaryDirectory() as directory:
             root = Path(directory)
             environment = {**runner.lawrence.THREADS, "SLURM_JOB_ID": "123", "SLURM_CPUS_PER_TASK": "2",
@@ -376,6 +378,7 @@ class LawrenceFrequencyH100Tests(unittest.TestCase):
             proxy = SimpleNamespace(**{**vars(runner.lawrence), "cgroup_controls": lambda: bounded,
                 "is_job_group": lambda _: True, "memory_snapshot": lambda *_: snapshot, "solve_environment": lambda: {}})
             with (patch.object(runner, "sys", SimpleNamespace(platform="linux")), patch.dict(os.environ, environment),
+                  patch.object(runner.workflow, "source_identity", return_value=implementation),
                   patch.object(runner, "lawrence", proxy), patch.object(runner, "allocation_seconds", return_value=900)):
                 runner.run_phase(SimpleNamespace(mode="solve", output=root / "solve"),
                                  lambda _, record: record.update(status="drives_accepted"))

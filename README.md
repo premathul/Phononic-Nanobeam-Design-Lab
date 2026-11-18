@@ -52,6 +52,10 @@ Configuration records geometry in nm and resolves it to SI; it includes the crys
 
 Layered meshes independently control in-plane size and thickness layers, while z layers also change the port discretization. Hole faceting is a separate control. Original scattering phases stay at the physical end planes; do not subtract a uniform-guide phase from the patterned response.
 
+For independent lead and central resolution, choose **26-hole device · regional layers (coarse)** or enable **Independent lead size** on a layered study. The main in-plane size applies to the central interval; the lead size applies on both sides. JSON uses `mesh.lead_mesh_size_nm` and `mesh.patterned_x_interval_nm: [start, end]`; CLI equivalents are `--lead-mesh-size-nm` and `--patterned-x-interval-nm START END`. Both cut planes must lie in solid gaps outside every hole. Changing only the lead size preserves the central mesh and matching end traces, with common thickness layers and hole faceting. Disabling the option restores the original single-region mesher.
+
+The [regional 26-hole preset](configs/historical_26hole_regional_AP_pnc.json) uses a 400 nm central target, 200 nm lead target, central interval [1000, 15650] nm, one P2 thickness layer and the existing 60000-DOF cap. It is an exploratory coarse configuration. The three-region construction is a new mesh family: it does not preserve cells from the archived global-mesh series or certify a full-device response. Check the mesh before a run; a new mesh or a passing tiny guide does not establish convergence.
+
 For long iterative runs, the opt-in checkpoint workflow preserves accepted channels and verifies original residuals on resume:
 
 ```powershell

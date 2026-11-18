@@ -31,11 +31,14 @@ def stage_fields():
 
 class LawrenceLowBandZ4Tests(unittest.TestCase):
     def test_entry_checks_real_current_helpers_before_stage(self):
+        implementation = json.loads((z4.ROOT / "data/saved_device_AP_pnc/h80_z6_08875/summary_AP_pnc.json").read_bytes())["implementation"]
+        self.assertEqual(z4.workflow.digest(implementation["source_sha256"]), z4.fixed_port.SOURCE_MAP_SHA256)
         with TemporaryDirectory() as directory:
             root = Path(directory)
             args = ["z4", "stage", "--safe-dir", str(root / "safe"), "--safe-sha256", "safe-sha",
                     "--reference-operator", str(root / "original.npz"), "--output", str(root / "stage")]
             with (patch.object(z4, "sys", SimpleNamespace(platform="linux")),
+                  patch.object(z4.workflow, "source_identity", return_value=implementation),
                   patch.dict(os.environ, {**z4.lawrence.THREADS, "SLURM_JOB_ID": "123"}),
                   patch.object(z4.lawrence, "solve_environment", return_value={"Slurm": "single thread"}),
                   patch.object(z4, "stage", side_effect=lambda _, record: record.update(status="operator_staged")) as operation,

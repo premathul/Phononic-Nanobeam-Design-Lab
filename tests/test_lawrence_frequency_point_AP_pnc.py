@@ -121,6 +121,8 @@ class LawrenceFrequencyPointTests(unittest.TestCase):
                     staged[key] = accepted
 
     def test_phase_entry_admits_only_the_current_reviewed_helper(self):
+        implementation = json.loads((frequency_point.ROOT / "data/saved_device_AP_pnc/h80_z6_08875/summary_AP_pnc.json").read_bytes())["implementation"]
+        self.assertEqual(frequency_point.workflow.digest(implementation["source_sha256"]), frequency_point.prep.fixed_port.SOURCE_MAP_SHA256)
         with TemporaryDirectory() as directory:
             root = Path(directory)
             output = root / "stage"
@@ -143,6 +145,7 @@ class LawrenceFrequencyPointTests(unittest.TestCase):
                 return link
 
             with (patch.object(frequency_point, "sys", SimpleNamespace(platform="linux")),
+                  patch.object(frequency_point.workflow, "source_identity", return_value=implementation),
                   patch.dict(os.environ, {**frequency_point.lawrence.THREADS, "SLURM_JOB_ID": "123"}),
                   patch.object(frequency_point.lawrence, "solve_environment", return_value={"fixture": "Slurm backend"}),
                   patch.object(frequency_point, "stage", side_effect=run_stage) as stage_call):

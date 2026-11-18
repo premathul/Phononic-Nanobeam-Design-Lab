@@ -97,7 +97,8 @@ def resolve_config(config: dict, *, check_body_budget: bool = True) -> dict:
         raise ValueError("name must use 1-80 letters, digits, underscores or hyphens")
     required = {
         "geometry": {*DIMENSIONS_NM, "pattern"},
-        "mesh": {"kind", "cells", "element_order", "mesh_size_nm", "port_size_nm", "circle_resolution", "thickness_layers"},
+        "mesh": {"kind", "cells", "element_order", "mesh_size_nm", "port_size_nm", "circle_resolution", "thickness_layers",
+                 "lead_mesh_size_nm", "patterned_x_interval_nm"},
         "material": {"name", "C11_Pa", "C12_Pa", "C44_Pa", "density_kg_m3", "crystal_rotation", "temperature_policy", "temperature_K"},
         "analysis": {"kind", "boundary", "num_modes", "k_points", "frequency_GHz", "incident_side"},
         "resources": {"max_dofs", "max_port_dofs", "assembly_batch_elements", "linear_solver", "ilu_fill_factor", "ilu_precision",
@@ -137,6 +138,20 @@ def resolve_config(config: dict, *, check_body_budget: bool = True) -> dict:
         if type(batch) is not int or batch <= 0:
             raise ValueError("assembly_batch_elements must be a positive integer")
     gmsh_fields = {"mesh_size_nm", "port_size_nm", "circle_resolution"}
+    regional_fields = {"lead_mesh_size_nm", "patterned_x_interval_nm"}
+    regional = regional_fields.intersection(mesh)
+    if regional:
+        if kind != "layered":
+            raise ValueError("Regional mesh settings require mesh.kind=layered")
+        if regional != regional_fields:
+            raise ValueError("Set mesh.lead_mesh_size_nm and mesh.patterned_x_interval_nm together")
+        if not _finite_number(mesh["lead_mesh_size_nm"]) or mesh["lead_mesh_size_nm"] <= 0:
+            raise ValueError("mesh.lead_mesh_size_nm must be positive and finite")
+        interval = mesh["patterned_x_interval_nm"]
+        if (not isinstance(interval, (list, tuple)) or len(interval) != 2
+                or any(not _finite_number(value) for value in interval)
+                or not 0 < interval[0] < interval[1] < geometry["length_nm"]):
+            raise ValueError("mesh.patterned_x_interval_nm must contain 0 < start < end < length_nm")
     if kind != "layered" and "thickness_layers" in mesh:
         raise ValueError("mesh.thickness_layers requires mesh.kind=layered")
     if kind == "structured":
@@ -647,6 +662,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--thickness-nm", type=float)
     parser.add_argument("--cells", nargs=3, type=int, metavar=("NX", "NY", "NZ"))
     parser.add_argument("--mesh-size-nm", type=float, help="Target Gmsh body size or layered in-plane size")
+    parser.add_argument("--lead-mesh-size-nm", type=float, help="Target in-plane size in both uniform leads of a regional layered mesh")
+    parser.add_argument("--patterned-x-interval-nm", nargs=2, type=float, metavar=("START", "END"),
+                        help="Central interval in nm for a regional layered mesh; requires --lead-mesh-size-nm")
     parser.add_argument("--port-size-nm", type=float, help="Target matched-port mesh size (width only for layered meshes)")
     parser.add_argument("--thickness-layers", type=int, help="Equal through-thickness intervals for a layered mesh")
     parser.add_argument("--circle-resolution", type=int, help="Number of straight segments around each hole")
@@ -700,6 +718,8 @@ def main(argv: list[str] | None = None) -> int:
                     config["analysis"]["k_points"] = previous.get("k_points", 9)
         for value, section, key in ((args.thickness_nm, "geometry", "thickness_nm"), (args.cells, "mesh", "cells"),
                                     (args.mesh_size_nm, "mesh", "mesh_size_nm"), (args.port_size_nm, "mesh", "port_size_nm"),
+                                    (args.lead_mesh_size_nm, "mesh", "lead_mesh_size_nm"),
+                                    (args.patterned_x_interval_nm, "mesh", "patterned_x_interval_nm"),
                                     (args.thickness_layers, "mesh", "thickness_layers"),
                                     (args.circle_resolution, "mesh", "circle_resolution"),
                                     (args.boundary, "analysis", "boundary"), (args.modes, "analysis", "num_modes"),

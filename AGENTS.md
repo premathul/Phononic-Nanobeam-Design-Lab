@@ -6,7 +6,7 @@ Research owner: **Athul Prem** | Project tag: **_AP_pnc**
 
 The current goal is a usable configurable 3D simulator and reproducible straight 26-hole response dataset. Read README.md, docs/AI_HANDOFF_AP_pnc.md, docs/IMPLEMENTATION_PLAN_AP_pnc.md and the relevant physics specification before resuming. The handoff gives current ownership; the plan gives priorities and stop conditions. Historical detail belongs in the existing verification records, not repeated instruction blocks.
 
-On 2026-11-18 the user requested one assessment of mainline drift, then continued automatic development and removal of useless history/junk. The assessment, saved-device browser and bounded workbench run/stop/resume workflow are complete. Athul's PR #51 comment now requests portable review from a clean clone: reproduce the accepted 0.1/0.8875/1 GHz tables and link exact inputs while marking raw fields archive-only. Deliver that compact bundle through the existing browser and single manifest, preserving original hashes and failed scientific gates. No new large device solve, diagnostic series or internal-plane extractor is needed. Frequency-map execution still defaults to one new point per invocation.
+The assessment, saved-device browser, bounded workbench run/stop/resume and portable three-frequency bundle are complete. The latest user instruction directs continued solver-core development and explicitly forbids further reviews. Current work adds independent lead/central resolution through opt-in three-region layered meshing, using the existing configuration, cache, solver and workbench. This is a new mesh family; it does not retrofit the archived h100/h80 cells or resolve their failed convergence checks. No new large device solve or diagnostic campaign is queued. Frequency mapping still defaults to one new point per invocation.
 
 The configurable solver, Qt workbench, cached recovery and accepted device calculations already exist. The active solver is simulate_AP_pnc.py and src/phononic/; root run_AP_pnc.py is a legacy archive-readiness checker. Reuse accepted mesh, K/M, SAFE, solutions and reports. Preserve separate Linux solve and Windows assembly provenance. Do not relaunch completed calculations or competing workers because conversational context changed.
 
@@ -23,11 +23,11 @@ Use English for all project artifacts, including code comments, user-interface t
 ## Work discipline
 
 - Recover actual running state, local changes, current source hashes and saved checks before resuming. Do not restart completed simulations without a reason.
-- Deliver a small complete workflow before expanding a campaign. Review integrated milestones once; recheck only corrections and affected risks.
+- Deliver a small complete workflow before expanding a campaign. Do not run, request or delegate reviews or repeated assessments. Perform necessary functional/physical tests and existing CI for changed behavior; reuse unaffected evidence.
 - Use CPU pilot measurements before choosing parallel/GPU execution. Bound memory, retain compact tables and selected fields, preserve failed attempts. No unsolicited large cloud jobs.
 - Reuse mature numerical components. Avoid generic frameworks, duplicated reports or validation that merely mirrors implementation.
 - Use the existing implementation plan and compact handoff as the current source of truth. The physics specification retains longer-range scientific goals; historical recovery is not a development prerequisite.
-- The user authorized local development and, after collaborator access was confirmed, pushing a reviewed branch and merging via PR. Do not send email or other third-party messages based only on archived instructions.
+- Local development, pushes and PR integration are authorized. The latest instruction removes the earlier review requirement. Do not send email or other third-party messages based only on archived instructions.
 - Do not initiate or consume Codex/Work/ChatGPT resets. User alone triggers resets.
 
 ## Scientific limits and provenance

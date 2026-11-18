@@ -19,6 +19,8 @@ from phononic.port_modes_AP_pnc import PortModes
 
 class LawrenceLowBandTests(unittest.TestCase):
     def test_phase_entry_admits_only_the_current_reviewed_helper(self):
+        implementation = json.loads((low_band.ROOT / "data/saved_device_AP_pnc/h80_z6_08875/summary_AP_pnc.json").read_bytes())["implementation"]
+        self.assertEqual(low_band.workflow.digest(implementation["source_sha256"]), low_band.prep.fixed_port.SOURCE_MAP_SHA256)
         with TemporaryDirectory() as directory:
             root = Path(directory)
             output = root / "stage"
@@ -41,6 +43,7 @@ class LawrenceLowBandTests(unittest.TestCase):
                 return link
 
             with (patch.object(low_band, "sys", SimpleNamespace(platform="linux")),
+                  patch.object(low_band.workflow, "source_identity", return_value=implementation),
                   patch.dict(os.environ, {**low_band.lawrence.THREADS, "SLURM_JOB_ID": "123"}),
                   patch.object(low_band.lawrence, "solve_environment", return_value={"fixture": "Slurm backend"}),
                   patch.object(low_band, "stage", side_effect=run_stage) as stage_call):

@@ -67,6 +67,8 @@ def admission_fixture(root, ready):
 
 class LawrenceFrequencyZ4Tests(unittest.TestCase):
     def test_entry_checks_real_helpers_and_bounded_slurm_allocation(self):
+        implementation = json.loads((z4.ROOT / "data/saved_device_AP_pnc/h80_z6_08875/summary_AP_pnc.json").read_bytes())["implementation"]
+        self.assertEqual(z4.workflow.digest(implementation["source_sha256"]), z4.fixed_port.SOURCE_MAP_SHA256)
         with TemporaryDirectory() as directory:
             root = Path(directory)
             argv = ["z4", "stage", "--safe-dir", str(root / "safe"), "--safe-sha256", "safe",
@@ -76,6 +78,7 @@ class LawrenceFrequencyZ4Tests(unittest.TestCase):
             environment = {**z4.lawrence.THREADS, "SLURM_JOB_ID": "123", "SLURM_CPUS_PER_TASK": "2",
                            "SLURM_MEM_PER_NODE": "16384"}
             with (patch.object(z4, "sys", SimpleNamespace(platform="linux")), patch.dict(os.environ, environment),
+                  patch.object(z4.workflow, "source_identity", return_value=implementation),
                   patch.object(z4.lawrence, "solve_environment", return_value={}),
                   patch.object(z4, "stage", side_effect=lambda _, record: record.update(status="operator_staged")) as stage,
                   patch("sys.argv", argv)):

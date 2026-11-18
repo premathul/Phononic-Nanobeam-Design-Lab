@@ -39,6 +39,7 @@ PRESETS = (
     ("Historical 26-hole device · pilot", "historical_26hole_AP_pnc.json"),
     ("Two-hole beam · layered mesh", "perforated_layered_AP_pnc.json"),
     ("Two-hole refined layers · scattering", "perforated_layered_reference_AP_pnc.json"),
+    ("26-hole device · regional layers (coarse)", "historical_26hole_regional_AP_pnc.json"),
 )
 ANALYSES = {"modes": "Finite-body modes", "bloch": "Bloch dispersion", "scattering": "Matched-port scattering"}
 BOUNDARIES = {"clamped_free": "Clamped–free", "clamped_clamped": "Clamped at both ends", "free": "Free",
@@ -185,6 +186,26 @@ class Workbench(QMainWindow):
         metadata_layout.addWidget(self.provenance)
         metadata_layout.addStretch()
         columns.addWidget(metadata, 1)
+
+        self.regional_controls = QGroupBox("Regional layered mesh")
+        regional_layout = QHBoxLayout(self.regional_controls)
+        self.regional_enabled = QCheckBox("Independent lead size")
+        self.regional_lead_size = QLineEdit()
+        self.regional_lead_size.setAccessibleName("Lead in-plane size (nm)")
+        self.regional_lead_size.setMaximumWidth(100)
+        self.regional_interval = QLineEdit()
+        self.regional_interval.setAccessibleName("Central region interval (nm)")
+        self.regional_interval.setPlaceholderText("start, end")
+        self.regional_interval.setToolTip("Both cuts must lie in solid gaps outside all holes. The central region uses the main in-plane size.")
+        regional_layout.addWidget(self.regional_enabled)
+        regional_layout.addWidget(QLabel("Lead size (nm)"))
+        regional_layout.addWidget(self.regional_lead_size)
+        regional_layout.addWidget(QLabel("Central interval (nm)"))
+        regional_layout.addWidget(self.regional_interval, 1)
+        self.regional_enabled.toggled.connect(self._inputs_changed)
+        self.regional_lead_size.textEdited.connect(self._inputs_changed)
+        self.regional_interval.textEdited.connect(self._inputs_changed)
+        main.addWidget(self.regional_controls)
 
         resume_controls = QHBoxLayout()
         self.save_progress = QCheckBox("Save progress for resume (ILU-LGMRES)")
@@ -362,6 +383,11 @@ class Workbench(QMainWindow):
         mesh = config["mesh"]
         analysis = config["analysis"]
         layered = mesh.get("kind") == "layered"
+        self.regional_controls.setVisible(layered)
+        self.regional_enabled.setChecked("lead_mesh_size_nm" in mesh or "patterned_x_interval_nm" in mesh)
+        self.regional_lead_size.setText(str(mesh.get("lead_mesh_size_nm", "")))
+        interval = mesh.get("patterned_x_interval_nm", "")
+        self.regional_interval.setText(", ".join(map(str, interval)) if isinstance(interval, (list, tuple)) else str(interval))
         gmsh = mesh.get("kind", "structured") in ("gmsh", "layered")
         scattering = analysis["kind"] == "scattering"
         self.save_progress.setChecked(False)
@@ -404,6 +430,8 @@ class Workbench(QMainWindow):
         if mesh.get("kind") == "layered":
             lines.append("Layered 3D mesh: in-plane size and thickness layers are independent.")
             lines.append("Thickness layers also set the port thickness resolution.")
+            if "lead_mesh_size_nm" in mesh:
+                lines.append("Regional mesh: lead and central sizes are independent; cut planes share a conforming trace.")
         lines.append(f"Configuration: {path}")
         pattern = self.config["geometry"].get("pattern")
         if pattern is None:
@@ -452,6 +480,30 @@ class Workbench(QMainWindow):
             if len(cells) != 3 or min(cells) <= 0:
                 raise ValueError("Mesh cells must contain three positive whole numbers.")
             config["mesh"]["cells"] = cells
+        if config["mesh"].get("kind") == "layered":
+            if self.regional_enabled.isChecked():
+                try:
+                    size = float(self.regional_lead_size.text().strip())
+                    interval = [float(value) for value in re.split(r"[,\s]+", self.regional_interval.text().strip())]
+                    valid = (math.isfinite(size) and size > 0 and len(interval) == 2
+                             and all(math.isfinite(value) for value in interval)
+                             and 0 < interval[0] < interval[1] < config["geometry"]["length_nm"])
+                except (ValueError, OverflowError):
+                    valid = False
+                if not valid:
+                    raise ValueError("Regional mesh needs a positive lead size and 0 < start < end < beam length, in nm.")
+                original_size = config["mesh"].get("lead_mesh_size_nm")
+                config["mesh"]["lead_mesh_size_nm"] = (
+                    original_size if type(original_size) in (int, float) and original_size == size else size)
+                original_interval = config["mesh"].get("patterned_x_interval_nm")
+                config["mesh"]["patterned_x_interval_nm"] = (
+                    original_interval if isinstance(original_interval, (list, tuple))
+                    and len(original_interval) == 2
+                    and all(type(value) in (int, float) for value in original_interval)
+                    and list(original_interval) == interval else interval)
+            else:
+                config["mesh"].pop("lead_mesh_size_nm", None)
+                config["mesh"].pop("patterned_x_interval_nm", None)
         return config
 
     def _choose_save(self) -> None:
@@ -487,7 +539,7 @@ class Workbench(QMainWindow):
     def _set_busy(self, busy: bool) -> None:
         for widget in (self.preset, self.load_button, self.saved_run_button, self.device_results_button, self.save_button, self.form,
                        self.mesh_button, self.run_button, self.save_progress, self.wall_seconds, self.resume_button,
-                       self.map_controls):
+                       self.map_controls, self.regional_controls):
             widget.setEnabled(not busy)
         self.stop_button.setEnabled(busy and not self.stopping and self.process.state() == QProcess.ProcessState.Running)
         self._set_result_buttons(busy)

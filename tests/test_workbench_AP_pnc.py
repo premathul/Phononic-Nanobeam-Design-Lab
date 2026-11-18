@@ -113,6 +113,45 @@ class WorkbenchTests(unittest.TestCase):
         self.assertFalse(self.window.fields["thickness_layers"].isVisible())
         self.assertEqual(self.window.fields["mesh_size_nm"].accessibleName(), "Body mesh size (nm)")
 
+    def test_regional_device_inputs_reach_worker_and_can_return_to_global_mesh(self):
+        preset = ROOT / "configs/historical_26hole_regional_AP_pnc.json"
+        original = json.loads(preset.read_bytes())
+        self.assertTrue(self.window.load_configuration(preset))
+        self.assertTrue(self.window.regional_controls.isVisible())
+        self.assertTrue(self.window.regional_enabled.isChecked())
+        self.assertEqual(json.dumps(self.window.edited_config(), sort_keys=True), json.dumps(original, sort_keys=True))
+        self.window.regional_lead_size.setText("125")
+        self.window.regional_interval.setText("1250, 15400")
+        expected = self.window.edited_config()
+        self.assertEqual(expected["geometry"], original["geometry"])
+        self.assertEqual(expected["material"], original["material"])
+        self.assertEqual(expected["resources"], original["resources"])
+        self.assertEqual(expected["mesh"]["lead_mesh_size_nm"], 125)
+        self.assertEqual(expected["mesh"]["patterned_x_interval_nm"], [1250, 15400])
+        with patch.object(self.window.process, "start"):
+            self.assertTrue(self.window.start_job("mesh"))
+            request = self.window.response_path.parent / "configuration_AP_pnc.json"
+            self.assertEqual(json.loads(request.read_bytes()), expected)
+            self.assertFalse(self.window.regional_controls.isEnabled())
+        self.window._finish_job()
+        self.window.regional_enabled.setChecked(False)
+        global_config = self.window.edited_config()
+        self.assertNotIn("lead_mesh_size_nm", global_config["mesh"])
+        self.assertNotIn("patterned_x_interval_nm", global_config["mesh"])
+        self.assertEqual(global_config["geometry"], original["geometry"])
+
+    def test_invalid_regional_inputs_stop_before_worker_creation(self):
+        self.window.load_configuration(ROOT / "configs/historical_26hole_regional_AP_pnc.json")
+        for size, interval in (("nan", "1000, 15650"), ("200", "0, 15650"),
+                               ("200", "15650, 1000"), ("200", "1000")):
+            with self.subTest(size=size, interval=interval), patch.object(self.window.process, "start") as start:
+                self.window.regional_lead_size.setText(size)
+                self.window.regional_interval.setText(interval)
+                self.assertFalse(self.window.start_job("mesh"))
+                start.assert_not_called()
+                self.assertIsNone(self.window.action)
+                self.assertFalse((self.output / "_workbench").exists())
+
     def test_open_saved_run_uses_selected_folder_without_launching_or_changing_files(self):
         directory = self.output.resolve() / "moved scattering result"
         directory.mkdir()
