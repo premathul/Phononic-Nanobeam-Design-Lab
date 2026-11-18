@@ -234,6 +234,34 @@ After all transfer hashes agree, replay the new point once and compare against t
 
 The replay checks original equations, physical nodal-force flux, coherent left-incident power and full P2 fields. The pair retains signed mode/gauge matching and original reference planes. Absolute power and complex increments use 0.01; relative reflection divides by max(abs(R_h100),1e-12) only for reporting. The global in-plane change affects lead interiors and the patterned region together. A finite pair pass is neither continuum convergence nor a weak-reflection error bound. Read the current handoff and `verification/low_band_inplane_AP_pnc.json` before acting; completed phases must be reused.
 
+## Archived 0.8875 GHz device point
+
+Accepted outcome: preparation 1335628, solve 1335630 and export 1335632 completed 0:0. The five-drive solve took 2009.77 seconds GNU elapsed with 35350312 KiB peak RSS and 37341077504 bytes job-cgroup peak; actual factor nonzeros 1846932631 pass the retained int32 count check. Cached export took 26.14 seconds with 3960536 KiB peak RSS. Independent Windows replay and signed/gauge-qualified comparison pass; reuse verification/device_frequency_8875_AP_pnc.json and results/runs/device_frequency_8875_AP_pnc/. These example commands document the accepted path, not permission to repeat it. No next job is queued.
+
+The selected point tests the frequency dependence of the saved 1 GHz conversion pair on the exact h80 six-layer device. The independently verified signed section relation is already saved under `results/runs/device_frequency_8875_AP_pnc/relation/`; reuse it. All ten signed channels match with minimum mass overlap 0.999560627280313 under the unchanged 0.99 gate. Endpoint correspondence does not prove continuous branches. A frequency-response difference is not a mesh-convergence test, and all failed 1 GHz spatial comparisons remain failed.
+
+`tools/run_lawrence_frequency_point_AP_pnc.py` pins the accepted 887500000 Hz full SAFE modes and interval receipts, exact archived mesh/K/M and physical end planes. It retains original Linux section, Windows frequency-mode and new Linux preparation/solve/export identities separately. There is no remeshing, body assembly or eigensolve. The prepared matrix must have the original CSC graph and reviewed int32 exposure. Initial factor allocation and historical aggregate factor counts are separate checks; future numeric-pivot fill is not certified before factorization.
+
+Read the current handoff for owned jobs before any submission. The batch phase arguments, after `PROJECT_ROOT PHASE WORKER_WALL_SECONDS`, are:
+
+- `stage BODY_STAGE_DIR SAFE_DIR INTERVAL_DIR INTERVAL_LEDGER`
+- `solve STAGE_DIR STAGE_SHA [PRIOR_SOLVE_DIR PRIOR_SOLVE_SHA]`
+- `export STAGE_DIR STAGE_SHA SOLVE_DIR SOLVE_SHA`
+
+The batch is `scripts/hpc/lawrence_frequency_point_AP_pnc.sbatch`. Preparation/export default to 16 GiB, two CPUs and ten minutes with a 550-second worker limit. Only after measured preparation, index/storage checks and fresh per-job/aggregate admission may the selected direct solve use the bounded 128 GiB/two-CPU/one-hour allocation and 3500-second worker. All phases use one numerical thread. Keep target 1e-10, both original residual gates 1e-9 and all physical/coherent checks unchanged. Use the preparation node for exact cached export. No retry, resource increase or next frequency is automatic.
+
+Upload only the new runner/batch, `verification/port_count_interval_AP_pnc.json`, and the accepted study's `inputs_AP_pnc.json`, `point-887500000_AP_pnc.json` and `modes-887500000_AP_pnc.npz`. Retain original body/section inputs in place and verify uploaded bytes/hashes. The fresh interval input directory may be `inputs/device_frequency_8875_AP_pnc/`. Reuse every completed phase; never rerun the accepted section relation or preparation merely because a chat or transfer connection changed.
+
+After returning complete receipts, original A/RHS, accepted vectors and exported files, independent Windows replay uses:
+
+```powershell
+.venv/Scripts/python.exe -B tools/replay_lawrence_frequency_point_AP_pnc.py --stage RETURNED_STAGE/stage_AP_pnc.json --solve RETURNED_SOLVE/solve_AP_pnc.json --export RETURNED_EXPORT/export_AP_pnc.json
+```
+
+Save its JSON stdout as a new receipt, retain its SHA-256, then use `tools/compare_device_frequency_AP_pnc.py compare --relation ACCEPTED_RELATION --candidate RETURNED_PUBLIC_DIRECTORY --verification INDEPENDENT_REPLAY --verification-sha256 REPLAY_SHA256 --output NEW_COMPARISON_DIRECTORY`. This validates the accepted relation bytes, reviewed replay source and receipt, shared physical inputs and all 50 coefficients before publishing raw/gauge-aligned response and directed conversion changes. The relative-power denominator floor 1e-12 is a reporting guard, not an uncertainty bound. Root supervises local replay with fresh available-memory admission and preserved failure output.
+
+On the current Windows host, Git OpenSSH's normal multiplex session request failed even while the master reported running. Its documented `-O proxy` mode successfully reused the authenticated master for actual commands and SFTP without another authentication. The live control location and ownership belong in the handoff; test an actual read-only remote command before assuming a connection works. SFTP can use a temporary SSH wrapper that passes `-O proxy` and the owned control path. Never write passwords or Duo responses into project files. [OpenSSH multiplex control](https://man.openbsd.org/ssh.1)
+
 ## Open JupyterLab
 
 After the bootstrap succeeds, submit the optional notebook job from the same Lawrence project directory. It requests one CPU and 4 GiB for two hours. Use the node assigned to the running job. The server log is private and contains the token generated for this session.
