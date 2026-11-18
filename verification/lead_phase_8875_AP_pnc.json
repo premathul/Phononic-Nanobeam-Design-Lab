@@ -1,0 +1,891 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "status": "phase_only_compatibility_audit_independently_verified",
+  "updated_utc": "2026-11-18T20:40:57.622622+00:00",
+  "baseline_git_commit": "9ec8f541200e9e13153e66a1e78776b7c02722a4",
+  "research_question": "Can diagonal, reflectionless, unmixed lead propagation phase alone account for the saved h100/h80 complex-response discrepancy?",
+  "latest_athul_review": {
+    "author": "Athul Prem",
+    "file_tag": "_AP_pnc",
+    "comment_id": 6969077996,
+    "url": "https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/48#issuecomment-6969077996",
+    "user": "premathul",
+    "created_at": "2026-11-18T04:29:26Z",
+    "updated_at": "2026-11-18T04:29:34Z",
+    "body": "Kunming, I agree this regional-energy comparison is a useful next step. The small change in stored-energy distribution is encouraging, while I agree that it does not establish convergence of the weak conversion or identify the source of its mesh sensitivity.\n\nWhat do you recommend as the next steps? Could the existing complex fields and channel amplitudes help distinguish numerical phase accumulation in the lead interiors from discretization error in the patterned region? The h100/h80 comparison changes both, so the regional energies alone do not locate the error.\n\nPlease indicate what the saved data can establish and what remains underdetermined. If a new calculation is needed, could you propose a bounded control and acceptance criterion for discussion first? Please retain the failed scattering gates and do not start another solve or refinement based on this comment."
+  },
+  "diagnostic_summary": {
+    "author": "Athul Prem",
+    "file_tag": "_AP_pnc",
+    "schema_version": 1,
+    "status": "finite_phase_only_audit_completed",
+    "research_question": "Can diagonal, reflectionless, unmixed lead propagation phase alone account for the saved h100/h80 complex-response discrepancy?",
+    "scope": {
+      "frequency_hz": 887500000,
+      "reference_resolution": "h100_z4",
+      "candidate_resolution": "h80_z4",
+      "incident_side": "left",
+      "block_shape": [
+        10,
+        5
+      ],
+      "coefficient_count": 50,
+      "reference_planes_m": [
+        0.0,
+        1.665e-05
+      ],
+      "native_incident_gauge_preserved": true,
+      "new_solve_performed": false,
+      "new_assembly_performed": false,
+      "arrays_read": false,
+      "phase_fitting_performed": false,
+      "phase_adjustment_applied": false,
+      "deembedding_performed": false,
+      "uniform_phase_subtraction_performed": false,
+      "spatial_convergence_established": false,
+      "numerical_floor_established": false
+    },
+    "accepted_comparison": {
+      "path": "results/runs/device_frequency_inplane_8875_AP_pnc/comparison/frequency_inplane_comparison_AP_pnc.json",
+      "sha256": "107d1c62817349d0a6900650d10dd3826ee492ca4bc36abc8195ee3c3e7911c7",
+      "bytes": 137386
+    },
+    "shared_basis": {
+      "status": "identical_saved_basis",
+      "safe_receipt": {
+        "path": "results/runs/device_frequency_thickness_8875_AP_pnc/h80-z4-frequency-887500000-safe-1335641/safe_AP_pnc.json",
+        "sha256": "7d3dda2761e3f25d2f6470259cd18306688e2e9ce7afc5f2d9c9ee92ea5eae20",
+        "bytes": 29493
+      },
+      "safe_modes": {
+        "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/runs/h80-z4-frequency-887500000-safe-1335641/modes-887500000_AP_pnc.npz",
+        "sha256": "a2cf1204490983c766d84292bfc85a0182da9997e56fbf2e7281251e11864b32",
+        "bytes": 12908238
+      },
+      "safe_section": {
+        "path": "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/results/runs/full_device_port_resolution/12x4/attempt_lpnbd9kr/arrays_AP_pnc.npz",
+        "sha256": "2a2aa9347921ac6940f851f2eb53bc06480a28a6cf67c27a000faa357b1404e8",
+        "bytes": 12973330
+      },
+      "incoming_roots": [
+        1302,
+        1346,
+        1292,
+        1286,
+        1282
+      ],
+      "reflected_roots": [
+        1303,
+        1347,
+        1293,
+        1287,
+        1283
+      ],
+      "transmitted_roots": [
+        1302,
+        1346,
+        1292,
+        1286,
+        1282
+      ],
+      "candidate_gauge_complex": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0
+        ]
+      ],
+      "candidate_gauge_phase_rad": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "basis_evidence": "Exact hash-identical saved SAFE displacement/traction columns, independently replayed for both points; root labels alone are not used.",
+      "field_matching_recomputed": false
+    },
+    "original_response_sources": {
+      "h100_8875_summary": {
+        "path": "results/runs/device_frequency_inplane_8875_AP_pnc/h100-z4-frequency-887500000-export-1335656/historical_26hole_layered_h100_ny12_z4-de3840e0af1e/summary_AP_pnc.json",
+        "sha256": "0c9f83062c66c4e4bae4ac721609f4a85c16c0fe1d3a6ca22afa631f99019b9c",
+        "bytes": 58272
+      },
+      "h100_8875_coefficients": {
+        "path": "results/runs/device_frequency_inplane_8875_AP_pnc/h100-z4-frequency-887500000-export-1335656/historical_26hole_layered_h100_ny12_z4-de3840e0af1e/scattering_channels_AP_pnc.csv",
+        "sha256": "855ff18a7daae4dab12e77451e017e5c206db7dbc558560ee50d48cdd2673a1b",
+        "bytes": 4676
+      },
+      "h80_8875_summary": {
+        "path": "results/runs/device_frequency_thickness_8875_AP_pnc/h80-z4-frequency-887500000-export-1335647/historical_26hole_layered_h80_ny12_z4-b88d0b9e1cc2/summary_AP_pnc.json",
+        "sha256": "6a8fe8e2a2f8b81a73c8e11a6905bf37bede44d4769b583a78e707dab75a4cbb",
+        "bytes": 55492
+      },
+      "h80_8875_coefficients": {
+        "path": "results/runs/device_frequency_thickness_8875_AP_pnc/h80-z4-frequency-887500000-export-1335647/historical_26hole_layered_h80_ny12_z4-b88d0b9e1cc2/scattering_channels_AP_pnc.csv",
+        "sha256": "e77ea5d9521c4c031314d5f0fb8ddabd2f090068929631b8ee3df0dbc3a3824d",
+        "bytes": 4664
+      }
+    },
+    "preserved_original_acceptance": {
+      "maximum_power_change": 0.004775546895249616,
+      "maximum_complex_change": 0.04260453030954958,
+      "power_change_limit": 0.01,
+      "complex_change_limit": 0.01,
+      "power_passed": true,
+      "complex_passed": false,
+      "mesh_pair_passed": false,
+      "pair_specific_targets": {
+        "directed_increment_rows": [
+          {
+            "direction": 1,
+            "h100_power": 1.6551626342101197e-06,
+            "accepted_h80_power": 9.916496528595719e-08,
+            "signed_h100_minus_h80_power": 1.5559976689241625e-06,
+            "absolute_power_change": 1.5559976689241625e-06,
+            "relative_absolute_power_change": 15.691002002947387,
+            "exact_denominator": 9.916496528595719e-08,
+            "limit": 0.1,
+            "passed": false
+          },
+          {
+            "direction": 2,
+            "h100_power": 1.6551626358499875e-06,
+            "accepted_h80_power": 9.91649649635775e-08,
+            "signed_h100_minus_h80_power": 1.55599767088641e-06,
+            "absolute_power_change": 1.55599767088641e-06,
+            "relative_absolute_power_change": 15.691002073745658,
+            "exact_denominator": 9.91649649635775e-08,
+            "limit": 0.1,
+            "passed": false
+          }
+        ],
+        "directed_increment_passed": false,
+        "suppression_retention_rows": [
+          {
+            "direction": 1,
+            "resolution": "h100",
+            "power_8875": 1.6551626342101197e-06,
+            "power_one_ghz": 0.001232799344468317,
+            "ratio": 0.001342605057049215,
+            "decrease_fraction": 0.9986573949429508,
+            "limit": 0.01,
+            "passed": true
+          },
+          {
+            "direction": 1,
+            "resolution": "h80",
+            "power_8875": 9.916496528595719e-08,
+            "power_one_ghz": 0.0011241681176131276,
+            "ratio": 8.821186416183698e-05,
+            "decrease_fraction": 0.9999117881358381,
+            "limit": 0.01,
+            "passed": true
+          },
+          {
+            "direction": 2,
+            "resolution": "h100",
+            "power_8875": 1.6551626358499875e-06,
+            "power_one_ghz": 0.001232799342515478,
+            "ratio": 0.0013426050605061925,
+            "decrease_fraction": 0.9986573949394938,
+            "limit": 0.01,
+            "passed": true
+          },
+          {
+            "direction": 2,
+            "resolution": "h80",
+            "power_8875": 9.91649649635775e-08,
+            "power_one_ghz": 0.0011241681176200138,
+            "ratio": 8.821186387452485e-05,
+            "decrease_fraction": 0.9999117881361255,
+            "limit": 0.01,
+            "passed": true
+          }
+        ],
+        "suppression_retention_passed": true,
+        "denominator_floor_applied": false,
+        "two_separate_unit_power_drives": true,
+        "interpretation": "Finite observational targets only; no accuracy, numerical-floor or uncertainty claim."
+      },
+      "other_prior_failed_spatial_comparisons_remain_unresolved": true
+    },
+    "method": {
+      "inequality": "abs(b-exp(i*theta)*a) >= abs(abs(b)-abs(a))",
+      "phase_freedom": "Independent unit-modulus phase per coefficient; a superset of diagonal input/output phases.",
+      "tested_model": "Diagonal, reflectionless, unmixed, unit-modulus lead propagation.",
+      "not_excluded_meaning": "The bound does not exclude the model; it never proves that model."
+    },
+    "aggregate": {
+      "maximum_magnitude_lower_bound": 0.017271176665339116,
+      "frobenius_magnitude_lower_bound": 0.01765592840980343,
+      "maximum_bound_entries": [
+        {
+          "kind": "reflection",
+          "incident_root": 1302,
+          "outgoing_root": 1303
+        }
+      ],
+      "existing_complex_change_limit": 0.01,
+      "bound_strictly_exceeds_existing_limit": true,
+      "verdict": "phase-only model excluded at existing tolerance",
+      "frobenius_acceptance_gate_applied": false
+    },
+    "selected_pair": [
+      {
+        "kind": "reflection",
+        "incident_root": 1302,
+        "outgoing_root": 1283,
+        "reference_raw_amplitude": [
+          -0.00022283816363236623,
+          -0.0012670855484295741
+        ],
+        "candidate_raw_amplitude": [
+          0.0002411133582693984,
+          0.0002025569395256798
+        ],
+        "reference_power": 1.6551626342101197e-06,
+        "candidate_power": 9.916496528595719e-08,
+        "reference_magnitude": 0.0012865312410548452,
+        "candidate_magnitude": 0.0003149046923847868,
+        "magnitude_lower_bound": 0.0009716265486700583,
+        "raw_complex_delta": [
+          0.00046395152190176463,
+          0.001469642487955254
+        ],
+        "absolute_raw_complex_change": 0.0015411359632032057,
+        "diagnostic_phase_change_rad": 2.4435954571156215,
+        "selected_directed_pair": true
+      },
+      {
+        "kind": "reflection",
+        "incident_root": 1282,
+        "outgoing_root": 1303,
+        "reference_raw_amplitude": [
+          -0.0002228381638213197,
+          -0.0012670855490434457
+        ],
+        "candidate_raw_amplitude": [
+          0.00024111335810898894,
+          0.00020255693892084754
+        ],
+        "reference_power": 1.6551626358499875e-06,
+        "candidate_power": 9.91649649635775e-08,
+        "reference_magnitude": 0.0012865312416921665,
+        "candidate_magnitude": 0.00031490469187291813,
+        "magnitude_lower_bound": 0.0009716265498192485,
+        "raw_complex_delta": [
+          0.00046395152193030864,
+          0.0014696424879642933
+        ],
+        "absolute_raw_complex_change": 0.0015411359632204187,
+        "diagnostic_phase_change_rad": 2.44359545603467,
+        "selected_directed_pair": true
+      }
+    ],
+    "limitations": [
+      "This is an algebraic residual lower bound for the two saved finite responses, not a numerical floor, error estimate, uncertainty bound or convergence result.",
+      "The tested null is diagonal, reflectionless, unmixed, unit-modulus lead propagation. Reflective or mixing lead errors and their interaction with the pattern are not excluded.",
+      "The bound cannot identify the patterned region as the cause or locate a discretization error. The global mesh increment changes both lead interiors and pattern.",
+      "No phase fitting, de-embedding, uniform-guide subtraction, field projection, new solve, assembly, remesh or eigensolve is performed.",
+      "The regional-energy observation concerns one drive's integrated total field; it does not determine traveling-wave phase or weak-conversion accuracy.",
+      "Saved 1 GHz uniform controls do not establish uniform propagation error at 0.8875 GHz. Original device planes and all failed spatial criteria remain unchanged."
+    ],
+    "producer": {
+      "path": "tools/diagnose_lead_phase_AP_pnc.py",
+      "sha256": "a378e999b462d7fe9231bd3d19bc3aa2ddcbabf3735b1d9f304d0725daf6648e",
+      "bytes": 19415
+    },
+    "numerical_environment": {
+      "python": "3.12.14",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "psutil": "7.2.2"
+    },
+    "publication": {
+      "json": "lead_phase_AP_pnc.json",
+      "csv": "lead_phase_AP_pnc.csv",
+      "html": "report_AP_pnc.html",
+      "csv_sha256": "d35ec93db335f777e70de93d7da95eb753d4fb5b3e16162e191e2a1641e64b88"
+    },
+    "resources": {
+      "wall_limit_s": 30,
+      "rss_limit_bytes": 268435456,
+      "available_memory_reserve_bytes": 536870912,
+      "output_limit_bytes": 2097152,
+      "elapsed_s": 0.5940000000009604,
+      "sampled_peak_process_tree_rss_bytes": 29483008,
+      "sampling_note": "Admission/checkpoint samples are not an exact high-water mark; the root execution receipt supplies external monitoring."
+    }
+  },
+  "maximum_bound_entries": [
+    {
+      "kind": "reflection",
+      "incident_root": 1302,
+      "outgoing_root": 1303,
+      "reference_raw_amplitude": [
+        0.14621538894047784,
+        0.013551383056977813
+      ],
+      "candidate_raw_amplitude": [
+        0.1283402482467774,
+        0.017815305222523448
+      ],
+      "reference_power": 0.02156257994577215,
+      "candidate_power": 0.016788604420216117,
+      "reference_magnitude": 0.14684202377307443,
+      "candidate_magnitude": 0.1295708471077353,
+      "magnitude_lower_bound": 0.017271176665339116,
+      "raw_complex_delta": [
+        -0.017875140693700442,
+        0.004263922165545634
+      ],
+      "absolute_raw_complex_change": 0.01837666147735809,
+      "diagnostic_phase_change_rad": 0.04551469599930018,
+      "selected_directed_pair": false
+    }
+  ],
+  "independent_verification": {
+    "author": "Athul Prem",
+    "file_tag": "_AP_pnc",
+    "schema_version": 1,
+    "status": "independently_verified_finite_phase_only_audit",
+    "diagnostic": {
+      "path": "results/runs/lead_phase_8875_AP_pnc/diagnostic/lead_phase_AP_pnc.json",
+      "sha256": "cdecf3827d83751bcb46878f2d5d3c0f8f3d1ad14d098e4180ddb2bf80b16843",
+      "bytes": 52721
+    },
+    "producer": {
+      "path": "tools/diagnose_lead_phase_AP_pnc.py",
+      "sha256": "a378e999b462d7fe9231bd3d19bc3aa2ddcbabf3735b1d9f304d0725daf6648e",
+      "bytes": 19415
+    },
+    "external_executed_producer_sha256": "a378e999b462d7fe9231bd3d19bc3aa2ddcbabf3735b1d9f304d0725daf6648e",
+    "publication_csv": {
+      "path": "results/runs/lead_phase_8875_AP_pnc/diagnostic/lead_phase_AP_pnc.csv",
+      "sha256": "d35ec93db335f777e70de93d7da95eb753d4fb5b3e16162e191e2a1641e64b88",
+      "bytes": 15985
+    },
+    "verifier": {
+      "path": "tools/verify_lead_phase_AP_pnc.py",
+      "sha256": "69678a59c6a9e6284dc68151bb351f63f1aa21f9ad85c6901a5b5b0429317277",
+      "bytes": 20123
+    },
+    "accepted_comparison": {
+      "path": "results/runs/device_frequency_inplane_8875_AP_pnc/comparison/frequency_inplane_comparison_AP_pnc.json",
+      "sha256": "107d1c62817349d0a6900650d10dd3826ee492ca4bc36abc8195ee3c3e7911c7",
+      "bytes": 137386
+    },
+    "reused_inputs": {
+      "accepted_safe": {
+        "path": "results/runs/device_frequency_thickness_8875_AP_pnc/h80-z4-frequency-887500000-safe-1335641/safe_AP_pnc.json",
+        "sha256": "7d3dda2761e3f25d2f6470259cd18306688e2e9ce7afc5f2d9c9ee92ea5eae20",
+        "bytes": 29493
+      },
+      "accepted_prebody": {
+        "path": "results/runs/device_frequency_thickness_8875_AP_pnc/independent_prebody_AP_pnc.json",
+        "sha256": "f45245144be6035c72ffee5ced2d96aa349b939bde89f9bb36f6ca82550bdca4",
+        "bytes": 8251
+      },
+      "accepted_point": {
+        "path": "results/runs/device_frequency_thickness_8875_AP_pnc/independent_point_AP_pnc.json",
+        "sha256": "17bcad69b7d567331489d32a798f6755df292272473df78e9338ba259683fd34",
+        "bytes": 13617
+      },
+      "point_replay": {
+        "path": "results/runs/device_frequency_inplane_8875_AP_pnc/independent_point_AP_pnc.json",
+        "sha256": "ac9d1ccd9d5346102d97d03b2dac7e47fc3cb319f99d67d8a1d33bba087fc2b9",
+        "bytes": 14945
+      },
+      "h100_8875_summary": {
+        "path": "results/runs/device_frequency_inplane_8875_AP_pnc/h100-z4-frequency-887500000-export-1335656/historical_26hole_layered_h100_ny12_z4-de3840e0af1e/summary_AP_pnc.json",
+        "sha256": "0c9f83062c66c4e4bae4ac721609f4a85c16c0fe1d3a6ca22afa631f99019b9c",
+        "bytes": 58272
+      },
+      "h100_8875_coefficients": {
+        "path": "results/runs/device_frequency_inplane_8875_AP_pnc/h100-z4-frequency-887500000-export-1335656/historical_26hole_layered_h100_ny12_z4-de3840e0af1e/scattering_channels_AP_pnc.csv",
+        "sha256": "855ff18a7daae4dab12e77451e017e5c206db7dbc558560ee50d48cdd2673a1b",
+        "bytes": 4676
+      },
+      "h80_8875_summary": {
+        "path": "results/runs/device_frequency_thickness_8875_AP_pnc/h80-z4-frequency-887500000-export-1335647/historical_26hole_layered_h80_ny12_z4-b88d0b9e1cc2/summary_AP_pnc.json",
+        "sha256": "6a8fe8e2a2f8b81a73c8e11a6905bf37bede44d4769b583a78e707dab75a4cbb",
+        "bytes": 55492
+      },
+      "h80_8875_coefficients": {
+        "path": "results/runs/device_frequency_thickness_8875_AP_pnc/h80-z4-frequency-887500000-export-1335647/historical_26hole_layered_h80_ny12_z4-b88d0b9e1cc2/scattering_channels_AP_pnc.csv",
+        "sha256": "e77ea5d9521c4c031314d5f0fb8ddabd2f090068929631b8ee3df0dbc3a3824d",
+        "bytes": 4664
+      }
+    },
+    "frequency_hz": 887500000,
+    "verified_coefficient_rows": 50,
+    "selected_directed_pairs": [
+      {
+        "kind": "reflection",
+        "incident_root": 1282,
+        "outgoing_root": 1303,
+        "reference_raw_amplitude": [
+          -0.0002228381638213197,
+          -0.0012670855490434457
+        ],
+        "candidate_raw_amplitude": [
+          0.00024111335810898894,
+          0.00020255693892084754
+        ],
+        "reference_power": 1.6551626358499875e-06,
+        "candidate_power": 9.91649649635775e-08,
+        "reference_magnitude": 0.0012865312416921665,
+        "candidate_magnitude": 0.00031490469187291813,
+        "magnitude_lower_bound": 0.0009716265498192485,
+        "raw_complex_delta": [
+          0.00046395152193030864,
+          0.0014696424879642933
+        ],
+        "absolute_raw_complex_change": 0.0015411359632204187,
+        "diagnostic_phase_change_rad": 2.44359545603467,
+        "selected_directed_pair": true
+      },
+      {
+        "kind": "reflection",
+        "incident_root": 1302,
+        "outgoing_root": 1283,
+        "reference_raw_amplitude": [
+          -0.00022283816363236623,
+          -0.0012670855484295741
+        ],
+        "candidate_raw_amplitude": [
+          0.0002411133582693984,
+          0.0002025569395256798
+        ],
+        "reference_power": 1.6551626342101197e-06,
+        "candidate_power": 9.916496528595719e-08,
+        "reference_magnitude": 0.0012865312410548452,
+        "candidate_magnitude": 0.0003149046923847868,
+        "magnitude_lower_bound": 0.0009716265486700583,
+        "raw_complex_delta": [
+          0.00046395152190176463,
+          0.001469642487955254
+        ],
+        "absolute_raw_complex_change": 0.0015411359632032057,
+        "diagnostic_phase_change_rad": 2.4435954571156215,
+        "selected_directed_pair": true
+      }
+    ],
+    "maximum_magnitude_lower_bound": 0.017271176665339116,
+    "frobenius_magnitude_lower_bound": 0.01765592840980341,
+    "complex_change_limit": 0.01,
+    "verdict": "phase-only model excluded at existing tolerance",
+    "interpretation": "Rejects only a diagonal, reflectionless, unmixed phase-only explanation. Does not locate the discrepancy, exclude lead reflections or mixing, establish pattern dominance, or certify convergence.",
+    "python_version": "3.12.14",
+    "elapsed_seconds": 0.030999999999039574,
+    "sampled_peak_process_tree_rss_bytes": 26345472
+  },
+  "current_sources": {
+    "tools/diagnose_lead_phase_AP_pnc.py": {
+      "path": "tools/diagnose_lead_phase_AP_pnc.py",
+      "bytes": 19415,
+      "sha256": "a378e999b462d7fe9231bd3d19bc3aa2ddcbabf3735b1d9f304d0725daf6648e"
+    },
+    "tools/verify_lead_phase_AP_pnc.py": {
+      "path": "tools/verify_lead_phase_AP_pnc.py",
+      "bytes": 20123,
+      "sha256": "69678a59c6a9e6284dc68151bb351f63f1aa21f9ad85c6901a5b5b0429317277"
+    },
+    "tests/test_lead_phase_AP_pnc.py": {
+      "path": "tests/test_lead_phase_AP_pnc.py",
+      "bytes": 11552,
+      "sha256": "93e623b9e39d535b4ddf040425f389b7517cf1abf8fab0b383e34232391c115e"
+    },
+    "tests/test_verify_lead_phase_AP_pnc.py": {
+      "path": "tests/test_verify_lead_phase_AP_pnc.py",
+      "bytes": 18679,
+      "sha256": "dc7cbf25b212e3d6ea39bd8f6b613d9c608e148c45b792198b22025d7c77f99b"
+    }
+  },
+  "executions": {
+    "producer": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "phase": "producer",
+      "command": [
+        "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\.venv\\Scripts\\python.exe",
+        "-B",
+        "tools/diagnose_lead_phase_AP_pnc.py",
+        "--output",
+        "results/runs/lead_phase_8875_AP_pnc/diagnostic"
+      ],
+      "started_utc": "2026-11-18T20:38:47.713693+00:00",
+      "source_pins": [
+        {
+          "path": "tools/diagnose_lead_phase_AP_pnc.py",
+          "sha256": "a378e999b462d7fe9231bd3d19bc3aa2ddcbabf3735b1d9f304d0725daf6648e"
+        },
+        {
+          "path": "tests/test_lead_phase_AP_pnc.py",
+          "sha256": "93e623b9e39d535b4ddf040425f389b7517cf1abf8fab0b383e34232391c115e"
+        },
+        {
+          "path": "tools/verify_lead_phase_AP_pnc.py",
+          "sha256": "69678a59c6a9e6284dc68151bb351f63f1aa21f9ad85c6901a5b5b0429317277"
+        },
+        {
+          "path": "tests/test_verify_lead_phase_AP_pnc.py",
+          "sha256": "dc7cbf25b212e3d6ea39bd8f6b613d9c608e148c45b792198b22025d7c77f99b"
+        }
+      ],
+      "exit_code": 0,
+      "guard": null,
+      "elapsed_seconds": 0.875,
+      "available_memory_before_bytes": 3073400832,
+      "minimum_sampled_available_memory_bytes": 3052621824,
+      "limits": {
+        "memory_bytes": 268435456,
+        "wall_seconds": 30,
+        "available_reserve_bytes": 536870912,
+        "numerical_threads": 1
+      },
+      "runtime": {
+        "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2"
+        },
+        "thread_environment": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "BLIS_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1"
+        }
+      },
+      "peak_sampled_process_tree_rss_sum_bytes": 34287616,
+      "peak_sampled_process_tree_private_sum_bytes": 17772544,
+      "sample_seconds": 0.05,
+      "measurement_scope": "Sampled launcher and observed descendants; not an exact high-water mark.",
+      "full_record": {
+        "path": "results/runs/lead_phase_8875_AP_pnc/local_checks/producer_execution_AP_pnc.json",
+        "bytes": 2260,
+        "sha256": "7080e3f708fa2f8ecbc3a4c5644d637cf2ef5cc7ec8c9a687e527f76aaa05843"
+      }
+    },
+    "verifier": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "phase": "verifier",
+      "command": [
+        "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\.venv\\Scripts\\python.exe",
+        "-B",
+        "tools/verify_lead_phase_AP_pnc.py",
+        "--diagnostic",
+        "results/runs/lead_phase_8875_AP_pnc/diagnostic/lead_phase_AP_pnc.json",
+        "--producer-sha256",
+        "a378e999b462d7fe9231bd3d19bc3aa2ddcbabf3735b1d9f304d0725daf6648e",
+        "--output",
+        "results/runs/lead_phase_8875_AP_pnc/independent_verification_AP_pnc.json"
+      ],
+      "started_utc": "2026-11-18T20:38:49.794733+00:00",
+      "source_pins": [
+        {
+          "path": "tools/diagnose_lead_phase_AP_pnc.py",
+          "sha256": "a378e999b462d7fe9231bd3d19bc3aa2ddcbabf3735b1d9f304d0725daf6648e"
+        },
+        {
+          "path": "tests/test_lead_phase_AP_pnc.py",
+          "sha256": "93e623b9e39d535b4ddf040425f389b7517cf1abf8fab0b383e34232391c115e"
+        },
+        {
+          "path": "tools/verify_lead_phase_AP_pnc.py",
+          "sha256": "69678a59c6a9e6284dc68151bb351f63f1aa21f9ad85c6901a5b5b0429317277"
+        },
+        {
+          "path": "tests/test_verify_lead_phase_AP_pnc.py",
+          "sha256": "dc7cbf25b212e3d6ea39bd8f6b613d9c608e148c45b792198b22025d7c77f99b"
+        }
+      ],
+      "exit_code": 0,
+      "guard": null,
+      "elapsed_seconds": 0.375,
+      "available_memory_before_bytes": 3082846208,
+      "minimum_sampled_available_memory_bytes": 3042930688,
+      "limits": {
+        "memory_bytes": 268435456,
+        "wall_seconds": 30,
+        "available_reserve_bytes": 536870912,
+        "numerical_threads": 1
+      },
+      "runtime": {
+        "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2"
+        },
+        "thread_environment": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "BLIS_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1"
+        }
+      },
+      "peak_sampled_process_tree_rss_sum_bytes": 29995008,
+      "peak_sampled_process_tree_private_sum_bytes": 16314368,
+      "sample_seconds": 0.05,
+      "measurement_scope": "Sampled launcher and observed descendants; not an exact high-water mark.",
+      "full_record": {
+        "path": "results/runs/lead_phase_8875_AP_pnc/local_checks/verifier_execution_AP_pnc.json",
+        "bytes": 2481,
+        "sha256": "290c86ee03d39530416ad4bd2d5a4e5b22959089d65ef81e52db641bb9d5d05c"
+      }
+    },
+    "integrated": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "phase": "integrated",
+      "command": [
+        "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test*_AP_pnc.py",
+        "-v"
+      ],
+      "started_utc": "2026-11-18T20:37:20.725395+00:00",
+      "source_pins": [
+        {
+          "path": "tools/diagnose_lead_phase_AP_pnc.py",
+          "sha256": "a378e999b462d7fe9231bd3d19bc3aa2ddcbabf3735b1d9f304d0725daf6648e"
+        },
+        {
+          "path": "tests/test_lead_phase_AP_pnc.py",
+          "sha256": "93e623b9e39d535b4ddf040425f389b7517cf1abf8fab0b383e34232391c115e"
+        },
+        {
+          "path": "tools/verify_lead_phase_AP_pnc.py",
+          "sha256": "69678a59c6a9e6284dc68151bb351f63f1aa21f9ad85c6901a5b5b0429317277"
+        },
+        {
+          "path": "tests/test_verify_lead_phase_AP_pnc.py",
+          "sha256": "dc7cbf25b212e3d6ea39bd8f6b613d9c608e148c45b792198b22025d7c77f99b"
+        }
+      ],
+      "exit_code": 0,
+      "guard": null,
+      "elapsed_seconds": 70.78100000000268,
+      "available_memory_before_bytes": 2879160320,
+      "minimum_sampled_available_memory_bytes": 1715609600,
+      "limits": {
+        "memory_bytes": 1073741824,
+        "wall_seconds": 180,
+        "available_reserve_bytes": 536870912,
+        "numerical_threads": 1
+      },
+      "runtime": {
+        "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+        "packages": {
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "scikit-fem": "12.0.2"
+        },
+        "thread_environment": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "BLIS_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1"
+        }
+      },
+      "peak_sampled_process_tree_rss_sum_bytes": 408621056,
+      "peak_sampled_process_tree_private_sum_bytes": 777048064,
+      "sample_seconds": 0.05,
+      "measurement_scope": "Sampled launcher and observed descendants; not an exact high-water mark.",
+      "full_record": {
+        "path": "results/runs/lead_phase_8875_AP_pnc/local_checks/integrated_execution_AP_pnc.json",
+        "bytes": 22748,
+        "sha256": "abd934a33e465ef19882c48f11f4af921f3c7387f286c507bbd5867254a115fc"
+      }
+    }
+  },
+  "validation": {
+    "source_cross_review": "Both independent cross-reviews pass without corrections; raw comparison and raw CSV paths are independent and no producer/comparator functions are imported by the verifier.",
+    "focused_tests": {
+      "producer": {
+        "tests": 9,
+        "seconds": 0.592,
+        "skipped": 0
+      },
+      "verifier": {
+        "tests": 10,
+        "seconds": 0.886,
+        "skipped": 0
+      }
+    },
+    "integrated_local": {
+      "tests": 418,
+      "passed": 417,
+      "skipped": 1,
+      "seconds": 67.3,
+      "skip_reason": "Windows symbolic-link privilege; that guard was not exercised locally.",
+      "full_suite_runs": 1
+    },
+    "actual_archive_passes": {
+      "producer": 1,
+      "verifier": 1,
+      "new_device_solves": 0,
+      "full_field_or_matrix_arrays_read": false,
+      "new_authentication": false
+    },
+    "ci": "pending exact final-head required checks",
+    "artifact_review": {
+      "artifact": {
+        "path": "results/runs/lead_phase_8875_AP_pnc/local_checks/artifact_review_AP_pnc.json",
+        "bytes": 12756,
+        "sha256": "9a0a05a542713a7f7419573a5b21bbc355b6d34e641e23e26ae85b3904093106"
+      },
+      "status": "passed"
+    }
+  },
+  "runtime_repair": {
+    "record": {
+      "path": "results/runs/lead_phase_8875_AP_pnc/local_checks/runtime_repair_AP_pnc.json",
+      "bytes": 4070,
+      "sha256": "b0748947a1c3b04e06a9780b1e2b9f1492e8fb7be4dd6fb54eba9c25134f33d2"
+    },
+    "status": "same-version base-path repair verified; packages not reinstalled; initial metapackage-name probe failure retained",
+    "scientific_data_changed": false
+  },
+  "prospective_control": {
+    "status": "proposal_for_research_discussion_only_not_queued",
+    "source": "docs/IMPLEMENTATION_PLAN_AP_pnc.md",
+    "summary": "One strict lead-interior-only perturbation of accepted h100 z4, freezing all pattern/intersecting cells, actual facet frontier, end traces, physical inputs and SAFE. Exact isolation preflight and resource admission required before separate execution authorization.",
+    "selected_directed_power_relative_increment_limit": 0.1,
+    "denominator": "actual positive h100 directed power, without a floor",
+    "full_block_complex_limit": 0.01,
+    "interpretation": "Only sensitivity to that finite isolated perturbation; no additive causal split, pattern-dominance or continuum claim."
+  },
+  "automatic_development": {
+    "status": "ACTIVE",
+    "cadence": "hourly",
+    "notification_policy": "failed_runs_only",
+    "coordinating_chat": "01a1e7dd-949e-7ce0-b90f-9fad42ea564e",
+    "root_model": "gpt-6-astra/ultra",
+    "workers": "gpt-6.1-sol/ultra; separate ownership",
+    "resets_used": false
+  },
+  "next_boundary": "Reuse this completed audit. Continue useful authorized offline work without another continuation question; the prospective new mesh/solve remains unqueued for discussion.",
+  "scientific_output_bytes": 72417,
+  "artifacts": [
+    {
+      "path": "results/runs/lead_phase_8875_AP_pnc/diagnostic/lead_phase_AP_pnc.csv",
+      "bytes": 15985,
+      "sha256": "d35ec93db335f777e70de93d7da95eb753d4fb5b3e16162e191e2a1641e64b88"
+    },
+    {
+      "path": "results/runs/lead_phase_8875_AP_pnc/diagnostic/lead_phase_AP_pnc.json",
+      "bytes": 52721,
+      "sha256": "cdecf3827d83751bcb46878f2d5d3c0f8f3d1ad14d098e4180ddb2bf80b16843"
+    },
+    {
+      "path": "results/runs/lead_phase_8875_AP_pnc/diagnostic/report_AP_pnc.html",
+      "bytes": 3711,
+      "sha256": "57a729dda786d60d64ba2bf234c2f7984901b4a68c5b3e8b4c7b9cd29efb14c4"
+    },
+    {
+      "path": "results/runs/lead_phase_8875_AP_pnc/independent_verification_AP_pnc.json",
+      "bytes": 5994,
+      "sha256": "0ef4bffb973c14f32457bb9bf3bd7cfa811dca7f1a8266641ce5b0723d3cb044"
+    },
+    {
+      "path": "results/runs/lead_phase_8875_AP_pnc/local_checks/integrated_execution_AP_pnc.json",
+      "bytes": 22748,
+      "sha256": "abd934a33e465ef19882c48f11f4af921f3c7387f286c507bbd5867254a115fc"
+    },
+    {
+      "path": "results/runs/lead_phase_8875_AP_pnc/local_checks/integrated_stderr_AP_pnc.txt",
+      "bytes": 78425,
+      "sha256": "4ced4c20296335e7d8e9a3541d8de568200b01eda3139af36f2ca8c5ee06875e"
+    },
+    {
+      "path": "results/runs/lead_phase_8875_AP_pnc/local_checks/integrated_stdout_AP_pnc.txt",
+      "bytes": 3308,
+      "sha256": "7432a8109d22e7c61928d3f66bebe90d68abb5ac7daded93d6949bdaeef6fccf"
+    },
+    {
+      "path": "results/runs/lead_phase_8875_AP_pnc/local_checks/producer_execution_AP_pnc.json",
+      "bytes": 2260,
+      "sha256": "7080e3f708fa2f8ecbc3a4c5644d637cf2ef5cc7ec8c9a687e527f76aaa05843"
+    },
+    {
+      "path": "results/runs/lead_phase_8875_AP_pnc/local_checks/producer_focused_AP_pnc.log",
+      "bytes": 1695,
+      "sha256": "d6c91271c7163b0c64fcd5c05a45856c72863063b5d0b697db947978bf24f95d"
+    },
+    {
+      "path": "results/runs/lead_phase_8875_AP_pnc/local_checks/producer_stderr_AP_pnc.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/runs/lead_phase_8875_AP_pnc/local_checks/producer_stdout_AP_pnc.txt",
+      "bytes": 449,
+      "sha256": "c8bfc4e38e71281770d4b7cc72c27a404719502e003a9774bdf203f17fdd4297"
+    },
+    {
+      "path": "results/runs/lead_phase_8875_AP_pnc/local_checks/review_input_AP_pnc.json",
+      "bytes": 1195,
+      "sha256": "80e028560881b5d3944da71ecd1d77616b983e11d46a564b2c6fd8ccd4b4acd8"
+    },
+    {
+      "path": "results/runs/lead_phase_8875_AP_pnc/local_checks/runtime_repair_AP_pnc.json",
+      "bytes": 4070,
+      "sha256": "b0748947a1c3b04e06a9780b1e2b9f1492e8fb7be4dd6fb54eba9c25134f33d2"
+    },
+    {
+      "path": "results/runs/lead_phase_8875_AP_pnc/local_checks/verifier_execution_AP_pnc.json",
+      "bytes": 2481,
+      "sha256": "290c86ee03d39530416ad4bd2d5a4e5b22959089d65ef81e52db641bb9d5d05c"
+    },
+    {
+      "path": "results/runs/lead_phase_8875_AP_pnc/local_checks/verifier_stderr_AP_pnc.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/runs/lead_phase_8875_AP_pnc/local_checks/verifier_stdout_AP_pnc.txt",
+      "bytes": 157,
+      "sha256": "9a4c9278b98487e569bb4397b33b4b5fdfe4677948089ea221597a3a5d3b6ce3"
+    },
+    {
+      "path": "results/runs/lead_phase_8875_AP_pnc/local_checks/verifier_focused_lead_phase_AP_pnc.log",
+      "bytes": 1924,
+      "sha256": "edb703ea485ab9cd07293329b390f3f0400ac33b65e66acf91841b481bad994d"
+    },
+    {
+      "path": "results/runs/lead_phase_8875_AP_pnc/local_checks/artifact_review_AP_pnc.json",
+      "bytes": 12756,
+      "sha256": "9a0a05a542713a7f7419573a5b21bbc355b6d34e641e23e26ae85b3904093106"
+    }
+  ]
+}
