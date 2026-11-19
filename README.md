@@ -2,6 +2,8 @@
 
 **Research owner: Athul Prem | `_AP_pnc`**
 
+The [publication figure gallery](figures/README.md) provides a labeled 26-hole device schematic, 1 GHz transmission magnitude and phase under lead-only and thickness/port refinement, and the 887.5 MHz reciprocal weak-conversion check requested in [Athul's latest comment](https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/55#issuecomment-7021915522). It includes vector PDFs, inline previews, raw complex blocks, plotted CSVs and a single reproduction command using saved repository data. Reciprocal powers agree to 3.251 × 10⁻⁹ relative, while nonmonotonic mesh sensitivity and the changing rescaling-invariant ratio leave conversion accuracy unresolved. No new solve is used.
+
 A configurable 3D anisotropic elastic-wave simulator for germanium nanobeams. It supports finite-body modes, periodic guided waves, power-normalized matched-port scattering, CSV-defined through-holes, saved results and an optional English desktop workbench. It uses Python, scikit-fem, SciPy, Gmsh and meshio on CPUs.
 
 ## Start the simulator
