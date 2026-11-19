@@ -109,6 +109,9 @@ class WorkbenchFrequencyWorkerTests(unittest.TestCase):
         invalid = (
             ("missing-bound", "map", ["--config", str(self.config_path), "--frequencies-ghz", "0.25"]),
             ("zero-bound", "map", ["--config", str(self.config_path), "--frequencies-ghz", "0.25", "--max-new-points", "0"]),
+            ("missing-donor", "map-seed", ["--frequencies-ghz", "0.25", "--max-new-points", "1"]),
+            ("seed-config", "map-seed", ["--from-map", str(self.directory / "donor"), "--config", str(self.config_path),
+                                         "--frequencies-ghz", "0.25", "--max-new-points", "1"]),
             ("resume-config", "map-resume", ["--config", str(self.config_path), "--max-new-points", "1"]),
             ("resume-frequencies", "map-resume", ["--frequencies-ghz", "0.25", "--max-new-points", "1"]),
         )
@@ -121,6 +124,47 @@ class WorkbenchFrequencyWorkerTests(unittest.TestCase):
                     self.assertIn("error", response)
             solve.assert_not_called()
         self.assertFalse(self.map_directory.exists())
+
+    def test_seeded_map_stops_at_point_boundary_and_resumes_without_donor(self):
+        donor = self.directory / "donor"
+        original = mapper.map_scattering(self.config, [0.35], donor, max_new_points=0)
+        donor_files = {path.relative_to(donor): path.read_bytes() for path in donor.rglob("*") if path.is_file()}
+        workflow = mapper.workflow
+        solve = workflow.solve_scattering
+
+        def stop_after_first_point(*args, **kwargs):
+            if args[2] == 250e6:
+                (self.directory / "seed" / "response_AP_pnc.cancel").touch()
+            return solve(*args, **kwargs)
+
+        with (
+            patch.object(workflow, "build_mesh", side_effect=AssertionError("rebuilt the saved mesh")),
+            patch.object(workflow, "_assemble_system", side_effect=AssertionError("reassembled body operators")),
+            patch.object(workflow, "assemble_port", side_effect=AssertionError("reassembled the port section")),
+            patch.object(workflow, "solve_port_modes", wraps=workflow.solve_port_modes) as modes,
+            patch.object(workflow, "solve_scattering", side_effect=stop_after_first_point) as scattering,
+        ):
+            code, first, _ = self.execute("seed", "map-seed", "--from-map", str(donor),
+                                         "--frequencies-ghz", "0.25", "0.30", "--max-new-points", "2")
+            self.assertEqual(code, 0, first)
+            self.assertEqual(first["status"], "partial")
+            self.assertTrue(first["summary"]["stop_requested"])
+            saved = mapper.read_map_checkpoint(self.map_directory)
+            self.assertEqual(saved["inputs"]["configuration"], original["inputs"]["configuration"])
+            self.assertEqual(saved["shared"], original["shared"])
+            self.assertEqual([p["status"] for p in saved["points"]], ["accepted", "pending"])
+            self.assertEqual({path.relative_to(donor): path.read_bytes() for path in donor.rglob("*") if path.is_file()},
+                             donor_files)
+            donor.rename(self.directory / "moved-donor")
+
+            code, resumed, _ = self.execute("seed-resume", "map-resume", "--max-new-points", "1")
+            self.assertEqual(code, 0, resumed)
+            self.assertEqual(resumed["status"], "complete")
+            completed = mapper.read_map_checkpoint(self.map_directory)
+            self.assertEqual(completed["points"][0], saved["points"][0])
+            self.assertEqual(completed["preparation_reuse"], saved["preparation_reuse"])
+            self.assertEqual([call.args[1] for call in modes.call_args_list], [250e6, 300e6])
+            self.assertEqual([call.args[2] for call in scattering.call_args_list], [250e6, 300e6])
 
     def test_resume_refuses_imported_read_only_map_and_changed_checkpoint(self):
         self.map_directory.mkdir()

@@ -62,6 +62,10 @@ class WorkbenchFrequencyMapTests(unittest.TestCase):
             "           'can_resume': True, 'spatial_convergence_established': False,\n"
             "           'frequency_convergence_established': False,\n"
             "           'points': [{'status': 'accepted'}, {'status': 'pending'}]}\n"
+            "if action == 'map-seed':\n"
+            "    summary['preparation_reuse'] = {}\n"
+            "    summary['inputs'] = {'configuration': {'name': 'saved_26hole', 'geometry': {\n"
+            "        'length_nm': 16650, 'width_nm': 1000, 'thickness_nm': 100}}}\n"
             + (
                 "progress = {**summary, 'status': 'running', 'phase': 'solving', 'current_frequency_GHz': 0.30}\n"
                 "response.with_suffix('.progress.json').write_text(json.dumps({'action': action, 'status': 'running', 'summary': progress}))\n"
@@ -140,6 +144,37 @@ class WorkbenchFrequencyMapTests(unittest.TestCase):
         self.assertFalse((resume_job / "configuration_AP_pnc.json").exists())
         self.assertEqual(self.window.fields["frequency_GHz"].text(), "invalid unsaved value")
         self.assertEqual(self.window.map_frequencies.text(), "invalid unsaved frequencies")
+
+    def test_run_from_saved_mesh_submits_donor_and_uses_requested_samples(self):
+        self.window.preset.setCurrentIndex(1)
+        self.window.fields["name"].setText("invalid unsaved name")
+        self.window.map_frequencies.setText("0.995, 1")
+        donor = self.output / "saved donor"
+        donor.mkdir()
+        worker = self.synthetic_worker()
+        with (
+            patch("workbench_AP_pnc.WORKER", worker),
+            patch("workbench_AP_pnc.QFileDialog.getExistingDirectory", return_value=str(donor)),
+        ):
+            QTest.mouseClick(self.window.seed_map_button, Qt.MouseButton.LeftButton)
+            self.assertEqual(self.window.action, "map-seed")
+            self.assertFalse(self.window.seed_map_button.isEnabled())
+            self.wait_for(lambda: self.window.action is None)
+
+        job = self.window.response_path.parent
+        args = json.loads((job / "observed_args_AP_pnc.json").read_bytes())
+        request = json.loads((job / "map_seed_request_AP_pnc.json").read_bytes())
+        self.assertEqual(request["from_map"], str(donor))
+        self.assertEqual(request["frequencies_GHz"], [0.995, 1])
+        self.assertEqual(request["max_new_points"], 1)
+        self.assertEqual(args[args.index("--from-map") + 1], str(donor))
+        frequencies = args.index("--frequencies-ghz") + 1
+        self.assertEqual([float(value) for value in args[frequencies:frequencies + 2]], [0.995, 1])
+        self.assertNotIn("--config", args)
+        self.assertFalse((job / "configuration_AP_pnc.json").exists())
+        self.assertEqual(self.window.result_directory, job / "map_AP_pnc")
+        self.assertIn("saved_26hole (16650 × 1000 × 100 nm)", self.window.status.text())
+        self.assertEqual(self.window.fields["name"].text(), "invalid unsaved name")
 
     def test_map_stop_keeps_worker_until_point_boundary_and_blocks_competing_launch(self):
         self.window.preset.setCurrentIndex(1)

@@ -54,6 +54,8 @@ Layered meshes independently control in-plane size and thickness layers, while z
 
 For independent lead and central resolution, choose **26-hole device · regional layers (coarse)** or enable **Independent lead size** on a layered study. The main in-plane size applies to the central interval; the lead size applies on both sides. JSON uses `mesh.lead_mesh_size_nm` and `mesh.patterned_x_interval_nm: [start, end]`; CLI equivalents are `--lead-mesh-size-nm` and `--patterned-x-interval-nm START END`. Both cut planes must lie in solid gaps outside every hole. Changing only the lead size preserves the central mesh and matching end traces, with common thickness layers and hole faceting. Disabling the option restores the original single-region mesher.
 
+For finer central refinement with the same lead and wall geometry, set the optional **Central edge target (nm)** in the workbench or use `mesh.central_max_edge_nm` in JSON and `--central-max-edge-nm` on the command line. The mesher bisects eligible edges in the regional footprint before extruding the thickness layers. A fixed transition near each cut preserves its trace, and the hole rims retain their original facets.
+
 The [regional 26-hole preset](configs/historical_26hole_regional_AP_pnc.json) uses a 400 nm central target, 200 nm lead target, central interval [1000, 15650] nm, one P2 thickness layer and the existing 60000-DOF cap. It is an exploratory coarse configuration. The three-region construction is a new mesh family: it does not preserve cells from the archived global-mesh series or certify a full-device response. Check the mesh before a run; a new mesh or a passing tiny guide does not establish convergence.
 
 For long iterative runs, the opt-in checkpoint workflow preserves accepted channels and verifies original residuals on resume:
@@ -76,6 +78,8 @@ To stage a regional device point from an existing preflight, run the command bel
 ```
 
 For a scattering preset, including **Historical 26-hole device · pilot**, use **Check mesh** first. In **Frequency map**, enter explicit increasing GHz samples separated by commas or spaces and choose **New point limit** (default **1**). **Run frequency map** reuses a matching checked mesh, keeps the existing body/port resource caps, and attempts at most that many unfinished points. Failed attempts count toward the limit.
+
+**Run from saved mesh…** starts a new bounded frequency map using the configuration, body matrices and port section from a verified native map folder. Enter the new sample frequencies before choosing the folder. The workbench copies the verified preparation into the new map and keeps the donor intact. The command-line equivalent is `tools/seed_frequency_map_AP_pnc.py`. Use `tools/transfer_frequency_preparation_AP_pnc.py --help` for the separately verified Windows-to-Linux preparation transfer where the numerical sources and package versions match.
 
 **Stop** during a map requests a stop after the current point finishes. It does not interrupt a running factorization. The workbench stays busy until the worker exits and preserves accepted points. **Resume map…** reads the saved configuration and frequency list; it ignores unsaved study edits and reuses accepted points and shared preparation. A forcibly interrupted unfinished point may need another attempt. Resume requires the original native input/source/environment identities; imported read-only views cannot resume.
 

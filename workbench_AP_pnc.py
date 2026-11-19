@@ -61,7 +61,7 @@ NUMERICAL_FIELDS = {
 }
 WHOLE_FIELDS = {"num_modes", "k_points", "circle_resolution", "thickness_layers", "max_dofs", "max_port_dofs"}
 RESUMABLE_ACTIONS = ("run-resumable", "resume")
-MAP_ACTIONS = ("map", "map-resume")
+MAP_ACTIONS = ("map", "map-seed", "map-resume")
 JOB_RESULTS = {"mesh": "mesh_ready", "run": "completed_unverified", "compare": "compared",
                **dict.fromkeys(RESUMABLE_ACTIONS, "completed_unverified"), **dict.fromkeys(MAP_ACTIONS, "partial")}
 JOB_MESSAGES = {"mesh": "Checking the mesh…", "run": "Running the study…",
@@ -69,6 +69,7 @@ JOB_MESSAGES = {"mesh": "Checking the mesh…", "run": "Running the study…",
                 "run-resumable": "Starting resumable ILU-LGMRES scattering…",
                 "resume": "Resuming scattering from saved inputs…",
                 "map": "Preparing the bounded frequency map…",
+                "map-seed": "Checking saved mesh and operators…",
                 "map-resume": "Resuming the frequency map from its saved inputs…"}
 
 
@@ -197,14 +198,26 @@ class Workbench(QMainWindow):
         self.regional_interval.setAccessibleName("Central region interval (nm)")
         self.regional_interval.setPlaceholderText("start, end")
         self.regional_interval.setToolTip("Both cuts must lie in solid gaps outside all holes. The central region uses the main in-plane size.")
+        self.regional_central_edge = QLineEdit()
+        self.regional_central_edge.setAccessibleName("Central edge target (nm)")
+        self.regional_central_edge.setPlaceholderText("Optional")
+        self.regional_central_edge.setToolTip("Refine the central footprint after meshing. Leave blank or enter 0 to disable.")
+        self.regional_central_edge.setMaximumWidth(100)
+        self.regional_central_edge.setEnabled(False)
+        central_edge_label = QLabel("Central edge target (nm)")
+        central_edge_label.setBuddy(self.regional_central_edge)
         regional_layout.addWidget(self.regional_enabled)
         regional_layout.addWidget(QLabel("Lead size (nm)"))
         regional_layout.addWidget(self.regional_lead_size)
         regional_layout.addWidget(QLabel("Central interval (nm)"))
         regional_layout.addWidget(self.regional_interval, 1)
+        regional_layout.addWidget(central_edge_label)
+        regional_layout.addWidget(self.regional_central_edge)
         self.regional_enabled.toggled.connect(self._inputs_changed)
+        self.regional_enabled.toggled.connect(self.regional_central_edge.setEnabled)
         self.regional_lead_size.textEdited.connect(self._inputs_changed)
         self.regional_interval.textEdited.connect(self._inputs_changed)
+        self.regional_central_edge.textEdited.connect(self._inputs_changed)
         main.addWidget(self.regional_controls)
 
         resume_controls = QHBoxLayout()
@@ -236,6 +249,9 @@ class Workbench(QMainWindow):
         self.map_max_points.setMaximumWidth(55)
         self.map_max_points.setToolTip("Maximum point attempts in this invocation, including failed attempts.")
         self.map_button = QPushButton("Run frequency map")
+        self.seed_map_button = QPushButton("Run from saved mesh…")
+        self.seed_map_button.setToolTip("Use the selected native map’s geometry, material, mesh and operators "
+                                        "with the samples and point limit entered here.")
         self.resume_map_button = QPushButton("Resume map…")
         self.resume_map_button.setToolTip("Use the saved configuration and frequency list; current study edits are ignored.")
         self.saved_map_button = QPushButton("Open saved map…")
@@ -243,7 +259,7 @@ class Workbench(QMainWindow):
         map_layout.addWidget(self.map_frequencies, 1)
         map_layout.addWidget(QLabel("New point limit"))
         map_layout.addWidget(self.map_max_points)
-        for button in (self.map_button, self.resume_map_button, self.saved_map_button):
+        for button in (self.map_button, self.seed_map_button, self.resume_map_button, self.saved_map_button):
             map_layout.addWidget(button)
         main.addWidget(self.map_controls)
 
@@ -282,6 +298,7 @@ class Workbench(QMainWindow):
         self.run_button.clicked.connect(lambda: self.start_job("run-resumable" if self.save_progress.isChecked() else "run"))
         self.resume_button.clicked.connect(self._choose_resume)
         self.map_button.clicked.connect(lambda: self.start_job("map"))
+        self.seed_map_button.clicked.connect(self._choose_seed_map)
         self.resume_map_button.clicked.connect(self._choose_resume_map)
         self.saved_map_button.clicked.connect(self._choose_saved_map)
         self.map_frequencies.textEdited.connect(self._inputs_changed)
@@ -388,6 +405,7 @@ class Workbench(QMainWindow):
         self.regional_lead_size.setText(str(mesh.get("lead_mesh_size_nm", "")))
         interval = mesh.get("patterned_x_interval_nm", "")
         self.regional_interval.setText(", ".join(map(str, interval)) if isinstance(interval, (list, tuple)) else str(interval))
+        self.regional_central_edge.setText(str(mesh.get("central_max_edge_nm", "")))
         gmsh = mesh.get("kind", "structured") in ("gmsh", "layered")
         scattering = analysis["kind"] == "scattering"
         self.save_progress.setChecked(False)
@@ -432,6 +450,8 @@ class Workbench(QMainWindow):
             lines.append("Thickness layers also set the port thickness resolution.")
             if "lead_mesh_size_nm" in mesh:
                 lines.append("Regional mesh: lead and central sizes are independent; cut planes share a conforming trace.")
+            if "central_max_edge_nm" in mesh:
+                lines.append(f"Central footprint refinement edge target: {mesh['central_max_edge_nm']} nm")
         lines.append(f"Configuration: {path}")
         pattern = self.config["geometry"].get("pattern")
         if pattern is None:
@@ -501,9 +521,23 @@ class Workbench(QMainWindow):
                     and len(original_interval) == 2
                     and all(type(value) in (int, float) for value in original_interval)
                     and list(original_interval) == interval else interval)
+                text = self.regional_central_edge.text().strip()
+                try:
+                    target = float(text) if text else 0
+                except (ValueError, OverflowError):
+                    target = math.nan
+                if not math.isfinite(target) or target < 0:
+                    raise ValueError("The central edge target (nm) must be positive, blank, or 0.")
+                if target == 0:
+                    config["mesh"].pop("central_max_edge_nm", None)
+                else:
+                    original_target = config["mesh"].get("central_max_edge_nm")
+                    config["mesh"]["central_max_edge_nm"] = (
+                        original_target if type(original_target) in (int, float) and original_target == target else target)
             else:
                 config["mesh"].pop("lead_mesh_size_nm", None)
                 config["mesh"].pop("patterned_x_interval_nm", None)
+                config["mesh"].pop("central_max_edge_nm", None)
         return config
 
     def _choose_save(self) -> None:
@@ -569,6 +603,14 @@ class Workbench(QMainWindow):
         if directory:
             self.start_job("map-resume", map_directory=Path(directory))
 
+    def _choose_seed_map(self) -> None:
+        if self.action is not None:
+            return
+        directory = QFileDialog.getExistingDirectory(self, "Choose the saved map whose geometry and mesh to use",
+                                                     str(self.map_directory or self.output_root))
+        if directory:
+            self.start_job("map-seed", donor_map=Path(directory))
+
     def _frequency_list(self) -> list[float]:
         try:
             frequencies = [float(value) for value in re.split(r"[,\s]+", self.map_frequencies.text().strip())]
@@ -599,7 +641,7 @@ class Workbench(QMainWindow):
         return seconds
 
     def start_job(self, action: str, reference: Path | None = None, *, resume_from: Path | None = None,
-                  map_directory: Path | None = None) -> bool:
+                  map_directory: Path | None = None, donor_map: Path | None = None) -> bool:
         if self.action is not None or action not in JOB_RESULTS:
             return False
         comparing = action == "compare"
@@ -611,6 +653,8 @@ class Workbench(QMainWindow):
         if resuming and resume_from is None:
             return False
         if action == "map-resume" and map_directory is None:
+            return False
+        if action == "map-seed" and donor_map is None:
             return False
         if not comparing:
             self._clear_result()
@@ -625,6 +669,11 @@ class Workbench(QMainWindow):
                 map_directory = map_directory.resolve()
                 if not map_directory.is_dir():
                     raise ValueError("Choose a saved native frequency-map folder.")
+            elif action == "map-seed":
+                donor_map = donor_map.resolve()
+                if not donor_map.is_dir():
+                    raise ValueError("Choose a saved native frequency-map folder with mesh and operators.")
+                frequencies = self._frequency_list()
             elif resuming:
                 resume_from = resume_from.resolve()
                 if not resume_from.is_dir():
@@ -655,6 +704,14 @@ class Workbench(QMainWindow):
                     "map_directory": str(map_directory), "max_new_points": point_bound,
                 })
                 job_args = []
+            elif action == "map-seed":
+                map_directory = directory / "map_AP_pnc"
+                self._write_config(directory / "map_seed_request_AP_pnc.json", {
+                    "author": "Athul Prem", "file_tag": "_AP_pnc", "action": action,
+                    "from_map": str(donor_map), "map_directory": str(map_directory),
+                    "frequencies_GHz": frequencies, "max_new_points": point_bound,
+                })
+                job_args = ["--from-map", str(donor_map), "--frequencies-ghz", *(str(value) for value in frequencies)]
             elif resuming:
                 self._write_config(directory / "resume_request_AP_pnc.json", {
                     "author": "Athul Prem", "file_tag": "_AP_pnc", "action": action,
@@ -673,7 +730,7 @@ class Workbench(QMainWindow):
             if mapping:
                 job_args.extend(("--map-directory", str(map_directory), "--max-new-points", str(point_bound)))
         except (OSError, ValueError) as exc:
-            task = "comparison" if comparing else "study"
+            task = "comparison" if comparing else "frequency map" if mapping else "study"
             self.status.setText(f"Could not start the {task}. {exc}")
             return False
         self.response_path = directory / "response_AP_pnc.json"
@@ -684,7 +741,8 @@ class Workbench(QMainWindow):
         self.log.clear()
         self.log_decoder = codecs.getincrementaldecoder("utf-8")(errors="replace")
         self._set_busy(True)
-        self.status.setText(JOB_MESSAGES[action])
+        self.status.setText(f"Using the geometry and preparation from {donor_map.name}…" if action == "map-seed"
+                            else JOB_MESSAGES[action])
         if resumable or mapping:
             self.progress_timer.start()
         self.process.start(sys.executable, ["-u", "-B", str(WORKER), *job_args,
@@ -826,7 +884,10 @@ class Workbench(QMainWindow):
             return
         progress = self._read_progress()
         if self.action in MAP_ACTIONS:
-            phase = {"preparing": "Preparing shared mesh and operators…", "solving": "Solving frequency point…",
+            preparation = ("Restoring copied mesh and operators…" if self.action == "map-seed"
+                           else "Preparing shared mesh and operators…")
+            phase = {"seeding": "Verifying and copying saved mesh and operators…", "preparing": preparation,
+                     "solving": "Solving frequency point…",
                      "point_finished": "Frequency point finished.", "publishing": "Saving frequency map…"}.get(progress.get("phase"))
             if phase:
                 count = f"Accepted frequencies: {progress.get('accepted_points', 0)}/{progress.get('total_points', '?')}."
@@ -893,7 +954,7 @@ class Workbench(QMainWindow):
             response = self._read_response(self.response_path)
             self._show_job_response(response, exit_status == QProcess.ExitStatus.NormalExit and exit_code == 0)
         except (OSError, ValueError, KeyError, TypeError) as exc:
-            task = "Comparison" if self.action == "compare" else "Study"
+            task = "Comparison" if self.action == "compare" else "Frequency map" if self.action in MAP_ACTIONS else "Study"
             failure = f"{task} could not complete. {exc}"
             if not self._show_map_fallback(failure) and not self._show_resume_fallback(failure):
                 self.status.setText(failure)
@@ -915,6 +976,11 @@ class Workbench(QMainWindow):
         self.scattering_directory = None
         heading = "Frequency map complete" if summary["status"] == "complete" else "Partial frequency map"
         message = f"{heading} · {accepted}/{len(points)} accepted frequencies; {failed} failed."
+        if "preparation_reuse" in summary:
+            config = summary["inputs"]["configuration"]
+            geometry = config["geometry"]
+            dimensions = " × ".join(f"{geometry[key]:g}" for key in ("length_nm", "width_nm", "thickness_nm"))
+            message += f" Using saved geometry and operators for {config['name']} ({dimensions} nm)."
         if summary.get("stop_requested"):
             message += " Stopped at a point boundary."
         if summary["status"] != "complete" and summary.get("execution_mode") is None:

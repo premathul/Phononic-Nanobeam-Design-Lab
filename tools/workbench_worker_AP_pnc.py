@@ -13,7 +13,7 @@ from tempfile import NamedTemporaryFile
 ROOT = Path(__file__).resolve().parents[1]
 THREAD_VARIABLES = ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "BLIS_NUM_THREADS")
 RESUMABLE_ACTIONS = ("run-resumable", "resume")
-MAP_ACTIONS = ("map", "map-resume")
+MAP_ACTIONS = ("map", "map-seed", "map-resume")
 
 
 def write_response(path: Path, response: dict, *, replace: bool = False) -> None:
@@ -48,6 +48,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--resume-from", type=Path)
     parser.add_argument("--wall-seconds", type=float)
     parser.add_argument("--map-directory", type=Path)
+    parser.add_argument("--from-map", type=Path)
     parser.add_argument("--frequencies-ghz", type=float, nargs="+")
     parser.add_argument("--max-new-points", type=int)
     parser.add_argument("--action", choices=("mesh", "run", "compare", *RESUMABLE_ACTIONS, *MAP_ACTIONS), required=True)
@@ -73,7 +74,9 @@ def main(argv: list[str] | None = None) -> int:
         if not resumable and (args.resume_from is not None or args.wall_seconds is not None):
             raise ValueError("--resume-from and --wall-seconds apply to resumable scattering.")
         if not mapping and any(value is not None for value in (args.map_directory, args.frequencies_ghz, args.max_new_points)):
-            raise ValueError("Frequency-map options apply only to map and map-resume.")
+            raise ValueError("Frequency-map options require a frequency-map action.")
+        if (args.from_map is not None) != (args.action == "map-seed"):
+            raise ValueError("--from-map is required for map-seed and applies only to that action.")
         if mapping:
             from tools import map_scattering_AP_pnc as mapper
 
@@ -85,17 +88,15 @@ def main(argv: list[str] | None = None) -> int:
                 if args.config is not None or args.frequencies_ghz is not None:
                     raise ValueError("Resume uses saved map inputs. Omit --config and --frequencies-ghz.")
                 saved = mapper.read_map_checkpoint(args.map_directory)
-                config = saved["inputs"]["configuration"]
-                frequencies = saved["inputs"]["frequencies_GHz"]
             else:
-                if args.config is None or args.frequencies_ghz is None:
-                    raise ValueError("A new map requires --config and --frequencies-ghz.")
                 if (args.map_directory / mapper.CHECKPOINT).exists():
                     raise ValueError("Use map-resume for an existing frequency-map checkpoint.")
-                config = json.loads(args.config.read_text(encoding="utf-8-sig"))
-                if not isinstance(config, dict):
-                    raise ValueError("The configuration must be a JSON object.")
-                frequencies = args.frequencies_ghz
+                if args.frequencies_ghz is None:
+                    raise ValueError("A new map requires --frequencies-ghz.")
+                if args.action == "map-seed" and args.config is not None:
+                    raise ValueError("A seeded map uses its donor configuration. Omit --config.")
+                if args.action == "map" and args.config is None:
+                    raise ValueError("A new map requires --config or a saved preparation via map-seed.")
 
             def publish_map_progress(progress: dict) -> None:
                 try:
@@ -103,6 +104,22 @@ def main(argv: list[str] | None = None) -> int:
                                    {"action": args.action, "status": "running", "summary": progress}, replace=True)
                 except OSError as exc:
                     print(f"Could not publish worker progress: {exc}", file=sys.stderr)
+
+            if args.action == "map-seed":
+                from tools.seed_frequency_map_AP_pnc import seed_frequency_map
+
+                publish_map_progress({"phase": "seeding", "accepted_points": 0,
+                                      "total_points": len(args.frequencies_ghz)})
+                # Install a native checkpoint before handing progress and cancellation to the existing map runner.
+                saved = seed_frequency_map(args.from_map, args.map_directory, args.frequencies_ghz, max_new_points=0)
+            if args.action == "map":
+                config = json.loads(args.config.read_text(encoding="utf-8-sig"))
+                if not isinstance(config, dict):
+                    raise ValueError("The configuration must be a JSON object.")
+                frequencies = args.frequencies_ghz
+            else:
+                config = saved["inputs"]["configuration"]
+                frequencies = saved["inputs"]["frequencies_GHz"]
 
             result = mapper.map_scattering(config, frequencies, args.map_directory,
                                           max_new_points=args.max_new_points, progress_callback=publish_map_progress,
