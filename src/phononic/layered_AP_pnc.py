@@ -137,6 +137,7 @@ def make_layered_mesh(
     element_order: int = 2,
     lead_mesh_size_m: float | None = None,
     patterned_x_interval_m: tuple[float, float] | None = None,
+    central_max_edge_m: float | None = None,
 ) -> MeshTet:
     """Return a straight affine mesh extruded from an independently meshed footprint.
 
@@ -156,6 +157,11 @@ def make_layered_mesh(
     tetrahedra, physical hole faceting, z planes and port traces. This opt-in
     construction is a new discretization; it does not preserve the central
     cells of an earlier mesh made without these regional interfaces.
+
+    Set ``central_max_edge_m`` to refine the regional footprint before
+    extrusion. ``mesh_size_m`` still defines the parent Gmsh mesh. The
+    central edge limit is graded near the preserved interface and the
+    hole edges are kept intact.
     """
     for name, size in (("mesh_size_m", mesh_size_m), ("port_mesh_size_m", port_mesh_size_m)):
         if not _finite_real(size) or size <= 0:
@@ -173,6 +179,11 @@ def make_layered_mesh(
         validate_hole_clearances(geometry, placed)
     if (lead_mesh_size_m is None) != (patterned_x_interval_m is None):
         raise ValueError("lead_mesh_size_m and patterned_x_interval_m must be provided together")
+    if central_max_edge_m is not None:
+        if lead_mesh_size_m is None:
+            raise ValueError("central_max_edge_m requires a regional layered mesh")
+        if not _finite_real(central_max_edge_m) or central_max_edge_m <= 0:
+            raise ValueError("central_max_edge_m must be positive and finite")
     if lead_mesh_size_m is not None:
         if not _finite_real(lead_mesh_size_m) or lead_mesh_size_m <= 0:
             raise ValueError("lead_mesh_size_m must be positive and finite")
@@ -216,6 +227,11 @@ def make_layered_mesh(
                                                     port_cells, circle_points)
         finally:
             gmsh.finalize()
+
+    if central_max_edge_m is not None:
+        from .refinement.central_AP_pnc import refine_footprint
+
+        xy, triangles = refine_footprint(xy, triangles, patterned_x_interval_m, central_max_edge_m)
 
     n = len(xy)
     z = np.linspace(-geometry.thickness_m / 2, geometry.thickness_m / 2, thickness_layers + 1)

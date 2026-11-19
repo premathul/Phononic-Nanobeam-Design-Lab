@@ -122,31 +122,41 @@ class WorkbenchTests(unittest.TestCase):
         self.assertEqual(json.dumps(self.window.edited_config(), sort_keys=True), json.dumps(original, sort_keys=True))
         self.window.regional_lead_size.setText("125")
         self.window.regional_interval.setText("1250, 15400")
+        self.window.regional_central_edge.setText("120")
         expected = self.window.edited_config()
         self.assertEqual(expected["geometry"], original["geometry"])
         self.assertEqual(expected["material"], original["material"])
         self.assertEqual(expected["resources"], original["resources"])
         self.assertEqual(expected["mesh"]["lead_mesh_size_nm"], 125)
         self.assertEqual(expected["mesh"]["patterned_x_interval_nm"], [1250, 15400])
+        self.assertEqual(expected["mesh"]["central_max_edge_nm"], 120)
         with patch.object(self.window.process, "start"):
             self.assertTrue(self.window.start_job("mesh"))
             request = self.window.response_path.parent / "configuration_AP_pnc.json"
             self.assertEqual(json.loads(request.read_bytes()), expected)
             self.assertFalse(self.window.regional_controls.isEnabled())
         self.window._finish_job()
+        self.assertTrue(self.window.load_configuration(request))
+        self.assertEqual(self.window.regional_central_edge.text(), "120.0")
+        self.assertEqual(self.window.edited_config(), expected)
+        self.window.regional_central_edge.setText("0")
+        self.assertNotIn("central_max_edge_nm", self.window.edited_config()["mesh"])
+        self.window.regional_central_edge.setText("120")
         self.window.regional_enabled.setChecked(False)
         global_config = self.window.edited_config()
         self.assertNotIn("lead_mesh_size_nm", global_config["mesh"])
         self.assertNotIn("patterned_x_interval_nm", global_config["mesh"])
+        self.assertNotIn("central_max_edge_nm", global_config["mesh"])
         self.assertEqual(global_config["geometry"], original["geometry"])
 
     def test_invalid_regional_inputs_stop_before_worker_creation(self):
         self.window.load_configuration(ROOT / "configs/historical_26hole_regional_AP_pnc.json")
-        for size, interval in (("nan", "1000, 15650"), ("200", "0, 15650"),
-                               ("200", "15650, 1000"), ("200", "1000")):
-            with self.subTest(size=size, interval=interval), patch.object(self.window.process, "start") as start:
+        for size, interval, target in (("nan", "1000, 15650", ""), ("200", "0, 15650", ""),
+                                       ("200", "15650, 1000", ""), ("200", "1000", ""), ("200", "1000, 15650", "nan")):
+            with self.subTest(size=size, interval=interval, target=target), patch.object(self.window.process, "start") as start:
                 self.window.regional_lead_size.setText(size)
                 self.window.regional_interval.setText(interval)
+                self.window.regional_central_edge.setText(target)
                 self.assertFalse(self.window.start_job("mesh"))
                 start.assert_not_called()
                 self.assertIsNone(self.window.action)

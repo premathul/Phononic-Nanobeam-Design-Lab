@@ -98,7 +98,7 @@ def resolve_config(config: dict, *, check_body_budget: bool = True) -> dict:
     required = {
         "geometry": {*DIMENSIONS_NM, "pattern"},
         "mesh": {"kind", "cells", "element_order", "mesh_size_nm", "port_size_nm", "circle_resolution", "thickness_layers",
-                 "lead_mesh_size_nm", "patterned_x_interval_nm"},
+                 "lead_mesh_size_nm", "patterned_x_interval_nm", "central_max_edge_nm"},
         "material": {"name", "C11_Pa", "C12_Pa", "C44_Pa", "density_kg_m3", "crystal_rotation", "temperature_policy", "temperature_K"},
         "analysis": {"kind", "boundary", "num_modes", "k_points", "frequency_GHz", "incident_side"},
         "resources": {"max_dofs", "max_port_dofs", "assembly_batch_elements", "linear_solver", "ilu_fill_factor", "ilu_precision",
@@ -152,6 +152,13 @@ def resolve_config(config: dict, *, check_body_budget: bool = True) -> dict:
                 or any(not _finite_number(value) for value in interval)
                 or not 0 < interval[0] < interval[1] < geometry["length_nm"]):
             raise ValueError("mesh.patterned_x_interval_nm must contain 0 < start < end < length_nm")
+    if "central_max_edge_nm" in mesh:
+        if not regional:
+            raise ValueError("mesh.central_max_edge_nm requires a regional layered mesh")
+        target = mesh["central_max_edge_nm"]
+        if not _finite_number(target) or target <= 0:
+            raise ValueError("mesh.central_max_edge_nm must be positive and finite")
+        mesh["central_max_edge_nm"] = float(target)
     if kind != "layered" and "thickness_layers" in mesh:
         raise ValueError("mesh.thickness_layers requires mesh.kind=layered")
     if kind == "structured":
@@ -255,7 +262,7 @@ def resolve_config(config: dict, *, check_body_budget: bool = True) -> dict:
 
 
 def source_identity() -> dict:
-    paths = sorted(Path(__file__).parent.glob("*.py")) + [ROOT / "simulate_AP_pnc.py"]
+    paths = sorted(Path(__file__).parent.rglob("*.py")) + [ROOT / "simulate_AP_pnc.py"]
     hashes = {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
     try:
         revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True, stderr=subprocess.DEVNULL).strip()
@@ -665,6 +672,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--lead-mesh-size-nm", type=float, help="Target in-plane size in both uniform leads of a regional layered mesh")
     parser.add_argument("--patterned-x-interval-nm", nargs=2, type=float, metavar=("START", "END"),
                         help="Central interval in nm for a regional layered mesh; requires --lead-mesh-size-nm")
+    parser.add_argument("--central-max-edge-nm", type=float,
+                        help="Bisect refinable central footprint edges above this length; requires a regional layered mesh")
     parser.add_argument("--port-size-nm", type=float, help="Target matched-port mesh size (width only for layered meshes)")
     parser.add_argument("--thickness-layers", type=int, help="Equal through-thickness intervals for a layered mesh")
     parser.add_argument("--circle-resolution", type=int, help="Number of straight segments around each hole")
@@ -720,6 +729,7 @@ def main(argv: list[str] | None = None) -> int:
                                     (args.mesh_size_nm, "mesh", "mesh_size_nm"), (args.port_size_nm, "mesh", "port_size_nm"),
                                     (args.lead_mesh_size_nm, "mesh", "lead_mesh_size_nm"),
                                     (args.patterned_x_interval_nm, "mesh", "patterned_x_interval_nm"),
+                                    (args.central_max_edge_nm, "mesh", "central_max_edge_nm"),
                                     (args.thickness_layers, "mesh", "thickness_layers"),
                                     (args.circle_resolution, "mesh", "circle_resolution"),
                                     (args.boundary, "analysis", "boundary"), (args.modes, "analysis", "num_modes"),

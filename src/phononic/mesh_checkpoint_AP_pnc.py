@@ -25,6 +25,8 @@ def mesh_inputs(geometry, pattern: dict | None, settings: dict, implementation: 
     if kind == "layered":
         modules += ("layered",)
     sources = [f"src/phononic/{module}_AP_pnc.py" for module in modules]
+    if "central_max_edge_nm" in settings:
+        sources.append("src/phononic/refinement/central_AP_pnc.py")
     return {
         "dimensions_m": [geometry.length_m, geometry.width_m, geometry.thickness_m],
         "pattern": {key: pattern[key] for key in ("source_sha256", "holes")} if pattern is not None else None,
@@ -51,6 +53,8 @@ def build_mesh(geometry, holes, settings: dict, max_port_dofs: int | None) -> tu
             if "lead_mesh_size_nm" in settings:
                 options["lead_mesh_size_m"] = settings["lead_mesh_size_nm"] * 1e-9
                 options["patterned_x_interval_m"] = tuple(value * 1e-9 for value in settings["patterned_x_interval_nm"])
+            if "central_max_edge_nm" in settings:
+                options["central_max_edge_m"] = settings["central_max_edge_nm"] * 1e-9
             mesh = make_layered_mesh(geometry, holes, mesh_size_m, thickness_layers=settings["thickness_layers"], **options)
         else:
             mesh = make_perforated_mesh(geometry, holes, mesh_size_m, **options)
