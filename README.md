@@ -26,7 +26,7 @@ python -B tools/browse_device_results_AP_pnc.py --open
 
 The portable dataset contains the 200 nm device on the archived global h80/z6 mesh at 0.1, 0.8875 and 1 GHz. It includes 14 incident-drive rows, 132 complex coefficients and the exact inputs. Roots are frequency-local. The regional 1 GHz lead and thickness-layer controls use a separate mesh family. [Dataset, exports and archive availability](data/README.md) · [1 GHz comparison plots](figures/README.md#figure-2--1-ghz-regional-transmission-sensitivity)
 
-The same reader shows the nine saved points of the 100 nm device and the finer regional controls. Select a mesh, frequency and drive to inspect native coefficients, download the exact configuration or export the full grid. [Thin-device dataset](data/README.md#thin-device-research-dataset)
+The same reader shows the nine saved points of the 100 nm device and the finer regional controls. Compare all three mesh traces for drives 3 and 5, then select a mesh, frequency and drive to inspect native coefficients, download the exact configuration or export the full grid. [Three-mesh frequency comparison](figures/README.md#figure-4--thin-device-frequency-response-on-three-meshes) [Thin-device dataset](data/README.md#thin-device-research-dataset)
 
 ## Start the simulator
 

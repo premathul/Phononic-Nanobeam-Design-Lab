@@ -54,9 +54,25 @@ cancels independent nonzero complex scalings of each row and column when the dia
 
 [In-plane input record](../data/saved_device_AP_pnc/controls/frequency_inplane_8875_AP_pnc.json) · [Thickness input record](../data/saved_device_AP_pnc/controls/frequency_thickness_8875_AP_pnc.json) · [Saved endpoint relation](../verification/device_frequency_8875_AP_pnc.json)
 
+## Figure 4 · Thin-device frequency response on three meshes
+
+![Reference drives 3 and 5 transmission at 995, 997.5 and 1000 MHz on all three central meshes](device_AP_pnc/athul_simulation_pnc_thin_frequency_traces_AP_pnc.png)
+
+Both panels compare the same three saved frequencies on central edge ceilings of 225, 168.75 and 126.5625 nm, with a shared 0–100% transmitted-incident-power scale. The physical beam thickness is 100 nm, with two quadratic thickness layers, 32 fixed facets per hole rim and left incidence. Reference-drive labels follow the 225 nm mesh at 1000 MHz through the recorded signed mode matches; native roots remain sample-local. Original reference planes remain x=0 and 16.65 µm.
+
+| Central edge ceiling (nm) | Drive 3 ΔT (percentage points) | Drive 5 ΔT (percentage points) |
+| --- | ---: | ---: |
+| 225 | +0.75 | +0.69 |
+| 168.75 | +5.24 | +5.12 |
+| 126.5625 | +9.78 | +9.51 |
+
+Here ΔT = 100 × [T(1000 MHz) − T(997.5 MHz)], with T a fraction of incident power. These are absolute percentage-point changes, not relative percent changes. Their positive direction agrees on the three meshes, while the magnitude remains mesh-sensitive. Connecting segments are visual guides between the three saved samples. No converged frequency slope or linewidth is established by the finest trace or by agreement of the signs. This directly implements [Athul's saved-data comparison request](https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/58#issuecomment-7046690925).
+
+[Vector PDF](device_AP_pnc/athul_simulation_pnc_thin_frequency_traces_AP_pnc.pdf) · [All 18 plotted samples and native identities (CSV)](device_AP_pnc/thin_frequency_traces_AP_pnc.csv) · [Plot script](../tools/plot_thin_frequency_traces_AP_pnc.py) · [Pinned nine-point record](../verification/thin_mesh_frequency_AP_pnc.json) · [Offline reader](../tools/browse_device_results_AP_pnc.py)
+
 ## Reproduce the figures
 
-Run from the repository root with [the plotting environment](../requirements_3d_AP_pnc.txt). The generator writes three vector PDFs, three PNG previews and four CSVs under `figures/device_AP_pnc/`. Use `--output-dir PATH` for a separate copy.
+Run from the repository root with [the plotting environment](../requirements_3d_AP_pnc.txt). The generator writes four vector PDFs, four PNG previews and five CSVs under `figures/device_AP_pnc/`. Use `--output-dir PATH` for a separate copy.
 
 ```powershell
 .\.venv\Scripts\python.exe tools/plot_saved_device_figures_AP_pnc.py --output-dir results/reproduction/figures_AP_pnc

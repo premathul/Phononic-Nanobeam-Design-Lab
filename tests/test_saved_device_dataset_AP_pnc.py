@@ -7,6 +7,7 @@ from html.parser import HTMLParser
 import json
 import math
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
@@ -14,6 +15,7 @@ from tempfile import TemporaryDirectory
 import unittest
 from unittest.mock import patch
 from urllib.parse import unquote, urlparse
+from xml.etree import ElementTree
 
 from tools import browse_device_results_AP_pnc as browser
 
@@ -603,6 +605,45 @@ class PortableAcceptedDeviceTests(unittest.TestCase):
         self.assertIn("Saved source identity changed", result.stderr)
         self.assertFalse(self.output.exists())
 
+    def assert_transmission_comparison_matches_exports(self, html, drives):
+        exported = {(int(row["reference_drive"]), float(row["central_max_edge_nm"]), int(row["frequency_hz"])): row
+                    for row in drives}
+        plots = re.findall(r'<svg [^>]*aria-labelledby="thin-grid-transmission-drive-[35]"[^>]*>.*?</svg>', html)
+        self.assertEqual(len(plots), 2)
+        namespaces = {"svg": "http://www.w3.org/2000/svg"}
+        common_scale = None
+        for drive, plot in zip((3, 5), plots, strict=True):
+            panel = ElementTree.fromstring(plot)
+            self.assertEqual(panel.attrib["aria-labelledby"], f"thin-grid-transmission-drive-{drive}")
+            ticks = {label.text: label.attrib for label in panel.findall("svg:text", namespaces)}
+            frequencies = (995, 997.5, 1000)
+            baseline, top = (float(ticks[label]["y"]) for label in ("0", "100"))
+            x_positions = [float(ticks[f"{frequency:g}"]["x"]) for frequency in frequencies]
+            self.assertGreater(baseline, top)
+            scale = baseline, top, x_positions
+            if common_scale is None:
+                common_scale = scale
+            self.assertEqual(scale, common_scale)
+            traces = panel.findall("svg:g[@data-central-max-edge-nm]", namespaces)
+            self.assertEqual([float(trace.attrib["data-central-max-edge-nm"]) for trace in traces],
+                             [225, 168.75, 126.5625])
+            for trace in traces:
+                mesh = float(trace.attrib["data-central-max-edge-nm"])
+                samples = [exported[drive, mesh, int(frequency * 1e6)] for frequency in frequencies]
+                points = trace.find("svg:polyline", namespaces).attrib["points"].split()
+                self.assertEqual(len(trace.findall("svg:g", namespaces)), 3)
+                for item, x_position, sample in zip(points, x_positions, samples, strict=True):
+                    x, y = map(float, item.split(","))
+                    self.assertAlmostEqual(x, x_position, places=3)
+                    fraction = float(sample["transmission"])
+                    self.assertAlmostEqual((baseline - y) / (baseline - top), fraction, places=5)
+                    self.assertIn(f'<td>{100 * fraction:.4f}<br><small>Root {sample["incident_port_index"]}</small></td>', html)
+                change = 100 * (float(samples[-1]["transmission"]) - float(samples[-2]["transmission"]))
+                self.assertRegex(html, rf'<tr><th scope="row">{drive}</th><td>{re.escape(f"{mesh:.15g}")}</td>'
+                                      rf'(?:<td>[^<]+<br><small>Root \d+</small></td>){{3}}<td>{re.escape(f"{change:+.2f}")}</td>')
+        self.assertIn("Lines connect three saved samples", html)
+        self.assertIn("spectral slope and linewidth remain unresolved", html)
+
     def test_portable_thin_grid_exports_all_native_rows_and_upgrades_existing_view(self):
         def copy(relative):
             target = self.root / relative
@@ -641,6 +682,8 @@ class PortableAcceptedDeviceTests(unittest.TestCase):
         with (self.output / browser.GRID_DRIVES).open(newline="") as stream:
             drives = list(csv.DictReader(stream))
         self.assertEqual((len(table_paths), len(drives), len(coefficients)), (6, 45, 450))
+        html = (self.output / browser.REPORT).read_text(encoding="utf-8")
+        self.assert_transmission_comparison_matches_exports(html, drives)
         matched = {(float(d["central_max_edge_nm"]), int(d["frequency_hz"]), int(d["incident_port_index"])): d
                    for d in drives}
         for row in coefficients:
