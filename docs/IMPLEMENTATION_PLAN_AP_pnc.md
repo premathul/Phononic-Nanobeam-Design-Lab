@@ -8,24 +8,15 @@ Athul Prem | _AP_pnc
 
 Deliver a usable configurable 3D elastic-wave simulator and reproducible finite straight 26-hole data. The solver, workbench, saved-result browser, bounded maps, exact-input recovery, regional meshing and nested controls are delivered. PRs [56](https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/56) and [57](https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/57) delivered preparation reuse, snapshot kernels and saved-data figures; they are not pending tasks.
 
-The 19 November revision proposals were based on GitHub `4f189fd`. The later workspace already completed the nine-point thin-device grid and the finer four-case regional comparison. Do not requeue the audit's proposed central calculation or discard that newer evidence. The current change is the documentation and result-interface architecture, with no new full-device solve or frequency sweep.
+The content-architecture revision is delivered in [PR #58](https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/58). The active saved-data milestone follows [Athul's 20 November comment](https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/58#issuecomment-7046690925): show the three central-mesh frequency traces together for reference drives 3 and 5. Use the existing nine-point dataset; this request needs no new full-device calculation.
 
 The immediate scientific observable remains per-incident total T/R near 1 GHz. Qualification of those powers, individual weak conversions, complex coefficients at original planes, spectral features and experiment are separate contracts in the [physics specification](PHYSICS_SPECIFICATION_AP_pnc.md#validation-and-uncertainty-contract). The [status record](RESEARCH_STATUS_AP_pnc.md) owns the concise interpretation and source links.
 
-## Architecture delivery and acceptance
+## Current delivery and acceptance
 
-Delivered in [PR #58](https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/58). [Final CI](https://github.com/premathul/Phononic-Nanobeam-Design-Lab/actions/runs/44780368245) passed 527 tests without skips and the prescribed benchmark/integrity steps. The remaining scientific decisions below are separate from this completed architecture milestone.
+Deliver two frequency-comparison panels in the offline reader and one reproducible PDF/PNG figure with the exact 18 plotted rows. Both drives show all three mesh levels, with identical frequency/transmission scales, sample markers, explicit reference-drive/native-root identities and the 997.5→1000 MHz changes in percentage points. The caption distinguishes agreement of the direction from the unresolved response magnitude, slope and linewidth.
 
-| Work package | Concrete output | Acceptance / stop condition |
-| --- | --- | --- |
-| D01/D04/D05: reader routes | Geometry-first README, ordered gallery, purpose-based docs and directory indexes, corrected references | Device, figures and limitations within two links; maintained pages expose their parent; links resolve; historical evidence unchanged |
-| D02/D03: status ownership | This single plan, compact operational handoff and one claim/evidence status record | Delivered controls do not appear queued; local/public data scope is explicit; finite sensitivity is not called convergence |
-| U01/U02: saved interactions | Current selection before provenance, selected/all exports, validated URL history, report identity in workbench | Exact h80 3/14/132 and thin-grid 9/45/450 counts preserved; invalid selection has a visible fallback; saved actions and edits cannot silently target the wrong report |
-| U03/U04: generated reports | Shared offline styling, operation-aware timing, real sibling downloads, verified optional receipts | Standard-library reader remains sufficient; absent data is text, not a broken link; representative desktop/mobile layout and keyboard navigation are usable |
-| N01: finite qualification | Add coherent propagating-block and uniform-guide power/phase dimensions | Unit column budgets cannot conceal coherent failure; a failed reference is retained but cannot be reported as a qualified reference; archived states/coefficients are unchanged |
-| Integration | Clean public ancestry, exact scoped source/data sync, affected tests and existing CI | functional tests pass; skips recorded separately; required CI passes before integration |
-
-These packages are implemented together as one usable path: project overview → saved result → exact data/configuration → editable study or documented finite comparison. Acceptance uses existing saved data, small discriminating tests and the required integrated suite. Do not add another general assessment or rerun accepted full-device calculations.
+Use the pinned comparison reader and unchanged native exports. Check the plotted values/identities against those inputs, the six interval changes against the saved rows, standard-library browser generation, desktop/mobile readability and unaffected selection/export behavior. Run the affected tests and existing CI once for the integrated implementation; retain genuine failures and skips separately. Stop after the reader, figure, captions and authorized GitHub integration are delivered. The previous milestone's [527-test CI](https://github.com/premathul/Phononic-Nanobeam-Design-Lab/actions/runs/44780368245) remains evidence for its source version.
 
 ## Completed numerical work to reuse
 
@@ -59,4 +50,4 @@ An internal-plane traveling-wave extractor is deferred. Total displacement alone
 
 Use the existing scikit-fem/SciPy/Gmsh/meshio solver, Qt/headless worker and saved-data generators. The coordinator owns authentication, transfers and interactive Lawrence allocations. Projected peaks above 10 GB run directly on an allocated Lawrence compute node; batch submission is prohibited. Reuse matching checkpoints; preserve separate Windows assembly and Linux solve provenance. Existing saved results do not acquire new source identities merely because report styling changes.
 
-Run meaningful affected tests, one integrated milestone suite and existing CI/physical benchmarks for changed behavior. Preserve raw data and unique failed evidence. No review loop, reset, unsolicited allocation, third-party message or expanded campaign is part of this architecture task. Stop when the implemented reader/workbench/report path, source/data integrity and authorized GitHub integration are verified.
+Run meaningful affected tests, one integrated milestone suite and existing CI/physical benchmarks for changed behavior. Preserve raw data and unique failed evidence. No review loop, reset, unsolicited allocation, third-party message or expanded campaign is part of this saved-data task. Stop when the comparison view, reproducible figure, source/data integrity and authorized GitHub integration are verified.

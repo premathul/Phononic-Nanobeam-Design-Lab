@@ -8,6 +8,88 @@ import json
 from pathlib import Path
 
 
+_MESH_TRACES = (
+    ("#176B87", '<circle r="4.5"/>'),
+    ("#B65324", '<rect x="-4.3" y="-4.3" width="8.6" height="8.6"/>'),
+    ("#6B4C9A", '<path d="M 0,-5.5 L 5.3,4.4 H -5.3 Z"/>'),
+)
+
+
+def _transmission_panel(drive, frequencies, traces):
+    """Plot the three mesh traces on shared frequency and power scales."""
+    left, right, top, bottom = 58, 372, 17, 192
+    start, end = frequencies[0], frequencies[-1]
+    x = {frequency: left + (right - left) * (frequency - start) / (end - start) for frequency in frequencies}
+
+    def y(percent):
+        return bottom - (bottom - top) * percent / 100
+
+    ticks = []
+    for percent in range(0, 101, 20):
+        height = y(percent)
+        ticks.append(f'<path class="thin-grid-plot-guide" d="M {left} {height:g} H {right}"/>'
+                     f'<text x="{left - 9}" y="{height:g}" dy=".35em" text-anchor="end">{percent}</text>')
+    for frequency, position in x.items():
+        ticks.append(f'<path class="thin-grid-plot-axis" d="M {position:g} {bottom} v 5"/>'
+                     f'<text x="{position:g}" y="{bottom + 22}" text-anchor="middle">{frequency / 1e6:g}</text>')
+    curves = []
+    for mesh, color, marker, samples in traces:
+        coordinates = [(x[frequency], y(100 * sample["transmission"]))
+                       for frequency, sample in zip(frequencies, samples, strict=True)]
+        line = " ".join(f"{position:.3f},{height:.3f}" for position, height in coordinates)
+        points = "".join(
+            f'<g transform="translate({position:.3f} {height:.3f})">{marker}</g>'
+            for position, height in coordinates
+        )
+        curves.append(f'<g data-central-max-edge-nm="{mesh:.15g}" stroke="{color}" fill="white" stroke-width="2.1">'
+                      f'<polyline points="{line}" fill="none"/>{points}</g>')
+    title = f"thin-grid-transmission-drive-{drive}"
+    return (f'<div><h4>Reference drive {drive}</h4>'
+            f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 396 250" role="img" aria-labelledby="{title}">'
+            f'<title id="{title}">Reference drive {drive} transmission on three central meshes</title>'
+            f'{"".join(ticks)}<path class="thin-grid-plot-axis" d="M {left} {top} V {bottom} H {right}"/>'
+            f'<text x="{(left + right) / 2:g}" y="241" text-anchor="middle">Frequency (MHz)</text>'
+            '<text x="18" y="105" text-anchor="middle" transform="rotate(-90 18 105)">Transmission (%)</text>'
+            f'{"".join(curves)}</svg></div>')
+
+
+def _transmission_comparison(levels, frequencies):
+    mesh_styles = list(zip(levels, _MESH_TRACES, strict=True))
+    legend, panels, rows = [], [], []
+    for level, (color, marker) in mesh_styles:
+        mesh = level["central_max_edge_nm"]
+        legend.append(f'<li><svg width="35" height="15" viewBox="0 0 35 15" aria-hidden="true" '
+                      f'stroke="{color}" stroke-width="2.1" fill="white"><path d="M 1 7.5 H 34"/>'
+                      f'<g transform="translate(17.5 7.5)">{marker}</g></svg>{mesh:.15g} nm</li>')
+    for drive in (3, 5):
+        traces = []
+        for level, (color, marker) in mesh_styles:
+            mesh = level["central_max_edge_nm"]
+            samples = [next(row for row in point["drives"] if row["reference_drive"] == drive)
+                       for point in level["points"]]
+            traces.append((mesh, color, marker, samples))
+            cells = "".join(f'<td>{100 * sample["transmission"]:.4f}<br><small>Root {sample["incident_port_index"]}</small></td>'
+                            for sample in samples)
+            change = 100 * (samples[-1]["transmission"] - samples[-2]["transmission"])
+            rows.append(f'<tr><th scope="row">{drive}</th><td>{mesh:.15g}</td>{cells}<td>{change:+.2f}</td></tr>')
+        panels.append(_transmission_panel(drive, frequencies, traces))
+    headings = "".join(f'<th scope="col">{frequency / 1e6:g} MHz</th>' for frequency in frequencies)
+    return ('<figure class="thin-grid-transmission-comparison" id="thin-grid-transmission-comparison" '
+            'aria-labelledby="thin-grid-transmission-comparison-title">'
+            '<h3 id="thin-grid-transmission-comparison-title">Transmission across three central meshes</h3>'
+            '<div class="thin-grid-mesh-legend"><span>Central mesh ceiling</span>'
+            f'<ul aria-label="Central mesh ceilings">{"".join(legend)}</ul></div>'
+            f'<div class="thin-grid-transmission-panels">{"".join(panels)}</div>'
+            '<figcaption>Both drives transmit a larger fraction of incident power at 1000 MHz than at 997.5 MHz '
+            'on all three meshes. The size of the increase depends on the mesh. Lines connect three saved samples '
+            'as visual guides. The continuum response magnitude, spectral slope and linewidth remain unresolved.</figcaption>'
+            '</figure><div class="thin-grid-table-wrap" role="region" tabindex="0" aria-labelledby="thin-grid-transmission-table-title">'
+            '<table><caption id="thin-grid-transmission-table-title">Transmission (%) and frequency-local incident roots. '
+            'ΔT subtracts the 997.5 MHz transmission from the 1000 MHz transmission, in percentage points (pp).</caption>'
+            '<thead><tr><th scope="col">Reference drive</th><th scope="col">Mesh ceiling (nm)</th>'
+            f'{headings}<th scope="col">997.5 → 1000 MHz ΔT (pp)</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>')
+
+
 def render_thin_device_grid(
     grid: dict | None,
     output: Path,
@@ -55,6 +137,16 @@ def render_thin_device_grid(
 #thin-grid td{{white-space:nowrap}}
 #thin-grid .thin-grid-gates{{padding-left:1.25rem}}
 #thin-grid .thin-grid-gates li+li{{margin-top:.35rem}}
+#thin-grid .thin-grid-transmission-comparison{{margin:1rem 0}}
+#thin-grid .thin-grid-mesh-legend,#thin-grid .thin-grid-mesh-legend ul{{display:flex;align-items:center;flex-wrap:wrap;gap:.3rem .95rem}}
+#thin-grid .thin-grid-mesh-legend ul{{margin:0;padding:0;list-style:none}}
+#thin-grid .thin-grid-mesh-legend li{{display:flex;align-items:center;gap:.35rem;white-space:nowrap}}
+#thin-grid .thin-grid-transmission-panels{{display:grid;gap:.5rem 1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,23rem),1fr))}}
+#thin-grid .thin-grid-transmission-panels h4{{margin:.65rem 0 .15rem;text-align:center}}
+#thin-grid .thin-grid-transmission-panels svg{{display:block;width:100%;font-family:inherit;font-size:15px;fill:currentColor}}
+#thin-grid .thin-grid-plot-guide{{stroke:var(--line);fill:none}}
+#thin-grid .thin-grid-plot-axis{{stroke:currentColor;fill:none}}
+#thin-grid .thin-grid-transmission-comparison figcaption{{margin:.6rem 0}}
 </style>
 <section id="thin-grid" aria-labelledby="thin-grid-title">
 <h2 id="thin-grid-title">100 nm thick device</h2>
@@ -72,6 +164,7 @@ def render_thin_device_grid(
 </div>
 <p>The saved solutions passed their equation and flux checks. Spatial and frequency convergence remain unresolved.</p>
 <p>Original reference planes at x = {planes} µm. The amplitudes use the native unit-power bases at these planes.</p>
+{_transmission_comparison(levels, grid["frequencies_hz"])}
 <div class="thin-grid-table-wrap" role="region" aria-labelledby="thin-grid-table-caption" tabindex="0">
  <table>
   <caption id="thin-grid-table-caption">Outgoing coefficients for the selected drive</caption>
