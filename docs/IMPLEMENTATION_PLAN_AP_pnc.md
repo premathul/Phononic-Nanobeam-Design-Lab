@@ -14,6 +14,8 @@ The immediate scientific observable remains per-incident total T/R near 1 GHz. Q
 
 ## Architecture delivery and acceptance
 
+Delivered in [PR #58](https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/58). [Final CI](https://github.com/premathul/Phononic-Nanobeam-Design-Lab/actions/runs/44780368245) passed 527 tests without skips and the prescribed benchmark/integrity steps. The remaining scientific decisions below are separate from this completed architecture milestone.
+
 | Work package | Concrete output | Acceptance / stop condition |
 | --- | --- | --- |
 | D01/D04/D05: reader routes | Geometry-first README, ordered gallery, purpose-based docs and directory indexes, corrected references | Device, figures and limitations within two links; maintained pages expose their parent; links resolve; historical evidence unchanged |
