@@ -122,7 +122,8 @@ def write_native_map(directory, *, candidate=False, reflection=.04, competitor="
 
 class AxialDevicePowerTests(TestCase):
     def setUp(self):
-        directory = Path(self.enterContext(TemporaryDirectory()))
+        # Windows runners may expose TEMP through a short-name alias.
+        directory = Path(self.enterContext(TemporaryDirectory())).resolve()
         self.reference = directory / "reference"
         self.candidate = directory / "candidate"
 
