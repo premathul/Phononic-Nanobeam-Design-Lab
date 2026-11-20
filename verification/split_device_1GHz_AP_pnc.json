@@ -1,0 +1,1162 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "map_directory": "/home/usd.local/kunming.dong/phononic_nested_3965855_AP_pnc/split_taper_37baf05_AP_pnc/results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux",
+  "source_git_commit": null,
+  "scope": "Same discrete mesh, operators, SAFE modes and physical end planes. Finite algebraic equivalence check.",
+  "inputs": {
+    "frequency_hz": 1000000000,
+    "nominal_cuts_nm": [
+      5745.0,
+      10905.0
+    ],
+    "rhs_block_size": 8,
+    "reference_map_checkpoint": {
+      "path": "checkpoint_AP_pnc.json",
+      "sha256": "8a8e2cf5a4dd1831c3615e158279aa6aa6f31bf1ff1b33e5dd18ec1070f13b5d",
+      "bytes": 15300
+    },
+    "reference_point_summary": {
+      "path": "point-002/attempt-7fagiz48/historical_26hole_regional_100nm-6edfa64541b9/summary_AP_pnc.json",
+      "sha256": "b87760198cd14cbb2711d46abe4cfc21816b83dc6a3417a2f7a5fcadb5532bcb",
+      "bytes": 13967
+    },
+    "reference_configuration": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "schema_version": 1,
+      "name": "historical_26hole_regional_100nm",
+      "geometry": {
+        "length_nm": 16650,
+        "width_nm": 1000,
+        "thickness_nm": 100,
+        "pattern": {
+          "csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+          "x_offset_nm": 8325
+        }
+      },
+      "mesh": {
+        "kind": "layered",
+        "element_order": 2,
+        "mesh_size_nm": 400,
+        "port_size_nm": 250,
+        "circle_resolution": 32,
+        "thickness_layers": 2,
+        "lead_mesh_size_nm": 150,
+        "patterned_x_interval_nm": [
+          1000,
+          15650
+        ],
+        "central_max_edge_nm": 168.75
+      },
+      "material": {
+        "name": "nominal_cubic_ge",
+        "C11_Pa": 128500000000.0,
+        "C12_Pa": 48300000000.0,
+        "C44_Pa": 66800000000.0,
+        "density_kg_m3": 5323,
+        "crystal_rotation": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "temperature_policy": "fixed_property_control",
+        "temperature_K": 4
+      },
+      "analysis": {
+        "kind": "scattering",
+        "boundary": "matched_ports",
+        "frequency_GHz": 1.0,
+        "incident_side": "left"
+      },
+      "resources": {
+        "max_dofs": 137745,
+        "max_port_dofs": 400
+      }
+    },
+    "shared_artifacts": {
+      "mesh_summary": {
+        "path": "shared-2m5o4mx7/_meshes/401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a/summary_AP_pnc.json",
+        "sha256": "67f0c46e123e887e7ed4880d8cda7146aa51a76b1a10259a7fb78184795d326b",
+        "bytes": 9815
+      },
+      "mesh": {
+        "path": "shared-2m5o4mx7/_meshes/401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a/mesh_AP_pnc.npz",
+        "sha256": "33771e9f0ab3c7399549122407372f7dbc907908f181c664de3bf3c881210705",
+        "bytes": 217141
+      },
+      "stiffness": {
+        "path": "shared-2m5o4mx7/K.npz",
+        "sha256": "62e6bf0cd79af267f02a78b9e72da953ab6df12090c1f4b98bf31236420c7040",
+        "bytes": 112822045
+      },
+      "mass": {
+        "path": "shared-2m5o4mx7/M.npz",
+        "sha256": "739ceb0027481ef33a4bb9f3495faf01181d525a0997dc3b2d94bb6024a8b459",
+        "bytes": 39275533
+      },
+      "port_section": {
+        "path": "shared-2m5o4mx7/port_section_AP_pnc.npz",
+        "sha256": "251c91aec84b9048e62c740ae293281518776d4a9ec25def5cca1b2c4c044705",
+        "bytes": 588030
+      }
+    },
+    "reference_outputs_sha256": {
+      "selected_fields_AP_pnc.npz": "698fec50fef944690366516c1c12033bf6d8d7300b08a30e103d3de128b5bb70",
+      "report_AP_pnc.html": "26048b6b28cb64afe5472bda3937d16215a91d29b0c36721797211f81165eff2",
+      "selected_vertex_shapes_AP_pnc.vtu": "54ae41e01d12dc3913386633fd2fc6352444ebe9824c6cc029952af3cbb4e204",
+      "port_modes_AP_pnc.csv": "bad2492cfd4eb1651f8236fe390962986d6558e37949c306e874c775124dad6e",
+      "configuration_AP_pnc.json": "b94c242ed15f646149e70086b596bc6cf915facbaa46283609c5fa7df96e216e",
+      "hole_pattern_AP_pnc.json": "8bad9c22c1a4f5df9e31615f8107c89a3fb4f7daa70df8aecf3dd624d11eabe9",
+      "scattering_AP_pnc.csv": "b57109203dd6353a97e10dc18ad19c621cb3339e6672d39294a963e8eb8d2552",
+      "scattering_channels_AP_pnc.csv": "d8720a2e8d5bff0431f7d20ef2c05dd2f46eb1239325a26e767a88a65dccd9ca"
+    },
+    "reference_map_input_sha256": "7d28d6c75b7cfe7847ce5c03ba148ac258e08a486cc848e049f157d0d9ee2ed8",
+    "reference_map_source_git_commit": null,
+    "reference_map_numerical_identity": {
+      "source_sha256": {
+        "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+        "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/layered_AP_pnc.py": "9242d11434e5004410fdb8d16b23e2405bf429ba93034fc08cee494d5aeae856",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+        "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/mesh_checkpoint_AP_pnc.py": "7fd1780e3c75f6a97f1c7f415bbd8c6e83c066fc5db3999774755910a689021d",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/refinement/central_AP_pnc.py": "1fa13bd28dc0664f197b9a77f90fbbbaec3c0d68e0a4daf884f536b6c10926ca",
+        "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+        "src/phononic/resumable_scattering_AP_pnc.py": "dba6002d982647810f3fc714fdce73a0f34e306e06e8519df2d54778002205ec",
+        "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+        "src/phononic/workflow_AP_pnc.py": "0992815d8ee2c88a74f8221d29c13e98bc388d8aadb5bc7d75992517980b15cd",
+        "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5",
+        "tools/map_scattering_AP_pnc.py": "11b1dfe118606271a5c2710eae30b4081fb448a660b87eee58283550f7e1acce",
+        "tools/compare_scattering_AP_pnc.py": "148f7efa58ad668a7a57be9db68a3241ffb67ed94067499ce6dcd4a0f8c59313"
+      },
+      "packages": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "scikit-fem": "12.0.2",
+        "meshio": "5.3.5",
+        "gmsh": "4.15.2",
+        "matplotlib": "3.11.2",
+        "psutil": "7.2.2"
+      },
+      "python": "3.12.12",
+      "platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28"
+    },
+    "reference_solve_implementation": {
+      "git_commit": null,
+      "source_sha256": {
+        "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+        "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/layered_AP_pnc.py": "9242d11434e5004410fdb8d16b23e2405bf429ba93034fc08cee494d5aeae856",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+        "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/mesh_checkpoint_AP_pnc.py": "7fd1780e3c75f6a97f1c7f415bbd8c6e83c066fc5db3999774755910a689021d",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/refinement/central_AP_pnc.py": "1fa13bd28dc0664f197b9a77f90fbbbaec3c0d68e0a4daf884f536b6c10926ca",
+        "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+        "src/phononic/resumable_scattering_AP_pnc.py": "dba6002d982647810f3fc714fdce73a0f34e306e06e8519df2d54778002205ec",
+        "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+        "src/phononic/workflow_AP_pnc.py": "0992815d8ee2c88a74f8221d29c13e98bc388d8aadb5bc7d75992517980b15cd",
+        "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5"
+      },
+      "packages": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "scikit-fem": "12.0.2",
+        "meshio": "5.3.5",
+        "gmsh": "4.15.2",
+        "matplotlib": "3.11.2",
+        "psutil": "7.2.2"
+      },
+      "python": "3.12.12",
+      "platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28"
+    },
+    "reference_shared_assembly_provenance": {
+      "method": "windows_to_linux_native_preparation",
+      "receipt_sha256": "eac4b3a67fcca26ea1a1fb9ede66f641cb695a00667a2c4faadee1224579273a",
+      "receipt": {
+        "schema_version": 1,
+        "donor_checkpoint_sha256": "f9a80aaeae31306460ab1954da6e3b2831a62e040aa762b9e8819e6b94194e17",
+        "donor_shared_sha256": "9a8af0e4090e4c523ee0df1fa0cda1b8f6e3d9a583c3808b996ad547833baa89",
+        "donor_source_git_commit": "3965855c1c6847e0e9a60becd7ac22efbeb88279",
+        "seeder_source_sha256": "c5eaaec3c5eb415cf9da91fd2d6bc53d82251a3c791cef20353da58bee1c7b2d",
+        "exporter_source_sha256": "1d262559f1b0286de24f3558f54540cdfca26b70de20db17af6847363ad50c3a",
+        "donor_publication_sha256": "681e08ae9a6c673ccd6c74116d18f864c94bd868a99e0a3144a4f0aa168f5d47",
+        "donor_numerical_identity": {
+          "source_sha256": {
+            "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+            "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+            "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+            "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+            "src/phononic/layered_AP_pnc.py": "9242d11434e5004410fdb8d16b23e2405bf429ba93034fc08cee494d5aeae856",
+            "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+            "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+            "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+            "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+            "src/phononic/mesh_checkpoint_AP_pnc.py": "7fd1780e3c75f6a97f1c7f415bbd8c6e83c066fc5db3999774755910a689021d",
+            "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+            "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+            "src/phononic/refinement/central_AP_pnc.py": "1fa13bd28dc0664f197b9a77f90fbbbaec3c0d68e0a4daf884f536b6c10926ca",
+            "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+            "src/phononic/resumable_scattering_AP_pnc.py": "dba6002d982647810f3fc714fdce73a0f34e306e06e8519df2d54778002205ec",
+            "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+            "src/phononic/workflow_AP_pnc.py": "0992815d8ee2c88a74f8221d29c13e98bc388d8aadb5bc7d75992517980b15cd",
+            "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5",
+            "tools/map_scattering_AP_pnc.py": "11b1dfe118606271a5c2710eae30b4081fb448a660b87eee58283550f7e1acce",
+            "tools/compare_scattering_AP_pnc.py": "148f7efa58ad668a7a57be9db68a3241ffb67ed94067499ce6dcd4a0f8c59313"
+          },
+          "packages": {
+            "numpy": "2.5.4",
+            "scipy": "1.18.1",
+            "scikit-fem": "12.0.2",
+            "meshio": "5.3.5",
+            "gmsh": "4.15.2",
+            "matplotlib": "3.11.2",
+            "psutil": "7.2.2"
+          },
+          "python": "3.12.14",
+          "platform": "Windows-11-10.0.26200-SP0"
+        },
+        "donor_thread_environment": {
+          "OPENBLAS_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "BLIS_NUM_THREADS": "1"
+        }
+      }
+    },
+    "numerical_identity": {
+      "source_sha256": {
+        "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+        "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/layered_AP_pnc.py": "9242d11434e5004410fdb8d16b23e2405bf429ba93034fc08cee494d5aeae856",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+        "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/mesh_checkpoint_AP_pnc.py": "7fd1780e3c75f6a97f1c7f415bbd8c6e83c066fc5db3999774755910a689021d",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/refinement/central_AP_pnc.py": "1fa13bd28dc0664f197b9a77f90fbbbaec3c0d68e0a4daf884f536b6c10926ca",
+        "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+        "src/phononic/resumable_scattering_AP_pnc.py": "dba6002d982647810f3fc714fdce73a0f34e306e06e8519df2d54778002205ec",
+        "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+        "src/phononic/workflow_AP_pnc.py": "0992815d8ee2c88a74f8221d29c13e98bc388d8aadb5bc7d75992517980b15cd",
+        "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5",
+        "tools/run_split_device_AP_pnc.py": "5b92e3c0cfce6369fe239485677aca82b8d3309721d1ce110c6a2d77d86f8670",
+        "tools/split_device_response_AP_pnc.py": "00038e8621118e82c8cb63752f4f7a32779704e8eb129c8500bdd9ae9acc987d",
+        "tools/map_scattering_AP_pnc.py": "11b1dfe118606271a5c2710eae30b4081fb448a660b87eee58283550f7e1acce",
+        "tools/compare_scattering_AP_pnc.py": "148f7efa58ad668a7a57be9db68a3241ffb67ed94067499ce6dcd4a0f8c59313"
+      },
+      "packages": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "scikit-fem": "12.0.2",
+        "meshio": "5.3.5",
+        "gmsh": "4.15.2",
+        "matplotlib": "3.11.2",
+        "psutil": "7.2.2"
+      },
+      "python": "3.12.12",
+      "platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28"
+    },
+    "threads": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1"
+    }
+  },
+  "inputs_sha256": "cac6c3f26652488c7d8738c051fd6d2a463d85b795037e4e74d7bd074e83c89d",
+  "resources": {
+    "peak_process_memory_mib": 1439.50390625,
+    "system_available_memory_mib_at_start": 91111.2578125,
+    "process_lifetime_peak_working_set_mib": 271.81640625,
+    "elapsed_seconds": 159.39186869596597
+  },
+  "result": {
+    "partition": {
+      "tetrahedra": 24144,
+      "body_dofs": 137745,
+      "stiffness_nonzeros": 9355817,
+      "mass_nonzeros": 3226941,
+      "protected_interval_x_m": [
+        5.745e-06,
+        1.0905000000000001e-05
+      ],
+      "protected_tetrahedra": 8052,
+      "seams": [
+        {
+          "nominal_cut_x_m": 5.745e-06,
+          "frontier_facets": 52,
+          "actual_frontier_x_range_m": [
+            5.626629858994632e-06,
+            5.7395801172494045e-06
+          ]
+        },
+        {
+          "nominal_cut_x_m": 1.0905000000000001e-05,
+          "frontier_facets": 52,
+          "actual_frontier_x_range_m": [
+            1.0910393821404182e-05,
+            1.1022901036769955e-05
+          ]
+        }
+      ],
+      "separator_dofs": 810,
+      "separator_x_range_m": [
+        5.626629858994632e-06,
+        1.1022901036769955e-05
+      ],
+      "regions": [
+        {
+          "tetrahedra": 8046,
+          "interior_dofs": 45405,
+          "interior_stiffness_nonzeros": 3079413
+        },
+        {
+          "tetrahedra": 8052,
+          "interior_dofs": 46125,
+          "interior_stiffness_nonzeros": 3080501
+        },
+        {
+          "tetrahedra": 8046,
+          "interior_dofs": 45405,
+          "interior_stiffness_nonzeros": 3079267
+        }
+      ]
+    },
+    "original_equations": {
+      "reconstructed_equation_hashes": {
+        "operator_csc_sha256": "d7b7821659146b9512e51a5c9ab8a45431712d8eed4e725e1cbe95eb99b4ebad",
+        "rhs_sha256": "fa417142d38e41e27e189d381e67e64181894f089a478636feded24c0cefcff3"
+      },
+      "saved_equation_hashes": {
+        "operator_csc_sha256": "d7b7821659146b9512e51a5c9ab8a45431712d8eed4e725e1cbe95eb99b4ebad",
+        "rhs_sha256": "fa417142d38e41e27e189d381e67e64181894f089a478636feded24c0cefcff3"
+      },
+      "byte_identical_to_saved": {
+        "operator_csc_sha256": true,
+        "rhs_sha256": true
+      },
+      "operator_nonzeros": 9396551,
+      "saved_field_in_reconstructed_equations": {
+        "channels": [
+          {
+            "column": 0,
+            "relative_residual": 5.972837017314975e-13,
+            "relative_backward_residual": 2.825730591223914e-16,
+            "passed": true
+          },
+          {
+            "column": 1,
+            "relative_residual": 5.917921632993943e-13,
+            "relative_backward_residual": 1.7822800028823168e-16,
+            "passed": true
+          },
+          {
+            "column": 2,
+            "relative_residual": 8.999263332463936e-13,
+            "relative_backward_residual": 1.6566458703101144e-16,
+            "passed": true
+          },
+          {
+            "column": 3,
+            "relative_residual": 6.901997044216405e-13,
+            "relative_backward_residual": 2.8209600917878876e-16,
+            "passed": true
+          },
+          {
+            "column": 4,
+            "relative_residual": 5.885758819677362e-13,
+            "relative_backward_residual": 1.9728883420371992e-16,
+            "passed": true
+          }
+        ],
+        "relative_and_backward_limit": 1e-09,
+        "passed": true
+      },
+      "split_field_in_reconstructed_equations": {
+        "channels": [
+          {
+            "column": 0,
+            "relative_residual": 7.517194870541179e-13,
+            "relative_backward_residual": 5.128508322377222e-16,
+            "passed": true
+          },
+          {
+            "column": 1,
+            "relative_residual": 7.775997503678514e-13,
+            "relative_backward_residual": 7.657674299431017e-16,
+            "passed": true
+          },
+          {
+            "column": 2,
+            "relative_residual": 8.611871540882428e-13,
+            "relative_backward_residual": 1.827130884505916e-16,
+            "passed": true
+          },
+          {
+            "column": 3,
+            "relative_residual": 6.749832819318363e-13,
+            "relative_backward_residual": 2.1393423423301533e-16,
+            "passed": true
+          },
+          {
+            "column": 4,
+            "relative_residual": 5.644267592161725e-13,
+            "relative_backward_residual": 1.6993710889411304e-16,
+            "passed": true
+          }
+        ],
+        "relative_and_backward_limit": 1e-09,
+        "passed": true
+      }
+    },
+    "split_solver": {
+      "separator_dofs": 810,
+      "rhs_block_size": 8,
+      "regions": [
+        {
+          "region": 0,
+          "elements": 8046,
+          "interior_dofs": 45405,
+          "interface_dofs": 405,
+          "interior_operator_nnz": 3097845,
+          "interior_dtype": "complex128",
+          "factor_nnz": 41857395,
+          "factor_seconds": 13.133148150052875,
+          "condensation_seconds": 34.43077226402238,
+          "local_dense_update_bytes": 2624400,
+          "maximum_interface_rhs_columns": 8,
+          "reconstruction_seconds": 13.07059058896266
+        },
+        {
+          "region": 1,
+          "elements": 8052,
+          "interior_dofs": 46125,
+          "interface_dofs": 810,
+          "interior_operator_nnz": 3083943,
+          "interior_dtype": "float64",
+          "factor_nnz": 39571034,
+          "factor_seconds": 5.912325204932131,
+          "condensation_seconds": 27.249579009017907,
+          "local_dense_update_bytes": 5248800,
+          "maximum_interface_rhs_columns": 8,
+          "reconstruction_seconds": 6.221170780947432
+        },
+        {
+          "region": 2,
+          "elements": 8046,
+          "interior_dofs": 45405,
+          "interface_dofs": 405,
+          "interior_operator_nnz": 3097853,
+          "interior_dtype": "complex128",
+          "factor_nnz": 40973682,
+          "factor_seconds": 12.027238151989877,
+          "condensation_seconds": 30.804696756997146,
+          "local_dense_update_bytes": 2624400,
+          "maximum_interface_rhs_columns": 8,
+          "reconstruction_seconds": 12.38869120401796
+        }
+      ],
+      "separator_operator_nnz": 656100,
+      "separator_factor_nnz": 656910,
+      "separator_solve_seconds": 0.14129959093406796,
+      "total_seconds": 155.67689256800804
+    },
+    "native_port": {
+      "trace_dofs_per_end": 135,
+      "outgoing_roots_per_end": 135,
+      "propagating_roots_per_end": 5,
+      "reference_planes_x_m": [
+        0.0,
+        1.665e-05
+      ],
+      "basis_sha256": "510b72e8da49b0dd17ffd52f0ff0918400e1424fb264a8f274801a782c67ad92"
+    },
+    "native_measured_scattering_resources": {
+      "peak_process_memory_mib": 3001.25390625,
+      "system_available_memory_mib_at_start": 91050.44140625,
+      "process_lifetime_peak_working_set_mib": 311.32421875,
+      "elapsed_seconds": 53.77803004998714
+    },
+    "same_mesh_comparison": {
+      "phase_gauge": "Exact saved complex SAFE columns and ordered root IDs at both original physical ends.",
+      "incident_powers_w": [
+        0.9999999999999999,
+        1.0,
+        1.0,
+        1.0,
+        0.9999999999999999
+      ],
+      "drives": [
+        {
+          "drive": 1,
+          "incident_root": 268,
+          "reflection_channels": [
+            {
+              "outgoing_root": 269,
+              "saved_real": -0.021821500820770497,
+              "saved_imag": 0.05788930429386048,
+              "delta_real": 1.786418235560916e-14,
+              "delta_imag": 1.499494972634352e-14,
+              "delta_absolute": 2.332332584624301e-14
+            },
+            {
+              "outgoing_root": 264,
+              "saved_real": 0.00027600132733501234,
+              "saved_imag": -0.0002119450921180175,
+              "delta_real": 1.1407866838675229e-14,
+              "delta_imag": -3.065839140718729e-14,
+              "delta_absolute": 3.271202209410542e-14
+            },
+            {
+              "outgoing_root": 259,
+              "saved_real": 0.00011732660643856109,
+              "saved_imag": 1.1356558523469836e-08,
+              "delta_real": 1.623023547156488e-15,
+              "delta_imag": 3.381492691506191e-14,
+              "delta_absolute": 3.385385484262616e-14
+            },
+            {
+              "outgoing_root": 243,
+              "saved_real": 2.081257984069545e-05,
+              "saved_imag": -0.00022743739959701952,
+              "delta_real": -3.893344929220208e-14,
+              "delta_imag": -2.2990127596794752e-14,
+              "delta_absolute": 4.5214593227246597e-14
+            },
+            {
+              "outgoing_root": 241,
+              "saved_real": -4.571893391852968e-05,
+              "saved_imag": 0.00048697277258125696,
+              "delta_real": 5.0475662332575416e-14,
+              "delta_imag": -8.075463041323783e-15,
+              "delta_absolute": 5.111756636660199e-14
+            }
+          ],
+          "reflection_all_outgoing_maximum_complex_change": 5.111756636660199e-14,
+          "transmission_channels": [
+            {
+              "outgoing_root": 268,
+              "saved_real": 0.9335810050513728,
+              "saved_imag": 0.35298428800091236,
+              "delta_real": 2.2870594307278225e-14,
+              "delta_imag": -1.8818280267396403e-14,
+              "delta_absolute": 2.961742318619883e-14
+            },
+            {
+              "outgoing_root": 263,
+              "saved_real": 0.00011085497665693562,
+              "saved_imag": -3.371480690459621e-05,
+              "delta_real": 1.2694774159834055e-14,
+              "delta_imag": -3.191419567852294e-14,
+              "delta_absolute": 3.4346370649258454e-14
+            },
+            {
+              "outgoing_root": 258,
+              "saved_real": 0.0005931981649406398,
+              "saved_imag": -0.00034651538668234395,
+              "delta_real": 5.425564511551961e-15,
+              "delta_imag": -2.8100406116587928e-14,
+              "delta_absolute": 2.861939157610071e-14
+            },
+            {
+              "outgoing_root": 242,
+              "saved_real": 0.00040317083024507777,
+              "saved_imag": 0.00019364018943776294,
+              "delta_real": -2.593557963878612e-14,
+              "delta_imag": -2.2426288256993665e-14,
+              "delta_absolute": 3.428691727445891e-14
+            },
+            {
+              "outgoing_root": 240,
+              "saved_real": 0.00022370253607994405,
+              "saved_imag": -0.00029708060146022545,
+              "delta_real": -1.5837862705342376e-14,
+              "delta_imag": 3.0897051410405663e-15,
+              "delta_absolute": 1.6136423796239593e-14
+            }
+          ],
+          "transmission_all_outgoing_maximum_complex_change": 3.4346370649258454e-14,
+          "power": {
+            "reflection": {
+              "reconstructed": 0.0038277757063228733,
+              "saved": 0.0038277757063219023,
+              "delta": 9.710114656780178e-16
+            },
+            "transmission": {
+              "reconstructed": 0.9961722242937118,
+              "saved": 0.9961722242936825,
+              "delta": 2.930988785010413e-14
+            },
+            "power_balance": {
+              "reconstructed": -3.4638958368304884e-14,
+              "saved": -4.3298697960381105e-15,
+              "delta": -3.0309088572266774e-14
+            },
+            "reflection_flux": {
+              "reconstructed": 0.0038277757063232298,
+              "saved": 0.003827775706322018,
+              "delta": 1.2117043479697998e-15
+            },
+            "transmission_flux": {
+              "reconstructed": 0.996172224293709,
+              "saved": 0.9961722242936774,
+              "delta": 3.164135620181696e-14
+            },
+            "flux_power_balance": {
+              "reconstructed": -3.219646771412954e-14,
+              "saved": 6.661338147750939e-16,
+              "delta": -3.2862601528904634e-14
+            }
+          },
+          "net_outward_power_ratio": 3.053113317719181e-14
+        },
+        {
+          "drive": 2,
+          "incident_root": 263,
+          "reflection_channels": [
+            {
+              "outgoing_root": 269,
+              "saved_real": 0.00027600132731520744,
+              "saved_imag": -0.00021194509200472014,
+              "delta_real": -1.6260701552611723e-14,
+              "delta_imag": -3.054249019494859e-14,
+              "delta_absolute": 3.4601360121990006e-14
+            },
+            {
+              "outgoing_root": 264,
+              "saved_real": -0.022136450640162727,
+              "saved_imag": -0.20326484196653782,
+              "delta_real": 5.6701171535777917e-14,
+              "delta_imag": -1.3711254354120683e-13,
+              "delta_absolute": 1.4837409628998267e-13
+            },
+            {
+              "outgoing_root": 259,
+              "saved_real": 0.0005982914150360439,
+              "saved_imag": -0.0005468535548415104,
+              "delta_real": -7.268491364342822e-16,
+              "delta_imag": -1.5400094394157904e-13,
+              "delta_absolute": 1.540026592126399e-13
+            },
+            {
+              "outgoing_root": 243,
+              "saved_real": 0.00042231244272731037,
+              "saved_imag": 0.0003859742809995831,
+              "delta_real": -4.8934868743938376e-14,
+              "delta_imag": -9.18861341181465e-17,
+              "delta_absolute": 4.8934955012221277e-14
+            },
+            {
+              "outgoing_root": 241,
+              "saved_real": -0.00019523704776602165,
+              "saved_imag": -0.00038411505944730193,
+              "delta_real": -6.036775354774371e-14,
+              "delta_imag": 4.599532560378705e-14,
+              "delta_absolute": 7.589358105794924e-14
+            }
+          ],
+          "reflection_all_outgoing_maximum_complex_change": 1.540026592126399e-13,
+          "transmission_channels": [
+            {
+              "outgoing_root": 268,
+              "saved_real": -0.00013961688457494624,
+              "saved_imag": 1.0752013379236792e-06,
+              "delta_real": -2.175215845119649e-14,
+              "delta_imag": -5.3969452587916645e-14,
+              "delta_absolute": 5.818812774033327e-14
+            },
+            {
+              "outgoing_root": 263,
+              "saved_real": 0.9729876763033563,
+              "saved_imag": -0.10717349693389981,
+              "delta_real": -9.947598300641403e-14,
+              "delta_imag": -1.5783208073827382e-13,
+              "delta_absolute": 1.8656483298109897e-13
+            },
+            {
+              "outgoing_root": 258,
+              "saved_real": 0.0005096700686713427,
+              "saved_imag": 0.0004567444759539397,
+              "delta_real": 7.549896038211434e-14,
+              "delta_imag": -3.441864848685583e-14,
+              "delta_absolute": 8.297431158160829e-14
+            },
+            {
+              "outgoing_root": 242,
+              "saved_real": -0.00047526585721621554,
+              "saved_imag": 0.00030222358704566106,
+              "delta_real": -3.751426252973644e-14,
+              "delta_imag": -1.6128374677459867e-14,
+              "delta_absolute": 4.083435273010356e-14
+            },
+            {
+              "outgoing_root": 240,
+              "saved_real": 0.00024099801606744625,
+              "saved_imag": 0.00022502336779477223,
+              "delta_real": 1.5039353226317664e-13,
+              "delta_imag": -1.405673537638319e-14,
+              "delta_absolute": 1.5104901971226698e-13
+            }
+          ],
+          "transmission_all_outgoing_maximum_complex_change": 1.86564832981099e-13,
+          "power": {
+            "reflection": {
+              "reconstructed": 0.04180790951139035,
+              "saved": 0.041807909511336984,
+              "delta": 5.3367033014950493e-14
+            },
+            "transmission": {
+              "reconstructed": 0.9581920904885033,
+              "saved": 0.9581920904886625,
+              "delta": -1.5920598173124745e-13
+            },
+            "power_balance": {
+              "reconstructed": 1.0635936575909e-13,
+              "saved": 5.551115123125783e-16,
+              "delta": 1.0580425424677742e-13
+            },
+            "reflection_flux": {
+              "reconstructed": 0.041807909511392585,
+              "saved": 0.04180790951133963,
+              "delta": 5.295763827461997e-14
+            },
+            "transmission_flux": {
+              "reconstructed": 0.9581920904884966,
+              "saved": 0.9581920904886574,
+              "delta": -1.6076029396572267e-13
+            },
+            "flux_power_balance": {
+              "reconstructed": 1.1080025785759062e-13,
+              "saved": 2.9976021664879227e-15,
+              "delta": 1.078026556911027e-13
+            }
+          },
+          "net_outward_power_ratio": -1.1468603844377867e-13
+        },
+        {
+          "drive": 3,
+          "incident_root": 258,
+          "reflection_channels": [
+            {
+              "outgoing_root": 269,
+              "saved_real": 0.00011732660650558926,
+              "saved_imag": 1.1356440603861887e-08,
+              "delta_real": 2.544160357647457e-14,
+              "delta_imag": 2.5669649260938387e-14,
+              "delta_absolute": 3.6141473209072125e-14
+            },
+            {
+              "outgoing_root": 264,
+              "saved_real": 0.0005982914149483244,
+              "saved_imag": -0.0005468535549506036,
+              "delta_real": -1.3617687706635184e-14,
+              "delta_imag": -1.9346937246700335e-14,
+              "delta_absolute": 2.365893909927501e-14
+            },
+            {
+              "outgoing_root": 259,
+              "saved_real": 0.00754135598297004,
+              "saved_imag": 0.059067653417338974,
+              "delta_real": -3.955776678443712e-13,
+              "delta_imag": 5.4414805994440485e-14,
+              "delta_absolute": 3.99302720261964e-13
+            },
+            {
+              "outgoing_root": 243,
+              "saved_real": -0.006775658600934287,
+              "saved_imag": -0.014763240438249807,
+              "delta_real": 1.8316945182839106e-13,
+              "delta_imag": 1.214306433183765e-13,
+              "delta_absolute": 2.1976453130527694e-13
+            },
+            {
+              "outgoing_root": 241,
+              "saved_real": -0.5737840357215545,
+              "saved_imag": -0.4768731538534368,
+              "delta_real": 2.489120021209601e-13,
+              "delta_imag": 7.654987754790454e-14,
+              "delta_absolute": 2.6041710495369546e-13
+            }
+          ],
+          "reflection_all_outgoing_maximum_complex_change": 3.99302720261964e-13,
+          "transmission_channels": [
+            {
+              "outgoing_root": 268,
+              "saved_real": 0.0004288851356937969,
+              "saved_imag": 0.0002547976249094768,
+              "delta_real": 8.456397474626565e-15,
+              "delta_imag": 6.802745216097361e-14,
+              "delta_absolute": 6.855103869207543e-14
+            },
+            {
+              "outgoing_root": 263,
+              "saved_real": 6.551910888476666e-05,
+              "saved_imag": -0.00021983178931120125,
+              "delta_real": -4.7360905345086857e-14,
+              "delta_imag": -4.344885996127035e-15,
+              "delta_absolute": 4.7559787525025986e-14
+            },
+            {
+              "outgoing_root": 258,
+              "saved_real": -0.6042736458159582,
+              "saved_imag": -0.26658726745675276,
+              "delta_real": -1.8107737531636303e-13,
+              "delta_imag": -3.3284486278262193e-13,
+              "delta_absolute": 3.789125473407359e-13
+            },
+            {
+              "outgoing_root": 242,
+              "saved_real": 0.0022349578519790356,
+              "saved_imag": -0.018590158311320104,
+              "delta_real": 2.804904745967729e-13,
+              "delta_imag": -1.0901002323038256e-14,
+              "delta_absolute": 2.807022233456119e-13
+            },
+            {
+              "outgoing_root": 240,
+              "saved_real": -0.050693725699871524,
+              "saved_imag": 0.02042859861175326,
+              "delta_real": 7.512740429760356e-14,
+              "delta_imag": -2.9860142136683976e-13,
+              "delta_absolute": 3.079073492445294e-13
+            }
+          ],
+          "transmission_all_outgoing_maximum_complex_change": 3.7891254734073586e-13,
+          "power": {
+            "reflection": {
+              "reconstructed": 0.5604465178296407,
+              "saved": 0.5604465178300051,
+              "delta": -3.643751966819764e-13
+            },
+            "transmission": {
+              "reconstructed": 0.4395534821704191,
+              "saved": 0.43955348217004103,
+              "delta": 3.7808645103609706e-13
+            },
+            "power_balance": {
+              "reconstructed": -5.984102102729594e-14,
+              "saved": -4.6129766673175254e-14,
+              "delta": -1.3711254354120683e-14
+            },
+            "reflection_flux": {
+              "reconstructed": 0.560446517829656,
+              "saved": 0.5604465178300253,
+              "delta": -3.6926017799032707e-13
+            },
+            "transmission_flux": {
+              "reconstructed": 0.43955348217041124,
+              "saved": 0.4395534821700355,
+              "delta": 3.7575498268438423e-13
+            },
+            "flux_power_balance": {
+              "reconstructed": -6.727951529228449e-14,
+              "saved": -6.078471059822732e-14,
+              "delta": -6.494804694057166e-15
+            }
+          },
+          "net_outward_power_ratio": 5.440092820663267e-15
+        },
+        {
+          "drive": 4,
+          "incident_root": 242,
+          "reflection_channels": [
+            {
+              "outgoing_root": 269,
+              "saved_real": 2.0812579832877418e-05,
+              "saved_imag": -0.0002274373996612241,
+              "delta_real": -4.2175938848136585e-15,
+              "delta_imag": -4.6523115221352995e-15,
+              "delta_absolute": 6.279498441452982e-15
+            },
+            {
+              "outgoing_root": 264,
+              "saved_real": 0.00042231244271434873,
+              "saved_imag": 0.00038597428105283983,
+              "delta_real": -3.161154064207361e-15,
+              "delta_imag": -2.847738321196114e-14,
+              "delta_absolute": 2.8652299203005345e-14
+            },
+            {
+              "outgoing_root": 259,
+              "saved_real": -0.006775658601003794,
+              "saved_imag": -0.014763240437655643,
+              "delta_real": 2.110507948960283e-13,
+              "delta_imag": 1.475937427830587e-13,
+              "delta_absolute": 2.575390279840263e-13
+            },
+            {
+              "outgoing_root": 243,
+              "saved_real": -0.026084957133909993,
+              "saved_imag": -0.15288601485598882,
+              "delta_real": 7.212633268416369e-14,
+              "delta_imag": 3.338995746560158e-14,
+              "delta_absolute": 7.948016813030368e-14
+            },
+            {
+              "outgoing_root": 241,
+              "saved_real": 0.007657587587514255,
+              "saved_imag": 0.013803780716252448,
+              "delta_real": 1.7119378831198517e-13,
+              "delta_imag": 1.497621471280297e-13,
+              "delta_absolute": 2.2745552063866555e-13
+            }
+          ],
+          "reflection_all_outgoing_maximum_complex_change": 2.575390279840263e-13,
+          "transmission_channels": [
+            {
+              "outgoing_root": 268,
+              "saved_real": -0.0004428709718797737,
+              "saved_imag": 0.00010615908322148065,
+              "delta_real": 1.8167975804339598e-14,
+              "delta_imag": -1.4590217055354682e-14,
+              "delta_absolute": 2.3301282766179026e-14
+            },
+            {
+              "outgoing_root": 263,
+              "saved_real": 0.0007000539057607127,
+              "saved_imag": 0.00012234537082946536,
+              "delta_real": 7.886768495224405e-14,
+              "delta_imag": -6.276446376518585e-16,
+              "delta_absolute": 7.887018237279281e-14
+            },
+            {
+              "outgoing_root": 258,
+              "saved_real": -0.01577771246117622,
+              "saved_imag": 0.015935300733957488,
+              "delta_real": 2.6549595855129837e-13,
+              "delta_imag": 9.270362255620057e-15,
+              "delta_absolute": 2.656577565655164e-13
+            },
+            {
+              "outgoing_root": 242,
+              "saved_real": 0.9731385179743441,
+              "saved_imag": -0.1656489684639763,
+              "delta_real": 1.7696955012524995e-13,
+              "delta_imag": 6.362688154126772e-13,
+              "delta_absolute": 6.604212497627441e-13
+            },
+            {
+              "outgoing_root": 240,
+              "saved_real": 0.022042084738959394,
+              "saved_imag": 0.002103395859263381,
+              "delta_real": 7.900971543683966e-14,
+              "delta_imag": 6.391415174888948e-14,
+              "delta_absolute": 1.0162457344161623e-13
+            }
+          ],
+          "transmission_all_outgoing_maximum_complex_change": 6.604212497627442e-13,
+          "power": {
+            "reflection": {
+              "reconstructed": 0.024567983839508475,
+              "saved": 0.024567983839522932,
+              "delta": -1.445718544879071e-14
+            },
+            "transmission": {
+              "reconstructed": 0.9754320161606905,
+              "saved": 0.9754320161605609,
+              "delta": 1.2967404927621828e-13
+            },
+            "power_balance": {
+              "reconstructed": -1.9895196601282805e-13,
+              "saved": -8.382183835919932e-14,
+              "delta": -1.1513012765362873e-13
+            },
+            "reflection_flux": {
+              "reconstructed": 0.024567983839509096,
+              "saved": 0.024567983839524125,
+              "delta": -1.5029644195863057e-14
+            },
+            "transmission_flux": {
+              "reconstructed": 0.9754320161606296,
+              "saved": 0.9754320161605027,
+              "delta": 1.268984917146554e-13
+            },
+            "flux_power_balance": {
+              "reconstructed": -1.3866685577568205e-13,
+              "saved": -2.6756374893466273e-14,
+              "delta": -1.1191048088221578e-13
+            }
+          },
+          "net_outward_power_ratio": 1.4033219031261979e-13
+        },
+        {
+          "drive": 5,
+          "incident_root": 240,
+          "reflection_channels": [
+            {
+              "outgoing_root": 269,
+              "saved_real": -4.571893393472868e-05,
+              "saved_imag": 0.0004869727724380471,
+              "delta_real": 6.811705469426596e-14,
+              "delta_imag": 3.621668936970579e-15,
+              "delta_absolute": 6.821326576341758e-14
+            },
+            {
+              "outgoing_root": 264,
+              "saved_real": -0.0001952370474626724,
+              "saved_imag": -0.00038411505929726385,
+              "delta_real": -3.023229995340049e-14,
+              "delta_imag": -2.5808782194713942e-14,
+              "delta_absolute": 3.975028551905712e-14
+            },
+            {
+              "outgoing_root": 259,
+              "saved_real": -0.5737840357214792,
+              "saved_imag": -0.47687315385346934,
+              "delta_real": 2.5413005033669833e-13,
+              "delta_imag": 6.661338147750939e-14,
+              "delta_absolute": 2.627154831295655e-13
+            },
+            {
+              "outgoing_root": 243,
+              "saved_real": 0.007657587588136172,
+              "saved_imag": 0.013803780716555459,
+              "delta_real": 8.963749881241156e-14,
+              "delta_imag": 1.3130642406711246e-13,
+              "delta_absolute": 1.5898508796310884e-13
+            },
+            {
+              "outgoing_root": 241,
+              "saved_real": 0.011360556554911349,
+              "saved_imag": -0.04308708151351811,
+              "delta_real": -8.428154008033317e-14,
+              "delta_imag": 1.7661566653615068e-13,
+              "delta_absolute": 1.9569484322363118e-13
+            }
+          ],
+          "reflection_all_outgoing_maximum_complex_change": 2.6271548312956547e-13,
+          "transmission_channels": [
+            {
+              "outgoing_root": 268,
+              "saved_real": 0.00023538025701917454,
+              "saved_imag": -8.433989537226154e-05,
+              "delta_real": 4.343853293557742e-14,
+              "delta_imag": 2.2809472409804354e-14,
+              "delta_absolute": 4.9063002101470216e-14
+            },
+            {
+              "outgoing_root": 263,
+              "saved_real": -0.00017025756575779063,
+              "saved_imag": 0.0005567031759062967,
+              "delta_real": -2.3689627733428087e-14,
+              "delta_imag": 5.352706125560935e-16,
+              "delta_absolute": 2.3695674220774376e-14
+            },
+            {
+              "outgoing_root": 258,
+              "saved_real": -0.05102116829314706,
+              "saved_imag": 0.018293128864352623,
+              "delta_real": -5.959815974065918e-14,
+              "delta_imag": 1.896295620529287e-13,
+              "delta_absolute": 1.987745241444654e-13
+            },
+            {
+              "outgoing_root": 242,
+              "saved_real": -0.019587104451797004,
+              "saved_imag": -0.0038566239294796855,
+              "delta_real": 1.4389531233227615e-13,
+              "delta_imag": -5.66573697680095e-14,
+              "delta_absolute": 1.546477237473357e-13
+            },
+            {
+              "outgoing_root": 240,
+              "saved_real": 0.36548009559430483,
+              "saved_imag": 0.5515580483110997,
+              "delta_real": -1.4732659536775827e-13,
+              "delta_imag": 4.157785227221211e-13,
+              "delta_absolute": 4.411087231733743e-13
+            }
+          ],
+          "transmission_all_outgoing_maximum_complex_change": 4.4110872317337427e-13,
+          "power": {
+            "reflection": {
+              "reconstructed": 0.5588712912575314,
+              "saved": 0.5588712912578987,
+              "delta": -3.672617765460018e-13
+            },
+            "transmission": {
+              "reconstructed": 0.44112870874246307,
+              "saved": 0.44112870874210414,
+              "delta": 3.589351038613131e-13
+            },
+            "power_balance": {
+              "reconstructed": 5.495603971894525e-15,
+              "saved": -2.831068712794149e-15,
+              "delta": 8.326672684688674e-15
+            },
+            "reflection_flux": {
+              "reconstructed": 0.5588712912575149,
+              "saved": 0.5588712912578772,
+              "delta": -3.622657729351886e-13
+            },
+            "transmission_flux": {
+              "reconstructed": 0.4411287087424849,
+              "saved": 0.44112870874212246,
+              "delta": 3.6243230638888235e-13
+            },
+            "flux_power_balance": {
+              "reconstructed": 2.220446049250313e-16,
+              "saved": 3.885780586188048e-16,
+              "delta": -1.6653345369377348e-16
+            }
+          },
+          "net_outward_power_ratio": 2.1871393585115587e-14
+        }
+      ],
+      "maximum_complex_coefficient_change": 6.604212497627442e-13,
+      "maximum_power_or_flux_change": 3.7808645103609706e-13,
+      "relative_displacement_l2_changes": [
+        2.5798655715802154e-13,
+        4.092088782385111e-13,
+        7.12948041184012e-13,
+        6.338368959460052e-13,
+        5.931230577885131e-13
+      ],
+      "same_mesh_comparison_limit": 1e-08,
+      "power_error_limit": 0.01,
+      "power_errors": {
+        "modal_power_closure": 1.9895196601282805e-13,
+        "nodal_flux_closure": 1.3866685577568205e-13,
+        "net_outward_flux": 1.4033219031261979e-13,
+        "modal_vs_nodal_flux": 6.09512440519211e-14,
+        "coherent_nodal_flux": {
+          "power_closure": 2.42935841358809e-13,
+          "net_outward_flux": 2.092472218345936e-13
+        }
+      },
+      "passed": true
+    },
+    "status": "accepted"
+  },
+  "result_sha256": "d8d2b3468daf5bcfd079b39f057fbd9c2860f6307a780c5e0eae6bff94e12cc4"
+}

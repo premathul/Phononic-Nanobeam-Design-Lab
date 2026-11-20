@@ -1,0 +1,140 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "frequency_hz": 997500000,
+  "section_arrays": {
+    "path": "mid150_section_AP_pnc.npz",
+    "sha256": "249fa427164ab548bd6006b10fdb7002bb03589e26385074cbbf053e5dbf1d63",
+    "bytes": 12971
+  },
+  "section_metadata": {
+    "path": "mid150_section_AP_pnc.json",
+    "sha256": "c343afe5a818f577d3bae5e9b8b66cd47fc066c0e8028e1a92df6d725849cc52",
+    "bytes": 6700
+  },
+  "mode_arrays": {
+    "path": "mid150_997p5MHz_modes_AP_pnc.npz",
+    "sha256": "e4243435c7294b2b99acab6dddbb275f2f6f3d167774691d6dbccdbcdceecddb",
+    "bytes": 489248
+  },
+  "status": "accepted",
+  "metrics": {
+    "discrete_roots": 270,
+    "maximum_eigen_backward_residual": 1.7524617370461892e-15,
+    "maximum_relative_traction_error": 5.349868690137444e-16,
+    "maximum_modal_power_difference_w": 2.6951162521040287e-15,
+    "maximum_saved_backward_residual_difference": 1.084441964474279e-17,
+    "minimum_open_relative_power": 0.29844783972228994,
+    "root_partner_checks": {
+      "conjugation": {
+        "maximum_mismatch_rad_m": 1.1026859283447266e-06,
+        "maximum_scaled_mismatch": 3.397817865048148e-14
+      },
+      "reciprocity": {
+        "maximum_mismatch_rad_m": 0.0,
+        "maximum_scaled_mismatch": 0.0
+      }
+    },
+    "open_channels": [
+      {
+        "root_id": 268,
+        "direction": "positive",
+        "k_real_rad_m": 1442830.7328174794,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": 1.0,
+        "eigen_backward_residual": 1.2038719248661497e-15
+      },
+      {
+        "root_id": 264,
+        "direction": "positive",
+        "k_real_rad_m": 2381869.4516804395,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": 1.0,
+        "eigen_backward_residual": 1.3376719759012073e-15
+      },
+      {
+        "root_id": 262,
+        "direction": "positive",
+        "k_real_rad_m": 2791683.91748105,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": 0.9999999999999988,
+        "eigen_backward_residual": 1.1005611905186495e-15
+      },
+      {
+        "root_id": 246,
+        "direction": "positive",
+        "k_real_rad_m": 4867325.4063718775,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": 1.0000000000000007,
+        "eigen_backward_residual": 1.5067213317601326e-15
+      },
+      {
+        "root_id": 241,
+        "direction": "positive",
+        "k_real_rad_m": 5903194.1380643565,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": 1.0000000000000004,
+        "eigen_backward_residual": 1.7524617370461892e-15
+      },
+      {
+        "root_id": 269,
+        "direction": "negative",
+        "k_real_rad_m": -1442830.7328174794,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": -1.0,
+        "eigen_backward_residual": 1.2038719248661497e-15
+      },
+      {
+        "root_id": 265,
+        "direction": "negative",
+        "k_real_rad_m": -2381869.4516804395,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": -1.0,
+        "eigen_backward_residual": 1.3376719759012073e-15
+      },
+      {
+        "root_id": 263,
+        "direction": "negative",
+        "k_real_rad_m": -2791683.91748105,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": -0.9999999999999988,
+        "eigen_backward_residual": 1.1005611905186495e-15
+      },
+      {
+        "root_id": 247,
+        "direction": "negative",
+        "k_real_rad_m": -4867325.4063718775,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": -1.0000000000000007,
+        "eigen_backward_residual": 1.5067213317601326e-15
+      },
+      {
+        "root_id": 242,
+        "direction": "negative",
+        "k_real_rad_m": -5903194.1380643565,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": -1.0000000000000004,
+        "eigen_backward_residual": 1.7524617370461892e-15
+      }
+    ],
+    "coincident_propagating_root_groups": [],
+    "degeneracy_status": "none_detected",
+    "positive_open_channels": 5,
+    "positive_flux_gram_error_w": 2.2756198243831884e-13,
+    "positive_basis_condition": 15.23155709788377,
+    "negative_open_channels": 5,
+    "negative_flux_gram_error_w": 2.2756198243831884e-13,
+    "negative_basis_condition": 15.231557097884503
+  },
+  "cutoff_status": "solver_resolved_at_sample",
+  "minimum_abs_k_times_width": 1.4428307328174796,
+  "minimum_closed_abs_imag_k_times_width": 1.4780981087642808,
+  "source_git_commit": "53ad5944d674ab411d289d04c246cabb9d65ec09",
+  "resources": {
+    "peak_process_memory_mib": 83.1171875,
+    "system_available_memory_mib_at_start": 2801.42578125,
+    "process_lifetime_peak_working_set_mib": 86.84765625,
+    "elapsed_seconds": 0.09676899999612942
+  }
+}

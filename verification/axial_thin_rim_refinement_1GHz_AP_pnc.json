@@ -1,0 +1,318 @@
+{
+  "schema_version": 1,
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "status": "completed_finite_rim_refinement",
+  "frequency_hz": 1000000000.0,
+  "incident_side": "left",
+  "hole_count": 26,
+  "physical_thickness_nm": 100,
+  "quadratic_layers": 2,
+  "central_target_nm": 400,
+  "lead_target_nm": 150,
+  "reference_planes_x_m": [
+    0.0,
+    1.665e-05
+  ],
+  "maps": {
+    "rim32": {
+      "map_directory": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_1GHz",
+      "configuration": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_configuration_AP_pnc.json",
+        "sha256": "d1f439458fe8c5f32bee2fdaa89406ca35970a762bc4e84e57a1d6d8688c3d83",
+        "bytes": 1214
+      },
+      "rim_segments_per_hole": 32,
+      "incident_channels_checked": 5,
+      "body_dofs": 69435,
+      "port_dofs": 135,
+      "source_git_commit": "a978f99cf9628889a3a31a6328c331f4298c6358",
+      "map_driver_sha256": "11b1dfe118606271a5c2710eae30b4081fb448a660b87eee58283550f7e1acce",
+      "maximum_numerical_checks": {
+        "maximum_relative_residual": 1.5683225542364356e-12,
+        "maximum_relative_backward_residual": 3.436409189923783e-16,
+        "maximum_port_relative_residual": 2.6933126604689146e-15,
+        "maximum_native_power_error": 2.728928194528635e-13
+      },
+      "independent_flux_checks": {
+        "maximum_nodal_force_relative_residual": 1.5747806627025967e-12,
+        "maximum_single_drive_power_error": 2.728928194528635e-13,
+        "coherent_defect_spectral_norm": 2.8465163559411147e-12,
+        "maximum_flux_gram_entry_error_W": 1.7451533268173944e-12
+      },
+      "archive": {
+        "map": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_1GHz/map_AP_pnc.json",
+          "sha256": "c4d6d6e7f0f63c777cd8d84faa2405632d6f7884073877968b3a94d7d0bf5dad",
+          "bytes": 14050
+        },
+        "checkpoint": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_1GHz/checkpoint_AP_pnc.json",
+          "sha256": "c1944b806eba75c5796a0290fa3f2bf11abd7d4ea48ab3c927c8d0d67a4ded8f",
+          "bytes": 11187
+        },
+        "point_summary": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_1GHz/point-001/attempt-u9p60vf3/historical_26hole_regional_100nm-9d56e228b6b6/summary_AP_pnc.json",
+          "sha256": "9ba5309de078178e780c9ff89af9006b007847c857df0642eba637a2ba11c0d2",
+          "bytes": 14186
+        },
+        "mesh": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_1GHz/shared-tgpv1eb_/_meshes/a2d3b3e2c4704453d98ab020faf8e4693b3bbd713446dbb667a038eceefa5fc4/mesh_AP_pnc.npz",
+          "sha256": "4236cbfb3a583081a5e72f07ddd033817a724b2e622a77309cc0f17ef27589d4",
+          "bytes": 98409
+        },
+        "port_section": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_1GHz/shared-tgpv1eb_/port_section_AP_pnc.npz",
+          "sha256": "7c216bd8f40d38fb22000acec0e3b01a4e9ba7c9bbaf8bc92dec0b39e8846930",
+          "bytes": 588030
+        },
+        "independent_flux_replay": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_flux_AP_pnc.json",
+          "sha256": "07db24df7efb013c1001ae14f11bb63b2edc245ce2b75d8f830ee5fa2d7da635",
+          "bytes": 8997
+        }
+      },
+      "native_axial_drive": {
+        "drive": 1,
+        "root": 268,
+        "k_rad_m": 1446421.5752191825,
+        "axial_kinetic_energy_fraction": 0.9798595749498722,
+        "T": 0.9950441790614645,
+        "R": 0.004955820938507334
+      },
+      "independent_axial_flux": {
+        "T": 0.9950441790614675,
+        "R": 0.004955820938506476
+      }
+    },
+    "rim48": {
+      "map_directory": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_rim48_1GHz",
+      "configuration": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_rim48_configuration_AP_pnc.json",
+        "sha256": "3a300513c488796bfa71a10b91785940d9a4cc0f2ef325c7187eb20a6780c973",
+        "bytes": 1214
+      },
+      "rim_segments_per_hole": 48,
+      "incident_channels_checked": 5,
+      "body_dofs": 89835,
+      "port_dofs": 135,
+      "source_git_commit": "dad9673e107d060da6d65de093dd74f401a68f18",
+      "map_driver_sha256": "11b1dfe118606271a5c2710eae30b4081fb448a660b87eee58283550f7e1acce",
+      "maximum_numerical_checks": {
+        "maximum_relative_residual": 2.2326726418936214e-12,
+        "maximum_relative_backward_residual": 7.122415984168565e-16,
+        "maximum_port_relative_residual": 2.6933126604689146e-15,
+        "maximum_native_power_error": 1.822986206434507e-13
+      },
+      "independent_flux_checks": {
+        "maximum_nodal_force_relative_residual": 2.2102549849448163e-12,
+        "maximum_single_drive_power_error": 1.822986206434507e-13,
+        "coherent_defect_spectral_norm": 3.093021502112821e-12,
+        "maximum_flux_gram_entry_error_W": 1.7451533268173944e-12
+      },
+      "archive": {
+        "map": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_rim48_1GHz/map_AP_pnc.json",
+          "sha256": "0b7ffde111afbf643d40bac1f295ed7625457fb08c929dd18091234b856b08fd",
+          "bytes": 14043
+        },
+        "checkpoint": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_rim48_1GHz/checkpoint_AP_pnc.json",
+          "sha256": "094c4a0abd0c45589b7ce3e3a139adaf2a423a0d8023ca12cc8c1f3a148876d6",
+          "bytes": 11176
+        },
+        "point_summary": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_rim48_1GHz/point-001/attempt-5_26fu47/historical_26hole_regional_100nm-42401ad0cf28/summary_AP_pnc.json",
+          "sha256": "4a3c8a364f39476851d95745a92ef6ba8433c9ab38b8f4cf7a7127c8033a7889",
+          "bytes": 14202
+        },
+        "mesh": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_rim48_1GHz/shared-tzywyi_l/_meshes/47ec0268c7fd623916ad28b8cf9e3f8ba8b856b166c8a20e37b9a1f9643b893b/mesh_AP_pnc.npz",
+          "sha256": "b678d78df0747d36f59331f25b948abec4c645d1bed001cd59d6183b957fc3a6",
+          "bytes": 126182
+        },
+        "port_section": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_rim48_1GHz/shared-tzywyi_l/port_section_AP_pnc.npz",
+          "sha256": "623c15cbc77bbad2d19737deeaa18858797969978a908723998a7b59763fb689",
+          "bytes": 588030
+        },
+        "independent_flux_replay": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_rim48_flux_AP_pnc.json",
+          "sha256": "e2d9d6abf84b33a862e38757c6c9a136fa1f24219b3477827bf3812f17c21449",
+          "bytes": 8988
+        }
+      },
+      "native_axial_drive": {
+        "drive": 1,
+        "root": 268,
+        "k_rad_m": 1446421.5752191825,
+        "axial_kinetic_energy_fraction": 0.9798595749498722,
+        "T": 0.9950614329498838,
+        "R": 0.0049385670501027445
+      },
+      "independent_axial_flux": {
+        "T": 0.9950614329498874,
+        "R": 0.004938567050102988
+      }
+    }
+  },
+  "mode_match": {
+    "reference_to_candidate_overlap": 0.9999999999999999,
+    "candidate_to_reference_overlap": 0.9999999999999999,
+    "reference_to_candidate_best_competing_overlap": 9.298805016652975e-06,
+    "candidate_to_reference_best_competing_overlap": 9.298805016652975e-06,
+    "method": "Reciprocal interpolation at fixed y and z/thickness, with each target's mass matrix."
+  },
+  "geometry_checks": {
+    "exact_shared_lead_tetrahedra": {
+      "left": 600,
+      "right": 600
+    },
+    "exact_shared_cut_port_triangles": {
+      "left_port": 16,
+      "left_cut": 16,
+      "right_cut": 16,
+      "right_port": 16
+    },
+    "identical_ordered_section_arrays": [
+      "points_m",
+      "triangles",
+      "K0",
+      "M",
+      "Q",
+      "G",
+      "reference_speed_m_s"
+    ],
+    "central_tetrahedra": {
+      "rim32": 9936,
+      "rim48": 12768
+    },
+    "exact_shared_central_tetrahedra": 0
+  },
+  "power_changes_32_to_48_segments": {
+    "T": {
+      "signed_change_percentage_points": 0.0017253888419332952,
+      "relative_change_percent": 0.0017339821469642676
+    },
+    "R": {
+      "signed_change_percentage_points": -0.0017253888404589537,
+      "relative_change_percent": -0.34815399141088244
+    }
+  },
+  "reflection_comparison_for_scale": {
+    "rim_change_absolute_percentage_points": 0.0017253888404589537,
+    "earlier_thin_minus_thick_signed_percentage_points": -0.020886779277665482,
+    "absolute_rim_change_over_absolute_thickness_contrast": 0.08260674455941303
+  },
+  "original_numerical_limits": {
+    "original_equation_and_nodal_force_relative_residuals": 1e-09,
+    "native_port_relative_residual": 1e-08,
+    "single_drive_and_coherent_power_defect": 0.01,
+    "flux_gram_entry_W": 1e-07
+  },
+  "execution": {
+    "guarded_execution_receipts": {
+      "mesh": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/local_checks/thin100_central400_rim48_mesh_execution_AP_pnc.json",
+        "sha256": "de4b6ee49d5b26fedd81d31e7a1bceeb153537e40a4faca165ad23e18a195c99",
+        "bytes": 1750
+      },
+      "preparation": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/local_checks/thin100_central400_rim48_preparation_execution_AP_pnc.json",
+        "sha256": "e1cfd39101785fcbb6bd055a59c817ee0b70e8e1b5c13d9c2a5f19cfa508bd8c",
+        "bytes": 1906
+      },
+      "response": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/local_checks/thin100_central400_rim48_response_execution_AP_pnc.json",
+        "sha256": "3bdcb97be593ebc648df9c75100eb975de660d3afd530d18efebd38ddb2abdf6",
+        "bytes": 2356
+      },
+      "flux": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/local_checks/thin100_central400_rim48_flux_execution_AP_pnc.json",
+        "sha256": "70c44b305e290c502e9bec369ffc22df410c700c84d7377dcc2b705ea99cba16",
+        "bytes": 1768
+      }
+    },
+    "response_resources": {
+      "host_platform": "Windows-11-10.0.26200-SP0",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "BLIS_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1"
+      },
+      "elapsed_seconds": 10.218,
+      "sample_interval_seconds": 0.05,
+      "peak_sampled_process_tree_rss_sum_bytes": 1460727808,
+      "peak_sampled_process_tree_private_sum_bytes": 7444393984,
+      "min_sampled_commit_available_bytes": 3357732864,
+      "min_sampled_physical_available_bytes": 4249739264,
+      "actual_K_nonzeros": 5738763,
+      "actual_M_nonzeros": 1969377
+    }
+  },
+  "provenance": {
+    "replay": {
+      "path": "results/runs/physical_thickness_device_AP_pnc/compare_axial_rim48_AP_pnc.py",
+      "sha256": "31a6afe38c055fbafed13d3d71f1d99fd69fe8c2ce9d5ba507e9b0aafc0ed991",
+      "bytes": 13478
+    },
+    "public_comparator": {
+      "path": "tools/compare_axial_device_power_AP_pnc.py",
+      "sha256": "1851b1add644071a25d5e1edfe17a97fd8682b9d7de01e3c0a9607fcbedf8f46",
+      "bytes": 15060
+    },
+    "acceptance_replay_reader": {
+      "path": "results/runs/physical_thickness_device_AP_pnc/compare_thickness_AP_pnc.py",
+      "sha256": "ef70b27b6536ddff78ed6bab1ca05ba9ceded8fa8ad9ae86d46eec13282af999",
+      "bytes": 17838
+    },
+    "prior_thickness_comparison": {
+      "path": "verification/axial_device_three_layer_pairs_1GHz_AP_pnc.json",
+      "sha256": "68886e2108af7635a512ca2dcdc6144f318e2c9bbbe55d0d109f54689cbeaf9e",
+      "bytes": 17750
+    },
+    "geometry": {
+      "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_rim48_geometry_AP_pnc.json",
+      "sha256": "e0b917a1b684c21eb5bd9b3fd094a5b36c650992caa2638baa9fbbe886b39f6b",
+      "bytes": 7597
+    },
+    "hole_pattern_csv": {
+      "path": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+      "sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+      "bytes": 608
+    },
+    "geometry_sources": [
+      {
+        "path": "results/runs/physical_thickness_device_AP_pnc/check_thin400_rim48_geometry_AP_pnc.py",
+        "sha256": "1be478e101baf340ba87a7cb202ee1eeb83f294680c74eff7926113ad31c1e0b",
+        "bytes": 11473
+      },
+      {
+        "path": "results/runs/regional_mesh_AP_pnc/local_checks/check_regional_lead_geometry_AP_pnc.py",
+        "sha256": "fc8a180cfe4db7bf029b17ad0f770bee844bbbc715469068bcabc2d448ab274f",
+        "bytes": 5980
+      },
+      {
+        "path": "tools/run_lawrence_device_refinement_AP_pnc.py",
+        "sha256": "50bb2bb36319b9a1d4af67ef1105a702381488d41df71a3ebfbc5ed1d5376535",
+        "bytes": 12210
+      }
+    ],
+    "independent_flux_sources": [
+      {
+        "path": "tools/replay_lawrence_device_point_AP_pnc.py",
+        "sha256": "83c98faae6f07071394fc472a1f44d96897258e09b6266db60402da63e06a6e0",
+        "bytes": 29228
+      },
+      {
+        "path": "results/runs/regional_mesh_AP_pnc/local_checks/replay_regional_flux_AP_pnc.py",
+        "sha256": "cd1e1aa30e8261a905e83b29fa328ca21342173931f7e3b631dfcd7ab6390e05",
+        "bytes": 7353
+      }
+    ]
+  },
+  "scope": "T and R are native power fractions for the matched axial drive. Changes subtract the 32-segment response from the 48-segment response and use the 32-segment power as the relative baseline. The changed segmentation remeshes the central region. The earlier thickness contrast provides scale only. The 200 nm device has no 48-segment result, so its paired contrast is unresolved.",
+  "limits": "Finite saved calculations at one frequency with the original physical sections and end planes. Normalized coordinates are used only for displacement matching; T and R are fractions of native incident power. This single-drive comparison leaves all-channel and complex-response failures in force. Weak reflection and relative changes near zero remain sensitive to discretization. Spatial and frequency convergence, a reflection floor, and continuous branch identity remain unresolved."
+}

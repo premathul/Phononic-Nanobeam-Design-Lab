@@ -2,6 +2,8 @@
 
 Research owner: **Athul Prem** | Project tag: **_AP_pnc**
 
+[Project home](README.md) · [Research status](docs/RESEARCH_STATUS_AP_pnc.md) · [Current execution handoff](docs/AI_HANDOFF_AP_pnc.md)
+
 ## Current direction
 
 The current goal is a usable configurable 3D simulator and reproducible straight 26-hole response dataset. Read README.md, docs/AI_HANDOFF_AP_pnc.md, docs/IMPLEMENTATION_PLAN_AP_pnc.md and the relevant physics specification before resuming. The handoff gives current ownership; the plan gives priorities and stop conditions. Historical detail belongs in the existing verification records, not repeated instruction blocks.
@@ -12,7 +14,7 @@ The configurable solver, Qt workbench, cached recovery and accepted device calcu
 
 Full-device spatial/frequency convergence remains unresolved. Low-band finite thickness/in-plane checks pass; the 0.8875 GHz weak-conversion and higher-frequency complex-response checks fail. The regional-energy and phase-only audits are complete and do not locate the error. Preserve original planes/phases and frequency-local channel identities. The proposed lead-interior-only control remains for research discussion under Athul's PR #48 comment; no mesh or solve is queued.
 
-Hourly development is active in the coordinating chat. Use GPT-6.2 Astra with ultra reasoning for leadership and GPT-6.2 Sol with ultra reasoning for implementation workers. Root owns authentication, transfers and jobs. Run larger simulations when a defined research question warrants them and measured CPU, memory and disk resources allow them. Send the user a Dot message when execution requires a new Lawrence login.
+Development is active in the coordinating chat with a ten-minute recovery heartbeat. On finishing a milestone, start its next justified calculation or implementation step in the same session. Continue until the agreed project outcome, a genuine blocker after independent work is complete, or a user stop. Keep the one-point limit per solver invocation for checkpointing. Use GPT-6.2 Astra with ultra reasoning for leadership and GPT-6.2 Sol with ultra reasoning for implementation workers. Root owns authentication, transfers and allocations. Run calculations with a projected peak above 10 GB (10,000,000,000 bytes) directly on Lawrence. Base the projection on measured cases. Small mesh and operator preparations may run locally within the limit. Request an interactive Lawrence compute allocation and invoke the runner directly on its compute node. Batch job submission is prohibited, including through scripts, recovery automation or notebooks. Reuse the existing JupyterLab for visibility. Send the user a Dot message when execution requires a new Lawrence login.
 
 Keep the plan and handoff compact. Delete obsolete empty templates, duplicate plans and rebuildable caches when no longer needed. Preserve raw scientific data, unique failures, necessary checkpoints and source/provenance evidence. Use Git history for superseded narrative; do not create another history dump. Architecture may change freely to deliver the latest reliable physics and a usable simulator; full historical archive recovery is not a prerequisite.
 

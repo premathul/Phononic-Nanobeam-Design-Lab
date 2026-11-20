@@ -1,0 +1,524 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "status": "mesh_ready",
+  "mesh_hash": "59cf0e5baa8527dbd9045f2848f87302107bd235af92ef618ecf16e87928824d",
+  "mesh_inputs": {
+    "dimensions_m": [
+      1.665e-05,
+      1.0000000000000002e-06,
+      1.0000000000000001e-07
+    ],
+    "pattern": {
+      "source_sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+      "holes": [
+        {
+          "x_m": 1.6250000000000005e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 2.1750000000000004e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 2.725e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 3.275000000000001e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 3.825000000000001e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 4.3750000000000005e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 4.925000000000001e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 5.475000000000001e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 6.015000000000001e-06,
+          "diameter_m": 2.55e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 6.545000000000001e-06,
+          "diameter_m": 2.6e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 7.065000000000001e-06,
+          "diameter_m": 2.65e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 7.575000000000001e-06,
+          "diameter_m": 2.7e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 8.075000000000001e-06,
+          "diameter_m": 2.75e-07,
+          "region": "Central cavity"
+        },
+        {
+          "x_m": 8.575e-06,
+          "diameter_m": 2.75e-07,
+          "region": "Central cavity"
+        },
+        {
+          "x_m": 9.075e-06,
+          "diameter_m": 2.7e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 9.585e-06,
+          "diameter_m": 2.65e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 1.0105e-05,
+          "diameter_m": 2.6e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 1.0635e-05,
+          "diameter_m": 2.55e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 1.1175e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror transition"
+        },
+        {
+          "x_m": 1.1725e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.2275e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.2825e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.3375e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.3925000000000001e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.4475000000000001e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.5025000000000001e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        }
+      ]
+    },
+    "settings": {
+      "kind": "layered",
+      "element_order": 2,
+      "mesh_size_nm": 400,
+      "port_size_nm": 250,
+      "circle_resolution": 32,
+      "thickness_layers": 2,
+      "lead_mesh_size_nm": 150,
+      "patterned_x_interval_nm": [
+        1000,
+        15650
+      ],
+      "central_max_edge_nm": 225.0
+    },
+    "source_sha256": {
+      "src/phononic/mesh_checkpoint_AP_pnc.py": "7fd1780e3c75f6a97f1c7f415bbd8c6e83c066fc5db3999774755910a689021d",
+      "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+      "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+      "src/phononic/layered_AP_pnc.py": "9242d11434e5004410fdb8d16b23e2405bf429ba93034fc08cee494d5aeae856",
+      "src/phononic/refinement/central_AP_pnc.py": "1fa13bd28dc0664f197b9a77f90fbbbaec3c0d68e0a4daf884f536b6c10926ca"
+    },
+    "packages": {
+      "numpy": "2.5.4",
+      "scikit-fem": "12.0.2",
+      "gmsh": "4.15.2"
+    },
+    "python": "3.12.12",
+    "platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28",
+    "taper_patch_refinement": {
+      "donors": {
+        "coarse": {
+          "directory": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge225_rim32",
+          "source_git_commit": "3965855c1c6847e0e9a60becd7ac22efbeb88279",
+          "checkpoint": {
+            "path": "checkpoint_AP_pnc.json",
+            "sha256": "317b486ae055d476c09e164c75a62c9f608da1d2891b766809734c0211627288",
+            "bytes": 11989
+          },
+          "assembly_source_git_commit": "3965855c1c6847e0e9a60becd7ac22efbeb88279",
+          "assembly_platform": "Windows-11-10.0.26200-SP0",
+          "mesh_hash": "59afe89e1e37a9f13a107cf18e41bc2616164e62afe0820ba1a1c4dd37b691a8",
+          "mesh": {
+            "path": "shared-9ltja0jy/_meshes/59afe89e1e37a9f13a107cf18e41bc2616164e62afe0820ba1a1c4dd37b691a8/mesh_AP_pnc.npz",
+            "sha256": "adb248795d69e4f9c2aac2fd0181c8e4e5828beb72b5dc8dc4fedc8d6b6fbbaf",
+            "bytes": 140111
+          },
+          "mesh_summary": {
+            "path": "shared-9ltja0jy/_meshes/59afe89e1e37a9f13a107cf18e41bc2616164e62afe0820ba1a1c4dd37b691a8/summary_AP_pnc.json",
+            "sha256": "f802f91ba64f844f2438a81c270f0a7984845dc68b5bc27b927713955d545b4f",
+            "bytes": 9807
+          },
+          "central_max_edge_nm": 225.0
+        },
+        "fine": {
+          "directory": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux",
+          "source_git_commit": null,
+          "checkpoint": {
+            "path": "checkpoint_AP_pnc.json",
+            "sha256": "8a8e2cf5a4dd1831c3615e158279aa6aa6f31bf1ff1b33e5dd18ec1070f13b5d",
+            "bytes": 15300
+          },
+          "assembly_source_git_commit": "3965855c1c6847e0e9a60becd7ac22efbeb88279",
+          "assembly_platform": "Windows-11-10.0.26200-SP0",
+          "mesh_hash": "401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a",
+          "mesh": {
+            "path": "shared-2m5o4mx7/_meshes/401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a/mesh_AP_pnc.npz",
+            "sha256": "33771e9f0ab3c7399549122407372f7dbc907908f181c664de3bf3c881210705",
+            "bytes": 217141
+          },
+          "mesh_summary": {
+            "path": "shared-2m5o4mx7/_meshes/401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a/summary_AP_pnc.json",
+            "sha256": "67f0c46e123e887e7ed4880d8cda7146aa51a76b1a10259a7fb78184795d326b",
+            "bytes": 9815
+          },
+          "central_max_edge_nm": 168.75
+        },
+        "hole_pattern_sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+        "reference_planes_x_m": [
+          0.0,
+          1.665e-05
+        ],
+        "nominal_mirror_cuts_x_m": [
+          5.745000000000001e-06,
+          1.0905000000000001e-05
+        ],
+        "regional_cuts_x_m": [
+          1.0000000000000002e-06,
+          1.565e-05
+        ]
+      },
+      "mesh_geometry_connectivity_sha256": "78f598f326d88101fcbed5104d01042dfa9408f106119b2cc3e22c35fd6c2085"
+    }
+  },
+  "hole_pattern_provenance": {
+    "author": "Athul Prem",
+    "file_tag": "_AP_pnc",
+    "source_csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+    "source_sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+    "x_offset_m": 8.325e-06,
+    "holes": [
+      {
+        "x_m": 1.6250000000000005e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 2.1750000000000004e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 2.725e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 3.275000000000001e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 3.825000000000001e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 4.3750000000000005e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 4.925000000000001e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 5.475000000000001e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 6.015000000000001e-06,
+        "diameter_m": 2.55e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 6.545000000000001e-06,
+        "diameter_m": 2.6e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 7.065000000000001e-06,
+        "diameter_m": 2.65e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 7.575000000000001e-06,
+        "diameter_m": 2.7e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 8.075000000000001e-06,
+        "diameter_m": 2.75e-07,
+        "region": "Central cavity"
+      },
+      {
+        "x_m": 8.575e-06,
+        "diameter_m": 2.75e-07,
+        "region": "Central cavity"
+      },
+      {
+        "x_m": 9.075e-06,
+        "diameter_m": 2.7e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 9.585e-06,
+        "diameter_m": 2.65e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 1.0105e-05,
+        "diameter_m": 2.6e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 1.0635e-05,
+        "diameter_m": 2.55e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 1.1175e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror transition"
+      },
+      {
+        "x_m": 1.1725e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.2275e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.2825e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.3375e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.3925000000000001e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.4475000000000001e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.5025000000000001e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      }
+    ],
+    "clearances": {
+      "min_side_ligament_m": 3.625000000000001e-07,
+      "min_end_ligament_m": 1.5000000000000005e-06,
+      "min_interhole_gap_m": 2.249999999999986e-07
+    },
+    "taper_patch_refinement": {
+      "donors": {
+        "coarse": {
+          "directory": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge225_rim32",
+          "source_git_commit": "3965855c1c6847e0e9a60becd7ac22efbeb88279",
+          "checkpoint": {
+            "path": "checkpoint_AP_pnc.json",
+            "sha256": "317b486ae055d476c09e164c75a62c9f608da1d2891b766809734c0211627288",
+            "bytes": 11989
+          },
+          "assembly_source_git_commit": "3965855c1c6847e0e9a60becd7ac22efbeb88279",
+          "assembly_platform": "Windows-11-10.0.26200-SP0",
+          "mesh_hash": "59afe89e1e37a9f13a107cf18e41bc2616164e62afe0820ba1a1c4dd37b691a8",
+          "mesh": {
+            "path": "shared-9ltja0jy/_meshes/59afe89e1e37a9f13a107cf18e41bc2616164e62afe0820ba1a1c4dd37b691a8/mesh_AP_pnc.npz",
+            "sha256": "adb248795d69e4f9c2aac2fd0181c8e4e5828beb72b5dc8dc4fedc8d6b6fbbaf",
+            "bytes": 140111
+          },
+          "mesh_summary": {
+            "path": "shared-9ltja0jy/_meshes/59afe89e1e37a9f13a107cf18e41bc2616164e62afe0820ba1a1c4dd37b691a8/summary_AP_pnc.json",
+            "sha256": "f802f91ba64f844f2438a81c270f0a7984845dc68b5bc27b927713955d545b4f",
+            "bytes": 9807
+          },
+          "central_max_edge_nm": 225.0
+        },
+        "fine": {
+          "directory": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux",
+          "source_git_commit": null,
+          "checkpoint": {
+            "path": "checkpoint_AP_pnc.json",
+            "sha256": "8a8e2cf5a4dd1831c3615e158279aa6aa6f31bf1ff1b33e5dd18ec1070f13b5d",
+            "bytes": 15300
+          },
+          "assembly_source_git_commit": "3965855c1c6847e0e9a60becd7ac22efbeb88279",
+          "assembly_platform": "Windows-11-10.0.26200-SP0",
+          "mesh_hash": "401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a",
+          "mesh": {
+            "path": "shared-2m5o4mx7/_meshes/401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a/mesh_AP_pnc.npz",
+            "sha256": "33771e9f0ab3c7399549122407372f7dbc907908f181c664de3bf3c881210705",
+            "bytes": 217141
+          },
+          "mesh_summary": {
+            "path": "shared-2m5o4mx7/_meshes/401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a/summary_AP_pnc.json",
+            "sha256": "67f0c46e123e887e7ed4880d8cda7146aa51a76b1a10259a7fb78184795d326b",
+            "bytes": 9815
+          },
+          "central_max_edge_nm": 168.75
+        },
+        "hole_pattern_sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+        "reference_planes_x_m": [
+          0.0,
+          1.665e-05
+        ],
+        "nominal_mirror_cuts_x_m": [
+          5.745000000000001e-06,
+          1.0905000000000001e-05
+        ],
+        "regional_cuts_x_m": [
+          1.0000000000000002e-06,
+          1.565e-05
+        ]
+      },
+      "mesh_geometry_connectivity_sha256": "78f598f326d88101fcbed5104d01042dfa9408f106119b2cc3e22c35fd6c2085"
+    }
+  },
+  "hole_count": 26,
+  "geometry_diagnostics": {
+    "taper_patch_refinement": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "spatial_convergence_established": false,
+      "frequency_convergence_established": false,
+      "schema_version": 1,
+      "method": "nested_coarse_mirror_fine_taper_and_cavity",
+      "control_source_sha256": "ab330477d1c205d0fc727c734a1453bdcd264aea56f06b660fe42af443a331c4",
+      "control_coordinates_and_connectivity_sha256": "78f598f326d88101fcbed5104d01042dfa9408f106119b2cc3e22c35fd6c2085",
+      "coarse_coordinates_and_connectivity_sha256": "b2556499ed448632dbbeb3c5e39b847d1f9391dacde8b0403458c17d456912c8",
+      "fine_coordinates_and_connectivity_sha256": "dad9ca9e939ac8e623bd8a1519aadab41e365adaf083cc115b8f5c0b84bb11fa",
+      "element_order": 2,
+      "z_planes_m": [
+        -5.0000000000000004e-08,
+        0.0,
+        5.0000000000000004e-08
+      ],
+      "reference_planes_x_m": [
+        0.0,
+        1.665e-05
+      ],
+      "nominal_patch_cuts_x_m": [
+        5.745000000000001e-06,
+        1.0905000000000001e-05
+      ],
+      "changed_axial_extent_x_m": [
+        5.751351351351338e-06,
+        1.0898648648648663e-05
+      ],
+      "coarse_planar_triangles": 2688,
+      "fine_donor_planar_triangles": 4024,
+      "control_planar_triangles": 3100,
+      "wholly_inside_coarse_triangles": 862,
+      "frozen_cross_cut_planar_triangles": [
+        21,
+        21
+      ],
+      "wholly_inside_coarse_triangles_frozen_by_conformity": 0,
+      "replaced_coarse_planar_triangles": 307,
+      "retained_coarse_tetrahedra": 14286,
+      "inserted_fine_donor_tetrahedra": 4314,
+      "unchanged_rim_facets": 3328,
+      "unchanged_patch_frontier_facets": 64,
+      "unchanged_patch_frontier_p2_dofs": 540,
+      "mesh_vertices": 6177,
+      "mesh_tetrahedra": 18600,
+      "ndof": 108645,
+      "boundary_facet_counts": {
+        "xleft": 16,
+        "xright": 16,
+        "free": 10440
+      },
+      "end_face_dofs": {
+        "xleft": 135,
+        "xright": 135
+      },
+      "minimum_tetrahedron_determinant_m3": 2.107187211896613e-23,
+      "coarse_solid_volume_m3": 1.5321239816748154e-18,
+      "control_solid_volume_m3": 1.5321239816748154e-18
+    }
+  },
+  "ndof": 108645,
+  "mesh_vertices": 6177,
+  "mesh_tetrahedra": 18600,
+  "end_face_dofs": {
+    "xleft": 135,
+    "xright": 135
+  },
+  "boundary_facet_counts": {
+    "xleft": 16,
+    "xright": 16,
+    "free": 10440
+  },
+  "mesh_sha256": "1ed55d0c46914dc781a20e2b70c4daeafe6d84a22ac5a2e4a240397a9228148b"
+}

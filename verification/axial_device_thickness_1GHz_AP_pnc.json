@@ -1,0 +1,352 @@
+{
+  "schema_version": 1,
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "frequency_hz": 1000000000.0,
+  "incident_side": "left",
+  "hole_count": 26,
+  "reference_planes_x_m": [
+    0.0,
+    1.665e-05
+  ],
+  "maps": {
+    "200_nm_central_400_nm": {
+      "native_axial_drive": {
+        "point_status": "accepted",
+        "thickness_nm": 200,
+        "central_target_nm": 400,
+        "drive": 2,
+        "root": 268,
+        "k_rad_m": 1446665.4707658237,
+        "axial_kinetic_energy_fraction": 0.9795916175161328,
+        "T": 0.9948353112687252,
+        "R": 0.005164688731283989,
+        "next_largest_axial_kinetic_energy_fraction": 0.1558318058966334
+      },
+      "original_map_source_git_commit": "b6d788f202dfebdbe9c5b52561a0e0eb8bfee48d",
+      "map_directory": "results/runs/regional_mesh_AP_pnc/lead150_z2_1GHz",
+      "map_relative_archive": {
+        "map": {
+          "path": "map_AP_pnc.json",
+          "sha256": "8b757bf077db1e84aa677db6b9820a02030f12a5a9d61a5a63eb7436043dceac"
+        },
+        "point_summary": {
+          "path": "point-001/attempt-wqrmb02x/historical_26hole_regional_pilot_200nm-35c4e1129841/summary_AP_pnc.json",
+          "sha256": "83d581eb6c10c1bb9c132e6aa9be96af64d032056b581fde86cb858ecd228027"
+        }
+      },
+      "numerical_acceptance_evidence": "thick_layer_control"
+    },
+    "100_nm_central_400_nm": {
+      "native_axial_drive": {
+        "point_status": "accepted",
+        "thickness_nm": 100,
+        "central_target_nm": 400,
+        "drive": 1,
+        "root": 268,
+        "k_rad_m": 1446421.5752191825,
+        "axial_kinetic_energy_fraction": 0.9798595749498722,
+        "T": 0.9950441790614645,
+        "R": 0.004955820938507334,
+        "next_largest_axial_kinetic_energy_fraction": 0.1558320668650195
+      },
+      "original_map_source_git_commit": "a978f99cf9628889a3a31a6328c331f4298c6358",
+      "map_directory": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_1GHz",
+      "map_relative_archive": {
+        "map": {
+          "path": "map_AP_pnc.json",
+          "sha256": "c4d6d6e7f0f63c777cd8d84faa2405632d6f7884073877968b3a94d7d0bf5dad"
+        },
+        "point_summary": {
+          "path": "point-001/attempt-u9p60vf3/historical_26hole_regional_100nm-9d56e228b6b6/summary_AP_pnc.json",
+          "sha256": "9ba5309de078178e780c9ff89af9006b007847c857df0642eba637a2ba11c0d2"
+        }
+      },
+      "numerical_acceptance_evidence": "four_corner_thickness_control"
+    },
+    "200_nm_central_300_nm": {
+      "native_axial_drive": {
+        "point_status": "accepted",
+        "thickness_nm": 200,
+        "central_target_nm": 300,
+        "drive": 2,
+        "root": 268,
+        "k_rad_m": 1446665.4707658237,
+        "axial_kinetic_energy_fraction": 0.9795916175161328,
+        "T": 0.9957145911863251,
+        "R": 0.004285408813683388,
+        "next_largest_axial_kinetic_energy_fraction": 0.1558318058966334
+      },
+      "original_map_source_git_commit": "a225f03f9557658ce2fe9f6826d4fdc989d26295",
+      "map_directory": "results/runs/regional_mesh_AP_pnc/central300_z2_1GHz",
+      "map_relative_archive": {
+        "map": {
+          "path": "map_AP_pnc.json",
+          "sha256": "503d13180b7c349ba2c910dd7c12ae6cebf8e0608cd69b58ebf24546c96409d6"
+        },
+        "point_summary": {
+          "path": "point-001/attempt-zd5711qc/historical_26hole_regional_pilot_200nm-1225d1d79cae/summary_AP_pnc.json",
+          "sha256": "328ffa326f533e118aea1037960112660d00d173d2b0bd01e3a424b1ee89b7d2"
+        }
+      },
+      "numerical_acceptance_evidence": "central_300_thickness_and_flux_control"
+    },
+    "100_nm_central_300_nm": {
+      "native_axial_drive": {
+        "point_status": "accepted",
+        "thickness_nm": 100,
+        "central_target_nm": 300,
+        "drive": 1,
+        "root": 268,
+        "k_rad_m": 1446421.5752191825,
+        "axial_kinetic_energy_fraction": 0.9798595749498722,
+        "T": 0.9959174636863714,
+        "R": 0.0040825363136362805,
+        "next_largest_axial_kinetic_energy_fraction": 0.1558320668650195
+      },
+      "original_map_source_git_commit": "44d4a40be2100e32f979ae708c29f79684d0dcee",
+      "map_directory": "results/runs/physical_thickness_device_AP_pnc/thin100_1GHz",
+      "map_relative_archive": {
+        "map": {
+          "path": "map_AP_pnc.json",
+          "sha256": "f37e9f7b6d8d843d1ddaf5095c8f0be35af41c471e45e8ce39a6bde63ed9bb03"
+        },
+        "point_summary": {
+          "path": "point-001/attempt-dp7gdz7f/historical_26hole_regional_100nm-41d55a50a70e/summary_AP_pnc.json",
+          "sha256": "5d1a34d7d15ba2715226b313aa50ce571fe9c7ca1dd33eb6db97704dbed42cb2"
+        }
+      },
+      "numerical_acceptance_evidence": "central_300_thickness_and_flux_control"
+    },
+    "100_nm_central_225_nm": {
+      "native_axial_drive": {
+        "point_status": "accepted",
+        "thickness_nm": 100,
+        "central_target_nm": 225.0,
+        "drive": 1,
+        "root": 268,
+        "k_rad_m": 1446421.5752191825,
+        "axial_kinetic_energy_fraction": 0.9798595749498722,
+        "T": 0.9964919706359389,
+        "R": 0.0035080293640520977,
+        "next_largest_axial_kinetic_energy_fraction": 0.1558320668650195
+      },
+      "original_map_source_git_commit": "d82c5e1111f2cd6c108c47465d1affc682fea43d",
+      "map_directory": "results/runs/physical_thickness_device_AP_pnc/thin100_central225_1GHz",
+      "map_relative_archive": {
+        "map": {
+          "path": "map_AP_pnc.json",
+          "sha256": "0e1ec6f35269485115054ac152a87bbb7e161310ad912192d1cfcdcf6ebb726f"
+        },
+        "point_summary": {
+          "path": "point-001/attempt-fnbwtchd/historical_26hole_regional_100nm-864c9c15d8f7/summary_AP_pnc.json",
+          "sha256": "ea6d7dbcee9657cac860d5dd85dde4352b8a393263849cf55ec01519f12fbc7c"
+        }
+      },
+      "numerical_acceptance_evidence": "thin_three_mesh_control"
+    }
+  },
+  "matched_axial_power_contrasts": {
+    "physical_thickness_200_to_100_central_400_nm": {
+      "reference": "200_nm_central_400_nm",
+      "candidate": "100_nm_central_400_nm",
+      "status": "matched",
+      "match": {
+        "reference_to_candidate_overlap": 0.9999437761427369,
+        "candidate_to_reference_overlap": 0.9999437761427376,
+        "reference_to_candidate_best_competing_overlap": 1.0886443505990617e-06,
+        "candidate_to_reference_best_competing_overlap": 1.088644350587284e-06
+      },
+      "power_changes": {
+        "transmission": {
+          "signed_change_fraction": 0.0002088677927393201,
+          "signed_change_percentage_points": 0.02088677927393201,
+          "relative_change_percent": 0.02099521301399611
+        },
+        "reflection": {
+          "signed_change_fraction": -0.00020886779277665482,
+          "signed_change_percentage_points": -0.020886779277665482,
+          "relative_change_percent": -4.04415064767569
+        }
+      }
+    },
+    "physical_thickness_200_to_100_central_300_nm": {
+      "reference": "200_nm_central_300_nm",
+      "candidate": "100_nm_central_300_nm",
+      "status": "matched",
+      "match": {
+        "reference_to_candidate_overlap": 0.9999437761427369,
+        "candidate_to_reference_overlap": 0.9999437761427376,
+        "reference_to_candidate_best_competing_overlap": 1.0886443505990617e-06,
+        "candidate_to_reference_best_competing_overlap": 1.088644350587284e-06
+      },
+      "power_changes": {
+        "transmission": {
+          "signed_change_fraction": 0.00020287250004624724,
+          "signed_change_percentage_points": 0.020287250004624724,
+          "relative_change_percent": 0.020374563337927858
+        },
+        "reflection": {
+          "signed_change_fraction": -0.00020287250004710766,
+          "signed_change_percentage_points": -0.020287250004710766,
+          "relative_change_percent": -4.73402909424492
+        }
+      }
+    },
+    "central_400_to_300_nm_thickness_200_nm": {
+      "reference": "200_nm_central_400_nm",
+      "candidate": "200_nm_central_300_nm",
+      "status": "matched",
+      "match": {
+        "reference_to_candidate_overlap": 1.0,
+        "candidate_to_reference_overlap": 1.0,
+        "reference_to_candidate_best_competing_overlap": 8.218839244693908e-06,
+        "candidate_to_reference_best_competing_overlap": 8.218839244693908e-06
+      },
+      "power_changes": {
+        "transmission": {
+          "signed_change_fraction": 0.0008792799175999511,
+          "signed_change_percentage_points": 0.0879279917599951,
+          "relative_change_percent": 0.08838447003641187
+        },
+        "reflection": {
+          "signed_change_fraction": -0.0008792799176006007,
+          "signed_change_percentage_points": -0.08792799176006007,
+          "relative_change_percent": -17.02483854011476
+        }
+      },
+      "selected_drive_power_increment_passed": true
+    },
+    "central_400_to_300_nm_thickness_100_nm": {
+      "reference": "100_nm_central_400_nm",
+      "candidate": "100_nm_central_300_nm",
+      "status": "matched",
+      "match": {
+        "reference_to_candidate_overlap": 0.9999999999999999,
+        "candidate_to_reference_overlap": 0.9999999999999999,
+        "reference_to_candidate_best_competing_overlap": 9.298805016652975e-06,
+        "candidate_to_reference_best_competing_overlap": 9.298805016652975e-06
+      },
+      "power_changes": {
+        "transmission": {
+          "signed_change_fraction": 0.0008732846249068782,
+          "signed_change_percentage_points": 0.08732846249068782,
+          "relative_change_percent": 0.08776340219693249
+        },
+        "reflection": {
+          "signed_change_fraction": -0.0008732846248710536,
+          "signed_change_percentage_points": -0.08732846248710535,
+          "relative_change_percent": -17.62139180787436
+        }
+      },
+      "selected_drive_power_increment_passed": true
+    },
+    "central_300_to_225_nm_thickness_100_nm": {
+      "reference": "100_nm_central_300_nm",
+      "candidate": "100_nm_central_225_nm",
+      "status": "matched",
+      "match": {
+        "reference_to_candidate_overlap": 0.9999999999999999,
+        "candidate_to_reference_overlap": 0.9999999999999999,
+        "reference_to_candidate_best_competing_overlap": 9.298805016652975e-06,
+        "candidate_to_reference_best_competing_overlap": 9.298805016652975e-06
+      },
+      "power_changes": {
+        "transmission": {
+          "signed_change_fraction": 0.0005745069495675104,
+          "signed_change_percentage_points": 0.057450694956751036,
+          "relative_change_percent": 0.05768620096699407
+        },
+        "reflection": {
+          "signed_change_fraction": -0.0005745069495841828,
+          "signed_change_percentage_points": -0.05745069495841828,
+          "relative_change_percent": -14.072304701007651
+        }
+      },
+      "selected_drive_power_increment_passed": true
+    }
+  },
+  "weak_reflection_sensitivity": {
+    "all_tested_central_changes_exceed_both_physical_thickness_changes": true,
+    "largest_tested_central_change_fraction": 0.0008792799176006007,
+    "smallest_tested_central_change_fraction": 0.0005745069495841828,
+    "largest_tested_physical_thickness_change_fraction": 0.00020886779277665482,
+    "largest_thickness_change_over_smallest_central_change": 0.36356008039211596,
+    "central_300_minus_400_signed_change_in_reflection_thickness_contrast_percentage_points": 0.0005995292729547158,
+    "interpretation": "The sampled thickness contrast repeats in sign but is smaller than observed same-thickness central-mesh increments. Individual central-mesh increments give neither an error bound nor a guaranteed sign in the continuum."
+  },
+  "public_entry_point_method": {
+    "minimum_mass_overlap": 0.99,
+    "axial_majority_threshold": 0.5,
+    "displacement_matching": "Reciprocal interpolation at fixed y and z/thickness, with each target's mass matrix."
+  },
+  "provenance": {
+    "public_entry_point": {
+      "path": "tools/compare_axial_device_power_AP_pnc.py",
+      "sha256": "1851b1add644071a25d5e1edfe17a97fd8682b9d7de01e3c0a9607fcbedf8f46"
+    },
+    "four_corner_thickness_control": {
+      "path": "verification/physical_device_thickness_central_1GHz_AP_pnc.json",
+      "sha256": "844ff16f796d8546e0c5a867af94ede8003317a13e64d589ea8a0ff01993380c"
+    },
+    "central_300_thickness_and_flux_control": {
+      "path": "verification/physical_device_thickness_1GHz_AP_pnc.json",
+      "sha256": "3b0957f8f398ba35fb5cf4bcbdc7c178663b87536eeb8adcf993d004d6937b4e"
+    },
+    "thin_three_mesh_control": {
+      "path": "verification/physical_thin_central_trend_1GHz_AP_pnc.json",
+      "sha256": "a852ed2169ab04bc81e54865c26163eb72110a7ba81a2d3f4d10f55c2fc4acc4"
+    },
+    "thick_layer_control": {
+      "path": "verification/regional_thickness_1GHz_AP_pnc.json",
+      "sha256": "cc640825b2a3ad409012e1f500fb77322a77e1fa40dfed5cfb847d23cf79c496"
+    },
+    "thick_central_control": {
+      "path": "verification/regional_central_1GHz_AP_pnc.json",
+      "sha256": "7a56189b4b5761309c55b9ea74444aef4c33c40539a98595f9e8980e52e98f41"
+    },
+    "uniform_phase_control": {
+      "path": "verification/uniform_thin_full_length_1GHz_AP_pnc.json",
+      "sha256": "abbf1f88a7b2b5cf7f3f7eb7a825de298c0c8d9491951a0aea866938610dd011"
+    },
+    "uniform_reference_section_refinement": {
+      "path": "verification/uniform_thin_port_refinement_1GHz_AP_pnc.json",
+      "sha256": "5c444e06c7d1380e33258321950739ba5bf2ebeb474e3146177827f8ef44ebda"
+    },
+    "section_interpolation_source": {
+      "path": "tools/compare_scattering_AP_pnc.py",
+      "sha256": "148f7efa58ad668a7a57be9db68a3241ffb67ed94067499ce6dcd4a0f8c59313"
+    },
+    "native_map_reading_source": {
+      "path": "tools/map_scattering_AP_pnc.py",
+      "sha256": "11b1dfe118606271a5c2710eae30b4081fb448a660b87eee58283550f7e1acce"
+    }
+  },
+  "scope": "Power-normalized total transmission and reflection from the predominantly axial incident mode in each original physical section. Displacement overlap identifies the matched finite mode, and powers retain the native port normalization. Relative changes use the named contrast reference power as denominator.",
+  "limits": "A single frequency and finite meshes. Spatial or frequency convergence, a quantitative weak-reflection thickness effect, a reflection floor, continuous branch identity and complex scattering accuracy remain unresolved.",
+  "common_mesh_except_central_target": {
+    "kind": "layered",
+    "element_order": 2,
+    "port_size_nm": 250,
+    "circle_resolution": 32,
+    "thickness_layers": 2,
+    "lead_mesh_size_nm": 150,
+    "patterned_x_interval_nm": [
+      1000,
+      15650
+    ]
+  },
+  "native_map_driver_sha256": "11b1dfe118606271a5c2710eae30b4081fb448a660b87eee58283550f7e1acce",
+  "planar_dimensions_nm": {
+    "length": 16650,
+    "width": 1000
+  },
+  "selected_drive_mesh_power_increment_limit": 0.01,
+  "earlier_failed_broader_criteria": {
+    "thin_device_all_channel_power": "thin_three_mesh_control",
+    "thick_device_central_complex_response": "thick_central_control",
+    "thick_device_layer_complex_response": "thick_layer_control",
+    "uniform_full_length_complex_response": "uniform_phase_control",
+    "uniform_lead_phase_increment": "uniform_reference_section_refinement"
+  }
+}

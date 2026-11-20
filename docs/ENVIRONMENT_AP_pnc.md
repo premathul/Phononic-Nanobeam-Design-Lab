@@ -1,13 +1,20 @@
 # Execution environment
 
-Author: Athul Prem | _AP_pnc
+Author: **Athul Prem** | Project/file tag: **`_AP_pnc`**
 
-The active 3D solver uses Python 3.12, NumPy, SciPy, scikit-fem, Gmsh, Matplotlib and meshio. Install `requirements_3d_AP_pnc.txt` in a dedicated virtual environment; `requirements_ui_AP_pnc.txt` adds the optional PySide6 Essentials workbench. Follow the current README for launch and test commands. On this Windows workspace use `.venv/Scripts/python.exe`.
+[Research documentation](README.md) · [Simulator quickstart](../README.md#start-the-simulator) · [Configuration guide](../configs/README.md)
 
-Each scientific result retains its original Python/platform/package and source identities. A working current environment does not authorize rewriting an old result's provenance. Linux solve/export and original Windows assembly records stay separate. The app-update virtual-environment base-path repair is recorded in the current handoff; do not reinstall packages or repeat accepted simulations merely because an application was updated.
+| Workflow | Runtime |
+| --- | --- |
+| [Offline saved-device browser](../data/README.md#portable-saved-device-data) | Python standard library and the pinned JSON/CSV bundle |
+| Three-dimensional solver and plots | Python 3.12 with [numerical requirements](../requirements_3d_AP_pnc.txt), including NumPy, SciPy, scikit-fem, Gmsh, Matplotlib and meshio |
+| Optional desktop workbench | Solver environment plus [PySide6 requirements](../requirements_ui_AP_pnc.txt) |
+| Historical checks | [Lightweight requirements](../requirements.txt) with the [archive tools](../tools/README.md#historical-archive-tools) |
 
-The saved-device browser uses only the Python standard library. It reads compact pinned JSON/CSV sources, links retained field arrays, and never launches a solver. A fresh Git clone contains portable evidence but not the large workspace archive.
+On the Windows workspace, use `.venv/Scripts/python.exe`. `Launch_AP_pnc.cmd` and `Launch_Workbench_AP_pnc.cmd` open the active simulator and workbench respectively. In the workbench, **Load saved study…** loads editable inputs and attaches the study's saved report. **Browse device results** opens the independent result browser. Use **Open report** to return to a report attached to your current study.
 
-Memory-heavy work follows the Lawrence runbook and current handoff. Measure actual resources, use bounded allocations/checkpoints, and keep large results and environments out of Git. No automatic GPU/cloud campaign or environment reset is part of setup.
+Each scientific result retains its original Python, platform, package and source identities. Linux solve/export provenance and original Windows assembly provenance are recorded separately. If an app update moves the base Python path, recover the environment before a new run and reuse accepted results. See the [current handoff](AI_HANDOFF_AP_pnc.md) for the project environment and ownership.
 
-`requirements.txt`, `run_AP_pnc.py` and `verify_AP_pnc.py` serve the historical lightweight archive audit, not the active 3D environment. The unchanged [historical environment note](../archive/documentation/ENVIRONMENT_AP_pnc.md) describes the old macOS/2D context; its missing sources are not repaired by installing packages.
+For memory-heavy calculations, follow the [Lawrence runbook](LAWRENCE_HPC_AP_pnc.md) and use measured resources, interactive allocations and bounded checkpoints. Keep large results and virtual environments outside Git.
+
+The preserved [historical environment note](../archive/documentation/ENVIRONMENT_AP_pnc.md) describes the earlier macOS and 2D model. Consult [archive recovery](EVIDENCE_AND_RECOVERY_AP_pnc.md) for missing original sources.

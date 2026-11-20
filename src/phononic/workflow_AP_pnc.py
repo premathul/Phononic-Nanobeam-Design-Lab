@@ -506,6 +506,10 @@ def run_study(config: dict, output_root: Path | None = None, *, _prepared_scatte
                     power_balance_passed and np.max(abs(result.reflection)) < 0.01
                     and np.max(abs(result.transmission - 1)) < 0.01
                 )
+                from .scattering_qualification_AP_pnc import qualify_scattering
+                summary["qualification"] = qualify_scattering(
+                    result, port_modes, length_m=config["geometry"]["length_nm"] * 1e-9, uniform=not holes,
+                    power_balance_passed=power_balance_passed, matched_reference_passed=matched)
                 summary.update({"frequency_hz": frequency, "incident_side": analysis["incident_side"],
                                 "incident_mode_indices": result.incident_mode_indices.tolist(),
                                 "num_incident_channels": len(result.incident_mode_indices),

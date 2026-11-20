@@ -14,14 +14,17 @@ from html import escape
 from io import StringIO
 import json
 import math
-import os
 from pathlib import Path
 import platform
+import sys
 from time import monotonic
 
 import psutil
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from phononic.report_style_AP_pnc import available_link, report_link, report_page, scroll_table
+
 AUTHOR = {"author": "Athul Prem", "file_tag": "_AP_pnc"}
 COMPARISON_PATH = Path("results/runs/device_frequency_inplane_8875_AP_pnc/comparison/frequency_inplane_comparison_AP_pnc.json")
 COMPARISON_SHA = "107d1c62817349d0a6900650d10dd3826ee492ca4bc36abc8195ee3c3e7911c7"
@@ -184,24 +187,34 @@ def report_text(record, output, workspace):
     def source_link(link, label):
         target = (workspace/link["path"]).resolve()
         require(target.is_relative_to(workspace), "A report source link escapes the workspace.")
-        return '<a href="'+escape(os.path.relpath(target, output).replace(os.sep, "/"), quote=True)+'">'+escape(label)+'</a>'
+        if target.is_file() and target.stat().st_size == link["bytes"] and sha(target) == link["sha256"]:
+            return available_link(output, target, label)
+        return f'<span class="availability">{escape(label)} (verified archive source unavailable)</span>'
     agg = record["aggregate"]
     table = "".join("<tr><td>"+str(r["incident_root"])+"→"+str(r["outgoing_root"])+"</td><td>"+format(r["reference_magnitude"], ".12g")
                     +"</td><td>"+format(r["candidate_magnitude"], ".12g")+"</td><td>"+format(r["magnitude_lower_bound"], ".12g")+"</td></tr>"
                     for r in record["selected_pair"])
-    sources = " · ".join(source_link(link, name) for name, link in record["original_response_sources"].items())
-    return f'''<!doctype html><html lang="en"><meta charset="utf-8"><title>Saved lead-phase audit | Athul Prem</title>
-<style>body{{font:16px system-ui;max-width:920px;margin:36px auto;line-height:1.5}}table{{border-collapse:collapse}}td,th{{padding:7px 12px;border:1px solid #ccd}}</style>
-<h1>Saved phase-only compatibility audit</h1><p>Athul Prem | athul_simulation_pnc_lead_phase_8875</p>
+    sources = " · ".join(source_link(link, name.replace("_8875_", " ").replace("_", " "))
+                         for name, link in record["original_response_sources"].items())
+    downloads = " · ".join((report_link("Complete audit JSON", JSON_NAME, download=True),
+                            report_link("All 50 coefficient rows (CSV)", CSV_NAME, download=True),
+                            source_link(record["accepted_comparison"], "Accepted h100/h80 comparison (JSON)")))
+    navigation = available_link(output, ROOT / "verification/README.md", "Verification records")
+    table = scroll_table(f"""<table><thead><tr><th>Directed reflected pair</th><th>|S h100|</th><th>|S h80|</th>
+<th>Magnitude lower bound</th></tr></thead><tbody>{table}</tbody></table>""", "Selected reflected pairs and phase-only bounds")
+    scope = ("Finite algebraic exclusion test on the saved 10 × 5 left-incident block at the original x = 0 and 16.65 µm planes. "
+             "The two responses retain the exact shared signed SAFE columns and native gauge.")
+    body = f'''
 <p><strong>{escape(agg['verdict'])}.</strong> For the accepted 887.5 MHz h100/h80 z4 responses, the maximum magnitude-only lower bound is
-{agg['maximum_magnitude_lower_bound']:.12g}, versus the unchanged 0.01 complex-response limit. The Frobenius lower bound is {agg['frobenius_magnitude_lower_bound']:.12g}; no Frobenius acceptance gate is applied.</p>
+{agg['maximum_magnitude_lower_bound']:.12g}, versus the unchanged 0.01 complex-response limit. The Frobenius lower bound {agg['frobenius_magnitude_lower_bound']:.12g} is diagnostic.</p>
+<p class="sources">{downloads}</p>
 <p>For every coefficient, |b − exp(iθ)a| ≥ ||b| − |a||. Even granting an independent phase to every entry cannot lower the maximum residual below this bound.
 Every diagonal, reflectionless, unmixed lead-phase model is a subset of that larger phase freedom. No phases are fitted or applied.</p>
-<p>The 50 coefficients form the saved 10 by 5 left-incident block at original planes x=0 and 16.65 µm, in exact shared signed SAFE columns and native gauge.
-This is a finite algebraic model-exclusion test, not attribution of error to the patterned region.</p>
-<table><thead><tr><th>Directed reflected pair</th><th>|S h100|</th><th>|S h80|</th><th>Magnitude lower bound</th></tr></thead><tbody>{table}</tbody></table>
-<p><a href="{JSON_NAME}">Complete audit JSON</a> · <a href="{CSV_NAME}">All 50 coefficient rows</a> · {source_link(record['accepted_comparison'], 'Accepted comparison')}</p>
-<p>Original response sources: {sources}</p><ul>{''.join('<li>'+escape(s)+'</li>' for s in LIMITATIONS)}</ul></html>\n'''
+{table}
+<h2>Original archive sources</h2><p class="sources">{sources}</p>
+<h2>Limits</h2><ul>{''.join('<li>'+escape(s)+'</li>' for s in LIMITATIONS)}</ul>'''
+    return report_page("Saved lead phase-only audit at 887.5 MHz", "lead_phase_8875", body,
+                       navigation=navigation, scope=scope)
 
 
 def run(workspace, comparison_path, output):

@@ -17,6 +17,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT), str(ROOT / "src")]
+from phononic.report_style_AP_pnc import available_link, report_link, report_page, scroll_table
 from phononic.workflow_AP_pnc import digest
 from tools import compare_device_frequency_AP_pnc as response_reader
 
@@ -38,6 +39,8 @@ STUDY = "results/runs/device_frequency_thickness_8875_AP_pnc/"
 H100 = "results/runs/full_device_layered_preflight/historical_26hole_layered_h100_ny12_z4-2d4bb91449a7/"
 H80 = ("results/runs/full_device_resource_profile/lawrence_h80_AP_pnc/"
        "h80-export-1335045/historical_26hole_layered_h80_ny12_z4-3385249d64d1/")
+# Live reader hashes include the 2026-11-20 presentation update. Numerical
+# functions are unchanged; archived producer/receipt identities remain separate.
 PINS = {
     "accepted_safe": (STUDY + "h80-z4-frequency-887500000-safe-1335641/safe_AP_pnc.json", "7d3dda2761e3f25d2f6470259cd18306688e2e9ce7afc5f2d9c9ee92ea5eae20"),
     "accepted_prebody": (STUDY + "independent_prebody_AP_pnc.json", "f45245144be6035c72ffee5ced2d96aa349b939bde89f9bb36f6ca82550bdca4"),
@@ -47,7 +50,7 @@ PINS = {
     "accepted_anchor_relation": ("results/runs/comparisons/scattering-f6e75a9694c42a2c/summary_AP_pnc.json", "e7f66845ccdbf4aca57b6976fbc1320b07ead0d9e0007a768766a93b01f5056f"),
     "h100_anchor_summary": (H100 + "summary_AP_pnc.json", "1a873882e9f16fd1604081a48319c80c92af34cac5f15a1a849fb1a3faabe0e8"),
     "h80_anchor_summary": (H80 + "summary_AP_pnc.json", "f65f61eaf62d69fa0574fe8566ba088fd7e090a019685bdac3db95261b61619f"),
-    "response_reader_source": ("tools/compare_device_frequency_AP_pnc.py", "36bb5effcd52ca7fde7da7f876acf8fb34bdaaf897bb4a6e8e7e28bb364ef623"),
+    "response_reader_source": ("tools/compare_device_frequency_AP_pnc.py", "04e7f7531e551c4172d0dd69c89775f5557e4f392bf047260d1b0b3ed75cec58"),
     "accepted_point_source": ("tools/replay_lawrence_frequency_z4_AP_pnc.py", "6eb0599a919eb3d1de7f99bed9a7e9cc452e6d2c6becf8b45379ae173e6afdbf"),
     "accepted_prebody_source": (STUDY + "local_checks/replay_lawrence_frequency_z4_prebody_AP_pnc.py", "34e2307663a9ea2c3cb864562a58559a6b94c8710219ea17fd305013e0110572"),
     "accepted_relation_source": (STUDY + "local_checks/compare_frequency_thickness_relation_AP_pnc.py", "1fb709dfacb1c9e2a45d2ac4d43fce7ab5a5c471021f6026bb85406936ecb08b"),
@@ -400,27 +403,41 @@ def write_outputs(output, result, workspace=ROOT):
     writer.writeheader()
     writer.writerows(rows)
     files[name + ".csv"] = stream.getvalue()
-    body = f"<h1>887.5 MHz in-plane control</h1><p>Athul Prem | athul_simulation_pnc_frequency_inplane_8875</p><p>{escape(SCOPE)}</p>"
-    body += (f"<p>Whole-response maximum power change: {result['maximum_power_change']:.12g} (pass: {result['power_passed']}); "
-             f"maximum complex change: {result['maximum_complex_change']:.12g} (pass: {result['complex_passed']}). Each gate is 0.01.</p>")
-    body += "<h2>A: Separate directed-power increments</h2><table><tr><th>Direction</th><th>h100 power</th><th>h80 power</th><th>|ΔP|/Ph80</th><th>≤0.10</th></tr>"
+    power_status = "passed" if result["power_passed"] else "failed"
+    complex_status = "passed" if result["complex_passed"] else "failed"
+    body = (f"<p>Whole-response power check {power_status} with maximum change {result['maximum_power_change']:.12g}. "
+            f"Complex check {complex_status} with maximum change {result['maximum_complex_change']:.12g}. Each gate is 0.01.</p>")
+    downloads = " · ".join((report_link("Complete source-bound JSON", name + ".json", download=True),
+                            report_link("All 50 complex coefficients (CSV)", name + ".csv", download=True)))
+    body += f'<p class="sources">{downloads}</p>'
     targets = result["pair_specific_targets"]
-    for row in targets["directed_increment_rows"]:
-        body += f"<tr><td>{row['direction']}</td><td>{row['h100_power']:.12g}</td><td>{row['accepted_h80_power']:.12g}</td><td>{row['relative_absolute_power_change']:.12g}</td><td>{row['passed']}</td></tr>"
-    body += "</table><h2>B: Separate suppression-retention ratios</h2><table><tr><th>Resolution</th><th>Direction</th><th>P8875/P1GHz</th><th>≤0.01</th></tr>"
-    for row in targets["suppression_retention_rows"]:
-        body += f"<tr><td>{row['resolution']}</td><td>{row['direction']}</td><td>{row['ratio']:.12g}</td><td>{row['passed']}</td></tr>"
-    body += "</table><p>Both directions must pass individually. Exact positive accepted denominators; no floor substitution. Each row is a separate unit-power drive.</p>"
-    body += "<h2>Selected complex coefficients</h2><table><tr><th>Signed pair</th><th>Raw and aligned |ΔS|</th><th>|ΔS|/|Sh100|</th><th>Δphase (rad)</th></tr>"
+    directed = "".join(f"<tr><td>{row['direction']}</td><td>{row['h100_power']:.12g}</td><td>{row['accepted_h80_power']:.12g}</td>"
+                       f"<td>{row['relative_absolute_power_change']:.12g}</td><td>{row['passed']}</td></tr>"
+                       for row in targets["directed_increment_rows"])
+    body += "<h2>Directed-power increments</h2>" + scroll_table(
+        "<table><thead><tr><th>Direction</th><th>h100 power</th><th>h80 power</th><th>|ΔP|/Ph80</th><th>≤0.10</th></tr></thead>"
+        f"<tbody>{directed}</tbody></table>", "Directed-power increments")
+    ratios = "".join(f"<tr><td>{row['resolution']}</td><td>{row['direction']}</td><td>{row['ratio']:.12g}</td><td>{row['passed']}</td></tr>"
+                     for row in targets["suppression_retention_rows"])
+    body += "<h2>Suppression-retention ratios</h2>" + scroll_table(
+        "<table><thead><tr><th>Resolution</th><th>Direction</th><th>P8875/P1GHz</th><th>≤0.01</th></tr></thead>"
+        f"<tbody>{ratios}</tbody></table>", "Suppression-retention ratios")
+    body += "<p>Both directions must pass individually. The ratios use exact positive accepted denominators. Each row is a separate unit-power drive.</p>"
+    coefficients = []
     number = lambda value: "undefined" if value is None else f"{value:.12g}"
     for row in result["selected_pair"]:
         change = row["gauge_aligned_complex_change"]
-        body += f"<tr><td>{row['incident_root']}→{row['outgoing_root']}</td><td>{number(change['absolute_complex_change'])}</td><td>{number(change['relative_absolute_complex_change'])}</td><td>{number(change['phase_change_rad'])}</td></tr>"
-    body += ("</table><p>Exact shared SAFE columns make the raw and gauge-aligned bases identical. Phase is diagnostic only, undefined for a zero coefficient. "
-             "Previous 887.5 MHz z4/z6 target A failed (about 87.5563%); its complex change 0.01753014 failed. All earlier 1 GHz spatial failures remain unresolved.</p>"
-             f'<p><a href="{name}.json">Complete source-bound JSON</a> · <a href="{name}.csv">All 50 complex coefficients</a></p>')
-    files["report_AP_pnc.html"] = ('<!doctype html><meta charset="utf-8"><title>Frequency in-plane control | Athul Prem</title>'
-        '<style>body{font:16px system-ui;max-width:1100px;margin:40px auto;padding:0 20px}table{border-collapse:collapse;margin:20px 0}td,th{border:1px solid #aaa;padding:8px;text-align:right}</style>' + body)
+        coefficients.append(f"<tr><td>{row['incident_root']}→{row['outgoing_root']}</td><td>{number(change['absolute_complex_change'])}</td>"
+                            f"<td>{number(change['relative_absolute_complex_change'])}</td><td>{number(change['phase_change_rad'])}</td></tr>")
+    body += "<h2>Selected complex coefficients</h2>" + scroll_table(
+        "<table><thead><tr><th>Signed pair</th><th>Raw and aligned |ΔS|</th><th>|ΔS|/|Sh100|</th><th>Δphase (rad)</th></tr></thead>"
+        f"<tbody>{''.join(coefficients)}</tbody></table>", "Selected complex coefficients")
+    body += ("<p>Exact shared SAFE columns make the raw and gauge-aligned bases identical. Phase is diagnostic only, undefined for a zero coefficient. "
+             "The previous 887.5 MHz z4/z6 directed increment (about 87.5563%) and complex change (0.01753014) both failed. "
+             "All earlier 1 GHz spatial failures remain unresolved.</p>")
+    navigation = available_link(output, ROOT / "figures/README.md", "Device figures and evidence")
+    files["report_AP_pnc.html"] = report_page("887.5 MHz in-plane sensitivity: h100/z4 to h80/z4",
+        "frequency_inplane_8875", body, navigation=navigation, scope=SCOPE)
     # Check every existing publication before writing anything; reuse preserves
     # bytes and modification times, and conflicting scientific output is refused.
     for filename, text in files.items():

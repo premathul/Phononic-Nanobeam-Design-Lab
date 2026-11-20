@@ -1,0 +1,290 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "inputs": {
+    "frequency_hz": 1000000000,
+    "geometry": {
+      "period_nm": 550.0,
+      "width_nm": 1000,
+      "thickness_nm": 100,
+      "hole_center_nm": [
+        275.0,
+        0
+      ],
+      "hole_diameter_nm": 250.0,
+      "circle_segments": 32,
+      "reference_planes_nm": [
+        0,
+        550.0
+      ],
+      "context": "one cell from the repeated outer mirror"
+    },
+    "mesh": {
+      "parent_central_size_nm": 400,
+      "central_target_nm": 168.75,
+      "central_interval_nm": [
+        50,
+        500.0
+      ],
+      "end_strip_target_nm": 125.0,
+      "transverse_cells": 8,
+      "thickness_layers": 2,
+      "element_order": 2,
+      "max_body_dofs": 20000,
+      "max_face_dofs": 400,
+      "family": "fixed-strip regional Gmsh parent, nested planar bisection, affine tetrahedra"
+    },
+    "material": {
+      "name": "nominal_cubic_ge",
+      "C11_Pa": 128500000000.0,
+      "C12_Pa": 48300000000.0,
+      "C44_Pa": 66800000000.0,
+      "density_kg_m3": 5323,
+      "crystal_rotation": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "temperature_policy": "fixed_property_control",
+      "temperature_K": 4
+    },
+    "boundary": "translated Bloch end traces, traction-free outer faces and hole wall",
+    "wave_convention": "exp(i*k*x - i*omega*t), right displacement = lambda * left displacement",
+    "hole_table": {
+      "path": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+      "sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+      "bytes": 608
+    },
+    "source_device_config": {
+      "path": "configs/historical_26hole_regional_AP_pnc.json",
+      "sha256": "dfcecd534ccf359bd672a44577b22fe18356001cbd26a0c9440140a824c4afa5",
+      "bytes": 1284
+    },
+    "repeated_outer_source_positions_nm": {
+      "left": [
+        -6700.0,
+        -6150.0,
+        -5600.0,
+        -5050.0,
+        -4500.0,
+        -3950.0,
+        -3400.0,
+        -2850.0
+      ],
+      "right": [
+        3400.0,
+        3950.0,
+        4500.0,
+        5050.0,
+        5600.0,
+        6150.0,
+        6700.0
+      ]
+    },
+    "threads": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1"
+    },
+    "numerical_identity": {
+      "source_sha256": {
+        "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+        "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/layered_AP_pnc.py": "9242d11434e5004410fdb8d16b23e2405bf429ba93034fc08cee494d5aeae856",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+        "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/mesh_checkpoint_AP_pnc.py": "7fd1780e3c75f6a97f1c7f415bbd8c6e83c066fc5db3999774755910a689021d",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/refinement/central_AP_pnc.py": "1fa13bd28dc0664f197b9a77f90fbbbaec3c0d68e0a4daf884f536b6c10926ca",
+        "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+        "src/phononic/resumable_scattering_AP_pnc.py": "dba6002d982647810f3fc714fdce73a0f34e306e06e8519df2d54778002205ec",
+        "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+        "src/phononic/workflow_AP_pnc.py": "0992815d8ee2c88a74f8221d29c13e98bc388d8aadb5bc7d75992517980b15cd",
+        "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5",
+        "tools/run_mirror_cell_phase_AP_pnc.py": "9cdba7eda3325e87c9b255b0c9ef4d4025e41b6851cfa1669c077cb167950f7b",
+        "tools/bloch_factors_AP_pnc.py": "b933780e67ba23d355b71680990dde2e9d70c5b6187939e45e137197cd417ccb"
+      },
+      "packages": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "scikit-fem": "12.0.2",
+        "meshio": "5.3.5",
+        "gmsh": "4.15.2",
+        "matplotlib": "3.11.2",
+        "psutil": "7.2.2"
+      },
+      "python": "3.12.14",
+      "platform": "Windows-11-10.0.26200-SP0"
+    }
+  },
+  "inputs_sha256": "198476c999e22f6da11ca43c05d98498564990c86e85069e230d362eb8ff4503",
+  "source_git_commit": "d44972ad568eb99c45d8339089a785f125d2e322",
+  "mesh": {
+    "planar_vertices": 116,
+    "planar_triangles": 172,
+    "tetrahedra": 1032,
+    "quadratic_vector_dofs": 6060,
+    "end_face_triangles": 32,
+    "end_face_quadratic_vector_dofs": 255,
+    "planar_area_m2": 5.012274194959683e-13,
+    "expected_polygonal_area_m2": 5.01227419495968e-13,
+    "volume_m3": 5.012274194959681e-20,
+    "min_planar_triangle_area_m2": 2.2572486066246306e-16,
+    "max_central_edge_nm": 168.68079578334257,
+    "max_end_strip_edge_nm": 134.62912017836265,
+    "frozen_rim_sha256": "86b7c06bfe64f82160846b41513de67e9d87d667732a1d56a1b0efea3f253f87",
+    "translated_end_triangles_sha256": "ac8633ccf42d692d1768df1823821e7cd6292f8b93442bde124a681f8692d0e4",
+    "fixed_end_strips_sha256": "98ad66fff37db028e712d54d08d0a1b7ad27eb59761e13f56e787e4694324412",
+    "geometry_connectivity_sha256": "06d157c42395279d0075425a41eb1d1c487fc38081498c2b413f02da93ceffa3"
+  },
+  "solver_status": "resolved",
+  "solver_diagnostics": {
+    "interior_dof_count": 5550,
+    "unit_circle_tolerance": 1e-08,
+    "residual_tolerance": 1e-08,
+    "relative_power_tolerance": 1e-08,
+    "reciprocity_tolerance": 1e-07,
+    "interior_minimum_pivot_ratio": 0.016740978342674875,
+    "schur_symmetry_error": 1.3701804525554848e-15,
+    "indeterminate_root_count": 0,
+    "infinite_root_count": 66,
+    "zero_root_count": 0,
+    "conjugacy_chordal_error": 7.850462293418876e-17,
+    "reciprocity_chordal_error": 2.0462798122622416e-14,
+    "near_unit_root_count": 6,
+    "issues": [],
+    "right_count": 3,
+    "left_count": 3,
+    "unresolved_count": 0
+  },
+  "modes": [
+    {
+      "root_index": 191,
+      "multiplier": [
+        -0.9217145095957521,
+        -0.3878690021136798
+      ],
+      "phase_rad": -2.7432741821610995,
+      "direction": "right",
+      "signed_flux_w": 189606313982.39816,
+      "relative_power": 0.4407141921030676,
+      "interior_residual": 6.068849360547442e-13,
+      "traction_residual": 1.6208154387569509e-13,
+      "radial_error": 2.220446049250313e-16,
+      "chordal_uncertainty": 7.006409776049612e-12
+    },
+    {
+      "root_index": 187,
+      "multiplier": [
+        -0.09603199818970257,
+        -0.9953782473631301
+      ],
+      "phase_rad": -1.6669765444145295,
+      "direction": "left",
+      "signed_flux_w": -295742385163.9698,
+      "relative_power": 0.798014481388396,
+      "interior_residual": 4.630731059431742e-13,
+      "traction_residual": 1.5806684457843166e-13,
+      "radial_error": 1.7763568394002505e-15,
+      "chordal_uncertainty": 4.491634964415772e-12
+    },
+    {
+      "root_index": 185,
+      "multiplier": [
+        0.6603665269804002,
+        -0.7509434399765744
+      ],
+      "phase_rad": -0.8494895819443439,
+      "direction": "left",
+      "signed_flux_w": -430220136804.418,
+      "relative_power": 1.1053313392948383,
+      "interior_residual": 4.928018070976497e-13,
+      "traction_residual": 1.4697366150626745e-13,
+      "radial_error": 3.3306690738754696e-15,
+      "chordal_uncertainty": 3.087848094400989e-12
+    },
+    {
+      "root_index": 184,
+      "multiplier": [
+        0.6603665269804003,
+        0.7509434399765744
+      ],
+      "phase_rad": 0.8494895819443438,
+      "direction": "right",
+      "signed_flux_w": 430220136804.4169,
+      "relative_power": 1.1053313392948354,
+      "interior_residual": 4.919067994919858e-13,
+      "traction_residual": 1.4724113994882116e-13,
+      "radial_error": 3.3306690738754696e-15,
+      "chordal_uncertainty": 3.08784809440099e-12
+    },
+    {
+      "root_index": 186,
+      "multiplier": [
+        -0.09603199818970257,
+        0.9953782473631302
+      ],
+      "phase_rad": 1.6669765444145295,
+      "direction": "right",
+      "signed_flux_w": 295742385163.97,
+      "relative_power": 0.7980144813883965,
+      "interior_residual": 4.655138598577036e-13,
+      "traction_residual": 1.5890811806672978e-13,
+      "radial_error": 1.7763568394002505e-15,
+      "chordal_uncertainty": 4.491634964415772e-12
+    },
+    {
+      "root_index": 190,
+      "multiplier": [
+        -0.9217145095957522,
+        0.3878690021136798
+      ],
+      "phase_rad": 2.7432741821610995,
+      "direction": "left",
+      "signed_flux_w": -189606313982.3979,
+      "relative_power": 0.440714192103067,
+      "interior_residual": 6.074063449501903e-13,
+      "traction_residual": 1.6203460539733343e-13,
+      "radial_error": 1.1102230246251565e-16,
+      "chordal_uncertainty": 7.006409776049612e-12
+    }
+  ],
+  "status": "accepted",
+  "trace_arrays": {
+    "path": "traces_AP_pnc.npz",
+    "sha256": "9455ecd04885a11e5821dcea58225aa840134adc6d50a046b0d52874f9a80a83",
+    "bytes": 2040754
+  },
+  "trace_conventions": {
+    "mass": "consistent y-z section displacement mass in kg/m",
+    "components": "0, 1, 2 denote lab x, y, z displacement",
+    "scale": "unit Euclidean norm of the left trace in metres",
+    "flux": "signed right-face power in watts at the saved amplitude; positive toward +x",
+    "condensed_blocks": "dynamic stiffness K - omega^2 M in N/m, outward end reactions"
+  },
+  "resources": {
+    "peak_process_memory_mib": 226.04296875,
+    "system_available_memory_mib_at_start": 2844.296875,
+    "process_lifetime_peak_working_set_mib": 226.04296875,
+    "elapsed_seconds": 1.8082226999977138
+  }
+}

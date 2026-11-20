@@ -1,0 +1,533 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "spatial_convergence_established": false,
+  "frequency_convergence_established": false,
+  "schema_version": 1,
+  "inputs": {
+    "configuration": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "schema_version": 1,
+      "name": "thin100_complement_patch_AP_pnc",
+      "geometry": {
+        "length_nm": 16650,
+        "width_nm": 1000,
+        "thickness_nm": 100,
+        "pattern": {
+          "csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+          "x_offset_nm": 8325
+        }
+      },
+      "mesh": {
+        "kind": "layered",
+        "element_order": 2,
+        "mesh_size_nm": 400,
+        "port_size_nm": 250,
+        "circle_resolution": 32,
+        "thickness_layers": 2,
+        "lead_mesh_size_nm": 150,
+        "patterned_x_interval_nm": [
+          1000,
+          15650
+        ],
+        "central_max_edge_nm": 168.75
+      },
+      "material": {
+        "name": "nominal_cubic_ge",
+        "C11_Pa": 128500000000.0,
+        "C12_Pa": 48300000000.0,
+        "C44_Pa": 66800000000.0,
+        "density_kg_m3": 5323,
+        "crystal_rotation": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "temperature_policy": "fixed_property_control",
+        "temperature_K": 4
+      },
+      "analysis": {
+        "kind": "scattering",
+        "boundary": "matched_ports",
+        "frequency_GHz": 1,
+        "incident_side": "left"
+      },
+      "resources": {
+        "max_dofs": 174345,
+        "max_port_dofs": 400
+      }
+    },
+    "hole_pattern": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "source_csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+      "source_sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+      "x_offset_m": 8.325e-06,
+      "holes": [
+        {
+          "x_m": 1.6250000000000005e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 2.1750000000000004e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 2.725e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 3.275000000000001e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 3.825000000000001e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 4.3750000000000005e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 4.925000000000001e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 5.475000000000001e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 6.015000000000001e-06,
+          "diameter_m": 2.55e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 6.545000000000001e-06,
+          "diameter_m": 2.6e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 7.065000000000001e-06,
+          "diameter_m": 2.65e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 7.575000000000001e-06,
+          "diameter_m": 2.7e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 8.075000000000001e-06,
+          "diameter_m": 2.75e-07,
+          "region": "Central cavity"
+        },
+        {
+          "x_m": 8.575e-06,
+          "diameter_m": 2.75e-07,
+          "region": "Central cavity"
+        },
+        {
+          "x_m": 9.075e-06,
+          "diameter_m": 2.7e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 9.585e-06,
+          "diameter_m": 2.65e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 1.0105e-05,
+          "diameter_m": 2.6e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 1.0635e-05,
+          "diameter_m": 2.55e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 1.1175e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror transition"
+        },
+        {
+          "x_m": 1.1725e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.2275e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.2825e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.3375e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.3925000000000001e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.4475000000000001e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.5025000000000001e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        }
+      ],
+      "clearances": {
+        "min_side_ligament_m": 3.625000000000001e-07,
+        "min_end_ligament_m": 1.5000000000000005e-06,
+        "min_interhole_gap_m": 2.249999999999986e-07
+      },
+      "taper_patch_refinement": {
+        "donors": {
+          "coarse": {
+            "directory": "/home/usd.local/kunming.dong/phononic_nested_3965855_AP_pnc/results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux",
+            "source_git_commit": null,
+            "checkpoint": {
+              "path": "checkpoint_AP_pnc.json",
+              "sha256": "8a8e2cf5a4dd1831c3615e158279aa6aa6f31bf1ff1b33e5dd18ec1070f13b5d",
+              "bytes": 15300
+            },
+            "assembly_source_git_commit": "3965855c1c6847e0e9a60becd7ac22efbeb88279",
+            "assembly_platform": "Windows-11-10.0.26200-SP0",
+            "mesh_hash": "401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a",
+            "mesh": {
+              "path": "shared-2m5o4mx7/_meshes/401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a/mesh_AP_pnc.npz",
+              "sha256": "33771e9f0ab3c7399549122407372f7dbc907908f181c664de3bf3c881210705",
+              "bytes": 217141
+            },
+            "mesh_summary": {
+              "path": "shared-2m5o4mx7/_meshes/401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a/summary_AP_pnc.json",
+              "sha256": "67f0c46e123e887e7ed4880d8cda7146aa51a76b1a10259a7fb78184795d326b",
+              "bytes": 9815
+            },
+            "central_max_edge_nm": 168.75
+          },
+          "fine": {
+            "directory": "/home/usd.local/kunming.dong/phononic_nested_3965855_AP_pnc/results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge126p5625_rim32_linux",
+            "source_git_commit": null,
+            "checkpoint": {
+              "path": "checkpoint_AP_pnc.json",
+              "sha256": "0a9fe4b6c50fd8efc48c1a7e0e82258c247020473af01304f170f59d836fea15",
+              "bytes": 11020
+            },
+            "assembly_source_git_commit": null,
+            "assembly_platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28",
+            "mesh_hash": "393ab3480e288a0d844eea824ddf6c38e217aab75c2883d807e700b96341b711",
+            "mesh": {
+              "path": "shared-4iibxoxj/_meshes/393ab3480e288a0d844eea824ddf6c38e217aab75c2883d807e700b96341b711/mesh_AP_pnc.npz",
+              "sha256": "0c88c5f206f21b04d3c23fc3dce2521c12e12308804fa253e123d7d769aec064",
+              "bytes": 332236
+            },
+            "mesh_summary": {
+              "path": "shared-4iibxoxj/_meshes/393ab3480e288a0d844eea824ddf6c38e217aab75c2883d807e700b96341b711/summary_AP_pnc.json",
+              "sha256": "f4ad25cddcab77a5e605e7d1636b09e6e418d26e1fdee8c16fe9e252fe006ab4",
+              "bytes": 9500
+            },
+            "central_max_edge_nm": 126.5625
+          },
+          "hole_pattern_sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+          "reference_planes_x_m": [
+            0.0,
+            1.665e-05
+          ],
+          "nominal_mirror_cuts_x_m": [
+            5.745000000000001e-06,
+            1.0905000000000001e-05
+          ],
+          "regional_cuts_x_m": [
+            1.0000000000000002e-06,
+            1.565e-05
+          ]
+        },
+        "refined_region": "complement",
+        "mesh_geometry_connectivity_sha256": "c4f69d0a1795c74fcbfb272729ef22792db30a55998b33e75bd0f6c444e7d16b"
+      }
+    },
+    "frequencies_GHz": [
+      1.0
+    ],
+    "numerical_identity": {
+      "source_sha256": {
+        "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+        "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/layered_AP_pnc.py": "9242d11434e5004410fdb8d16b23e2405bf429ba93034fc08cee494d5aeae856",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+        "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/mesh_checkpoint_AP_pnc.py": "7fd1780e3c75f6a97f1c7f415bbd8c6e83c066fc5db3999774755910a689021d",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/refinement/central_AP_pnc.py": "1fa13bd28dc0664f197b9a77f90fbbbaec3c0d68e0a4daf884f536b6c10926ca",
+        "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+        "src/phononic/resumable_scattering_AP_pnc.py": "dba6002d982647810f3fc714fdce73a0f34e306e06e8519df2d54778002205ec",
+        "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+        "src/phononic/workflow_AP_pnc.py": "0992815d8ee2c88a74f8221d29c13e98bc388d8aadb5bc7d75992517980b15cd",
+        "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5",
+        "tools/run_taper_patch_response_AP_pnc.py": "f1e8a292d98df9e8e17b86f53955a1751882a5e02385c006f6f224c02fe2f233",
+        "tools/central_patch_refinement_AP_pnc.py": "ea340f855dda845a44887bab7b35d698adf2591f24c33b76c1de00d27c5aec53",
+        "tools/map_scattering_AP_pnc.py": "11b1dfe118606271a5c2710eae30b4081fb448a660b87eee58283550f7e1acce",
+        "tools/run_fixed_wall_response_AP_pnc.py": "0247a77f3d216e149e8bea3a5491ddc1a1c9eff4caae8c0e683eeaba268ef892"
+      },
+      "packages": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "scikit-fem": "12.0.2",
+        "meshio": "5.3.5",
+        "gmsh": "4.15.2",
+        "matplotlib": "3.11.2",
+        "psutil": "7.2.2"
+      },
+      "python": "3.12.12",
+      "platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28"
+    },
+    "thread_environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1"
+    }
+  },
+  "inputs_sha256": "97a50031b0876d4aafd48215132d13fc1c118ca312a66d1001449cd1f165c827",
+  "source_git_commit": null,
+  "taper_patch_donors": {
+    "coarse": {
+      "directory": "/home/usd.local/kunming.dong/phononic_nested_3965855_AP_pnc/results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux",
+      "source_git_commit": null,
+      "checkpoint": {
+        "path": "checkpoint_AP_pnc.json",
+        "sha256": "8a8e2cf5a4dd1831c3615e158279aa6aa6f31bf1ff1b33e5dd18ec1070f13b5d",
+        "bytes": 15300
+      },
+      "assembly_source_git_commit": "3965855c1c6847e0e9a60becd7ac22efbeb88279",
+      "assembly_platform": "Windows-11-10.0.26200-SP0",
+      "mesh_hash": "401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a",
+      "mesh": {
+        "path": "shared-2m5o4mx7/_meshes/401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a/mesh_AP_pnc.npz",
+        "sha256": "33771e9f0ab3c7399549122407372f7dbc907908f181c664de3bf3c881210705",
+        "bytes": 217141
+      },
+      "mesh_summary": {
+        "path": "shared-2m5o4mx7/_meshes/401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a/summary_AP_pnc.json",
+        "sha256": "67f0c46e123e887e7ed4880d8cda7146aa51a76b1a10259a7fb78184795d326b",
+        "bytes": 9815
+      },
+      "central_max_edge_nm": 168.75
+    },
+    "fine": {
+      "directory": "/home/usd.local/kunming.dong/phononic_nested_3965855_AP_pnc/results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge126p5625_rim32_linux",
+      "source_git_commit": null,
+      "checkpoint": {
+        "path": "checkpoint_AP_pnc.json",
+        "sha256": "0a9fe4b6c50fd8efc48c1a7e0e82258c247020473af01304f170f59d836fea15",
+        "bytes": 11020
+      },
+      "assembly_source_git_commit": null,
+      "assembly_platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28",
+      "mesh_hash": "393ab3480e288a0d844eea824ddf6c38e217aab75c2883d807e700b96341b711",
+      "mesh": {
+        "path": "shared-4iibxoxj/_meshes/393ab3480e288a0d844eea824ddf6c38e217aab75c2883d807e700b96341b711/mesh_AP_pnc.npz",
+        "sha256": "0c88c5f206f21b04d3c23fc3dce2521c12e12308804fa253e123d7d769aec064",
+        "bytes": 332236
+      },
+      "mesh_summary": {
+        "path": "shared-4iibxoxj/_meshes/393ab3480e288a0d844eea824ddf6c38e217aab75c2883d807e700b96341b711/summary_AP_pnc.json",
+        "sha256": "f4ad25cddcab77a5e605e7d1636b09e6e418d26e1fdee8c16fe9e252fe006ab4",
+        "bytes": 9500
+      },
+      "central_max_edge_nm": 126.5625
+    },
+    "hole_pattern_sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+    "reference_planes_x_m": [
+      0.0,
+      1.665e-05
+    ],
+    "nominal_mirror_cuts_x_m": [
+      5.745000000000001e-06,
+      1.0905000000000001e-05
+    ],
+    "regional_cuts_x_m": [
+      1.0000000000000002e-06,
+      1.565e-05
+    ]
+  },
+  "refined_region": "complement",
+  "shared": {
+    "mesh_hash": "951e0a82d111e6109fbb5c4ee83d598d7e2d56c30730b6a19ea479dc8cf2ba14",
+    "assembly_resources": {
+      "peak_process_memory_mib": 2180.921875,
+      "system_available_memory_mib_at_start": 91266.66015625,
+      "process_lifetime_peak_working_set_mib": 1150.87109375,
+      "elapsed_seconds": 56.86971499200445
+    },
+    "section_resources": {
+      "peak_process_memory_mib": 1151.44140625,
+      "system_available_memory_mib_at_start": 90238.51953125,
+      "process_lifetime_peak_working_set_mib": 1151.44140625,
+      "elapsed_seconds": 0.15777773200534284
+    },
+    "reference_planes_x_m": [
+      0.0,
+      1.665e-05
+    ],
+    "artifacts": {
+      "mesh_summary": {
+        "path": "shared-ikib2nx5/_meshes/951e0a82d111e6109fbb5c4ee83d598d7e2d56c30730b6a19ea479dc8cf2ba14/summary_AP_pnc.json",
+        "sha256": "edd220470570c73549123387e4cfab907c9c9e5911746ea58019b4ba4965d9d4",
+        "bytes": 97399
+      },
+      "mesh": {
+        "path": "shared-ikib2nx5/_meshes/951e0a82d111e6109fbb5c4ee83d598d7e2d56c30730b6a19ea479dc8cf2ba14/mesh_AP_pnc.npz",
+        "sha256": "1d6d09bb4497bdf347415b9e584a926cf718646f1d4188bcbe18fd3b394bb898",
+        "bytes": 279197
+      },
+      "stiffness": {
+        "path": "shared-ikib2nx5/K.npz",
+        "sha256": "3f19325550e92c9ab48445105d4277336180078840e4e16ae3126d1a9a149760",
+        "bytes": 145145629
+      },
+      "mass": {
+        "path": "shared-ikib2nx5/M.npz",
+        "sha256": "be6c7ba3173c16bd8bab8528f7df4c15824564d5a330c14b1188959f697099d9",
+        "bytes": 50533693
+      },
+      "port_section": {
+        "path": "shared-ikib2nx5/port_section_AP_pnc.npz",
+        "sha256": "89486efc58d29a62e215dff1cac392fd70730b417288236c72b83372b1f3ced2",
+        "bytes": 588030
+      }
+    }
+  },
+  "points": [
+    {
+      "index": 1,
+      "frequency_GHz": 1.0,
+      "status": "accepted",
+      "attempts": [
+        {
+          "status": "accepted",
+          "path": "point-001/attempt-eoypz___"
+        }
+      ],
+      "spatial_convergence_established": false,
+      "frequency_convergence_established": false,
+      "accepted": {
+        "summary": {
+          "path": "point-001/attempt-eoypz___/thin100_complement_patch_AP_pnc-5df8dd02c023/summary_AP_pnc.json",
+          "sha256": "0fac3659dd3b21928128f779f0f0c501b0e78cd47ccf488a08bb0d3d9a77c142",
+          "bytes": 98920
+        }
+      },
+      "track_from_previous": {
+        "status": "segment_start",
+        "reason": "No adjacent accepted point to link."
+      },
+      "segment": 1,
+      "report": "point-001/attempt-eoypz___/thin100_complement_patch_AP_pnc-5df8dd02c023/report_AP_pnc.html",
+      "resources": {
+        "port_modes": {
+          "peak_process_memory_mib": 1164.3203125,
+          "system_available_memory_mib_at_start": 90232.640625,
+          "process_lifetime_peak_working_set_mib": 1164.3203125,
+          "elapsed_seconds": 0.2937313839793205
+        },
+        "scattering": {
+          "peak_process_memory_mib": 4890.81640625,
+          "system_available_memory_mib_at_start": 90228.4375,
+          "process_lifetime_peak_working_set_mib": 1216.2265625,
+          "elapsed_seconds": 67.90260446397588
+        },
+        "solve_and_field_files_elapsed_seconds": 69.30527010094374
+      },
+      "incoming_channels": [
+        {
+          "channel": 1,
+          "port_index": 268,
+          "k_rad_m": 1446421.5752192289,
+          "reflection": 0.0033674922009016405,
+          "transmission": 0.996632507799114
+        },
+        {
+          "channel": 2,
+          "port_index": 263,
+          "k_rad_m": 2796373.3740788386,
+          "reflection": 0.043213994593354975,
+          "transmission": 0.956786005406645
+        },
+        {
+          "channel": 3,
+          "port_index": 258,
+          "k_rad_m": 3870335.6132428073,
+          "reflection": 0.5488277116967548,
+          "transmission": 0.4511722883033018
+        },
+        {
+          "channel": 4,
+          "port_index": 242,
+          "k_rad_m": 6227752.07867574,
+          "reflection": 0.02267772652486684,
+          "transmission": 0.9773222734751705
+        },
+        {
+          "channel": 5,
+          "port_index": 240,
+          "k_rad_m": 7133416.051191055,
+          "reflection": 0.5483725924150848,
+          "transmission": 0.45162740758487996
+        }
+      ]
+    }
+  ],
+  "scope": "Exploratory lossless 3D scattering at the listed frequencies and original end planes. Equations and flux checks qualify each accepted calculation. Spatial and frequency convergence remain unestablished. Matched links compare sampled port fields and do not establish the absence of intervening cutoffs.",
+  "status": "complete",
+  "stop_requested": false,
+  "matching_method": {
+    "minimum_mass_overlap": 0.99,
+    "relative_wavenumber_gap": 1e-08,
+    "gauge": "Cumulative adjacent mass-overlap phases within each segment."
+  },
+  "output_sha256": {
+    "scattering_map_AP_pnc.csv": "7f83de9725d6d4f69d5963d78457103e23a2d77226b8bdb36f532c8a7f5bbd7f",
+    "report_AP_pnc.html": "a40fe596ea6c8d4e7c8ab131417f7e61e2dd45a0cd0e50a88c31e4f83f1001de"
+  },
+  "checkpoint_sha256": "5442dabde960a675a3a1853e8177677d1956b25259a5ef6e5f3e9cd1d90fae20",
+  "map_data_sha256": "397b30099d07614732e6057bc64e32d49ea27005bb4dabe7e290c787fe3f6680"
+}

@@ -1,0 +1,4 @@
+JobID|JobName|Partition|State|ExitCode|NodeList|Elapsed|ReqMem|MaxRSS
+1336422|bash|nodes|COMPLETED|0:0|node031|00:10:33|16G|
+1336422.extern|extern||COMPLETED|0:0|node031|00:10:33||868K
+1336422.0|bash||COMPLETED|0:0|node031|00:10:32||5931M

@@ -183,7 +183,9 @@ class WorkbenchFrequencyMapTests(unittest.TestCase):
         with patch("workbench_AP_pnc.WORKER", worker):
             self.assertTrue(self.window.start_job("map"))
             self.wait_for(lambda: "1/2" in self.window.status.text())
+            self.assertEqual(self.window.stop_button.text(), "Stop after current point")
             QTest.mouseClick(self.window.stop_button, Qt.MouseButton.LeftButton)
+            self.assertIn("Stop requested at a point boundary", self.window.status.text())
             self.assertTrue(self.window.response_path.with_suffix(".cancel").exists())
             QTest.qWait(200)
             self.assertEqual(self.window.action, "map")
@@ -195,11 +197,12 @@ class WorkbenchFrequencyMapTests(unittest.TestCase):
             (self.window.response_path.parent / "release_AP_pnc").touch()
             self.wait_for(lambda: self.window.action is None)
         self.assertIn("1/2", self.window.status.text())
+        self.assertIn("Stopped at a point boundary", self.window.status.text())
         self.assertTrue(self.window.resume_map_button.isEnabled())
         self.assertTrue(self.window.report_button.isEnabled())
 
     def test_saved_map_open_reads_only_publication_and_preserves_current_inputs(self):
-        self.window.preset.setCurrentIndex(1)
+        self.assertTrue(self.window.saved_map_button.isVisible())
         directory = self.output / "saved imported map"
         directory.mkdir()
         report = directory / mapper.REPORT
@@ -228,6 +231,7 @@ class WorkbenchFrequencyMapTests(unittest.TestCase):
             self.assertEqual(Path(open_url.call_args.args[0].toLocalFile()), report)
         self.assertEqual(self.window.result_directory, directory)
         self.assertEqual(self.window.report_path, report)
+        self.assertIn(f"Saved frequency map · {directory.name}", self.window.current_report.text())
         self.assertEqual(self.window.edited_config(), baseline)
         self.assertIsNone(self.window.action)
         self.assertFalse((self.output / "_workbench").exists())

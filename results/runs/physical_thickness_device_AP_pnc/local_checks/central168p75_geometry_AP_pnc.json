@@ -1,0 +1,211 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "status": "passed",
+  "central_targets_nm": [
+    225,
+    168.75
+  ],
+  "lead_target_nm": 150,
+  "quadratic_thickness_layers": 2,
+  "hole_count": 26,
+  "rim_segments_per_hole_per_plane": 32,
+  "reference_planes_x_m": [
+    0.0,
+    1.665e-05
+  ],
+  "regional_cut_planes_nm": [
+    1000,
+    15650
+  ],
+  "thin_to_thick_coordinate_scale": [
+    1,
+    1,
+    2
+  ],
+  "exact_paired_ordered_connectivity_and_tags": true,
+  "cases": {
+    "thin100": {
+      "physical_thickness_nm": 100,
+      "reference_checkpoint": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central225_1GHz/checkpoint_AP_pnc.json",
+        "sha256": "301696fb3c9ee07544a73ca9458cdcc7dde4db3ab7cae5a65c0bcecec4a9979c"
+      },
+      "reference_geometry_evidence": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/central225_geometry_AP_pnc.json",
+        "sha256": "8413d6990e589d741b515f6142521a36ec869f8d9562f5aec9b5f2d75647b0e6"
+      },
+      "reference": {
+        "mesh_hash": "36bf4349454c9978e907afd06982abe10a3be736112de9f044bbe9bb11a77c0f",
+        "mesh_sha256": "b74961c77f742f52f1db649417a06797d737338688308616c30ac99053765c0e",
+        "ndof": 85425,
+        "mesh_vertices": 4965,
+        "mesh_tetrahedra": 14160,
+        "end_face_dofs": {
+          "xleft": 135,
+          "xright": 135
+        },
+        "summary": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central225_1GHz/shared-3blepqq6/_meshes/36bf4349454c9978e907afd06982abe10a3be736112de9f044bbe9bb11a77c0f/summary_AP_pnc.json",
+          "sha256": "9bfd3d6a841a2b65f7aae1b4b47f592d723f8c29906a54878225d9a2dfd97e2d"
+        },
+        "mesh": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central225_1GHz/shared-3blepqq6/_meshes/36bf4349454c9978e907afd06982abe10a3be736112de9f044bbe9bb11a77c0f/mesh_AP_pnc.npz",
+          "sha256": "b74961c77f742f52f1db649417a06797d737338688308616c30ac99053765c0e"
+        }
+      },
+      "candidate": {
+        "mesh_hash": "396f69baa123e0076759562c53f35088b4912aaf90a832521f6c542117834d33",
+        "mesh_sha256": "0f9ca27db82e9d96c68053b039180ed8548764bd568df386a8cb042a0d277800",
+        "ndof": 98055,
+        "mesh_vertices": 5628,
+        "mesh_tetrahedra": 16560,
+        "end_face_dofs": {
+          "xleft": 135,
+          "xright": 135
+        },
+        "summary": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/_meshes/396f69baa123e0076759562c53f35088b4912aaf90a832521f6c542117834d33/summary_AP_pnc.json",
+          "sha256": "4df2ec886d070764b1eadd8073fa93ea7d238717be3a89421fde53839ce4794c"
+        },
+        "mesh": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/_meshes/396f69baa123e0076759562c53f35088b4912aaf90a832521f6c542117834d33/mesh_AP_pnc.npz",
+          "sha256": "0f9ca27db82e9d96c68053b039180ed8548764bd568df386a8cb042a0d277800"
+        }
+      },
+      "same_P2_end_trace_coordinates_and_components": true,
+      "verified_rims_at_three_planes": 78,
+      "maximum_rim_vertex_error_m": 2.2301083857509742e-21,
+      "hole_pattern_csv": {
+        "path": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+        "sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771"
+      },
+      "lead_tetrahedra": {
+        "left": 600,
+        "right": 600
+      },
+      "exact_shared_faces": {
+        "left_port": 16,
+        "left_cut": 16,
+        "right_cut": 16,
+        "right_port": 16,
+        "hole_walls": 3328
+      },
+      "central_tetrahedra": [
+        12960,
+        15360
+      ],
+      "exact_shared_central_tetrahedra": 90,
+      "central_bottom_edges": [
+        {
+          "triangles": 2160,
+          "unique_edges": 3726,
+          "median_nm": 67.01213359255516,
+          "max_nm": 317.2388373550315
+        },
+        {
+          "triangles": 2560,
+          "unique_edges": 4347,
+          "median_nm": 73.7538754885621,
+          "max_nm": 250.00000000000003
+        }
+      ]
+    },
+    "thick200": {
+      "physical_thickness_nm": 200,
+      "reference_checkpoint": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thick200_central225_1GHz/checkpoint_AP_pnc.json",
+        "sha256": "7f5d2a3a11d2b31c35dd0e511920520174fce6f9fa1842a448ca6ab21b1f1d18"
+      },
+      "reference_geometry_evidence": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thick200_central225_geometry_AP_pnc.json",
+        "sha256": "702aa425e392c8bd2541319121a01ea961961e1fa85f776a225828e8a95b4dbf"
+      },
+      "reference": {
+        "mesh_hash": "c7ea5c1aef861cf341abb6698038de90284be2800fb833bea8c2ed3bb057611e",
+        "mesh_sha256": "f5d63668ca29c98597e8c141215425611e7debd1fe3bf518aa893324efd1ee4d",
+        "ndof": 85425,
+        "mesh_vertices": 4965,
+        "mesh_tetrahedra": 14160,
+        "end_face_dofs": {
+          "xleft": 135,
+          "xright": 135
+        },
+        "summary": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thick200_central225_1GHz/shared-7c1iw4b_/_meshes/c7ea5c1aef861cf341abb6698038de90284be2800fb833bea8c2ed3bb057611e/summary_AP_pnc.json",
+          "sha256": "83c5c8e20786ce8ea62c3a7fb2d509f7761de5d7783e6804a7ea435cae7f5a08"
+        },
+        "mesh": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thick200_central225_1GHz/shared-7c1iw4b_/_meshes/c7ea5c1aef861cf341abb6698038de90284be2800fb833bea8c2ed3bb057611e/mesh_AP_pnc.npz",
+          "sha256": "f5d63668ca29c98597e8c141215425611e7debd1fe3bf518aa893324efd1ee4d"
+        }
+      },
+      "candidate": {
+        "mesh_hash": "ea63db0218f08ea208b4793048dfada9325804cfdb449b47f0f678bbde855228",
+        "mesh_sha256": "4618795545686c2579290e31227a459f432b8162720073f0b9eaad378e02048a",
+        "ndof": 98055,
+        "mesh_vertices": 5628,
+        "mesh_tetrahedra": 16560,
+        "end_face_dofs": {
+          "xleft": 135,
+          "xright": 135
+        },
+        "summary": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/_meshes/ea63db0218f08ea208b4793048dfada9325804cfdb449b47f0f678bbde855228/summary_AP_pnc.json",
+          "sha256": "220650217ea06f3e99e52bfad306bb626f9a1a5964b4c3295f7fe953bab962c3"
+        },
+        "mesh": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/_meshes/ea63db0218f08ea208b4793048dfada9325804cfdb449b47f0f678bbde855228/mesh_AP_pnc.npz",
+          "sha256": "4618795545686c2579290e31227a459f432b8162720073f0b9eaad378e02048a"
+        }
+      },
+      "same_P2_end_trace_coordinates_and_components": true,
+      "verified_rims_at_three_planes": 78,
+      "maximum_rim_vertex_error_m": 2.2301083857509742e-21,
+      "hole_pattern_csv": {
+        "path": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+        "sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771"
+      },
+      "lead_tetrahedra": {
+        "left": 600,
+        "right": 600
+      },
+      "exact_shared_faces": {
+        "left_port": 16,
+        "left_cut": 16,
+        "right_cut": 16,
+        "right_port": 16,
+        "hole_walls": 3328
+      },
+      "central_tetrahedra": [
+        12960,
+        15360
+      ],
+      "exact_shared_central_tetrahedra": 90,
+      "central_bottom_edges": [
+        {
+          "triangles": 2160,
+          "unique_edges": 3726,
+          "median_nm": 67.01213359255516,
+          "max_nm": 317.2388373550315
+        },
+        {
+          "triangles": 2560,
+          "unique_edges": 4347,
+          "median_nm": 73.7538754885621,
+          "max_nm": 250.00000000000003
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "geometry_replay": {
+      "path": "results/runs/physical_thickness_device_AP_pnc/local_checks/check_central168p75_geometry_AP_pnc.py",
+      "sha256": "5ae5dd3fc336ba4014307af8f8e74f8b8383c736f3c30564c212106f2ec81402"
+    },
+    "regional_partition": {
+      "path": "results/runs/regional_mesh_AP_pnc/local_checks/check_regional_lead_geometry_AP_pnc.py",
+      "sha256": "fc8a180cfe4db7bf029b17ad0f770bee844bbbc715469068bcabc2d448ab274f"
+    }
+  }
+}

@@ -3,7 +3,9 @@
 Author and research owner: **Athul Prem** | Project/file tag: **`_AP_pnc`**
 Final recipient: **athul.prem@coyotes.usd.edu**
 
-This contract applies when the continuing AI completes the research or reaches a documented stopping point. It is not a completed report and does not imply that the proposed simulations have run.
+[Reporting index](README.md) · [Current status and evidence](../docs/RESEARCH_STATUS_AP_pnc.md) · [Published figures](../figures/README.md)
+
+This prospective contract applies when the research is complete or reaches a documented stopping point. The current evidence links above cover the delivered finite results.
 
 ## Required deliverable package
 
@@ -59,7 +61,7 @@ Conclude only within the validated model/regime. State which thicknesses support
 2. Check that every numerical claim has its evidence/status and every new figure carries Athul Prem and the required identifier.
 3. Prepare a concise email addressed exactly to **athul.prem@coyotes.usd.edu**, subject **HPGe phonon propagation research report | Athul Prem | _AP_pnc**.
 4. Summarize the strongest supported findings, the main unresolved limitations and whether the study is complete, partial or blocked; attach the report and link compact supporting data.
-5. Send through the executing environment's authenticated email connector when available. Athul explicitly requested this final delivery; do not substitute a GitHub upload for a claimed email send.
+5. After current user authorization, send through the executing environment's authenticated email connector. Record any GitHub publication separately from email delivery.
 6. Create a delivery receipt only after authorized delivery, recording the actual send timestamp and provider message reference. A queued draft is not a sent message.
 
 If sending is unavailable, retain the complete report and delivery-ready draft, set the status to `pending_email_capability`, and tell Athul what is ready and that sending is pending. Do not create a fictional delivery receipt, embed credentials, install unsolicited recurring email jobs or label a missing report as sent.

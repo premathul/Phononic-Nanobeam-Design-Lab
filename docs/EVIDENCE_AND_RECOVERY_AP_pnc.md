@@ -1,13 +1,17 @@
 # Evidence status and archive recovery
 
 Author: **Athul Prem** | Project/file tag: **`_AP_pnc`**
-Audit baseline: `068cb8c92d179bfb2049f886278e95a0e7d9c709` | 12 November 2026.
+Historical audit baseline: `068cb8c92d179bfb2049f886278e95a0e7d9c709` | 12 November 2026.
+
+[Research documentation](README.md) · [Historical archive](../archive/README.md) · [Provenance](../provenance/README.md)
+
+The counts and checks below describe the November reorganization of the earlier 2D upload. Use the [portable saved-device data](../data/README.md#portable-saved-device-data) for the active 3D results. The [supplied continuation brief (PDF)](references/Phononic_Research_Continuation_AP_pnc.pdf) remains the historical statement of the proposed follow-up.
 
 ## What was preserved
 
 Every one of the 199 tracked files in the uploaded repository has an exact-byte successor listed in [the relocation manifest](../provenance/relocation_manifest_AP_pnc.json). Historical scripts, arrays, meshes, plots and documents were moved/renamed, not scientifically edited. Active wrappers and documentation are new files; their original versions remain in the archive. The attached continuation PDF was copied unchanged into `docs/references/`.
 
-The original flat manifest lists 496 expected archive entries. Its expectation is larger than the actual GitHub upload. The inventory is:
+The original flat manifest lists 496 expected archive entries. The following counts describe what was available at reorganization.
 
 | Condition | Entries |
 | --- | ---: |
@@ -20,7 +24,7 @@ The original flat manifest lists 496 expected archive entries. Its expectation i
 
 The unresolved count comprises **222 missing entries and one changed `requirements.txt`**. The uploaded dependency file contains only NumPy; the historical manifest expected a different file. The active current requirements file is explicitly scoped to the lightweight checks, with the uploaded version preserved under `archive/environment/`.
 
-The seven available Git commits do not contain a complete previous archive to restore. Exact-hash aliases are evidence-preserving mappings, not newly computed or inferred replacement data. An alias satisfies an expected byte identity, but does not create the missing solver dependencies.
+The seven Git commits available at reorganization lacked a complete previous archive. An exact-hash alias satisfies the expected byte identity at a different path. Availability of the original solver and its dependencies is checked independently.
 
 ## Critical unavailable components
 
@@ -60,7 +64,7 @@ Primary repository evidence is the [saved stage marker](../results/archive_smoke
 
 The preserved [historical summary](../archive/documentation/RESULTS_AND_NEXT_GOALS_AP_pnc.md) and [saved verification record](../verification/archive/saved_and_fresh_checks_AP_pnc.json) remain readable. Their statements retain their original dates/context; old `PASS` labels do not mean those tests were rerun now.
 
-## Exact recovery procedure for the next AI
+## Exact recovery procedure for historical files
 
 1. Read the missing-entry list, expected hashes and original paths; prioritize the execution-critical entries above.
 2. Locate Athul's complete original folder/backup through available authorized access. This repository does not claim access to his laptop.

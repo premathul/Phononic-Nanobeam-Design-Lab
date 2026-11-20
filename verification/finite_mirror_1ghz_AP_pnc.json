@@ -1,0 +1,829 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "frequency_hz": 1000000000,
+  "cell_count": 8,
+  "geometry": {
+    "period_nm": 550.0,
+    "width_nm": 1000,
+    "hole_center_nm": [
+      275.0,
+      0
+    ],
+    "hole_diameter_nm": 250.0,
+    "circle_segments": 32,
+    "context": "one cell from the repeated outer mirror"
+  },
+  "original_reference_planes_m": [
+    0.0,
+    4.4e-06
+  ],
+  "material": {
+    "name": "nominal_cubic_ge",
+    "C11_Pa": 128500000000.0,
+    "C12_Pa": 48300000000.0,
+    "C44_Pa": 66800000000.0,
+    "density_kg_m3": 5323,
+    "crystal_rotation": [
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ],
+    "temperature_policy": "fixed_property_control",
+    "temperature_K": 4
+  },
+  "section": {
+    "width_nm": 1000,
+    "thicknesses_nm": [
+      100,
+      200
+    ],
+    "element_order": 2,
+    "transverse_cells": 8,
+    "thickness_layers": 2,
+    "native_outgoing_columns_per_end": 255,
+    "evanescent_columns_per_end": 250
+  },
+  "one_cell_native_countercheck": {
+    "source": {
+      "path": "results/runs/mirror_cell_phase_AP_pnc/t100_z2_edge225nm_AP_pnc/finite_1_AP_pnc.json",
+      "sha256": "9260db449ed8b7f033c8d3c9e6d97f9329589e8c57d115b9e429be9cc6b24198",
+      "bytes": 13499
+    },
+    "physical_thickness_nm": 100,
+    "target_nm": 225,
+    "original_reference_planes_m": [
+      0.0,
+      5.5e-07
+    ],
+    "status": "accepted",
+    "maximum_absolute_changes": {
+      "reflection_amplitudes": 8.822797950562052e-14,
+      "transmission_amplitudes": 1.6206495575423985e-13,
+      "reflection": 1.6729673202320328e-14,
+      "transmission": 1.765254609153999e-14
+    },
+    "native_original_equation_residual": 1.5873769484866945e-16,
+    "absolute_limit": 1e-08
+  },
+  "power_normalization": "Per drive, unit incident flux. Mean is the equal-power incoherent average over all propagating lead inputs and is invariant under unitary basis changes.",
+  "mode_match": "A within-thickness match requires identical assembled lead operators, translated section triangles, source and numerical environment, ordered signed SAFE roots, and incident powers.",
+  "phase_gauge_invariant_bounds": "For diagonal transmission the same forward native mode is used at both ends, so its arbitrary phase cancels at the original planes. Changes of coefficient magnitude are unchanged by per-mode phase choices. Either maximum lower-bounds the largest complex change for the matched mode basis.",
+  "conditional_complex_comparison": "Raw elementwise complex maxima assume the deterministic native gauge was reproduced. The finite receipts retain no per-vector phase hashes.",
+  "mesh_power_limit_percentage_points": 1.0,
+  "mesh_complex_amplitude_limit": 0.01,
+  "point_relative_numerical_residual_limit": 1e-08,
+  "point_power_flux_error_limit": 0.01,
+  "by_thickness_nm": {
+    "100": {
+      "cases": [
+        {
+          "source": {
+            "path": "results/runs/mirror_cell_phase_AP_pnc/t100_z2_edge225nm_AP_pnc/finite_8_AP_pnc.json",
+            "sha256": "4f4e5b2d90817595b256628c6609fc2e7f594221ff1efb80a2807c3d7791b90d",
+            "bytes": 13089
+          },
+          "source_cell_inputs_sha256": "99f1b418043a4111e15d0884c6dbfe7c7119598dce96be72a5d26dd1a6c6dec1",
+          "target_nm": 225.0,
+          "actual_central_max_edge_nm": 224.99999999999937,
+          "cell_dofs": 5370,
+          "status": "accepted",
+          "maximum_relative_numerical_residual": 5.517537824168837e-13,
+          "maximum_power_flux_error": 1.7313736119591475e-13,
+          "native_port_operator_sha256": "f68d9bcad71f969df4f13be9b3847648d51683fd4568de57a6b33669a9c433e3",
+          "native_root_order": {
+            "native_incident_root_ids": [
+              508,
+              500,
+              492,
+              478,
+              476
+            ],
+            "native_transmission_root_ids": [
+              508,
+              500,
+              492,
+              478,
+              476
+            ],
+            "native_reflection_root_ids": [
+              509,
+              501,
+              493,
+              479,
+              477
+            ]
+          },
+          "mean_power": {
+            "transmission": 0.8455033602303915,
+            "reflection": 0.1544966397695833
+          },
+          "drives": [
+            {
+              "incident_native_root_id": 508,
+              "transmission": 0.9875626542728595,
+              "reflection": 0.012437345727111809
+            },
+            {
+              "incident_native_root_id": 500,
+              "transmission": 0.9924419203349896,
+              "reflection": 0.007558079665023581
+            },
+            {
+              "incident_native_root_id": 492,
+              "transmission": 0.6180352063477695,
+              "reflection": 0.3819647936521701
+            },
+            {
+              "incident_native_root_id": 478,
+              "transmission": 0.9999026207702848,
+              "reflection": 9.737922969970181e-05
+            },
+            {
+              "incident_native_root_id": 476,
+              "transmission": 0.6295743994260542,
+              "reflection": 0.3704256005739113
+            }
+          ]
+        },
+        {
+          "source": {
+            "path": "results/runs/mirror_cell_phase_AP_pnc/t100_z2_edge168p75nm_AP_pnc/finite_8_AP_pnc.json",
+            "sha256": "dee76311c996bf10b7a71db9f49510f750aa93ae663478a406f7ce51c8cf59e9",
+            "bytes": 13091
+          },
+          "source_cell_inputs_sha256": "198476c999e22f6da11ca43c05d98498564990c86e85069e230d362eb8ff4503",
+          "target_nm": 168.75,
+          "actual_central_max_edge_nm": 168.68079578334257,
+          "cell_dofs": 6060,
+          "status": "accepted",
+          "maximum_relative_numerical_residual": 5.191119385675405e-13,
+          "maximum_power_flux_error": 1.710469548662496e-13,
+          "native_port_operator_sha256": "f68d9bcad71f969df4f13be9b3847648d51683fd4568de57a6b33669a9c433e3",
+          "native_root_order": {
+            "native_incident_root_ids": [
+              508,
+              500,
+              492,
+              478,
+              476
+            ],
+            "native_transmission_root_ids": [
+              508,
+              500,
+              492,
+              478,
+              476
+            ],
+            "native_reflection_root_ids": [
+              509,
+              501,
+              493,
+              479,
+              477
+            ]
+          },
+          "mean_power": {
+            "transmission": 0.8460682936483616,
+            "reflection": 0.15393170635162673
+          },
+          "drives": [
+            {
+              "incident_native_root_id": 508,
+              "transmission": 0.9875250963025869,
+              "reflection": 0.012474903697397306
+            },
+            {
+              "incident_native_root_id": 500,
+              "transmission": 0.9923046488355041,
+              "reflection": 0.007695351164490124
+            },
+            {
+              "incident_native_root_id": 492,
+              "transmission": 0.6197846653231085,
+              "reflection": 0.38021533467685725
+            },
+            {
+              "incident_native_root_id": 478,
+              "transmission": 0.999997783415886,
+              "reflection": 2.216584136087778e-06
+            },
+            {
+              "incident_native_root_id": 476,
+              "transmission": 0.6307292743647223,
+              "reflection": 0.3692707256352529
+            }
+          ]
+        },
+        {
+          "source": {
+            "path": "results/runs/mirror_cell_phase_AP_pnc/t100_z2_edge126p5625nm_AP_pnc/finite_8_AP_pnc.json",
+            "sha256": "571cdf5fac0628b4f40b8c4bb3f7326a183d8369bca2ba66399c43cfea9fe3af",
+            "bytes": 13103
+          },
+          "source_cell_inputs_sha256": "2d37bef38888851749daf9905609044cadead65700a316b5f219ed3bbed18461",
+          "target_nm": 126.5625,
+          "actual_central_max_edge_nm": 126.19077901851684,
+          "cell_dofs": 8100,
+          "status": "accepted",
+          "maximum_relative_numerical_residual": 5.214355355542535e-13,
+          "maximum_power_flux_error": 1.7010317419683458e-13,
+          "native_port_operator_sha256": "f68d9bcad71f969df4f13be9b3847648d51683fd4568de57a6b33669a9c433e3",
+          "native_root_order": {
+            "native_incident_root_ids": [
+              508,
+              500,
+              492,
+              478,
+              476
+            ],
+            "native_transmission_root_ids": [
+              508,
+              500,
+              492,
+              478,
+              476
+            ],
+            "native_reflection_root_ids": [
+              509,
+              501,
+              493,
+              479,
+              477
+            ]
+          },
+          "mean_power": {
+            "transmission": 0.8405414206262917,
+            "reflection": 0.15945857937372138
+          },
+          "drives": [
+            {
+              "incident_native_root_id": 508,
+              "transmission": 0.9872204667295643,
+              "reflection": 0.012779533270410303
+            },
+            {
+              "incident_native_root_id": 500,
+              "transmission": 0.9918534210744785,
+              "reflection": 0.008146578925552424
+            },
+            {
+              "incident_native_root_id": 492,
+              "transmission": 0.6064288895362764,
+              "reflection": 0.3935711104636932
+            },
+            {
+              "incident_native_root_id": 478,
+              "transmission": 0.999977790871002,
+              "reflection": 2.2209129069641273e-05
+            },
+            {
+              "incident_native_root_id": 476,
+              "transmission": 0.6172265349201373,
+              "reflection": 0.38277346507988136
+            }
+          ]
+        }
+      ],
+      "adjacent_mesh_changes": [
+        {
+          "reference_target_nm": 225.0,
+          "candidate_target_nm": 168.75,
+          "native_basis_status": "matched",
+          "native_basis_evidence": {
+            "identical_assembled_section_operators": true,
+            "identical_translated_section_triangles": true,
+            "identical_signed_native_root_order": true,
+            "identical_environment": true,
+            "identical_incident_flux_normalizations": true
+          },
+          "mean_power_change_percentage_points": {
+            "transmission": 0.056493341797003715,
+            "reflection": -0.05649334179565757
+          },
+          "status": "matched",
+          "drives": [
+            {
+              "incident_native_root_id": 508,
+              "transmission_change_percentage_points": -0.003755797027260588,
+              "reflection_change_percentage_points": 0.003755797028549661
+            },
+            {
+              "incident_native_root_id": 500,
+              "transmission_change_percentage_points": -0.013727149948550288,
+              "reflection_change_percentage_points": 0.013727149946654322
+            },
+            {
+              "incident_native_root_id": 492,
+              "transmission_change_percentage_points": 0.17494589753389578,
+              "reflection_change_percentage_points": -0.17494589753128675
+            },
+            {
+              "incident_native_root_id": 478,
+              "transmission_change_percentage_points": 0.00951626456011656,
+              "reflection_change_percentage_points": -0.009516264556361403
+            },
+            {
+              "incident_native_root_id": 476,
+              "transmission_change_percentage_points": 0.11548749386680601,
+              "reflection_change_percentage_points": -0.11548749386583457
+            }
+          ],
+          "max_abs_power_change_percentage_points": {
+            "transmission": 0.17494589753389578,
+            "reflection": 0.17494589753128675
+          },
+          "passes_per_drive_power_limit": true,
+          "phase_gauge_invariant_amplitude_bounds": {
+            "max_abs_diagonal_transmission_change": 0.10731293584397177,
+            "diagonal_transmission_native_root_id": 478,
+            "max_abs_coefficient_magnitude_change_by_block": {
+              "transmission": 0.0029679927367153728,
+              "reflection": 0.00694867847948758
+            },
+            "max_abs_coefficient_magnitude_change": 0.00694867847948758,
+            "establishes_complex_amplitude_limit_exceeded": true
+          },
+          "conditional_native_gauge_comparison": {
+            "max_abs_elementwise_complex_amplitude_change": {
+              "transmission": 0.10731293584397177,
+              "reflection": 0.045790020541470584
+            },
+            "passes_mesh_complex_amplitude_limit": false
+          }
+        },
+        {
+          "reference_target_nm": 168.75,
+          "candidate_target_nm": 126.5625,
+          "native_basis_status": "matched",
+          "native_basis_evidence": {
+            "identical_assembled_section_operators": true,
+            "identical_translated_section_triangles": true,
+            "identical_signed_native_root_order": true,
+            "identical_environment": true,
+            "identical_incident_flux_normalizations": true
+          },
+          "mean_power_change_percentage_points": {
+            "transmission": -0.5526873022069889,
+            "reflection": 0.5526873022094647
+          },
+          "status": "matched",
+          "drives": [
+            {
+              "incident_native_root_id": 508,
+              "transmission_change_percentage_points": -0.030462957302257454,
+              "reflection_change_percentage_points": 0.030462957301299713
+            },
+            {
+              "incident_native_root_id": 500,
+              "transmission_change_percentage_points": -0.04512277610255744,
+              "reflection_change_percentage_points": 0.04512277610623002
+            },
+            {
+              "incident_native_root_id": 492,
+              "transmission_change_percentage_points": -1.3355775786832114,
+              "reflection_change_percentage_points": 1.3355775786835944
+            },
+            {
+              "incident_native_root_id": 478,
+              "transmission_change_percentage_points": -0.0019992544883939978,
+              "reflection_change_percentage_points": 0.0019992544933553494
+            },
+            {
+              "incident_native_root_id": 476,
+              "transmission_change_percentage_points": -1.350273944458491,
+              "reflection_change_percentage_points": 1.350273944462843
+            }
+          ],
+          "max_abs_power_change_percentage_points": {
+            "transmission": 1.350273944458491,
+            "reflection": 1.350273944462843
+          },
+          "passes_per_drive_power_limit": false,
+          "phase_gauge_invariant_amplitude_bounds": {
+            "max_abs_diagonal_transmission_change": 0.058293516377408,
+            "diagonal_transmission_native_root_id": 478,
+            "max_abs_coefficient_magnitude_change_by_block": {
+              "transmission": 0.00861980243760807,
+              "reflection": 0.010999157280037308
+            },
+            "max_abs_coefficient_magnitude_change": 0.010999157280037308,
+            "establishes_complex_amplitude_limit_exceeded": true
+          },
+          "conditional_native_gauge_comparison": {
+            "max_abs_elementwise_complex_amplitude_change": {
+              "transmission": 0.058293516377408,
+              "reflection": 0.035483509855157296
+            },
+            "passes_mesh_complex_amplitude_limit": false
+          }
+        }
+      ]
+    },
+    "200": {
+      "cases": [
+        {
+          "source": {
+            "path": "results/runs/mirror_cell_phase_AP_pnc/t200_z2_edge225nm_AP_pnc/finite_8_AP_pnc.json",
+            "sha256": "7ca2114b3ccd54f8123b690757d745bf5900be5f40c1ec94ccf609a644e5750c",
+            "bytes": 13123
+          },
+          "source_cell_inputs_sha256": "b91259a880acc58d7172706d37aeee945e6b2e9c85251a4c9ecf800f9846cae3",
+          "target_nm": 225.0,
+          "actual_central_max_edge_nm": 224.99999999999937,
+          "cell_dofs": 5370,
+          "status": "accepted",
+          "maximum_relative_numerical_residual": 2.9563437656175383e-13,
+          "maximum_power_flux_error": 6.272760089132134e-14,
+          "native_port_operator_sha256": "3bdb4cfec950d65bb018192e4eb7a28d80c239b08a198ddd4fa484c66d9dfca8",
+          "native_root_order": {
+            "native_incident_root_ids": [
+              506,
+              508,
+              498,
+              488,
+              480
+            ],
+            "native_transmission_root_ids": [
+              506,
+              508,
+              498,
+              488,
+              480
+            ],
+            "native_reflection_root_ids": [
+              507,
+              509,
+              499,
+              489,
+              481
+            ]
+          },
+          "mean_power": {
+            "transmission": 0.9922821761086731,
+            "reflection": 0.0077178238913238615
+          },
+          "drives": [
+            {
+              "incident_native_root_id": 506,
+              "transmission": 0.9818635970448488,
+              "reflection": 0.018136402955100762
+            },
+            {
+              "incident_native_root_id": 508,
+              "transmission": 0.9878108586906825,
+              "reflection": 0.012189141309371744
+            },
+            {
+              "incident_native_root_id": 498,
+              "transmission": 0.9928695089998703,
+              "reflection": 0.0071304910001289855
+            },
+            {
+              "incident_native_root_id": 488,
+              "transmission": 0.9996371636234315,
+              "reflection": 0.00036283637656178155
+            },
+            {
+              "incident_native_root_id": 480,
+              "transmission": 0.9992297521845326,
+              "reflection": 0.0007702478154560334
+            }
+          ]
+        },
+        {
+          "source": {
+            "path": "results/runs/mirror_cell_phase_AP_pnc/t200_z2_edge168p75nm_AP_pnc/finite_8_AP_pnc.json",
+            "sha256": "8b63ec9ea90e741c83f20a0d1ab50de8f9b43b6a07eccf6ae760d462f3a5977c",
+            "bytes": 13132
+          },
+          "source_cell_inputs_sha256": "f88ad52450b6b168f363a3f8d74c2593cd0c108538a5079f04d0c951c5cf7917",
+          "target_nm": 168.75,
+          "actual_central_max_edge_nm": 168.68079578334257,
+          "cell_dofs": 6060,
+          "status": "accepted",
+          "maximum_relative_numerical_residual": 3.265853720900805e-13,
+          "maximum_power_flux_error": 6.850076061937216e-14,
+          "native_port_operator_sha256": "3bdb4cfec950d65bb018192e4eb7a28d80c239b08a198ddd4fa484c66d9dfca8",
+          "native_root_order": {
+            "native_incident_root_ids": [
+              506,
+              508,
+              498,
+              488,
+              480
+            ],
+            "native_transmission_root_ids": [
+              506,
+              508,
+              498,
+              488,
+              480
+            ],
+            "native_reflection_root_ids": [
+              507,
+              509,
+              499,
+              489,
+              481
+            ]
+          },
+          "mean_power": {
+            "transmission": 0.9921809065757654,
+            "reflection": 0.007819093424219794
+          },
+          "drives": [
+            {
+              "incident_native_root_id": 506,
+              "transmission": 0.981891313094217,
+              "reflection": 0.01810868690571455
+            },
+            {
+              "incident_native_root_id": 508,
+              "transmission": 0.9877730927465012,
+              "reflection": 0.012226907253557158
+            },
+            {
+              "incident_native_root_id": 498,
+              "transmission": 0.9927401130248683,
+              "reflection": 0.0072598869751261345
+            },
+            {
+              "incident_native_root_id": 488,
+              "transmission": 0.9995459072774914,
+              "reflection": 0.0004540927224756955
+            },
+            {
+              "incident_native_root_id": 480,
+              "transmission": 0.9989541067357491,
+              "reflection": 0.001045893264225434
+            }
+          ]
+        },
+        {
+          "source": {
+            "path": "results/runs/mirror_cell_phase_AP_pnc/t200_z2_edge126p5625nm_AP_pnc/finite_8_AP_pnc.json",
+            "sha256": "146db9a97d3760dbbad132183bb1c843331782c62c12966645c40d15d555ecd6",
+            "bytes": 13114
+          },
+          "source_cell_inputs_sha256": "1bc74200b8c0e3289c5862955cf0da2d43165dcf2f1aa5105aa6e5859deaf2e1",
+          "target_nm": 126.5625,
+          "actual_central_max_edge_nm": 126.19077901851684,
+          "cell_dofs": 8100,
+          "status": "accepted",
+          "maximum_relative_numerical_residual": 3.1408041849972304e-13,
+          "maximum_power_flux_error": 8.448797217397441e-14,
+          "native_port_operator_sha256": "3bdb4cfec950d65bb018192e4eb7a28d80c239b08a198ddd4fa484c66d9dfca8",
+          "native_root_order": {
+            "native_incident_root_ids": [
+              506,
+              508,
+              498,
+              488,
+              480
+            ],
+            "native_transmission_root_ids": [
+              506,
+              508,
+              498,
+              488,
+              480
+            ],
+            "native_reflection_root_ids": [
+              507,
+              509,
+              499,
+              489,
+              481
+            ]
+          },
+          "mean_power": {
+            "transmission": 0.9919963897466774,
+            "reflection": 0.008003610253317861
+          },
+          "drives": [
+            {
+              "incident_native_root_id": 506,
+              "transmission": 0.9817963637294784,
+              "reflection": 0.01820363627044514
+            },
+            {
+              "incident_native_root_id": 508,
+              "transmission": 0.9874832255343775,
+              "reflection": 0.012516774465701557
+            },
+            {
+              "incident_native_root_id": 498,
+              "transmission": 0.9923268028489591,
+              "reflection": 0.007673197151032853
+            },
+            {
+              "incident_native_root_id": 488,
+              "transmission": 0.9994714639581371,
+              "reflection": 0.0005285360418505727
+            },
+            {
+              "incident_native_root_id": 480,
+              "transmission": 0.9989040926624346,
+              "reflection": 0.0010959073375591858
+            }
+          ]
+        }
+      ],
+      "adjacent_mesh_changes": [
+        {
+          "reference_target_nm": 225.0,
+          "candidate_target_nm": 168.75,
+          "native_basis_status": "matched",
+          "native_basis_evidence": {
+            "identical_assembled_section_operators": true,
+            "identical_translated_section_triangles": true,
+            "identical_signed_native_root_order": true,
+            "identical_environment": true,
+            "identical_incident_flux_normalizations": true
+          },
+          "mean_power_change_percentage_points": {
+            "transmission": -0.010126953290767737,
+            "reflection": 0.010126953289593243
+          },
+          "status": "matched",
+          "drives": [
+            {
+              "incident_native_root_id": 506,
+              "transmission_change_percentage_points": 0.0027716049368131657,
+              "reflection_change_percentage_points": -0.0027716049386210945
+            },
+            {
+              "incident_native_root_id": 508,
+              "transmission_change_percentage_points": -0.003776594418136714,
+              "reflection_change_percentage_points": 0.003776594418541425
+            },
+            {
+              "incident_native_root_id": 498,
+              "transmission_change_percentage_points": -0.012939597500194466,
+              "reflection_change_percentage_points": 0.012939597499714902
+            },
+            {
+              "incident_native_root_id": 488,
+              "transmission_change_percentage_points": -0.00912563459400939,
+              "reflection_change_percentage_points": 0.009125634591391395
+            },
+            {
+              "incident_native_root_id": 480,
+              "transmission_change_percentage_points": -0.027564544878344588,
+              "reflection_change_percentage_points": 0.02756454487694007
+            }
+          ],
+          "max_abs_power_change_percentage_points": {
+            "transmission": 0.027564544878344588,
+            "reflection": 0.02756454487694007
+          },
+          "passes_per_drive_power_limit": true,
+          "phase_gauge_invariant_amplitude_bounds": {
+            "max_abs_diagonal_transmission_change": 0.0247186805770901,
+            "diagonal_transmission_native_root_id": 480,
+            "max_abs_coefficient_magnitude_change_by_block": {
+              "transmission": 0.00021239799455250678,
+              "reflection": 0.005332046597888357
+            },
+            "max_abs_coefficient_magnitude_change": 0.005332046597888357,
+            "establishes_complex_amplitude_limit_exceeded": true
+          },
+          "conditional_native_gauge_comparison": {
+            "max_abs_elementwise_complex_amplitude_change": {
+              "transmission": 0.0247186805770901,
+              "reflection": 0.005332058923082509
+            },
+            "passes_mesh_complex_amplitude_limit": false
+          }
+        },
+        {
+          "reference_target_nm": 168.75,
+          "candidate_target_nm": 126.5625,
+          "native_basis_status": "matched",
+          "native_basis_evidence": {
+            "identical_assembled_section_operators": true,
+            "identical_translated_section_triangles": true,
+            "identical_signed_native_root_order": true,
+            "identical_environment": true,
+            "identical_incident_flux_normalizations": true
+          },
+          "mean_power_change_percentage_points": {
+            "transmission": -0.01845168290880439,
+            "reflection": 0.018451682909806713
+          },
+          "status": "matched",
+          "drives": [
+            {
+              "incident_native_root_id": 506,
+              "transmission_change_percentage_points": -0.0094949364738528,
+              "reflection_change_percentage_points": 0.00949493647305899
+            },
+            {
+              "incident_native_root_id": 508,
+              "transmission_change_percentage_points": -0.02898672121236512,
+              "reflection_change_percentage_points": 0.028986721214439848
+            },
+            {
+              "incident_native_root_id": 498,
+              "transmission_change_percentage_points": -0.04133101759091762,
+              "reflection_change_percentage_points": 0.0413310175906719
+            },
+            {
+              "incident_native_root_id": 488,
+              "transmission_change_percentage_points": -0.007444331935424486,
+              "reflection_change_percentage_points": 0.007444331937487723
+            },
+            {
+              "incident_native_root_id": 480,
+              "transmission_change_percentage_points": -0.0050014073314508245,
+              "reflection_change_percentage_points": 0.005001407333375175
+            }
+          ],
+          "max_abs_power_change_percentage_points": {
+            "transmission": 0.04133101759091762,
+            "reflection": 0.0413310175906719
+          },
+          "passes_per_drive_power_limit": true,
+          "phase_gauge_invariant_amplitude_bounds": {
+            "max_abs_diagonal_transmission_change": 0.02396359828041515,
+            "diagonal_transmission_native_root_id": 506,
+            "max_abs_coefficient_magnitude_change_by_block": {
+              "transmission": 0.0006412065894699898,
+              "reflection": 0.002392063371151068
+            },
+            "max_abs_coefficient_magnitude_change": 0.002392063371151068,
+            "establishes_complex_amplitude_limit_exceeded": true
+          },
+          "conditional_native_gauge_comparison": {
+            "max_abs_elementwise_complex_amplitude_change": {
+              "transmission": 0.02396359828041515,
+              "reflection": 0.003859604968770318
+            },
+            "passes_mesh_complex_amplitude_limit": false
+          }
+        }
+      ]
+    }
+  },
+  "mean_thickness_contrast": [
+    {
+      "target_nm": 225.0,
+      "thin_minus_thick_mean_percentage_points": {
+        "transmission": -14.677881587828157,
+        "reflection": 14.677881587825944
+      }
+    },
+    {
+      "target_nm": 168.75,
+      "thin_minus_thick_mean_percentage_points": {
+        "transmission": -14.611261292740386,
+        "reflection": 14.611261292740693
+      }
+    },
+    {
+      "target_nm": 126.5625,
+      "thin_minus_thick_mean_percentage_points": {
+        "transmission": -15.14549691203857,
+        "reflection": 15.145496912040352
+      }
+    }
+  ],
+  "adjacent_contrast_changes": [
+    {
+      "reference_target_nm": 225.0,
+      "candidate_target_nm": 168.75,
+      "contrast_change_percentage_points": {
+        "transmission": 0.06662029508777145,
+        "reflection": -0.0666202950852508
+      }
+    },
+    {
+      "reference_target_nm": 168.75,
+      "candidate_target_nm": 126.5625,
+      "contrast_change_percentage_points": {
+        "transmission": -0.534235619298185,
+        "reflection": 0.5342356192996593
+      }
+    }
+  ],
+  "scope": "Eight identical cells cut from the repeated outer-mirror region, joined to uniform leads at their physical end planes. Fixed end strips, transverse trace, hole faceting and thickness-layer count bound this comparison. It samples one frequency and three in-plane refinements of each thickness. Full-device response and spatial or frequency convergence remain unestablished.",
+  "comparison_source": {
+    "path": "tools/compare_finite_mirror_AP_pnc.py",
+    "sha256": "256374892169d2e7528cd60b10c12f2ca43e87d9494e14efdec0416e48b42d3d",
+    "bytes": 14699
+  }
+}

@@ -1,0 +1,568 @@
+{
+  "schema_version": 1,
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "status": "completed_finite_paired_comparison",
+  "frequency_hz": 1000000000.0,
+  "incident_side": "left",
+  "hole_count": 26,
+  "reference_planes_x_m": [
+    0.0,
+    1.665e-05
+  ],
+  "planar_dimensions_nm": {
+    "length": 16650,
+    "width": 1000
+  },
+  "common_mesh_except_central_target": {
+    "kind": "layered",
+    "element_order": 2,
+    "port_size_nm": 250,
+    "circle_resolution": 32,
+    "thickness_layers": 2,
+    "lead_mesh_size_nm": 150,
+    "patterned_x_interval_nm": [
+      1000,
+      15650
+    ]
+  },
+  "central_targets_nm": [
+    400,
+    300,
+    225
+  ],
+  "maps": {
+    "200_nm_central_400_nm": {
+      "point_status": "accepted",
+      "thickness_nm": 200,
+      "central_target_nm": 400,
+      "drive": 2,
+      "root": 268,
+      "k_rad_m": 1446665.4707658237,
+      "axial_kinetic_energy_fraction": 0.9795916175161328,
+      "T": 0.9948353112687252,
+      "R": 0.005164688731283989,
+      "next_largest_axial_kinetic_energy_fraction": 0.1558318058966334
+    },
+    "100_nm_central_400_nm": {
+      "point_status": "accepted",
+      "thickness_nm": 100,
+      "central_target_nm": 400,
+      "drive": 1,
+      "root": 268,
+      "k_rad_m": 1446421.5752191825,
+      "axial_kinetic_energy_fraction": 0.9798595749498722,
+      "T": 0.9950441790614645,
+      "R": 0.004955820938507334,
+      "next_largest_axial_kinetic_energy_fraction": 0.1558320668650195
+    },
+    "200_nm_central_300_nm": {
+      "point_status": "accepted",
+      "thickness_nm": 200,
+      "central_target_nm": 300,
+      "drive": 2,
+      "root": 268,
+      "k_rad_m": 1446665.4707658237,
+      "axial_kinetic_energy_fraction": 0.9795916175161328,
+      "T": 0.9957145911863251,
+      "R": 0.004285408813683388,
+      "next_largest_axial_kinetic_energy_fraction": 0.1558318058966334
+    },
+    "100_nm_central_300_nm": {
+      "point_status": "accepted",
+      "thickness_nm": 100,
+      "central_target_nm": 300,
+      "drive": 1,
+      "root": 268,
+      "k_rad_m": 1446421.5752191825,
+      "axial_kinetic_energy_fraction": 0.9798595749498722,
+      "T": 0.9959174636863714,
+      "R": 0.0040825363136362805,
+      "next_largest_axial_kinetic_energy_fraction": 0.1558320668650195
+    },
+    "100_nm_central_225_nm": {
+      "point_status": "accepted",
+      "thickness_nm": 100,
+      "central_target_nm": 225.0,
+      "drive": 1,
+      "root": 268,
+      "k_rad_m": 1446421.5752191825,
+      "axial_kinetic_energy_fraction": 0.9798595749498722,
+      "T": 0.9964919706359389,
+      "R": 0.0035080293640520977,
+      "next_largest_axial_kinetic_energy_fraction": 0.1558320668650195
+    },
+    "200_nm_central_225_nm": {
+      "point_status": "accepted",
+      "thickness_nm": 200,
+      "central_target_nm": 225.0,
+      "drive": 2,
+      "root": 268,
+      "k_rad_m": 1446665.4707658237,
+      "axial_kinetic_energy_fraction": 0.9795916175161328,
+      "T": 0.9962879335342922,
+      "R": 0.003712066465710732,
+      "next_largest_axial_kinetic_energy_fraction": 0.1558318058966334
+    }
+  },
+  "thin_minus_thick_axial_power": {
+    "400": {
+      "reference": "200_nm_central_400_nm",
+      "candidate": "100_nm_central_400_nm",
+      "status": "matched",
+      "match": {
+        "reference_to_candidate_overlap": 0.9999437761427369,
+        "candidate_to_reference_overlap": 0.9999437761427376,
+        "reference_to_candidate_best_competing_overlap": 1.0886443505990617e-06,
+        "candidate_to_reference_best_competing_overlap": 1.088644350587284e-06
+      },
+      "power_changes": {
+        "transmission": {
+          "signed_change_fraction": 0.0002088677927393201,
+          "signed_change_percentage_points": 0.02088677927393201,
+          "relative_change_percent": 0.02099521301399611
+        },
+        "reflection": {
+          "signed_change_fraction": -0.00020886779277665482,
+          "signed_change_percentage_points": -0.020886779277665482,
+          "relative_change_percent": -4.04415064767569
+        }
+      }
+    },
+    "300": {
+      "reference": "200_nm_central_300_nm",
+      "candidate": "100_nm_central_300_nm",
+      "status": "matched",
+      "match": {
+        "reference_to_candidate_overlap": 0.9999437761427369,
+        "candidate_to_reference_overlap": 0.9999437761427376,
+        "reference_to_candidate_best_competing_overlap": 1.0886443505990617e-06,
+        "candidate_to_reference_best_competing_overlap": 1.088644350587284e-06
+      },
+      "power_changes": {
+        "transmission": {
+          "signed_change_fraction": 0.00020287250004624724,
+          "signed_change_percentage_points": 0.020287250004624724,
+          "relative_change_percent": 0.020374563337927858
+        },
+        "reflection": {
+          "signed_change_fraction": -0.00020287250004710766,
+          "signed_change_percentage_points": -0.020287250004710766,
+          "relative_change_percent": -4.73402909424492
+        }
+      }
+    },
+    "225": {
+      "status": "matched",
+      "reference": "200_nm_central_225_nm",
+      "candidate": "100_nm_central_225_nm",
+      "match": {
+        "reference_to_candidate_overlap": 0.9999437761427369,
+        "candidate_to_reference_overlap": 0.9999437761427376,
+        "reference_to_candidate_best_competing_overlap": 1.0886443505990617e-06,
+        "candidate_to_reference_best_competing_overlap": 1.088644350587284e-06
+      },
+      "power_changes": {
+        "transmission": {
+          "signed_change_fraction": 0.0002040371016466258,
+          "signed_change_percentage_points": 0.02040371016466258,
+          "relative_change_percent": 0.020479732292130872
+        },
+        "reflection": {
+          "signed_change_fraction": -0.00020403710165863443,
+          "signed_change_percentage_points": -0.020403710165863443,
+          "relative_change_percent": -5.496590741124254
+        }
+      }
+    }
+  },
+  "central_mesh_axial_power_increments_by_thickness_nm": {
+    "200": {
+      "400_to_300": {
+        "reference": "200_nm_central_400_nm",
+        "candidate": "200_nm_central_300_nm",
+        "status": "matched",
+        "match": {
+          "reference_to_candidate_overlap": 1.0,
+          "candidate_to_reference_overlap": 1.0,
+          "reference_to_candidate_best_competing_overlap": 8.218839244693908e-06,
+          "candidate_to_reference_best_competing_overlap": 8.218839244693908e-06
+        },
+        "power_changes": {
+          "transmission": {
+            "signed_change_fraction": 0.0008792799175999511,
+            "signed_change_percentage_points": 0.0879279917599951,
+            "relative_change_percent": 0.08838447003641187
+          },
+          "reflection": {
+            "signed_change_fraction": -0.0008792799176006007,
+            "signed_change_percentage_points": -0.08792799176006007,
+            "relative_change_percent": -17.02483854011476
+          }
+        },
+        "selected_drive_power_increment_passed": true
+      },
+      "300_to_225": {
+        "status": "matched",
+        "reference": "200_nm_central_300_nm",
+        "candidate": "200_nm_central_225_nm",
+        "match": {
+          "reference_to_candidate_overlap": 1.0,
+          "candidate_to_reference_overlap": 1.0,
+          "reference_to_candidate_best_competing_overlap": 8.218839244693908e-06,
+          "candidate_to_reference_best_competing_overlap": 8.218839244693908e-06
+        },
+        "power_changes": {
+          "transmission": {
+            "signed_change_fraction": 0.0005733423479671318,
+            "signed_change_percentage_points": 0.05733423479671318,
+            "relative_change_percent": 0.05758099289114906
+          },
+          "reflection": {
+            "signed_change_fraction": -0.000573342347972656,
+            "signed_change_percentage_points": -0.0573342347972656,
+            "relative_change_percent": -13.378941727612158
+          }
+        },
+        "selected_drive_power_increment_passed": true
+      }
+    },
+    "100": {
+      "400_to_300": {
+        "reference": "100_nm_central_400_nm",
+        "candidate": "100_nm_central_300_nm",
+        "status": "matched",
+        "match": {
+          "reference_to_candidate_overlap": 0.9999999999999999,
+          "candidate_to_reference_overlap": 0.9999999999999999,
+          "reference_to_candidate_best_competing_overlap": 9.298805016652975e-06,
+          "candidate_to_reference_best_competing_overlap": 9.298805016652975e-06
+        },
+        "power_changes": {
+          "transmission": {
+            "signed_change_fraction": 0.0008732846249068782,
+            "signed_change_percentage_points": 0.08732846249068782,
+            "relative_change_percent": 0.08776340219693249
+          },
+          "reflection": {
+            "signed_change_fraction": -0.0008732846248710536,
+            "signed_change_percentage_points": -0.08732846248710535,
+            "relative_change_percent": -17.62139180787436
+          }
+        },
+        "selected_drive_power_increment_passed": true
+      },
+      "300_to_225": {
+        "reference": "100_nm_central_300_nm",
+        "candidate": "100_nm_central_225_nm",
+        "status": "matched",
+        "match": {
+          "reference_to_candidate_overlap": 0.9999999999999999,
+          "candidate_to_reference_overlap": 0.9999999999999999,
+          "reference_to_candidate_best_competing_overlap": 9.298805016652975e-06,
+          "candidate_to_reference_best_competing_overlap": 9.298805016652975e-06
+        },
+        "power_changes": {
+          "transmission": {
+            "signed_change_fraction": 0.0005745069495675104,
+            "signed_change_percentage_points": 0.057450694956751036,
+            "relative_change_percent": 0.05768620096699407
+          },
+          "reflection": {
+            "signed_change_fraction": -0.0005745069495841828,
+            "signed_change_percentage_points": -0.05745069495841828,
+            "relative_change_percent": -14.072304701007651
+          }
+        },
+        "selected_drive_power_increment_passed": true
+      }
+    }
+  },
+  "thin_minus_thick_axial_power_contrast_increments": {
+    "400_to_300": {
+      "transmission": {
+        "signed_change_fraction": -5.995292693072862e-06,
+        "signed_change_percentage_points": -0.0005995292693072862
+      },
+      "reflection": {
+        "signed_change_fraction": 5.995292729547158e-06,
+        "signed_change_percentage_points": 0.0005995292729547158
+      }
+    },
+    "300_to_225": {
+      "transmission": {
+        "signed_change_fraction": 1.1646016003785675e-06,
+        "signed_change_percentage_points": 0.00011646016003785675
+      },
+      "reflection": {
+        "signed_change_fraction": -1.164601611526768e-06,
+        "signed_change_percentage_points": -0.0001164601611526768
+      }
+    }
+  },
+  "same_nonzero_reflection_contrast_sign_at_all_three_targets": true,
+  "selected_drive_mesh_power_increment_limit": 0.01,
+  "public_entry_point_method": {
+    "minimum_mass_overlap": 0.99,
+    "axial_majority_threshold": 0.5,
+    "displacement_matching": "Reciprocal interpolation at fixed y and z/thickness, with each target's mass matrix.",
+    "relative_wavenumber_gap": 1e-08,
+    "minimum_overlap_competitor_margin": 1e-08
+  },
+  "new_thick_central_225_numerical_acceptance": {
+    "source_git_commit": "827062ce284c9b25741daa98fef0e11ef0f539fd",
+    "map_driver_sha256": "11b1dfe118606271a5c2710eae30b4081fb448a660b87eee58283550f7e1acce",
+    "body_dofs": 85425,
+    "port_dofs": 135,
+    "maximum_numerical_checks": {
+      "maximum_relative_residual": 7.110490416127465e-13,
+      "maximum_relative_backward_residual": 4.724846484354751e-16,
+      "maximum_port_relative_residual": 2.2861067136381084e-15,
+      "maximum_native_power_error": 2.6756374893466273e-14
+    },
+    "independent_flux_checks": {
+      "maximum_nodal_force_relative_residual": 7.149923825052049e-13,
+      "maximum_single_drive_power_error": 2.6867397195928788e-14,
+      "coherent_defect_spectral_norm": 6.988716432407249e-12,
+      "maximum_flux_gram_entry_error_W": 3.504989731200905e-12
+    },
+    "body_matrix_nonzeros": {
+      "stiffness": 5655231,
+      "mass": 1939965
+    }
+  },
+  "new_thick_central_225_geometry": {
+    "fixed_mesh_pair": {
+      "physical_thickness_nm": [
+        200,
+        100
+      ],
+      "central_target_nm": 225,
+      "exact_coordinate_mapping": {
+        "x_scale": 1,
+        "y_scale": 1,
+        "z_scale": 0.5
+      },
+      "exact_ordered_connectivity_and_boundary_tags": true,
+      "xy_vertices_per_layer": 1655,
+      "z_planes_m": [
+        [
+          -1.0000000000000001e-07,
+          0.0,
+          1.0000000000000001e-07
+        ],
+        [
+          -5.0000000000000004e-08,
+          0.0,
+          5.0000000000000004e-08
+        ]
+      ]
+    },
+    "exact_shared_cells": {
+      "left": 600,
+      "right": 600
+    },
+    "exact_shared_faces": {
+      "left_port": 16,
+      "right_port": 16,
+      "left_cut": 16,
+      "right_cut": 16,
+      "hole_walls": 3328
+    },
+    "central_tetrahedra": [
+      10920,
+      12960
+    ]
+  },
+  "original_numerical_acceptance_limits": {
+    "original_equation_relative_and_backward_residual": 1e-09,
+    "nodal_force_relative_residual": 1e-09,
+    "native_port_relative_residual": 1e-08,
+    "single_drive_and_coherent_power_defect": 0.01,
+    "flux_gram_entry_W": 1e-07
+  },
+  "execution": {
+    "mesh": {
+      "receipt": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/local_checks/thick200_central225_mesh_execution_AP_pnc.json",
+        "sha256": "4a2d384c840d68a1a5db9108df66d1beeeab928370ee30bf69218e75e3c67660",
+        "bytes": 1710
+      },
+      "started_utc": "2026-11-19T07:00:23.859295+00:00",
+      "elapsed_seconds": 2.828,
+      "sample_interval_seconds": 0.05,
+      "min_sampled_commit_available_bytes": 10523983872,
+      "peak_sampled_process_tree_rss_sum_bytes": 100458496,
+      "peak_sampled_process_tree_private_sum_bytes": 107053056,
+      "min_sampled_physical_available_bytes": 5393555456
+    },
+    "preparation": {
+      "receipt": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/local_checks/thick200_central225_preparation_execution_AP_pnc.json",
+        "sha256": "093ff51c45fa3d1a04a233c7780f67cd85f1272f2e62096b1f696277b661db62",
+        "bytes": 1894
+      },
+      "started_utc": "2026-11-19T07:00:41.287032+00:00",
+      "elapsed_seconds": 20.016,
+      "sample_interval_seconds": 0.05,
+      "min_sampled_commit_available_bytes": 8789721088,
+      "peak_sampled_process_tree_rss_sum_bytes": 1004756992,
+      "peak_sampled_process_tree_private_sum_bytes": 1110519808,
+      "min_sampled_physical_available_bytes": 4621094912
+    },
+    "response": {
+      "receipt": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/local_checks/thick200_central225_response_execution_AP_pnc.json",
+        "sha256": "89bfdd3370cf56bee115489cd1c806ed6ff3f96bb19cc9cf54a0e96d0cc5c62e",
+        "bytes": 1888
+      },
+      "started_utc": "2026-11-19T07:01:43.923617+00:00",
+      "elapsed_seconds": 12.656,
+      "sample_interval_seconds": 0.05,
+      "min_sampled_commit_available_bytes": 2253406208,
+      "peak_sampled_process_tree_rss_sum_bytes": 1596416000,
+      "peak_sampled_process_tree_private_sum_bytes": 7335428096,
+      "min_sampled_physical_available_bytes": 4033888256,
+      "host_platform": "Windows-11-10.0.26200-SP0",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "BLIS_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1"
+      },
+      "resident_limit_bytes": 3758096384,
+      "private_limit_bytes": 8724152320
+    },
+    "flux": {
+      "receipt": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/local_checks/thick200_central225_flux_execution_AP_pnc.json",
+        "sha256": "8da5f559858070d1e59cc4ae5a17dc80d9c920c5656a41a193eada3901a91143",
+        "bytes": 1755
+      },
+      "started_utc": "2026-11-19T07:02:29.067750+00:00",
+      "elapsed_seconds": 2.343,
+      "sample_interval_seconds": 0.05,
+      "min_sampled_commit_available_bytes": 9575084032,
+      "peak_sampled_process_tree_rss_sum_bytes": 158404608,
+      "peak_sampled_process_tree_private_sum_bytes": 140816384,
+      "min_sampled_physical_available_bytes": 5412851712
+    }
+  },
+  "provenance": {
+    "script": {
+      "path": "results/runs/physical_thickness_device_AP_pnc/compare_axial_third_pair_AP_pnc.py",
+      "sha256": "a4a6d5244736dbfd4192a02bc91ae6b148e28a820208d2c0c99dd55f224fec4a",
+      "bytes": 14394
+    },
+    "prior_five_map_result": {
+      "path": "verification/axial_device_thickness_1GHz_AP_pnc.json",
+      "sha256": "c14e4a85f3e3609e08ea5662c77f12a6a78bf25e1a22a0a26fee7d11fa3f17e5",
+      "bytes": 15214
+    },
+    "public_entry_point": {
+      "path": "tools/compare_axial_device_power_AP_pnc.py",
+      "sha256": "1851b1add644071a25d5e1edfe17a97fd8682b9d7de01e3c0a9607fcbedf8f46"
+    },
+    "prior_thin_three_mesh_control": {
+      "path": "verification/physical_thin_central_trend_1GHz_AP_pnc.json",
+      "sha256": "a852ed2169ab04bc81e54865c26163eb72110a7ba81a2d3f4d10f55c2fc4acc4"
+    },
+    "geometry_and_ports": {
+      "path": "results/runs/physical_thickness_device_AP_pnc/thick200_central225_geometry_AP_pnc.json",
+      "sha256": "702aa425e392c8bd2541319121a01ea961961e1fa85f776a225828e8a95b4dbf",
+      "bytes": 10224
+    },
+    "configuration": {
+      "path": "results/runs/physical_thickness_device_AP_pnc/thick200_central225_configuration_AP_pnc.json",
+      "sha256": "432eb5100ef28b988b27d17ead363c4a09dae8f72c1f9376891449cc39f3845a",
+      "bytes": 1222
+    },
+    "new_thick_central_225_archive": {
+      "map": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thick200_central225_1GHz/map_AP_pnc.json",
+        "sha256": "de9af3b1fb20ea6573ac5870bd4b172e85019678079b72d28433f8a802597475",
+        "bytes": 14084
+      },
+      "checkpoint": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thick200_central225_1GHz/checkpoint_AP_pnc.json",
+        "sha256": "7f5d2a3a11d2b31c35dd0e511920520174fce6f9fa1842a448ca6ab21b1f1d18",
+        "bytes": 11207
+      },
+      "point_summary": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thick200_central225_1GHz/point-001/attempt-gw2ojmki/historical_26hole_regional_pilot_200nm-039db7b72a73/summary_AP_pnc.json",
+        "sha256": "636c29ccb544b34010c158d13610c21c1f1491f42160b1bbf91d03c5f877213f",
+        "bytes": 14211
+      },
+      "map_coefficients": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thick200_central225_1GHz/scattering_map_AP_pnc.csv",
+        "sha256": "4c9ab1311777caf493578090e824567a4ce6c7c04212047d5a73920d1d930e0a",
+        "bytes": 7274
+      },
+      "configuration_AP_pnc.json": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thick200_central225_1GHz/point-001/attempt-gw2ojmki/historical_26hole_regional_pilot_200nm-039db7b72a73/configuration_AP_pnc.json",
+        "sha256": "ad586a1d720e327981c7301a738e4e9eb94af811fe59ff4717c4e293f8053471",
+        "bytes": 1288
+      },
+      "scattering_AP_pnc.csv": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thick200_central225_1GHz/point-001/attempt-gw2ojmki/historical_26hole_regional_pilot_200nm-039db7b72a73/scattering_AP_pnc.csv",
+        "sha256": "bcb865fe5277cd6347a8049cdd6ae0ded67687492bfcc907a4e490f996ffa099",
+        "bytes": 924
+      },
+      "scattering_channels_AP_pnc.csv": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thick200_central225_1GHz/point-001/attempt-gw2ojmki/historical_26hole_regional_pilot_200nm-039db7b72a73/scattering_channels_AP_pnc.csv",
+        "sha256": "a0ce6f65e266924e23f7404e1692f3a4d138fb0e310671ba81ed41ac5418e116",
+        "bytes": 4572
+      },
+      "port_modes_AP_pnc.csv": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thick200_central225_1GHz/point-001/attempt-gw2ojmki/historical_26hole_regional_pilot_200nm-039db7b72a73/port_modes_AP_pnc.csv",
+        "sha256": "cfb3480497752cfd277cd6bedce3a3cabd92fe330e1b62e98fdd8f12089a2c06",
+        "bytes": 22140
+      },
+      "selected_fields_AP_pnc.npz": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thick200_central225_1GHz/point-001/attempt-gw2ojmki/historical_26hole_regional_pilot_200nm-039db7b72a73/selected_fields_AP_pnc.npz",
+        "sha256": "8095c1ac61f8b8c2cbd0e1589dd6f9acdeec8eeaa60cc9351aad304c3a0a743b",
+        "bytes": 8267690
+      },
+      "mesh": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thick200_central225_1GHz/shared-7c1iw4b_/_meshes/c7ea5c1aef861cf341abb6698038de90284be2800fb833bea8c2ed3bb057611e/mesh_AP_pnc.npz",
+        "sha256": "f5d63668ca29c98597e8c141215425611e7debd1fe3bf518aa893324efd1ee4d",
+        "bytes": 126355
+      },
+      "port_section": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thick200_central225_1GHz/shared-7c1iw4b_/port_section_AP_pnc.npz",
+        "sha256": "e0145ef01ef9d6e710aca1210b4ff83a0e196f420e2a7e1b9e1c717d75fcfc63",
+        "bytes": 588030
+      },
+      "independent_flux_replay": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thick200_central225_flux_AP_pnc.json",
+        "sha256": "c86f8eb5b1a03bffb702baf3479f08f34873dc1ff63ce34f6448dd44467e9128",
+        "bytes": 9018
+      }
+    },
+    "earlier_failed_broader_criteria": {
+      "thin_device_all_channel_power": {
+        "path": "verification/physical_thin_central_trend_1GHz_AP_pnc.json",
+        "sha256": "a852ed2169ab04bc81e54865c26163eb72110a7ba81a2d3f4d10f55c2fc4acc4"
+      },
+      "thick_device_central_complex_response": {
+        "path": "verification/regional_central_1GHz_AP_pnc.json",
+        "sha256": "7a56189b4b5761309c55b9ea74444aef4c33c40539a98595f9e8980e52e98f41"
+      },
+      "thick_device_layer_complex_response": {
+        "path": "verification/regional_thickness_1GHz_AP_pnc.json",
+        "sha256": "cc640825b2a3ad409012e1f500fb77322a77e1fa40dfed5cfb847d23cf79c496"
+      },
+      "uniform_full_length_complex_response": {
+        "path": "verification/uniform_thin_full_length_1GHz_AP_pnc.json",
+        "sha256": "abbf1f88a7b2b5cf7f3f7eb7a825de298c0c8d9491951a0aea866938610dd011"
+      },
+      "uniform_lead_phase_increment": {
+        "path": "verification/uniform_thin_port_refinement_1GHz_AP_pnc.json",
+        "sha256": "5c444e06c7d1380e33258321950739ba5bf2ebeb474e3146177827f8ef44ebda"
+      }
+    }
+  },
+  "scope": "Native drives are one-based incident order at 1 GHz. T and R are fractions of the selected incident axial-mode power. Thickness contrasts use 100 nm minus 200 nm at fixed central target. Increments are the finer result minus the coarser result. Relative percent changes use the thick power for thickness contrasts and coarser power for single-thickness mesh increments.",
+  "limits": "Finite saved calculations at one frequency with the original physical sections and end planes. Normalized coordinates are used only for displacement matching; T and R are fractions of native incident power. This single-drive comparison leaves all-channel and complex-response failures in force. Weak reflection and relative changes near zero remain sensitive to discretization. Spatial and frequency convergence, a reflection floor, and continuous branch identity remain unresolved. Mesh increments and changes in the paired contrasts provide no error bound or guaranteed sign for the continuum thickness effect."
+}

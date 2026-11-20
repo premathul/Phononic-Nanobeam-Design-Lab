@@ -23,6 +23,7 @@ from scipy.optimize import linear_sum_assignment
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT), str(ROOT / "src")]
+from phononic.report_style_AP_pnc import available_link, report_link, report_page, scroll_table
 from phononic.workflow_AP_pnc import digest
 from tools import compare_scattering_AP_pnc as matching
 from tools import compare_device_frequency_AP_pnc as frequency
@@ -59,10 +60,12 @@ PINS = {
     "accepted_z6_modes": ("results/runs/port_count_interval_AP_pnc/study/modes-887500000_AP_pnc.npz", "93e4e089e6b329244b204ca10e3612653824b1e569476a51ea1924654a83b81c"),
     "accepted_z6_point_replay": (STUDY + "independent_point_AP_pnc.json", "7ca962aa197087aa167e1dfb3a74fdaee1b822b2d3c7d2a6e4cf5f3c936a27d7"),
 }
+# Live reader hashes include the 2026-11-20 presentation update. Numerical
+# functions are unchanged; archived producer/receipt identities remain separate.
 HELPERS = {
-    "matching_source": (matching, "148f7efa58ad668a7a57be9db68a3241ffb67ed94067499ce6dcd4a0f8c59313"),
+    "matching_source": (matching, "c677eae9a1078b90638950e01107de64bf96a44a27b24b675d09b74353c2a2f8"),
     "section_reader_source": (section_reader, "367eb1fa5ed0296df548716cb8eb02e422dd639a23f8ad434dc0e357af5d1e79"),
-    "response_reader_source": (frequency, "36bb5effcd52ca7fde7da7f876acf8fb34bdaaf897bb4a6e8e7e28bb364ef623"),
+    "response_reader_source": (frequency, "04e7f7531e551c4172d0dd69c89775f5557e4f392bf047260d1b0b3ed75cec58"),
 }
 SCOPE = ("One finite joint body/port thickness-discretization increment at 887.5 MHz. "
          "The 10% directed-power increment and 99% suppression-retention targets are observational criteria, "
@@ -541,6 +544,7 @@ def write_outputs(output, result, workspace=ROOT):
         require(path.read_text(encoding="utf-8") == text, "Existing scientific output differs; choose a new output directory.")
     else:
         path.write_text(text, encoding="utf-8")
+    downloads = [available_link(output, path, "Complete source-bound JSON", download=True)]
     if result["phase"] == "device_thickness_comparison":
         rows = result["coefficients"]
         flat_rows = []
@@ -562,32 +566,50 @@ def write_outputs(output, result, workspace=ROOT):
             require(csv_path.read_text(encoding="utf-8") == csv_text.replace("\r\n", "\n"), "Existing coefficient CSV differs.")
         else:
             csv_path.write_text(csv_text, encoding="utf-8", newline="")
-    body = f"<h1>Athul Prem | 887.5 MHz thickness control</h1><p>{escape(result['status'])}</p><p>{escape(SCOPE)}</p>"
+        downloads.append(available_link(output, csv_path, "Complete coefficient table (CSV)", download=True))
+    body = f'<p><strong>Status:</strong> {escape(result["status"].replace("_", " "))}</p>'
+    body += f'<p class="sources">{" · ".join(downloads)}</p>'
     if result["phase"] == "saved_section_relation":
-        body += "<p>Root-permutation square: " + escape(result["root_permutation_square"]["status"]) + ". Gauge closure is not required.</p>"
+        title = "Signed port-mode relation for the 887.5 MHz thickness-layer control"
+        scope = ("Sampled signed correspondence on the h80 four- and six-layer sections at fixed physical thickness. "
+                 "Continuous branch identity remains unresolved.")
+        body += "<p>Root-permutation square: " + escape(result["root_permutation_square"]["status"]) + ". The relation uses root identity without imposing gauge closure.</p>"
     else:
+        title = "887.5 MHz thickness-layer and port sensitivity at fixed thickness"
+        scope = "The h80 four-to-six-layer change refines the body and compatible ports at fixed 200 nm physical thickness. " + SCOPE
         body += "<p>Whole-response power / complex increments: " + f"{result['maximum_power_change']:.12g} / {result['maximum_complex_change']:.12g}. "
-        body += f"Power passed: {result['power_passed']}; complex passed: {result['complex_passed']}.</p>"
+        power_status = "passed" if result["power_passed"] else "failed"
+        complex_status = "passed" if result["complex_passed"] else "failed"
+        body += f"Power check {power_status}. Complex check {complex_status}.</p>"
         targets = result["pair_specific_targets"]
-        body += "<h2>Separate directed-power targets</h2><table><tr><th>Direction</th><th>z4 power</th><th>z6 power</th><th>Relative increment</th><th>≤10%</th></tr>"
-        for row in targets["directed_increment_rows"]:
-            body += f"<tr><td>{row['direction']}</td><td>{row['z4_power']:.12g}</td><td>{row['accepted_z6_power']:.12g}</td><td>{row['relative_absolute_power_change']:.12g}</td><td>{row['passed']}</td></tr>"
-        body += "</table><table><tr><th>Resolution</th><th>Direction</th><th>P8875/P1GHz</th><th>≤0.01</th></tr>"
-        for row in targets["suppression_retention_rows"]:
-            body += f"<tr><td>{row['resolution']}</td><td>{row['direction']}</td><td>{row['ratio']:.12g}</td><td>{row['passed']}</td></tr>"
-        body += "</table><p>Exact positive accepted denominators; no floor substitution. The pair sum combines separate drives. Pair phase has no additional acceptance gate.</p>"
-        body += "<h2>Selected complex coefficients</h2><table><tr><th>z4 signed pair</th><th>z6 signed pair</th><th>Raw |ΔS|</th><th>Aligned |ΔS|</th><th>Aligned |ΔS|/|Sz4|</th><th>Aligned Δphase (rad)</th></tr>"
+        directed = "".join(f"<tr><td>{row['direction']}</td><td>{row['z4_power']:.12g}</td><td>{row['accepted_z6_power']:.12g}</td>"
+                           f"<td>{row['relative_absolute_power_change']:.12g}</td><td>{row['passed']}</td></tr>"
+                           for row in targets["directed_increment_rows"])
+        body += "<h2>Directed-power increments</h2>" + scroll_table(
+            "<table><thead><tr><th>Direction</th><th>z4 power</th><th>z6 power</th><th>|ΔP|/Pz6</th><th>≤10%</th></tr></thead>"
+            f"<tbody>{directed}</tbody></table>", "Directed-power increments")
+        ratios = "".join(f"<tr><td>{row['resolution']}</td><td>{row['direction']}</td><td>{row['ratio']:.12g}</td><td>{row['passed']}</td></tr>"
+                         for row in targets["suppression_retention_rows"])
+        body += "<h2>Suppression-retention ratios</h2>" + scroll_table(
+            "<table><thead><tr><th>Resolution</th><th>Direction</th><th>P8875/P1GHz</th><th>≤0.01</th></tr></thead>"
+            f"<tbody>{ratios}</tbody></table>", "Suppression-retention ratios")
+        body += "<p>The ratios use exact positive accepted denominators. The pair sum combines separate drives. Pair phase is diagnostic.</p>"
+        coefficients = []
+        number = lambda value: "undefined" if value is None else f"{value:.12g}"
         for row in result["selected_pair"]:
             change = row["complex_changes"]
             raw, aligned = change["raw"], change["gauge_aligned"]
-            number = lambda value: "undefined" if value is None else f"{value:.12g}"
-            body += (f"<tr><td>{row['reference_incident_root']}→{row['reference_outgoing_root']}</td>"
-                     f"<td>{row['candidate_incident_root']}→{row['candidate_outgoing_root']}</td>"
-                     f"<td>{number(raw['absolute_complex_change'])}</td><td>{number(aligned['absolute_complex_change'])}</td>"
-                     f"<td>{number(aligned['relative_absolute_complex_change'])}</td><td>{number(aligned['phase_change_rad'])}</td></tr>")
-        body += "</table><p>Relative complex changes use the displayed z4 coefficient magnitude. Raw phases retain arbitrary modal gauges; aligned changes use each direct signed relation.</p>"
-    body += f'<p><a href="{name}">Complete source-bound JSON</a></p>'
-    report = '<!doctype html><meta charset="utf-8"><title>Frequency thickness control | Athul Prem</title><style>body{font:16px system-ui;max-width:1100px;margin:40px auto;padding:0 20px}table{border-collapse:collapse;margin:20px 0}td,th{border:1px solid #aaa;padding:8px;text-align:right}</style>' + body
+            coefficients.append(f"<tr><td>{row['reference_incident_root']}→{row['reference_outgoing_root']}</td>"
+                                f"<td>{row['candidate_incident_root']}→{row['candidate_outgoing_root']}</td>"
+                                f"<td>{number(raw['absolute_complex_change'])}</td><td>{number(aligned['absolute_complex_change'])}</td>"
+                                f"<td>{number(aligned['relative_absolute_complex_change'])}</td><td>{number(aligned['phase_change_rad'])}</td></tr>")
+        body += "<h2>Selected complex coefficients</h2>" + scroll_table(
+            "<table><thead><tr><th>z4 signed pair</th><th>z6 signed pair</th><th>Raw |ΔS|</th><th>Aligned |ΔS|</th>"
+            "<th>Aligned |ΔS|/|Sz4|</th><th>Aligned Δphase (rad)</th></tr></thead>"
+            f"<tbody>{''.join(coefficients)}</tbody></table>", "Selected complex coefficients")
+        body += "<p>Relative complex changes use the displayed z4 coefficient magnitude. Raw phases retain their native modal gauges. Aligned changes use each direct signed relation.</p>"
+    navigation = available_link(output, ROOT / "figures/README.md", "Device figures and evidence")
+    report = report_page(title, "frequency_thickness_8875", body, navigation=navigation, scope=scope)
     report_path = output / "report_AP_pnc.html"
     if report_path.exists():
         require(report_path.read_text(encoding="utf-8") == report, "Existing report differs.")

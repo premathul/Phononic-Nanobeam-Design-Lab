@@ -2,6 +2,21 @@
 
 Author: **Athul Prem** | Project/file tag: **`_AP_pnc`**
 
+[Research documentation](README.md) · [Physics specification](PHYSICS_SPECIFICATION_AP_pnc.md)
+
+## Localization of finite mesh changes
+
+Becker and Rannacher describe using a dual solution to weight local finite-element residuals for a chosen output. Here the output is the left reflection amplitude at the original port of the 26-hole beam. The calculation below compares two computed discretizations. [Becker and Rannacher, *Acta Numerica* 10 (2001)](https://doi.org/10.1017/S0962492901000010)
+
+Let $u_c$ contain the incident-drive solutions of the coarse system and let $Z_f$ satisfy $A_f^T Z_f=C_f^T$, where $C_f$ extracts the outgoing amplitudes on the fine port. The implementation reconstructs $Z_f$ from the saved fields and checks its residual against the complete equation. For a set of coarse planar parents $g$, the assigned complex amplitude change is
+
+$$
+ (QZ_f)^T(K_{c,g}-\omega^2 M_{c,g})u_c
+ -Z_f^T(K_{f,g}-\omega^2 M_{f,g})(Pu_c).
+$$
+
+$P$ evaluates a coarse quadratic displacement at fine nodes and $Q$ evaluates a fine displacement at coarse nodes. All terms use the same incident and reflected mode conventions. The transpose is ordinary because $C_f$ extracts a complex-linear amplitude. Summing all parents and the separate port forcing term recovers the measured difference $r_f-r_c$. Multiplying by $\overline{r_f+r_c}$, taking the real part and applying the modal powers gives the reflected-power difference. Independent power balance at both ports checks the corresponding transmitted-power difference. The allocation to each parent depends on the interpolation and partition. A separate solve on the cells actually replaced measures the response to isolated refinement. [Saved-field calculation](../tools/localize_reflection_change_AP_pnc.py) · [Isolated-pair calculation](../tools/run_goal_patch_response_AP_pnc.py)
+
 These references are a starting reading list for the proposed material/transport registry. Bibliographic records and available primary abstracts were checked during preparation. No numerical temperature curve or loss model was extracted and installed. Obtain the full papers and relevant corrections before entering parameter tables. The existence of a citation does not certify the proposed GHz/millikelvin/nanoscale regime.
 
 | Source | Relevance | Boundary for use |
@@ -32,8 +47,8 @@ The device follow-up uses the sources below to guide targeted body and port chec
 | Source | Relevance | Boundary for use |
 | --- | --- | --- |
 | D. L. Brown and D. Gallistl, *Multiscale Sub-grid Correction Method for Time-Harmonic High-Frequency Elastodynamics with Wavenumber Explicit Bounds*, [arXiv:1608.04243v2](https://arxiv.org/abs/1608.04243v2) | Documents frequency-dependent pollution error in elastodynamics and a multiscale treatment | Supports treating propagation-phase accuracy as a separate requirement. No multiscale method or transferable element-size threshold from this paper has been installed here. |
-| S. Geevers, W. A. Mulder and J. J. W. van der Vegt, *Dispersion Properties of Explicit Finite Element Methods for Wave Propagation Modelling on Tetrahedral Meshes*, J. Sci. Comput. 77, 372-396 (2018), [10.1007/s10915-018-0709-7](https://doi.org/10.1007/s10915-018-0709-7) | Examines elastic-wave dispersion, resolution and tetrahedron-shape sensitivity | Its mass-lumped and discontinuous-Galerkin time-domain schemes differ from this consistent-mass P2 harmonic solver. The lesson is to measure dispersion and element quality, not copy a points-per-wavelength rule. |
-| [Gmsh mesh-size fields](https://gmsh.info/doc/texinfo/gmsh.html#t10_003a-Mesh-size-fields) and [structured meshes](https://gmsh.info/doc/texinfo/gmsh.html#t6_003a-Transfinite-meshes) | Established controls for volume targets and prescribed surface subdivisions | The existing mesher holds port and circle subdivisions separately from the body target. Holding the number of wall layers fixed does not by itself fix the complete volume mesh. |
+| S. Geevers, W. A. Mulder and J. J. W. van der Vegt, *Dispersion Properties of Explicit Finite Element Methods for Wave Propagation Modelling on Tetrahedral Meshes*, J. Sci. Comput. 77, 372-396 (2018). [Springer DOI](https://doi.org/10.1007/s10915-018-0709-7) · [TU Delft repository](https://repository.tudelft.nl/record/uuid%3Abe0be1e4-b53b-4a90-99ab-d66c16a73f4b) | Examines elastic-wave dispersion, resolution and tetrahedron-shape sensitivity | Its mass-lumped and discontinuous-Galerkin time-domain schemes differ from this consistent-mass P2 harmonic solver. Measure dispersion and element quality for the actual discretization. |
+| [Gmsh mesh-size fields](https://gmsh.info/doc/texinfo/gmsh.html#t10_003a-Mesh-size-fields) and [transfinite meshes](https://gmsh.info/doc/texinfo/gmsh.html#t6) | Established controls for volume targets and prescribed surface subdivisions | The existing mesher holds port and circle subdivisions separately from the body target. Holding the number of wall layers fixed does not by itself fix the complete volume mesh. |
 
 In the current study, a matched-port wavenumber difference multiplied by a stated guide length is a propagation-phase sensitivity indicator. It is not a bound on the patterned device's scattering error, and it is not subtracted from the measured complex scattering difference. Direct saved-result comparisons retain the phase at the original physical reference planes.
 
@@ -51,7 +66,7 @@ The layered mesh extension follows the established idea of sweeping a planar mes
 
 H. Gravenkamp, B. Plestenjak and D. A. Kiefer, *Notes on osculations and mode tracing in semi-analytical waveguide modeling*, Ultrasonics 135, 107112 (2023), [accepted manuscript](https://arxiv.org/abs/2310.06086v2), describes the cross-section discretization and mode-tracing problems of SAFE waveguides. Crossings and avoided crossings motivate field-overlap matching instead of assigning physical identity from sorted eigenvalues alone. Our isolated four-channel study uses overlap matching; it does not implement that paper's general branch-tracing method. The bounded frequency-map pilot links adjacent signed propagating fields with overlap-qualified permutations and cumulative modal gauges. It breaks tracks at failed points, changed channel counts or ambiguous/degenerate modes; this remains sampled correspondence rather than a proof of complete continuous branches between frequencies.
 
-W. Duan and R. Kirby, *A numerical model for the scattering of elastic waves from a non-axisymmetric defect in a pipe*, Finite Elements in Analysis and Design 100, 28-40 (2015), [author manuscript](https://v-lib-bura1.brunel.ac.uk/bitstream/2438/11171/1/Fulltext.pdf), separates uniform-guide modal resolution from the local three-dimensional defect mesh and tests their convergence independently. Its pipe geometry and power checks do not supply an error bound or complex-phase threshold for this Ge nanobeam.
+W. Duan and R. Kirby, *A numerical model for the scattering of elastic waves from a non-axisymmetric defect in a pipe*, Finite Elements in Analysis and Design 100, 28-40 (2015), separates uniform-guide modal resolution from the local three-dimensional defect mesh and tests their convergence independently. This project's Ge geometry requires its own error and phase checks. [Publisher DOI](https://doi.org/10.1016/j.finel.2015.02.008) · [Brunel University record](https://bura.brunel.ac.uk/handle/2438/11171) · [Author manuscript (PDF)](https://bura.brunel.ac.uk/bitstream/2438/11171/1/Fulltext.pdf)
 
 The practical choice here is to measure width and thickness sensitivity in the port cross-section first, then compare existing uniform runs to a common finer SAFE phase reference at the original physical end planes. This is our numerical diagnostic strategy, not a claim that either paper validates the present device. A native coarse-port phase discrepancy can grow when error cancellation changes; it cannot by itself rank continuum accuracy. No uniform-guide phase is subtracted from the patterned-device scattering matrix.
 

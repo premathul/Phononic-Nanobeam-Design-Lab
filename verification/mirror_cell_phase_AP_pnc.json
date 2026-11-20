@@ -1,0 +1,553 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "spatial_convergence_established": false,
+  "frequency_convergence_established": false,
+  "schema_version": 1,
+  "frequency_hz": 1000000000.0,
+  "cell_period_m": 5.5e-07,
+  "axial_planes_m": [
+    0.0,
+    5.5e-07
+  ],
+  "minimum_mass_overlap": 0.99,
+  "minimum_competitor_margin": 1e-08,
+  "by_thickness": {
+    "100": {
+      "physical_thickness_nm": 100,
+      "cases": [
+        {
+          "source": {
+            "path": "results/runs/mirror_cell_phase_AP_pnc/t100_z2_edge225nm_AP_pnc/summary_AP_pnc.json",
+            "sha256": "3ebafe68965db2780c4d1aa94e0f0f687c1cacccaafb5e33e61c6a822adfd896",
+            "bytes": 10790
+          },
+          "case_status": "accepted",
+          "central_target_nm": 225.0,
+          "body_dofs": 5370,
+          "signed_mode_counts": {
+            "right": 3,
+            "left": 3,
+            "unresolved": 0
+          }
+        },
+        {
+          "source": {
+            "path": "results/runs/mirror_cell_phase_AP_pnc/t100_z2_edge168p75nm_AP_pnc/summary_AP_pnc.json",
+            "sha256": "a604999c414ecf8642546b89b4594039d119596726ea43412e90258b87d866d9",
+            "bytes": 10785
+          },
+          "case_status": "accepted",
+          "central_target_nm": 168.75,
+          "body_dofs": 6060,
+          "signed_mode_counts": {
+            "right": 3,
+            "left": 3,
+            "unresolved": 0
+          }
+        },
+        {
+          "source": {
+            "path": "results/runs/mirror_cell_phase_AP_pnc/t100_z2_edge126p5625nm_AP_pnc/summary_AP_pnc.json",
+            "sha256": "a9dd934461d4609ac7efbdf0216f7d8cd4362241c21a4cab6f0e71b0ab88b761",
+            "bytes": 10784
+          },
+          "case_status": "accepted",
+          "central_target_nm": 126.5625,
+          "body_dofs": 8100,
+          "signed_mode_counts": {
+            "right": 3,
+            "left": 3,
+            "unresolved": 0
+          }
+        }
+      ],
+      "adjacent_mesh_changes": [
+        {
+          "reference_target_nm": 225.0,
+          "candidate_target_nm": 168.75,
+          "modes": [
+            {
+              "direction": "right",
+              "reference_root": 188,
+              "candidate_root": 191,
+              "mass_overlap": 0.9999899346790361,
+              "largest_competing_overlap": 0.00014745026657788269,
+              "status": "matched",
+              "reference_phase_rad": -2.7566665493218854,
+              "candidate_phase_rad": -2.7432741821610995,
+              "phase_change_rad_per_period": 0.0133923671607856,
+              "phase_change_degrees_per_period": 0.7673261160026161
+            },
+            {
+              "direction": "right",
+              "reference_root": 183,
+              "candidate_root": 184,
+              "mass_overlap": 0.9999999736451366,
+              "largest_competing_overlap": 0.00010093577256399143,
+              "status": "matched",
+              "reference_phase_rad": 0.8494138549502306,
+              "candidate_phase_rad": 0.8494895819443438,
+              "phase_change_rad_per_period": 7.572699411320828e-05,
+              "phase_change_degrees_per_period": 0.004338837157898865
+            },
+            {
+              "direction": "right",
+              "reference_root": 185,
+              "candidate_root": 186,
+              "mass_overlap": 0.9999999033642079,
+              "largest_competing_overlap": 0.00014745026657788269,
+              "status": "matched",
+              "reference_phase_rad": 1.6664904833611753,
+              "candidate_phase_rad": 1.6669765444145295,
+              "phase_change_rad_per_period": 0.00048606105335405965,
+              "phase_change_degrees_per_period": 0.027849246942870744
+            },
+            {
+              "direction": "left",
+              "reference_root": 186,
+              "candidate_root": 187,
+              "mass_overlap": 0.9999999033642079,
+              "largest_competing_overlap": 0.00014745026657788269,
+              "status": "matched",
+              "reference_phase_rad": -1.6664904833611753,
+              "candidate_phase_rad": -1.6669765444145295,
+              "phase_change_rad_per_period": -0.0004860610533540873,
+              "phase_change_degrees_per_period": -0.02784924694287233
+            },
+            {
+              "direction": "left",
+              "reference_root": 184,
+              "candidate_root": 185,
+              "mass_overlap": 0.9999999736451366,
+              "largest_competing_overlap": 0.00010093577256399143,
+              "status": "matched",
+              "reference_phase_rad": -0.8494138549502307,
+              "candidate_phase_rad": -0.8494895819443439,
+              "phase_change_rad_per_period": -7.572699411312495e-05,
+              "phase_change_degrees_per_period": -0.00433883715789409
+            },
+            {
+              "direction": "left",
+              "reference_root": 187,
+              "candidate_root": 190,
+              "mass_overlap": 0.9999899346790361,
+              "largest_competing_overlap": 0.00014745026657788269,
+              "status": "matched",
+              "reference_phase_rad": 2.7566665493218854,
+              "candidate_phase_rad": 2.7432741821610995,
+              "phase_change_rad_per_period": -0.013392367160785599,
+              "phase_change_degrees_per_period": -0.767326116002616
+            }
+          ]
+        },
+        {
+          "reference_target_nm": 168.75,
+          "candidate_target_nm": 126.5625,
+          "modes": [
+            {
+              "direction": "right",
+              "reference_root": 191,
+              "candidate_root": 185,
+              "mass_overlap": 0.9999978745063807,
+              "largest_competing_overlap": 0.00024058188897819083,
+              "status": "matched",
+              "reference_phase_rad": -2.7432741821610995,
+              "candidate_phase_rad": -2.73602160636473,
+              "phase_change_rad_per_period": 0.007252575796369686,
+              "phase_change_degrees_per_period": 0.415541983730715
+            },
+            {
+              "direction": "right",
+              "reference_root": 184,
+              "candidate_root": 178,
+              "mass_overlap": 0.9999996632746508,
+              "largest_competing_overlap": 0.00011279016672648422,
+              "status": "matched",
+              "reference_phase_rad": 0.8494895819443438,
+              "candidate_phase_rad": 0.8500480321607465,
+              "phase_change_rad_per_period": 0.0005584502164027024,
+              "phase_change_degrees_per_period": 0.03199684046804235
+            },
+            {
+              "direction": "right",
+              "reference_root": 186,
+              "candidate_root": 180,
+              "mass_overlap": 0.9999988242640458,
+              "largest_competing_overlap": 0.00024058188897819083,
+              "status": "matched",
+              "reference_phase_rad": 1.6669765444145295,
+              "candidate_phase_rad": 1.6686849823525773,
+              "phase_change_rad_per_period": 0.0017084379380478622,
+              "phase_change_degrees_per_period": 0.09788628341017531
+            },
+            {
+              "direction": "left",
+              "reference_root": 187,
+              "candidate_root": 181,
+              "mass_overlap": 0.9999988242640458,
+              "largest_competing_overlap": 0.00024058188897819083,
+              "status": "matched",
+              "reference_phase_rad": -1.6669765444145295,
+              "candidate_phase_rad": -1.6686849823525773,
+              "phase_change_rad_per_period": -0.0017084379380478487,
+              "phase_change_degrees_per_period": -0.09788628341017454
+            },
+            {
+              "direction": "left",
+              "reference_root": 185,
+              "candidate_root": 179,
+              "mass_overlap": 0.9999996632746508,
+              "largest_competing_overlap": 0.00011279016672648422,
+              "status": "matched",
+              "reference_phase_rad": -0.8494895819443439,
+              "candidate_phase_rad": -0.8500480321607465,
+              "phase_change_rad_per_period": -0.0005584502164026193,
+              "phase_change_degrees_per_period": -0.031996840468037586
+            },
+            {
+              "direction": "left",
+              "reference_root": 190,
+              "candidate_root": 184,
+              "mass_overlap": 0.9999978745063807,
+              "largest_competing_overlap": 0.00024058188897819083,
+              "status": "matched",
+              "reference_phase_rad": 2.7432741821610995,
+              "candidate_phase_rad": 2.73602160636473,
+              "phase_change_rad_per_period": -0.007252575796369685,
+              "phase_change_degrees_per_period": -0.41554198373071494
+            }
+          ]
+        }
+      ],
+      "independent_check_of_largest_matched_rightward_change": {
+        "root": 185,
+        "k_rad_m": -4974584.738844964,
+        "recovered_frequency_hz": 1000000000.0000136,
+        "relative_frequency_error": 1.354472090042691e-14,
+        "mass_overlap_on_left_face": 1.0,
+        "frequency_eigenpair_backward_residual": 4.971748119128792e-17,
+        "frequencies_requested": 12
+      }
+    },
+    "200": {
+      "physical_thickness_nm": 200,
+      "cases": [
+        {
+          "source": {
+            "path": "results/runs/mirror_cell_phase_AP_pnc/t200_z2_edge225nm_AP_pnc/summary_AP_pnc.json",
+            "sha256": "90124a4eba41f780749f345e31d614d55eb4f5aef9bf691f5e211dd382f81e80",
+            "bytes": 12746
+          },
+          "case_status": "accepted",
+          "central_target_nm": 225.0,
+          "body_dofs": 5370,
+          "signed_mode_counts": {
+            "right": 5,
+            "left": 5,
+            "unresolved": 0
+          }
+        },
+        {
+          "source": {
+            "path": "results/runs/mirror_cell_phase_AP_pnc/t200_z2_edge168p75nm_AP_pnc/summary_AP_pnc.json",
+            "sha256": "495aa5910045db8f0606e7227299f3d291078750f596a0c406eeb00cffde4978",
+            "bytes": 12754
+          },
+          "case_status": "accepted",
+          "central_target_nm": 168.75,
+          "body_dofs": 6060,
+          "signed_mode_counts": {
+            "right": 5,
+            "left": 5,
+            "unresolved": 0
+          }
+        },
+        {
+          "source": {
+            "path": "results/runs/mirror_cell_phase_AP_pnc/t200_z2_edge126p5625nm_AP_pnc/summary_AP_pnc.json",
+            "sha256": "a8d217b528dfe878995e5f6f2abdd48ae0ef4b1d0c6b55d6d6f5ada0e311313e",
+            "bytes": 12742
+          },
+          "case_status": "accepted",
+          "central_target_nm": 126.5625,
+          "body_dofs": 8100,
+          "signed_mode_counts": {
+            "right": 5,
+            "left": 5,
+            "unresolved": 0
+          }
+        }
+      ],
+      "adjacent_mesh_changes": [
+        {
+          "reference_target_nm": 225.0,
+          "candidate_target_nm": 168.75,
+          "modes": [
+            {
+              "direction": "right",
+              "reference_root": 204,
+              "candidate_root": 209,
+              "mass_overlap": 0.9999999726892018,
+              "largest_competing_overlap": 0.00046775039826170265,
+              "status": "matched",
+              "reference_phase_rad": 0.8490539038215164,
+              "candidate_phase_rad": 0.8491312598947685,
+              "phase_change_rad_per_period": 7.73560732521224e-05,
+              "phase_change_degrees_per_period": 0.00443217651705145
+            },
+            {
+              "direction": "right",
+              "reference_root": 202,
+              "candidate_root": 207,
+              "mass_overlap": 0.9999998227094568,
+              "largest_competing_overlap": 0.12515316627251954,
+              "status": "matched",
+              "reference_phase_rad": 0.9728429815539953,
+              "candidate_phase_rad": 0.9738282114037207,
+              "phase_change_rad_per_period": 0.0009852298497254068,
+              "phase_change_degrees_per_period": 0.05644951223957414
+            },
+            {
+              "direction": "right",
+              "reference_root": 200,
+              "candidate_root": 205,
+              "mass_overlap": 0.9999999141685534,
+              "largest_competing_overlap": 0.000913509428571028,
+              "status": "matched",
+              "reference_phase_rad": 1.664713260162655,
+              "candidate_phase_rad": 1.6651879322223193,
+              "phase_change_rad_per_period": 0.0004746720596641197,
+              "phase_change_degrees_per_period": 0.02719670567153606
+            },
+            {
+              "direction": "right",
+              "reference_root": 198,
+              "candidate_root": 203,
+              "mass_overlap": 0.9999990224963523,
+              "largest_competing_overlap": 0.0013599788976027861,
+              "status": "matched",
+              "reference_phase_rad": 2.383902870184542,
+              "candidate_phase_rad": 2.3864952482227375,
+              "phase_change_rad_per_period": 0.0025923780381952055,
+              "phase_change_degrees_per_period": 0.14853232049098938
+            },
+            {
+              "direction": "right",
+              "reference_root": 196,
+              "candidate_root": 201,
+              "mass_overlap": 0.9999974730307757,
+              "largest_competing_overlap": 0.12515316627251954,
+              "status": "matched",
+              "reference_phase_rad": 2.916905709861228,
+              "candidate_phase_rad": 2.9199946377038417,
+              "phase_change_rad_per_period": 0.0030889278426137205,
+              "phase_change_degrees_per_period": 0.17698252860221678
+            },
+            {
+              "direction": "left",
+              "reference_root": 197,
+              "candidate_root": 202,
+              "mass_overlap": 0.9999974730307757,
+              "largest_competing_overlap": 0.12515316627251954,
+              "status": "matched",
+              "reference_phase_rad": -2.916905709861228,
+              "candidate_phase_rad": -2.9199946377038417,
+              "phase_change_rad_per_period": -0.0030889278426137474,
+              "phase_change_degrees_per_period": -0.17698252860221833
+            },
+            {
+              "direction": "left",
+              "reference_root": 199,
+              "candidate_root": 204,
+              "mass_overlap": 0.9999990224963523,
+              "largest_competing_overlap": 0.0013599788976027861,
+              "status": "matched",
+              "reference_phase_rad": -2.383902870184542,
+              "candidate_phase_rad": -2.386495248222738,
+              "phase_change_rad_per_period": -0.0025923780381955273,
+              "phase_change_degrees_per_period": -0.14853232049100784
+            },
+            {
+              "direction": "left",
+              "reference_root": 201,
+              "candidate_root": 206,
+              "mass_overlap": 0.9999999141685534,
+              "largest_competing_overlap": 0.000913509428571028,
+              "status": "matched",
+              "reference_phase_rad": -1.664713260162655,
+              "candidate_phase_rad": -1.6651879322223193,
+              "phase_change_rad_per_period": -0.0004746720596641198,
+              "phase_change_degrees_per_period": -0.027196705671536068
+            },
+            {
+              "direction": "left",
+              "reference_root": 203,
+              "candidate_root": 208,
+              "mass_overlap": 0.9999998227094568,
+              "largest_competing_overlap": 0.12515316627251954,
+              "status": "matched",
+              "reference_phase_rad": -0.9728429815539953,
+              "candidate_phase_rad": -0.9738282114037207,
+              "phase_change_rad_per_period": -0.0009852298497254068,
+              "phase_change_degrees_per_period": -0.05644951223957414
+            },
+            {
+              "direction": "left",
+              "reference_root": 205,
+              "candidate_root": 210,
+              "mass_overlap": 0.9999999726892018,
+              "largest_competing_overlap": 0.0004677503982617047,
+              "status": "matched",
+              "reference_phase_rad": -0.8490539038215162,
+              "candidate_phase_rad": -0.8491312598947686,
+              "phase_change_rad_per_period": -7.735607325237241e-05,
+              "phase_change_degrees_per_period": -0.004432176517065775
+            }
+          ]
+        },
+        {
+          "reference_target_nm": 168.75,
+          "candidate_target_nm": 126.5625,
+          "modes": [
+            {
+              "direction": "right",
+              "reference_root": 209,
+              "candidate_root": 234,
+              "mass_overlap": 0.9999995828883269,
+              "largest_competing_overlap": 0.0006586979758563934,
+              "status": "matched",
+              "reference_phase_rad": 0.8491312598947685,
+              "candidate_phase_rad": 0.8496680071203218,
+              "phase_change_rad_per_period": 0.0005367472255533344,
+              "phase_change_degrees_per_period": 0.030753350689562517
+            },
+            {
+              "direction": "right",
+              "reference_root": 207,
+              "candidate_root": 232,
+              "mass_overlap": 0.9999997210350432,
+              "largest_competing_overlap": 0.12531309391592807,
+              "status": "matched",
+              "reference_phase_rad": 0.9738282114037207,
+              "candidate_phase_rad": 0.9768782224522602,
+              "phase_change_rad_per_period": 0.0030500110485394125,
+              "phase_change_degrees_per_period": 0.1747527605495792
+            },
+            {
+              "direction": "right",
+              "reference_root": 205,
+              "candidate_root": 230,
+              "mass_overlap": 0.9999988695781091,
+              "largest_competing_overlap": 0.0009635907166277311,
+              "status": "matched",
+              "reference_phase_rad": 1.6651879322223193,
+              "candidate_phase_rad": 1.6668143548087362,
+              "phase_change_rad_per_period": 0.001626422586416859,
+              "phase_change_degrees_per_period": 0.09318714990643744
+            },
+            {
+              "direction": "right",
+              "reference_root": 203,
+              "candidate_root": 228,
+              "mass_overlap": 0.9999996831379847,
+              "largest_competing_overlap": 0.0005705085324508783,
+              "status": "matched",
+              "reference_phase_rad": 2.3864952482227375,
+              "candidate_phase_rad": 2.388788739403805,
+              "phase_change_rad_per_period": 0.0022934911810675294,
+              "phase_change_degrees_per_period": 0.13140736502564393
+            },
+            {
+              "direction": "right",
+              "reference_root": 201,
+              "candidate_root": 226,
+              "mass_overlap": 0.9999994599249911,
+              "largest_competing_overlap": 0.12531309391592807,
+              "status": "matched",
+              "reference_phase_rad": 2.9199946377038417,
+              "candidate_phase_rad": 2.9219059364435465,
+              "phase_change_rad_per_period": 0.001911298739704648,
+              "phase_change_degrees_per_period": 0.10950935117374964
+            },
+            {
+              "direction": "left",
+              "reference_root": 202,
+              "candidate_root": 227,
+              "mass_overlap": 0.9999994599249914,
+              "largest_competing_overlap": 0.12531309391592804,
+              "status": "matched",
+              "reference_phase_rad": -2.9199946377038417,
+              "candidate_phase_rad": -2.9219059364435465,
+              "phase_change_rad_per_period": -0.001911298739704648,
+              "phase_change_degrees_per_period": -0.10950935117374964
+            },
+            {
+              "direction": "left",
+              "reference_root": 204,
+              "candidate_root": 229,
+              "mass_overlap": 0.9999996831379847,
+              "largest_competing_overlap": 0.0005705085324508783,
+              "status": "matched",
+              "reference_phase_rad": -2.386495248222738,
+              "candidate_phase_rad": -2.388788739403805,
+              "phase_change_rad_per_period": -0.002293491181067368,
+              "phase_change_degrees_per_period": -0.1314073650256347
+            },
+            {
+              "direction": "left",
+              "reference_root": 206,
+              "candidate_root": 231,
+              "mass_overlap": 0.9999988695781091,
+              "largest_competing_overlap": 0.0009635907166277311,
+              "status": "matched",
+              "reference_phase_rad": -1.6651879322223193,
+              "candidate_phase_rad": -1.6668143548087362,
+              "phase_change_rad_per_period": -0.0016264225864168448,
+              "phase_change_degrees_per_period": -0.09318714990643662
+            },
+            {
+              "direction": "left",
+              "reference_root": 208,
+              "candidate_root": 233,
+              "mass_overlap": 0.9999997210350432,
+              "largest_competing_overlap": 0.12531309391592804,
+              "status": "matched",
+              "reference_phase_rad": -0.9738282114037207,
+              "candidate_phase_rad": -0.9768782224522603,
+              "phase_change_rad_per_period": -0.003050011048539596,
+              "phase_change_degrees_per_period": -0.17475276054958971
+            },
+            {
+              "direction": "left",
+              "reference_root": 210,
+              "candidate_root": 235,
+              "mass_overlap": 0.9999995828883266,
+              "largest_competing_overlap": 0.000658697975856381,
+              "status": "matched",
+              "reference_phase_rad": -0.8491312598947686,
+              "candidate_phase_rad": -0.8496680071203219,
+              "phase_change_rad_per_period": -0.0005367472255533343,
+              "phase_change_degrees_per_period": -0.03075335068956251
+            }
+          ]
+        }
+      ],
+      "independent_check_of_largest_matched_rightward_change": {
+        "root": 232,
+        "k_rad_m": 1776142.222640473,
+        "recovered_frequency_hz": 999999999.9999571,
+        "relative_frequency_error": 4.296563105299356e-14,
+        "mass_overlap_on_left_face": 0.9999999999999998,
+        "frequency_eigenpair_backward_residual": 3.2867837997283425e-17,
+        "frequencies_requested": 12
+      }
+    }
+  },
+  "source": {
+    "path": "tools/compare_mirror_cell_phase_AP_pnc.py",
+    "sha256": "0f8196452c07aea1fd1a22e691c684f47babc4caed7c27bfd98cf6898c99992f",
+    "bytes": 11561
+  },
+  "scope": "Each phase is the principal argument of the finite-cell Bloch multiplier per period. Each mesh change is measured modulo 2 pi with direction set by signed right-face power. The periodic mirror omits the tapers, central cavity and finite-device end leads. These phase changes do not assign a phase error to the 26-hole device."
+}

@@ -1,7 +1,10 @@
 # HPGe mode-resolved propagation: scientific specification
 
 Author: **Athul Prem** | File/project tag: **`_AP_pnc`**
-Status: **Proposed research; no new 3D results are supplied by this specification.**
+
+[Research documentation](README.md) · [Current claims and evidence](RESEARCH_STATUS_AP_pnc.md) · [Device geometry and figures](../figures/README.md)
+
+This specification defines the model, validation rules and longer-range research questions. The current status record identifies the finite numerical results that support specific claims.
 
 ## Scientific questions and discriminating tests
 

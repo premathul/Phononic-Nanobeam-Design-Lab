@@ -1,0 +1,767 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "spatial_convergence_established": false,
+  "frequency_convergence_established": false,
+  "schema_version": 1,
+  "inputs": {
+    "configuration": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "schema_version": 1,
+      "name": "thin100_cavity_pair_AP_pnc",
+      "geometry": {
+        "length_nm": 16650,
+        "width_nm": 1000,
+        "thickness_nm": 100,
+        "pattern": {
+          "csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+          "x_offset_nm": 8325
+        }
+      },
+      "mesh": {
+        "kind": "layered",
+        "element_order": 2,
+        "mesh_size_nm": 400,
+        "port_size_nm": 250,
+        "circle_resolution": 32,
+        "thickness_layers": 2,
+        "lead_mesh_size_nm": 150,
+        "patterned_x_interval_nm": [
+          1000,
+          15650
+        ],
+        "central_max_edge_nm": 225.0
+      },
+      "material": {
+        "name": "nominal_cubic_ge",
+        "C11_Pa": 128500000000.0,
+        "C12_Pa": 48300000000.0,
+        "C44_Pa": 66800000000.0,
+        "density_kg_m3": 5323,
+        "crystal_rotation": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "temperature_policy": "fixed_property_control",
+        "temperature_K": 4
+      },
+      "analysis": {
+        "kind": "scattering",
+        "boundary": "matched_ports",
+        "frequency_GHz": 1,
+        "incident_side": "left"
+      },
+      "resources": {
+        "max_dofs": 97785,
+        "max_port_dofs": 400
+      }
+    },
+    "hole_pattern": {
+      "author": "Athul Prem",
+      "file_tag": "_AP_pnc",
+      "source_csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+      "source_sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+      "x_offset_m": 8.325e-06,
+      "holes": [
+        {
+          "x_m": 1.6250000000000005e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 2.1750000000000004e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 2.725e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 3.275000000000001e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 3.825000000000001e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 4.3750000000000005e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 4.925000000000001e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 5.475000000000001e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 6.015000000000001e-06,
+          "diameter_m": 2.55e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 6.545000000000001e-06,
+          "diameter_m": 2.6e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 7.065000000000001e-06,
+          "diameter_m": 2.65e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 7.575000000000001e-06,
+          "diameter_m": 2.7e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 8.075000000000001e-06,
+          "diameter_m": 2.75e-07,
+          "region": "Central cavity"
+        },
+        {
+          "x_m": 8.575e-06,
+          "diameter_m": 2.75e-07,
+          "region": "Central cavity"
+        },
+        {
+          "x_m": 9.075e-06,
+          "diameter_m": 2.7e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 9.585e-06,
+          "diameter_m": 2.65e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 1.0105e-05,
+          "diameter_m": 2.6e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 1.0635e-05,
+          "diameter_m": 2.55e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 1.1175e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror transition"
+        },
+        {
+          "x_m": 1.1725e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.2275e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.2825e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.3375e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.3925000000000001e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.4475000000000001e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.5025000000000001e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        }
+      ],
+      "clearances": {
+        "min_side_ligament_m": 3.625000000000001e-07,
+        "min_end_ligament_m": 1.5000000000000005e-06,
+        "min_interhole_gap_m": 2.249999999999986e-07
+      },
+      "taper_patch_refinement": {
+        "donors": {
+          "coarse": {
+            "directory": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge225_rim32",
+            "source_git_commit": "3965855c1c6847e0e9a60becd7ac22efbeb88279",
+            "checkpoint": {
+              "path": "checkpoint_AP_pnc.json",
+              "sha256": "317b486ae055d476c09e164c75a62c9f608da1d2891b766809734c0211627288",
+              "bytes": 11989
+            },
+            "assembly_source_git_commit": "3965855c1c6847e0e9a60becd7ac22efbeb88279",
+            "assembly_platform": "Windows-11-10.0.26200-SP0",
+            "mesh_hash": "59afe89e1e37a9f13a107cf18e41bc2616164e62afe0820ba1a1c4dd37b691a8",
+            "mesh": {
+              "path": "shared-9ltja0jy/_meshes/59afe89e1e37a9f13a107cf18e41bc2616164e62afe0820ba1a1c4dd37b691a8/mesh_AP_pnc.npz",
+              "sha256": "adb248795d69e4f9c2aac2fd0181c8e4e5828beb72b5dc8dc4fedc8d6b6fbbaf",
+              "bytes": 140111
+            },
+            "mesh_summary": {
+              "path": "shared-9ltja0jy/_meshes/59afe89e1e37a9f13a107cf18e41bc2616164e62afe0820ba1a1c4dd37b691a8/summary_AP_pnc.json",
+              "sha256": "f802f91ba64f844f2438a81c270f0a7984845dc68b5bc27b927713955d545b4f",
+              "bytes": 9807
+            },
+            "central_max_edge_nm": 225.0,
+            "port_section": {
+              "path": "shared-9ltja0jy/port_section_AP_pnc.npz",
+              "sha256": "afb2efac6cde61d78037cd86226a4d6658891bc27c5362fc2e82815b05182aeb",
+              "bytes": 588030
+            },
+            "accepted_point_summary": {
+              "path": "point-002/attempt-8sqjivv7/historical_26hole_regional_100nm-5f58816ef174/summary_AP_pnc.json",
+              "sha256": "392a90dfdf69adc6e55eb9a1de0be0050b07030f135a07d8093f446d90dc5a1b",
+              "bytes": 14364
+            }
+          },
+          "fine": {
+            "directory": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux",
+            "source_git_commit": null,
+            "checkpoint": {
+              "path": "checkpoint_AP_pnc.json",
+              "sha256": "8a8e2cf5a4dd1831c3615e158279aa6aa6f31bf1ff1b33e5dd18ec1070f13b5d",
+              "bytes": 15300
+            },
+            "assembly_source_git_commit": "3965855c1c6847e0e9a60becd7ac22efbeb88279",
+            "assembly_platform": "Windows-11-10.0.26200-SP0",
+            "mesh_hash": "401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a",
+            "mesh": {
+              "path": "shared-2m5o4mx7/_meshes/401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a/mesh_AP_pnc.npz",
+              "sha256": "33771e9f0ab3c7399549122407372f7dbc907908f181c664de3bf3c881210705",
+              "bytes": 217141
+            },
+            "mesh_summary": {
+              "path": "shared-2m5o4mx7/_meshes/401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a/summary_AP_pnc.json",
+              "sha256": "67f0c46e123e887e7ed4880d8cda7146aa51a76b1a10259a7fb78184795d326b",
+              "bytes": 9815
+            },
+            "central_max_edge_nm": 168.75,
+            "port_section": {
+              "path": "shared-2m5o4mx7/port_section_AP_pnc.npz",
+              "sha256": "251c91aec84b9048e62c740ae293281518776d4a9ec25def5cca1b2c4c044705",
+              "bytes": 588030
+            },
+            "accepted_point_summary": {
+              "path": "point-002/attempt-7fagiz48/historical_26hole_regional_100nm-6edfa64541b9/summary_AP_pnc.json",
+              "sha256": "b87760198cd14cbb2711d46abe4cfc21816b83dc6a3417a2f7a5fcadb5532bcb",
+              "bytes": 13967
+            }
+          },
+          "hole_pattern_sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+          "reference_planes_x_m": [
+            0.0,
+            1.665e-05
+          ],
+          "nominal_mirror_cuts_x_m": [
+            5.745000000000001e-06,
+            1.0905000000000001e-05
+          ],
+          "regional_cuts_x_m": [
+            1.0000000000000002e-06,
+            1.565e-05
+          ],
+          "goal_patch_selection": {
+            "index_order": "Zero-based original native bottom-footprint triangle order.",
+            "hole_bins": [
+              13,
+              14
+            ],
+            "hole_bin_edges_x_m": [
+              [
+                7.825e-06,
+                8.325e-06
+              ],
+              [
+                8.325e-06,
+                8.825000000000001e-06
+              ]
+            ],
+            "selected_parent_indices": [
+              101,
+              119,
+              120,
+              122,
+              186,
+              187,
+              188,
+              198,
+              201,
+              208,
+              214,
+              215,
+              220,
+              221,
+              237,
+              242,
+              243,
+              246,
+              247,
+              337,
+              360,
+              361,
+              395,
+              396,
+              398,
+              422,
+              441,
+              476,
+              477,
+              481,
+              482,
+              486,
+              491,
+              508,
+              509,
+              530,
+              531,
+              534,
+              580,
+              610,
+              669,
+              679,
+              680,
+              685,
+              718,
+              724,
+              732,
+              750,
+              762,
+              803,
+              813,
+              815,
+              818,
+              819,
+              849,
+              850,
+              851,
+              852,
+              889,
+              890,
+              926,
+              960,
+              978,
+              981,
+              987,
+              1001,
+              1011,
+              1012,
+              1020,
+              1021,
+              1048,
+              1057,
+              1058,
+              1061,
+              1076,
+              1077,
+              1085,
+              1086,
+              1093,
+              1095,
+              1122,
+              1127,
+              1130,
+              1135,
+              1154,
+              1162,
+              1191,
+              1192,
+              1228,
+              1229,
+              1230,
+              1237,
+              1239,
+              1247,
+              1288,
+              1293,
+              1313,
+              1321,
+              1334,
+              1335,
+              1336,
+              1337,
+              1338,
+              1339,
+              1340,
+              1341,
+              1342,
+              1343,
+              1344,
+              1345,
+              1346,
+              1347,
+              1365,
+              1380,
+              1565,
+              1566,
+              1573,
+              1574,
+              1575,
+              1576,
+              1577,
+              1578,
+              1579,
+              1580,
+              1856,
+              1857,
+              1920,
+              1921,
+              1924,
+              1925,
+              1944,
+              1945,
+              1960,
+              1961,
+              1992,
+              1993,
+              2098,
+              2099,
+              2128,
+              2129,
+              2180,
+              2200,
+              2201,
+              2217,
+              2280,
+              2281,
+              2282,
+              2283,
+              2286,
+              2287,
+              2292,
+              2293,
+              2312,
+              2313,
+              2334,
+              2335,
+              2372,
+              2373,
+              2392,
+              2393,
+              2402,
+              2403,
+              2438,
+              2439,
+              2476,
+              2478,
+              2479,
+              2488,
+              2489,
+              2534,
+              2535,
+              2544,
+              2545,
+              2546,
+              2547,
+              2614,
+              2615,
+              2618,
+              2619,
+              2656,
+              2657
+            ],
+            "replaced_parent_indices": [
+              198,
+              214,
+              215,
+              221,
+              237,
+              242,
+              243,
+              337,
+              398,
+              422,
+              685,
+              750,
+              803,
+              850,
+              852,
+              1020,
+              1057,
+              1077,
+              1093,
+              1228,
+              1229,
+              1230,
+              1239,
+              1321,
+              1365,
+              1856,
+              1857,
+              1920,
+              1921,
+              1924,
+              1925,
+              1944,
+              1960,
+              1961,
+              1993,
+              2129,
+              2180,
+              2200,
+              2201,
+              2217,
+              2281,
+              2282,
+              2283,
+              2287,
+              2293,
+              2334,
+              2335,
+              2372,
+              2392,
+              2403,
+              2476,
+              2478,
+              2544,
+              2546,
+              2619
+            ],
+            "source_sha256": {
+              "tools/run_goal_patch_response_AP_pnc.py": "cafcf2b1e3a7c6ecc62402728ec130a18055d8fb9382af75ae7d06cc050ed9c5",
+              "tools/goal_patch_refinement_AP_pnc.py": "799697b68939bd376fba75ebbf9ad5d7c811aac1caf5a2270a44340d753c5f41"
+            }
+          }
+        },
+        "refined_region": "cavity_13_14",
+        "mesh_geometry_connectivity_sha256": "39aa1cef6b1af58c957483b1275a1108a99295be90b3a474987449e1b5380bbd"
+      }
+    },
+    "frequencies_GHz": [
+      1.0
+    ],
+    "numerical_identity": {
+      "source_sha256": {
+        "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+        "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/layered_AP_pnc.py": "9242d11434e5004410fdb8d16b23e2405bf429ba93034fc08cee494d5aeae856",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+        "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/mesh_checkpoint_AP_pnc.py": "7fd1780e3c75f6a97f1c7f415bbd8c6e83c066fc5db3999774755910a689021d",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/refinement/central_AP_pnc.py": "1fa13bd28dc0664f197b9a77f90fbbbaec3c0d68e0a4daf884f536b6c10926ca",
+        "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+        "src/phononic/resumable_scattering_AP_pnc.py": "dba6002d982647810f3fc714fdce73a0f34e306e06e8519df2d54778002205ec",
+        "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+        "src/phononic/workflow_AP_pnc.py": "0992815d8ee2c88a74f8221d29c13e98bc388d8aadb5bc7d75992517980b15cd",
+        "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5",
+        "tools/run_goal_patch_response_AP_pnc.py": "cafcf2b1e3a7c6ecc62402728ec130a18055d8fb9382af75ae7d06cc050ed9c5",
+        "tools/goal_patch_refinement_AP_pnc.py": "799697b68939bd376fba75ebbf9ad5d7c811aac1caf5a2270a44340d753c5f41",
+        "tools/central_patch_refinement_AP_pnc.py": "ea340f855dda845a44887bab7b35d698adf2591f24c33b76c1de00d27c5aec53",
+        "tools/run_taper_patch_response_AP_pnc.py": "f1e8a292d98df9e8e17b86f53955a1751882a5e02385c006f6f224c02fe2f233",
+        "tools/map_scattering_AP_pnc.py": "11b1dfe118606271a5c2710eae30b4081fb448a660b87eee58283550f7e1acce",
+        "tools/run_fixed_wall_response_AP_pnc.py": "0247a77f3d216e149e8bea3a5491ddc1a1c9eff4caae8c0e683eeaba268ef892",
+        "tools/compare_scattering_AP_pnc.py": "148f7efa58ad668a7a57be9db68a3241ffb67ed94067499ce6dcd4a0f8c59313"
+      },
+      "packages": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "scikit-fem": "12.0.2",
+        "meshio": "5.3.5",
+        "gmsh": "4.15.2",
+        "matplotlib": "3.11.2",
+        "psutil": "7.2.2"
+      },
+      "python": "3.12.12",
+      "platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28"
+    },
+    "thread_environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1"
+    }
+  },
+  "inputs_sha256": "1582479187ab7d43781772e7cca0aca7bd83f0fbd19a57add7551daf3a9e4f98",
+  "source_git_commit": null,
+  "goal_patch_donors": {
+    "coarse": {
+      "directory": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge225_rim32",
+      "source_git_commit": "3965855c1c6847e0e9a60becd7ac22efbeb88279",
+      "checkpoint": {
+        "path": "checkpoint_AP_pnc.json",
+        "sha256": "317b486ae055d476c09e164c75a62c9f608da1d2891b766809734c0211627288",
+        "bytes": 11989
+      },
+      "assembly_source_git_commit": "3965855c1c6847e0e9a60becd7ac22efbeb88279",
+      "assembly_platform": "Windows-11-10.0.26200-SP0",
+      "mesh_hash": "59afe89e1e37a9f13a107cf18e41bc2616164e62afe0820ba1a1c4dd37b691a8",
+      "mesh": {
+        "path": "shared-9ltja0jy/_meshes/59afe89e1e37a9f13a107cf18e41bc2616164e62afe0820ba1a1c4dd37b691a8/mesh_AP_pnc.npz",
+        "sha256": "adb248795d69e4f9c2aac2fd0181c8e4e5828beb72b5dc8dc4fedc8d6b6fbbaf",
+        "bytes": 140111
+      },
+      "mesh_summary": {
+        "path": "shared-9ltja0jy/_meshes/59afe89e1e37a9f13a107cf18e41bc2616164e62afe0820ba1a1c4dd37b691a8/summary_AP_pnc.json",
+        "sha256": "f802f91ba64f844f2438a81c270f0a7984845dc68b5bc27b927713955d545b4f",
+        "bytes": 9807
+      },
+      "central_max_edge_nm": 225.0,
+      "port_section": {
+        "path": "shared-9ltja0jy/port_section_AP_pnc.npz",
+        "sha256": "afb2efac6cde61d78037cd86226a4d6658891bc27c5362fc2e82815b05182aeb",
+        "bytes": 588030
+      },
+      "accepted_point_summary": {
+        "path": "point-002/attempt-8sqjivv7/historical_26hole_regional_100nm-5f58816ef174/summary_AP_pnc.json",
+        "sha256": "392a90dfdf69adc6e55eb9a1de0be0050b07030f135a07d8093f446d90dc5a1b",
+        "bytes": 14364
+      }
+    },
+    "fine": {
+      "directory": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux",
+      "source_git_commit": null,
+      "checkpoint": {
+        "path": "checkpoint_AP_pnc.json",
+        "sha256": "8a8e2cf5a4dd1831c3615e158279aa6aa6f31bf1ff1b33e5dd18ec1070f13b5d",
+        "bytes": 15300
+      },
+      "assembly_source_git_commit": "3965855c1c6847e0e9a60becd7ac22efbeb88279",
+      "assembly_platform": "Windows-11-10.0.26200-SP0",
+      "mesh_hash": "401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a",
+      "mesh": {
+        "path": "shared-2m5o4mx7/_meshes/401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a/mesh_AP_pnc.npz",
+        "sha256": "33771e9f0ab3c7399549122407372f7dbc907908f181c664de3bf3c881210705",
+        "bytes": 217141
+      },
+      "mesh_summary": {
+        "path": "shared-2m5o4mx7/_meshes/401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a/summary_AP_pnc.json",
+        "sha256": "67f0c46e123e887e7ed4880d8cda7146aa51a76b1a10259a7fb78184795d326b",
+        "bytes": 9815
+      },
+      "central_max_edge_nm": 168.75,
+      "port_section": {
+        "path": "shared-2m5o4mx7/port_section_AP_pnc.npz",
+        "sha256": "251c91aec84b9048e62c740ae293281518776d4a9ec25def5cca1b2c4c044705",
+        "bytes": 588030
+      },
+      "accepted_point_summary": {
+        "path": "point-002/attempt-7fagiz48/historical_26hole_regional_100nm-6edfa64541b9/summary_AP_pnc.json",
+        "sha256": "b87760198cd14cbb2711d46abe4cfc21816b83dc6a3417a2f7a5fcadb5532bcb",
+        "bytes": 13967
+      }
+    },
+    "hole_pattern_sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+    "reference_planes_x_m": [
+      0.0,
+      1.665e-05
+    ],
+    "nominal_mirror_cuts_x_m": [
+      5.745000000000001e-06,
+      1.0905000000000001e-05
+    ],
+    "regional_cuts_x_m": [
+      1.0000000000000002e-06,
+      1.565e-05
+    ]
+  },
+  "goal_patch_region": "cavity_13_14",
+  "original_end_sections_match_exactly": true,
+  "shared": {
+    "mesh_hash": "bbd00036392ed6ef17879d35f8681f1f351c8ffd2fd7aa7cc961cebda6be0584",
+    "assembly_resources": {
+      "peak_process_memory_mib": 1133.15234375,
+      "system_available_memory_mib_at_start": 88165.72265625,
+      "process_lifetime_peak_working_set_mib": 647.79296875,
+      "elapsed_seconds": 30.10660941246897
+    },
+    "section_resources": {
+      "peak_process_memory_mib": 649.953125,
+      "system_available_memory_mib_at_start": 87633.01953125,
+      "process_lifetime_peak_working_set_mib": 649.953125,
+      "elapsed_seconds": 0.10373545344918966
+    },
+    "reference_planes_x_m": [
+      0.0,
+      1.665e-05
+    ],
+    "artifacts": {
+      "mesh_summary": {
+        "path": "shared-9vbg4fx9/_meshes/bbd00036392ed6ef17879d35f8681f1f351c8ffd2fd7aa7cc961cebda6be0584/summary_AP_pnc.json",
+        "sha256": "c166c1d03e9307fc032a1fc06d101f0d551fabe39eb91fe8ca11379d8852a974",
+        "bytes": 48871
+      },
+      "mesh": {
+        "path": "shared-9vbg4fx9/_meshes/bbd00036392ed6ef17879d35f8681f1f351c8ffd2fd7aa7cc961cebda6be0584/mesh_AP_pnc.npz",
+        "sha256": "d658a1620aa53991d7425d1f9cd7a274a0d13dcb49eed05816a523d8efa0e55b",
+        "bytes": 149942
+      },
+      "stiffness": {
+        "path": "shared-9vbg4fx9/K.npz",
+        "sha256": "c883cb80976493cb29162f04c1942bb545b5cc1b2be3a3e387e23a8f8d4043c9",
+        "bytes": 78715813
+      },
+      "mass": {
+        "path": "shared-9vbg4fx9/M.npz",
+        "sha256": "35452f8bb86e21bef8d89e43beb524711fd294a892d95b8f1c86b6deb7cd994c",
+        "bytes": 27347365
+      },
+      "port_section": {
+        "path": "shared-9vbg4fx9/port_section_AP_pnc.npz",
+        "sha256": "18d9b74b8622c4ac6d8eedb9b7497bfd1b9067c1e652a8ed68407a8fac3b9ba2",
+        "bytes": 588030
+      }
+    }
+  },
+  "points": [
+    {
+      "index": 1,
+      "frequency_GHz": 1.0,
+      "status": "accepted",
+      "attempts": [
+        {
+          "status": "accepted",
+          "path": "point-001/attempt-x4ydgiix"
+        }
+      ],
+      "spatial_convergence_established": false,
+      "frequency_convergence_established": false,
+      "accepted": {
+        "summary": {
+          "path": "point-001/attempt-x4ydgiix/thin100_cavity_pair_AP_pnc-07b84ef60e72/summary_AP_pnc.json",
+          "sha256": "b25e0c6e67efafd2e4df798d695086e4a06c390475106378dfd057c2a64dc715",
+          "bytes": 44545
+        }
+      }
+    }
+  ],
+  "checkpoint_data_sha256": "3e5fea34287da2599782dd830720ddf73518560af242d94b29e1ad46a885f2ce"
+}
