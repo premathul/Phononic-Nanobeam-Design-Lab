@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "frequency_hz": 1000000000.0,
+  "width_nm": 1000,
+  "lead": "Uniform semi-infinite rectangular lead along lab x with traction-free lateral surfaces.",
+  "material": {
+    "name": "nominal_cubic_ge",
+    "C11_Pa": 128500000000.0,
+    "C12_Pa": 48300000000.0,
+    "C44_Pa": 66800000000.0,
+    "density_kg_m3": 5323,
+    "crystal_rotation": [
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ],
+    "temperature_policy": "fixed_property_control",
+    "temperature_K": 4
+  },
+  "material_status": "nominal fixed-property control; no temperature calibration",
+  "section_discretization": {
+    "element_order": 2,
+    "vertices": 15,
+    "triangles": 16,
+    "width_intervals": 4,
+    "thickness_layers": 2,
+    "vector_dofs": 135,
+    "finite_roots": 270,
+    "matched_topology": "The 100 nm section reuses the exact reference triangles and y coordinates with all z coordinates halved."
+  },
+  "wave_convention": "exp(i*k*x - i*omega*t). Propagating direction follows signed axial power. Evanescent direction follows decay.",
+  "propagating_root_columns": [
+    "native_root_id",
+    "signed_real_k_rad_m",
+    "signed_power_W",
+    "backward_residual"
+  ],
+  "evanescent_root_columns": [
+    "native_root_id",
+    "signed_imag_k_rad_m"
+  ],
+  "criteria": {
+    "maximum_eigen_backward_residual": 1e-08,
+    "maximum_relative_traction_error": 1e-08,
+    "maximum_signed_power_error_W": 1e-07,
+    "maximum_directional_flux_gram_error_W": 1e-07,
+    "maximum_scaled_root_partner_mismatch": 1e-08,
+    "directional_basis_condition_strict_upper_bound": 10000000000.0,
+    "propagating_abs_flux_over_reference_power_strict_lower_bound": 1e-08
+  },
+  "sections": {
+    "100_nm": {
+      "propagating_count": {
+        "+x": 5,
+        "-x": 5
+      },
+      "propagating_roots": {
+        "+x": [
+          [268, 1446421.5752191825, 1.0, 1.332245158910912e-15],
+          [263, 2796373.3740785704, 1.0, 7.980321792146519e-16],
+          [258, 3870335.613243325, 1.0000000000000002, 1.7514500286384593e-15],
+          [242, 6227752.07867649, 1.0000000000000002, 2.4009295000435394e-15],
+          [240, 7133416.051187846, 0.9999999999999996, 2.498776845527735e-15]
+        ],
+        "-x": [
+          [269, -1446421.5752191825, -1.0, 1.332245158910912e-15],
+          [264, -2796373.3740785704, -1.0, 7.980321792146519e-16],
+          [259, -3870335.613243325, -1.0000000000000002, 1.7514500286384593e-15],
+          [243, -6227752.07867649, -1.0000000000000002, 2.4009295000435394e-15],
+          [241, -7133416.051187846, -0.9999999999999996, 2.498776845527735e-15]
+        ]
+      },
+      "least_attenuated_evanescent_roots": {
+        "+x": [266, 1477537.886344777],
+        "-x": [267, -1477537.886344935]
+      },
+      "near_cutoff_unresolved_at_sample": false,
+      "minimum_abs_k_times_width": 1.4464215752191827,
+      "minimum_evanescent_abs_imag_k_times_width": 1.4775378863447772,
+      "minimum_propagating_abs_flux_over_reference_power": 0.27620349711405257,
+      "maximum_saved_backward_residual": 2.6933126604689146e-15,
+      "maximum_independent_eigen_backward_residual": 2.6939131538443675e-15,
+      "maximum_independent_relative_traction_error": 7.810537199254614e-16,
+      "maximum_independent_signed_power_difference_W": 5.4003541774098134e-15,
+      "independent_directional_flux_gram_errors_W": {
+        "+x": 1.7448404757183833e-12,
+        "-x": 1.7448404757183833e-12
+      },
+      "independent_directional_basis_condition": {
+        "+x": 34.87377842865608,
+        "-x": 34.873778428643796
+      },
+      "independent_root_partner_checks": {
+        "conjugation": {
+          "maximum_mismatch_rad_m": 1.4603137969970703e-06,
+          "maximum_scaled_mismatch": 1.0699692271991421e-13
+        },
+        "reciprocity": {
+          "maximum_mismatch_rad_m": 0.0,
+          "maximum_scaled_mismatch": 0.0
+        }
+      },
+      "source_git_commit": "44d4a40be2100e32f979ae708c29f79684d0dcee",
+      "artifacts": {
+        "receipt": {
+          "path": "results/runs/physical_thickness_section_AP_pnc/thin100_AP_pnc.json",
+          "sha256": "1ab22f2652565d8c8d0f26e09f8287d1c469418fd293d0744931a1f0e1b39230"
+        },
+        "mode_arrays": {
+          "path": "results/runs/physical_thickness_section_AP_pnc/thin100_modes_AP_pnc.npz",
+          "sha256": "a36cc4904c324b52104afb24b74be41d12e96bd66689fe5c268b681b45f4c675"
+        },
+        "corrected_driver": {
+          "path": "results/runs/physical_thickness_section_AP_pnc/run_physical_section_AP_pnc.py",
+          "sha256": "e9ac0245669a16208ae056ced1fe11c66a1c6adb9fe2f3786b627cae241f3b62"
+        },
+        "independent_replay": {
+          "path": "tools/verify_port_count_interval_AP_pnc.py",
+          "sha256": "8488071bf9e19c53d29365f0806af0fefac2ba58528af7555a68b6420decc844"
+        }
+      },
+      "original_driver_sha256": "225c85310f4ec974408ed5e6a69f17b9d1da1d813bb785fb0aecdbb335166093",
+      "receipt_recovery": "The eigensolve, independent replay and mode-array write completed before the first JSON serialization stopped at a NumPy int32 DOF count. The saved arrays were replayed to finish this receipt. Per-stage timing from the first process is unavailable."
+    },
+    "200_nm": {
+      "propagating_count": {
+        "+x": 5,
+        "-x": 5
+      },
+      "propagating_roots": {
+        "+x": [
+          [265, 1380733.1747046688, 1.0000000000000002, 1.494655161608078e-15],
+          [268, 1446665.4707658237, 1.0, 1.3948332878880857e-15],
+          [258, 2796624.0707935984, 1.0, 1.0158496513794546e-15],
+          [246, 4077505.5819656434, 1.0, 1.5747236215738718e-15],
+          [242, 5192383.245401606, 1.0, 1.9916420416178723e-15]
+        ],
+        "-x": [
+          [266, -1380733.1747046688, -1.0000000000000002, 1.494655161608078e-15],
+          [269, -1446665.4707658237, -1.0, 1.3948332878880857e-15],
+          [259, -2796624.0707935984, -1.0, 1.0158496513794546e-15],
+          [247, -4077505.5819656434, -1.0, 1.5747236215738718e-15],
+          [243, -5192383.245401606, -1.0, 1.9916420416178723e-15]
+        ]
+      },
+      "least_attenuated_evanescent_roots": {
+        "+x": [264, 1477672.3768344761],
+        "-x": [267, -1477672.376834369]
+      },
+      "near_cutoff_unresolved_at_sample": false,
+      "minimum_abs_k_times_width": 1.3807331747046687,
+      "minimum_evanescent_abs_imag_k_times_width": 1.477672376834369,
+      "minimum_propagating_abs_flux_over_reference_power": 0.2504231095451184,
+      "maximum_saved_backward_residual": 2.2861067136381084e-15,
+      "maximum_port_csv_power_minus_field_flux_W": 1.3927022532289484e-15,
+      "archived_field_directional_flux_gram_errors_W": {
+        "+x": 3.504988705798288e-12,
+        "-x": 3.504988705798288e-12
+      },
+      "saved_directional_basis_condition": {
+        "+x": 31.960955695632812,
+        "-x": 31.960955695592155
+      },
+      "archived_device_reference_planes_x_m": [
+        0.0,
+        1.665e-05
+      ],
+      "source_git_commit": "a225f03f9557658ce2fe9f6826d4fdc989d26295",
+      "artifacts": {
+        "receipt": {
+          "path": "results/runs/physical_thickness_section_AP_pnc/reference200_AP_pnc.json",
+          "sha256": "122ad8f1336820ea5b892d9bc7ae51e1fe1d7c89f19026c1ada6ce8c47250267"
+        },
+        "map_driver": {
+          "path": "tools/map_scattering_AP_pnc.py",
+          "sha256": "11b1dfe118606271a5c2710eae30b4081fb448a660b87eee58283550f7e1acce"
+        },
+        "map": {
+          "path": "results/runs/regional_mesh_AP_pnc/central300_z2_1GHz/map_AP_pnc.json",
+          "sha256": "503d13180b7c349ba2c910dd7c12ae6cebf8e0608cd69b58ebf24546c96409d6"
+        },
+        "point_summary": {
+          "path": "results/runs/regional_mesh_AP_pnc/central300_z2_1GHz/point-001/attempt-zd5711qc/historical_26hole_regional_pilot_200nm-1225d1d79cae/summary_AP_pnc.json",
+          "sha256": "328ffa326f533e118aea1037960112660d00d173d2b0bd01e3a424b1ee89b7d2"
+        },
+        "checkpoint": {
+          "path": "results/runs/regional_mesh_AP_pnc/central300_z2_1GHz/checkpoint_AP_pnc.json",
+          "sha256": "44cdb3852c03113ce0bd041c7921bdf5099b723ce6654441ab1b84cf4cf36920"
+        },
+        "flux_replay": {
+          "path": "results/runs/regional_mesh_AP_pnc/local_checks/central300_flux_AP_pnc.json",
+          "sha256": "d1412e56e9dfb0c4a3999c1d49462b7ec974216f37588e932da32a624308ffe0"
+        },
+        "port_section": {
+          "path": "results/runs/regional_mesh_AP_pnc/central300_z2_1GHz/shared-i2212y1y/port_section_AP_pnc.npz",
+          "sha256": "cf3859ee8aa873714c245dd1b8bd80e08c9dc53b1b77935437ee402b93fbe51c"
+        },
+        "body_mesh": {
+          "path": "results/runs/regional_mesh_AP_pnc/central300_z2_1GHz/shared-i2212y1y/_meshes/33aefcb3b4fa8bd1838a50f83e338d72664cf9e8760c93d50284d8de940ad7a8/mesh_AP_pnc.npz",
+          "sha256": "cce24b7a661947a0f7f4df89d911213ee87f8e9fbbb5d1761aeaf1492be1d77d"
+        },
+        "port_csv": {
+          "path": "results/runs/regional_mesh_AP_pnc/central300_z2_1GHz/point-001/attempt-zd5711qc/historical_26hole_regional_pilot_200nm-1225d1d79cae/port_modes_AP_pnc.csv",
+          "sha256": "cfb3480497752cfd277cd6bedce3a3cabd92fe330e1b62e98fdd8f12089a2c06"
+        },
+        "fields": {
+          "path": "results/runs/regional_mesh_AP_pnc/central300_z2_1GHz/point-001/attempt-zd5711qc/historical_26hole_regional_pilot_200nm-1225d1d79cae/selected_fields_AP_pnc.npz",
+          "sha256": "16039f52022601dd28895ff96a72e7c5074bff8701804a8b988741432eb9cf7e"
+        },
+        "configuration": {
+          "path": "results/runs/regional_mesh_AP_pnc/central300_z2_1GHz/point-001/attempt-zd5711qc/historical_26hole_regional_pilot_200nm-1225d1d79cae/configuration_AP_pnc.json",
+          "sha256": "4ee85527eed10cab9e82504d9704982ba469a13c4b1b05a837d4b92e1ea56a71"
+        }
+      },
+      "receipt_recovery": "The reference receipt was reconstructed from the accepted native point, modal CSV, saved section and archived modal fields. The original residuals are from the native CSV."
+    }
+  },
+  "shared_solver_sources": {
+    "src/phononic/port_modes_AP_pnc.py": {
+      "path": "src/phononic/port_modes_AP_pnc.py",
+      "sha256": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b"
+    },
+    "src/phononic/material_AP_pnc.py": {
+      "path": "src/phononic/material_AP_pnc.py",
+      "sha256": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2"
+    }
+  },
+  "result": "Both finite sections have five propagating modes in each direction at the sampled frequency. The compared wavenumbers are native to each thickness and independently numbered.",
+  "scope_limits": "The calculation establishes a finite lead count at one frequency. Cutoff frequencies, cross-thickness branch correspondence, spatial or frequency convergence, continuum mode completeness and patterned-device transmission remain undetermined."
+}

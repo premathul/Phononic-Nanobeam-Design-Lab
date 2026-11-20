@@ -1,0 +1,323 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "spatial_convergence_established": false,
+  "frequency_convergence_established": false,
+  "schema_version": 1,
+  "method": "nested_coarse_taper_and_cavity_fine_complement",
+  "region": "complement",
+  "control_source_sha256": "ea340f855dda845a44887bab7b35d698adf2591f24c33b76c1de00d27c5aec53",
+  "control_coordinates_and_connectivity_sha256": "c4f69d0a1795c74fcbfb272729ef22792db30a55998b33e75bd0f6c444e7d16b",
+  "coarse_coordinates_and_connectivity_sha256": "dad9ca9e939ac8e623bd8a1519aadab41e365adaf083cc115b8f5c0b84bb11fa",
+  "fine_coordinates_and_connectivity_sha256": "dc7521861387c3e55cbb17908d0e7bcc7f11ca3e3a2748bc203cd8d000938d0d",
+  "element_order": 2,
+  "z_planes_m": [
+    -5.0000000000000004e-08,
+    0.0,
+    5.0000000000000004e-08
+  ],
+  "reference_planes_x_m": [
+    0.0,
+    1.665e-05
+  ],
+  "nominal_patch_cuts_x_m": [
+    5.745000000000001e-06,
+    1.0905000000000001e-05
+  ],
+  "changed_axial_extent_x_m": [
+    1.1030276010112193e-06,
+    1.554697239898878e-05
+  ],
+  "coarse_planar_triangles": 4024,
+  "fine_donor_planar_triangles": 6100,
+  "control_planar_triangles": 5244,
+  "wholly_inside_coarse_triangles": 1294,
+  "frozen_cross_cut_planar_triangles": [
+    11,
+    11
+  ],
+  "wholly_inside_coarse_triangles_frozen_by_conformity": 4,
+  "replaced_coarse_planar_triangles": 955,
+  "coarse_parent_partition": {
+    "index_order": "Zero-based native bottom-footprint triangle order.",
+    "central_active_mask_sha256": "cc3bee1c8d27bff1e19cb099d871068453ee0d19ecabb1a12ccef39f65430246",
+    "complement_active_mask_sha256": "a88e3200628097a2cf32a1f6acff0aa8fdcfc8e0682934dc955fee8d79fb4774",
+    "replaced_cut_crossing_planar_triangles": [
+      13,
+      13
+    ],
+    "recombined_tetrahedra": 36600,
+    "fine_donor_topology_sha256": "50c76d98715326682cd3b821bae849ba70f0589f610104dcdde1b1437593d0a8",
+    "central_parent_count": 1290,
+    "complement_parent_count": 2734,
+    "replaced_parent_count": 955,
+    "nominal_cut_crossing_parent_count": [
+      24,
+      24
+    ]
+  },
+  "retained_coarse_tetrahedra": 18414,
+  "inserted_fine_donor_tetrahedra": 13050,
+  "unchanged_rim_facets": 3328,
+  "unchanged_patch_frontier_facets": 104,
+  "unchanged_patch_frontier_p2_dofs": 810,
+  "mesh_vertices": 9531,
+  "mesh_tetrahedra": 31464,
+  "ndof": 174345,
+  "boundary_facet_counts": {
+    "xleft": 16,
+    "xright": 16,
+    "free": 15096
+  },
+  "end_face_dofs": {
+    "xleft": 135,
+    "xright": 135
+  },
+  "minimum_tetrahedron_determinant_m3": 2.107187211896613e-23,
+  "coarse_solid_volume_m3": 1.5321239816748154e-18,
+  "control_solid_volume_m3": 1.5321239816748154e-18,
+  "source": {
+    "coarse": {
+      "directory": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux",
+      "source_git_commit": null,
+      "checkpoint": {
+        "path": "checkpoint_AP_pnc.json",
+        "sha256": "8a8e2cf5a4dd1831c3615e158279aa6aa6f31bf1ff1b33e5dd18ec1070f13b5d",
+        "bytes": 15300
+      },
+      "assembly_source_git_commit": "3965855c1c6847e0e9a60becd7ac22efbeb88279",
+      "assembly_platform": "Windows-11-10.0.26200-SP0",
+      "mesh_hash": "401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a",
+      "mesh": {
+        "path": "shared-2m5o4mx7/_meshes/401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a/mesh_AP_pnc.npz",
+        "sha256": "33771e9f0ab3c7399549122407372f7dbc907908f181c664de3bf3c881210705",
+        "bytes": 217141
+      },
+      "mesh_summary": {
+        "path": "shared-2m5o4mx7/_meshes/401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a/summary_AP_pnc.json",
+        "sha256": "67f0c46e123e887e7ed4880d8cda7146aa51a76b1a10259a7fb78184795d326b",
+        "bytes": 9815
+      },
+      "central_max_edge_nm": 168.75
+    },
+    "fine": {
+      "directory": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge126p5625_rim32_linux",
+      "source_git_commit": null,
+      "checkpoint": {
+        "path": "checkpoint_AP_pnc.json",
+        "sha256": "0a9fe4b6c50fd8efc48c1a7e0e82258c247020473af01304f170f59d836fea15",
+        "bytes": 11020
+      },
+      "assembly_source_git_commit": null,
+      "assembly_platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28",
+      "mesh_hash": "393ab3480e288a0d844eea824ddf6c38e217aab75c2883d807e700b96341b711",
+      "mesh": {
+        "path": "shared-4iibxoxj/_meshes/393ab3480e288a0d844eea824ddf6c38e217aab75c2883d807e700b96341b711/mesh_AP_pnc.npz",
+        "sha256": "0c88c5f206f21b04d3c23fc3dce2521c12e12308804fa253e123d7d769aec064",
+        "bytes": 332236
+      },
+      "mesh_summary": {
+        "path": "shared-4iibxoxj/_meshes/393ab3480e288a0d844eea824ddf6c38e217aab75c2883d807e700b96341b711/summary_AP_pnc.json",
+        "sha256": "f4ad25cddcab77a5e605e7d1636b09e6e418d26e1fdee8c16fe9e252fe006ab4",
+        "bytes": 9500
+      },
+      "central_max_edge_nm": 126.5625
+    },
+    "hole_pattern_sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+    "reference_planes_x_m": [
+      0.0,
+      1.665e-05
+    ],
+    "nominal_mirror_cuts_x_m": [
+      5.745000000000001e-06,
+      1.0905000000000001e-05
+    ],
+    "regional_cuts_x_m": [
+      1.0000000000000002e-06,
+      1.565e-05
+    ]
+  },
+  "status": "passed_geometry_only_preflight",
+  "local_git_commit": "66baefa85830f5aac275eacb32dfabc367bad468",
+  "local_platform": "Windows-11-10.0.26200-SP0",
+  "frequency_GHz": 1.0,
+  "full_control_coverage": {
+    "removed_coarse_tetrahedra": {
+      "central": 3792,
+      "complement": 5730,
+      "full": 9522,
+      "recombined_and_full_array_sha256": "8460892a0eb2abd82ab2074b540abf45a319025f87bc7b80f7810b71893982c5"
+    },
+    "added_fine_tetrahedra": {
+      "central": 8928,
+      "complement": 13050,
+      "full": 21978,
+      "recombined_and_full_array_sha256": "c672636201562a340b5c3e9268765d5a6fe8fee7916fbc5ee8733f16ee0057e5"
+    },
+    "recombined_tetrahedra_match_full_refinement": true,
+    "full_fine_physical_tetrahedron_set_sha256": "5301377ade7120f4329dbc8463b13c920be0285ffc5b8fc91ca906f6406d5d51",
+    "coarse_parent_counts": {
+      "central": 1290,
+      "complement": 2734
+    },
+    "refined_cut_crossing_planar_triangles": [
+      13,
+      13
+    ]
+  },
+  "surface_counts_equal_on_all_four_meshes": {
+    "xleft": 16,
+    "xright": 16,
+    "hole_rims": 3328
+  },
+  "exact_frozen_center_local_tetrahedron_coordinates": true,
+  "frozen_central_partition_tetrahedra": 7740,
+  "frozen_central_tetrahedra_geometry_sha256": "e7d724a2fcbcaa34d6605ab4a9e77d047b99dc8f2d2f1f97786f454472b1039f",
+  "unchanged_lead_tetrahedra": {
+    "left": 600,
+    "right": 600
+  },
+  "replaced_wholly_inside_nominal_cuts_planar_triangles": 4,
+  "replaced_nominal_cut_crossing_planar_triangles": [
+    13,
+    13
+  ],
+  "replaced_wholly_outside_nominal_cuts_planar_triangles": 925,
+  "exact_archived_section_geometry_and_p2_trace_order": true,
+  "end_trace_coordinate_sha256": "10841b5def98f8ff72996a3a35f587f5449256992ececf8ef7c19341de9e6f9b",
+  "tetrahedron_quality_definition": "Mean ratio = 12 (3 V)^(2/3) / sum of six squared edge lengths, where V is positive tetrahedron volume. It is 1 for an equilateral tetrahedron.",
+  "topology_and_quality": {
+    "baseline": {
+      "body_dofs": 137745,
+      "tetrahedra": 24144,
+      "body_geometry_scalar_p2_pattern_nnz": 1075647,
+      "body_geometry_vector_p2_pattern_nnz_ceiling": 9680823,
+      "min_jacobian_determinant_m3": 2.107187211896613e-23,
+      "tetrahedron_mean_ratio_min_p01_median": [
+        0.1696028859487544,
+        0.24598079376944307,
+        0.6154264413360844
+      ]
+    },
+    "taper_patch": {
+      "body_dofs": 163425,
+      "tetrahedra": 29280,
+      "body_geometry_scalar_p2_pattern_nnz": 1292215,
+      "body_geometry_vector_p2_pattern_nnz_ceiling": 11629935,
+      "min_jacobian_determinant_m3": 2.107187211896613e-23,
+      "tetrahedron_mean_ratio_min_p01_median": [
+        0.17385281279317005,
+        0.25670198078398887,
+        0.6375583277346714
+      ]
+    },
+    "complement": {
+      "body_dofs": 174345,
+      "tetrahedra": 31464,
+      "body_geometry_scalar_p2_pattern_nnz": 1384307,
+      "body_geometry_vector_p2_pattern_nnz_ceiling": 12458763,
+      "min_jacobian_determinant_m3": 2.107187211896613e-23,
+      "tetrahedron_mean_ratio_min_p01_median": [
+        0.1696028859487544,
+        0.26162053535938296,
+        0.65146464555936
+      ],
+      "including_two_dense_face_blocks_pattern_nnz_ceiling": 12495213
+    },
+    "full_refinement": {
+      "body_dofs": 200025,
+      "tetrahedra": 36600,
+      "body_geometry_scalar_p2_pattern_nnz": 1600875,
+      "body_geometry_vector_p2_pattern_nnz_ceiling": 14407875,
+      "min_jacobian_determinant_m3": 2.107187211896613e-23,
+      "tetrahedron_mean_ratio_min_p01_median": [
+        0.17385281279317005,
+        0.2717915863226397,
+        0.6718959285540923
+      ]
+    }
+  },
+  "estimated_linux_resources": {
+    "measured_linux_neighbors": {
+      "baseline": {
+        "phase": "cached one-point solve",
+        "body_dofs": 137745,
+        "peak_rss_bytes": 3149139968,
+        "elapsed_seconds": 57.67344847507775,
+        "shared_preparation_bytes": 152912564,
+        "non_shared_1GHz_archive_bytes": 18005509,
+        "timing_receipt": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/local_checks/thin100_central400_edge168p75_rim32_linux_response_1GHz_execution_AP_pnc.json",
+          "sha256": "0177b34e954541aa9f28de7e393c54c02d4ce6d9bda8211566a1bb25b6489a8b",
+          "bytes": 2104
+        },
+        "checkpoint": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux/checkpoint_AP_pnc.json",
+          "sha256": "8a8e2cf5a4dd1831c3615e158279aa6aa6f31bf1ff1b33e5dd18ec1070f13b5d",
+          "bytes": 15300
+        }
+      },
+      "previous_complement": {
+        "phase": "assembly and one solve",
+        "body_dofs": 124605,
+        "peak_rss_bytes": 3426672640,
+        "elapsed_seconds": 84.25,
+        "shared_preparation_bytes": 137942334,
+        "non_shared_1GHz_archive_bytes": 16373547,
+        "timing_receipt": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/local_checks/complement_point_time_AP_pnc.txt",
+          "sha256": "95251130ef5832b772fbe1a00e97b41226960888237bced72ff122297a9fe166",
+          "bytes": 1174
+        },
+        "checkpoint": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_complement225to168p75_1GHz/checkpoint_AP_pnc.json",
+          "sha256": "0d9649d4de0e55e892cba1b7b844fb39bef26c2a56532f4800d9123ee23a1dbc",
+          "bytes": 17165
+        }
+      },
+      "central": {
+        "phase": "assembly and one solve",
+        "body_dofs": 163425,
+        "peak_rss_bytes": 4754849792,
+        "elapsed_seconds": 122.64,
+        "shared_preparation_bytes": 183624110,
+        "non_shared_1GHz_archive_bytes": 21177034,
+        "timing_receipt": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/local_checks/finer_taper_point_time_AP_pnc.txt",
+          "sha256": "6f3f71bb284dfa5b0d81cdd6c2fd22ada8381300977782c6565a57b246e0ffc7",
+          "bytes": 1190
+        },
+        "checkpoint": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_taper_patch168p75to126p5625_1GHz/checkpoint_AP_pnc.json",
+          "sha256": "9d10dce8ac3947d8118d58f6662fb317d2ac8d0eca86c9fbe72154c3abe75683",
+          "bytes": 17090
+        }
+      },
+      "full_refinement": {
+        "phase": "assembly and one solve",
+        "body_dofs": 200025,
+        "peak_rss_bytes": 5968805888,
+        "elapsed_seconds": 155.69,
+        "shared_preparation_bytes": 227195240,
+        "non_shared_1GHz_archive_bytes": 25694486,
+        "timing_receipt": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/local_checks/thin100_central400_edge126p5625_rim32_linux_1GHz_time_AP_pnc.txt",
+          "sha256": "c2b7cec425b023ac8d0bb46d1aa703f4b0cb8358b4d6f4b6d5770f5a1da1fa4b",
+          "bytes": 1193
+        },
+        "checkpoint": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge126p5625_rim32_linux/checkpoint_AP_pnc.json",
+          "sha256": "0a9fe4b6c50fd8efc48c1a7e0e82258c247020473af01304f170f59d836fea15",
+          "bytes": 11020
+        }
+      }
+    },
+    "complement_to_same_step_center_p2_pattern_ratio": 1.071266778361186,
+    "scaled_from_same_step_center_peak_rss_bytes": 5093712618,
+    "scaled_from_same_step_center_elapsed_seconds": 131.38015769821584,
+    "scaled_from_same_step_center_persistent_artifact_bytes": 219396661,
+    "nearby_full_fine_observed_peak_rss_bytes": 5968805888,
+    "scope": "Pattern scaling extrapolates linearly from a measured one-thread Linux solve with assembly. Numerical factor fill, actual runtime, and live memory/disk admission remain run-specific."
+  },
+  "preflight_elapsed_seconds": 4.750008799994248
+}

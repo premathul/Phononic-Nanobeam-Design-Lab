@@ -1,0 +1,641 @@
+{
+  "schema_version": 1,
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "frequency_hz": 1000000000.0,
+  "physical_thickness_nm": 100,
+  "central_mesh_targets_nm": [
+    400,
+    300,
+    225
+  ],
+  "increment_order_nm": [
+    [
+      400,
+      300
+    ],
+    [
+      300,
+      225
+    ]
+  ],
+  "reference_planes_x_m": [
+    0.0,
+    1.665e-05
+  ],
+  "new_refinement_geometry": {
+    "central_tetrahedra": [
+      10920,
+      12960
+    ],
+    "exact_shared_cells": {
+      "left": 600,
+      "right": 600
+    },
+    "exact_shared_faces": {
+      "left_port": 16,
+      "right_port": 16,
+      "left_cut": 16,
+      "right_cut": 16,
+      "hole_walls": 3328
+    },
+    "unique_inplane_edges_on_bottom_central_face": [
+      {
+        "triangles": 1820,
+        "unique_edges": 3199,
+        "median_nm": 69.22594423447221,
+        "max_nm": 389.2149124742542
+      },
+      {
+        "triangles": 2160,
+        "unique_edges": 3726,
+        "median_nm": 67.01213359255516,
+        "max_nm": 317.2388373550315
+      }
+    ]
+  },
+  "equal_incoherent_mean_power": {
+    "transmission": {
+      "powers_by_central_target_fraction": [
+        0.9186204414806436,
+        0.9488200068555004,
+        0.7117940646415767
+      ],
+      "signed_increments_fraction": [
+        0.030199565374856796,
+        -0.2370259422139237
+      ],
+      "signed_increments_percentage_points": [
+        3.0199565374856796,
+        -23.70259422139237
+      ],
+      "relative_increments_percent": [
+        3.2874911128888846,
+        -24.981128190946897
+      ],
+      "monotonic_over_three_targets": false,
+      "last_absolute_increment_decreased": false
+    },
+    "reflection": {
+      "powers_by_central_target_fraction": [
+        0.0813795585193813,
+        0.051179993144450306,
+        0.28820593535843303
+      ],
+      "signed_increments_fraction": [
+        -0.030199565374931,
+        0.2370259422139827
+      ],
+      "signed_increments_percentage_points": [
+        -3.0199565374931,
+        23.70259422139827
+      ],
+      "relative_increments_percent": [
+        -37.10952224905311,
+        463.1222625313786
+      ],
+      "monotonic_over_three_targets": false,
+      "last_absolute_increment_decreased": false
+    }
+  },
+  "matched_native_drive_power": [
+    {
+      "native_drives": [
+        1,
+        1,
+        1
+      ],
+      "native_root_ids": [
+        268,
+        268,
+        268
+      ],
+      "k_rad_m": 1446421.5752191825,
+      "transmission": {
+        "powers_by_central_target_fraction": [
+          0.995044179061464,
+          0.9959174636863709,
+          0.9964919706359384
+        ],
+        "signed_increments_fraction": [
+          0.0008732846249068782,
+          0.0005745069495675104
+        ],
+        "signed_increments_percentage_points": [
+          0.08732846249068782,
+          0.057450694956751036
+        ],
+        "relative_increments_percent": [
+          0.08776340219693253,
+          0.057686200966994096
+        ],
+        "monotonic_over_three_targets": true,
+        "last_absolute_increment_decreased": true
+      },
+      "reflection": {
+        "powers_by_central_target_fraction": [
+          0.004955820938507331,
+          0.004082536313636279,
+          0.003508029364052096
+        ],
+        "signed_increments_fraction": [
+          -0.0008732846248710527,
+          -0.0005745069495841828
+        ],
+        "signed_increments_percentage_points": [
+          -0.08732846248710527,
+          -0.05745069495841828
+        ],
+        "relative_increments_percent": [
+          -17.62139180787435,
+          -14.072304701007658
+        ],
+        "monotonic_over_three_targets": true,
+        "last_absolute_increment_decreased": true
+      }
+    },
+    {
+      "native_drives": [
+        2,
+        2,
+        2
+      ],
+      "native_root_ids": [
+        263,
+        263,
+        263
+      ],
+      "k_rad_m": 2796373.3740785704,
+      "transmission": {
+        "powers_by_central_target_fraction": [
+          0.9622999282531942,
+          0.9615217496438128,
+          0.9583953781863808
+        ],
+        "signed_increments_fraction": [
+          -0.0007781786093814524,
+          -0.003126371457431998
+        ],
+        "signed_increments_percentage_points": [
+          -0.07781786093814524,
+          -0.3126371457431998
+        ],
+        "relative_increments_percent": [
+          -0.0808665351138531,
+          -0.32514828277052854
+        ],
+        "monotonic_over_three_targets": true,
+        "last_absolute_increment_decreased": false
+      },
+      "reflection": {
+        "powers_by_central_target_fraction": [
+          0.03770007174681918,
+          0.03847825035619248,
+          0.04160462181362756
+        ],
+        "signed_increments_fraction": [
+          0.0007781786093732992,
+          0.0031263714574350857
+        ],
+        "signed_increments_percentage_points": [
+          0.07781786093732992,
+          0.31263714574350854
+        ],
+        "relative_increments_percent": [
+          2.064130314125876,
+          8.125035386209925
+        ],
+        "monotonic_over_three_targets": true,
+        "last_absolute_increment_decreased": false
+      }
+    },
+    {
+      "native_drives": [
+        3,
+        3,
+        3
+      ],
+      "native_root_ids": [
+        258,
+        258,
+        258
+      ],
+      "k_rad_m": 3870335.613243325,
+      "transmission": {
+        "powers_by_central_target_fraction": [
+          0.9202655168195681,
+          0.9161924501568968,
+          0.3222369276951885
+        ],
+        "signed_increments_fraction": [
+          -0.004073066662671376,
+          -0.5939555224617082
+        ],
+        "signed_increments_percentage_points": [
+          -0.40730666626713763,
+          -59.39555224617082
+        ],
+        "relative_increments_percent": [
+          -0.4425969014625115,
+          -64.82868554090291
+        ],
+        "monotonic_over_three_targets": true,
+        "last_absolute_increment_decreased": false
+      },
+      "reflection": {
+        "powers_by_central_target_fraction": [
+          0.0797344831804522,
+          0.08380754984314083,
+          0.6777630723048467
+        ],
+        "signed_increments_fraction": [
+          0.004073066662688626,
+          0.5939555224617058
+        ],
+        "signed_increments_percentage_points": [
+          0.40730666626886264,
+          59.39555224617058
+        ],
+        "relative_increments_percent": [
+          5.108287531594842,
+          708.7136225475964
+        ],
+        "monotonic_over_three_targets": true,
+        "last_absolute_increment_decreased": false
+      }
+    },
+    {
+      "native_drives": [
+        4,
+        4,
+        4
+      ],
+      "native_root_ids": [
+        242,
+        242,
+        242
+      ],
+      "k_rad_m": 6227752.07867649,
+      "transmission": {
+        "powers_by_central_target_fraction": [
+          0.8726024875747834,
+          0.9636177363296473,
+          0.9533005766821121
+        ],
+        "signed_increments_fraction": [
+          0.09101524875486389,
+          -0.010317159647535212
+        ],
+        "signed_increments_percentage_points": [
+          9.101524875486389,
+          -1.0317159647535212
+        ],
+        "relative_increments_percent": [
+          10.430321945084271,
+          -1.0706693389468476
+        ],
+        "monotonic_over_three_targets": false,
+        "last_absolute_increment_decreased": true
+      },
+      "reflection": {
+        "powers_by_central_target_fraction": [
+          0.12739751242506345,
+          0.0363822636698638,
+          0.04669942331792277
+        ],
+        "signed_increments_fraction": [
+          -0.09101524875519965,
+          0.010317159648058967
+        ],
+        "signed_increments_percentage_points": [
+          -9.101524875519965,
+          1.0317159648058967
+        ],
+        "relative_increments_percent": [
+          -71.44193557840133,
+          28.35766279327168
+        ],
+        "monotonic_over_three_targets": false,
+        "last_absolute_increment_decreased": true
+      }
+    },
+    {
+      "native_drives": [
+        5,
+        5,
+        5
+      ],
+      "native_root_ids": [
+        240,
+        240,
+        240
+      ],
+      "k_rad_m": 7133416.051187846,
+      "transmission": {
+        "powers_by_central_target_fraction": [
+          0.8428900956942085,
+          0.9068506344607747,
+          0.3285454700082639
+        ],
+        "signed_increments_fraction": [
+          0.06396053876656627,
+          -0.5783051644525108
+        ],
+        "signed_increments_percentage_points": [
+          6.396053876656627,
+          -57.83051644525108
+        ],
+        "relative_increments_percent": [
+          7.588241823376516,
+          -63.77071840462224
+        ],
+        "monotonic_over_three_targets": false,
+        "last_absolute_increment_decreased": false
+      },
+      "reflection": {
+        "powers_by_central_target_fraction": [
+          0.15710990430606436,
+          0.09314936553941815,
+          0.6714545299917161
+        ],
+        "signed_increments_fraction": [
+          -0.06396053876664622,
+          0.578305164452298
+        ],
+        "signed_increments_percentage_points": [
+          -6.396053876664622,
+          57.8305164452298
+        ],
+        "relative_increments_percent": [
+          -40.71069806143175,
+          620.8363965802599
+        ],
+        "monotonic_over_three_targets": false,
+        "last_absolute_increment_decreased": false
+      }
+    }
+  ],
+  "selected_left_reflected_conversions": {
+    "columns": [
+      "central_target_nm",
+      "incident_channel",
+      "reflected_channel",
+      "incident_root_id",
+      "reflected_root_id",
+      "incident_mode_signed_axial_power_W",
+      "reflected_mode_signed_axial_power_W",
+      "reflected_power_fraction_of_incident_drive"
+    ],
+    "rows": [
+      [
+        400,
+        3,
+        5,
+        258,
+        241,
+        1.0,
+        -1.0,
+        0.06013087388260325
+      ],
+      [
+        400,
+        5,
+        3,
+        240,
+        259,
+        1.0,
+        -1.0,
+        0.06013087388262464
+      ],
+      [
+        300,
+        3,
+        5,
+        258,
+        241,
+        1.0,
+        -1.0,
+        0.06993567558251855
+      ],
+      [
+        300,
+        5,
+        3,
+        240,
+        259,
+        1.0,
+        -1.0,
+        0.06993567558253101
+      ],
+      [
+        225,
+        3,
+        5,
+        258,
+        241,
+        1.0,
+        -1.0,
+        0.6662375958079153
+      ],
+      [
+        225,
+        5,
+        3,
+        240,
+        259,
+        1.0,
+        -1.0,
+        0.6662375958079246
+      ]
+    ],
+    "archive_by_central_target_nm": {
+      "400": {
+        "coefficient_table": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_1GHz/scattering_map_AP_pnc.csv",
+          "sha256": "f4c5dcf34b26f4b60b5b9538bc39584d16071b39a9913e0c855a6f5d6a7a7495",
+          "bytes": 7155
+        },
+        "signed_port_modes": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_1GHz/point-001/attempt-u9p60vf3/historical_26hole_regional_100nm-9d56e228b6b6/port_modes_AP_pnc.csv",
+          "sha256": "77e97fb6c96e7ab2b80b3ab769453b940b147dd71f1db62220ccc9068d74738d",
+          "bytes": 22206
+        }
+      },
+      "300": {
+        "coefficient_table": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_1GHz/scattering_map_AP_pnc.csv",
+          "sha256": "57420b941b698b46d508f6d06ee9fdf41323ce02b134d12b9832a8e32c9f441c",
+          "bytes": 7137
+        },
+        "signed_port_modes": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_1GHz/point-001/attempt-dp7gdz7f/historical_26hole_regional_100nm-41d55a50a70e/port_modes_AP_pnc.csv",
+          "sha256": "77e97fb6c96e7ab2b80b3ab769453b940b147dd71f1db62220ccc9068d74738d",
+          "bytes": 22206
+        }
+      },
+      "225": {
+        "coefficient_table": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central225_1GHz/scattering_map_AP_pnc.csv",
+          "sha256": "849584d5840f657386951536c8e6a5970dd9b7f56c8d239c345376e04f5f2d5f",
+          "bytes": 7200
+        },
+        "signed_port_modes": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central225_1GHz/point-001/attempt-fnbwtchd/historical_26hole_regional_100nm-864c9c15d8f7/port_modes_AP_pnc.csv",
+          "sha256": "77e97fb6c96e7ab2b80b3ab769453b940b147dd71f1db62220ccc9068d74738d",
+          "bytes": 22206
+        }
+      }
+    },
+    "scope": "Individual +x to -x conversion powers at the original left end plane. Fractions express outgoing reflected power as a positive share of the incident drive power."
+  },
+  "absolute_power_increment_limit": 0.01,
+  "400_to_300_nm": {
+    "maximum_absolute_mean_increment_fraction": 0.030199565374931,
+    "mean_power_increment_passed": false,
+    "maximum_absolute_per_drive_increment_fraction": 0.09101524875519965,
+    "per_drive_increment_passed": false,
+    "transmission_limiter": {
+      "native_drives": [
+        4,
+        4
+      ],
+      "native_roots": [
+        242,
+        242
+      ],
+      "signed_increment_fraction": 0.09101524875486389
+    },
+    "reflection_limiter": {
+      "native_drives": [
+        4,
+        4
+      ],
+      "native_roots": [
+        242,
+        242
+      ],
+      "signed_increment_fraction": -0.09101524875519965
+    }
+  },
+  "300_to_225_nm": {
+    "maximum_absolute_mean_increment_fraction": 0.2370259422139827,
+    "mean_power_increment_passed": false,
+    "maximum_absolute_per_drive_increment_fraction": 0.5939555224617082,
+    "per_drive_increment_passed": false,
+    "transmission_limiter": {
+      "native_drives": [
+        3,
+        3
+      ],
+      "native_roots": [
+        258,
+        258
+      ],
+      "signed_increment_fraction": -0.5939555224617082
+    },
+    "reflection_limiter": {
+      "native_drives": [
+        3,
+        3
+      ],
+      "native_roots": [
+        258,
+        258
+      ],
+      "signed_increment_fraction": 0.5939555224617058
+    }
+  },
+  "maximum_absolute_mean_increment_decreased": false,
+  "maximum_absolute_matched_drive_increment_decreased": false,
+  "new_225_nm_point": {
+    "source_git_commit": "d82c5e1111f2cd6c108c47465d1affc682fea43d",
+    "map_driver_sha256": "11b1dfe118606271a5c2710eae30b4081fb448a660b87eee58283550f7e1acce",
+    "body_dofs": 85425,
+    "port_dofs": 135,
+    "maximum_numerical_checks": {
+      "maximum_relative_residual": 1.0937323231275633e-12,
+      "maximum_relative_backward_residual": 2.8932706583662845e-16,
+      "maximum_port_relative_residual": 2.6933126604689146e-15,
+      "maximum_native_power_error": 8.604228440844961e-14
+    },
+    "independent_flux_checks": {
+      "maximum_nodal_force_relative_residual": 1.0986059888548532e-12,
+      "maximum_single_drive_power_error": 7.815970093361101e-14,
+      "coherent_defect_spectral_norm": 2.231840306401876e-12,
+      "maximum_flux_gram_entry_error_W": 1.7451533268173944e-12
+    }
+  },
+  "original_numerical_acceptance_limits": {
+    "original_equation_relative_and_backward_residual": 1e-09,
+    "nodal_force_relative_residual": 1e-09,
+    "native_port_relative_residual": 1e-08,
+    "single_drive_and_coherent_power_defect": 0.01,
+    "flux_gram_entry_W": 1e-07
+  },
+  "provenance": {
+    "prior_four_corner_result": {
+      "path": "verification/physical_device_thickness_central_1GHz_AP_pnc.json",
+      "sha256": "844ff16f796d8546e0c5a867af94ede8003317a13e64d589ea8a0ff01993380c",
+      "bytes": 17490
+    },
+    "driver": {
+      "path": "results/runs/physical_thickness_device_AP_pnc/compare_thin_central_trend_AP_pnc.py",
+      "sha256": "11dd4753930a9e06b090986757fe3274587ce36efd317fce1c7075a8e7d5e911",
+      "bytes": 12458
+    },
+    "geometry_and_port_match": {
+      "path": "results/runs/physical_thickness_device_AP_pnc/central225_geometry_AP_pnc.json",
+      "sha256": "8413d6990e589d741b515f6142521a36ec869f8d9562f5aec9b5f2d75647b0e6",
+      "bytes": 9017
+    },
+    "configuration": {
+      "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central225_configuration_AP_pnc.json",
+      "sha256": "e1f59c9f5f006a1443ad1a903203624b1338ee292bdda20c6d68a8b3ec5d9baa",
+      "bytes": 1216
+    },
+    "new_point_archive": {
+      "map": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central225_1GHz/map_AP_pnc.json",
+        "sha256": "0e1ec6f35269485115054ac152a87bbb7e161310ad912192d1cfcdcf6ebb726f",
+        "bytes": 14049
+      },
+      "checkpoint": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central225_1GHz/checkpoint_AP_pnc.json",
+        "sha256": "301696fb3c9ee07544a73ca9458cdcc7dde4db3ab7cae5a65c0bcecec4a9979c",
+        "bytes": 11195
+      },
+      "point_summary": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central225_1GHz/point-001/attempt-fnbwtchd/historical_26hole_regional_100nm-864c9c15d8f7/summary_AP_pnc.json",
+        "sha256": "ea6d7dbcee9657cac860d5dd85dde4352b8a393263849cf55ec01519f12fbc7c",
+        "bytes": 14184
+      },
+      "mesh": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central225_1GHz/shared-3blepqq6/_meshes/36bf4349454c9978e907afd06982abe10a3be736112de9f044bbe9bb11a77c0f/mesh_AP_pnc.npz",
+        "sha256": "b74961c77f742f52f1db649417a06797d737338688308616c30ac99053765c0e",
+        "bytes": 126356
+      },
+      "port_section": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central225_1GHz/shared-3blepqq6/port_section_AP_pnc.npz",
+        "sha256": "801e9f78ba6dcdf9bc4537fbaf6be9625264098c2e1ae8dd255ec9a526d35f61",
+        "bytes": 588030
+      },
+      "scattering_AP_pnc.csv": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central225_1GHz/point-001/attempt-fnbwtchd/historical_26hole_regional_100nm-864c9c15d8f7/scattering_AP_pnc.csv",
+        "sha256": "5da7525b657330a80a7101cb6d5524e79a99a2ff7fc56e5467249b75b5a5a870",
+        "bytes": 907
+      },
+      "port_modes_AP_pnc.csv": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central225_1GHz/point-001/attempt-fnbwtchd/historical_26hole_regional_100nm-864c9c15d8f7/port_modes_AP_pnc.csv",
+        "sha256": "77e97fb6c96e7ab2b80b3ab769453b940b147dd71f1db62220ccc9068d74738d",
+        "bytes": 22206
+      },
+      "independent_flux_replay": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central225_flux_AP_pnc.json",
+        "sha256": "bb7a70afcd4eb99c05e97046ec0ba9054644c00c53bfc0fb03888e70a6287c6c",
+        "bytes": 8981
+      }
+    }
+  },
+  "scope": "Five unit-power native left incident drives at the original end planes. Equal incoherent mean weights each drive by 0.2. Absolute power changes use normalized incident power. Relative increments use the mean or per-drive power on the preceding coarser mesh. Native modes are matched only on the identical 100 nm lead section with distinct signed wavenumbers.",
+  "limits": "These are observed finite central-size increments at one frequency. The earlier numerical and complex-response criteria retain their original scope. The results supply no extrapolation or error bound for continuum scattering, complex coefficients, other frequencies or the thickness contrast."
+}

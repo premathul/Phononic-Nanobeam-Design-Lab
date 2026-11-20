@@ -9,6 +9,7 @@ import argparse
 import csv
 from html import escape
 import hashlib
+from io import StringIO
 import json
 import math
 from pathlib import Path
@@ -20,6 +21,7 @@ from scipy.optimize import linear_sum_assignment
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT), str(ROOT / "src")]
 from phononic.workflow_AP_pnc import digest
+from phononic.report_style_AP_pnc import available_link, report_link, report_page, scroll_table
 from tools import compare_scattering_AP_pnc as matching
 
 AUTHOR = {"author": "Athul Prem", "file_tag": "_AP_pnc"}
@@ -471,39 +473,59 @@ def build_comparison(relation_path, candidate_directory, verification_path, work
 
 def write_outputs(output, result, rows=()):
     output = Path(output)
-    output.mkdir(parents=True, exist_ok=True)
-    json_path = output / ("mode_relation_AP_pnc.json" if result["phase"] == "saved_section_relation"
-                          else "device_frequency_comparison_AP_pnc.json")
+    relation = result["phase"] == "saved_section_relation"
+    json_name = "mode_relation_AP_pnc.json" if relation else "device_frequency_comparison_AP_pnc.json"
+    csv_name = "device_frequency_comparison_AP_pnc.csv"
     payload = {**result, "producer": link(Path(__file__))}
     payload["content_sha256"] = digest(payload)
-    serialized = json.dumps(payload, indent=2, allow_nan=False) + "\n"
-    if json_path.exists():
-        require(json_path.read_text(encoding="utf-8") == serialized, "Existing scientific comparison differs; choose a new output directory.")
-    else:
-        json_path.write_text(serialized, encoding="utf-8")
-    report = output / "report_AP_pnc.html"
-    body = ""
-    if result["phase"] == "saved_section_relation":
+    files = {json_name: json.dumps(payload, indent=2, allow_nan=False) + "\n"}
+    downloads = [report_link("Complete source-bound JSON", json_name, download=True)]
+    if rows:
+        stream = StringIO(newline="")
+        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
+        files[csv_name] = stream.getvalue()
+        downloads.append(report_link("Endpoint response comparison (CSV)", csv_name, download=True))
+    body = f'<p><strong>Status:</strong> {escape(result["status"].replace("_", " "))}</p>'
+    body += f'<p class="sources">{" · ".join(downloads)}</p>'
+    if relation:
+        title = "Signed port-mode relation between 887.5 MHz and 1 GHz"
+        scope = ("Sampled endpoint correspondence on the saved h80/z6 end sections at the original x = 0 and 16.65 µm planes. "
+                 "The relation uses signed port power and mass overlap. Continuous branch identity remains unresolved.")
         for name, group in result["matched_channels"].items():
             body += f"<h2>{escape(name.title())}: {escape(group['status'])}</h2>"
             body += f"<p>{escape(group.get('reason', 'Sampled endpoint correspondence accepted.'))}</p>"
             body += "<p>Rows: " + escape(str(group["reference_roots"])) + "; columns: " + escape(str(group["candidate_roots_unordered"])) + "</p>"
-            body += "<table>" + "".join("<tr>" + "".join(f"<td>{v:.10g}</td>" for v in row) + "</tr>"
-                                        for row in group["full_mass_overlap_matrix"]) + "</table>"
+            columns = "".join(f'<th scope="col">{root}</th>' for root in group["candidate_roots_unordered"])
+            cells = "".join(f'<tr><th scope="row">{root}</th>' + "".join(f"<td>{v:.10g}</td>" for v in row) + "</tr>"
+                            for root, row in zip(group["reference_roots"], group["full_mass_overlap_matrix"], strict=True))
+            body += scroll_table(f'<table><thead><tr><th scope="col">1 GHz root</th>{columns}</tr></thead>'
+                                 f'<tbody>{cells}</tbody></table>', f"{name.title()} mass overlap matrix")
+    else:
+        title = "Saved device responses at 887.5 MHz and 1 GHz"
+        scope = (SCOPE + " Signed section-mode matching pairs the endpoint roots. Raw amplitudes retain their native "
+                 "modal gauges. The JSON and CSV distinguish native values and gauge-aligned differences.")
     if rows:
-        table = output / "device_frequency_comparison_AP_pnc.csv"
-        with table.open("w", newline="", encoding="utf-8") as stream:
-            writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
-            writer.writeheader()
-            writer.writerows(rows)
-        body += "<table><tr>" + "".join(f"<th>{escape(str(key))}</th>" for key in rows[0]) + "</tr>"
-        body += "".join("<tr>" + "".join(f"<td>{escape(str(value))}</td>" for value in row.values()) + "</tr>" for row in rows) + "</table>"
-    report.write_text("<!doctype html><html lang='en'><meta charset='utf-8'><title>Device frequency comparison | Athul Prem</title>"
-        "<style>body{font:16px system-ui;max-width:1300px;margin:2em auto;padding:1em}table{border-collapse:collapse}"
-        "td,th{padding:.4em;border:1px solid #aaa;text-align:right}p{max-width:90ch}</style>"
-        f"<h1>Athul Prem | athul_simulation_pnc_device_frequency</h1><p>Status: {escape(result['status'])}</p>"
-        f"<p>{escape(SCOPE)}</p>{body}</html>", encoding="utf-8")
-    return json_path
+        columns = "".join(f'<th scope="col">{escape(key)}</th>' for key in rows[0])
+        cells = "".join("<tr>" + "".join(f"<td>{escape(str(row[key]))}</td>" for key in rows[0]) + "</tr>" for row in rows)
+        body += scroll_table(f"<table><thead><tr>{columns}</tr></thead><tbody>{cells}</tbody></table>",
+                             "Endpoint response comparisons")
+    navigation = available_link(output, ROOT / "figures/README.md", "Device figures and evidence")
+    compact = available_link(output, ROOT / "verification/device_frequency_8875_AP_pnc.json", "Compact archived frequency evidence (JSON)")
+    files["report_AP_pnc.html"] = report_page(title, "device_frequency", body + f'<p>{compact}</p>',
+                                                 navigation=navigation, scope=scope)
+    output.mkdir(parents=True, exist_ok=True)
+    for name, text in files.items():
+        path = output / name
+        require(not path.exists() or path.read_bytes() == text.encode("utf-8"),
+                "Existing scientific comparison differs; choose a new output directory.")
+    for name, text in files.items():
+        path = output / name
+        if not path.exists():
+            with path.open("x", encoding="utf-8", newline="") as stream:
+                stream.write(text)
+    return output / json_name
 
 
 def main(argv=None):

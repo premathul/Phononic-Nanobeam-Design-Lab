@@ -1,0 +1,351 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "status": "mesh_ready",
+  "mesh_hash": "401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a",
+  "mesh_inputs": {
+    "dimensions_m": [
+      1.665e-05,
+      1.0000000000000002e-06,
+      1.0000000000000001e-07
+    ],
+    "pattern": {
+      "source_sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+      "holes": [
+        {
+          "x_m": 1.6250000000000005e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 2.1750000000000004e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 2.725e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 3.275000000000001e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 3.825000000000001e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 4.3750000000000005e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 4.925000000000001e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 5.475000000000001e-06,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 6.015000000000001e-06,
+          "diameter_m": 2.55e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 6.545000000000001e-06,
+          "diameter_m": 2.6e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 7.065000000000001e-06,
+          "diameter_m": 2.65e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 7.575000000000001e-06,
+          "diameter_m": 2.7e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 8.075000000000001e-06,
+          "diameter_m": 2.75e-07,
+          "region": "Central cavity"
+        },
+        {
+          "x_m": 8.575e-06,
+          "diameter_m": 2.75e-07,
+          "region": "Central cavity"
+        },
+        {
+          "x_m": 9.075e-06,
+          "diameter_m": 2.7e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 9.585e-06,
+          "diameter_m": 2.65e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 1.0105e-05,
+          "diameter_m": 2.6e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 1.0635e-05,
+          "diameter_m": 2.55e-07,
+          "region": "Taper"
+        },
+        {
+          "x_m": 1.1175e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror transition"
+        },
+        {
+          "x_m": 1.1725e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.2275e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.2825e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.3375e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.3925000000000001e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.4475000000000001e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        },
+        {
+          "x_m": 1.5025000000000001e-05,
+          "diameter_m": 2.5000000000000004e-07,
+          "region": "Mirror"
+        }
+      ]
+    },
+    "settings": {
+      "kind": "layered",
+      "element_order": 2,
+      "mesh_size_nm": 400,
+      "port_size_nm": 250,
+      "circle_resolution": 32,
+      "thickness_layers": 2,
+      "lead_mesh_size_nm": 150,
+      "patterned_x_interval_nm": [
+        1000,
+        15650
+      ],
+      "central_max_edge_nm": 168.75
+    },
+    "source_sha256": {
+      "src/phononic/mesh_checkpoint_AP_pnc.py": "7fd1780e3c75f6a97f1c7f415bbd8c6e83c066fc5db3999774755910a689021d",
+      "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+      "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+      "src/phononic/layered_AP_pnc.py": "9242d11434e5004410fdb8d16b23e2405bf429ba93034fc08cee494d5aeae856",
+      "src/phononic/refinement/central_AP_pnc.py": "1fa13bd28dc0664f197b9a77f90fbbbaec3c0d68e0a4daf884f536b6c10926ca"
+    },
+    "packages": {
+      "numpy": "2.5.4",
+      "scikit-fem": "12.0.2",
+      "gmsh": "4.15.2"
+    },
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "hole_pattern_provenance": {
+    "author": "Athul Prem",
+    "file_tag": "_AP_pnc",
+    "source_csv": "data/geometry/hole_geometry_derived_AP_pnc.csv",
+    "source_sha256": "2c44d944ca9a161a5571a145d129972bb808e3e038f20765ea915f5ce0020771",
+    "x_offset_m": 8.325e-06,
+    "holes": [
+      {
+        "x_m": 1.6250000000000005e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 2.1750000000000004e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 2.725e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 3.275000000000001e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 3.825000000000001e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 4.3750000000000005e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 4.925000000000001e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 5.475000000000001e-06,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 6.015000000000001e-06,
+        "diameter_m": 2.55e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 6.545000000000001e-06,
+        "diameter_m": 2.6e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 7.065000000000001e-06,
+        "diameter_m": 2.65e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 7.575000000000001e-06,
+        "diameter_m": 2.7e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 8.075000000000001e-06,
+        "diameter_m": 2.75e-07,
+        "region": "Central cavity"
+      },
+      {
+        "x_m": 8.575e-06,
+        "diameter_m": 2.75e-07,
+        "region": "Central cavity"
+      },
+      {
+        "x_m": 9.075e-06,
+        "diameter_m": 2.7e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 9.585e-06,
+        "diameter_m": 2.65e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 1.0105e-05,
+        "diameter_m": 2.6e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 1.0635e-05,
+        "diameter_m": 2.55e-07,
+        "region": "Taper"
+      },
+      {
+        "x_m": 1.1175e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror transition"
+      },
+      {
+        "x_m": 1.1725e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.2275e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.2825e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.3375e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.3925000000000001e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.4475000000000001e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      },
+      {
+        "x_m": 1.5025000000000001e-05,
+        "diameter_m": 2.5000000000000004e-07,
+        "region": "Mirror"
+      }
+    ],
+    "clearances": {
+      "min_side_ligament_m": 3.625000000000001e-07,
+      "min_end_ligament_m": 1.5000000000000005e-06,
+      "min_interhole_gap_m": 2.249999999999986e-07
+    }
+  },
+  "hole_count": 26,
+  "mesh_resources": {
+    "peak_process_memory_mib": 104.02734375,
+    "system_available_memory_mib_at_start": 4367.3984375,
+    "process_lifetime_peak_working_set_mib": 107.1640625,
+    "elapsed_seconds": 0.37938929999654647
+  },
+  "geometry_diagnostics": {
+    "analytic_solid_volume_m3": 1.5312663277275e-18,
+    "meshed_solid_volume_m3": 1.5321239816748154e-18,
+    "analytic_removed_volume_m3": 1.3373367227250054e-19,
+    "meshed_removed_volume_m3": 1.3287601832518514e-19,
+    "relative_solid_volume_error": 0.0005600945647307897,
+    "relative_removed_volume_error": 0.006413148855793134,
+    "rim_segments_min": 32,
+    "rim_segments_max": 32,
+    "max_radial_sagitta_m": 6.621000825729834e-10
+  },
+  "ndof": 137745,
+  "mesh_vertices": 7701,
+  "mesh_tetrahedra": 24144,
+  "boundary_facet_counts": {
+    "xleft": 16,
+    "xright": 16,
+    "free": 12656
+  },
+  "end_face_dofs": {
+    "xleft": 135,
+    "xright": 135
+  },
+  "mesh_sha256": "33771e9f0ab3c7399549122407372f7dbc907908f181c664de3bf3c881210705"
+}

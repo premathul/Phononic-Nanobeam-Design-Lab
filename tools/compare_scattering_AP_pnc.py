@@ -26,6 +26,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from phononic.workflow_AP_pnc import digest, write_json
+from phononic.report_style_AP_pnc import available_link, report_link, report_page, scroll_table
 
 AUTHOR = {"author": "Athul Prem", "file_tag": "_AP_pnc"}
 CORE = ("elasticity", "geometry", "lead_modes", "material", "perforated", "port_modes", "scattering")
@@ -544,19 +545,29 @@ def write_report(path: Path, result: dict, rows: list[dict]) -> None:
     reference_balance = "passed" if result["reference"]["power_balance_passed"] else "failed"
     candidate_balance = "passed" if result["candidate"]["power_balance_passed"] else "failed"
     if result["comparison_kind"] == "repeatability":
+        title = "Saved scattering repeatability"
         outcome = "Same discretization; mesh convergence not assessed."
     else:
+        title = "Saved scattering mesh sensitivity"
         outcome = "Mesh-pair checks passed." if result["mesh_pair_passed"] else "Mesh-pair checks failed."
-    paths = "".join(f"<li>{side.title()} ({result[side]['ndof']:,} body DOFs, {result[side]['port_dofs']:,} port DOFs) "
-                    f"<code>{escape(result[side]['directory'])}</code></li>" for side in ("reference", "candidate"))
+    paths = []
+    for side in ("reference", "candidate"):
+        run = result[side]
+        summary = available_link(path.parent, Path(run["directory"]) / FILES[0], f"{side.title()} run summary (JSON)")
+        paths.append(f"<li>{summary} · {run['ndof']:,} body DOFs, {run['port_dofs']:,} port DOFs. "
+                     f"<code>{escape(run['directory'])}</code></li>")
     matches = "".join(f"<tr><td>{name.title()}</td><td>{min(group['mass_overlaps']):.8g}</td>"
                       f"<td>{max(group['relative_wavenumber_change']):.6g}</td></tr>"
                       for name, group in result["matched_channels"].items())
-    path.write_text(f"""<!doctype html><html lang="en"><meta charset="utf-8"><title>Scattering mesh comparison</title>
-<style>body{{font:16px system-ui,sans-serif;max-width:1000px;margin:3rem auto;padding:0 1rem;color:#172630}}
-table{{border-collapse:collapse;width:100%}}th,td{{text-align:left;padding:.6rem;border-bottom:1px solid #dbe1e4}}
-code{{overflow-wrap:anywhere}}small{{color:#40515a}}</style>
-<h1>Scattering mesh comparison</h1><p>Athul Prem | _AP_pnc</p>
+    outputs = " · ".join((available_link(path.parent, path.parent / OUTPUTS[0], "Per-drive channel changes (CSV)", download=True),
+                          report_link("Summary, complex blocks and provenance (JSON)", FILES[0], download=True)))
+    channel_table = scroll_table(f"""<table><thead><tr><th>Quantity</th><th>Incident channel</th><th>Reference power</th><th>Candidate power</th>
+<th>Power change</th><th>Max complex change</th><th>Same-channel phase change (rad)</th></tr></thead><tbody>{''.join(table)}</tbody></table>""",
+                                 "Per-drive scattering changes")
+    match_table = scroll_table(f"""<table><thead><tr><th>Group</th><th>Minimum mass overlap</th>
+<th>Maximum relative wavenumber change</th></tr></thead><tbody>{matches}</tbody></table>""", "Signed port-mode matching")
+    navigation = available_link(path.parent, ROOT / "tools/README.md", "Simulation and comparison tools")
+    body = f"""
 <p>{result['physical_inputs']['frequency_hz'] / 1e9:g} GHz · {result['physical_inputs']['incident_side'].title()} incidence</p>
 <p><strong>Power change {power_status}</strong> ({result['maximum_power_change']:.6g}) ·
 <strong>Complex amplitude change {complex_status}</strong> ({result['maximum_complex_change']:.6g}).
@@ -564,13 +575,13 @@ Each maximum must be below {LIMIT:g}.</p>
 <p>Input power-balance checks: reference {reference_balance}; candidate {candidate_balance}.</p>
 {'<p>Both input solutions also passed the same original-equation accuracy checks across the solver precision or version change.</p>' if result.get('linear_solver_compatibility') else ''}
 <p><strong>{outcome}</strong></p>
-<p>{escape(result['scope'])}</p><ul>{paths}</ul>
-<table><thead><tr><th>Quantity</th><th>Incident channel</th><th>Reference power</th><th>Candidate power</th>
-<th>Power change</th><th>Max complex change</th><th>Same-channel phase change (rad)</th></tr></thead><tbody>{''.join(table)}</tbody></table>
-<h2>Matched port channels</h2><table><thead><tr><th>Group</th><th>Minimum mass overlap</th>
-<th>Maximum relative wavenumber change</th></tr></thead><tbody>{matches}</tbody></table>
-<p><a href="comparison_AP_pnc.csv">Channel CSV</a> · <a href="summary_AP_pnc.json">Summary and provenance</a></p></html>
-""", encoding="utf-8")
+<p class="sources">{outputs}</p>
+{channel_table}
+<h2>Matched port channels</h2>{match_table}
+<h2>Compared runs</h2><ul>{''.join(paths)}</ul>
+"""
+    path.write_text(report_page(title, "scattering_comparison", body, navigation=navigation, scope=result["scope"]),
+                    encoding="utf-8")
 
 
 def compare_runs(reference: Path, candidate: Path, output_root: Path | None = None) -> dict:

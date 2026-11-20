@@ -1,0 +1,140 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "frequency_hz": 995000000,
+  "section_arrays": {
+    "path": "mid150_section_AP_pnc.npz",
+    "sha256": "249fa427164ab548bd6006b10fdb7002bb03589e26385074cbbf053e5dbf1d63",
+    "bytes": 12971
+  },
+  "section_metadata": {
+    "path": "mid150_section_AP_pnc.json",
+    "sha256": "c343afe5a818f577d3bae5e9b8b66cd47fc066c0e8028e1a92df6d725849cc52",
+    "bytes": 6700
+  },
+  "mode_arrays": {
+    "path": "mid150_995MHz_modes_AP_pnc.npz",
+    "sha256": "9d3e0fb4bcd4997c9cd5c329d6ba1af81c2dcc307a91b814d1f4284ab56dc2b0",
+    "bytes": 489900
+  },
+  "status": "accepted",
+  "metrics": {
+    "discrete_roots": 270,
+    "maximum_eigen_backward_residual": 2.037045627766495e-15,
+    "maximum_relative_traction_error": 5.49902047203786e-16,
+    "maximum_modal_power_difference_w": 2.419084883234309e-15,
+    "maximum_saved_backward_residual_difference": 1.3313747468919205e-17,
+    "minimum_open_relative_power": 0.2977590085008972,
+    "root_partner_checks": {
+      "conjugation": {
+        "maximum_mismatch_rad_m": 1.043081283569336e-06,
+        "maximum_scaled_mismatch": 1.193606298035597e-13
+      },
+      "reciprocity": {
+        "maximum_mismatch_rad_m": 0.0,
+        "maximum_scaled_mismatch": 0.0
+      }
+    },
+    "open_channels": [
+      {
+        "root_id": 268,
+        "direction": "positive",
+        "k_real_rad_m": 1439139.4271002212,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": 1.0000000000000002,
+        "eigen_backward_residual": 1.2656782605725073e-15
+      },
+      {
+        "root_id": 264,
+        "direction": "positive",
+        "k_real_rad_m": 2371144.9011186017,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": 1.0000000000000002,
+        "eigen_backward_residual": 1.2710859126806107e-15
+      },
+      {
+        "root_id": 262,
+        "direction": "positive",
+        "k_real_rad_m": 2786883.681251498,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": 1.0,
+        "eigen_backward_residual": 1.1419623601756905e-15
+      },
+      {
+        "root_id": 246,
+        "direction": "positive",
+        "k_real_rad_m": 4858297.580413927,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": 0.9999999999999997,
+        "eigen_backward_residual": 1.5807933363846933e-15
+      },
+      {
+        "root_id": 241,
+        "direction": "positive",
+        "k_real_rad_m": 5895251.588578074,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": 1.0000000000000002,
+        "eigen_backward_residual": 2.002805547109103e-15
+      },
+      {
+        "root_id": 269,
+        "direction": "negative",
+        "k_real_rad_m": -1439139.4271002212,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": -1.0000000000000002,
+        "eigen_backward_residual": 1.2656782605725073e-15
+      },
+      {
+        "root_id": 265,
+        "direction": "negative",
+        "k_real_rad_m": -2371144.9011186017,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": -1.0000000000000002,
+        "eigen_backward_residual": 1.2710859126806107e-15
+      },
+      {
+        "root_id": 263,
+        "direction": "negative",
+        "k_real_rad_m": -2786883.681251498,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": -1.0,
+        "eigen_backward_residual": 1.1419623601756905e-15
+      },
+      {
+        "root_id": 247,
+        "direction": "negative",
+        "k_real_rad_m": -4858297.580413927,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": -0.9999999999999997,
+        "eigen_backward_residual": 1.5807933363846933e-15
+      },
+      {
+        "root_id": 242,
+        "direction": "negative",
+        "k_real_rad_m": -5895251.588578074,
+        "k_imag_rad_m": 0.0,
+        "signed_power_w": -1.0000000000000002,
+        "eigen_backward_residual": 2.002805547109103e-15
+      }
+    ],
+    "coincident_propagating_root_groups": [],
+    "degeneracy_status": "none_detected",
+    "positive_open_channels": 5,
+    "positive_flux_gram_error_w": 1.6566217163458606e-12,
+    "positive_basis_condition": 15.231596134367928,
+    "negative_open_channels": 5,
+    "negative_flux_gram_error_w": 1.6566217163458606e-12,
+    "negative_basis_condition": 15.231596134366704
+  },
+  "cutoff_status": "solver_resolved_at_sample",
+  "minimum_abs_k_times_width": 1.4391394271002214,
+  "minimum_closed_abs_imag_k_times_width": 1.4785916275750903,
+  "source_git_commit": "53ad5944d674ab411d289d04c246cabb9d65ec09",
+  "resources": {
+    "peak_process_memory_mib": 85.015625,
+    "system_available_memory_mib_at_start": 2850.203125,
+    "process_lifetime_peak_working_set_mib": 87.64453125,
+    "elapsed_seconds": 0.09942860000592191
+  }
+}

@@ -6,7 +6,6 @@ from __future__ import annotations
 import argparse
 from collections.abc import Sequence
 import csv
-from html import escape
 import math
 import os
 from pathlib import Path, PurePosixPath
@@ -20,6 +19,7 @@ sys.path.insert(0, str(ROOT))
 from tools import map_scattering_AP_pnc as native
 from tools.compare_scattering_AP_pnc import require as _require
 from phononic import workflow_AP_pnc as workflow
+from phononic.report_style_AP_pnc import available_link, report_link, report_page, scroll_table
 from phononic.resumable_scattering_AP_pnc import AUTHOR, THREADS, _exclusive, _read, _sha, _valid_residual
 
 
@@ -351,7 +351,7 @@ def _verified_channel_rows(public: Path, point: dict) -> list[dict]:
     return rows
 
 
-def _report(result: dict, point: dict) -> str:
+def _report(result: dict, point: dict, output: Path, archived_report: Path) -> str:
     point_rows = "".join(
         f"<tr><td>{sample['frequency_GHz']:.8g}</td><td>{sample['status'].title()}</td></tr>"
         for sample in result["points"]
@@ -371,31 +371,38 @@ def _report(result: dict, point: dict) -> str:
         for key, pair in result["mesh_pair_checks"].items()
     )
     left, right = result["shared"]["reference_planes_x_m"]
-    fields_link = escape(point["report"], quote=True)
-    return f"""<!doctype html><html lang="en"><meta charset="utf-8"><title>Scattering frequency map</title>
-<style>body{{font:16px system-ui,sans-serif;max-width:1050px;margin:3rem auto;padding:0 1rem}}
-table{{border-collapse:collapse;width:100%}}td,th{{text-align:left;padding:.65rem;border-bottom:1px solid #dbe1e4}}</style>
-<h1>Scattering frequency map</h1><p>Athul Prem | _AP_pnc</p>
-<p>Read-only archive import for the 26-hole h80 six-layer device. Spatial and frequency convergence remain
-unestablished. Raw complex amplitudes retain the original modal basis at x = {left * 1e6:.6g} and {right * 1e6:.6g} µm.
-The map has no adjacent accepted samples for channel tracking. Pending points have no computed response.</p>
-<table><thead><tr><th>Frequency (GHz)</th><th>Point</th></tr></thead><tbody>{point_rows}</tbody></table>
+    downloads = " · ".join((
+        available_link(output, archived_report, "Original 3D field report (verified workspace archive)",
+                       unavailable="workspace archive file unavailable"),
+        report_link("Archived 1 GHz coefficients and channel powers (CSV)", native.TABLE, download=True),
+        report_link("Read-only map and provenance (JSON)", native.MAP, download=True),
+    ))
+    point_table = scroll_table(f"<table><thead><tr><th>Frequency (GHz)</th><th>Point</th></tr></thead>"
+                               f"<tbody>{point_rows}</tbody></table>", "Archived and pending frequencies")
+    channel_table = scroll_table(f"""<table><thead><tr><th>Incident SAFE root</th><th>Transmission</th><th>Reflection</th>
+<th>Relative L2 residual</th><th>Backward residual</th><th>Flux imbalance</th></tr></thead><tbody>{channel_rows}</tbody></table>""",
+                                 "Archived anchor per-drive checks")
+    mesh_table = scroll_table(f"""<table><thead><tr><th>Control</th><th>Power change (limit 0.01)</th>
+<th>Complex change (limit 0.01)</th><th>Largest transmission phase change (rad)</th></tr></thead><tbody>{mesh_rows}</tbody></table>""",
+                              "Saved mesh comparison checks")
+    scope = (f"26-hole h80 six-layer device. Raw complex amplitudes retain the original modal basis at "
+             f"x = {left * 1e6:.6g} and {right * 1e6:.6g} µm. Spatial and frequency convergence remain unresolved.")
+    body = f"""
+<p>One accepted archived sample. Pending frequencies have no computed response. Channel tracking requires adjacent accepted samples.</p>
+<p class="sources">{downloads}</p>
+{point_table}
 <h2>Accepted 1 GHz point</h2>
-<p><a href="{fields_link}">Archived 3D field report</a> · <a href="{native.TABLE}">Complex amplitudes and channel powers</a>
- · <a href="{native.MAP}">Map and provenance</a></p>
-<table><thead><tr><th>Incident SAFE root</th><th>Transmission</th><th>Reflection</th><th>Relative L2 residual</th>
-<th>Backward residual</th><th>Flux imbalance</th></tr></thead><tbody>{channel_rows}</tbody></table>
+{channel_table}
 <p>Residuals come from the saved independent Windows original-equation replay. Per-drive flux values come from
 the original Linux export. The independent Windows nodal-force replay measured maximum flux imbalance
 {point['numerical_checks']['independent_nodal_force_flux_replay']['maximum_flux_imbalance']:.3e}.</p>
-<h2>Saved mesh comparisons</h2>
-<table><thead><tr><th>Control</th><th>Power change (limit 0.01)</th><th>Complex change (limit 0.01)</th>
-<th>Largest transmission phase change (rad)</th></tr></thead>
-<tbody>{mesh_rows}</tbody></table></html>
+<h2>Saved mesh comparisons</h2>{mesh_table}
 """
+    return report_page("Archived read-only 1 GHz anchor import", "lawrence_1ghz_anchor", body, scope=scope,
+                       navigation=available_link(output, ROOT / "tools/README.md", "Simulation and comparison tools"))
 
 
-def _publish(output: Path, result: dict, point: dict, rows: list[dict]) -> dict:
+def _publish(output: Path, result: dict, point: dict, rows: list[dict], archived_report: Path) -> dict:
     output.mkdir(parents=True, exist_ok=True)
     lock = ".frequency_map.lock"
     files = (native.MAP, native.TABLE, native.REPORT)
@@ -419,7 +426,7 @@ def _publish(output: Path, result: dict, point: dict, rows: list[dict]) -> dict:
         with TemporaryDirectory(prefix="lawrence-map-", dir=output.parent) as temporary:
             staging = Path(temporary)
             workflow._write_csv(staging / native.TABLE, rows)
-            (staging / native.REPORT).write_text(_report(result, point), encoding="utf-8")
+            (staging / native.REPORT).write_text(_report(result, point, output, archived_report), encoding="utf-8")
             result["output_sha256"] = {filename: _sha(staging / filename) for filename in (native.TABLE, native.REPORT)}
             result["map_data_sha256"] = workflow.digest(result)
             workflow.write_json(staging / native.MAP, result)
@@ -468,7 +475,7 @@ def import_lawrence_frequency_map(archive_root: Path, output: Path, *,
               "computation_enabled": False, "archive_root": archive_path, "scope": SCOPE,
               "import_environment": environment, "frequencies_GHz": frequencies, "points": points,
               "status": "complete" if len(points) == 1 else "partial"}
-    return _publish(output, result, point, rows)
+    return _publish(output, result, point, rows, report_path)
 
 
 def main(argv: list[str] | None = None) -> int:

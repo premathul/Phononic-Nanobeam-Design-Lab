@@ -1,0 +1,293 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "status": "passed_saved_discretization_flux_replay",
+  "frequency_hz": 1000000000.0,
+  "reference_planes_x_m": [
+    0.0,
+    1.665e-05
+  ],
+  "point_summary": {
+    "path": "point-002/attempt-8sqjivv7/historical_26hole_regional_100nm-5f58816ef174/summary_AP_pnc.json",
+    "sha256": "392a90dfdf69adc6e55eb9a1de0be0050b07030f135a07d8093f446d90dc5a1b",
+    "bytes": 14364
+  },
+  "map_checkpoint_sha256": "317b486ae055d476c09e164c75a62c9f608da1d2891b766809734c0211627288",
+  "map_source_git_commit": "3965855c1c6847e0e9a60becd7ac22efbeb88279",
+  "replay_source_sha256": "83c98faae6f07071394fc472a1f44d96897258e09b6266db60402da63e06a6e0",
+  "regional_replay_source_sha256": "cd1e1aa30e8261a905e83b29fa328ca21342173931f7e3b631dfcd7ab6390e05",
+  "stiffness_mass_and_port_section": {
+    "stiffness": {
+      "path": "shared-9ltja0jy/K.npz",
+      "sha256": "e6c6cd8a88f46ae405a0337045877dc1f7d6a49210b360b97588da8270c57bd8",
+      "bytes": 76816165
+    },
+    "mass": {
+      "path": "shared-9ltja0jy/M.npz",
+      "sha256": "f751971dd83d3d2084a3da065e495425a57f5babb470c71ad29f38bf0ec81d7f",
+      "bytes": 26679085
+    },
+    "port_section": {
+      "path": "shared-9ltja0jy/port_section_AP_pnc.npz",
+      "sha256": "afb2efac6cde61d78037cd86226a4d6658891bc27c5362fc2e82815b05182aeb",
+      "bytes": 588030
+    }
+  },
+  "fields_sha256": "c7a39655f29121404c52a11ffacf1762a740fa0953b1f26110ec4f67c876814e",
+  "body_dofs": 95505,
+  "port_dofs": 135,
+  "original_equations_saved": {
+    "operator_csc_sha256": "cfb29babbb2a76d642f3cdba93945a1cabfe82d2fba67d6a5fe99285c14cb132",
+    "rhs_sha256": "b7a1fc0f4e0e9ae075da2732e45bd27a8bf7c5929a45a6e477b54ba89ffec6d5",
+    "relative_residual_limit": 1e-09,
+    "backward_residual_limit": 1e-09,
+    "channels": [
+      {
+        "column": 0,
+        "relative_residual": 6.038242852426516e-13,
+        "relative_backward_residual": 3.335453516779599e-16
+      },
+      {
+        "column": 1,
+        "relative_residual": 6.154020119055842e-13,
+        "relative_backward_residual": 2.4359455681509385e-16
+      },
+      {
+        "column": 2,
+        "relative_residual": 8.963670019322493e-13,
+        "relative_backward_residual": 1.4592408932369933e-16
+      },
+      {
+        "column": 3,
+        "relative_residual": 7.835573822538409e-13,
+        "relative_backward_residual": 3.312257938951017e-16
+      },
+      {
+        "column": 4,
+        "relative_residual": 5.95069585932228e-13,
+        "relative_backward_residual": 2.1543508850817233e-16
+      }
+    ]
+  },
+  "maximum_relative_port_residual_saved": 2.6933126604689146e-15,
+  "original_rhs_matches_saved_sha256": true,
+  "physical_boundary_force_relative_residual_limit": 1e-09,
+  "physical_boundary_force_relative_residuals": [
+    6.103996775727964e-13,
+    6.178691048892148e-13,
+    8.907424967386037e-13,
+    7.85553325260312e-13,
+    5.953344464840063e-13
+  ],
+  "rhs_trace_reconstruction_relative_differences": [
+    3.672481496172121e-14,
+    5.4393370918129644e-14,
+    4.49492180726272e-14,
+    4.6832373168327774e-14,
+    3.847535864371109e-14
+  ],
+  "single_drive_power_limit": 0.01,
+  "single_drive_power_error_maxima": {
+    "modal_balance": 7.083222897108499e-14,
+    "direct_balance": 6.217248937900877e-15,
+    "net_outward": 1.0103029524088925e-14,
+    "modal_vs_direct_reflection": 2.9531932455029164e-14,
+    "modal_vs_direct_transmission": 8.637535131583718e-14
+  },
+  "single_drive_powers_in_incident_root_order": {
+    "modal_reflection": [
+      0.004196181080843448,
+      0.0421013443136757,
+      0.6943400377515527,
+      0.03201400832909017,
+      0.6899432903368635
+    ],
+    "modal_transmission": [
+      0.9958038189191556,
+      0.9578986556863205,
+      0.3056599622484289,
+      0.967985991670839,
+      0.31005670966312865
+    ],
+    "direct_reflection": [
+      0.004196181080843087,
+      0.042101344313675994,
+      0.6943400377515823,
+      0.03201400832907071,
+      0.6899432903368822
+    ],
+    "direct_transmission": [
+      0.9958038189191603,
+      0.9578986556863178,
+      0.3056599622484193,
+      0.9679859916709254,
+      0.3100567096631181
+    ],
+    "net_outward_power_ratio": [
+      3.885780586188048e-15,
+      -1.0103029524088925e-14,
+      7.882583474838611e-15,
+      4.996003610813204e-15,
+      -6.938893903907228e-15
+    ]
+  },
+  "coherent_left_incidence": {
+    "scope": "Left-incident propagating reflection and transmission in the original SAFE basis",
+    "incident_roots": [
+      268,
+      263,
+      258,
+      242,
+      240
+    ],
+    "reflected_roots": [
+      269,
+      264,
+      259,
+      243,
+      241
+    ],
+    "transmitted_roots": [
+      268,
+      263,
+      258,
+      242,
+      240
+    ],
+    "flux_gram_entry_limit_w": 1e-07,
+    "flux_gram_errors": {
+      "incident": {
+        "maximum_diagonal_error_w": 4.440892098500626e-16,
+        "maximum_off_diagonal_magnitude_w": 1.7451397245479666e-12
+      },
+      "reflected": {
+        "maximum_diagonal_error_w": 4.440892098500626e-16,
+        "maximum_off_diagonal_magnitude_w": 1.7451533268173944e-12
+      },
+      "transmitted": {
+        "maximum_diagonal_error_w": 4.440892098500626e-16,
+        "maximum_off_diagonal_magnitude_w": 1.7451397245479666e-12
+      }
+    },
+    "flux_gram_cross_direction_maximum_w": 1.555429003943222e-13,
+    "defect_matrix_real": [
+      [
+        -9.992007221626409e-16,
+        -8.749767335908092e-15,
+        -3.724322282863679e-13,
+        -2.84732615496398e-14,
+        1.201823471470853e-13
+      ],
+      [
+        -8.749767335908092e-15,
+        -3.9968028886505635e-15,
+        -7.93641790741012e-13,
+        -3.387250874752057e-15,
+        4.9933310524580277e-14
+      ],
+      [
+        -3.724322282863679e-13,
+        -7.93641790741012e-13,
+        -1.8207657603852567e-14,
+        -1.1376038999699745e-12,
+        3.266917986133322e-14
+      ],
+      [
+        -2.84732615496398e-14,
+        -3.387250874752057e-15,
+        -1.1376038999699745e-12,
+        -7.072120666862247e-14,
+        1.2210974419113452e-12
+      ],
+      [
+        1.2018218451675944e-13,
+        4.9933418944797525e-14,
+        3.2670914584809196e-14,
+        1.2210970082304762e-12,
+        -7.993605777301127e-15
+      ]
+    ],
+    "defect_matrix_imag": [
+      [
+        0.0,
+        -8.714310197922848e-14,
+        4.601841911006099e-15,
+        4.25965347521616e-14,
+        8.271183217500866e-14
+      ],
+      [
+        8.714310197922848e-14,
+        0.0,
+        1.8095261075136426e-13,
+        4.2844918693614453e-14,
+        -6.214072225535494e-14
+      ],
+      [
+        -4.601841911006099e-15,
+        -1.8095261075136426e-13,
+        0.0,
+        -3.0531133177191805e-14,
+        -2.679106936298581e-14
+      ],
+      [
+        -4.25965347521616e-14,
+        -4.2844918693614453e-14,
+        3.0531133177191805e-14,
+        0.0,
+        -1.1370539926280898e-12
+      ],
+      [
+        -8.271183217500866e-14,
+        6.214061383513769e-14,
+        2.67841304690819e-14,
+        1.1370531252663518e-12,
+        -5.586356395986465e-18
+      ]
+    ],
+    "defect_eigenvalues": [
+      -2.1788072259450067e-12,
+      -6.577030244594502e-13,
+      -1.797139213450182e-15,
+      6.878929478853705e-13,
+      2.0484959680719452e-12
+    ],
+    "coherent_coefficient_power_defect_spectral_norm": 2.1788072259450067e-12,
+    "coherent_power_limit": 0.01,
+    "direct_superposition": {
+      "incident_coefficients_real": [
+        0.12309149097933272,
+        0.24618298195866545,
+        0.3692744729379982,
+        0.4923659639173309,
+        0.6154574548966636
+      ],
+      "incident_coefficients_imag": [
+        0.12309149097933272,
+        -0.24618298195866545,
+        0.12309149097933272,
+        -0.24618298195866545,
+        0.12309149097933272
+      ],
+      "incident_coefficient_norm_squared": 0.9999999999999998,
+      "incident_power_w": 1.000000000000729,
+      "modal_reflection": 0.38940568410505455,
+      "modal_transmission": 0.6105943158955965,
+      "direct_reflection": 0.3894056841047444,
+      "direct_transmission": 0.6105943158951931,
+      "net_outward_power_ratio": 1.4432899320116515e-14,
+      "power_errors": {
+        "modal_balance": 6.511458039426543e-13,
+        "direct_balance": 6.250555628639631e-14,
+        "net_outward": 1.4432899320116515e-14,
+        "modal_vs_direct_reflection": 3.101408019290375e-13,
+        "modal_vs_direct_transmission": 4.034550471487819e-13
+      }
+    }
+  },
+  "replay_resources": {
+    "peak_process_memory_mib": 242.19921875,
+    "system_available_memory_mib_at_start": 4902.6171875,
+    "process_lifetime_peak_working_set_mib": 273.20703125,
+    "elapsed_seconds": 0.2921825999947032
+  }
+}

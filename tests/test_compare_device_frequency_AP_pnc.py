@@ -87,6 +87,9 @@ class DeviceFrequencyTests(TestCase):
             path = comparison.write_outputs(temporary, {"phase": "device_frequency_comparison", "status": "synthetic", **result}, rows)
             self.assertTrue(path.is_file())
             self.assertTrue((Path(temporary) / "device_frequency_comparison_AP_pnc.csv").is_file())
+            html = (Path(temporary) / "report_AP_pnc.html").read_text(encoding="utf-8")
+            self.assertIn('href="device_frequency_comparison_AP_pnc.json"', html)
+            self.assertIn('href="device_frequency_comparison_AP_pnc.csv"', html)
 
     def test_response_corruption_and_wrong_replay_receipts_reject(self):
         first, _, _, _, _ = mode_fixture()

@@ -1,0 +1,191 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "status": "passed_mesh_only",
+  "frequency_hz": 1000000000,
+  "physical_thickness_nm": 100,
+  "reference_planes_x_m": [
+    0.0,
+    1.665e-05
+  ],
+  "configuration": {
+    "path": "configs/thin100_central168p75_z3_AP_pnc.json",
+    "sha256": "c92bd4f57bbec4604d7bfaf3b538ef81f1e285f6dbfde420f2f7eef823c22c8f",
+    "bytes": 1112
+  },
+  "verification_source": {
+    "path": "results/runs/physical_thickness_device_AP_pnc/local_checks/check_thin100_central126p5625_z3_AP_pnc.py",
+    "sha256": "3077d91482dc259da29ecd7829bd1bf79a9cce95dce70c9d39a7a0a4873eb54e",
+    "bytes": 10170
+  },
+  "accepted_reference_checkpoint": {
+    "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux/checkpoint_AP_pnc.json",
+    "sha256": "8a8e2cf5a4dd1831c3615e158279aa6aa6f31bf1ff1b33e5dd18ec1070f13b5d",
+    "bytes": 15300
+  },
+  "accepted_reference_mesh": {
+    "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux/shared-2m5o4mx7/_meshes/401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a/mesh_AP_pnc.npz",
+    "sha256": "33771e9f0ab3c7399549122407372f7dbc907908f181c664de3bf3c881210705",
+    "bytes": 217141
+  },
+  "candidate_preflight": {
+    "path": "scratch/thin100_central168p75_z3_mesh_AP_pnc/_meshes/3ed5333bc3b9eb0e3aaaa241119e734ab0b5e73121236cd920162e314c67fc85/summary_AP_pnc.json",
+    "sha256": "6ac88b83a1ddd29f64b180a083f22f7b5a7273328f3deb14d4b015519b6a8420",
+    "bytes": 9814
+  },
+  "candidate_mesh": {
+    "path": "scratch/thin100_central168p75_z3_mesh_AP_pnc/_meshes/3ed5333bc3b9eb0e3aaaa241119e734ab0b5e73121236cd920162e314c67fc85/mesh_AP_pnc.npz",
+    "sha256": "f6ecb6f2747298ecda68506fc693cdc5a2e491372d067dea37f5ede08a267403",
+    "bytes": 304664
+  },
+  "source_git_commit_local": "53ad5944d674ab411d289d04c246cabb9d65ec09",
+  "exact_native_source_match_count": 20,
+  "native_source_sha256": "4ddf9c10df9511234ceb3f14d5c0f72337b14e7311486179ac14da4bc2f81430",
+  "shared_package_versions": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "scikit-fem": "12.0.2",
+    "meshio": "5.3.5",
+    "gmsh": "4.15.2",
+    "matplotlib": "3.11.2",
+    "psutil": "7.2.2"
+  },
+  "footprint": {
+    "ordered_xy_and_triangles_sha256": "af4bf9cde5621c4630486b7a4774b8d49b4e32ebce11ac7c9a2e0df0fea5b057",
+    "max_abs_xy_difference_m": 0.0,
+    "vertices": 2567,
+    "triangles": 4024,
+    "exact_layer_local_tetrahedron_connectivity": true,
+    "one_slab_ordered_connectivity_sha256": "91efcb243415efe8c7a580e522874b11bacdda37bea68d3df86163fbbbb40381",
+    "hole_count": 26,
+    "exact_projected_hole_rim_edges": 832,
+    "rim_segments_per_hole": 32
+  },
+  "accepted_linux_z2": {
+    "thickness_layers": 2,
+    "z_planes_m": [
+      -5.0000000000000004e-08,
+      0.0,
+      5.0000000000000004e-08
+    ],
+    "dimensions_m": [
+      1.665e-05,
+      1.0000000000000002e-06,
+      1.0000000000000001e-07
+    ],
+    "mesh_hash": "401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a",
+    "mesh_vertices": 7701,
+    "mesh_tetrahedra": 24144,
+    "body_dofs": 137745,
+    "end_face_dofs": {
+      "xleft": 135,
+      "xright": 135
+    },
+    "regional_planar_triangles": {
+      "left_lead": 100,
+      "central": 3824,
+      "right_lead": 100
+    },
+    "regional_tetrahedra": {
+      "left": 600,
+      "central": 22944,
+      "right": 600
+    },
+    "lead_outer_edge_segments": {
+      "left": 7,
+      "right": 7
+    },
+    "face_triangles": {
+      "left_port": 16,
+      "left_cut": 16,
+      "right_cut": 16,
+      "right_port": 16,
+      "central_exterior": 12144,
+      "hole_walls": 3328
+    },
+    "mesh_build_resources": {
+      "peak_process_memory_mib": 104.02734375,
+      "system_available_memory_mib_at_start": 4367.3984375,
+      "process_lifetime_peak_working_set_mib": 107.1640625,
+      "elapsed_seconds": 0.37938929999654647
+    },
+    "compatible_tagged_p2_end_traces": true
+  },
+  "candidate_mesh_z3": {
+    "thickness_layers": 3,
+    "z_planes_m": [
+      -5.0000000000000004e-08,
+      -1.666666666666667e-08,
+      1.6666666666666664e-08,
+      5.0000000000000004e-08
+    ],
+    "dimensions_m": [
+      1.665e-05,
+      1.0000000000000002e-06,
+      1.0000000000000001e-07
+    ],
+    "mesh_hash": "3ed5333bc3b9eb0e3aaaa241119e734ab0b5e73121236cd920162e314c67fc85",
+    "mesh_vertices": 10268,
+    "mesh_tetrahedra": 36216,
+    "body_dofs": 192843,
+    "end_face_dofs": {
+      "xleft": 189,
+      "xright": 189
+    },
+    "regional_planar_triangles": {
+      "left_lead": 100,
+      "central": 3824,
+      "right_lead": 100
+    },
+    "regional_tetrahedra": {
+      "left": 900,
+      "central": 34416,
+      "right": 900
+    },
+    "lead_outer_edge_segments": {
+      "left": 7,
+      "right": 7
+    },
+    "face_triangles": {
+      "left_port": 24,
+      "left_cut": 24,
+      "right_cut": 24,
+      "right_port": 24,
+      "central_exterior": 14392,
+      "hole_walls": 4992
+    },
+    "mesh_build_resources": {
+      "peak_process_memory_mib": 117.79296875,
+      "system_available_memory_mib_at_start": 2982.02734375,
+      "process_lifetime_peak_working_set_mib": 122.90625,
+      "elapsed_seconds": 0.4373126999998931
+    },
+    "compatible_tagged_p2_end_traces": true
+  },
+  "resource_projection": {
+    "linux_measured_anchors": [
+      {
+        "body_dofs": 137745,
+        "peak_rss_bytes": 3149139968,
+        "receipt": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/local_checks/thin100_central400_edge168p75_rim32_linux_response_1GHz_execution_AP_pnc.json",
+          "sha256": "0177b34e954541aa9f28de7e393c54c02d4ce6d9bda8211566a1bb25b6489a8b",
+          "bytes": 2104
+        }
+      },
+      {
+        "body_dofs": 280035,
+        "peak_rss_bytes": 9377280000,
+        "receipt": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/local_checks/thin100_central400_edge126p5625_z3_rim32_linux_1GHz_time_AP_pnc.txt",
+          "sha256": "d4174e122c6dd5ca96bd2c8f1650cbb1df25625402a742c9846d0ad4cff4100a",
+          "bytes": 1192
+        }
+      }
+    ],
+    "fitted_rss_dof_exponent": 1.5379059737469987,
+    "fitted_projection_bytes": 5283517411,
+    "scope": "Power-law interpolation between the two measured same-device Linux solves on node031. The two-layer anchor reused Windows assembly. Factor fill and peak RSS for the candidate remain unmeasured."
+  }
+}

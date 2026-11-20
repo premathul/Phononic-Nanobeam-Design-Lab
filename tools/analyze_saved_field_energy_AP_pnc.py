@@ -32,6 +32,7 @@ from skfem.quadrature import get_quadrature_tet
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from phononic.material_AP_pnc import CubicMaterial
+from phononic.report_style_AP_pnc import available_link, report_page, scroll_table
 
 AUTHOR = {"author": "Athul Prem", "file_tag": "_AP_pnc"}
 FREQUENCY, INCIDENT_ROOT, INCIDENT_COLUMN = 887_500_000, 1302, 0
@@ -45,6 +46,8 @@ REPLAY_SHAS = {"h100": "ac9d1ccd9d5346102d97d03b2dac7e47fc3cb319f99d67d8a1d33bba
 FIELD_SHAS = {"h100": "b4b4e7363c488d83515df75a5eba1ffb053f0c01940829d8d270e3c76c7b22c7",
               "h80": "4006732336aac65989207fbf3c0572ca931d6919bbbd80827725137abdf854de"}
 LIMIT = .02
+RECORD_NAME = "field_energy_AP_pnc.json"
+RECEIPT_NAME = "independent_verification_AP_pnc.json"
 MOMENT_POWERS = tuple((a, b, c) for a in range(5) for b in range(5-a) for c in range(5-a-b))
 LIMITATIONS = (
     "One finite global h100/h80 in-plane increment, including lead interiors; no spatial or frequency convergence is established.",
@@ -348,31 +351,75 @@ def load_inputs(workspace, comparison_path):
     return inputs, sources
 
 
+def independent_receipt(output, record):
+    """Identify the independent verification of these exact regional-integral bytes."""
+    path = output.parent / RECEIPT_NAME
+    source = output / RECORD_NAME
+    try:
+        if not path.is_file() or not source.is_file():
+            return None
+        proof = json.loads(path.read_bytes())
+        payload = source.read_bytes()
+        binding = proof["receipt"]
+        if (proof["status"] == "saved_field_energy_independently_verified"
+                and binding["bytes"] == len(payload)
+                and binding["sha256"] == hashlib.sha256(payload).hexdigest()
+                and proof["executed_producer_sha256"] == record["producer"]["sha256"]
+                and proof["material_source"] == record["material_source"]
+                and json.loads(payload) == record):
+            return path
+    except (OSError, ValueError, KeyError, TypeError):
+        pass
+    return None
+
+
 def write_report(output, record):
+    output = Path(output)
     rows = []
     for mesh, value in record["meshes"].items():
         for row in value["regions"]:
             rows.append({"mesh": mesh, **{k: v for k, v in row.items() if k != "x_interval_m"},
                          "x_lower_m": row["x_interval_m"][0], "x_upper_m": row["x_interval_m"][1]})
-    with (output/"regional_energy_AP_pnc.csv").open("w", encoding="utf-8", newline="") as stream:
+    csv_path = output / "regional_energy_AP_pnc.csv"
+    with csv_path.open("w", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
         writer.writeheader()
         writer.writerows(rows)
-    table = "".join("<tr>"+"".join(f"<td>{escape(str(row[k]))}</td>" for k in rows[0])+"</tr>" for row in rows)
+    cells = "".join("<tr>"+"".join(f"<td>{escape(str(row[k]))}</td>" for k in rows[0])+"</tr>" for row in rows)
+    header = "".join(f'<th scope="col">{escape(k)}</th>' for k in rows[0])
+    table = scroll_table(f"<table><thead><tr>{header}</tr></thead><tbody>{cells}</tbody></table>",
+                         "Regional energy integrals")
     bars = "".join(f'<p>{mesh}: '+"".join(f'<span title="{r["name"]}: {r["total_energy_fraction"]:.8g}" style="display:inline-block;background:{color};width:{r["total_energy_fraction"]*80:.8g}%;height:1.2rem"></span>' for r, color in zip(value["regions"], ("#547cb3", "#da9944", "#64a780")))+"</p>" for mesh, value in record["meshes"].items())
-    links = "".join(f'<li><a href="{escape(Path(value["selected_field_vtu"]["path"]).name)}">{mesh} root1302 full quadratic field (VTU)</a></li>' for mesh, value in record["meshes"].items())
-    original_links = "".join(f'<li><a href="{escape(os.path.relpath(Path(record["workspace"])/record["inputs"][mesh+"_fields"]["path"], output).replace(chr(92), "/"))}">{mesh} original all-drive full-P2 NPZ</a></li>' for mesh in record["meshes"])
+    workspace = Path(record["workspace"])
+    field_links = []
+    for mesh, value in record["meshes"].items():
+        selected = output / Path(value["selected_field_vtu"]["path"]).name
+        original = workspace / record["inputs"][mesh+"_fields"]["path"]
+        field_links.append(available_link(output, selected, f"{mesh} root 1302 full quadratic field (VTU)"))
+        field_links.append(available_link(output, original, f"{mesh} original all-drive full-P2 field (NPZ)",
+                                          unavailable="original workspace archive required"))
+    links = "".join(f"<li>{link}</li>" for link in field_links)
+    outputs = " · ".join((available_link(output, output / RECORD_NAME, "Regional integrals and provenance (JSON)", download=True),
+                          available_link(output, csv_path, "Regional integrals (CSV)", download=True)))
+    receipt = independent_receipt(output, record)
+    verification = (available_link(output, receipt, "Independent numerical verification receipt (JSON)") if receipt else
+                    '<span class="availability">Independent numerical verification receipt (unavailable for this report)</span>')
+    compact = available_link(output, ROOT / "verification/field_energy_8875_AP_pnc.json",
+                             "Compact verification record for the archived comparison (JSON)")
     result = record["comparison"]
-    html = f'''<!doctype html><html lang="en"><meta charset="utf-8"><title>Saved field energy | Athul Prem</title>
-<style>body{{font:16px system-ui;margin:2rem;max-width:1100px}}table{{border-collapse:collapse;font-size:13px}}td,th{{padding:.45rem;border:1px solid #ccc}}p{{line-height:1.5}}</style>
-<h1>Saved regional field energy at 887.5 MHz</h1><p>Athul Prem | athul_simulation_pnc_field_energy_8875</p>
-<p>One native left-incident root1302 field per mesh, original 0/16.65 µm planes. Regional fractions use total cycle-averaged kinetic plus elastic energy. The strict finite target is max |F80−F100| &lt; 0.02.</p>
-<p>Maximum fraction increment: {result["max_absolute_fraction_increment"]:.12g}; target passed: {result["finite_fraction_target_passed"]}.</p>
-<p>This is the computed finite comparison. <a href="../independent_verification_AP_pnc.json">Independent numerical verification receipt</a> records the separate integration and saved-matrix checks.</p>
+    status = "Passed" if result["finite_fraction_target_passed"] else "Failed"
+    scope = ("One native left-incident root 1302 field per mesh at the original x = 0 and 16.65 µm planes. "
+             "Regional fractions use total cycle-averaged kinetic plus elastic energy.")
+    body = f'''
+<p><strong>Finite fraction target: {status}.</strong> Maximum fraction increment {result["max_absolute_fraction_increment"]:.12g}, with target max |F80−F100| &lt; 0.02.</p>
+<p class="sources">{outputs}</p>
+<p class="sources">{verification} · {compact}</p>
 <p>Displacements retain m/√W and their original complex phase. Integrated energies have units J/W = s (numerically joules for a 1 W drive); no second division by stored unit-drive power is applied. E/P is a diagnostic, not delay or Q.</p>
 {bars}<p>Bars: left lead (blue), patterned region (orange), right lead (green).</p>
-<table><thead><tr>{''.join('<th>'+escape(k)+'</th>' for k in rows[0])}</tr></thead><tbody>{table}</tbody></table>
-<ul>{links}{original_links}</ul><ul>{''.join('<li>'+escape(s)+'</li>' for s in LIMITATIONS)}</ul></html>'''
+{table}
+<h2>Field files and scope</h2><ul>{links}</ul><ul>{''.join('<li>'+escape(s)+'</li>' for s in LIMITATIONS)}</ul>'''
+    html = report_page("Saved regional field energy at 887.5 MHz", "field_energy_8875", body, scope=scope,
+                       navigation=available_link(output, ROOT / "verification/README.md", "Verification records"))
     (output/"report_AP_pnc.html").write_text(html, encoding="utf-8")
 
 
@@ -426,13 +473,13 @@ def run(workspace, comparison_path, output, batch_elements=256):
     record["comparison"] = {"regional_fraction_increments": increments, "max_absolute_fraction_increment": maximum,
                             "finite_fraction_target_passed": maximum < LIMIT,
                             "relative_total_energy_change": (b["totals"]["total_energy_J_per_W"]-a["totals"]["total_energy_J_per_W"])/a["totals"]["total_energy_J_per_W"]}
-    write_report(output, record)
-    require(sum(p.stat().st_size for p in output.iterdir()) <= 200*2**20, "Output exceeds the admitted 200 MiB ceiling.")
     guard()
     record["resources"] = {"elapsed_s": monotonic()-start, "sampled_peak_rss_bytes": peak_rss, "rss_limit_bytes": 2**30,
                            "wall_limit_s": 90, "available_memory_reserve_bytes": 512*2**20, "output_limit_bytes": 200*2**20,
                            "batch_elements": batch_elements}
-    (output/"field_energy_AP_pnc.json").write_text(json.dumps(record, indent=2, allow_nan=False)+"\n", encoding="utf-8")
+    (output / RECORD_NAME).write_text(json.dumps(record, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    write_report(output, record)
+    guard()
     require(sum(p.stat().st_size for p in output.iterdir()) <= 200*2**20, "Completed output exceeds the admitted 200 MiB ceiling.")
     return record
 

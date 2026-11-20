@@ -13,6 +13,8 @@ from string import Template
 import numpy as np
 from skfem import MeshTet
 
+from .report_style_AP_pnc import REPORT_CSS, available_link, report_header, scroll_table
+
 
 _FIELD_LABELS = {
     "mode_order": "Mode order",
@@ -70,8 +72,17 @@ def _result_table(rows: list[dict]) -> str:
     headers = "".join(f'<th scope="col">{escape(_FIELD_LABELS.get(key, key))}</th>' for key in columns)
     body = "".join("<tr>" + "".join(f"<td>{_display(row.get(key))}</td>" for key in columns) + "</tr>"
                    for row in rows)
-    return ('<div class="table-scroll" tabindex="0" aria-label="Scrollable results table">'
-            f'<table><thead><tr>{headers}</tr></thead><tbody>{body}</tbody></table></div>')
+    return scroll_table(f'<table><thead><tr>{headers}</tr></thead><tbody>{body}</tbody></table>', "Results table")
+
+
+def _timing_labels(provenance: dict) -> tuple[str, str]:
+    method = provenance.get("method")
+    if (method == "lawrence_superlu_replay" or "linux_export" in provenance
+            or {"accepted", "original_rhs_sha256"} <= provenance.keys()):
+        return "Cached export time (s)", "Export process memory (MiB)"
+    if method == "frequency_map" or "linux_assembly_and_solve" in provenance:
+        return "Body solve and field-file time (s)", "Solve and field-file process memory (MiB)"
+    return "Elapsed time (s)", "Peak process memory (MiB)"
 
 
 def write_report(
@@ -142,17 +153,26 @@ def write_report(
 
     geometry = summary.get("geometry_nm", {})
     dimension = " × ".join(_display(geometry.get(axis)) for axis in ("length_nm", "width_nm", "thickness_nm"))
+    provenance = summary.get("checkpointed_scattering", {})
+    time_label, memory_label = _timing_labels(provenance)
     statistics = {
         "Length × width × thickness (nm)": dimension,
         "Boundary conditions": _display(summary.get("boundary")),
         "Degrees of freedom": _display(summary.get("ndof")),
-        ("Cached export time (s)" if "checkpointed_scattering" in summary else "Elapsed time (s)"):
-            _display(summary.get("elapsed_seconds")),
-        ("Export process memory (MiB)" if "checkpointed_scattering" in summary else "Peak process memory (MiB)"):
-            _display(summary.get("peak_process_memory_mib")),
+        time_label: _display(summary.get("elapsed_seconds")),
+        memory_label: _display(summary.get("peak_process_memory_mib")),
         "Material model": _display(summary.get("material_status")),
         "Run status": _display(summary.get("status")),
     }
+    if provenance.get("method") == "frequency_map" and "port_modes_resources" in provenance:
+        statistics["SAFE section-mode time (s)"] = _display(provenance["port_modes_resources"].get("elapsed_seconds"))
+    if scattering:
+        qualification = summary.get("qualification", {})
+        statistics["Finite qualification"] = _display(qualification.get("status", "Not recorded"))
+        statistics["Coherent propagating power"] = _display(qualification.get("coherent_power", {}).get("status", "Not recorded"))
+        statistics["Uniform-guide power and phase"] = _display(qualification.get("uniform_reference", {}).get("status", "Not recorded"))
+        statistics["Spatial / frequency convergence"] = "Unestablished / unestablished"
+        statistics["Experimental validation"] = "Not established"
     hole_count = summary.get("hole_count", 0)
     diagnostics = summary.get("geometry_diagnostics")
     if diagnostics:
@@ -225,14 +245,25 @@ def write_report(
     phase_control = ('<label>Phase <output id="phase-value">0°</output>'
                      '<input id="phase" type="range" min="0" max="360" value="0" step="5"></label>'
                      if complex_fields else "")
-    html = _PAGE.substitute(title=title, statistics=statistics_html, sample_note=sample_note,
+    output = Path(output)
+    root = Path(__file__).resolve().parents[2]
+    navigation = available_link(output, root / "src/README.md", "3D solver guide")
+    files = [("summary_AP_pnc.json", "Numerical summary (JSON)"),
+             ("configuration_AP_pnc.json", "Resolved configuration (JSON)"),
+             ("selected_fields_AP_pnc.npz", "Full finite-element fields (NPZ)"),
+             ("selected_vertex_shapes_AP_pnc.vtu", "Normalized vertex visualization (VTU)")]
+    files += ([("scattering_AP_pnc.csv", "Per-drive powers (CSV)"),
+               ("scattering_channels_AP_pnc.csv", "Complex channel coefficients (CSV)")]
+              if scattering else [("modes_AP_pnc.csv", "Computed mode frequencies (CSV)")])
+    sources = " · ".join(available_link(output, output / name, label, download=True) for name, label in files)
+    html = _PAGE.substitute(title=title, report_css=REPORT_CSS, statistics=statistics_html, sample_note=sample_note,
                             phase_control=phase_control, options=options, payload=payload,
-                            scope=scope, figure_id=figure_id, shape_title=shape_title,
+                            header=report_header(title, figure_id, navigation=navigation, scope=scope),
+                            sources=sources, shape_title=shape_title,
                             selection_label=selection_label, amplitude_note=amplitude_note,
                             table_title=table_title,
                             table_note=f'<p class="note">{table_note}</p>' if table_note else "",
                             table=_result_table(rows))
-    output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
     report = output / "report_AP_pnc.html"
     temporary = report.with_suffix(".html.tmp")
@@ -248,17 +279,11 @@ _PAGE = Template(r"""<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>$title | Athul Prem</title>
 <style>
-  :root { color-scheme: light; --ink: #17243a; --muted: #43536a; --line: #d5dfeb;
-    --accent: #116461; --canvas: #112037; }
-  * { box-sizing: border-box; }
-  body { margin: 0; background: #edf2f8; color: var(--ink); line-height: 1.55;
-    font-family: "Microsoft YaHei UI", "PingFang SC", "Noto Sans CJK SC", system-ui, sans-serif; }
+$report_css
+  body { background: #edf2f8; }
   main { width: min(1120px, calc(100% - 36px)); margin: 36px auto 48px; }
-  h1, h2, p, dl { margin: 0; }
-  h1 { font-size: clamp(1.65rem, 4vw, 2.6rem); margin: 5px 0 8px; }
-  h2 { font-size: 1.22rem; }
-  .author { color: var(--accent); font-size: .85rem; font-weight: 650; overflow-wrap: anywhere; }
-  .scope { color: var(--muted); }
+  dl { margin: 0; }
+  .card h2 { margin-top: 0; }
   .card { background: white; border: 1px solid var(--line); border-radius: 12px;
     margin-top: 18px; padding: 20px; }
   .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: 14px 20px; }
@@ -270,7 +295,6 @@ _PAGE = Template(r"""<!DOCTYPE html>
   select, button { padding: 6px 8px; color: var(--ink); border: 1px solid #8395ac;
     background: white; border-radius: 5px; font: inherit; }
   input[type="range"] { width: 130px; accent-color: var(--accent); min-height: 24px; }
-  :focus-visible { outline: 2px solid #167c78; outline-offset: 3px; }
   canvas { display: block; width: 100%; height: clamp(270px, 48vw, 440px); background: var(--canvas);
     border-radius: 8px; cursor: grab; touch-action: none; }
   canvas:active { cursor: grabbing; }
@@ -281,22 +305,16 @@ _PAGE = Template(r"""<!DOCTYPE html>
   .base::before { background: #7487a4; }
   .shape::before { background: #188278; }
   .note { color: var(--muted); font-size: .86rem; }
-  .table-scroll { margin-top: 10px; overflow: auto; max-height: 500px; }
-  table { width: 100%; border-collapse: collapse; font-size: .85rem; font-variant-numeric: tabular-nums; }
-  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
-  th { position: sticky; top: 0; background: #e9f1f7; white-space: nowrap; }
-  tbody tr:nth-child(even) { background: #f7fafc; }
+  .table-scroll { overflow: auto; max-height: 500px; }
+  th { position: sticky; top: 0; }
   @media (max-width: 530px) { main { width: calc(100% - 20px); margin-top: 20px; }
-    .card { padding: 13px; } .stats { grid-template-columns: 1fr 1fr; } }
+    .card { padding: 13px; } .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 </style>
 </head>
 <body>
 <main>
-  <header>
-    <p class="author">Athul Prem | athul_simulation_pnc_$figure_id</p>
-    <h1>$title</h1>
-    <p class="scope">$scope</p>
-  </header>
+  $header
+  <p class="sources">$sources</p>
   <section class="card" aria-label="Simulation parameters">
     <dl class="stats">$statistics</dl>
   </section>

@@ -9,4 +9,4 @@ authors:
     affiliation: University of South Dakota
     email: athul.prem@coyotes.usd.edu
 repository-code: "https://github.com/premathul/Phononic-Nanobeam-Design-Lab"
-abstract: "Preserved germanium phononic simulation evidence and a research specification for verified three-dimensional HPGe phonon propagation. The full archived FEM workflow is incomplete; the proposed 3D campaign is not an executed result."
+abstract: "Configurable three-dimensional finite-element simulation of germanium nanobeams, with a desktop workbench, power-normalized matched-port scattering and reproducible finite responses for the straight 26-hole device. Full-device spatial and frequency convergence remain unresolved. Historical two-dimensional evidence and the proposed research campaign are documented separately."

@@ -182,6 +182,8 @@ class WorkbenchTests(unittest.TestCase):
         self.assertEqual(self.window.result_directory, directory)
         self.assertEqual(self.window.report_path, report)
         self.assertEqual(self.window.scattering_directory, directory)
+        self.assertIn(directory.name, self.window.current_report.text())
+        self.assertEqual(self.window.report_button.toolTip(), str(report))
         self.assertTrue(self.window.compare_button.isEnabled())
         self.assertEqual(self.window.edited_config(), config)
         self.assertEqual({path: path.read_bytes() for path in saved_bytes}, saved_bytes)
@@ -208,6 +210,13 @@ class WorkbenchTests(unittest.TestCase):
         self.assertTrue(self.window.report_button.isEnabled())
         self.assertFalse(self.window.compare_button.isEnabled())
         self.assertIsNone(self.window.scattering_directory)
+        field = self.window.fields["width_nm"]
+        field.selectAll()
+        QTest.keyClicks(field, "625")
+        self.assertIsNone(self.window.result_directory)
+        self.assertIsNone(self.window.report_path)
+        self.assertFalse(self.window.report_button.isEnabled())
+        self.assertEqual(self.window.current_report.text(), "No current report")
 
     def test_compare_protocol_keeps_scattering_candidate_and_opens_comparison_report(self):
         candidate = self.output.resolve() / "saved candidate"

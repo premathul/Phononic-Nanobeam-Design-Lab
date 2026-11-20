@@ -1,0 +1,78 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "status": "passed_native_mesh_geometry_preflight",
+  "target_nm": 126.5625,
+  "parent_target_nm": 168.75,
+  "configuration": {
+    "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge126p5625_rim32_configuration_AP_pnc.json",
+    "sha256": "5c37c482a21b8b8712ad8c3593ee0fee3f85acb093fd319d7d02671862fc6db9",
+    "bytes": 1114
+  },
+  "parent_map_checkpoint": {
+    "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux/checkpoint_AP_pnc.json",
+    "sha256": "8a8e2cf5a4dd1831c3615e158279aa6aa6f31bf1ff1b33e5dd18ec1070f13b5d",
+    "bytes": 15300
+  },
+  "windows_transfer_receipt_sha256": "eac4b3a67fcca26ea1a1fb9ede66f641cb695a00667a2c4faadee1224579273a",
+  "parent_windows_shared_mesh": {
+    "path": "shared-2m5o4mx7/_meshes/401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a/mesh_AP_pnc.npz",
+    "sha256": "33771e9f0ab3c7399549122407372f7dbc907908f181c664de3bf3c881210705",
+    "bytes": 217141
+  },
+  "candidate_mesh_preflight": {
+    "path": "results/runs/physical_thickness_device_AP_pnc/_meshes/393ab3480e288a0d844eea824ddf6c38e217aab75c2883d807e700b96341b711/summary_AP_pnc.json",
+    "sha256": "f4ad25cddcab77a5e605e7d1636b09e6e418d26e1fdee8c16fe9e252fe006ab4",
+    "bytes": 9500
+  },
+  "geometry_verifier": {
+    "path": "results/runs/physical_thickness_device_AP_pnc/check_central126p5625_geometry_AP_pnc.py",
+    "sha256": "e9858592ea481cb55207600f47f9513f73211dad30e77c9cdf35f4056fa0033b",
+    "bytes": 6030
+  },
+  "refiner_sha256": "1fa13bd28dc0664f197b9a77f90fbbbaec3c0d68e0a4daf884f536b6c10926ca",
+  "fixed_geometry": {
+    "lead_tetrahedra": true,
+    "cut_facets": true,
+    "rim_facets": true,
+    "port_facets": true
+  },
+  "planar_archived_parent_bisection_match": true,
+  "reference_planes_x_m": [
+    0.0,
+    1.665e-05
+  ],
+  "end_face_dofs": {
+    "xleft": 135,
+    "xright": 135
+  },
+  "parent": {
+    "planar_triangles": 4024,
+    "central_planar_triangles": 3824,
+    "tetrahedra": 24144,
+    "body_dofs": 137745,
+    "bulk_max_edge_nm": 168.5340561587944,
+    "transition_max_edge_nm": 223.14195054001698,
+    "cut_max_edge_nm": 250.00000000000003,
+    "rim_max_edge_nm": 26.95471359063052,
+    "area_weighted_mean_triangle_max_edge_nm": 134.1750745205926,
+    "central_polygon_area_nm2": 13321239.816748153,
+    "archive_mesh_sha256": "33771e9f0ab3c7399549122407372f7dbc907908f181c664de3bf3c881210705",
+    "mesh_hash": "401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a"
+  },
+  "candidate": {
+    "planar_triangles": 6100,
+    "central_planar_triangles": 5900,
+    "tetrahedra": 36600,
+    "body_dofs": 200025,
+    "bulk_max_edge_nm": 126.50291421229969,
+    "transition_max_edge_nm": 223.14195054001698,
+    "cut_max_edge_nm": 250.00000000000003,
+    "rim_max_edge_nm": 26.95471359063052,
+    "area_weighted_mean_triangle_max_edge_nm": 105.14277725019812,
+    "central_polygon_area_nm2": 13321239.816748153,
+    "archive_mesh_sha256": "0c88c5f206f21b04d3c23fc3dce2521c12e12308804fa253e123d7d769aec064",
+    "mesh_hash": "393ab3480e288a0d844eea824ddf6c38e217aab75c2883d807e700b96341b711"
+  }
+}

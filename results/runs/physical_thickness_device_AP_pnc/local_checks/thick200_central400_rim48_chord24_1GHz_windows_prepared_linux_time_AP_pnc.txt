@@ -1,0 +1,23 @@
+	Command being timed: "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/.venv-lawrence-export/bin/python -B -u tools/run_fixed_wall_response_AP_pnc.py solve --output results/runs/physical_thickness_device_AP_pnc/thick200_central400_rim48_chord24_1GHz_windows_prepared_linux --preparation-sha256 908197f9895d05769797bf96fb2cc3af219c7bb8aa05a89abe461fcf45fcb5e0"
+	User time (seconds): 15.13
+	System time (seconds): 0.57
+	Percent of CPU this job got: 96%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:16.27
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1427600
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 61320
+	Voluntary context switches: 3559
+	Involuntary context switches: 655
+	Swaps: 0
+	File system inputs: 204384
+	File system outputs: 24176
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

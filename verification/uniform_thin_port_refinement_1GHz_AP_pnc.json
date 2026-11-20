@@ -1,0 +1,456 @@
+{
+  "schema_version": 1,
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "frequency_hz": 1000000000.0,
+  "geometry_nm": {
+    "length_nm": 16650,
+    "width_nm": 1000,
+    "thickness_nm": 100
+  },
+  "reference_planes_x_m": [
+    0.0,
+    1.665e-05
+  ],
+  "propagation_length_m": 1.665e-05,
+  "coarse_4_by_2_section": {
+    "triangles": 16,
+    "vector_dofs": 135,
+    "finite_roots": 270,
+    "source_git_commit": "44d4a40be2100e32f979ae708c29f79684d0dcee",
+    "maximum_independent_eigen_backward_residual": 2.6939131538443675e-15,
+    "directional_flux_gram_errors_W": {
+      "+x": 1.7448404757183833e-12,
+      "-x": 1.7448404757183833e-12
+    },
+    "archive": {
+      "receipt": {
+        "path": "results/runs/physical_thickness_section_AP_pnc/thin100_AP_pnc.json",
+        "sha256": "1ab22f2652565d8c8d0f26e09f8287d1c469418fd293d0744931a1f0e1b39230",
+        "bytes": 7459
+      },
+      "mode_arrays": {
+        "path": "results/runs/physical_thickness_section_AP_pnc/thin100_modes_AP_pnc.npz",
+        "sha256": "a36cc4904c324b52104afb24b74be41d12e96bd66689fe5c268b681b45f4c675",
+        "bytes": 501592
+      }
+    }
+  },
+  "refined_8_by_4_section": {
+    "triangles": 64,
+    "vector_dofs": 459,
+    "finite_roots": 918,
+    "source_git_commit": "f265ae2915c69e89a44f98c228f4ed24bf622ac6",
+    "maximum_independent_eigen_backward_residual": 3.18945743973933e-15,
+    "directional_flux_gram_errors_W": {
+      "+x": 4.801372202601756e-12,
+      "-x": 4.801372202601756e-12
+    },
+    "archive": {
+      "receipt": {
+        "path": "results/runs/physical_thickness_section_AP_pnc/thin100_refined_AP_pnc.json",
+        "sha256": "2a1975748f553224569aba5c3a64fbfda26333050d51894891e679915c30eb12",
+        "bytes": 7311
+      },
+      "mode_arrays": {
+        "path": "results/runs/physical_thickness_section_AP_pnc/thin100_refined_modes_AP_pnc.npz",
+        "sha256": "c7c46bafd3cb33117e46599a7964d661348ea49dce6e135eb782e341cfa18b16",
+        "bytes": 5890214
+      }
+    }
+  },
+  "minimum_overlap_required": 0.99,
+  "relative_wavenumber_gap_threshold": 1e-08,
+  "signed_mode_matches": {
+    "+x": {
+      "coarse_count": 5,
+      "refined_count": 5,
+      "coarse_roots": [
+        268,
+        263,
+        258,
+        242,
+        240
+      ],
+      "refined_roots": [
+        916,
+        907,
+        894,
+        884,
+        880
+      ],
+      "status": "matched",
+      "matches": [
+        {
+          "coarse_root": 268,
+          "refined_root": 916,
+          "coarse_k_rad_m": 1446421.5752191825,
+          "refined_k_rad_m": 1446424.937381204,
+          "signed_delta_k_rad_m": 3.3621620214544237,
+          "unwrapped_delta_k_L_rad": 5.597999765721616e-05,
+          "mass_overlap": 0.9999999927498845,
+          "refined_gauge_phase_rad": -5.098814546359255e-13,
+          "coarse_eigen_backward_residual": 1.332245158910912e-15,
+          "refined_eigen_backward_residual": 2.1311326318160263e-15
+        },
+        {
+          "coarse_root": 263,
+          "refined_root": 907,
+          "coarse_k_rad_m": 2796373.3740785704,
+          "refined_k_rad_m": 2796696.988933448,
+          "signed_delta_k_rad_m": 323.61485487781465,
+          "unwrapped_delta_k_L_rad": 0.005388187333715614,
+          "mass_overlap": 0.9999993760697257,
+          "refined_gauge_phase_rad": 1.7358176528688575e-13,
+          "coarse_eigen_backward_residual": 7.980321792146519e-16,
+          "refined_eigen_backward_residual": 1.396868562752385e-15
+        },
+        {
+          "coarse_root": 258,
+          "refined_root": 894,
+          "coarse_k_rad_m": 3870335.613243325,
+          "refined_k_rad_m": 3967187.9327172576,
+          "signed_delta_k_rad_m": 96852.3194739325,
+          "unwrapped_delta_k_L_rad": 1.6125911192409763,
+          "mass_overlap": 0.9998259493451809,
+          "refined_gauge_phase_rad": 1.497541321204973e-13,
+          "coarse_eigen_backward_residual": 1.7514500286384593e-15,
+          "refined_eigen_backward_residual": 2.8587945755456997e-15
+        },
+        {
+          "coarse_root": 242,
+          "refined_root": 884,
+          "coarse_k_rad_m": 6227752.07867649,
+          "refined_k_rad_m": 6256243.805692056,
+          "signed_delta_k_rad_m": 28491.72701556608,
+          "unwrapped_delta_k_L_rad": 0.47438725480917526,
+          "mass_overlap": 0.999973657432129,
+          "refined_gauge_phase_rad": -2.2588232630561875e-16,
+          "coarse_eigen_backward_residual": 2.4009295000435394e-15,
+          "refined_eigen_backward_residual": 2.8637746954676375e-15
+        },
+        {
+          "coarse_root": 240,
+          "refined_root": 880,
+          "coarse_k_rad_m": 7133416.051187846,
+          "refined_k_rad_m": 7140235.72509634,
+          "signed_delta_k_rad_m": 6819.673908494413,
+          "unwrapped_delta_k_L_rad": 0.11354757057643199,
+          "mass_overlap": 0.9999882029439238,
+          "refined_gauge_phase_rad": -3.1415926535889525,
+          "coarse_eigen_backward_residual": 2.498776845527735e-15,
+          "refined_eigen_backward_residual": 3.1733064981324875e-15
+        }
+      ]
+    },
+    "-x": {
+      "coarse_count": 5,
+      "refined_count": 5,
+      "coarse_roots": [
+        269,
+        264,
+        259,
+        243,
+        241
+      ],
+      "refined_roots": [
+        917,
+        908,
+        895,
+        885,
+        881
+      ],
+      "status": "matched",
+      "matches": [
+        {
+          "coarse_root": 269,
+          "refined_root": 917,
+          "coarse_k_rad_m": -1446421.5752191825,
+          "refined_k_rad_m": -1446424.937381204,
+          "signed_delta_k_rad_m": -3.3621620214544237,
+          "unwrapped_delta_k_L_rad": -5.597999765721616e-05,
+          "mass_overlap": 0.9999999927498845,
+          "refined_gauge_phase_rad": 5.098814546359255e-13,
+          "coarse_eigen_backward_residual": 1.332245158910912e-15,
+          "refined_eigen_backward_residual": 2.1311326318160263e-15
+        },
+        {
+          "coarse_root": 264,
+          "refined_root": 908,
+          "coarse_k_rad_m": -2796373.3740785704,
+          "refined_k_rad_m": -2796696.988933448,
+          "signed_delta_k_rad_m": -323.61485487781465,
+          "unwrapped_delta_k_L_rad": -0.005388187333715614,
+          "mass_overlap": 0.9999993760697257,
+          "refined_gauge_phase_rad": -1.7358176528688575e-13,
+          "coarse_eigen_backward_residual": 7.980321792146519e-16,
+          "refined_eigen_backward_residual": 1.396868562752385e-15
+        },
+        {
+          "coarse_root": 259,
+          "refined_root": 895,
+          "coarse_k_rad_m": -3870335.613243325,
+          "refined_k_rad_m": -3967187.9327172576,
+          "signed_delta_k_rad_m": -96852.3194739325,
+          "unwrapped_delta_k_L_rad": -1.6125911192409763,
+          "mass_overlap": 0.9998259493451809,
+          "refined_gauge_phase_rad": -1.497541321204973e-13,
+          "coarse_eigen_backward_residual": 1.7514500286384593e-15,
+          "refined_eigen_backward_residual": 2.8587945755456997e-15
+        },
+        {
+          "coarse_root": 243,
+          "refined_root": 885,
+          "coarse_k_rad_m": -6227752.07867649,
+          "refined_k_rad_m": -6256243.805692056,
+          "signed_delta_k_rad_m": -28491.72701556608,
+          "unwrapped_delta_k_L_rad": -0.47438725480917526,
+          "mass_overlap": 0.999973657432129,
+          "refined_gauge_phase_rad": 2.2588232630561875e-16,
+          "coarse_eigen_backward_residual": 2.4009295000435394e-15,
+          "refined_eigen_backward_residual": 2.8637746954676375e-15
+        },
+        {
+          "coarse_root": 241,
+          "refined_root": 881,
+          "coarse_k_rad_m": -7133416.051187846,
+          "refined_k_rad_m": -7140235.72509634,
+          "signed_delta_k_rad_m": -6819.673908494413,
+          "unwrapped_delta_k_L_rad": -0.11354757057643199,
+          "mass_overlap": 0.9999882029439238,
+          "refined_gauge_phase_rad": 3.1415926535889525,
+          "coarse_eigen_backward_residual": 2.498776845527735e-15,
+          "refined_eigen_backward_residual": 3.1733064981324875e-15
+        }
+      ]
+    }
+  },
+  "section_phase_increment_gate": {
+    "absolute_unwrapped_delta_k_L_limit_rad": 0.01,
+    "status": "compared",
+    "maximum_absolute_unwrapped_delta_k_L_rad": 1.6125911192409763,
+    "passed": false,
+    "limiting_mode": {
+      "direction": "+x",
+      "channel": 3,
+      "coarse_root": 258,
+      "refined_root": 894,
+      "coarse_k_rad_m": 3870335.613243325,
+      "refined_k_rad_m": 3967187.9327172576,
+      "signed_delta_k_rad_m": 96852.3194739325,
+      "unwrapped_delta_k_L_rad": 1.6125911192409763,
+      "mass_overlap": 0.9998259493451809,
+      "refined_gauge_phase_rad": 1.497541321204973e-13,
+      "coarse_eigen_backward_residual": 1.7514500286384593e-15,
+      "refined_eigen_backward_residual": 2.8587945755456997e-15
+    }
+  },
+  "archived_body_comparison": {
+    "incident_roots": [
+      268,
+      263,
+      258,
+      242,
+      240
+    ],
+    "per_drive_original_equation_residuals": [
+      {
+        "column": 0,
+        "relative_residual": 4.641528492587453e-13,
+        "relative_backward_residual": 2.079810689898621e-16
+      },
+      {
+        "column": 1,
+        "relative_residual": 4.5469474698755323e-13,
+        "relative_backward_residual": 1.9761861425526284e-16
+      },
+      {
+        "column": 2,
+        "relative_residual": 1.0175926577066695e-12,
+        "relative_backward_residual": 2.510855581798682e-16
+      },
+      {
+        "column": 3,
+        "relative_residual": 6.755318749449972e-13,
+        "relative_backward_residual": 2.1839415095039346e-16
+      },
+      {
+        "column": 4,
+        "relative_residual": 6.154676970822015e-13,
+        "relative_backward_residual": 3.314101567708737e-16
+      }
+    ],
+    "absolute_complex_coefficient_limit": 0.01,
+    "max_total_power_error_and_gate_from_archived_body": {
+      "maximum_total_power_error": 0.0023575815285701296,
+      "absolute_total_power_limit": 0.01,
+      "power_passed": true
+    },
+    "against_4_by_2_reference": {
+      "status": "compared",
+      "ideal_transmission_diagonal_re_im": [
+        [
+          0.49772544019857107,
+          -0.8673346448627188
+        ],
+        [
+          -0.8449775574077026,
+          0.5348017646542621
+        ],
+        [
+          -0.03842909696637686,
+          0.9992613294360734
+        ],
+        [
+          -0.9998095973775145,
+          -0.019513302944717176
+        ],
+        [
+          0.8201383299825298,
+          -0.5721652905354073
+        ]
+      ],
+      "diagonal_wrapped_body_minus_ideal_phase_rad": [
+        -6.413229316670431e-05,
+        -0.0066393819130645855,
+        -0.7125142214773941,
+        -2.37056114079166,
+        -2.65930531752859
+      ],
+      "maximum_transmission_coefficient_error_by_drive": [
+        8.270185013576913e-05,
+        0.006639368926651688,
+        0.6970307368730883,
+        1.8524022557295081,
+        1.9414378617846042
+      ],
+      "peak_coefficient_errors": {
+        "reflection": {
+          "complex_error": 0.042461335536956156,
+          "incident_drive": 3,
+          "incident_root": 258,
+          "outgoing_channel": 3,
+          "outgoing_root": 259,
+          "actual_magnitude": 0.042461335536956156,
+          "ideal_magnitude": 0.0
+        },
+        "transmission": {
+          "complex_error": 1.9414378617846042,
+          "incident_drive": 5,
+          "incident_root": 240,
+          "outgoing_channel": 5,
+          "outgoing_root": 240,
+          "actual_magnitude": 0.9992862281132402,
+          "ideal_magnitude": 1.0,
+          "signed_magnitude_error": -0.0007137718867598064,
+          "wrapped_phase_error_rad": -2.65930531752859
+        }
+      },
+      "worst_block": "transmission",
+      "maximum_complex_coefficient_error": 1.9414378617846042,
+      "complex_coefficient_passed": false
+    },
+    "against_8_by_4_reference": {
+      "status": "compared",
+      "ideal_transmission_diagonal_re_im": [
+        [
+          0.4977739928100576,
+          -0.8673067808347474
+        ],
+        [
+          -0.8478468896563505,
+          0.5302411259984011
+        ],
+        [
+          -0.9967830307207396,
+          -0.08014729981213983
+        ],
+        [
+          -0.8804898606001678,
+          -0.47406498012434656
+        ],
+        [
+          0.8796854282517088,
+          -0.47555604014838004
+        ]
+      ],
+      "diagonal_wrapped_body_minus_ideal_phase_rad": [
+        -0.00012011229082454362,
+        -0.012027569246779378,
+        -2.325105340718383,
+        -2.844948395600833,
+        -2.772852888105019
+      ],
+      "maximum_transmission_coefficient_error_by_drive": [
+        0.00012011229063357212,
+        0.012027495309865731,
+        1.8343016328457642,
+        1.977179494865814,
+        1.9654022562443605
+      ],
+      "peak_coefficient_errors": {
+        "reflection": {
+          "complex_error": 0.042461335536956156,
+          "incident_drive": 3,
+          "incident_root": 258,
+          "outgoing_channel": 3,
+          "outgoing_root": 259,
+          "actual_magnitude": 0.042461335536956156,
+          "ideal_magnitude": 0.0
+        },
+        "transmission": {
+          "complex_error": 1.977179494865814,
+          "incident_drive": 4,
+          "incident_root": 242,
+          "outgoing_channel": 4,
+          "outgoing_root": 242,
+          "actual_magnitude": 0.999129080532548,
+          "ideal_magnitude": 0.9999999999999999,
+          "signed_magnitude_error": -0.0008709194674519916,
+          "wrapped_phase_error_rad": -2.844948395600833
+        }
+      },
+      "worst_block": "transmission",
+      "maximum_complex_coefficient_error": 1.977179494865814,
+      "complex_coefficient_passed": false
+    }
+  },
+  "original_section_numerical_limits": {
+    "maximum_eigen_backward_residual": 1e-08,
+    "maximum_relative_traction_error": 1e-08,
+    "maximum_signed_power_error_W": 1e-07,
+    "maximum_directional_flux_gram_error_W": 1e-07,
+    "maximum_scaled_root_partner_mismatch": 1e-08,
+    "directional_basis_condition_strict_upper_bound": 10000000000.0,
+    "propagating_abs_flux_over_reference_power_strict_lower_bound": 1e-08
+  },
+  "provenance": {
+    "driver": {
+      "path": "results/runs/physical_thickness_device_AP_pnc/compare_uniform_section_refinement_AP_pnc.py",
+      "sha256": "337de3d3d75db0c263a44b80bd4d43b54455744e41463e807cb2dfe46d895c07",
+      "bytes": 12622
+    },
+    "uniform_body_record": {
+      "path": "verification/uniform_thin_full_length_1GHz_AP_pnc.json",
+      "sha256": "abbf1f88a7b2b5cf7f3f7eb7a825de298c0c8d9491951a0aea866938610dd011",
+      "bytes": 15823
+    },
+    "prior_100_nm_section_ledger": {
+      "path": "verification/physical_lead_thickness_1GHz_AP_pnc.json",
+      "sha256": "8967c602b1ba9f869ce0ec30565f7d1aaf8a032246a7c29aa6fa9928e1740d04",
+      "bytes": 11032
+    },
+    "refined_section_execution": {
+      "path": "results/runs/physical_thickness_section_AP_pnc/local_checks/thin100_8x4_execution_AP_pnc.json",
+      "sha256": "f264d43f3e8578a4f6028daebe1e60524c144c5bbe592e4a0b7c91bc2f231502",
+      "bytes": 2033
+    },
+    "mass_overlap_implementation": {
+      "path": "tools/compare_scattering_AP_pnc.py",
+      "sha256": "148f7efa58ad668a7a57be9db68a3241ffb67ed94067499ce6dcd4a0f8c59313",
+      "bytes": 44347
+    }
+  },
+  "scope": "Coarse quadratic displacement fields are interpolated on the richer section and matched by mass overlap within each signed power group. The signed k shifts use a positive 16.65 \u00b5m length. The same archived left-incident body matrices are compared at the original end planes in the common coarse-mode gauge. Matched refined diagonal phases are invariant under applying the same per-mode gauge at both ends.",
+  "limits": "The joint width and thickness refinement characterizes one finite SAFE reference increment. Spatial convergence, continuum phase error and the source of patterned-response sensitivity remain unresolved."
+}

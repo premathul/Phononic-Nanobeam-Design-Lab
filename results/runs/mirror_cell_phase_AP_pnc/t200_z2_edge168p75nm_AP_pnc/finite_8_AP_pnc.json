@@ -1,0 +1,425 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "schema_version": 1,
+  "inputs": {
+    "cell_receipt": {
+      "path": "summary_AP_pnc.json",
+      "sha256": "495aa5910045db8f0606e7227299f3d291078750f596a0c406eeb00cffde4978",
+      "bytes": 12754
+    },
+    "cell_trace_arrays": {
+      "path": "traces_AP_pnc.npz",
+      "sha256": "94b1182c2153430fc77e857fab089ee2de97ca3b489387abc5289b8bde9a1c35",
+      "bytes": 2061522
+    },
+    "cell_inputs_sha256": "f88ad52450b6b168f363a3f8d74c2593cd0c108538a5079f04d0c951c5cf7917",
+    "periods": 8,
+    "native_check": false,
+    "numerical_identity": {
+      "source_sha256": {
+        "src/phononic/__init__.py": "b800e254b4fa1d4b32c42117e24b0617b61850d5a49e33c3a27606b5e7da03a8",
+        "src/phononic/assembly_batched_AP_pnc.py": "8dd174aca583883e649fc8ff828183c9c5f68e354764a9755d65fbfce6dbfcdc",
+        "src/phononic/elasticity_AP_pnc.py": "ac5c5f1313e4196ba2c5c3662655e5b66e20046cb4efb568604487d34db3a248",
+        "src/phononic/geometry_AP_pnc.py": "e43125e4252c748965daa1a1ba4d9b75d3fc573c2bd0ba4731a6dcfe8385db15",
+        "src/phononic/layered_AP_pnc.py": "9242d11434e5004410fdb8d16b23e2405bf429ba93034fc08cee494d5aeae856",
+        "src/phononic/lead_modes_AP_pnc.py": "a70b53100784bde2439445bdeb94507337e5e8dececcb2e5575bd6c2f97ce56d",
+        "src/phononic/linear_lgmres_AP_pnc.py": "4e56e8a07df53ccc78927f860b69ad46dc5f495b7791acb008d9aa0ef71b5120",
+        "src/phononic/linear_solvers_AP_pnc.py": "912563f0a3b2b5eba906050e1a62a337d0c555f4e08bba6c0c74dd4d497a5a68",
+        "src/phononic/material_AP_pnc.py": "6b6db34f0ac0126f6047d78ebeb23de0f07ad738c3d400e5ba81247288fe47b2",
+        "src/phononic/mesh_checkpoint_AP_pnc.py": "7fd1780e3c75f6a97f1c7f415bbd8c6e83c066fc5db3999774755910a689021d",
+        "src/phononic/perforated_AP_pnc.py": "96e3034456cfe027814bcffb8e2baf5923a4572d5a1caef896cd6fdb12cde49d",
+        "src/phononic/port_modes_AP_pnc.py": "729f8cf72cd9eb8c78b50e9e9a4d16eea876543156b2f53ef837998e5ca0c91b",
+        "src/phononic/refinement/central_AP_pnc.py": "1fa13bd28dc0664f197b9a77f90fbbbaec3c0d68e0a4daf884f536b6c10926ca",
+        "src/phononic/report_AP_pnc.py": "552a34e90558ba29440cb7d6951e8e857a744930e6f49c3bf38cb0357cbe3a71",
+        "src/phononic/resumable_scattering_AP_pnc.py": "dba6002d982647810f3fc714fdce73a0f34e306e06e8519df2d54778002205ec",
+        "src/phononic/scattering_AP_pnc.py": "d3b2bbe9059ec615a63976a54c6e254696fc17d86838f07dd3710b199b53aeab",
+        "src/phononic/workflow_AP_pnc.py": "0992815d8ee2c88a74f8221d29c13e98bc388d8aadb5bc7d75992517980b15cd",
+        "simulate_AP_pnc.py": "b63b7f8017ff518aa12c4d20c8bf57e2d6c7b4eaca4bf5e1bb107749a9665df5",
+        "tools/finite_mirror_response_AP_pnc.py": "01ee974c8f9e10cefbbe072445f222a108dd4f72326112702b4cb34e1b3cdbf0",
+        "tools/run_mirror_cell_phase_AP_pnc.py": "9cdba7eda3325e87c9b255b0c9ef4d4025e41b6851cfa1669c077cb167950f7b"
+      },
+      "packages": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "scikit-fem": "12.0.2",
+        "meshio": "5.3.5",
+        "gmsh": "4.15.2",
+        "matplotlib": "3.11.2",
+        "psutil": "7.2.2"
+      },
+      "python": "3.12.14",
+      "platform": "Windows-11-10.0.26200-SP0"
+    },
+    "threads": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1"
+    }
+  },
+  "inputs_sha256": "b94044b58768d9a66bfa7d8ad702cbaf6f30485433c5d4ffc53ce9ad4ca02b03",
+  "cell_directory": "C:\\Users\\kunmi\\My Drive\\Phononic Nanobeam Design Lab\\results\\runs\\mirror_cell_phase_AP_pnc\\t200_z2_edge168p75nm_AP_pnc",
+  "source_git_commit": "d44972ad568eb99c45d8339089a785f125d2e322",
+  "cell_geometry": {
+    "period_nm": 550.0,
+    "width_nm": 1000,
+    "thickness_nm": 200,
+    "hole_center_nm": [
+      275.0,
+      0
+    ],
+    "hole_diameter_nm": 250.0,
+    "circle_segments": 32,
+    "reference_planes_nm": [
+      0,
+      550.0
+    ],
+    "context": "one cell from the repeated outer mirror"
+  },
+  "cell_mesh_controls": {
+    "parent_central_size_nm": 400,
+    "central_target_nm": 168.75,
+    "central_interval_nm": [
+      50,
+      500.0
+    ],
+    "end_strip_target_nm": 125.0,
+    "transverse_cells": 8,
+    "thickness_layers": 2,
+    "element_order": 2,
+    "max_body_dofs": 20000,
+    "max_face_dofs": 400,
+    "family": "fixed-strip regional Gmsh parent, nested planar bisection, affine tetrahedra"
+  },
+  "resources": {
+    "peak_process_memory_mib": 200.7578125,
+    "system_available_memory_mib_at_start": 2501.48046875,
+    "process_lifetime_peak_working_set_mib": 220.6640625,
+    "elapsed_seconds": 1.2552615000022342
+  },
+  "result": {
+    "status": "accepted",
+    "frequency_hz": 1000000000.0,
+    "period_m": 5.5e-07,
+    "cell_count": 8,
+    "reference_planes_m": [
+      0.0,
+      4.4e-06
+    ],
+    "native_port": {
+      "trace_dof_count": 255,
+      "outgoing_columns_per_end": 255,
+      "evanescent_columns_per_end": 250,
+      "operator_sha256": "3bdb4cfec950d65bb018192e4eb7a28d80c239b08a198ddd4fa484c66d9dfca8",
+      "trace_sha256": "d640429a44e62196b8058a13d879c75f5b09d1a7670f1cd7e406e3c9fde16818",
+      "outgoing_displacement_condition_numbers": [
+        21.151652330834438,
+        21.151652330835354
+      ]
+    },
+    "native_incident_root_ids": [
+      506,
+      508,
+      498,
+      488,
+      480
+    ],
+    "native_reflection_root_ids": [
+      507,
+      509,
+      499,
+      489,
+      481
+    ],
+    "native_transmission_root_ids": [
+      506,
+      508,
+      498,
+      488,
+      480
+    ],
+    "incident_powers_w": [
+      0.9999999999999998,
+      1.0000000000000007,
+      1.0000000000000002,
+      0.9999999999999994,
+      1.0000000000000004
+    ],
+    "reflection_amplitudes": {
+      "real": [
+        [
+          0.13384857157664742,
+          4.327768120936618e-05,
+          0.00019936427879812366,
+          -3.929490916560606e-05,
+          -0.0011114630057709597
+        ],
+        [
+          4.3277673156019254e-05,
+          -0.0567350509604309,
+          7.300687692023441e-06,
+          -7.30693421987631e-05,
+          -1.7674019104463712e-05
+        ],
+        [
+          0.00019936427892366086,
+          7.300687762367752e-06,
+          0.060631082491298435,
+          1.5590230177516754e-05,
+          3.761963851755717e-05
+        ],
+        [
+          -3.929490913363936e-05,
+          -7.306934220026778e-05,
+          1.559023018378465e-05,
+          -0.005131715850795776,
+          9.875466390413887e-05
+        ],
+        [
+          -0.0011114630057474963,
+          -1.7674018849959876e-05,
+          3.761963852514641e-05,
+          9.875466392259043e-05,
+          -0.02985172757081485
+        ]
+      ],
+      "imag": [
+        [
+          -0.009209516653181614,
+          8.484942529787161e-05,
+          0.00016243327827207267,
+          -5.894623188827511e-05,
+          -0.010349687134891462
+        ],
+        [
+          8.484942877932331e-05,
+          0.09491062172540403,
+          -5.506208965529909e-06,
+          -1.407420170837314e-05,
+          -1.1143958720072385e-05
+        ],
+        [
+          0.00016243327827942895,
+          -5.506208936141082e-06,
+          -0.05986391695130605,
+          -4.7793300136739106e-05,
+          -1.0075251303019688e-05
+        ],
+        [
+          -5.894623190738353e-05,
+          -1.4074201663664184e-05,
+          -4.779330010646852e-05,
+          0.020681080117110992,
+          0.0001682390962365719
+        ],
+        [
+          -0.010349687134931375,
+          -1.1143959323368222e-05,
+          -1.0075251323953449e-05,
+          0.00016823909622449697,
+          0.006810010372690198
+        ]
+      ]
+    },
+    "transmission_amplitudes": {
+      "real": [
+        [
+          0.06064814655662604,
+          -2.2340576637865532e-05,
+          -7.268932701139513e-05,
+          -0.00012274749600215922,
+          -0.0008027816214605782
+        ],
+        [
+          0.0004200421020148917,
+          0.8532323635413269,
+          -6.0814673004226446e-06,
+          -2.2866058355442563e-05,
+          -1.2274468112738376e-05
+        ],
+        [
+          0.0003569248527657272,
+          -8.545031214683932e-07,
+          0.7001758629259985,
+          6.161313415472991e-05,
+          -0.00011301327072176523
+        ],
+        [
+          -6.18981363520664e-05,
+          2.040719469663197e-05,
+          -8.896567451660907e-06,
+          0.9712730325188073,
+          0.0004681667388703355
+        ],
+        [
+          -2.977176450775063e-05,
+          -1.415640156076123e-05,
+          0.0001237159016606886,
+          0.0007620615264405657,
+          -0.2032840121687612
+        ]
+      ],
+      "imag": [
+        [
+          0.9890406268574905,
+          -0.0005082340625894869,
+          -0.0005746906448833445,
+          5.0005003525263204e-05,
+          0.0034447773252927467
+        ],
+        [
+          0.0002647634160111873,
+          0.5096737844148376,
+          2.643863293753206e-06,
+          -1.2065934956363326e-05,
+          -1.9894994382109118e-05
+        ],
+        [
+          0.0004168149522302514,
+          6.053107469470941e-06,
+          0.7088677698885251,
+          -2.9149335056062178e-05,
+          7.556661594599561e-05
+        ],
+        [
+          0.00010154403827068893,
+          1.265288921965031e-05,
+          -7.006382114314816e-05,
+          0.23701002861016157,
+          0.000775332360139575
+        ],
+        [
+          0.0033453168440336504,
+          -2.042432981914007e-05,
+          -5.406670947692127e-05,
+          0.0004962840895921541,
+          -0.9785787484071057
+        ]
+      ]
+    },
+    "reflection": [
+      0.01810868690571455,
+      0.012226907253557158,
+      0.0072598869751261345,
+      0.0004540927224756955,
+      0.001045893264225434
+    ],
+    "transmission": [
+      0.981891313094217,
+      0.9877730927465012,
+      0.9927401130248683,
+      0.9995459072774914,
+      0.9989541067357491
+    ],
+    "direct_reflection_flux": [
+      0.018108686905715998,
+      0.012226907253557752,
+      0.00725988697512706,
+      0.0004540927224756959,
+      0.0010458932642254837
+    ],
+    "direct_transmission_flux": [
+      0.9818913130942837,
+      0.9877730927464471,
+      0.9927401130248675,
+      0.9995459072775008,
+      0.9989541067357496
+    ],
+    "coherent_power_defect": {
+      "real": [
+        [
+          -3.3306690738754706e-16,
+          -1.7600026508076532e-14,
+          -3.828937230764764e-15,
+          -1.0592168662178049e-15,
+          2.5140291734337527e-14
+        ],
+        [
+          -1.7600026508076532e-14,
+          4.884981308350686e-15,
+          -9.237281752398886e-15,
+          -6.198923011565445e-16,
+          -1.6670480240634838e-15
+        ],
+        [
+          -3.828937230764764e-15,
+          -9.237281752398886e-15,
+          -5.4400928206632655e-15,
+          9.348752638103684e-15,
+          -1.249799528686809e-15
+        ],
+        [
+          -1.0592168662178049e-15,
+          -6.198923011565445e-16,
+          9.348752638103684e-15,
+          -2.3536728122053334e-14,
+          -7.91612122008335e-16
+        ],
+        [
+          2.5140291734337527e-14,
+          -1.6670480240634838e-15,
+          -1.249799528686809e-15,
+          -7.91612122008335e-16,
+          -2.498001805406601e-14
+        ]
+      ],
+      "imag": [
+        [
+          0.0,
+          -3.9509718553020076e-15,
+          -1.1313921526835264e-14,
+          6.338729262166735e-16,
+          1.6756780465864024e-16
+        ],
+        [
+          3.9509718553020076e-15,
+          0.0,
+          -2.1487668756805663e-15,
+          -4.5120549839495334e-15,
+          5.052121668294281e-15
+        ],
+        [
+          1.1313921526835264e-14,
+          2.1487668756805663e-15,
+          0.0,
+          -5.246815294382546e-15,
+          3.988800983584383e-15
+        ],
+        [
+          -6.338729262166735e-16,
+          4.5120549839495334e-15,
+          5.246815294382546e-15,
+          0.0,
+          -7.45569942179051e-16
+        ],
+        [
+          -1.6756780465864024e-16,
+          -5.052121668294281e-15,
+          -3.988800983584383e-15,
+          7.45569942179051e-16,
+          0.0
+        ]
+      ]
+    },
+    "relative_residuals": {
+      "dynamic_block_symmetry": 2.27149714691981e-15,
+      "native_safe_eigenpair": 2.4768690892627114e-15,
+      "joined_equation": 3.8635050109178864e-16,
+      "interface_force_balance": 3.5774025893085205e-14,
+      "end_displacement_reconstruction": 2.2827884732980954e-15,
+      "end_traction_reconstruction": 3.265853720900805e-13
+    },
+    "power_errors": {
+      "modal_energy_budget": 6.850076061937216e-14,
+      "coherent_energy_budget": 4.3003955054938956e-14,
+      "coherent_net_end_flux": 2.857703048711735e-14,
+      "coherent_modal_traction_flux_agreement": 3.282991239731249e-14,
+      "propagating_channel_traction_flux_agreement": 6.672440377997191e-14
+    },
+    "relative_residual_limit": 1e-08,
+    "power_error_limit": 0.01
+  },
+  "result_sha256": "6e5f72824d2dddaba49991733438076023502acc03dd7fbbc5a6138a7a684ffd",
+  "scope": "Finite repeated outer-mirror segment with uniform leads at its original end planes."
+}

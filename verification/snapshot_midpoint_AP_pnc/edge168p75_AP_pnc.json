@@ -1,0 +1,666 @@
+{
+  "author": "Athul Prem",
+  "file_tag": "_AP_pnc",
+  "central_max_edge_nm": 168.75,
+  "body_dofs": 137745,
+  "training_frequencies_hz": [
+    995000000,
+    1000000000
+  ],
+  "prediction_frequency_hz": 997500000,
+  "reference_planes_x_m": [
+    0.0,
+    1.665e-05
+  ],
+  "method": "Complex Galerkin projection of the midpoint body and outgoing traction operator onto all five left-incident volume responses at each endpoint. The midpoint ports and forcing retain their native phase. Only endpoint volume fields enter the trial basis.",
+  "rank_relative_singular_value_cutoff": 1e-12,
+  "trial_columns": 10,
+  "trial_rank": 10,
+  "applied_trial_rank": 10,
+  "projected_operator_condition_2": 16.419367948649445,
+  "relative_equation_residual_limit": 1e-09,
+  "output_comparison_limit": 0.01,
+  "drives": [
+    {
+      "reference_drive": 1,
+      "native_incident_root": 268,
+      "relative_equation_residual": 0.001129448179418594,
+      "minimum_relative_equation_residual_in_trial_span": 7.517351610303087e-05,
+      "reflection": {
+        "candidate_power_fraction": 0.005067074923110542,
+        "direct_power_fraction": 0.005156396638830367,
+        "power_error_percentage_points": -0.00893217157198244,
+        "maximum_absolute_complex_error": 0.0013296425585533997
+      },
+      "transmission": {
+        "candidate_power_fraction": 0.9949329250768657,
+        "direct_power_fraction": 0.9948436033611702,
+        "power_error_percentage_points": 0.008932171569553393,
+        "maximum_absolute_complex_error": 9.533284021295482e-05
+      },
+      "power_budget_defect": 2.375877272697835e-14,
+      "total_power_comparison_passed": true,
+      "complex_comparison_passed": true,
+      "relative_equation_check_passed": false
+    },
+    {
+      "reference_drive": 2,
+      "native_incident_root": 263,
+      "relative_equation_residual": 0.0014611426014210214,
+      "minimum_relative_equation_residual_in_trial_span": 0.00010897320678983996,
+      "reflection": {
+        "candidate_power_fraction": 0.040449618494172224,
+        "direct_power_fraction": 0.04028696614060672,
+        "power_error_percentage_points": 0.01626523535655025,
+        "maximum_absolute_complex_error": 0.0012125203784025807
+      },
+      "transmission": {
+        "candidate_power_fraction": 0.959550381505806,
+        "direct_power_fraction": 0.9597130338593887,
+        "power_error_percentage_points": -0.016265235358270402,
+        "maximum_absolute_complex_error": 0.0002476486058257523
+      },
+      "power_budget_defect": 2.1760371282653068e-14,
+      "total_power_comparison_passed": true,
+      "complex_comparison_passed": true,
+      "relative_equation_check_passed": false
+    },
+    {
+      "reference_drive": 3,
+      "native_incident_root": 258,
+      "relative_equation_residual": 0.035022476565340376,
+      "minimum_relative_equation_residual_in_trial_span": 0.0002842507485135909,
+      "reflection": {
+        "candidate_power_fraction": 0.6099257186681777,
+        "direct_power_fraction": 0.6128479104666497,
+        "power_error_percentage_points": -0.29221917984719736,
+        "maximum_absolute_complex_error": 0.0064656044940071215
+      },
+      "transmission": {
+        "candidate_power_fraction": 0.3900742813316916,
+        "direct_power_fraction": 0.3871520895331013,
+        "power_error_percentage_points": 0.2922191798590268,
+        "maximum_absolute_complex_error": 0.008327453678187985
+      },
+      "power_budget_defect": 1.3078427230084344e-13,
+      "total_power_comparison_passed": true,
+      "complex_comparison_passed": true,
+      "relative_equation_check_passed": false
+    },
+    {
+      "reference_drive": 4,
+      "native_incident_root": 242,
+      "relative_equation_residual": 0.004269347931494698,
+      "minimum_relative_equation_residual_in_trial_span": 0.00016605911671393873,
+      "reflection": {
+        "candidate_power_fraction": 0.028149477828561933,
+        "direct_power_fraction": 0.0272220969328407,
+        "power_error_percentage_points": 0.09273808957212318,
+        "maximum_absolute_complex_error": 0.003432931318278145
+      },
+      "transmission": {
+        "candidate_power_fraction": 0.9718505221713853,
+        "direct_power_fraction": 0.9727779030672485,
+        "power_error_percentage_points": -0.09273808958631946,
+        "maximum_absolute_complex_error": 0.0005707447110511001
+      },
+      "power_budget_defect": 5.2735593669694936e-14,
+      "total_power_comparison_passed": true,
+      "complex_comparison_passed": true,
+      "relative_equation_check_passed": false
+    },
+    {
+      "reference_drive": 5,
+      "native_incident_root": 240,
+      "relative_equation_residual": 0.02052247753461915,
+      "minimum_relative_equation_residual_in_trial_span": 0.00017342167737748683,
+      "reflection": {
+        "candidate_power_fraction": 0.6038614597723707,
+        "direct_power_fraction": 0.610087258468158,
+        "power_error_percentage_points": -0.6225798695787321,
+        "maximum_absolute_complex_error": 0.0058805643360777295
+      },
+      "transmission": {
+        "candidate_power_fraction": 0.3961385402276901,
+        "direct_power_fraction": 0.3899127415321086,
+        "power_error_percentage_points": 0.6225798695581486,
+        "maximum_absolute_complex_error": 0.0073235417412125196
+      },
+      "power_budget_defect": -6.084022174945858e-14,
+      "total_power_comparison_passed": true,
+      "complex_comparison_passed": true,
+      "relative_equation_check_passed": false
+    }
+  ],
+  "native_coefficients": {
+    "incident_roots_by_column": [
+      268,
+      263,
+      258,
+      242,
+      240
+    ],
+    "reflection_roots_by_row": [
+      269,
+      264,
+      259,
+      243,
+      241
+    ],
+    "transmission_roots_by_row": [
+      268,
+      263,
+      258,
+      242,
+      240
+    ],
+    "format": "Each entry is [real, imaginary].",
+    "reflection": [
+      [
+        [
+          -0.019389750964353213,
+          0.06848899770677416
+        ],
+        [
+          -0.00025780865563223497,
+          0.00023907899423514505
+        ],
+        [
+          -8.598226705155988e-05,
+          4.499585890201537e-05
+        ],
+        [
+          7.869925825593578e-06,
+          0.00023990405118935008
+        ],
+        [
+          7.309118581415188e-05,
+          0.0004449785587706728
+        ]
+      ],
+      [
+        [
+          -0.000258039334553902,
+          0.00023928029195237623
+        ],
+        [
+          -0.03888329300391994,
+          -0.1973233712647497
+        ],
+        [
+          0.0005495675963132716,
+          -0.000513719892142933
+        ],
+        [
+          0.0004998242171186365,
+          0.00026411120325811475
+        ],
+        [
+          0.00023914096108083389,
+          0.00036065712034457964
+        ]
+      ],
+      [
+        [
+          -0.00013504267147536274,
+          -2.109347483796228e-05
+        ],
+        [
+          0.0005370015828903455,
+          -0.0005772983235839809
+        ],
+        [
+          0.01281722204407096,
+          0.05421198635960807
+        ],
+        [
+          -0.00915270307656425,
+          -0.013618990583696259
+        ],
+        [
+          0.667777972813112,
+          0.3954722986633183
+        ]
+      ],
+      [
+        [
+          5.685751711294247e-06,
+          0.00023712667225612202
+        ],
+        [
+          0.0004890932247509532,
+          0.0002587012919209728
+        ],
+        [
+          -0.009158332650228607,
+          -0.013301867621732024
+        ],
+        [
+          -0.05361080347705223,
+          -0.15730400115561832
+        ],
+        [
+          -0.008453849770429085,
+          -0.01347554311952831
+        ]
+      ],
+      [
+        [
+          1.3385034284167353e-05,
+          0.00041317358662530895
+        ],
+        [
+          0.00019603655838105392,
+          0.0003245536339093618
+        ],
+        [
+          0.6713935426571395,
+          0.3947047235733138
+        ],
+        [
+          -0.008596345281345098,
+          -0.013685305051483765
+        ],
+        [
+          -0.002016849280368585,
+          -0.03575169448303573
+        ]
+      ]
+    ],
+    "transmission": [
+      [
+        [
+          0.9548765359800832,
+          0.28834523510873283
+        ],
+        [
+          0.00013531498358003736,
+          -1.0948254604832613e-05
+        ],
+        [
+          -0.0003872454298827369,
+          -0.0001807384288447066
+        ],
+        [
+          0.0004467639042725421,
+          -0.00015800381003178537
+        ],
+        [
+          0.0002379007706910494,
+          -9.279441631646045e-05
+        ]
+      ],
+      [
+        [
+          -0.00010572692389430078,
+          4.555444800175512e-05
+        ],
+        [
+          0.9596810696064775,
+          -0.19637150338560383
+        ],
+        [
+          4.7353638635787346e-05,
+          -0.00017337014792887892
+        ],
+        [
+          0.0007149312006959486,
+          2.4222718956258354e-05
+        ],
+        [
+          5.447468883260291e-05,
+          -0.0005624891690118278
+        ]
+      ],
+      [
+        [
+          -0.0004944787138663958,
+          0.0003991150756246188
+        ],
+        [
+          0.0005366043257538904,
+          0.00033121413723763584
+        ],
+        [
+          -0.6024210294295509,
+          -0.15792620844592353
+        ],
+        [
+          -0.012309505344624437,
+          0.01841162477167872
+        ],
+        [
+          0.0370011401689988,
+          -0.03529005171171569
+        ]
+      ],
+      [
+        [
+          -0.0004429981555058443,
+          -0.00014327691481621788
+        ],
+        [
+          -0.00045828467957005853,
+          0.0003620717502285941
+        ],
+        [
+          -0.0006959537705846014,
+          -0.01940631969284929
+        ],
+        [
+          0.9291006299093951,
+          -0.32813807528097
+        ],
+        [
+          0.018589771163950542,
+          -9.69542925525267e-05
+        ]
+      ],
+      [
+        [
+          0.0001681049972555774,
+          -0.0002990171732175747
+        ],
+        [
+          -0.0002656115230081533,
+          -0.0001762258610532024
+        ],
+        [
+          0.03435632717457043,
+          -0.02578440577268813
+        ],
+        [
+          -0.021271353937536337,
+          0.0020558698404125517
+        ],
+        [
+          0.4115014754181114,
+          0.47312221494195966
+        ]
+      ]
+    ]
+  },
+  "held_out_direct_solution_replay": {
+    "maximum_relative_equation_residual": 8.776250554096674e-13,
+    "maximum_absolute_native_coefficient_difference": 0.0
+  },
+  "scope": "One midpoint on one finite mesh. Output discrepancies are against its already accepted direct result. The minimum relative residual is the independent least-squares fit for each forcing in the retained span. This comparison does not establish mesh or frequency convergence.",
+  "inputs": {
+    "grid_comparison": {
+      "path": "verification/thin_mesh_frequency_AP_pnc.json",
+      "sha256": "8ece9fce1492bf9faa46f4b54484450e5fcb85c63e374a5bf7d98cb93d092ec0",
+      "bytes": 203315
+    },
+    "level": {
+      "comparison": {
+        "path": "verification/thin_mesh_frequency_AP_pnc.json",
+        "sha256": "8ece9fce1492bf9faa46f4b54484450e5fcb85c63e374a5bf7d98cb93d092ec0",
+        "bytes": 203315
+      },
+      "mesh_hash": "401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a",
+      "same_mesh_shared_inputs_by_map": {
+        "thin100_central400_edge168p75_rim32_linux": {
+          "mesh": {
+            "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux/shared-2m5o4mx7/_meshes/401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a/mesh_AP_pnc.npz",
+            "sha256": "33771e9f0ab3c7399549122407372f7dbc907908f181c664de3bf3c881210705",
+            "bytes": 217141
+          },
+          "stiffness": {
+            "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux/shared-2m5o4mx7/K.npz",
+            "sha256": "62e6bf0cd79af267f02a78b9e72da953ab6df12090c1f4b98bf31236420c7040",
+            "bytes": 112822045
+          },
+          "mass": {
+            "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux/shared-2m5o4mx7/M.npz",
+            "sha256": "739ceb0027481ef33a4bb9f3495faf01181d525a0997dc3b2d94bb6024a8b459",
+            "bytes": 39275533
+          },
+          "port_section": {
+            "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux/shared-2m5o4mx7/port_section_AP_pnc.npz",
+            "sha256": "251c91aec84b9048e62c740ae293281518776d4a9ec25def5cca1b2c4c044705",
+            "bytes": 588030
+          }
+        },
+        "thin100_central400_edge168p75_rim32_997p5MHz_linux": {
+          "mesh": {
+            "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_997p5MHz_linux/shared-2m5o4mx7/_meshes/401b6e14ebb570abd95f66880c14405cfd8cff6e13b07bc2445bbf9912f79d6a/mesh_AP_pnc.npz",
+            "sha256": "33771e9f0ab3c7399549122407372f7dbc907908f181c664de3bf3c881210705",
+            "bytes": 217141
+          },
+          "stiffness": {
+            "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_997p5MHz_linux/shared-2m5o4mx7/K.npz",
+            "sha256": "62e6bf0cd79af267f02a78b9e72da953ab6df12090c1f4b98bf31236420c7040",
+            "bytes": 112822045
+          },
+          "mass": {
+            "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_997p5MHz_linux/shared-2m5o4mx7/M.npz",
+            "sha256": "739ceb0027481ef33a4bb9f3495faf01181d525a0997dc3b2d94bb6024a8b459",
+            "bytes": 39275533
+          },
+          "port_section": {
+            "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_997p5MHz_linux/shared-2m5o4mx7/port_section_AP_pnc.npz",
+            "sha256": "251c91aec84b9048e62c740ae293281518776d4a9ec25def5cca1b2c4c044705",
+            "bytes": 588030
+          }
+        }
+      },
+      "reference_planes_x_m": [
+        0.0,
+        1.665e-05
+      ],
+      "volume_dof_layout_sha256": "25d5fe2fa0d7b68fa985287297d9a242a42896a323e00a4406776de1dbbaf0d2"
+    },
+    "endpoints": [
+      {
+        "frequency_hz": 995000000,
+        "source_git_commit": null,
+        "assembly_platform": "Windows-11-10.0.26200-SP0",
+        "solve_platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28",
+        "preparation": "windows_to_linux_native_preparation",
+        "original_equations": {
+          "operator_csc_sha256": "2c53d24e2da89ea81ab381c7000dcc40bc9837d79e8ae44db25dbf45341685ad",
+          "rhs_sha256": "a69ede0fa02bbd28119d3b266c1e7c2d579dc841ede97fe6b6fce7af772f6435"
+        },
+        "maximum_numerical_checks": {
+          "maximum_relative_residual": 8.453783597366297e-13,
+          "maximum_relative_backward_residual": 2.481214845323361e-16,
+          "maximum_port_relative_residual": 2.7487045824732227e-15,
+          "maximum_native_power_error": 1.4882539645100223e-13
+        },
+        "independent_flux_checks": {
+          "maximum_nodal_force_relative_residual": 8.475391737392342e-13,
+          "maximum_single_drive_power_error": 1.4871437414853972e-13,
+          "coherent_defect_spectral_norm": 1.317769582927902e-12,
+          "maximum_flux_gram_entry_error_W": 5.291475283805518e-13
+        },
+        "coherent_power_defect_spectral_norm": 1.317769582927902e-12,
+        "archive": {
+          "map": {
+            "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux/map_AP_pnc.json",
+            "sha256": "2079e0efb12a3630aabdbef9dd844708771924f65e15f0e404065d233c674dcd",
+            "bytes": 24931
+          },
+          "checkpoint": {
+            "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux/checkpoint_AP_pnc.json",
+            "sha256": "8a8e2cf5a4dd1831c3615e158279aa6aa6f31bf1ff1b33e5dd18ec1070f13b5d",
+            "bytes": 15300
+          },
+          "point_summary": {
+            "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux/point-001/attempt-nerltrt7/historical_26hole_regional_100nm-3c4efb65ad73/summary_AP_pnc.json",
+            "sha256": "d9243dfb418479d99f6f0d58c659fee6e0076e4be55389f8ec77c93bede25210",
+            "bytes": 13960
+          },
+          "selected_fields_AP_pnc.npz": {
+            "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux/point-001/attempt-nerltrt7/historical_26hole_regional_100nm-3c4efb65ad73/selected_fields_AP_pnc.npz",
+            "sha256": "4d2386d8961addd41b2db1bb02c7b6035999b94ef89d2859223814d9ed522c25",
+            "bytes": 13115109
+          },
+          "independent_flux_replay": {
+            "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux_995MHz_flux_AP_pnc.json",
+            "sha256": "301d6635d04941166e3dabf9f2edc755fc408c4b8787459d18906bb370e1f576",
+            "bytes": 8656
+          }
+        },
+        "native_coefficients": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux/scattering_map_AP_pnc.csv",
+          "sha256": "f317e9c893034997e4e8e0fb47766a22a7fd03844d979cd9188c443f15ed4821",
+          "bytes": 14375
+        },
+        "reference_drives_in_native_order": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "frequency_hz": 1000000000,
+        "source_git_commit": null,
+        "assembly_platform": "Windows-11-10.0.26200-SP0",
+        "solve_platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28",
+        "preparation": "windows_to_linux_native_preparation",
+        "original_equations": {
+          "operator_csc_sha256": "d7b7821659146b9512e51a5c9ab8a45431712d8eed4e725e1cbe95eb99b4ebad",
+          "rhs_sha256": "fa417142d38e41e27e189d381e67e64181894f089a478636feded24c0cefcff3"
+        },
+        "maximum_numerical_checks": {
+          "maximum_relative_residual": 8.999263332463936e-13,
+          "maximum_relative_backward_residual": 2.825730591223914e-16,
+          "maximum_port_relative_residual": 2.3686268211168403e-15,
+          "maximum_native_power_error": 8.382183835919932e-14
+        },
+        "independent_flux_checks": {
+          "maximum_nodal_force_relative_residual": 9.058939679984786e-13,
+          "maximum_single_drive_power_error": 8.382183835919932e-14,
+          "coherent_defect_spectral_norm": 1.6383327820485025e-12,
+          "maximum_flux_gram_entry_error_W": 7.435037442696115e-13
+        },
+        "coherent_power_defect_spectral_norm": 1.6383327820485025e-12,
+        "archive": {
+          "map": {
+            "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux/map_AP_pnc.json",
+            "sha256": "2079e0efb12a3630aabdbef9dd844708771924f65e15f0e404065d233c674dcd",
+            "bytes": 24931
+          },
+          "checkpoint": {
+            "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux/checkpoint_AP_pnc.json",
+            "sha256": "8a8e2cf5a4dd1831c3615e158279aa6aa6f31bf1ff1b33e5dd18ec1070f13b5d",
+            "bytes": 15300
+          },
+          "point_summary": {
+            "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux/point-002/attempt-7fagiz48/historical_26hole_regional_100nm-6edfa64541b9/summary_AP_pnc.json",
+            "sha256": "b87760198cd14cbb2711d46abe4cfc21816b83dc6a3417a2f7a5fcadb5532bcb",
+            "bytes": 13967
+          },
+          "selected_fields_AP_pnc.npz": {
+            "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux/point-002/attempt-7fagiz48/historical_26hole_regional_100nm-6edfa64541b9/selected_fields_AP_pnc.npz",
+            "sha256": "698fec50fef944690366516c1c12033bf6d8d7300b08a30e103d3de128b5bb70",
+            "bytes": 13115289
+          },
+          "independent_flux_replay": {
+            "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux_1GHz_flux_AP_pnc.json",
+            "sha256": "a9ce684840a7f50cd9b1fc69d45401fec313cae468f84b0b990578eee442b464",
+            "bytes": 8655
+          }
+        },
+        "native_coefficients": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux/scattering_map_AP_pnc.csv",
+          "sha256": "f317e9c893034997e4e8e0fb47766a22a7fd03844d979cd9188c443f15ed4821",
+          "bytes": 14375
+        },
+        "reference_drives_in_native_order": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    ],
+    "midpoint": {
+      "frequency_hz": 997500000,
+      "source_git_commit": null,
+      "assembly_platform": "Windows-11-10.0.26200-SP0",
+      "solve_platform": "Linux-4.18.0-372.26.1.el8_6.x86_64-x86_64-with-glibc2.28",
+      "preparation": "windows_to_linux_native_preparation",
+      "original_equations": {
+        "operator_csc_sha256": "9d7467b353df51dd3733f4a23418d745cf47c2d2cf1976c7ed94d0f01deae821",
+        "rhs_sha256": "be8feaadd78373febd0854c69d42ebd5bcac211f4fb396e132b3cbaf0b016840"
+      },
+      "maximum_numerical_checks": {
+        "maximum_relative_residual": 8.757598006873404e-13,
+        "maximum_relative_backward_residual": 2.373348209992434e-16,
+        "maximum_port_relative_residual": 2.6001954180793008e-15,
+        "maximum_native_power_error": 2.6650903706126883e-13
+      },
+      "independent_flux_checks": {
+        "maximum_nodal_force_relative_residual": 8.777756973035363e-13,
+        "maximum_single_drive_power_error": 2.7450264283856995e-13,
+        "coherent_defect_spectral_norm": 2.275996169707363e-12,
+        "maximum_flux_gram_entry_error_W": 1.3440999407555764e-12
+      },
+      "coherent_power_defect_spectral_norm": 2.275996169707363e-12,
+      "archive": {
+        "map": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_997p5MHz_linux/map_AP_pnc.json",
+          "sha256": "73d43d60146b99b72449902b8e7ecb9b568e7fd26c738cabde148526f73f1a3c",
+          "bytes": 17483
+        },
+        "checkpoint": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_997p5MHz_linux/checkpoint_AP_pnc.json",
+          "sha256": "dcab3c7aab0e40a99baf52a19c0f4e41b38914c2ebaee11a2ae57b298541e5b5",
+          "bytes": 14692
+        },
+        "point_summary": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_997p5MHz_linux/point-001/attempt-8vl5dp7r/historical_26hole_regional_100nm-19643b76df93/summary_AP_pnc.json",
+          "sha256": "3742ab43b82d086ce496b1a17113e2834d55444616130dc50c2b05821b5edb55",
+          "bytes": 13982
+        },
+        "selected_fields_AP_pnc.npz": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_997p5MHz_linux/point-001/attempt-8vl5dp7r/historical_26hole_regional_100nm-19643b76df93/selected_fields_AP_pnc.npz",
+          "sha256": "ac1ef5d41bec2484d3f6a6040f0c6e996b1574a332f37e430cdc67c198264177",
+          "bytes": 13115941
+        },
+        "independent_flux_replay": {
+          "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_997p5MHz_linux_997p5MHz_flux_AP_pnc.json",
+          "sha256": "43611f712c20b86d45860c34dcb74bc53756967c058e1be0f5861f4deb514785",
+          "bytes": 8653
+        }
+      },
+      "native_coefficients": {
+        "path": "results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_997p5MHz_linux/scattering_map_AP_pnc.csv",
+        "sha256": "827e197bf5fb941596722d0311461434c2130337a9259f13e15ca1eab76e6a54",
+        "bytes": 7363
+      },
+      "reference_drives_in_native_order": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  },
+  "resources": {
+    "peak_process_memory_mib": 353.15625,
+    "system_available_memory_mib_at_start": 3953.765625,
+    "process_lifetime_peak_working_set_mib": 381.96484375,
+    "elapsed_seconds": 1.201454600013676
+  },
+  "execution": {
+    "git_base_revision": "36d68cd87ec0ceae2ca8a74cfd62c2d71852fb51",
+    "source_sha256": {
+      "tools/run_snapshot_midpoint_AP_pnc.py": "bbbb1a976b66563d28e325479019357e2ecf890ee35cc5e2d71a981d615e4119",
+      "tools/snapshot_grid_inputs_AP_pnc.py": "5eb135e1742e02c8108615bda6e48ae3fd88ae5d7b97410018bbfef98ab6aafe",
+      "tools/snapshot_native_system_AP_pnc.py": "b876f5dd7ac5e7d829198593018611cce253cb4f1bfeb1de369f41e1bb797deb",
+      "tools/snapshot_response_AP_pnc.py": "dd97886b2ac1b6576f0e3eee4c44a59614234443ad6e90f4afd655db5f4cf82a",
+      "tools/read_thin_device_grid_AP_pnc.py": "75e995ad94cd9496bac87aecfce3bf8a8a12a2ff3fe96e388f116b0f20732ba4",
+      "src/phononic/workflow_AP_pnc.py": "0992815d8ee2c88a74f8221d29c13e98bc388d8aadb5bc7d75992517980b15cd"
+    },
+    "python": "3.12.14",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "platform": "Windows-11-10.0.26200-SP0"
+  }
+}

@@ -2,7 +2,25 @@
 
 Author: **Athul Prem** | Project/file tag: **`_AP_pnc`**
 
-Run `python -m unittest discover -s tests -p 'test*_AP_pnc.py' -v` from the repository root. [test_nanobeam_AP_pnc.py](test_nanobeam_AP_pnc.py) preserves four elementary geometry/analytic-chain checks. [test_archive_runtime_AP_pnc.py](test_archive_runtime_AP_pnc.py) checks path/hash/alias/overwrite/completeness behavior. These tests verify the stated utility and evidence-preservation behavior; they do not validate the proposed 3D research campaign.
+[Research documentation](../docs/README.md) · [Simulator source](../src/README.md) · [Scientific verification](../verification/README.md)
+
+From the repository root, run:
+
+```powershell
+.\.venv\Scripts\python.exe -B -m unittest discover -s tests -p "test*_AP_pnc.py" -v
+```
+
+| Target | What the tests cover |
+| --- | --- |
+| Mechanics and mesh | [Layered mesh](test_layered_AP_pnc.py) and [regional workflow](test_regional_workflow_AP_pnc.py) exercise finite-element conformity, fixed regional traces and configuration/cache reuse. |
+| Ports and scattering | [Scattering](test_scattering_AP_pnc.py), [port inventory](test_port_inventory_AP_pnc.py) and [frequency maps](test_frequency_map_AP_pnc.py) exercise signed flux, coherent response, original equations and bounded recovery. |
+| Saved data | [Portable reader](test_saved_device_dataset_AP_pnc.py) and [archived frequency map](test_imported_frequency_map_AP_pnc.py) exercise exact source identity, portable exports and archive availability. |
+| Optional desktop | With [Qt dependencies](../requirements_ui_AP_pnc.txt), [saved device access](test_workbench_device_results_AP_pnc.py) and [map workflow](test_workbench_frequency_map_AP_pnc.py) check offscreen interface and state transitions. |
+| Historical utilities | [Geometry and chain](test_nanobeam_AP_pnc.py) and [archive guards](test_archive_runtime_AP_pnc.py) cover the lightweight example and path, hash, alias, overwrite and completeness checks. |
+
+See the [current handoff and CI receipts](../docs/AI_HANDOFF_AP_pnc.md) for integrated check counts. Windows symbolic-link privileges can cause an explicit local skip. Small-problem and workflow passes establish the stated behavior and finite numerical cases. Full-device spatial and frequency convergence have separate criteria.
+
+## Detailed numerical and workflow test scope
 
 [test_scattering_AP_pnc.py](test_scattering_AP_pnc.py) checks the complete two-port, power-normalized scattering matrix of a small uniform guide: `S.conj().T @ S = I`. This tests cross-channel orthogonality as well as the separate incident-channel power budgets. An unequal complex superposition incident from both ends also checks outgoing power from the finite-domain nodal forces, independently of the outgoing modal amplitudes. The test preserves the original port reference planes and uses the same port basis for both solves. It verifies lossless coherent-drive consistency for this bounded case, not spatial convergence, reciprocity, or the full patterned device.
 

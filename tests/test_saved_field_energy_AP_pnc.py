@@ -284,7 +284,34 @@ class EvidenceTests(unittest.TestCase):
             self.assertIn("not delay or Q", html)
             self.assertIn("full quadratic field", html)
             self.assertIn("no spatial or frequency convergence", html)
+            self.assertIn("unavailable for this report", html)
+            self.assertNotIn('href="../independent_verification_AP_pnc.json"', html)
             self.assertEqual(len((out/"regional_energy_AP_pnc.csv").read_text().splitlines()), 7)
+
+    def test_independent_receipt_requires_exact_report_and_producer(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as td:
+            output = Path(td) / "diagnostic"
+            output.mkdir()
+            record = {"producer": {"sha256": "a" * 64}, "material_source": {"sha256": "b" * 64}}
+            source = output / energy.RECORD_NAME
+            source.write_text(json.dumps(record), encoding="utf-8")
+            self.assertIsNone(energy.independent_receipt(output, record))
+            proof = {"status": "saved_field_energy_independently_verified",
+                     "receipt": {"bytes": source.stat().st_size,
+                                 "sha256": hashlib.sha256(source.read_bytes()).hexdigest()},
+                     "executed_producer_sha256": record["producer"]["sha256"],
+                     "material_source": record["material_source"]}
+            receipt = output.parent / energy.RECEIPT_NAME
+            receipt.write_text(json.dumps(proof), encoding="utf-8")
+            self.assertEqual(energy.independent_receipt(output, record), receipt)
+            proof["executed_producer_sha256"] = "c" * 64
+            receipt.write_text(json.dumps(proof), encoding="utf-8")
+            self.assertIsNone(energy.independent_receipt(output, record))
+            proof["executed_producer_sha256"] = record["producer"]["sha256"]
+            receipt.write_text(json.dumps(proof), encoding="utf-8")
+            source.write_text(json.dumps({**record, "changed": True}), encoding="utf-8")
+            self.assertIsNone(energy.independent_receipt(output, record))
 
 
 if __name__ == "__main__":

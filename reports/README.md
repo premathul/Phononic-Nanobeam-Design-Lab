@@ -1,5 +1,12 @@
 # Research reporting
 
-Author: Athul Prem | _AP_pnc
+Author: **Athul Prem** | Project/file tag: **`_AP_pnc`**
 
-[REPORT_REQUIREMENTS_AP_pnc.md](REPORT_REQUIREMENTS_AP_pnc.md) defines the scientific report contract. Current results and limitations are available through the saved-device browser and existing verification records. There is no completed final research report or email delivery. Create a report or delivery receipt when it is actually needed; empty report/email templates and stale placeholder status files have been removed. Sending to a collaborator requires current user authorization.
+[Research documentation](../docs/README.md) · [Project home](../README.md)
+
+- [Publication figures](../figures/README.md) contain vector PDFs, previews, plot data and source links.
+- [Saved-device data and browser](../data/README.md#portable-saved-device-data) reproduce the recorded finite responses. Large existing HTML reports, native fields and checkpoint files are archive-only and appear when available.
+- [Verification records](../verification/README.md) retain the equation, power and refinement evidence with failed criteria.
+- [Final scientific report contract](REPORT_REQUIREMENTS_AP_pnc.md) defines the future package and its claim-evidence requirements. A completed final research report is pending.
+
+The [historical archive](../archive/README.md) preserves earlier handoff reports and the predecessor 2D model context.

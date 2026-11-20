@@ -129,6 +129,8 @@ class RegionalWorkflow(unittest.TestCase):
         self.assertEqual(result["status"], "completed_unverified")
         self.assertFalse(result["matched_reference_passed"],
                          f"Coarse P1 matched-guide failure must remain explicit; max R={result['maximum_reflection']:.17g}")
+        self.assertFalse(result["qualification"]["eligible_as_uniform_reference"])
+        self.assertEqual(result["qualification"]["status"], "finite_checks_failed")
         self.assertGreater(result["num_incident_channels"], 0)
         self.assertFalse(result["spatial_convergence_established"])
         print("Regional coarse P1 pilot (unverified): " + json.dumps({key: result[key] for key in (

@@ -1,0 +1,23 @@
+	Command being timed: "/home/usd.local/kunming.dong/Phononic_Nanobeam_Design_Lab_AP_pnc/.venv-lawrence-export/bin/python -B -u tools/run_goal_patch_response_AP_pnc.py --coarse results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge225_rim32 --fine results/runs/physical_thickness_device_AP_pnc/thin100_central400_edge168p75_rim32_linux --output results/runs/physical_thickness_device_AP_pnc/thin100_outer_taper_pair225to168p75_1GHz --region outer_taper_09_18"
+	User time (seconds): 56.98
+	System time (seconds): 6.75
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:04.28
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 2467200
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1301821
+	Voluntary context switches: 4865
+	Involuntary context switches: 1495
+	Swaps: 0
+	File system inputs: 53384
+	File system outputs: 234144
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

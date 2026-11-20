@@ -52,7 +52,8 @@ GROUPS = comparison.GROUPS
 RESIDUAL_LIMIT = 1e-9
 CONVERGENCE = {"spatial_convergence_established": False, "frequency_convergence_established": False}
 SCOPE = ("Exploratory lossless 3D scattering at the listed frequencies and original end planes. "
-         "Equations and flux checks qualify each accepted calculation. Spatial and frequency convergence remain "
+         "Accepted records passed the original equation and per-column flux checks; completion is separate "
+         "from the coherent-power and uniform-reference qualification shown below. Spatial and frequency convergence remain "
          "unestablished. Matched links compare sampled port fields and do not establish the absence of intervening cutoffs.")
 
 
@@ -284,6 +285,7 @@ def _channel_rows(point, modes, blocks, modal_powers, labels, gauge):
 
 
 def _render_report(result: dict) -> str:
+    from phononic.report_style_AP_pnc import report_page, scroll_table
     rows = []
     for point in result["points"]:
         if "accepted" in point:
@@ -296,21 +298,29 @@ def _render_report(result: dict) -> str:
             details = escape(point["attempts"][-1].get("error", ""))
         else:
             details = ""
+        qualification = point.get("qualification", {})
+        qualified = escape(qualification.get("status", "not_recorded").replace("_", " ").title())
+        if qualification:
+            qualified += ("<br>Coherent power: " + escape(qualification.get("coherent_power", {}).get("status", "not_recorded"))
+                          + "<br>Uniform reference: " + escape(qualification.get("uniform_reference", {}).get("status", "not_recorded")))
         match = point.get("track_from_previous", {}).get("status", "—")
         rows.append(f"<tr><td>{point['frequency_GHz']:.8g}</td><td>{point['status'].title()}</td>"
-                    f"<td>{match.title()}</td><td>{details}</td></tr>")
-    return f"""<!doctype html><html lang="en"><meta charset="utf-8"><title>Scattering frequency map</title>
-<style>body{{font:16px system-ui,sans-serif;max-width:1050px;margin:3rem auto;padding:0 1rem}}
-table{{border-collapse:collapse;width:100%}}td,th{{text-align:left;padding:.65rem;border-bottom:1px solid #dbe1e4}}</style>
-<h1>Scattering frequency map</h1><p>Athul Prem | _AP_pnc</p><p>{escape(SCOPE)}</p>
+                    f"<td>{qualified}</td><td>{match.title()}</td><td>{details}</td></tr>")
+    table = ("<table><thead><tr><th>GHz</th><th>Point completion</th><th>Finite qualification</th>"
+             "<th>Link from previous point</th><th>Power by incident channel</th></tr>"
+             "</thead><tbody>" + ''.join(rows) + "</tbody></table>")
+    body = f"""
+<p><a href="{TABLE}">Export all saved frequencies: complex amplitudes and channel powers (CSV)</a> ·
+<a href="{MAP}">Map, qualification and provenance (JSON)</a></p>
 <p>Mode labels and aligned amplitudes apply within each matched segment. Raw amplitudes retain each point's
 native modal basis at the original end planes.</p>
-<p>The linked reports display fresh body solve and field-file generation under “Cached export time”.
-The point provenance records SAFE section-mode time separately.</p>
-<table><thead><tr><th>GHz</th><th>Point</th><th>Link from previous point</th><th>Power by incident channel</th></tr>
-</thead><tbody>{''.join(rows)}</tbody></table>
-<p><a href="{TABLE}">Complex amplitudes and channel powers</a> · <a href="{MAP}">Map and provenance</a></p></html>
+<p>Accepted means the finite point is saved with its original equation and column-flux checks.
+A failed uniform-reference or coherent check remains visible and does not erase the computed fields.
+Older records without these dimensions are labelled Not recorded. Neither status establishes spatial,
+frequency or experimental validation. Point provenance separates body solve, field export and SAFE timings.</p>
+{scroll_table(table, 'Frequency samples and independent qualification')}
 """
+    return report_page("Scattering frequency map", "frequency_map_AP_pnc", body, scope=SCOPE)
 
 
 def _publish(state, shared, accepted, output, *, stop_requested=False):
@@ -328,6 +338,8 @@ def _publish(state, shared, accepted, output, *, stop_requested=False):
             previous = None
             continue
         directory, summary = accepted[index]
+        point["qualification"] = summary.get("qualification", {
+            "status": "not_recorded", "scope": "Historical finite-point acceptance retained unchanged"})
         modes, blocks, modal_powers = _point_modes(directory, summary)
         if previous is None:
             match = {"status": "segment_start", "reason": "No adjacent accepted point to link."}

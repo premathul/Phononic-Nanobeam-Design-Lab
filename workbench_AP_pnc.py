@@ -109,7 +109,9 @@ class Workbench(QMainWindow):
         self.config = {}
         self.result_directory = None
         self.report_path = None
+        self.report_title = None
         self.scattering_directory = None
+        # These folders seed the explicit chooser dialogs.
         self.resume_directory = None
         self.resume_source = None
         self.map_directory = None
@@ -146,24 +148,21 @@ class Workbench(QMainWindow):
         heading.setStyleSheet("font-size: 23px; font-weight: 600;")
         main.addWidget(heading)
 
-        choices = QHBoxLayout()
+        configuration = QGroupBox("Configure study")
+        choices = QHBoxLayout(configuration)
         self.preset = QComboBox()
         self.preset.setAccessibleName("Simulation preset")
         for label, _ in PRESETS:
             self.preset.addItem(label)
         self.preset.addItem("Loaded configuration")
-        self.load_button = QPushButton("Load JSON…")
-        self.saved_run_button = QPushButton("Open saved run…")
-        self.device_results_button = QPushButton("Open device results")
-        self.device_results_button.setToolTip("Browse the accepted saved device samples and export their native responses.")
-        self.save_button = QPushButton("Save JSON…")
+        self.load_button = QPushButton("Load configuration…")
+        self.load_button.setToolTip("Load editable study inputs from a JSON file.")
+        self.save_button = QPushButton("Save configuration…")
         choices.addWidget(QLabel("Preset"))
         choices.addWidget(self.preset, 1)
         choices.addWidget(self.load_button)
         choices.addWidget(self.save_button)
-        choices.addWidget(self.saved_run_button)
-        choices.addWidget(self.device_results_button)
-        main.addLayout(choices)
+        main.addWidget(configuration)
 
         columns = QHBoxLayout()
         main.addLayout(columns)
@@ -223,6 +222,7 @@ class Workbench(QMainWindow):
         resume_controls = QHBoxLayout()
         self.save_progress = QCheckBox("Save progress for resume (ILU-LGMRES)")
         self.save_progress.setToolTip("Use ILU-LGMRES and save incident-channel checkpoints for this run.")
+        self.save_progress.toggled.connect(self._inputs_changed)
         self.wall_seconds = QLineEdit("1800")
         self.wall_seconds.setAccessibleName("Wall-time limit (s)")
         self.wall_seconds.setToolTip("Elapsed time budget in seconds for a resumable run or continuation.")
@@ -254,29 +254,49 @@ class Workbench(QMainWindow):
                                         "with the samples and point limit entered here.")
         self.resume_map_button = QPushButton("Resume map…")
         self.resume_map_button.setToolTip("Use the saved configuration and frequency list; current study edits are ignored.")
-        self.saved_map_button = QPushButton("Open saved map…")
         map_layout.addWidget(QLabel("Samples (GHz)"))
         map_layout.addWidget(self.map_frequencies, 1)
         map_layout.addWidget(QLabel("New point limit"))
         map_layout.addWidget(self.map_max_points)
-        for button in (self.map_button, self.seed_map_button, self.resume_map_button, self.saved_map_button):
+        for button in (self.map_button, self.seed_map_button, self.resume_map_button):
             map_layout.addWidget(button)
         main.addWidget(self.map_controls)
 
-        actions = QHBoxLayout()
+        run_controls = QGroupBox("Run study")
+        actions = QHBoxLayout(run_controls)
         self.mesh_button = QPushButton("Check mesh")
         self.run_button = QPushButton("Run")
         self.run_button.setStyleSheet("font-weight: 600; padding-left: 15px; padding-right: 15px;")
         self.stop_button = QPushButton("Stop")
         self.stop_button.setEnabled(False)
-        self.compare_button = QPushButton("Compare saved run…")
-        self.report_button = QPushButton("Open report")
-        self.folder_button = QPushButton("Open folder")
-        for button in (self.mesh_button, self.run_button, self.stop_button, self.compare_button,
-                       self.report_button, self.folder_button):
+        for button in (self.mesh_button, self.run_button, self.stop_button):
             actions.addWidget(button)
         actions.addStretch()
-        main.addLayout(actions)
+        main.addWidget(run_controls)
+
+        inspection = QGroupBox("Inspect and compare results")
+        inspection_layout = QVBoxLayout(inspection)
+        inspection_buttons = QHBoxLayout()
+        self.saved_run_button = QPushButton("Load saved study…")
+        self.saved_run_button.setToolTip("Load editable inputs and set their saved result as the current report.")
+        self.saved_map_button = QPushButton("Open saved map…")
+        self.saved_map_button.setToolTip("Open a saved frequency map in the browser and set it as the current report. Study edits are kept.")
+        self.device_results_button = QPushButton("Browse device results")
+        self.device_results_button.setToolTip("Open the read-only device dataset in a separate browser view.")
+        self.compare_button = QPushButton("Compare with saved run…")
+        self.report_button = QPushButton("Open report")
+        self.folder_button = QPushButton("Open folder")
+        for button in (self.saved_run_button, self.saved_map_button, self.device_results_button, self.compare_button,
+                       self.report_button, self.folder_button):
+            inspection_buttons.addWidget(button)
+        inspection_buttons.addStretch()
+        inspection_layout.addLayout(inspection_buttons)
+        self.current_report = QLabel()
+        self.current_report.setTextFormat(Qt.TextFormat.PlainText)
+        self.current_report.setWordWrap(True)
+        self.current_report.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
+        inspection_layout.addWidget(self.current_report)
+        main.addWidget(inspection)
         self.status = QLabel()
         self.status.setWordWrap(True)
         self.status.setTextFormat(Qt.TextFormat.PlainText)
@@ -318,7 +338,7 @@ class Workbench(QMainWindow):
             self.load_configuration(Path(path))
 
     def _choose_saved_run(self) -> None:
-        path = QFileDialog.getExistingDirectory(self, "Open a saved simulation run", str(self.output_root))
+        path = QFileDialog.getExistingDirectory(self, "Load a saved study and its result", str(self.output_root))
         if path:
             self.open_saved_run(Path(path))
 
@@ -337,7 +357,7 @@ class Workbench(QMainWindow):
             result = mapper.read_saved_map(directory)
             self._clear_result()
             self._show_map_result({**result, "output_directory": str(directory),
-                                   "report_path": str(directory / mapper.REPORT)})
+                                   "report_path": str(directory / mapper.REPORT)}, saved=True)
         except (OSError, ValueError, KeyError, TypeError) as exc:
             self.status.setText(f"Could not open saved map. {exc}")
             return False
@@ -354,7 +374,8 @@ class Workbench(QMainWindow):
             return False
         if not self._open(Path(publication["report_path"])):
             return False
-        self.status.setText("Opened saved device samples and CSV exports. Spatial and frequency convergence remain unresolved.")
+        self.status.setText("Opened the read-only device dataset and its exports in the browser. "
+                            "Spatial and frequency convergence remain unresolved.")
         return True
 
     def load_configuration(self, path: Path, index: int = len(PRESETS)) -> bool:
@@ -390,6 +411,7 @@ class Workbench(QMainWindow):
             return False
         self._apply_configuration(config, config_path, len(PRESETS))
         self._show_result("completed_unverified", {**summary, "output_directory": str(directory)})
+        self.status.setText(f"Loaded saved study. {self.status.text()}")
         return True
 
     def _apply_configuration(self, config: dict, path: Path, index: int) -> None:
@@ -558,6 +580,7 @@ class Workbench(QMainWindow):
     def _clear_result(self) -> None:
         self.result_directory = None
         self.report_path = None
+        self.report_title = None
         self.scattering_directory = None
         self._set_result_buttons(False)
 
@@ -565,16 +588,27 @@ class Workbench(QMainWindow):
         self.compare_button.setEnabled(not busy and self.scattering_directory is not None)
         self.report_button.setEnabled(not busy and self.report_path is not None)
         self.folder_button.setEnabled(not busy and self.result_directory is not None)
+        self.current_report.setText("Current report · " + (self.report_title or self.report_path.parent.name)
+                                    if self.report_path is not None else "No current report")
+        path = str(self.report_path) if self.report_path is not None else ""
+        self.current_report.setToolTip(path)
+        self.report_button.setToolTip(path)
+        self.compare_button.setToolTip(f"Current comparison candidate: {self.scattering_directory}"
+                                       if self.scattering_directory is not None else "")
 
     def _inputs_changed(self) -> None:
         self._clear_result()
         self.status.setText("Inputs changed. Check the mesh or run the study.")
 
     def _set_busy(self, busy: bool) -> None:
-        for widget in (self.preset, self.load_button, self.saved_run_button, self.device_results_button, self.save_button, self.form,
+        for widget in (self.preset, self.load_button, self.saved_run_button, self.saved_map_button,
+                       self.device_results_button, self.save_button, self.form,
                        self.mesh_button, self.run_button, self.save_progress, self.wall_seconds, self.resume_button,
                        self.map_controls, self.regional_controls):
             widget.setEnabled(not busy)
+        mapping = self.action in MAP_ACTIONS
+        self.stop_button.setText("Stop after current point" if mapping else "Stop")
+        self.stop_button.setToolTip("Request a stop at the next point boundary. Accepted points stay saved." if mapping else "")
         self.stop_button.setEnabled(busy and not self.stopping and self.process.state() == QProcess.ProcessState.Running)
         self._set_result_buttons(busy)
 
@@ -793,7 +827,7 @@ class Workbench(QMainWindow):
                 self._set_busy(True)
                 self.status.setText(f"Could not request a stop after the current point. {exc}")
                 return
-            self.status.setText("Stop requested. Finishing the current point before stopping; accepted points are kept.")
+            self.status.setText("Stop requested at a point boundary. An active point can finish. Accepted points stay saved.")
             self.stop_deadline = None
             self.stop_timer.start()
             return
@@ -961,7 +995,7 @@ class Workbench(QMainWindow):
         finally:
             self._finish_job()
 
-    def _show_map_result(self, summary: dict) -> None:
+    def _show_map_result(self, summary: dict, *, saved: bool = False) -> None:
         directory = Path(summary["output_directory"])
         if not directory.is_dir():
             raise ValueError("The frequency-map folder is missing.")
@@ -973,11 +1007,18 @@ class Workbench(QMainWindow):
         self.result_directory = self.map_directory = directory
         report = summary.get("report_path")
         self.report_path = Path(report) if report and Path(report).is_file() else None
+        config = summary.get("inputs", {}).get("configuration", {})
+        identity = f"{config['name']} · {directory.name}" if config.get("name") else directory.name
+        self.report_title = f"{'Saved frequency map' if saved else 'Frequency map'} · {identity}"
         self.scattering_directory = None
         heading = "Frequency map complete" if summary["status"] == "complete" else "Partial frequency map"
-        message = f"{heading} · {accepted}/{len(points)} accepted frequencies; {failed} failed."
+        message = f"{heading} · {accepted}/{len(points)} accepted frequencies, {failed} failed."
+        qualification = [point.get("qualification", {}).get("status") for point in points if point["status"] == "accepted"]
+        passed_checks = qualification.count("finite_checks_passed")
+        failed_checks = qualification.count("finite_checks_failed")
+        if passed_checks or failed_checks:
+            message += f" Recorded finite checks: {passed_checks} passed, {failed_checks} failed."
         if "preparation_reuse" in summary:
-            config = summary["inputs"]["configuration"]
             geometry = config["geometry"]
             dimensions = " × ".join(f"{geometry[key]:g}" for key in ("length_nm", "width_nm", "thickness_nm"))
             message += f" Using saved geometry and operators for {config['name']} ({dimensions} nm)."
@@ -1027,6 +1068,11 @@ class Workbench(QMainWindow):
                 acceptance = "passed" if summary["mesh_pair_passed"] else "failed"
                 message += f"Mesh-pair check {acceptance} for these runs."
             self.report_path = report
+            reference = summary["reference"].get("directory")
+            candidate = summary["candidate"].get("directory")
+            comparison = (f"reference {Path(reference).name}, candidate {Path(candidate).name}"
+                          if reference and candidate else directory.name)
+            self.report_title = f"{heading} · {comparison}"
         else:
             report = directory / "report_AP_pnc.html"
             if not report.is_file():
@@ -1035,10 +1081,17 @@ class Workbench(QMainWindow):
             if summary.get("analysis_kind") == "scattering":
                 power = "passed" if summary["power_balance_passed"] else "failed"
                 message += f" Power-balance check {power}."
+                qualification = summary.get("qualification", {}).get("status")
+                if qualification == "finite_checks_passed":
+                    message += " Finite numerical checks passed."
+                elif qualification == "finite_checks_failed":
+                    message += " Finite numerical checks failed."
                 self.scattering_directory = directory.resolve()
             if self.action == "resume":
                 message += " Resumed from the saved simulation inputs."
             self.report_path = report
+            name = summary.get("configuration", {}).get("name")
+            self.report_title = f"Study result · {name} · {directory.name}" if name else f"Study result · {directory.name}"
         self.result_directory = directory
         self._set_result_buttons(self.action is not None)
         self.status.setText(message)

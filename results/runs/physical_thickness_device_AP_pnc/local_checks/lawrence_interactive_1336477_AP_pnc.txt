@@ -1,0 +1,4 @@
+JobID|JobName|Partition|State|ExitCode|NodeList|Elapsed|ReqMem|MaxRSS
+1336477|pnc-fine-outer|nodes|COMPLETED|0:0|node031|00:07:04|12G|
+1336477.extern|extern||COMPLETED|0:0|node031|00:07:04||872K
+1336477.0|pnc-fine-outer||COMPLETED|0:0|node031|00:07:04||4222520K
