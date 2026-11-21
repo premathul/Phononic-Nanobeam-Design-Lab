@@ -81,13 +81,45 @@ def _transmission_comparison(levels, frequencies):
             f'<ul aria-label="Central mesh ceilings">{"".join(legend)}</ul></div>'
             f'<div class="thin-grid-transmission-panels">{"".join(panels)}</div>'
             '<figcaption>Both drives transmit a larger fraction of incident power at 1000 MHz than at 997.5 MHz '
-            'on all three meshes. The size of the increase depends on the mesh. Lines connect three saved samples '
-            'as visual guides. The continuum response magnitude, spectral slope and linewidth remain unresolved.</figcaption>'
+            'on all three meshes. Lines connect three saved samples as visual guides.</figcaption>'
             '</figure><div class="thin-grid-table-wrap" role="region" tabindex="0" aria-labelledby="thin-grid-transmission-table-title">'
             '<table><caption id="thin-grid-transmission-table-title">Transmission (%) and frequency-local incident roots. '
             'ΔT subtracts the 997.5 MHz transmission from the 1000 MHz transmission, in percentage points (pp).</caption>'
             '<thead><tr><th scope="col">Reference drive</th><th scope="col">Mesh ceiling (nm)</th>'
             f'{headings}<th scope="col">997.5 → 1000 MHz ΔT (pp)</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>')
+
+
+def _coherent_endpoint_table(changes, evidence_href):
+    first = changes[0]
+    lower_mhz = first["lower_frequency_hz"] / 1e6
+    upper_mhz = first["upper_frequency_hz"] / 1e6
+    drives = " and ".join(map(str, first["reference_drives"]))
+    outgoing_rows = first["outgoing_rows_per_block"]
+    rows = []
+    for change in changes:
+        mesh = change["central_max_edge_nm"]
+        t_min, t_max = change["transmission_eigenvalue_bounds_percentage_points"]
+        r_min, r_max = change["reflection_eigenvalue_bounds_percentage_points"]
+        rows.append(f'<tr><th scope="row">{mesh:.15g}</th><td>{t_min:+.3f} to {t_max:+.3f}</td>'
+                    f'<td>{r_min:+.3f} to {r_max:+.3f}</td></tr>')
+    sign = ""
+    if all(change["transmission_eigenvalue_bounds_percentage_points"][0] > 0
+           and change["reflection_eigenvalue_bounds_percentage_points"][1] < 0 for change in changes):
+        sign = " Transmission increases and reflection decreases for every mixture on all three saved meshes."
+    evidence = ""
+    if evidence_href is not None:
+        evidence = f'<p><a href="{escape(evidence_href, quote=True)}" download>Coherent endpoint bounds and provenance (CSV)</a></p>'
+    return ('<div class="thin-grid-table-wrap" role="region" tabindex="0" aria-labelledby="thin-grid-coherent-table-title">'
+            '<table class="thin-grid-coherent-table" aria-describedby="thin-grid-coherent-description">'
+            '<caption id="thin-grid-coherent-table-title">Coherent power-change bounds from '
+            f'{lower_mhz:g} to {upper_mhz:g} MHz</caption>'
+            '<thead><tr><th scope="col">Mesh (nm)</th><th scope="col">ΔT (pp)</th><th scope="col">ΔR (pp)</th></tr></thead>'
+            f'<tbody>{"".join(rows)}</tbody></table></div>'
+            '<p id="thin-grid-coherent-description">The bounds cover every fixed, unit-power coherent mixture of '
+            f'reference drives {drives}. The same complex weights apply at both endpoints after matching incident-mode '
+            f'phases. Each power sums over all {outgoing_rows} outgoing rows in its block.{sign} '
+            'The bounds vary with the mesh. The continuum response magnitude, spectral slope and linewidth remain unresolved.</p>'
+            + evidence)
 
 
 def render_thin_device_grid(
@@ -120,6 +152,8 @@ def render_thin_device_grid(
     data = json.dumps({"levels": levels, "frequencies_hz": grid["frequencies_hz"]},
                       separators=(",", ":"), allow_nan=False).replace("<", "\\u003c").replace("&", "\\u0026")
     comparison = escape(href(grid["source_comparison"], output), quote=True)
+    coherent_evidence = repo_root / "figures/device_AP_pnc/thin_coherent_endpoint_bounds_AP_pnc.csv"
+    coherent_evidence_href = href(str(coherent_evidence), output) if coherent_evidence.is_file() else None
     planes = " and ".join(f"{x * 1e6:g}" for x in grid["reference_planes_x_m"])
     hole_geometry_link = ""
     if hole_geometry_csv_href is not None:
@@ -133,6 +167,8 @@ def render_thin_device_grid(
 #thin-grid .thin-grid-links{{display:flex;flex-wrap:wrap;gap:.35rem 1.1rem;margin:.65rem 0}}
 #thin-grid .thin-grid-table-wrap{{overflow-x:auto}}
 #thin-grid table{{min-width:34rem;font-variant-numeric:tabular-nums}}
+#thin-grid .thin-grid-coherent-table{{min-width:0;max-width:32rem}}
+#thin-grid .thin-grid-coherent-table :is(th,td){{padding:.4rem .45rem}}
 #thin-grid caption{{font-weight:600;text-align:left;padding:.5rem 0}}
 #thin-grid td{{white-space:nowrap}}
 #thin-grid .thin-grid-gates{{padding-left:1.25rem}}
@@ -165,6 +201,7 @@ def render_thin_device_grid(
 <p>The saved solutions passed their equation and flux checks. Spatial and frequency convergence remain unresolved.</p>
 <p>Original reference planes at x = {planes} µm. The amplitudes use the native unit-power bases at these planes.</p>
 {_transmission_comparison(levels, grid["frequencies_hz"])}
+{_coherent_endpoint_table(grid["coherent_endpoint_changes"], coherent_evidence_href)}
 <div class="thin-grid-table-wrap" role="region" aria-labelledby="thin-grid-table-caption" tabindex="0">
  <table>
   <caption id="thin-grid-table-caption">Outgoing coefficients for the selected drive</caption>

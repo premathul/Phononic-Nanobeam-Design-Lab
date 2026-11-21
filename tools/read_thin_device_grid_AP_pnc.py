@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import cmath
 from copy import deepcopy
 import csv
 from hashlib import sha256
@@ -37,6 +38,7 @@ CONFIGURATION_SHA256 = {
 }
 PLANES = [0.0, 1.665e-5]
 DRIVES = list(range(1, 6))
+COHERENT_DRIVES = (3, 5)
 KINDS = ("reflection", "transmission")
 CSV_FILE = "scattering_map_AP_pnc.csv"
 CSV_HEADER = (
@@ -118,7 +120,10 @@ def _channel_inventory(comparison):
                 groups = inventory.setdefault(point, {})
                 _require(groups.setdefault(group, roots) == roots, "Signed edges disagree on a point's native channel order.")
             if group == "incoming":
-                incoming_edges[a, b] = dict(zip(reference, candidate, strict=True))
+                phases = match["candidate_gauge_phase_rad"]
+                _require(len(phases) == len(reference) and all(math.isfinite(float(phase)) for phase in phases),
+                         "A signed incident match has an invalid gauge.")
+                incoming_edges[a, b] = match
     _require(inventory.keys() == positions and incoming_edges.keys() == grid_edges
              and all(set(g["incoming"]) == set(g["transmission"]) and not set(g["incoming"]) & set(g["reflection"])
                      for g in inventory.values()), "The fixed signed modal grid is incomplete.")
@@ -294,6 +299,49 @@ def _spatial_gates(comparison, points):
                 point["neighboring_spatial_gates"].append(gates)
 
 
+def _two_drive_grams(point, inventory, incident_roots, factors):
+    coefficients = {(row["kind"], row["incident_port_index"], row["outgoing_port_index"]):
+                    complex(row["amplitude_real"], row["amplitude_imag"]) for row in point["coefficients"]}
+    grams = {}
+    for kind in KINDS:
+        first, second = ([factor * coefficients[kind, root, out] for out in inventory[kind]]
+                         for root, factor in zip(incident_roots, factors, strict=True))
+        products = [a.conjugate() * b for a, b in zip(first, second, strict=True)]
+        cross = complex(math.fsum(value.real for value in products), math.fsum(value.imag for value in products))
+        grams[kind] = math.fsum(abs(a)**2 for a in first), math.fsum(abs(b)**2 for b in second), cross
+    return grams
+
+
+def _hermitian_bounds(first, second, cross):
+    center = (first + second) / 2
+    radius = math.hypot((first - second) / 2, abs(cross))
+    return center - radius, center + radius
+
+
+def _coherent_endpoint_change(lower, upper, lower_inventory, upper_inventory, match):
+    lower_roots = [lower["drives"][drive - 1]["incident_port_index"] for drive in COHERENT_DRIVES]
+    indices = [match["reference_roots"].index(root) for root in lower_roots]
+    upper_roots = [match["candidate_roots"][i] for i in indices]
+    phases = [float(match["candidate_gauge_phase_rad"][i]) for i in indices]
+    overlaps = [float(match["mass_overlaps"][i]) for i in indices]
+    # The matched upper incident modes are rephased by exp(-i * phase).
+    # Unitary outgoing row permutations and phases cancel in each Gram matrix.
+    before = _two_drive_grams(lower, lower_inventory, lower_roots, (1, 1))
+    after = _two_drive_grams(upper, upper_inventory, upper_roots, [cmath.rect(1, -phase) for phase in phases])
+    deltas = {kind: tuple(b - a for a, b in zip(before[kind], after[kind], strict=True)) for kind in KINDS}
+    closure = _hermitian_bounds(*(a + b for a, b in zip(*deltas.values(), strict=True)))
+    result = {"lower_frequency_hz": lower["frequency_hz"], "upper_frequency_hz": upper["frequency_hz"],
+              "reference_drives": list(COHERENT_DRIVES), "lower_incident_native_roots": lower_roots,
+              "upper_incident_native_roots": upper_roots, "candidate_incident_gauge_phase_rad": phases,
+              "incident_mass_overlaps": overlaps, "outgoing_rows_per_block": len(DRIVES),
+              "closure_discrepancy_percentage_points": 100 * max(map(abs, closure))}
+    for kind, (first, second, cross) in deltas.items():
+        matrix = ((first, cross), (cross.conjugate(), second))
+        result[f"delta_{kind}_gram_fraction"] = [[{"real": v.real, "imag": v.imag} for v in row] for row in matrix]
+        result[f"{kind}_eigenvalue_bounds_percentage_points"] = [100 * v for v in _hermitian_bounds(first, second, cross)]
+    return result
+
+
 def _load(root, sources):
     comparison_path, content = _source(root, COMPARISON, sources)
     comparison = json.loads(content)
@@ -335,12 +383,24 @@ def _load(root, sources):
              == inventory[TARGETS[0], FREQUENCIES[-1]]["incoming"]
              == comparison["channel_correspondence"]["reference_native_incident_roots"],
              "Reference drive labels differ from the native 225 nm, 1 GHz order.")
-    for (a, b), roots in incoming_edges.items():
+    for (a, b), match in incoming_edges.items():
+        roots = dict(zip(match["reference_roots"], match["candidate_roots"], strict=True))
         _require(all(roots[x["incident_port_index"]] == y["incident_port_index"]
                      for x, y in zip(points[a]["drives"], points[b]["drives"], strict=True)),
                  "Reference drive labels do not follow the published signed channel matches.")
     _spatial_gates(comparison, points)
+    pins = {item["path"]: {**item, "path": Path(item["path"]).relative_to(root).as_posix()} for item in sources}
+    coherent_changes = []
+    for mesh in TARGETS:
+        a, b = (mesh, FREQUENCIES[-2]), (mesh, FREQUENCIES[-1])
+        lower, upper = points[a], points[b]
+        change = _coherent_endpoint_change(lower, upper, inventory[a], inventory[b], incoming_edges[a, b])
+        provenance = {"comparison": pins[str(comparison_path)],
+                      "lower_source_coefficients": pins[lower["source_coefficients"]],
+                      "upper_source_coefficients": pins[upper["source_coefficients"]]}
+        coherent_changes.append({"central_max_edge_nm": mesh, **change, "provenance": provenance})
     return {**metadata, "source_comparison": str(comparison_path), "sources": sources, "levels": output,
+            "coherent_endpoint_changes": coherent_changes,
             "scope": comparison["scope"], "computation_enabled": False,
             "spatial_convergence_established": False, "frequency_convergence_established": False}
 

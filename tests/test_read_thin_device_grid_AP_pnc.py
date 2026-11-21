@@ -1,5 +1,6 @@
 """Verify the portable thin-grid reader against compact sources. Author: Athul Prem | _AP_pnc."""
 
+from copy import deepcopy
 import csv
 from hashlib import sha256
 import json
@@ -7,6 +8,8 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 from unittest.mock import patch
+
+import numpy as np
 
 from tools import read_thin_device_grid_AP_pnc as reader
 
@@ -21,6 +24,11 @@ def pin(path, root):
 
 def write_json(path, record):
     path.write_text(json.dumps(record, allow_nan=False) + "\n", encoding="utf-8")
+
+
+def decode_gram(change, kind):
+    return np.array([[complex(entry["real"], entry["imag"]) for entry in row]
+                     for row in change[f"delta_{kind}_gram_fraction"]])
 
 
 class OptionalThinGridTests(unittest.TestCase):
@@ -58,6 +66,10 @@ class ThinGridTests(unittest.TestCase):
         write_json(self.comparison, self.report)
         return patch.object(reader, "COMPARISON", pin(reader.COMPARISON["path"], self.root))
 
+    def endpoint_match(self, mesh):
+        return next(edge["groups"] for edge in self.report["channel_correspondence"]["signed_matches"]
+                    if edge["reference_point"] == [mesh, 997_500_000] and edge["candidate_point"] == [mesh, 1_000_000_000])
+
     def test_all_sources_drives_and_coefficients_load_without_raw_archives(self):
         grid = reader.load_thin_grid(self.root)
         points = [point for level in grid["levels"] for point in level["points"]]
@@ -87,6 +99,83 @@ class ThinGridTests(unittest.TestCase):
             for gate in point["neighboring_spatial_gates"]:
                 self.assertEqual([r["reference_drive"] for r in gate["drives"] if not r["total_power_gate_passed"]], [3, 5])
         self.assertTrue(differs_from_segment_gauge)
+
+    def test_coherent_bounds_use_all_native_rows_and_the_signed_incident_phase(self):
+        grid = reader.load_thin_grid(self.root)
+        changes = grid["coherent_endpoint_changes"]
+        self.assertEqual([row["central_max_edge_nm"] for row in changes], [225, 168.75, 126.5625])
+        expected_bounds = [(0.541, 0.901), (4.624, 5.738), (9.383, 9.905)]
+        for change, level, bounds in zip(changes, self.report["mesh_levels"], expected_bounds, strict=True):
+            with self.subTest(mesh=change["central_max_edge_nm"]):
+                self.assertEqual((change["lower_frequency_hz"], change["upper_frequency_hz"]), (997_500_000, 1_000_000_000))
+                self.assertEqual(change["reference_drives"], [3, 5])
+                self.assertEqual(change["outgoing_rows_per_block"], 5)
+                self.assertEqual(change["provenance"]["comparison"], pin(reader.COMPARISON["path"], self.root))
+                groups = self.endpoint_match(level["central_max_edge_nm"])
+                incoming = groups["incoming"]
+                tables, selected_roots = [], []
+                for index, endpoint in ((1, "lower"), (2, "upper")):
+                    sample = level["samples"][index]
+                    csv_path = Path(sample["archive"]["map"]["path"]).with_name(reader.CSV_FILE).as_posix()
+                    self.assertEqual(change["provenance"][f"{endpoint}_source_coefficients"], pin(csv_path, self.root))
+                    with (self.root / csv_path).open(encoding="utf-8", newline="") as stream:
+                        tables.append({(r["kind"], int(r["outgoing_port_index"]), int(r["incident_port_index"])):
+                                       complex(float(r["amplitude_real"]), float(r["amplitude_imag"]))
+                                       for r in csv.DictReader(stream) if float(r["frequency_GHz"]) * 1e9 == sample["frequency_hz"]})
+                    roots = [level["matched_drives"][col]["samples"][index]["native_root_id"] for col in (2, 4)]
+                    self.assertEqual(change[f"{endpoint}_incident_native_roots"], roots)
+                    selected_roots.append(roots)
+                slots = [incoming["reference_roots"].index(root) for root in selected_roots[0]]
+                phases = np.array(incoming["candidate_gauge_phase_rad"])[slots]
+                np.testing.assert_array_equal(change["candidate_incident_gauge_phase_rad"], phases)
+                np.testing.assert_array_equal(change["incident_mass_overlaps"], np.array(incoming["mass_overlaps"])[slots])
+                differences = []
+                for kind in ("transmission", "reflection"):
+                    match = groups[kind]
+                    outgoing = (match["reference_roots"], match["candidate_roots"])
+                    before, after = (np.array([[table[kind, out, inc] for inc in roots] for out in outputs])
+                                     for table, outputs, roots in zip(tables, outgoing, selected_roots, strict=True))
+                    after = np.exp(1j * np.array(match["candidate_gauge_phase_rad"]))[:, None] * after / np.exp(1j * phases)
+                    expected = after.conj().T @ after - before.conj().T @ before
+                    differences.append(expected)
+                    np.testing.assert_allclose(decode_gram(change, kind), expected, atol=5e-16, rtol=0)
+                    eig = 100 * np.linalg.eigvalsh(expected)
+                    np.testing.assert_allclose(change[f"{kind}_eigenvalue_bounds_percentage_points"], eig, atol=1e-13, rtol=0)
+                    if kind == "transmission":
+                        np.testing.assert_array_equal(eig.round(3), bounds)
+                        focus = [outgoing[0].index(root) for root in selected_roots[0]]
+                        a, b = before[focus], after[focus]
+                        self.assertGreater(np.linalg.norm(expected - (b.conj().T @ b - a.conj().T @ a)), 1e-5)
+                    else:
+                        np.testing.assert_array_equal(eig.round(3), [-bounds[1], -bounds[0]])
+                self.assertAlmostEqual(change["closure_discrepancy_percentage_points"],
+                                       100 * np.linalg.norm(sum(differences), ord=2), delta=6e-14)
+
+    def test_coherent_gram_survives_upper_native_gauge_and_root_changes(self):
+        grid = reader.load_thin_grid(self.root)
+        lower, upper = grid["levels"][0]["points"][1:]
+        native = deepcopy(upper)
+        groups = self.endpoint_match(225)
+        match = deepcopy(groups["incoming"])
+        incoming_phases = dict(zip(match["candidate_roots"], (.37, .1, -.63, 1.7, .29), strict=True))
+        match["candidate_gauge_phase_rad"] = [phase + incoming_phases[root] for root, phase in
+                                             zip(match["candidate_roots"], match["candidate_gauge_phase_rad"], strict=True)]
+        match["candidate_roots"] = [root + 1000 for root in match["candidate_roots"]]
+        match["candidate_order"] = [4, 3, 2, 1, 0]
+        lower_inventory = {kind: groups[kind]["reference_roots"] for kind in reader.KINDS}
+        upper_inventory = {kind: [root + 1000 for root in reversed(groups[kind]["candidate_roots"])] for kind in reader.KINDS}
+        native["coefficients"].reverse()
+        for row in native["coefficients"]:
+            incident, outgoing = row["incident_port_index"], row["outgoing_port_index"]
+            outgoing_phase = .37 * upper_inventory[row["kind"]].index(outgoing + 1000)
+            value = complex(row["amplitude_real"], row["amplitude_imag"]) * np.exp(1j * (incoming_phases[incident] - outgoing_phase))
+            row.update(incident_port_index=incident + 1000, outgoing_port_index=outgoing + 1000,
+                       amplitude_real=value.real, amplitude_imag=value.imag)
+        change = reader._coherent_endpoint_change(lower, native, lower_inventory, upper_inventory, match)
+        original = grid["coherent_endpoint_changes"][0]
+        self.assertEqual(change["upper_incident_native_roots"], [root + 1000 for root in original["upper_incident_native_roots"]])
+        for kind in reader.KINDS:
+            np.testing.assert_allclose(decode_gram(change, kind), decode_gram(original, kind), atol=5e-16, rtol=0)
 
     def test_present_comparison_requires_its_native_csv_hash(self):
         relative = Path(min(self.map_paths)).with_name(reader.CSV_FILE)
