@@ -696,6 +696,21 @@ class PortableAcceptedDeviceTests(unittest.TestCase):
         self.assertFalse(native)
         published = snapshot(self.output)
         dataset = browser.load_dataset(self.root / "configs/saved_device_dataset_AP_pnc.json", root=self.root)
+        coherent_markup = re.search(r'<table class="thin-grid-coherent-table"[^>]*>.*?</table>', html)
+        self.assertIsNotNone(coherent_markup)
+        coherent = ElementTree.fromstring(coherent_markup.group())
+        self.assertEqual(coherent.findtext("caption"), "Coherent power-change bounds from 997.5 to 1000 MHz")
+        self.assertEqual(coherent.attrib["aria-describedby"], "thin-grid-coherent-description")
+        rows = coherent.findall("tbody/tr")
+        self.assertEqual(len(rows), 3)
+        for row, bound in zip(rows, dataset["thin_grid"]["coherent_endpoint_changes"], strict=True):
+            self.assertEqual(row.findtext("th"), f'{bound["central_max_edge_nm"]:.15g}')
+            expected = [" to ".join(f"{value:+.3f}" for value in bound[f"{kind}_eigenvalue_bounds_percentage_points"])
+                        for kind in ("transmission", "reflection")]
+            self.assertEqual([cell.text for cell in row.findall("td")], expected)
+        self.assertIn("all 5 outgoing rows in its block", html)
+        self.assertIn("Transmission increases and reflection decreases for every mixture on all three saved meshes", html)
+        self.assertNotIn("Coherent endpoint bounds and provenance (CSV)", html)
         geometry = dataset["thin_grid"]["levels"][0]["points"][0]["hole_csv"]
         geometry_path = self.root / geometry["path"]
         href = browser._href(geometry_path, self.output)

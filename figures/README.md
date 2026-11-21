@@ -66,19 +66,35 @@ Both panels compare the same three saved frequencies on central edge ceilings of
 | 168.75 | +5.24 | +5.12 |
 | 126.5625 | +9.78 | +9.51 |
 
-Here ΔT = 100 × [T(1000 MHz) − T(997.5 MHz)], with T a fraction of incident power. These are absolute percentage-point changes, not relative percent changes. Their positive direction agrees on the three meshes, while the magnitude remains mesh-sensitive. Connecting segments are visual guides between the three saved samples. No converged frequency slope or linewidth is established by the finest trace or by agreement of the signs. This directly implements [Athul's saved-data comparison request](https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/58#issuecomment-7046690925).
+Here ΔT = 100 × [T(1000 MHz) − T(997.5 MHz)], with T a fraction of incident power. These are absolute percentage-point changes, not relative percent changes. Connecting segments are visual guides between the three saved samples.
 
-[Vector PDF](device_AP_pnc/athul_simulation_pnc_thin_frequency_traces_AP_pnc.pdf) · [All 18 plotted samples and native identities (CSV)](device_AP_pnc/thin_frequency_traces_AP_pnc.csv) · [Plot script](../tools/plot_thin_frequency_traces_AP_pnc.py) · [Pinned nine-point record](../verification/thin_mesh_frequency_AP_pnc.json) · [Offline reader](../tools/browse_device_results_AP_pnc.py)
+The positive endpoint change also holds for every fixed normalized coherent mixture of reference drives 3 and 5, after matching their incident phases. Following [Athul's coherent-mixture observation](https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/59#issuecomment-7059248061), retain those two incident columns and **all five outgoing rows** in each power-normalized block. For a fixed complex input vector `a = (a3, a5)` with `a†a = 1`, the transmitted-power change is
+
+$$
+\Delta T(a)=a^\dagger\!\left[T_{1000}^\dagger T_{1000}-T_{997.5}^\dagger T_{997.5}\right]a.
+$$
+
+The two eigenvalues of this Hermitian 2×2 difference bound every such mixture. Frequencies in the subscripts are in MHz; multiplying the eigenvalues by 100 gives the intervals below in percentage points of incident power. The upper endpoint uses the saved incident phase correspondence. Outgoing row phases cancel in each Gram matrix, so no inter-frequency outgoing phase subtraction is required.
+
+| Central edge ceiling (nm) | Coherent ΔT bounds (percentage points) | Coherent ΔR bounds (percentage points) |
+| --- | ---: | ---: |
+| 225 | +0.541 to +0.901 | −0.901 to −0.541 |
+| 168.75 | +4.624 to +5.738 | −5.738 to −4.624 |
+| 126.5625 | +9.383 to +9.905 | −9.905 to −9.383 |
+
+Reflection gives the opposite intervals to the shown precision; the spectral norm of the transmission-plus-reflection difference is below 1×10⁻¹⁰ percentage points on each saved mesh. Thus the **sign is robust for these fixed coherent mixtures on the saved meshes and endpoints**, while its magnitude remains unconverged. This finite observation does not establish the continuum sign, monotonicity between samples, a converged frequency slope or a linewidth. A frequency-dependent change in the mixture is outside this comparison.
+
+[Vector PDF](device_AP_pnc/athul_simulation_pnc_thin_frequency_traces_AP_pnc.pdf) · [All 18 plotted samples and native identities (CSV)](device_AP_pnc/thin_frequency_traces_AP_pnc.csv) · [Coherent bounds, complex matrices, incident phases and input hashes (CSV)](device_AP_pnc/thin_coherent_endpoint_bounds_AP_pnc.csv) · [Plot script](../tools/plot_thin_frequency_traces_AP_pnc.py) · [Pinned nine-point record](../verification/thin_mesh_frequency_AP_pnc.json) · [Offline reader](../tools/browse_device_results_AP_pnc.py)
 
 ## Reproduce the figures
 
-Run from the repository root with [the plotting environment](../requirements_3d_AP_pnc.txt). The generator writes four vector PDFs, four PNG previews and five CSVs under `figures/device_AP_pnc/`. Use `--output-dir PATH` for a separate copy.
+Run from the repository root with [the plotting environment](../requirements_3d_AP_pnc.txt). The generator writes four vector PDFs, four PNG previews and six CSVs under `figures/device_AP_pnc/`. Use `--output-dir PATH` for a separate copy.
 
 ```powershell
 .\.venv\Scripts\python.exe tools/plot_saved_device_figures_AP_pnc.py --output-dir results/reproduction/figures_AP_pnc
 ```
 
-The plots use tracked inputs and require Matplotlib. The complex-ratio calculation uses the standard library. The portable controls are checked against the [dataset manifest](../configs/saved_device_dataset_AP_pnc.json). Native coefficient paths and SHA-256 hashes in the CSVs identify original archive artifacts. Figure reproduction requires only the tracked inputs and starts no simulation.
+The plots use tracked inputs and require Matplotlib. The complex-ratio and coherent endpoint-bound calculations use the standard library. The portable controls are checked against the [dataset manifest](../configs/saved_device_dataset_AP_pnc.json). Native coefficient paths and SHA-256 hashes in the CSVs identify original archive artifacts. Figure reproduction requires only the tracked inputs and starts no simulation.
 
 ## Historical figures and small benchmarks
 

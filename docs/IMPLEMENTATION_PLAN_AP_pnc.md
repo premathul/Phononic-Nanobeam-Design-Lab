@@ -8,9 +8,15 @@ Athul Prem | _AP_pnc
 
 Deliver a usable configurable 3D elastic-wave simulator and reproducible finite straight 26-hole data. The solver, workbench, saved-result browser, bounded maps, exact-input recovery, regional meshing and nested controls are delivered. PRs [56](https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/56) and [57](https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/57) delivered preparation reuse, snapshot kernels and saved-data figures; they are not pending tasks.
 
-The content-architecture revision is delivered in [PR #58](https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/58). The completed saved-data milestone follows [Athul's 20 November comment](https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/58#issuecomment-7046690925): show the three central-mesh frequency traces together for reference drives 3 and 5. Use the existing nine-point dataset; this request needs no new full-device calculation.
+The content-architecture revision is delivered in [PR #58](https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/58), and the three central-mesh frequency traces for drives 3/5 in [PR #59](https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/59). The current saved-data milestone follows [Athul's 21 November comment](https://github.com/premathul/Phononic-Nanobeam-Design-Lab/pull/59#issuecomment-7059248061): preserve the distinction between the positive endpoint change for every fixed coherent mixture of drives 3/5 and its unconverged magnitude. Use the pinned nine-point dataset; no new full-device calculation is needed.
 
 The immediate scientific observable remains per-incident total T/R near 1 GHz. Qualification of those powers, individual weak conversions, complex coefficients at original planes, spectral features and experiment are separate contracts in the [physics specification](PHYSICS_SPECIFICATION_AP_pnc.md#validation-and-uncertainty-contract). The [status record](RESEARCH_STATUS_AP_pnc.md) owns the concise interpretation and source links.
+
+## Coherent endpoint-caption milestone
+
+Reconstruct Δ(T†T) and Δ(R†R) for 997.5→1000 MHz from incident columns 3/5 and all five outgoing rows, using the saved incident phase correspondence at original planes. Compute both Hermitian eigenvalue intervals, retain their complex matrices, native roots, phases and input hashes in one compact CSV, and show the bounds in Figure 4 and the standard-library offline reader. Preserve the original 18 plotted samples and all native data.
+
+Check the analytic 2×2 bounds against NumPy, phase/permutation invariance, coherent closure and the requirement to retain all outgoing rows. Verify artifact reproduction and desktop/mobile readability; run affected tests and the existing integrated CI once. Stop after the caption, exact export, source/data integrity and authorized GitHub integration are verified. Positive bounds establish the direction only for fixed normalized mixtures on the saved meshes/endpoints; magnitude, continuum sign, intermediate monotonicity, slope and linewidth remain unresolved. No new research calculation is queued by this comment.
 
 ## Delivered frequency-comparison milestone
 

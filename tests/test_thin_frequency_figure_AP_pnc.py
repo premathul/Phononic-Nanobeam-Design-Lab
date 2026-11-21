@@ -20,10 +20,11 @@ class ThinFrequencyFigureTests(unittest.TestCase):
 
     def test_saved_csv_reproduces_with_native_identities(self):
         with TemporaryDirectory() as output:
-            pdf, csv_path, png = plot.render(Path(output))
+            pdf, csv_path, png, coherent_path = plot.render(Path(output))
             self.assertTrue(pdf.read_bytes().startswith(b"%PDF-"))
             self.assertTrue(png.read_bytes().startswith(b"\x89PNG\r\n\x1a\n"))
             self.assertEqual(csv_path.read_bytes(), (ROOT / "figures" / "device_AP_pnc" / csv_path.name).read_bytes())
+            self.assertEqual(coherent_path.read_bytes(), (ROOT / "figures" / "device_AP_pnc" / coherent_path.name).read_bytes())
             with csv_path.open(encoding="utf-8", newline="") as stream:
                 saved = list(csv.DictReader(stream))
         self.assertEqual(len(saved), 18)
@@ -50,6 +51,25 @@ class ThinFrequencyFigureTests(unittest.TestCase):
                 self.assertEqual(row[f"{stem}_path"], relative)
                 self.assertEqual(row[f"{stem}_sha256"], sources[relative])
         self.assertEqual(len(identities), 18)
+
+    def test_coherent_export_preserves_matrices_and_phase_correspondence(self):
+        rows = plot._coherent_rows(self.grid)
+        self.assertEqual(len(rows), 3)
+        for row, change in zip(rows, self.grid["coherent_endpoint_changes"], strict=True):
+            self.assertEqual(row["outgoing_rows_per_block"], 5)
+            self.assertEqual(row["lower_frequency_hz"], 997_500_000)
+            self.assertEqual(row["upper_frequency_hz"], 1_000_000_000)
+            for index, drive in enumerate((3, 5)):
+                self.assertEqual(row[f"candidate_incident_gauge_phase_rad_drive_{drive}"],
+                                 change["candidate_incident_gauge_phase_rad"][index])
+            for kind in ("transmission", "reflection"):
+                for i, matrix_row in enumerate(change[f"delta_{kind}_gram_fraction"], 1):
+                    for j, value in enumerate(matrix_row, 1):
+                        for part in ("real", "imag"):
+                            self.assertEqual(row[f"delta_{kind}_gram_{i}{j}_{part}_fraction"], value[part])
+            for stem, pin in change["provenance"].items():
+                self.assertEqual(row[f"{stem}_sha256"], pin["sha256"])
+                self.assertEqual(row[f"{stem}_path"], pin["path"])
 
     def test_only_saved_markers_are_plotted_on_common_axes(self):
         figure = plot._plot_figure(self.grid, self.rows)
