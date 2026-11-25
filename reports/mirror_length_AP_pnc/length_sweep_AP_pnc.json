@@ -1,0 +1,182 @@
+{
+  "scope": "One 1 GHz lossless discrete periodic mirror, coarse 225 nm central mesh, 100 nm film, two thickness layers; not the tapered device",
+  "source_cell_sha256": "846ee0e06ba96689bfb17636d29dc25436bb1a3cd9ccb0181a980fb96f6bcd2a",
+  "mesh_sha256": "d0e75cbb2b922319ede2de6572363a692adf7ccfccc3e7ab721f3939cb5ca598",
+  "environment": {
+    "python": "3.11.3",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "gmsh": "4.15.2",
+    "platform": "macOS-26.6.2-arm64-arm-64bit"
+  },
+  "focus_rule": "Two least transmitting individual native inputs at eight cells, held fixed for all lengths. Local root IDs, not cross-platform labels.",
+  "control_rule": "Among remaining inputs, least transmitting one-cell mode, held fixed.",
+  "adjacent_decrease_pp": [
+    {
+      "from": 1,
+      "to": 2,
+      "bounds": [
+        0.0037923835007371296,
+        5.339547278021979
+      ]
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "bounds": [
+        0.34819673279417596,
+        5.784814335887852
+      ]
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "bounds": [
+        0.7278615610861705,
+        9.718320355237159
+      ]
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "bounds": [
+        0.8168347114689609,
+        11.444233774723077
+      ]
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "bounds": [
+        0.6961302405055156,
+        11.26963117981657
+      ]
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "bounds": [
+        0.7984195215139569,
+        12.274325424582381
+      ]
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "bounds": [
+        0.9038707125020504,
+        12.21045506399443
+      ]
+    }
+  ],
+  "one_to_eight_decrease_pp": [
+    31.442489803655572,
+    40.89394347197947
+  ],
+  "root_ids": [
+    492,
+    476
+  ],
+  "control_root_id": 502,
+  "native_port": {
+    "trace_dof_count": 255,
+    "outgoing_columns_per_end": 255,
+    "evanescent_columns_per_end": 250,
+    "operator_sha256": "ad456b956c21a65d364e8ef564db13733e836ea205fb9e6ebd1c7927bbf416a8",
+    "trace_sha256": "ace84e23ee0253b671735eb901d42e80d295a0dceb70572f0a9502099da9359d",
+    "outgoing_displacement_condition_numbers": [
+      29.29002899766769,
+      29.290028997661356
+    ]
+  },
+  "results": [
+    {
+      "cells": 1,
+      "restricted_transmission_percent": [
+        96.78967158230098,
+        99.95699542597174
+      ],
+      "control_transmission_percent": 95.16301685799067,
+      "restricted_flux_closure": 2.8709016619369598e-12,
+      "maximum_original_residual": 3.4525552834816315e-13,
+      "maximum_power_error": 1.522221462362328e-13
+    },
+    {
+      "cells": 2,
+      "restricted_transmission_percent": [
+        92.28583290931422,
+        99.11749443743578
+      ],
+      "control_transmission_percent": 99.85113020098636,
+      "restricted_flux_closure": 3.5152418416956747e-12,
+      "maximum_original_residual": 3.4574814618898935e-13,
+      "maximum_power_error": 1.3550273319435224e-13
+    },
+    {
+      "cells": 3,
+      "restricted_transmission_percent": [
+        90.83881495847612,
+        94.43150131959182
+      ],
+      "control_transmission_percent": 96.30566850296164,
+      "restricted_flux_closure": 1.5669549058808508e-12,
+      "maximum_original_residual": 3.493416094776832e-13,
+      "maximum_power_error": 1.4437680201474927e-13
+    },
+    {
+      "cells": 4,
+      "restricted_transmission_percent": [
+        84.2759536138707,
+        90.54818074787391
+      ],
+      "control_transmission_percent": 99.97516630394855,
+      "restricted_flux_closure": 1.3560710576355557e-12,
+      "maximum_original_residual": 3.5125571426463727e-13,
+      "maximum_power_error": 1.9979352170948455e-13
+    },
+    {
+      "cells": 5,
+      "restricted_transmission_percent": [
+        74.5871443226669,
+        87.97592155288572
+      ],
+      "control_transmission_percent": 95.96580013455618,
+      "restricted_flux_closure": 2.9480519482775136e-12,
+      "maximum_original_residual": 3.4870248391654256e-13,
+      "maximum_power_error": 2.3183975408915646e-13
+    },
+    {
+      "cells": 6,
+      "restricted_transmission_percent": [
+        70.31853010115827,
+        80.2787743540723
+      ],
+      "control_transmission_percent": 99.76350145676474,
+      "restricted_flux_closure": 2.271552774818155e-12,
+      "maximum_original_residual": 3.5383093944928045e-13,
+      "maximum_power_error": 2.621386272465231e-13
+    },
+    {
+      "cells": 7,
+      "restricted_transmission_percent": [
+        67.71067208788018,
+        69.81388742125405
+      ],
+      "control_transmission_percent": 96.47219684950005,
+      "restricted_flux_closure": 3.335673613943849e-13,
+      "maximum_original_residual": 3.483731168143001e-13,
+      "maximum_power_error": 3.1852053916048425e-13
+    },
+    {
+      "cells": 8,
+      "restricted_transmission_percent": [
+        55.99316369811842,
+        68.41707003451928
+      ],
+      "control_transmission_percent": 99.2399981064953,
+      "restricted_flux_closure": 1.7840116389891134e-12,
+      "maximum_original_residual": 3.4700531057662577e-13,
+      "maximum_power_error": 3.9834802123550617e-13
+    }
+  ]
+}
