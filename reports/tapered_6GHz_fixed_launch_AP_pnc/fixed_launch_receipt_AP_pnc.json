@@ -1,0 +1,422 @@
+{
+  "H85_SAFE": {
+    "H_nm": 85,
+    "port": "SAFE",
+    "lead_axial_nm": null,
+    "launches": {
+      "rejected": {
+        "projection_error": 1.3035384443843354e-15,
+        "blank": {
+          "R": 1.566617302253344e-06,
+          "T": 0.9999984333827071
+        },
+        "taper": {
+          "R": 0.9999997294367869,
+          "T": 2.705632059127305e-07
+        }
+      },
+      "passed": {
+        "projection_error": 1.0429809853544053e-15,
+        "blank": {
+          "R": 0.0002955300443307776,
+          "T": 0.9997044699556796
+        },
+        "taper": {
+          "R": 0.005307690151218187,
+          "T": 0.9946923098487817
+        }
+      }
+    },
+    "blank_worst_coherent_R": 0.0009490931840870913,
+    "unitary_residual": 1.7102361217231006e-11,
+    "hashes": {
+      "section_H85_ny16_nz2_rim32_blank_AP_pnc.npz": "f8b1f7ffdea67becf6642105d11c1eecdb1703587470b15a7db55425bafc7f62",
+      "section_H85_ny16_nz2_rim32_taper_AP_pnc.npz": "4a753b2e6ffdcb26db8aae3fab334551a2a6db29070afc0493c69c60829f0311"
+    }
+  },
+  "H85_D384": {
+    "H_nm": 85,
+    "port": "retarded",
+    "lead_axial_nm": 43.359375,
+    "launches": {
+      "rejected": {
+        "projection_error": 0.0009264867952418958,
+        "blank": {
+          "R": 1.4891994980015386e-06,
+          "T": 0.9999985108007701
+        },
+        "taper": {
+          "R": 0.999999548021604,
+          "T": 4.474512376871004e-07
+        }
+      },
+      "passed": {
+        "projection_error": 0.00455862713688081,
+        "blank": {
+          "R": 0.00028500694702373203,
+          "T": 0.9997149930598184
+        },
+        "taper": {
+          "R": 0.0054246086600987795,
+          "T": 0.9945753915276704
+        }
+      }
+    },
+    "blank_worst_coherent_R": 0.0009227639085030333,
+    "unitary_residual": 2.56382325200919e-08,
+    "hashes": {
+      "retarded_dxN384_section_H85_ny16_nz2_rim32_blank_AP_pnc.npz": "ebc63ef75203fe83d3a69b74038616cdc51c2bbb380cd7a86879a5dfdd49b1d5",
+      "retarded_dxN384_section_H85_ny16_nz2_rim32_taper_AP_pnc.npz": "f35e8706c1469ee92e357104e3791b608c9c68c8aa7a1686c24b2162e1256666"
+    }
+  },
+  "H85_D768": {
+    "H_nm": 85,
+    "port": "retarded",
+    "lead_axial_nm": 21.6796875,
+    "launches": {
+      "rejected": {
+        "projection_error": 0.0004515103330506454,
+        "blank": {
+          "R": 1.468278202961233e-06,
+          "T": 0.9999985317228165
+        },
+        "taper": {
+          "R": 0.999999651836644,
+          "T": 3.4363980441461024e-07
+        }
+      },
+      "passed": {
+        "projection_error": 0.0018470631770025332,
+        "blank": {
+          "R": 0.0002956183064018854,
+          "T": 0.9997043817180132
+        },
+        "taper": {
+          "R": 0.005346697856369273,
+          "T": 0.994653302350243
+        }
+      }
+    },
+    "blank_worst_coherent_R": 0.0009465847062105146,
+    "unitary_residual": 2.5635657312886124e-08,
+    "hashes": {
+      "retarded_dxN768_section_H85_ny16_nz2_rim32_blank_AP_pnc.npz": "08231d23aab8d0c079ea4f70ea1069f4f5f78cf279a49201999883a1e3a7196d",
+      "retarded_dxN768_section_H85_ny16_nz2_rim32_taper_AP_pnc.npz": "7eed460f1b301ec73e91ec142e48ee5bd1ab8384e7e4d2d4eacd279b03323082"
+    }
+  },
+  "H60_SAFE": {
+    "H_nm": 60,
+    "port": "SAFE",
+    "lead_axial_nm": null,
+    "launches": {
+      "rejected": {
+        "projection_error": 1.3035384443843354e-15,
+        "blank": {
+          "R": 6.244464083785545e-07,
+          "T": 0.9999993755535528
+        },
+        "taper": {
+          "R": 0.9999997240477246,
+          "T": 2.759522803230754e-07
+        }
+      },
+      "passed": {
+        "projection_error": 1.0429809853544053e-15,
+        "blank": {
+          "R": 7.402336758024092e-05,
+          "T": 0.9999259766324312
+        },
+        "taper": {
+          "R": 0.0014605711599726702,
+          "T": 0.9985394288400266
+        }
+      }
+    },
+    "blank_worst_coherent_R": 0.00017728217694847897,
+    "unitary_residual": 1.784633795413034e-11,
+    "hashes": {
+      "section_H60_ny16_nz2_rim32_blank_AP_pnc.npz": "c12f852c04662d5cefe43513c0b159b141a4d873769babc2610226f7c29ce541",
+      "section_H60_ny16_nz2_rim32_taper_AP_pnc.npz": "5bc83d0ff575978e64f52a976f78e6b1d18bee6db1f95a37d58ecbae34317715"
+    }
+  },
+  "H60_D384": {
+    "H_nm": 60,
+    "port": "retarded",
+    "lead_axial_nm": 43.359375,
+    "launches": {
+      "rejected": {
+        "projection_error": 0.0009264867952418958,
+        "blank": {
+          "R": 3.8465788335772944e-07,
+          "T": 0.9999996153406246
+        },
+        "taper": {
+          "R": 0.9999997335992297,
+          "T": 2.617520442321749e-07
+        }
+      },
+      "passed": {
+        "projection_error": 0.00455862713688081,
+        "blank": {
+          "R": 5.918947661791557e-05,
+          "T": 0.9999408105416133
+        },
+        "taper": {
+          "R": 0.00150404463578871,
+          "T": 0.998495955227053
+        }
+      }
+    },
+    "blank_worst_coherent_R": 8.43953756794337e-05,
+    "unitary_residual": 2.553357436305576e-08,
+    "hashes": {
+      "retarded_dxN384_section_H60_ny16_nz2_rim32_blank_AP_pnc.npz": "ee55a7b48597cd838e8d8c52a61ac5f8c039bd365907f3ed7ed799c4430b9f05",
+      "retarded_dxN384_section_H60_ny16_nz2_rim32_taper_AP_pnc.npz": "9c2fcde7db45913539b2526065c90cfbac7a607f2a4deaadd928e133a623852b"
+    }
+  },
+  "H60_D768": {
+    "H_nm": 60,
+    "port": "retarded",
+    "lead_axial_nm": 21.6796875,
+    "launches": {
+      "rejected": {
+        "projection_error": 0.0004515103330506454,
+        "blank": {
+          "R": 4.657804961953466e-07,
+          "T": 0.9999995342185201
+        },
+        "taper": {
+          "R": 0.9999997444784207,
+          "T": 2.5087659377050115e-07
+        }
+      },
+      "passed": {
+        "projection_error": 0.0018470631770025332,
+        "blank": {
+          "R": 7.030133785621007e-05,
+          "T": 0.999929698700136
+        },
+        "taper": {
+          "R": 0.0014675409185297866,
+          "T": 0.9985324589669741
+        }
+      }
+    },
+    "blank_worst_coherent_R": 0.00011091127886477171,
+    "unitary_residual": 2.5530900179545514e-08,
+    "hashes": {
+      "retarded_dxN768_section_H60_ny16_nz2_rim32_blank_AP_pnc.npz": "1fb03046ac56be1123fb8064fab5ac79976b0afee2e7b9321c6f06536bd2bf61",
+      "retarded_dxN768_section_H60_ny16_nz2_rim32_taper_AP_pnc.npz": "0dcbb29471880497b2188c61e4068a6ee6ddab051afadd38074b87ac5f541e33"
+    }
+  },
+  "H43_SAFE": {
+    "H_nm": 43,
+    "port": "SAFE",
+    "lead_axial_nm": null,
+    "launches": {
+      "rejected": {
+        "projection_error": 0.0009847795519126903,
+        "blank": {
+          "R": 6.636090791747677e-08,
+          "T": 0.9999999336390637
+        },
+        "taper": {
+          "R": 0.9999967415465872,
+          "T": 3.2584534150843716e-06
+        }
+      },
+      "passed": {
+        "projection_error": 0.004710422442995572,
+        "blank": {
+          "R": 4.303847673551532e-06,
+          "T": 0.9999956961523386
+        },
+        "taper": {
+          "R": 0.003919422664969931,
+          "T": 0.9960805773350353
+        }
+      }
+    },
+    "blank_worst_coherent_R": 1.8702298065035464e-05,
+    "unitary_residual": 5.48651848202486e-11,
+    "hashes": {
+      "section_H43_ny20_nz3_rim40_blank_AP_pnc.npz": "b79c569202716923004418467390cf1bddbd07f71c9f450357c2433b779be533",
+      "section_H43_ny20_nz3_rim40_taper_AP_pnc.npz": "2e3c13688172a944e940ce3387a97fdf83d31e9a47d6014b84f17cf20c6dcbb3"
+    }
+  },
+  "H43_D768": {
+    "H_nm": 43,
+    "port": "retarded",
+    "lead_axial_nm": 21.6796875,
+    "launches": {
+      "rejected": {
+        "projection_error": 0.00101180185641534,
+        "blank": {
+          "R": 4.3317853716683465e-08,
+          "T": 0.9999999566817932
+        },
+        "taper": {
+          "R": 0.9999966990770202,
+          "T": 3.2962832079286906e-06
+        }
+      },
+      "passed": {
+        "projection_error": 0.004562302447440091,
+        "blank": {
+          "R": 4.142419529207565e-06,
+          "T": 0.999995857590805
+        },
+        "taper": {
+          "R": 0.003941233653704791,
+          "T": 0.9960587663676121
+        }
+      }
+    },
+    "blank_worst_coherent_R": 1.0727507925328368e-05,
+    "unitary_residual": 2.550361562699662e-08,
+    "hashes": {
+      "retarded_dxN768_section_H43_ny20_nz3_rim40_blank_AP_pnc.npz": "c56f72381ce753b0d27e10073ceeb2f493f9aaddfd91eca597c826f33cc9eaf6",
+      "retarded_dxN768_section_H43_ny20_nz3_rim40_taper_AP_pnc.npz": "1404bdc95524ac9f9491df87beec84d511f438d35e4f3d872102f4472bd4d90d"
+    }
+  },
+  "H43_D1536": {
+    "H_nm": 43,
+    "port": "retarded",
+    "lead_axial_nm": 10.83984375,
+    "launches": {
+      "rejected": {
+        "projection_error": 0.0009899650597840115,
+        "blank": {
+          "R": 4.866360860941673e-08,
+          "T": 0.9999999513360799
+        },
+        "taper": {
+          "R": 0.9999967008166839,
+          "T": 3.2945456669531664e-06
+        }
+      },
+      "passed": {
+        "projection_error": 0.004514809652361225,
+        "blank": {
+          "R": 4.181105354847147e-06,
+          "T": 0.9999958189081014
+        },
+        "taper": {
+          "R": 0.0039255171123943325,
+          "T": 0.9960744829117346
+        }
+      }
+    },
+    "blank_worst_coherent_R": 1.2356553605426383e-05,
+    "unitary_residual": 2.550270210798567e-08,
+    "hashes": {
+      "retarded_dxN1536_section_H43_ny20_nz3_rim40_blank_AP_pnc.npz": "c64c329457258ba544d853f0a768682fd4dc7d808ca41f84f15e91726494bbe7",
+      "retarded_dxN1536_section_H43_ny20_nz3_rim40_taper_AP_pnc.npz": "b6f2ff54be98da2988cf431f60d756d1c482fb4644fc0cb82ce4f4178369f640"
+    }
+  },
+  "H33_SAFE": {
+    "H_nm": 33,
+    "port": "SAFE",
+    "lead_axial_nm": null,
+    "launches": {
+      "rejected": {
+        "projection_error": 0.0009847795519126903,
+        "blank": {
+          "R": 6.324737394532916e-08,
+          "T": 0.9999999367525941
+        },
+        "taper": {
+          "R": 0.9999946264787121,
+          "T": 5.3735212893529924e-06
+        }
+      },
+      "passed": {
+        "projection_error": 0.004710422442995572,
+        "blank": {
+          "R": 5.501967975936423e-06,
+          "T": 0.9999944980320361
+        },
+        "taper": {
+          "R": 0.0037676776556893154,
+          "T": 0.9962323223443172
+        }
+      }
+    },
+    "blank_worst_coherent_R": 2.7844433701816183e-05,
+    "unitary_residual": 5.513276731743708e-11,
+    "hashes": {
+      "section_H33_ny20_nz3_rim40_blank_AP_pnc.npz": "528ce31e5a212bdae4e50356f6a0eb2a2f644f228384b8bd74c67b98b5b49445",
+      "section_H33_ny20_nz3_rim40_taper_AP_pnc.npz": "723fa19f96c95aed6104c7dfb519176b2cec73ad672f9a9fa55e3f7b06cd4508"
+    }
+  },
+  "H33_D768": {
+    "H_nm": 33,
+    "port": "retarded",
+    "lead_axial_nm": 21.6796875,
+    "launches": {
+      "rejected": {
+        "projection_error": 0.0010118018564101525,
+        "blank": {
+          "R": 4.404385787879684e-08,
+          "T": 0.999999955955245
+        },
+        "taper": {
+          "R": 0.9999945511511954,
+          "T": 5.4441965193044966e-06
+        }
+      },
+      "passed": {
+        "projection_error": 0.0045623024474413425,
+        "blank": {
+          "R": 5.2204818670768486e-06,
+          "T": 0.9999947795302643
+        },
+        "taper": {
+          "R": 0.0037875859303206478,
+          "T": 0.9962124140779265
+        }
+      }
+    },
+    "blank_worst_coherent_R": 2.7707873820579308e-05,
+    "unitary_residual": 2.5482936386656353e-08,
+    "hashes": {
+      "retarded_dxN768_section_H33_ny20_nz3_rim40_blank_AP_pnc.npz": "631269cdc544877b9c9ac187bfa50f3e2c0c897d0aa5213892efc248c25d045b",
+      "retarded_dxN768_section_H33_ny20_nz3_rim40_taper_AP_pnc.npz": "04b63dea01898ca14d1f868043cc3e03ac832a91687093d32625b6e8833c7a4d"
+    }
+  },
+  "H33_D1536": {
+    "H_nm": 33,
+    "port": "retarded",
+    "lead_axial_nm": 10.83984375,
+    "launches": {
+      "rejected": {
+        "projection_error": 0.0009899650597840115,
+        "blank": {
+          "R": 4.8100591885449935e-08,
+          "T": 0.9999999518987454
+        },
+        "taper": {
+          "R": 0.9999945581399022,
+          "T": 5.43721110337659e-06
+        }
+      },
+      "passed": {
+        "projection_error": 0.004514809652361225,
+        "blank": {
+          "R": 5.358055828962189e-06,
+          "T": 0.9999946419585595
+        },
+        "taper": {
+          "R": 0.003773290868926613,
+          "T": 0.9962267091410434
+        }
+      }
+    },
+    "blank_worst_coherent_R": 2.717154618579671e-05,
+    "unitary_residual": 2.548229704767143e-08,
+    "hashes": {
+      "retarded_dxN1536_section_H33_ny20_nz3_rim40_blank_AP_pnc.npz": "6020b6c5b667fb097eed55db06b948e9972bfc6e56631baaa0b7a7ebb0eb0b0e",
+      "retarded_dxN1536_section_H33_ny20_nz3_rim40_taper_AP_pnc.npz": "98334586eb4db02a55591836dd3f7121b8d456566cb687e924b5787e0ef60edb"
+    }
+  }
+}

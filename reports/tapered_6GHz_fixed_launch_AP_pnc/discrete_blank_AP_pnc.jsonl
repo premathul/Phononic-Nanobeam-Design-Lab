@@ -1,0 +1,3 @@
+{"N": 384, "transition_N": null, "mode_count": 14, "max_R_pct": 1.6726408188871787e-14, "max_phase_ref_error": 6.2365307119105075e-09, "max_flux_error": 6.887393766419336e-09}
+{"N": 384, "transition_N": 192, "mode_count": 14, "max_R_pct": 0.014104999388885497, "max_phase_ref_error": 1.8918564529807762, "max_flux_error": 6.265996166376908e-09}
+{"N": 384, "transition_N": 96, "mode_count": 14, "max_R_pct": 98.60162579964307, "max_phase_ref_error": 1.9756060553118096, "max_flux_error": 7.191698347952524e-09}

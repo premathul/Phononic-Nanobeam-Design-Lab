@@ -1,0 +1,4 @@
+{"eta": 1e-05, "max_R_pct": 3.2636365530278646e-08, "max_phase_ref_error": 2.8264862120494067e-10, "impedance_doublings": 23, "remaining_relative_endcoupling": 1.4577876618056172e-18, "condition_operator": 192.40990516061802}
+{"eta": 1e-06, "max_R_pct": 3.2636462124352104e-10, "max_phase_ref_error": 1.9172707590058154e-11, "impedance_doublings": 26, "remaining_relative_endcoupling": 2.208535594454474e-15, "condition_operator": 192.4082466802444}
+{"eta": 1e-07, "max_R_pct": 3.263646691535321e-12, "max_phase_ref_error": 1.917722775065961e-11, "impedance_doublings": 30, "remaining_relative_endcoupling": 5.148650608401701e-23, "condition_operator": 192.40808082399474}
+{"eta": 1e-08, "max_R_pct": 3.263657948311554e-14, "max_phase_ref_error": 1.917791581561467e-11, "impedance_doublings": 33, "remaining_relative_endcoupling": 6.054541699370444e-19, "condition_operator": 192.4080642382883}
