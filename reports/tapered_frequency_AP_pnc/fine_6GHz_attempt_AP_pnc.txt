@@ -1,0 +1,3 @@
+Athul Prem | _AP_pnc
+6 GHz, central 126.5625 nm target, two P2 thickness layers, 200025 body displacement DOFs.
+Under an 8.50 GB process address-space limit, the default SuperLU direct solve failed with a gstrf error before accepting this frequency. One bounded retry with MMD_AT_PLUS_A ordering failed to expand factor memory (jcol 171645). The failures supply no transmission data. Mesh preparation and failed outputs were retained separately. No result is inferred from either failure.
